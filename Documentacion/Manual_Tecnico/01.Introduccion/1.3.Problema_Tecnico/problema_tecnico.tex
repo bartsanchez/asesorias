@@ -35,14 +35,112 @@ elementos determinan las especificaciones técnicas que caracterizan al problema
    en el sistema, y mantener una apropiada integridad de la misma, la aplicación
    permitirá hacer copias de seguridad.
 
-
  \item Entorno
+
+   \paragraph{}La aplicación constará de una interfaz amigable e
+   intuitiva basada en cuadros de diálogo, botones, menús desplegables, etc.
+   Como periféricos de entrada, serán necesarios el teclado y el ratón. Como
+   periféricos de salida, la impresora. Para la generación de determinados
+   informes, como los correos electrónicos, será necesaria la conexión a
+   Internet.
+
  \item Vida esperada
+
+   \paragraph{}Este sistema, en principio, no tiene una vida esperada
+   determinada. El tiempo de funcionamiento debería ser el máximo posible,
+   siempre que su utilización suponga alguna ventaja sustancial con respecto a
+   otros futuros sistemas alternativos.
+
+   \paragraph{}Debido a los cambios administrativos que se pueden dar en los
+   centros universitarios, como por ejemplo, la incorporación de nuevas
+   titulaciones o el cambio de planes de estudios, este sistema tendrá que ser
+   continuamente revisado para mantenerlo actualizado a los cambios producidos.
+
  \item Ciclo de mantenimiento
+
+   \paragraph{}Debido a que el sistema informático va a ser desarrollado como
+   objetivo de un proyecto de fin de carrera, se considera que el autor no debe
+   ser el responsable de su mantenimiento. No obstante, en su realización, se
+   utilizará una metodología de desarrollo modular que permite a otros
+   programadores incorporar futuras mejoras con facilidad.
+
  \item Competencia
+
+   \paragraph{}Debido a la reciente implantación del rol del asesor académico
+   dentro de la Universidad de Córdoba, no se conoce ningún sistema software
+   que realice las funciones desempeñadas por éste.
+
  \item Aspecto externo
+
+   \paragraph{}El sistema constará de una interfaz intuitiva y ergonómica que
+   hará que su uso sea cómodo y fácil. Ésta constará de elementos bien conocidos
+   y comúnmente utilizados como cuadros de diálogo, botones, menús desplegables,
+   etc.
+
+   \paragraph{}El soporte utilizado para albergar la aplicación será el CD-ROM,
+   por ser ampliamente utilizado, compatible y de tamaño suficiente.
+
  \item Estandarización
+
+   \paragraph{}El sistema de software a desarrollar mantendrá un alto nivel de
+   estandarización en cuanto a:
+
+   \begin{itemize}
+      \item Sistema de almacenamiento de información. El motor de la base de
+      datos utilizado para albergar la información está ampliamente implantado
+      en el mercado. Dicho sistema de almacenamiento se denomina
+      \textit{RELLENAR}.
+      \item Interfaz de ventanas. Se hará uso de instrumentos de diseño de
+      interfaz muy populares, los cuales se encuentran expuestos en
+      \textit{RELLENAR}.
+      \item Soporte digital CD-ROM.
+   \end{itemize}
+
+
  \item Calidad y fiabilidad
+
+   \paragraph{}La aplicación comprobará los pasos dados por el usuario: si en
+   algún momento éste realiza una acción no permitida, el sistema intentará
+   guiarle mediante mensajes de ayuda.
+
  \item Pruebas
+
+   \paragraph{}Las pruebas realizadas sobre el sistema son un elemento
+   determinante a la hora de garantizar la calidad y fiabilidad del mismo.
+
+   \paragraph{}Para comprobar que el sistema funciona correctamente, estas
+   pruebas tendrán dos objetivos básicamente:
+
+   \begin{itemize}
+      \item Comprobar que la aplicación hace lo que debe hacer.
+      \item Probar que la aplicación no hace lo que no debe hacer, es decir,
+      comprobar que no provoca efectos secundarios adversos.
+   \end{itemize}
+
+   \paragraph{}Se realizarán pruebas sobre los siguientes subsistemas de la
+   aplicación:
+
+   \begin{itemize}
+      \item Interfaz: comprobando el correcto funcionamiento de los diferentes
+      componentes que la constituyen.
+      \item Comunicación con la base de datos del sistema y la apropiada
+      modificación de la información que alberga.
+      \item Generación de documentos y parametrización de los mismos.
+      \item Instalación y desinstalación.
+   \end{itemize}
+
  \item Seguridad
+
+   \paragraph{}El sistema de gestión de bases de datos de la aplicación tiene la
+   capacidad de proteger los datos contra su pérdida parcial o total debidos a
+   fallos en el sistema. A su vez, garantiza la privacidad, es decir, sólo
+   permite el acceso a la información a personas autorizadas.
+
+   \textit{\paragraph{}Hace falta decidir si a la aplicación solo acceden
+   profesores o también alumnos.}
+
+   \paragraph{}Finalmente, el mecanismo de copias de seguridad del sistema
+   permitirá al usuario salvaguardar la información siempre que crea
+   conveniente.
+
 \end{itemize}
