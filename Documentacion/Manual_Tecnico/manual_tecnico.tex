@@ -13,9 +13,13 @@
 \author{Bartolomé Sánchez Salado}
 \title{Asesorías Académicas}
 \date{\today}
+%
 
+% Cabeceras
 \pagestyle{fancy}
 \headheight 16pt
+\lhead{\nouppercase{\rightmark}}
+\rhead{\nouppercase{\leftmark}}
 %
 
 % Quitar cabecera y pie de página a las páginas en blanco
@@ -61,7 +65,7 @@
       \input{05.Recursos/5.2.Hardware/hardware}
       \input{05.Recursos/5.3.Humanos/humanos}
 
-   \chapter{Especificación de requisitos}
+   \chapter{Especificación de requisitos}\label{espReq}
       \input{06.Especificacion_Requisitos/6.1.Descripcion_Modular/descripcion_modular}
       \input{06.Especificacion_Requisitos/6.2.Supuestos_Semanticos/supuestos_semanticos}
 
@@ -69,7 +73,7 @@
 
    \chapter{Análisis Funcional}
 
-   \chapter{Especificación de requisitos de la interfaz}
+   \chapter{Especificación de requisitos de la interfaz}\label{espReqInt}
 
    \chapter{Diseño de datos}
 
@@ -79,7 +83,7 @@
 
    \chapter{Diseño de la interfaz}
 
-   \chapter{Pruebas}
+   \chapter{Pruebas}\label{pruebas}
 
    \chapter{Resultados}
 
