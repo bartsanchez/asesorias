@@ -1,12 +1,42 @@
 \section{Factores estratégicos}
 
-\paragraph{}Se han decidido como factores estratégicos, para la consecución de
-este proyecto, los siguientes:
+\paragraph{}En cuanto a las características técnicas, se han decidido como
+factores estratégicos, para la consecución de este proyecto, los siguientes:
 
 \begin{itemize}
-   \item Cada asesor podrá acceder al sistema de forma personalizada; es decir,
+   \item El sistema operativo que se utilizará para el desarrollo del proyecto
+   será Debian GNU/Linux 6.0 (INSERTAR CITA), por ser éste el sistema habitual
+   del desarrollador principal y estar claramente familiarizado con él.
+   \item Se ha decidido utilizar un sistema de control de versiones para el
+   desarrollo del proyecto, abarcando tanto la documentación como la generación
+   de código, con el objetivo de facilitar la administración de los elementos
+   que se generen a medida que evolucionan. La aplicación software encargada de
+   éste cometido elegida se denomina Subversion (INSERTAR CITA), por varias
+   razones, entre las que se encuentran:
+   \begin{itemize}
+      \item Es software libre.
+      \item Fácil de instalar en el sistema operativo sobre el que se trabaja.
+      \item Bastante documentación existente y de fácil acceso.
+   \end{itemize}
+   \item Para el funcionamiento de la base de datos, se ha decidido utilizar
+   MySQL 5.0(INSERTAR CITA). Entre los motivos se encuentran el ser software
+   libre y la fácil instalación/configuración en el sistema operativo sobre el
+   que se desarrolla la aplicación.
+   \item Al ser un servicio web, el contenido generado por la aplicación deberá
+   hacer uso del lenguaje de marcado HTML, o alguna de sus variantes (XHTML), al
+   ser el lenguaje de marcado estándar.
+   \item Para la generación de contenido, se hará uso de un lenguaje del lado
+   del servidor. Se ha decidido utilizar PHP/Ruby(On Rails)/Python(Django) por
+   el motivo X.
+\end{itemize}
+
+\paragraph{}En lo que respecta a funcionalidades de la aplicación, se han tomado
+las siguientes decisiones:
+
+\begin{itemize}
+   \item Cada usuario podrá acceder al sistema de forma personalizada; es decir,
    a través de un sistema de identificación personal. La información manejada
-   por cada asesor es particular, y dependiente de los alumnos que asesore.
+   por cada usuario es particular, y dependiente del rol que desempeñe.
    \item Las entrevistas generadas por los asesores se podrán hacer llegar a los
    alumnos mediante correo electrónico.
    \item La interfaz gráfica a usar deberá ser de fácil manejo e intuitiva,
