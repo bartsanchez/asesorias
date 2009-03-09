@@ -1,3 +1,61 @@
 \section{Supuestos Semánticos}
 
-Prueba de supuestos semánticos.
+   \paragraph{}A continuación se detallan las entidades que participan en el
+   diseño del sistema, con sus correspondientes supuestos semánticos.
+
+   \begin{description}
+
+      \item[Titulación] Conjunto de materias cuya superación supone la obtención
+      de un título académico.
+      \begin{itemize}
+         \item Cada titulación tiene un identificador que hace referencia a ella
+          de forma unívoca.
+          \item Una titulación está compuesta de al menos una asignatura y como
+         máximo un número indeterminado.
+      \end{itemize}
+
+      \item[Asignatura] Materia que forma parte del plan de estudios de una
+      titulación.
+      \begin{itemize}
+         \item Cada asignatura tiene un identificador que hace referencia a ella
+         de forma unívoca.
+         \item Una asignatura pertenece a una y solo a una titulación.
+         \item \textit{Una asignatura pertenece a una o a varias áreas de
+         conocimiento.}
+         \item Una asignatura tiene asignada una carga docente traducida en
+         un número de créditos.
+         \item \textit{Los créditos de una asignatura pueden estar compuestos de
+         créditos teóricos, prácticos y/o problemas.}
+         \item Una misma asignatura se puede impartir en varios cursos
+         académicos.
+      \end{itemize}
+
+      \item[Curso académico] Tiempo señalado en cada año en el que se imparte
+      docencia.
+      \begin{itemize}
+         \item Cada curso académico tiene un identificador que hace referencia
+         al mismo de forma unívoca.
+         \item En un curso académico se imparte al menos una y como máximo
+         un número indeterminado de asignaturas.
+         \item Un número indeterminado de alumnos pertenece a un determinado
+         curso académico.
+      \end{itemize}
+
+      \item[Alumno] Estudiante de una titulación que recibe asesoría.
+      \begin{itemize}
+         \item Cada alumno tiene un identificador que hace referencia al mismo
+         de forma unívoca.
+         \item Un alumno recibe asesoría de un, y solo un, asesor.
+         \item Un determinado alumno puede estar matriculado en un número
+         indeterminado de cursos académicos.
+      \end{itemize}
+
+      \item[Asesor] Tutor que realiza un seguimiento permanente y orientado a la
+      optimización del esfuerzo de estudio de un alumno.
+      \begin{itemize}
+         \item Cada asesor tiene un identificador que hace referencia al mismo
+         de forma unívoca.
+         \item Un asesor asesora a un número indeterminado de alumnos.
+      \end{itemize}
+
+ \end{description}

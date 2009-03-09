@@ -1,60 +1,148 @@
 \section{Descripción Modular}
 
-\paragraph{}
+   \subsection{Módulo de asesores}
 
-\begin{itemize}
-   \item Datos Personales.
-   \begin{itemize}
-      \item \textit{¿Fotografía.?}
-      \item D.N.I.
-      \item Fecha de nacimiento.
-      \item Nombre.
-      \item Apellidos.
-      \item Dirección en Córdoba.
-      \item Teléfonos.
-      \item Correo electrónico.
-      \item Residencia durante el curso.
-   \end{itemize}
-   \item Datos Familiares.
-   \begin{itemize}
-      \item Dirección familiar.
-      \item Localidad.
-      \item Código postal.
-      \item Provicia.
-      \item Teléfonos.
-   \end{itemize}
-   \item Datos Académicos.
-   \begin{itemize}
-      \item Estudios realizados en año pasado.
-      \item Estudios que está realizando.
-      \item Curso.
-      \item Año de ingreso en la Universidad.
-      \item Otros estudios universitarios.
-      \item Modalidad de acceso a la universidad.
-      \item Calificación de: acceso/estudios previos.
-   \end{itemize}
-\end{itemize}
+      \paragraph{}Una vez que ingresa en el sistema, un usuario asesor tendrá
+      a su disposición un resumen con la información de todos y cada uno de los
+      alumnos a los que presta asesoría. No obstante, el asesor podrá
+      especificar un determinado alumno para obtener toda la información que
+      se dispone de dicho individuo, como datos personales y académicos, o
+      detalles de entrevistas realizadas.
+
+      \paragraph{}La aplicación proporcionará a los asesores métodos y
+      herramientas con los que poder realizar entrevistas a los alumnos
+      asesorados.
+
+      \paragraph{}\textit{También, el sistema dotará al usuario asesor de una
+      zona especial, a través de la cual podrá transmitir información que estime
+      oportuno a cada uno de sus alumnos asesorados; por ejemplo, horario
+      de asesoría, próximas reuniones, etc.}
+
+      \paragraph{}\textit{Este usuario será el encargado de dar de alta en el
+      sistema a cada uno de los alumnos a los que preste servicio de asesoría.}
+
+   \subsection{Módulo de alumnos}
+
+      \paragraph{}\textit{¿Se autoregistrará en el sistema?}
+
+      \paragraph{}Cada uno de los alumnos que acceda al sistema dispondrá
+      de una serie de campos de información, opcionales u obligatorios, que
+      deberá rellenar con el objetivo de facilitar al asesor que tenga asignado
+      la labor de asesoría. Esta información se estructurará de la siguiente
+      forma:
+
+      \begin{itemize}
+         \item Datos Personales.
+         \begin{itemize}
+            \item \textit{¿Fotografía.?}
+            \item D.N.I.
+            \item Fecha de nacimiento.
+            \item Nombre.
+            \item Apellidos.
+            \item Dirección en Córdoba.
+            \item Teléfonos.
+            \item Correo electrónico.
+            \item Residencia durante el curso.
+         \end{itemize}
+         \item Datos Familiares.
+         \begin{itemize}
+            \item Dirección familiar.
+            \item Localidad.
+            \item Código postal.
+            \item Provicia.
+            \item Teléfonos.
+         \end{itemize}
+         \item Datos Académicos.
+         \begin{itemize}
+            \item Estudios realizados en año pasado.
+            \item Estudios que está realizando.
+            \item Curso.
+            \item Año de ingreso en la Universidad.
+            \item Otros estudios universitarios.
+            \item Modalidad de acceso a la universidad.
+            \item Calificación de: acceso/estudios previos.
+         \end{itemize}
+      \end{itemize}
+
+      \paragraph{}\textit{Además, el sistema proporcionará una zona especial
+      a cada uno de los usuarios alumnos, en la podrán visualizar cierta
+      información de sus asesores, como horario de asesoría disponible, próxima
+      reunión, etc. Esta información depende por completo de lo que cada asesor
+      estime oportuno.}
 
 
-\paragraph{}Para llevar a cabo el seguimiento de los alumnos, el sistema deberá
-poder gestionar la siguiente información:
+   \subsection{Módulo de administrador}
 
-\begin{itemize}
-   \item Datos de la reunión.
-   \begin{itemize}
-      \item Asesor.
-      \item Alumno (en caso de seguimiento individual).
-      \item Asistentes (en caso de seguimiento grupal).
-      \item Fecha.
-      \item Hora.
-      \item Duración.
-   \end{itemize}
-   \item Motivo.
-   \item Orientaciones realizadas.
-   \item Observaciones.
-   \item Próxima reunión, temas a tratar.
-   \begin{itemize}
-      \item Fecha.
-      \item Hora.
-   \end{itemize}
-\end{itemize}
+      \paragraph{}El administrador es el encargado y principal responsable
+      del funcionamiento del sistema. Tiene permisos para gestionar el
+      sistema completo, y es el único que puede administrar, en cuanto a
+      creación, modificación y eliminación se refiere, al resto de usuarios
+      del sistema.
+
+      \paragraph{}Además, será el encargado de crear y mantener toda la
+      estructura que componen las titulaciones, asignaturas, áreas de
+      conocimiento, departamentos y cursos académicos.
+
+   \subsection{Módulo de entrevistas}
+
+      \paragraph{}Existen dos tipos de entrevistas contempladas: individuales y
+      grupales. Como sus propios nombres indican, las entrevistas individuales
+      se realizan a un alumno en particular, mientras que las entrevistas
+      grupales se realizan a varios alumnos previamente seleccionados por el
+      asesor, común a todos ellos.
+
+      \paragraph{}La información que se gestionará entrevistas tiene la
+      siguiente estructura:
+
+      \begin{itemize}
+         \item Datos de la reunión.
+         \begin{itemize}
+            \item Asesor.
+            \item Alumno (en caso de seguimiento individual).
+            \item Asistentes (en caso de seguimiento grupal).
+            \item Fecha.
+            \item Hora.
+            \item Duración.
+         \end{itemize}
+         \item Motivo.
+         \item Orientaciones realizadas.
+         \item Observaciones.
+         \item Próxima reunión, temas a tratar.
+         \begin{itemize}
+            \item Fecha.
+            \item Hora.
+         \end{itemize}
+      \end{itemize}
+
+   \subsection{Módulo de elaboración de informes}
+
+      \paragraph{}RELLENAR.
+
+   \subsection{Módulo de titulaciones}
+
+      \paragraph{}En este módulo se establece la estructura que componen
+      cada una de las titulaciones que contendrá el sistema. Por ejemplo,
+      una titulación estará compuesta por asignaturas de un determinado
+      curso académico. Esta estructura, será explicada con detalle en el
+      capítulo \ref{modEntInt}, \textit{Modelo Entidad-Interrelación}.
+
+      \paragraph{}Únicamente el administrador podrá realizar modificaciones de
+      los elementos que este módulo aparecen, con la intención de evitar
+      posibles malos usos de la aplicación por parte del resto de usuarios,
+      asesores incluídos.
+
+   \subsection{Módulo de copias de seguridad}
+
+      \paragraph{}Este módulo está orientado a ofrecer mecanismos al usuario
+      administrador con el objeto de realizar copias de seguridad de un
+      estado determinado del sistema.
+
+      \paragraph{}Estas copias de seguridad serán almacenadas en dispositivos
+      de almacenamiento externo como discos magnéticos u ópticos. A su vez,
+      transcurrido determinado tiempo, el sistema recordará al administrador
+      la realización de este proceso.
+
+      \paragraph{}La recuperación de la información almacenada es posible
+      mediante un proceso de restauración que dispondrá la aplicación, en el
+      cual se transferirá dicha información desde el soporte magnético u
+      óptico auxiliar a la ubicación específica del sistema.
