@@ -19,35 +19,22 @@
       \begin{itemize}
          \item Cada asignatura tiene un identificador que hace referencia a ella
          de forma unívoca.
-         \item Una asignatura pertenece a una y solo a una titulación.
-         \item \textit{Una asignatura pertenece a una o a varias áreas de
-         conocimiento.}
-         \item Una asignatura tiene asignada una carga docente traducida en
-         un número de créditos.
-         \item \textit{Los créditos de una asignatura pueden estar compuestos de
-         créditos teóricos, prácticos y/o problemas.}
          \item Una misma asignatura se puede impartir en varios cursos
          académicos.
-      \end{itemize}
-
-      \item[Curso académico] Tiempo señalado en cada año en el que se imparte
-      docencia.
-      \begin{itemize}
-         \item Cada curso académico tiene un identificador que hace referencia
-         al mismo de forma unívoca.
-         \item En un curso académico se imparte al menos una y como máximo
-         un número indeterminado de asignaturas.
-         \item Un número indeterminado de alumnos pertenece a un determinado
-         curso académico.
+         \item Una asignatura pertenece a una y solo a una titulación.
+         \item Una asignatura tiene asignada una carga docente traducida en
+         un número de créditos.
+         \item Una asignatura puede ser de varios tipos: troncal, obligatoria,
+         optativa o de libre configuración.
       \end{itemize}
 
       \item[Alumno] Estudiante de una titulación que recibe asesoría.
       \begin{itemize}
          \item Cada alumno tiene un identificador que hace referencia al mismo
          de forma unívoca.
-         \item Un alumno recibe asesoría de un, y solo un, asesor.
+         \item Cada alumno recibe asesoría de un, y solo un asesor.
          \item Un determinado alumno puede estar matriculado en un número
-         indeterminado de cursos académicos.
+         indeterminado de asignaturas.
       \end{itemize}
 
       \item[Asesor] Tutor que realiza un seguimiento permanente y orientado a la
@@ -55,7 +42,7 @@
       \begin{itemize}
          \item Cada asesor tiene un identificador que hace referencia al mismo
          de forma unívoca.
-         \item Un asesor asesora a un número indeterminado de alumnos.
+         \item Un asesor ofrece asesoría a un número indeterminado de alumnos.
       \end{itemize}
 
  \end{description}
