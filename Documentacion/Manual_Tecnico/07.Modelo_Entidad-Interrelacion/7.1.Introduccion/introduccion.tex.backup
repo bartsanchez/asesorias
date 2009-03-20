@@ -1,1 +1,27 @@
- 
+\section{Introducción}
+
+   \paragraph{}En este sistema de software, la cantidad de información a manejar
+   es muy elevada, por ello se hace necesaria e incluso imprescindible una
+   descripción detallada de la misma. Para ello, se empleará una técnica
+   denominada \textit{modelación de la información}, la cual nos permite
+   describir el dominio de la información a tratar por la aplicación. Esta
+   técnica se centra exclusivamente en los datos, con independencia de los
+   procesos que los manipulan, lo que permite que, combinada con un análisis
+   funcional, se consiga un análisis de requisitos completo.
+
+   \paragraph{}En esta fase de modelación de la información, se especificarán
+   cada uno de los ítems de datos individuales que son aceptados por el sistema.
+   Para cada uno de estos objetos, se determinarán sus propiedades y el dominio
+   o tipo de datos básico en el cual pueden ser medidas, así como las
+   restricciones o límites de los valores que pueden presentarse para cada una
+   de ellas. Además, se especificarán detalladamente las relaciones existentes
+   entre dichos objetos.
+
+   \paragraph{}A continuación se describen, de manera formal, los objetos de
+   datos que serán procesados por este sistema de software, tales como los
+   diferentes tipos de usuarios, titulaciones, asignaturas, etc. Para ello, se
+   hará uso del modelo Entidad-Interrelación, el cual se basa en la utilización
+   conjunta de grafos y   de tablas para la descripción de la información
+   existente en el sistema. Con esta técnica, mediante un conjunto de símbolos,
+   y un conjunto reducido de reglas, se puede representar los elementos que
+   forman parte del sistema y las relaciones existentes entre ellos.
