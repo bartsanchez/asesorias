@@ -1,0 +1,143 @@
+\subsection{Tipo de entidad Asignatura}
+
+   \begin{description}
+
+   \item[Definición] Se refiere al objeto del mundo real: \emph{``Materia que
+   forma parte del plan de estudios de una titulación''}.
+
+   \item[Características]
+
+   \item \begin{center}
+            \begin{tabular}{ | l | p{6cm} | }
+            \hline
+            Nombre & Asignatura \\
+            \hline
+            Tipo & Débil por identificación respecto a Titulación \\
+            \hline
+            Número de atributos &  \\
+            \hline
+            Atributo/s identificador/es principal/es & id\_titulacion, id\_asignatura \\
+            \hline
+            Atributo/s identificador/es alternativo/s & id\_titulacion, nombre\_asignatura \\
+            \hline
+            Atributo/s heredado/s & id\_titulacion, del tipo de entidad Titulación \\
+            \hline
+            \end{tabular}
+         \end{center}
+
+   \item[Diagrama]
+
+   \item[Descripción de los atributos]
+
+   \item \begin{center}
+            \begin{tabular}{ | l | p{10cm} | }
+            \hline
+            \multicolumn{2}{ | l | }{\textbf{id\_asignatura}} \\
+            \hline
+            Definición & Código que sirve como número identificativo para cada asignatura dentro del sistema. \\
+            \hline
+            Dominio & Números naturales. \\
+            \hline
+            Carácter & Obligatorio. \\
+            \hline
+            Ejemplo práctico & 17 \\
+            \hline
+            Información adicional & El dato lo genera el sistema cuando el administrador introduce la asignatura en el sistema. Es la clave primaria junto con id\_titulacion.\\
+            \hline
+            \end{tabular}
+         \end{center}
+
+   \item \begin{center}
+            \begin{tabular}{ | l | p{10cm} | }
+            \hline
+            \multicolumn{2}{ | l | }{\textbf{nombre\_asignatura}} \\
+            \hline
+            Definición & Denominación de una asignatura dentro del sistema. \\
+            \hline
+            Dominio & Conjunto de los caracteres del alfabeto. \\
+            \hline
+            Carácter & Obligatorio. \\
+            \hline
+            Ejemplo práctico & Lenguajes de Inteligencia Artificial. \\
+            \hline
+            Información adicional & El dato lo proporciona el administrador en el momento de introducir la asignatura en el sistema. Es la clave alterna junto con id\_titulacion. \\
+            \hline
+            \end{tabular}
+         \end{center}
+
+   \item \begin{center}
+            \begin{tabular}{ | l | p{10cm} | }
+            \hline
+            \multicolumn{2}{ | l | }{\textbf{curso}} \\
+            \hline
+            Definición & Nivel académico de la asignatura en una titulación. \\
+            \hline
+            Dominio & Números naturales. \\
+            \hline
+            Carácter & Optativo. \\
+            \hline
+            Ejemplo práctico & 2 \\
+            \hline
+            Información adicional & El dato lo proporciona el administrador en el momento de introducir la asignatura en el sistema. \\
+            \hline
+            \end{tabular}
+         \end{center}
+
+   \item \begin{center}
+            \begin{tabular}{ | l | p{10cm} | }
+            \hline
+            \multicolumn{2}{ | l | }{\textbf{nCreditos}} \\
+            \hline
+            Definición & Valor relacionado con el número de horas que se estima necesario para dedicar a una asignatura. \\
+            \hline
+            Dominio & Números reales positivos. \\
+            \hline
+            Carácter & Optativo. \\
+            \hline
+            Ejemplo práctico & 4.50 \\
+            \hline
+            Información adicional & El dato lo proporciona el administrador en el momento de introducir la asignatura en el sistema. \\
+            \hline
+            \end{tabular}
+         \end{center}
+
+   \item \begin{center}
+            \begin{tabular}{ | l | p{10cm} | }
+            \hline
+            \multicolumn{2}{ | l | }{\textbf{tipo}} \\
+            \hline
+            Definición & Clasificación de la asignatura según su tipo. \\
+            \hline
+            Dominio & Uno de los valores: Troncal, Obligatoria, Optativa o Libre Configuración. \\
+            \hline
+            Carácter & Optativo. \\
+            \hline
+            Ejemplo práctico & Optativa. \\
+            \hline
+            Información adicional & El dato lo proporciona el administrador en el momento de introducir la asignatura en el sistema. \\
+            \hline
+            \end{tabular}
+         \end{center}
+
+   \item[Ejemplo práctico]
+
+   \item \begin{center}
+            \begin{tabular}{ | l | l | }
+            \hline
+            \multicolumn{2}{ | c | }{\textbf{Tipo de entidad Asignatura}} \\
+            \hline
+            id\_titulacion & 3 \\
+            \hline
+            id\_asignatura & 17 \\
+            \hline
+            nombre\_asignatura & Lenguajes de Inteligencia Artificial \\
+            \hline
+            curso & 2 \\
+            \hline
+            nCreditos & 4.50 \\
+            \hline
+            tipo & Optativa \\
+            \hline
+            \end{tabular}
+         \end{center}
+   \end{description}
