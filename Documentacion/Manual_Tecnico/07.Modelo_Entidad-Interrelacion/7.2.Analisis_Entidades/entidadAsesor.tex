@@ -1,1 +1,122 @@
 \subsection{Tipo de entidad Asesor}
+
+   \begin{description}
+
+   \item[Definición] Se refiere al objeto del mundo real: \emph{``Tutor que
+        realiza un seguimiento permanente y orientado a la optimización del
+        esfuerzo de estudio de un alumno.''}.
+
+   \item[Características]
+
+   \item \begin{center}
+            \begin{tabular}{ | l | p{6cm} | }
+            \hline
+            Nombre & Asesor \\
+            \hline
+            Tipo & Fuerte \\
+            \hline
+            Número de atributos & 4 \\
+            \hline
+            Atributo/s identificador/es principal/es & dni\_pasaporte\_asesor \\
+            \hline
+            Atributo/s identificador/es alternativo/s & correo\_electronico \\
+            \hline
+            Atributo/s heredado/s & - \\
+            \hline
+            \end{tabular}
+         \end{center}
+
+   \item[Diagrama]
+
+   \item[Descripción de los atributos]
+
+   \item \begin{center}
+            \begin{tabular}{ | l | p{10cm} | }
+            \hline
+            \multicolumn{2}{ | l | }{\textbf{dni\_pasaporte\_asesor}} \\
+            \hline
+            Definición & Coincide con el documento nacional de identidad o pasaporte de la persona. \\
+            \hline
+            Dominio & Números naturales. \\
+            \hline
+            Carácter & Obligatorio. \\
+            \hline
+            Ejemplo práctico & 98765432Z \\
+            \hline
+            Información adicional & El dato lo genera el administrador cuando introduce al usuario asesor en el sistema. Es la clave primaria.\\
+            \hline
+            \end{tabular}
+         \end{center}
+
+   \item \begin{center}
+            \begin{tabular}{ | l | p{10cm} | }
+            \hline
+            \multicolumn{2}{ | l | }{\textbf{nombre\_asesor}} \\
+            \hline
+            Definición & Designa el nombre de pila del usuario asesor que interviene en el sistema. \\
+            \hline
+            Dominio & Conjunto de caracteres alfanuméricos. \\
+            \hline
+            Carácter & Obligatorio. \\
+            \hline
+            Ejemplo práctico & Nicolás Luis \\
+            \hline
+            Información adicional & El dato lo proporciona el propio usuario asesor, cuando modifica su información personal. \\
+            \hline
+            \end{tabular}
+         \end{center}
+
+   \item \begin{center}
+            \begin{tabular}{ | l | p{10cm} | }
+            \hline
+            \multicolumn{2}{ | l | }{\textbf{apellidos\_asesor}} \\
+            \hline
+            Definición & Hace referencia a los apellidos del usuario asesor que interviene en el sistema. \\
+            \hline
+            Dominio & Conjunto de caracteres alfanuméricos. \\
+            \hline
+            Carácter & Obligatorio. \\
+            \hline
+            Ejemplo práctico & Fernández García \\
+            \hline
+            Información adicional & El dato lo proporciona el propio usuario asesor, cuando modifica su información persona. \\
+            \hline
+            \end{tabular}
+         \end{center}
+
+   \item \begin{center}
+            \begin{tabular}{ | l | p{10cm} | }
+            \hline
+            \multicolumn{2}{ | l | }{\textbf{correo\_electronico}} \\
+            \hline
+            Definición & Contiene la dirección de correo electrónico del asesor. \\
+            \hline
+            Dominio & Conjunto de caracteres alfanuméricos permitidos en una dirección de correo electrónico. \\
+            \hline
+            Carácter & Opcional. \\
+            \hline
+            Ejemplo práctico & ma1fegan@uco.es \\
+            \hline
+            Información adicional & El dato lo proporciona el propio usuario asesor, cuando modifica su información personall. \\
+            \hline
+            \end{tabular}
+         \end{center}
+
+   \item[Ejemplo práctico]
+
+   \item \begin{center}
+            \begin{tabular}{ | l | l | }
+            \hline
+            \multicolumn{2}{ | c | }{\textbf{Tipo de entidad Asesor}} \\
+            \hline
+            dni\_pasaporte\_asesor & 98765432Z \\
+            \hline
+            nombre\_asesor & Nicolás Luis \\
+            \hline
+            apellidos\_asesor & Fernández García \\
+            \hline
+            correo\_electronico & ma1fegan@uco.es \\
+            \hline
+            \end{tabular}
+         \end{center}
+   \end{description}
