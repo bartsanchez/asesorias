@@ -1,0 +1,62 @@
+\subsection{Tipo de entidad Alumno Curso Académico}
+
+   \begin{description}
+
+   \item[Definición] Se refiere al objeto del mundo real: \emph{``Estudiante de
+   una titulación matriculado en cierta asignatura durante un curso académico''}.
+
+   \item[Características] La entidad presenta las siguientes características:
+      \begin{itemize}
+         \item \textbf{Nombre:} Alumno Curso Académico.
+         \item \textbf{Tipo:} Débil por identificación con respecto a Alumno.
+         \item \textbf{Número de atributos:} 2.
+         \item \textbf{Atributo/s identificador/es principal/es:} dni\_pasaporte y \\curso\_académico.
+         \item \textbf{Atributo/s identificador/es alternativo/s:} -
+         \item \textbf{Atributo/s heredado/s:} dni\_pasaporte del tipo de entidad Alumno y curso\_académico del tipo de entidad Asignatura Curso Académico.
+      \end{itemize}
+
+   \item[Diagrama]
+   \item \begin{figure}[h!]
+            \begin{center}
+            \includegraphics[]{07.Modelo_Entidad-Interrelacion/7.2.Analisis_Entidades/diagramas/alumnoca.pdf}
+            \caption{Diagrama de la entidad Alumno Curso Académico.}
+            \end{center}
+         \end{figure}
+
+   \item[Descripción de los atributos] La entidad presenta los siguientes
+   atributos:
+
+   \begin{itemize}
+   \item \textbf{dni\_pasaporte}
+      \begin{itemize}
+         \item \textbf{Definición:} Coincide con el número de documento nacional
+         de identidad o pasaporte del alumno.
+         \item \textbf{Dominio:} Formato: 11111111A.
+         \item \textbf{Carácter:} Obligatorio.
+         \item \textbf{Ejemplo práctico:} 01234567A.
+         \item \textbf{Información adicional:} El dato se hereda del tipo de entidad Alumno. Es la clave primaria junto con curso\_académico.
+      \end{itemize}
+   \item \textbf{curso\_académico}
+      \begin{itemize}
+         \item \textbf{Definición:} Hace referencia al periodo de tiempo en que se imparte una determinada asignatura.
+         \item \textbf{Dominio:} Formato de fecha: aaaa.
+         \item \textbf{Carácter:}  Obligatorio.
+         \item \textbf{Ejemplo práctico:} 2008.
+         \item \textbf{Información adicional:} El dato se hereda del tipo de entidad Asignatura Curso Académico. Es la clave primaria junto con dni\_pasaporte.
+      \end{itemize}
+   \end{itemize}
+
+   \item[Ejemplo práctico]
+
+   \item \begin{center}
+            \begin{tabular}{ | l | l | }
+            \hline
+            \multicolumn{2}{ | c | }{\textbf{Tipo de entidad Alumno Curso Académico}} \\
+            \hline
+            dni\_pasaporte & 01234567A \\
+            \hline
+            curso\_académico & 2008\\
+            \hline
+            \end{tabular}
+         \end{center}
+   \end{description}

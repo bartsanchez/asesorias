@@ -1,0 +1,90 @@
+\subsection{Tipo de entidad Asignatura Curso Académico}
+
+   \begin{description}
+
+   \item[Definición] Se refiere al objeto del mundo real: \emph{``Asignatura
+   impartida en un determinado curso académico''}.
+
+   \item[Características] La entidad presenta las siguientes características:
+      \begin{itemize}
+         \item \textbf{Nombre:} Asignatura Curso Académico.
+         \item \textbf{Tipo:} Débil por identificación con respecto a Asignatura.
+         \item \textbf{Número de atributos:} 4.
+         \item \textbf{Atributo/s identificador/es principal/es:} id\_centro junto con \\id\_titulación, id\_asignatura y curso\_académico.
+         \item \textbf{Atributo/s identificador/es alternativo/s:} -
+         \item \textbf{Atributo/s heredado/s:} id\_centro del tipo de entidad Centro, \\id\_titulación del tipo de entidad Titulación e id\_asignatura del tipo de entidad Asignatura.
+      \end{itemize}
+
+   \item[Diagrama]
+   \item \begin{figure}[h!]
+            \begin{center}
+            \includegraphics[]{07.Modelo_Entidad-Interrelacion/7.2.Analisis_Entidades/diagramas/aca.pdf}
+            \caption{Diagrama de la entidad Asignatura Curso Académico.}
+            \end{center}
+         \end{figure}
+
+   \item[Descripción de los atributos] La entidad presenta los siguientes
+   atributos:
+
+   \begin{itemize}
+   \item \textbf{id\_centro}
+      \begin{itemize}
+         \item \textbf{Definición:} Código que sirve como número identificativo
+               para cada centro del sistema.
+         \item \textbf{Dominio:} Números naturales.
+         \item \textbf{Carácter:} Obligatorio.
+         \item \textbf{Ejemplo práctico:} 15.
+         \item \textbf{Información adicional:} El dato se hereda del tipo de
+         entidad Centro. Es la clave primaria junto con id\_titulación,
+         id\_asignatura y curso\_académico.
+      \end{itemize}
+   \item \textbf{id\_titulación}
+      \begin{itemize}
+         \item \textbf{Definición:} Código que sirve como número identificativo
+         para cada titulación dentro del sistema.
+         \item \textbf{Dominio:} Números naturales.
+         \item \textbf{Carácter:} Obligatorio.
+         \item \textbf{Ejemplo práctico:} 3.
+         \item \textbf{Información adicional:} El dato se hereda del tipo de
+         entidad Titulación. Es la clave primaria junto con id\_centro,
+         id\_asignatura y curso\_académico.
+      \end{itemize}
+   \item \textbf{id\_asignatura}
+      \begin{itemize}
+         \item \textbf{Definición:} Código que sirve como número identificativo
+         para cada asignatura dentro del sistema.
+         \item \textbf{Dominio:} Números naturales.
+         \item \textbf{Carácter:} Obligatorio.
+         \item \textbf{Ejemplo práctico:} 17.
+         \item \textbf{Información adicional:} El dato se hereda del tipo de
+         entidad Asignatura. Es la clave primaria junto con id\_centro,
+         id\_titulación y curso\_académico.
+      \end{itemize}
+   \item \textbf{curso\_académico}
+      \begin{itemize}
+         \item \textbf{Definición:} Hace referencia al periodo de tiempo en que se imparte una determinada asignatura.
+         \item \textbf{Dominio:} Formato de fecha: aaaa.
+         \item \textbf{Carácter:}  Obligatorio.
+         \item \textbf{Ejemplo práctico:} 2008.
+         \item \textbf{Información adicional:} El dato lo proporciona el usuario alumno al establecer las asignaturas en las cuales se ha matriculado. Es la clave primaria junto con id\_centro, id\_titulación e id\_asignatura.
+      \end{itemize}
+   \end{itemize}
+
+   \item[Ejemplo práctico]
+
+   \item \begin{center}
+            \begin{tabular}{ | l | l | }
+            \hline
+            \multicolumn{2}{ | c | }{\textbf{Tipo de entidad Asignatura Curso Académico}} \\
+            \hline
+            id\_centro & 15 \\
+            \hline
+            id\_titulación & 3\\
+            \hline
+            id\_asignatura & 17\\
+            \hline
+            curso\_académico & 2008\\
+            \hline
+            \end{tabular}
+         \end{center}
+   \end{description}

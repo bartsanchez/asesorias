@@ -8,19 +8,18 @@
    \item[Características] La entidad presenta las siguientes características:
       \begin{itemize}
          \item \textbf{Nombre:} Administrador Centro.
-         \item \textbf{Tipo:} Débil por existencia con respecto a Centro.
+         \item \textbf{Tipo:} Fuerte.
          \item \textbf{Número de atributos:} 2.
          \item \textbf{Atributo/s identificador/es principal/es:} id\_centro.
          \item \textbf{Atributo/s identificador/es alternativo/s:} -
-         \item \textbf{Atributo/s heredado/s:} nombre\_centro, del tipo de
-               entidad Centro.
+         \item \textbf{Atributo/s heredado/s:} -
       \end{itemize}
 
    \item[Diagrama]
    \item \begin{figure}[h!]
             \begin{center}
             \includegraphics[]{07.Modelo_Entidad-Interrelacion/7.2.Analisis_Entidades/diagramas/adm_centro.pdf}
-            \caption{Diagrama de la entidad Administrador Centro}
+            \caption{Diagrama de la entidad Administrador Centro.}
             \end{center}
          \end{figure}
 
@@ -39,14 +38,16 @@
                cuando el administrador principal introduce un nuevo usuario
                administrador de centro. Es la clave primaria.
       \end{itemize}
-   \item \textbf{nombre\_centro}
+   \item \textbf{nombre\_adm\_centro}
       \begin{itemize}
-         \item \textbf{Definición:} Denominación de un centro dentro del sistema.
+         \item \textbf{Definición:} Denominación de un usuario administrador de
+         centro dentro del sistema.
          \item \textbf{Dominio:} Conjunto de caracteres alfanuméricos.
          \item \textbf{Carácter:} Obligatorio.
-         \item \textbf{Ejemplo práctico:} Escuela Politécnica Superior.
-         \item \textbf{Información adicional:} El dato se hereda de la entidad
-               Centro.
+         \item \textbf{Ejemplo práctico:} Alan Turing.
+         \item \textbf{Información adicional:} El dato lo introduce el
+         administrador principal al introducir un nuevo usuario administrador
+         de centro.
       \end{itemize}
    \end{itemize}
 
@@ -59,7 +60,7 @@
             \hline
             id\_adm\_centro & 9 \\
             \hline
-            nombre\_centro & Escuela Politécnica Superior \\
+            nombre\_adm\_centro & Alan Turing \\
             \hline
             \end{tabular}
          \end{center}
