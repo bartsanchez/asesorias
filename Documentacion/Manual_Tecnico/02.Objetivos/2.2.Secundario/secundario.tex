@@ -1,5 +1,43 @@
 \section{Objetivos secundarios}
 
+\paragraph{}Para alcanzar nuestro objetivo principal, se han de alcanzar unos
+objetivos secundarios, que tienen su importancia para el desarrollo de la
+aplicación. Estos objetivos son los siguientes:
+
+\begin{itemize}
+   \item Diseñar una base de datos que permita la gestión de toda la información
+         de interés relativa a la Asesoría Académica para cada curso académico:
+   \begin{itemize}
+      \item Asesores.
+      \item Alumnos: datos académicos y personales.
+      \item Seguimiento de la asesoría: entrevistas, rendimiento académico, etc.
+      \item Organización docente: centros, titulaciones, asignaturas.
+      \item Etc.
+   \end{itemize}
+
+   \item Realizar un desarrollo de la aplicación modular que permita satisfacer
+         las necesidades de cada uno de los tipos de usuarios:
+   \begin{itemize}
+      \item Administrador principal.
+      \item Administrador de centro.
+      \item Asesor académico.
+      \item Alumno.
+   \end{itemize}
+
+   \item Crear un entorno interactivo robusto, consistente, amigable, intuitivo,
+         de fácil manejo que fomente la interacción entre los usuarios y la
+         interfaz, en la que se incluirán todas las opciones necesarias para
+         cada uno de los tipos de usuario existente en la aplicación.
+
+   \item Proporcionar una aplicación con unos mecanismos de control de acceso
+         para garantizar la privacidad, seguridad e integridad de la
+         información.
+
+   \item Potenciar la explotación del sistema, facilitando las consultas sobre
+         las asesorías académicas.
+\end{itemize}
+
+
 \paragraph{}Se pretende que el sistema a desarrollar ofrezca una serie de
 funcionalidades para cada tipo de usuario, con el objetivo de satisfacer las
 necesidades de cada uno de ellos. A continuación se detallan las características
@@ -20,7 +58,8 @@ que se esperan alcanzar para cada uno de los usuarios del sistema.
 
    \item Características del usuario administrador principal.
       \begin{itemize}
-         \item Posibilidad de gestionar al resto de usuarios del sistema.
+         \item Tendrá la posibilidad de gestionar al resto de usuarios del
+               sistema.
          \item Establecerá los distintos centros que presente el sistema,
                designando su respectivo usuario administrador de centro.
          \item Podrá establecer y mantener los diferentes planes docentes que el
@@ -39,33 +78,49 @@ que se esperan alcanzar para cada uno de los usuarios del sistema.
              que le concierne, tanto asesores como alumnos.
        \item Podrá establecer y mantener los diferentes planes docentes de los
              que su centro disponga.
+       \item Por defecto en el sistema, será el encargado de relacionar los
+             distintos usuarios asesores con sus correspondientes alumnos,
+             asignando a cada usuario alumno el asesor que le corresponda. Esta
+             opción, no obstante, podrá ser reemplazada por otras dos
+             posibilidades, que serán comentadas con mayor profundidad más
+             adelante:
+             \begin{itemize}
+               \item El usuario asesor se autoasigna sus usuarios alumnos.
+               \item El usuario alumno elige a su usuario asesor.
+             \end{itemize}
+             Estas opciones no podrán activarse simultáneamente en el sistema,
+             debiendo elegirse únicamente una de las tres posibilidades.
       \end{itemize}
-
 
    \item Características del usuario asesor.
       \begin{itemize}
          \item Tendrá la posibilidad de visualizar y modificar su información
          personal.
-         \item Será el encargado de validar a los usuarios alumnos que le
-         soliciten servicio de asesoría.
          \item Se permitirá a cada asesor gestionar la información de sus
          alumnos de forma fácil e intuitiva.
          \item Deberá permitir realizar un seguimiento de cada alumno en
          particular.
          \item Podrá generar informes de información personal de alumnos y su
-         seguimiento, que puedan ser mostrados por pantalla o imprimidos.
+         seguimiento, que podrán ser mostrados por pantalla o imprimidos.
          \item Un asesor podrá generar entrevistas, grupales o individuales, que
-         puedan ser mostradas por pantalla o imprimidas, las cuales, además,
+         podrán ser mostradas por pantalla o imprimidas, las cuales, además,
          podrán ser recibidas por los alumnos a través del correo electrónico.
+         \item Dispondrá de dos funcionalidades, desactivadas por defecto,
+         respecto a la forma en que se relaciona con el usuario alumno:
+         \begin{itemize}
+            \item Será el encargado de autoasignarse sus propios usuarios
+            alumnos a los que ofrece asesoría.
+            \item Podrá validar a los usuarios alumnos que les pidan asesoría.
+         \end{itemize}
       \end{itemize}
 
    \item Características del usuario alumno.
       \begin{itemize}
          \item Tendrá la posibilidad de visualizar y modificar su información
          personal.
-         \item Podrá visualizar los asesores disponibles para prestar asesoría
-         así como solicitar sus servicios, en caso de no tener asignado uno
-         previamente.
+         \item Como opción desactivada por defecto, podrá visualizar los
+         asesores disponibles para prestar asesoría así como solicitar sus
+         servicios, en caso de no tener asignado uno previamente.
       \end{itemize}
 \end{itemize}
 
