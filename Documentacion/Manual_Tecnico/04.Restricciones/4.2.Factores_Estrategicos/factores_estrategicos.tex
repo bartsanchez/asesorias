@@ -1,35 +1,214 @@
 \section{Factores estratégicos}\label{facEst}
 
-\paragraph{}En cuanto a las características técnicas, se han decidido como
-factores estratégicos, para la consecución de este proyecto, los siguientes:
+\paragraph{}Con el objeto de determinar las características técnicas de
+desarrollo, se ha realizado un estudio de los diferentes componentes que afectan
+y conforman el proyecto a realizar, que servirá para determinar los distintos
+factores estratégicos necesarios para la consecución de este proyecto. Dicho
+estudio ha tenido en cuenta:
 
 \begin{itemize}
-   \item El sistema operativo que se utilizará para el desarrollo del proyecto
-   será Debian GNU/Linux 6.0 \cite{debian}, por ser éste el sistema habitual
-   del desarrollador principal y estar claramente familiarizado con él.
-   \item Se ha decidido utilizar un sistema de control de versiones para el
-   desarrollo del proyecto, abarcando tanto la documentación como la generación
-   de código, con el objetivo de facilitar la administración de los elementos
-   que se generen a medida que evolucionan. La aplicación software encargada de
-   este cometido se denomina Subversion \cite{subversion}, y ha sido elegida por
-   varias razones, entre las que se encuentran:
+ \item Sistema operativo.
+ \item Servicios web.
+ \item Sistema gestor de bases de datos.
+ \item Sistema control de versiones.
+ \item Otras decisiones.
+\end{itemize}
+
+\subsection{Sistema operativo}
+   \paragraph{}Los distintos sistemas operativos que se han tenido en cuenta a
+   la hora de elegir el sistema en el que se desarrollará el proyecto son:
+
+   \begin{itemize}
+    \item Debian GNU/Linux \cite{debian}.
+      \begin{itemize}
+         \item Ventajas
+            \begin{itemize}
+             \item Software libre.
+             \item Gran estabilidad.
+             \item Gran cantidad de software disponible.
+             \item Amplia comunidad de usuarios.
+             \item Basado en Unix.
+             \item Disponibilidad del código fuente del sistema.
+             \item Se distribuye gratuitamente.
+            \end{itemize}
+         \item Inconvenientes
+            \begin{itemize}
+            \item No tiene sustituto directo para determinadas aplicaciones.
+            \item Algunos dispositivos de última generación no están soportados.
+            \end{itemize}
+      \end{itemize}
+    \item Microsoft Windows XP/Vista \cite{microsoft}.
+      \begin{itemize}
+         \item Ventajas
+            \begin{itemize}
+             \item Ampliamente difundido.
+             \item Facilidad de uso.
+            \end{itemize}
+         \item Inconvenientes
+            \begin{itemize}
+            \item Requerimientos técnicos.
+            \item Coste respecto a otros sistemas.
+            \item Estabilidad frente a otros sistemas.
+            \end{itemize}
+      \end{itemize}
+   \end{itemize}
+
+   \paragraph{} El sistema operativo que se utilizará para el desarrollo del
+   proyecto será Debian GNU/Linux \cite{debian}, además de por las ventajas
+   anteriormente señaladas, por ser éste el sistema habitual del desarrollador
+   principal y estar claramente familiarizado con él.
+
+\subsection{Servicios web}
+   \paragraph{} Al tratarse de un servicio web, el contenido generado por la
+   aplicación deberá hacer uso del lenguaje de marcado HTML, o alguna de sus
+   variantes (XHTML), al ser el lenguaje de marcado estándar.
+
+   \paragraph{}La elección del lenguaje del lado del servidor utilizado para el
+   desarrollo de la aplicación, se ha ha llevado a cabo contemplando las
+   siguientes alternativas:
+   \begin{itemize}
+    \item PHP \cite{php}.
+      \begin{itemize}
+         \item Ventajas
+            \begin{itemize}
+             \item Relativamente fácil de aprender.
+             \item Lenguaje multiplataforma.
+             \item Amplia documentación.
+             \item Muy extensible a través de módulos.
+             \item Software libre.
+            \end{itemize}
+         \item Inconvenientes
+            \begin{itemize}
+             \item Pobre seguimiento de errores.
+             \item Limitaciones en la programación orientada a objetos.
+             \item Mala legibilidad de código.
+            \end{itemize}
+      \end{itemize}
+    \item Ruby \cite{ruby}.
+      \begin{itemize}
+         \item Ventajas
+            \begin{itemize}
+             \item Lenguaje multiplataforma.
+             \item Muy extensible a través de módulos.
+             \item Software libre.
+            \end{itemize}
+         \item Inconvenientes
+            \begin{itemize}
+             \item Pobre documentación extraoficial.
+             \item Velocidad, al ser un lenguaje interpretado.
+            \end{itemize}
+      \end{itemize}
+    \item Python \cite{python}.
+      \begin{itemize}
+         \item Ventajas
+            \begin{itemize}
+             \item Lenguaje de propósito general multiplataforma.
+             \item Muy extensible a través de módulos.
+             \item Software libre.
+             \item Buena legibilidad de código.
+            \end{itemize}
+         \item Inconvenientes
+            \begin{itemize}
+             \item Velocidad, al ser un lenguaje interpretado.
+            \end{itemize}
+      \end{itemize}
+   \end{itemize}
+
+   \paragraph{}Se ha decidido utilizar Python por satisfacer las necesidades
+   de la aplicación a desarrollar, teniendo en cuenta las ventajas anteriormente
+   comentadas, así como por cumplir el deseo personal del desarrollador
+   principal de dicha aplicación de aprender este lenguaje.
+
+   \paragraph{}Además, con objeto de agilizar el desarrollo, se utilizará
+   un \textit{framework} \footnote{Según Wikipedia \cite{wikipedia}:\textit{``Un
+   framework, en el desarrollo de software, es una estructura de soporte
+   definida, mediante la cual otro proyecto de software puede ser organizado y
+   desarrollado. Típicamente, puede incluir soporte de programas, bibliotecas y
+   un lenguaje interpretado entre otros software para ayudar a desarrollar y
+   unir los diferentes componentes de un proyecto``.}} escrito en Python llamado
+   Django \cite{django}.
+
+\subsection{Sistema gestor de bases de datos}
+   \paragraph{}En cuanto al funcionamiento de la base de datos, como sistema
+   gestor se han estudiado dos en particular:
+
+   \begin{itemize}
+    \item MySQL \cite{mysql}.
+      \begin{itemize}
+         \item Ventajas
+            \begin{itemize}
+             \item Velocidad a la hora de realizar las operaciones.
+             \item Bajo consumo de recursos.
+             \item Buenas utilidades de administración.
+             \item Poca probabilidad de corromper los datos.
+            \end{itemize}
+         \item Inconvenientes
+            \begin{itemize}
+             \item Carece de soporte para transacciones, \textit{rollback's} y
+                   subconsulta.
+             \item No maneja la integridad referencial.
+             \item No implementa una buena escalabilidad.
+            \end{itemize}
+      \end{itemize}
+    \item PostgreSQL \cite{postgresql}.
+      \begin{itemize}
+         \item Ventajas
+            \begin{itemize}
+             \item Implementa el uso de \textit{rollback's}, subconsultas y
+                   transacciones.
+             \item Tiene la capacidad de comprobar la integridad referencial.
+             \item Recomendado por el \textit{framework} elegido (Django).
+            \end{itemize}
+         \item Inconvenientes
+            \begin{itemize}
+             \item Gran consumo de recursos.
+             \item De 2 a 3 veces más lento que MySQL.
+            \end{itemize}
+      \end{itemize}
+      \item Oracle \cite{oracle}.
+      \begin{itemize}
+         \item Ventajas
+            \begin{itemize}
+             \item Gran escalabilidad.
+             \item Gran estabilidad.
+             \item Implementa el uso de \textit{rollback's}, subconsultas y
+                   transacciones.
+             \item Tiene la capacidad de comprobar la integridad referencial.
+             \item Buen soporte técnico.
+            \end{itemize}
+         \item Inconvenientes
+            \begin{itemize}
+             \item Licencia privativa.
+            \end{itemize}
+      \end{itemize}
+   \end{itemize}
+
+   \paragraph{}Debido a que las diferencias entre ambos sistemas gestores de
+   bases de datos son prácticamente despreciables al nivel de desarrollo que
+   se pretende llegar, se hará uso de PostreSQL, al ser el recomendado por el
+   \textit{framework} utilizado.
+
+\subsection{Sistema de control de versiones}
+   \paragraph{} Se ha decidido utilizar un sistema de control de versiones para
+   el desarrollo del proyecto, abarcando tanto la documentación como la
+   generación de código, con el objetivo de facilitar la administración de los
+   elementos que se generen a medida que evolucionan.
+
+   \paragraph{}En este caso no se han estudiado alternativas, al existir con
+   anterioridad un sistema de control de versiones implantado en los equipos
+   que forman parte de los recursos hardware del proyecto.
+
+   \paragraph{}La aplicación software encargada de este cometido se denomina
+   Subversion \cite{subversion}, y entre sus características se encuentran:
    \begin{itemize}
       \item Es software libre.
-      \item Es fácil de instalar en el sistema operativo sobre el que se
-            trabaja.
       \item Existe bastante documentación y de fácil acceso.
+      \item Se envían sólo las diferencias en ambas direcciones.
+      \item Maneja eficientemente archivos binarios.
+      \item Permite selectivamente el bloqueo de archivos.
    \end{itemize}
-   \item Para el funcionamiento de la base de datos, se ha decidido utilizar
-   MySQL 5.0 \cite{mysql}. Entre los motivos se encuentran el ser software
-   libre y la fácil instalación/configuración en el sistema operativo sobre el
-   que se desarrolla la aplicación.
-   \item Al ser un servicio web, el contenido generado por la aplicación deberá
-   hacer uso del lenguaje de marcado HTML, o alguna de sus variantes (XHTML), al
-   ser el lenguaje de marcado estándar.
-   \item Para la generación de contenido, se hará uso de un lenguaje del lado
-   del servidor. Se ha decidido utilizar PHP/Ruby(On Rails)/Python(Django) por
-   el motivo X.
-\end{itemize}
+
+\subsection{Otras decisiones}
 
 \paragraph{}En lo que respecta a funcionalidades de la aplicación, se han tomado
 las siguientes decisiones:
