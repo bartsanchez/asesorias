@@ -15,11 +15,12 @@
          \item \textbf{Atributo/s heredado/s:} -
       \end{itemize}
 
-   \item[Diagrama]
-   \item \begin{figure}[h!]
+   \item[Diagrama] La figura \ref{diagramaAlumno} muestra el diagrama de la entidad.
+   \item \begin{figure}[!ht]
             \begin{center}
             \includegraphics[]{07.Modelo_Entidad-Interrelacion/7.2.Analisis_Entidades/diagramas/alumno.pdf}
             \caption{Diagrama de la entidad Alumno.}
+            \label{diagramaAlumno}
             \end{center}
          \end{figure}
 
@@ -124,22 +125,6 @@
          \item \textbf{Ejemplo práctico:} 957123456.
          \item \textbf{Información adicional:} El dato lo proporciona el usuario alumno cuando se registra o cuando modifica su información personal.
       \end{itemize}
-   \item \textbf{estudios\_actuales}
-      \begin{itemize}
-         \item \textbf{Definición:} Hace referencia a los estudios realizados actualmente por el alumno.
-         \item \textbf{Dominio:} Conjunto de caracteres alfanuméricos.
-         \item \textbf{Carácter:}  Obligatorio.
-         \item \textbf{Ejemplo práctico:} Ingeniería Técnica en Informática de Gestión.
-         \item \textbf{Información adicional:} El dato lo proporciona el usuario alumno cuando se registra o cuando modifica su información personal.
-      \end{itemize}
-   \item \textbf{curso}
-      \begin{itemize}
-         \item \textbf{Definición:} Hace referencia al curso de una titulación en el que se encuentra actualmente  el alumno.
-         \item \textbf{Dominio:} Conjunto de enteros positivos.
-         \item \textbf{Carácter:}  Obligatorio.
-         \item \textbf{Ejemplo práctico:} 3.
-         \item \textbf{Información adicional:} El dato lo proporciona el usuario alumno cuando se registra o cuando modifica su información personal.
-      \end{itemize}
    \item \textbf{ingreso}
       \begin{itemize}
          \item \textbf{Definición:} Hace referencia al año de ingreso en la Universidad por parte del alumno en sus estudios actuales.
@@ -148,21 +133,13 @@
          \item \textbf{Ejemplo práctico:} 2004.
          \item \textbf{Información adicional:} El dato lo proporciona el usuario alumno cuando se registra o cuando modifica su información personal.
       \end{itemize}
-   \item \textbf{estudios\_curso\_anterior}
-      \begin{itemize}
-         \item \textbf{Definición:} Hace referencia a los estudios realizados por el alumno el curso anterior.
-         \item \textbf{Dominio:} Conjunto de caracteres alfanuméricos.
-         \item \textbf{Carácter:}  Opcional.
-         \item \textbf{Ejemplo práctico:} Ingeniería Técnica en Informática de Gestión.
-         \item \textbf{Información adicional:} El dato lo proporciona el usuario alumno cuando se registra o cuando modifica su información personal.
-      \end{itemize}
    \item \textbf{otros\_estudios\_universitarios}
       \begin{itemize}
          \item \textbf{Definición:} Hace referencia a otros estudios universitarios que posea el alumno.
          \item \textbf{Dominio:} Conjunto de caracteres alfanuméricos.
          \item \textbf{Carácter:}  Opcional.
          \item \textbf{Ejemplo práctico:} -
-         \item \textbf{Información adicional:} El dato lo proporciona el usuario alumno cuando se registra o cuando modifica su información personal.
+         \item \textbf{Información adicional:} El dato lo proporciona el usuario alumno cuando se registra o cuando modifica su información personal. Se trata de un atributo múltiple.
       \end{itemize}
    \item \textbf{modalidad\_acceso\_universidad}
       \begin{itemize}
@@ -213,13 +190,7 @@
             \hline
             teléfono\_familiar & 957123456\\
             \hline
-            estudios\_actuales & Ingeniería Técnica en Informática de Gestión.\\
-            \hline
-            curso & 3\\
-            \hline
             ingreso & 2004\\
-            \hline
-            estudios\_curso\_anterior & Ingeniería Técnica en Informática de Gestión.\\
             \hline
             otros\_estudios\_universitarios & -\\
             \hline
