@@ -5,44 +5,68 @@
 
    \begin{description}
 
+      \item[Centro] Un centro representa una institución donde se imparte
+      docencia de titulaciones universitarias.
+      \begin{itemize}
+         \item Solo se van a considerar centros de la universidad de Córdoba.
+         \item Un centro será identificado mediante un código numérico o por su
+         nombre.
+      \end{itemize}
+
       \item[Titulación] Conjunto de materias cuya superación supone la obtención
       de un título académico.
       \begin{itemize}
-         \item Cada titulación tiene un identificador que hace referencia a ella
-          de forma unívoca.
-          \item Una titulación está compuesta de al menos una asignatura y como
-         máximo un número indeterminado.
+         \item Una titulación se imparte en un único centro universitario, pero
+         en un centro universitario se pueden impartir varias titulaciones.
+         \item Cada titulación se puede identificar de dos formas:
+         \begin{itemize}
+            \item Usando el código del centro y el código de la titulación.
+            \item Usando el código del centro, el nombre de la titulación y el
+            año en que se aprobó su plan de estudios.
+         \end{itemize}
       \end{itemize}
 
       \item[Asignatura] Materia que forma parte del plan de estudios de una
       titulación.
       \begin{itemize}
-         \item Cada asignatura tiene un identificador que hace referencia a ella
-         de forma unívoca.
+         \item Una asignatura pertenece a una única titulación, pero una
+         titulación está compuesta por varias asignaturas.
+         \item Cada asignatura se puede identificar de dos formas:
+         \begin{itemize}
+            \item Usando el código del centro, el código de la titulación y el
+            código de la asignatura.
+            \item Usando el código del centro, el código de la titulación y el
+            nombre de la asignatura.
+         \end{itemize}
          \item Una misma asignatura se puede impartir en varios cursos
          académicos.
-         \item Una asignatura pertenece a una y solo a una titulación.
-         \item Una asignatura tiene asignada una carga docente traducida en
-         un número de créditos.
+         \item Una asignatura tiene asignada una carga docente traducida en un
+         número de créditos, teóricos y prácticos.
          \item Una asignatura puede ser de varios tipos: troncal, obligatoria,
          optativa o de libre configuración.
+         \item En cada curso académico, una asignatura podrá tener matriculados
+         varios alumnos, y un alumno podrá matricularse de varias asignaturas.
       \end{itemize}
 
       \item[Alumno] Estudiante de una titulación que recibe asesoría.
       \begin{itemize}
-         \item Cada alumno tiene un identificador que hace referencia al mismo
-         de forma unívoca.
-         \item Cada alumno recibe asesoría de un, y solo un asesor.
-         \item Un determinado alumno puede estar matriculado en un número
-         indeterminado de asignaturas.
+         \item Un alumno podrá ser identificado por su dni o su pasaporte.
       \end{itemize}
 
-      \item[Asesor] Tutor que realiza un seguimiento permanente y orientado a la
-      optimización del esfuerzo de estudio de un alumno.
+      \item[Asesor] Profesor que realiza un seguimiento permanente y orientado a
+      la optimización del esfuerzo de estudio de un alumno.
       \begin{itemize}
-         \item Cada asesor tiene un identificador que hace referencia al mismo
-         de forma unívoca.
-         \item Un asesor ofrece asesoría a un número indeterminado de alumnos.
+         \item Un asesor podrá ser identificado mediante su dni o pasaporte.
+         \item En cada curso académico, un asesor podrá tener asignados varios
+         alumnos, pero un alumno solo podrá tener asignado un asesor.
       \end{itemize}
 
+      \item[Administrador de centro] Persona encargada de la gestión
+      administrativa de las asesorías en un centro universitario.
+      \begin{itemize}
+       \item Un administrador de centro podrá ser identificado mediante su dni o
+       pasaporte.
+       \item Un administrador de centro podrá gestionar varios centros, y un
+       centro podrá ser gestionado por varios administradores.
+      \end{itemize}
  \end{description}
