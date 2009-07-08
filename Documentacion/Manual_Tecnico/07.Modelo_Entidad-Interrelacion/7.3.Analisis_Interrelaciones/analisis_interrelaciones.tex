@@ -1,3 +1,59 @@
 \section{Análisis de interrelaciones}
 
-   \paragraph{}Prueba.
+   \paragraph{}Una vez definidas las distintas entidades presentes en el
+   modelo, a continuación se detallarán las distintas relaciones que mantienen
+   entre ellas. Las interrelaciones por describir son las siguientes:
+
+   \begin{itemize}
+    \item Interrelación Administrador Centro - Centro.
+    \item Interrelación Centro - Titulación.
+    \item Interrelación Titulación - Asignatura.
+    \item Interrelación Asignatura - Asignatura Curso Académico.
+    \item Interrelación Asignatura Curso Académico - Alumno Curso Académico.
+    \item Interrelación Alumno Curso Académico - Alumno.
+    \item Interrelación Alumno Curso Académico - Asesor.
+   \end{itemize}
+
+   \paragraph{}Para la descripción de cada relación entre entidades, se
+   utilizarán los siguientes apartados:
+
+   \begin{description}
+      \item[Definición] Especifica el motivo por el cual se produce la
+           interrelación y entre qué tipos de entidad se da lugar.
+
+      \item[Características] En este aparatado se mostrará la siguiente
+           información:
+
+            \begin{itemize}
+             \item Nombre del tipo de interrelación.
+             \item Tipo de la interrelación, es decir, fuerte o débil. En el
+                   caso de que sea débil se especifica el tipo de debilidad:
+                   existencia o identificación.
+             \item Cardinalidad de la interrelación y cardinalidad con la que
+                   cada tipo de entidad participa en la interrelación.
+             \item Número de atributos del tipo de interrelación.
+            \end{itemize}
+
+      \item[Diagrama] Representación gráfica del tipo de interrelación.
+
+      \item[Descripción de los atributos] Se describirán cada uno de los
+           atributos que forman parte del tipo de interrelación. Para cada uno
+           de ellos se indicará lo siguiente:
+
+           \begin{itemize}
+            \item Definición del atributo.
+            \item Dominio en el cual se encuentra.
+            \item Ejemplo práctico de cada atributo.
+           \end{itemize}
+
+      \item[Ejemplo práctico del tipo de interrelación] En este apartado se
+           muestra una ocurrencia concreta del tipo de interrelación.
+   \end{description}
+
+\input{07.Modelo_Entidad-Interrelacion/7.3.Analisis_Interrelaciones/iAdministradorCentro-Centro}
+\input{07.Modelo_Entidad-Interrelacion/7.3.Analisis_Interrelaciones/iCentro-Titulacion}
+\input{07.Modelo_Entidad-Interrelacion/7.3.Analisis_Interrelaciones/iTitulacion-Asignatura}
+\input{07.Modelo_Entidad-Interrelacion/7.3.Analisis_Interrelaciones/iAsignatura-ACA}
+\input{07.Modelo_Entidad-Interrelacion/7.3.Analisis_Interrelaciones/iACA-AlumnoCA}
+\input{07.Modelo_Entidad-Interrelacion/7.3.Analisis_Interrelaciones/iAlumnoCA-Alumno}
+\input{07.Modelo_Entidad-Interrelacion/7.3.Analisis_Interrelaciones/iAlumnoCA-Asesor}
