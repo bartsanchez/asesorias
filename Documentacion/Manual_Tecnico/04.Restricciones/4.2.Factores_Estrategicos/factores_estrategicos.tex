@@ -10,8 +10,6 @@ estudio ha tenido en cuenta:
  \item Sistema operativo.
  \item Servicios web.
  \item Sistema gestor de bases de datos.
- \item Sistema control de versiones.
- \item Otras decisiones.
 \end{itemize}
 
 \subsection{Sistema operativo}
@@ -125,12 +123,12 @@ estudio ha tenido en cuenta:
    definida, mediante la cual otro proyecto de software puede ser organizado y
    desarrollado. Típicamente, puede incluir soporte de programas, bibliotecas y
    un lenguaje interpretado entre otros software para ayudar a desarrollar y
-   unir los diferentes componentes de un proyecto``.}} escrito en Python llamado
+   unir los diferentes componentes de un proyecto.''}} escrito en Python llamado
    Django \cite{django}.
 
 \subsection{Sistema gestor de bases de datos}
    \paragraph{}En cuanto al funcionamiento de la base de datos, como sistema
-   gestor se han estudiado dos en particular:
+   gestor se han estudiado tres en particular:
 
    \begin{itemize}
     \item MySQL \cite{mysql}.
@@ -185,42 +183,5 @@ estudio ha tenido en cuenta:
 
    \paragraph{}Debido a que las diferencias entre ambos sistemas gestores de
    bases de datos son prácticamente despreciables al nivel de desarrollo que
-   se pretende llegar, se hará uso de PostreSQL, al ser el recomendado por el
+   se pretende llegar, se hará uso de PostgreSQL, al ser el recomendado por el
    \textit{framework} utilizado.
-
-\subsection{Sistema de control de versiones}
-   \paragraph{} Se ha decidido utilizar un sistema de control de versiones para
-   el desarrollo del proyecto, abarcando tanto la documentación como la
-   generación de código, con el objetivo de facilitar la administración de los
-   elementos que se generen a medida que evolucionan.
-
-   \paragraph{}En este caso no se han estudiado alternativas, al existir con
-   anterioridad un sistema de control de versiones implantado en los equipos
-   que forman parte de los recursos hardware del proyecto.
-
-   \paragraph{}La aplicación software encargada de este cometido se denomina
-   Subversion \cite{subversion}, y entre sus características se encuentran:
-   \begin{itemize}
-      \item Es software libre.
-      \item Existe bastante documentación y de fácil acceso.
-      \item Se envían sólo las diferencias en ambas direcciones.
-      \item Maneja eficientemente archivos binarios.
-      \item Permite selectivamente el bloqueo de archivos.
-   \end{itemize}
-
-\subsection{Otras decisiones}
-
-\paragraph{}En lo que respecta a funcionalidades de la aplicación, se han tomado
-las siguientes decisiones:
-
-\begin{itemize}
-   \item Cada usuario podrá acceder al sistema de forma personalizada; es decir,
-   a través de un sistema de identificación personal. La información manejada
-   por cada usuario es particular, y dependiente del rol que desempeñe.
-   \item Las entrevistas generadas por los asesores se podrán hacer llegar a los
-   alumnos mediante correo electrónico.
-   \item La interfaz gráfica a usar deberá ser de fácil manejo e intuitiva,
-   basada en elementos gráficos usados comúnmente como por ejemplo: cuadros de
-   texto, botones, etiquetas, etc.
-\end{itemize}
-
