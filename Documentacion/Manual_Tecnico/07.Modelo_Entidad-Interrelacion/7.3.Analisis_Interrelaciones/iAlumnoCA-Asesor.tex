@@ -1,22 +1,46 @@
 \subsection{Interrelación Alumno Curso Académico - Asesor}
 
    \begin{description}
-      \item[Definición]
+      \item[Definición] En esta interrelación se deja constancia de que un
+      asesor puede ofrecer servicios de asesoría a un número indeterminado
+      de alumnos matriculados durante un determinado curso académico.
 
       \item[Características] La interrelación presenta las siguientes
                              características:
 
          \begin{itemize}
-            \item \textbf{Nombre:}
-            \item \textbf{Tipo de la interrelación:}
-            \item \textbf{Cardinalidad de la interrelación:}
-            \item \textbf{Número de atributos:}
+            \item \textbf{Nombre:} AlCA-As
+            \item \textbf{Tipo de la interrelación:} El tipo de entidad
+                  Alumno Curso Académico es débil por identificación respecto al
+                  tipo de entidad Asesor.
+            \item \textbf{Cardinalidad de la interrelación:} N:1
+            \item \textbf{Número de atributos:} Ninguno.
          \end{itemize}
 
-      \item[Diagrama] La figura \textit{RELLENAR} muestra el diagrama de la
+      \item[Diagrama] La figura \ref{diagramaAlCA-As} muestra el diagrama de la
                       interrelación.
 
-      \item[Descripción de los atributos]
+      \item \begin{figure}[!ht]
+            \begin{center}
+            \includegraphics[]{07.Modelo_Entidad-Interrelacion/7.3.Analisis_Interrelaciones/diagramas/AlCA-As.pdf}
+            \caption{Diagrama de la interrelación AlCA-As.}
+            \label{diagramaAlCA-As}
+            \end{center}
+         \end{figure}
 
       \item[Ejemplo práctico del tipo de interrelación]
+
+      \item \begin{center}
+            \begin{tabular}{ | c | c | }
+            \hline
+            \multicolumn{2}{ | c | }{\textbf{Tipo de interrelación AlCA-As}} \\
+            \hline
+            \textbf{Alumno Curso Académico} & \textbf{Asesor}\\
+            \hline
+            dni\_pasaporte+id\_centro & dni\_pasaporte \\
+            \hline
+            01234567A2008 & 98765432Z \\
+            \hline
+            \end{tabular}
+         \end{center}
    \end{description}

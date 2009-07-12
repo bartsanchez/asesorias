@@ -1,22 +1,22 @@
 \subsection{Interrelación Administrador Centro - Centro}
 
    \begin{description}
-      \item[Definición] En esta interrelación se deja constancia de que cada
-      centro establecido en el sistema dispone, al menos, un administrador de
-      centro.
+      \item[Definición] En esta interrelación se deja constancia de que pueden
+      existir administradores de centro que administren los posibles centros
+      que se establezcan en el sistema.
 
       \item[Características] La interrelación presenta las siguientes
                              características:
 
          \begin{itemize}
             \item \textbf{Nombre:} AC-C
-            \item \textbf{Tipo de la interrelación:} Fuerte
+            \item \textbf{Tipo de la interrelación:} Fuerte.
             \item \textbf{Cardinalidad de la interrelación:} N:M
                   \begin{itemize}
                      \item Administrador Centro: administra (0,n)
-                     \item Centro: es\_administrado\_por (1,n)
+                     \item Centro: es\_administrado\_por (0,n)
                   \end{itemize}
-            \item \textbf{Número de atributos:} Ninguno
+            \item \textbf{Número de atributos:} Ninguno.
          \end{itemize}
 
       \item[Diagrama] La figura \ref{diagramaAC-C} muestra el diagrama de la
