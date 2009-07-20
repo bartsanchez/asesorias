@@ -11,7 +11,7 @@
          \begin{itemize}
             \item \textbf{Nombre:} AlCA-As
             \item \textbf{Tipo de la interrelación:} El tipo de entidad
-                  Alumno Curso Académico es débil por identificación respecto al
+                  Alumno Curso Académico es débil por existencia respecto al
                   tipo de entidad Asesor.
             \item \textbf{Cardinalidad de la interrelación:} N:1
             \item \textbf{Número de atributos:} Ninguno.
@@ -31,15 +31,16 @@
       \item[Ejemplo práctico del tipo de interrelación]
 
       \item \begin{center}
-            \begin{tabular}{ | c | c | }
+            \begin{tabular}{ | r r | }
             \hline
             \multicolumn{2}{ | c | }{\textbf{Tipo de interrelación AlCA-As}} \\
             \hline
-            \textbf{Alumno Curso Académico} & \textbf{Asesor}\\
+            \textbf{Alumno Curso Académico} & \\
+            dni\_pasaporte & 01234567A \\
+            id\_centro & 2008 \\
             \hline
-            dni\_pasaporte+id\_centro & dni\_pasaporte \\
-            \hline
-            01234567A2008 & 98765432Z \\
+            \textbf{Asesor} & \\
+            dni\_pasaporte & 98765432Z \\
             \hline
             \end{tabular}
          \end{center}
