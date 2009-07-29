@@ -1,0 +1,68 @@
+\subsection{Tipo de entidad Departamento}
+
+   \begin{description}
+
+   \item[Definición] Se refiere al objeto del mundo real: \emph{``Unidad
+   estructural universitaria de docencia e investigación, formada por una o
+   varias cátedras de materias afines:''}.
+
+   \item[Características] La entidad presenta las siguientes características:
+      \begin{itemize}
+         \item \textbf{Nombre:} Departamento.
+         \item \textbf{Tipo:} Fuerte.
+         \item \textbf{Número de atributos:} 2.
+         \item \textbf{Atributo/s identificador/es principal/es:} id\_departamento.
+         \item \textbf{Atributo/s identificador/es alternativo/s:} nombre\_departamento.
+         \item \textbf{Atributo/s heredado/s:} -
+      \end{itemize}
+
+   \item[Diagrama] La figura \ref{diagramaDepartamento} muestra el diagrama de la entidad.
+   \item \begin{figure}[!ht]
+            \begin{center}
+            \includegraphics[]{07.Modelo_Entidad-Interrelacion/7.2.Analisis_Entidades/diagramas/departamento.pdf}
+            \caption{Diagrama de la entidad Departamento.}
+            \label{diagramaDepartamento}
+            \end{center}
+         \end{figure}
+
+   \item[Descripción de los atributos] La entidad presenta los siguientes
+   atributos:
+
+   \begin{itemize}
+    \item \textbf{id\_departamento}
+      \begin{itemize}
+         \item \textbf{Definición:} Código que sirve como número identificativo
+               para cada departamento del sistema.
+         \item \textbf{Dominio:} Números naturales.
+         \item \textbf{Carácter:} Obligatorio.
+         \item \textbf{Ejemplo práctico:} 22.
+         \item \textbf{Información adicional:} El dato lo genera el sistema
+               cuando el administrador principal introduce un nuevo departamento
+               en el sistema. Es la clave primaria.
+      \end{itemize}
+   \item \textbf{nombre\_departamento}
+      \begin{itemize}
+         \item \textbf{Definición:} Denominación de un departamento dentro del sistema.
+         \item \textbf{Dominio:} Conjunto de caracteres alfanuméricos.
+         \item \textbf{Carácter:} Obligatorio.
+         \item \textbf{Ejemplo práctico:} Departamento de Informática y Análisis Numérico.
+         \item \textbf{Información adicional:} El dato lo introduce el
+         administrador principal al introducir un nuevo departamento en el sistema. Es
+         clave alterna.
+      \end{itemize}
+   \end{itemize}
+
+   \item[Ejemplo práctico]
+
+   \item \begin{center}
+            \begin{tabular}{ | l | l | }
+            \hline
+            \multicolumn{2}{ | c | }{\textbf{Tipo de entidad Departamento}} \\
+            \hline
+            id\_departamento & 22 \\
+            \hline
+            nombre\_departamento & Departamento de Informática y Análisis Numérico \\
+            \hline
+            \end{tabular}
+         \end{center}
+   \end{description}
