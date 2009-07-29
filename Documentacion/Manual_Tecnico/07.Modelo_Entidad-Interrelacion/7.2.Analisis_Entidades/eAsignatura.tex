@@ -9,10 +9,11 @@
       \begin{itemize}
          \item \textbf{Nombre:} Asignatura.
          \item \textbf{Tipo:} Débil por identificación con respecto a Titulación.
-         \item \textbf{Número de atributos:} 8.
+         \item \textbf{Número de atributos:} 6 propios y 2 heredados.
          \item \textbf{Atributo/s identificador/es principal/es:} id\_centro junto con \\id\_titulación e id\_asignatura.
          \item \textbf{Atributo/s identificador/es alternativo/s:} id\_centro junto con \\id\_titulación y nombre\_asignatura.
-         \item \textbf{Atributo/s heredado/s:} id\_centro del tipo de entidad Centro, \\id\_titulación del tipo de entidad Titulación.
+         \item \textbf{Atributo/s heredado/s:} id\_centro e id\_titulación del
+         tipo de entidad Titulación.
       \end{itemize}
 
    \item[Diagrama] La figura \ref{diagramaAsignatura} muestra el diagrama de la entidad.
@@ -24,34 +25,10 @@
             \end{center}
          \end{figure}
 
-   \item[Descripción de los atributos] La entidad presenta los siguientes
-   atributos:
+   \item[Descripción de los atributos propios] La entidad presenta los
+   siguientes atributos propios:
 
    \begin{itemize}
-   \item \textbf{id\_centro}
-      \begin{itemize}
-         \item \textbf{Definición:} Código que sirve como número identificativo
-               para cada centro del sistema.
-         \item \textbf{Dominio:} Números naturales.
-         \item \textbf{Carácter:} Obligatorio.
-         \item \textbf{Ejemplo práctico:} 15.
-         \item \textbf{Información adicional:} El dato se hereda del tipo de
-         entidad Centro. Es la clave primaria junto con id\_titulación e
-         id\_asignatura. También actúa de clave alterna junto con
-         id\_titulación y nombre\_asignatura.
-      \end{itemize}
-   \item \textbf{id\_titulación}
-      \begin{itemize}
-         \item \textbf{Definición:} Código que sirve como número identificativo
-         para cada titulación dentro del sistema.
-         \item \textbf{Dominio:} Números naturales.
-         \item \textbf{Carácter:} Obligatorio.
-         \item \textbf{Ejemplo práctico:} 3.
-         \item \textbf{Información adicional:} El dato se hereda del tipo de
-         entidad Titulación. Es la clave primaria junto con id\_centro e
-         id\_asignatura. También actúa de clave alterna junto con
-         id\_centro y nombre\_asignatura.
-      \end{itemize}
    \item \textbf{id\_asignatura}
       \begin{itemize}
          \item \textbf{Definición:} Código que sirve como número identificativo

@@ -9,10 +9,11 @@
       \begin{itemize}
          \item \textbf{Nombre:} Alumno Curso Académico.
          \item \textbf{Tipo:} Débil por identificación con respecto a Alumno.
-         \item \textbf{Número de atributos:} 2.
+         \item \textbf{Número de atributos:} 1 propio y 1 heredado.
          \item \textbf{Atributo/s identificador/es principal/es:} dni\_pasaporte y \\curso\_académico.
          \item \textbf{Atributo/s identificador/es alternativo/s:} -
-         \item \textbf{Atributo/s heredado/s:} dni\_pasaporte del tipo de entidad Alumno y curso\_académico del tipo de entidad Asignatura Curso Académico.
+         \item \textbf{Atributo/s heredado/s:} dni\_pasaporte del tipo
+         de entidad Alumno.
       \end{itemize}
 
    \item[Diagrama] La figura \ref{diagramaAlumnoCA} muestra el diagrama de la entidad.
@@ -24,19 +25,10 @@
             \end{center}
          \end{figure}
 
-   \item[Descripción de los atributos] La entidad presenta los siguientes
-   atributos:
+   \item[Descripción de los atributos propios] La entidad presenta los
+   siguientes atributos propios:
 
    \begin{itemize}
-   \item \textbf{dni\_pasaporte}
-      \begin{itemize}
-         \item \textbf{Definición:} Coincide con el número de documento nacional
-         de identidad o pasaporte del alumno.
-         \item \textbf{Dominio:} Formato: 11111111A.
-         \item \textbf{Carácter:} Obligatorio.
-         \item \textbf{Ejemplo práctico:} 01234567A.
-         \item \textbf{Información adicional:} El dato se hereda del tipo de entidad Alumno. Es la clave primaria junto con curso\_académico.
-      \end{itemize}
    \item \textbf{curso\_académico}
       \begin{itemize}
          \item \textbf{Definición:} Hace referencia al periodo de tiempo en que se imparte una determinada asignatura.
