@@ -1,0 +1,55 @@
+\subsection{Tipo de entidad Asesor Curso Académico}
+
+   \begin{description}
+
+   \item[Definición] Se refiere al objeto del mundo real: \emph{``Asesor
+   que realiza labor de tutoría durante un curso académico''}.
+
+   \item[Características] La entidad presenta las siguientes características:
+      \begin{itemize}
+         \item \textbf{Nombre:} Asesor Curso Académico.
+         \item \textbf{Tipo:} Débil por identificación con respecto a Asesor y débil por existencia respecto a Departamento.
+         \item \textbf{Número de atributos:} 1 propio y 1 heredado.
+         \item \textbf{Atributo/s identificador/es principal/es:} dni\_pasaporte y \\curso\_académico.
+         \item \textbf{Atributo/s identificador/es alternativo/s:} -
+         \item \textbf{Atributo/s heredado/s:} dni\_pasaporte del tipo
+         de entidad Asesor.
+      \end{itemize}
+
+   \item[Diagrama] La figura \ref{diagramaAsesorCA} muestra el diagrama de la entidad.
+   \item \begin{figure}[!ht]
+            \begin{center}
+            \includegraphics[]{07.Modelo_Entidad-Interrelacion/7.2.Analisis_Entidades/diagramas/asesorca.pdf}
+            \caption{Diagrama de la entidad Asesor Curso Académico.}
+            \label{diagramaAsesorCA}
+            \end{center}
+         \end{figure}
+
+   \item[Descripción de los atributos propios] La entidad presenta los
+   siguientes atributos propios:
+
+   \begin{itemize}
+   \item \textbf{curso\_académico}
+      \begin{itemize}
+         \item \textbf{Definición:} Hace referencia al periodo de tiempo en que se imparte una determinada asignatura.
+         \item \textbf{Dominio:} Formato de fecha: aaaa.
+         \item \textbf{Carácter:}  Obligatorio.
+         \item \textbf{Ejemplo práctico:} 2007.
+         \item \textbf{Información adicional:} El dato \textit{¿quién lo proporciona?}. Es la clave primaria junto con dni\_pasaporte.
+      \end{itemize}
+   \end{itemize}
+
+   \item[Ejemplo práctico]
+
+   \item \begin{center}
+            \begin{tabular}{ | l | l | }
+            \hline
+            \multicolumn{2}{ | c | }{\textbf{Tipo de entidad Asesor Curso Académico}} \\
+            \hline
+            dni\_pasaporte & 98765432Z \\
+            \hline
+            curso\_académico & 2007\\
+            \hline
+            \end{tabular}
+         \end{center}
+   \end{description}
