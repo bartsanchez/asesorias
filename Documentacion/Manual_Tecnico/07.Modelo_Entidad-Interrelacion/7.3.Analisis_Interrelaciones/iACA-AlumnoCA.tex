@@ -2,9 +2,8 @@
 
    \begin{description}
       \item[Definición] En esta interrelación se deja constancia de que un
-      alumno matriculado durante un curso académico está matriculado de un
-      determinado de un número indeterminado de asignaturas, las cuales
-      pertenecen a un determinado curso académico.
+      alumno está matriculado de un determinado número de asignaturas en un
+      curso académico.
 
       \item[Características] La interrelación presenta las siguientes
                              características:
@@ -13,6 +12,10 @@
             \item \textbf{Nombre:} ACA-AlCA
             \item \textbf{Tipo de la interrelación:} Fuerte.
             \item \textbf{Cardinalidad de la interrelación:} N:M
+                  \begin{itemize}
+                     \item Asignatura Curso Académico: dispone\_de (0,n)
+                     \item Alumno Curso Académico: matriculado\_en (0,n)
+                  \end{itemize}
             \item \textbf{Número de atributos:} 1, nota.
          \end{itemize}
 
@@ -27,12 +30,20 @@
             \end{center}
          \end{figure}
 
-      \item[Descripción de los atributos]
+      \item[Descripción de los atributos] La interrelación presenta el siguiente
+      atributo:
 
-      \item \begin{description}
-               \item[Nota] Establece la calificación obtenida por un alumno en
-               una asignatura durante un curso académico.
-             \end{description}
+       \begin{itemize}
+          \item \textbf{nota}
+          \begin{itemize}
+            \item \textbf{Definición:}Establece la calificación obtenida por un
+            alumno en una asignatura durante un curso académico.
+            \item \textbf{Dominio:} Conjunto de reales positivos.
+            \item \textbf{Carácter:} Opcional.
+            \item \textbf{Ejemplo práctico:} 8.4.
+            \item \textbf{Información adicional:} El dato \textbf{¿¿QUIÉN LO INTRODUCE??}.
+         \end{itemize}
+       \end{itemize}
 
       \item[Ejemplo práctico del tipo de interrelación]
 
