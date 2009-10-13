@@ -16,7 +16,8 @@
                      \item Asignatura Curso Académico: dispone\_de (0,n)
                      \item Alumno Curso Académico: matriculado\_en (0,n)
                   \end{itemize}
-            \item \textbf{Número de atributos:} 1, nota.
+            \item \textbf{Número de atributos:} Tres: convocatoria, nota y
+                  comentario.
          \end{itemize}
 
       \item[Diagrama] La figura \ref{diagramaACA-AlCA} muestra el diagrama de la
@@ -30,17 +31,36 @@
             \end{center}
          \end{figure}
 
-      \item[Descripción de los atributos] La interrelación presenta el siguiente
-      atributo:
+      \item[Descripción de los atributos] La interrelación presenta los
+      siguientes atributos:
 
        \begin{itemize}
-          \item \textbf{nota}
+        \item \textbf{convocatoria}
           \begin{itemize}
-            \item \textbf{Definición:}Establece la calificación obtenida por un
+            \item \textbf{Definición:} Establece la convocatoria en la que el
+            alumno se presenta a la asignatura.
+            \item \textbf{Dominio:} Conjunto de caracteres alfanuméricos.
+            \item \textbf{Carácter:} Obligatorio.
+            \item \textbf{Ejemplo práctico:} febrero.
+            \item \textbf{Información adicional:} Es clave primaria de la
+            interrelación. El dato \textbf{¿¿QUIÉN LO INTRODUCE??}.
+         \end{itemize}
+         \item \textbf{nota}
+          \begin{itemize}
+            \item \textbf{Definición:} Establece la calificación obtenida por un
             alumno en una asignatura durante un curso académico.
             \item \textbf{Dominio:} Conjunto de reales positivos.
             \item \textbf{Carácter:} Opcional.
-            \item \textbf{Ejemplo práctico:} 8.4.
+            \item \textbf{Ejemplo práctico:} 8,4.
+            \item \textbf{Información adicional:} El dato \textbf{¿¿QUIÉN LO INTRODUCE??}.
+         \end{itemize}
+          \item \textbf{comentario}
+          \begin{itemize}
+            \item \textbf{Definición:} Información extra que sea interesante
+            conocer.
+            \item \textbf{Dominio:} Conjunto de caracteres alfanuméricos.
+            \item \textbf{Carácter:} Opcional.
+            \item \textbf{Ejemplo práctico:} Prácticas superadas.
             \item \textbf{Información adicional:} El dato \textbf{¿¿QUIÉN LO INTRODUCE??}.
          \end{itemize}
        \end{itemize}
@@ -63,7 +83,9 @@
             curso\_académico & 2008 \\
             \hline
             \textbf{Atributos} & \\
-            nota & 7,5 \\
+            convocatoria & febrero \\
+            nota & 8,4 \\
+            comentario & Prácticas superadas \\
             \hline
             \end{tabular}
          \end{center}
