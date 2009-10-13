@@ -26,6 +26,10 @@
 \rhead{\nouppercase{\leftmark}}
 %
 
+% Arreglo de los márgenes de las subsecciones
+\usepackage[titles]{tocloft}
+\cftsetindents{subsection}{2em}{3.5em}
+
 % Quitar cabecera y pie de página a las páginas en blanco
 \let\origdoublepage\cleardoublepage
 \newcommand{\clearemptydoublepage}{%
