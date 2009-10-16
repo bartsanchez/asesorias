@@ -55,3 +55,44 @@
          \textsc{nombre\_asignatura}, curso, tipo, nCréditosTeóricos,
          nCréditosPrácticos)\end{flushleft}
       \end{description}
+
+   \subsection{Tabla AsignaturasPorCurso}
+
+      \begin{description}
+         \item[AsignaturasPorCurso] \begin{flushleft}(\underline{\textbf{id\_centro}},
+         \underline{\textbf{id\_titulación}}, \underline{\textbf{id\_asignatura}},
+         \underline{curso\_académico})\end{flushleft}
+      \end{description}
+
+   \subsection{Tabla AlumnosPorCurso}
+
+      \begin{description}
+         \item[AlumnosPorCurso] \begin{flushleft}(\underline{\textbf{dni\_pasaporte}},
+         \underline{curso\_académico})\end{flushleft}
+      \end{description}
+
+
+   \subsection{Tabla AsesoresPorCurso}
+
+      \begin{description}
+         \item[AsesoresPorCurso] \begin{flushleft}(\underline{\textbf{dni\_pasaporte}},
+         \underline{curso\_académico}, \underline{\textbf{id\_departamento}})
+         \end{flushleft}
+      \end{description}
+
+   \subsection{Tabla Administradores}
+
+      \begin{description}
+         \item[Administradores] \begin{flushleft}(\underline{\textbf{id\_adm\_centro}},
+         \underline{\textbf{id\_centro}})\end{flushleft}
+      \end{description}
+
+   \subsection{Tabla Matriculados}
+
+      \begin{description}
+         \item[Matriculados] \begin{flushleft}(\underline{\textbf{curso\_académico\_alumno}},
+         \underline{\textbf{dni\_pasaporte}}, \underline{\textbf{id\_centro}},
+         \underline{\textbf{id\_titulación}}, \underline{\textbf{id\_asignatura}},
+         \underline{\textbf{curso\_académico\_asignatura}}, \underline{convocatoria}, nota,
+         comentario)\end{flushleft}
+      \end{description}
