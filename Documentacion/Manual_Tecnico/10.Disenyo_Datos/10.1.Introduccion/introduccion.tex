@@ -1,3 +1,54 @@
 \section{Introducción}
 
-   \paragraph{}Ejemplo de introducción.
+   \paragraph{}El modelo de datos relacional se obtiene a partir del diagrama
+   obtenido en el capítulo \ref{modEntInt}, \textit{Modelo
+   Entidad-Interrelación}.
+
+   \paragraph{}El modelo de datos relacional representa la información mediante
+   el uso de una representación tabular plana de la misma. Una tabla
+   bidimensional mediante la cual se representa tanto los objetos como las
+   relaciones entre ellos existentes en el dominio del problema. Como cualquier
+   modelo de datos, el modelo relacional introduce su propia terminología para
+   nominar los objetos y elementos utilizados por el modelo para representar el
+   dominio de la información. Por ejemplo, a una tabla o matriz rectangular se
+   le denomina relación, a las filas de la misma se les denomina tuplas y al
+   conjunto de sus columnas dominio de la relación. Así, una base de datos
+   relacional estará formada por un conjunto de relaciones.
+
+   \paragraph{}Las ventajas de este modelo son:
+
+   \begin{itemize}
+    \item Garantiza herramientas para evitar la duplicidad de registros, a
+    través de campos claves o llaves.
+    \item Garantiza la integridad referencial: Así al eliminar un registro
+    se eliminan todos los registros relacionados dependientes.
+    \item Favorece la normalización por ser más comprensible y aplicable.
+   \end{itemize}
+
+   \paragraph{}El proceso de traducción de esquemas conceptuales a lógicos
+   consiste en la aplicación, por pasos, de una serie de reglas que, aplicadas a
+   los esquemas conceptuales, transforman los objetos de estos esquemas en
+   objetos pertenecientes a los esquemas lógicos, la aplicación de las reglas va
+   a dar lugar a la transformación de los tipos de entidad y los tipos de
+   interrelación que forman parte de los esquemas conceptuales, en tablas o
+   relaciones, los únicos objetos que intervienen en los esquemas lógicos
+   relacionales. Para cada una de las tablas obtenidas se va a proporcionar la
+   siguiente información:
+
+   \begin{itemize}
+    \item Nombre.
+    \item Tipo de entidad o tipo de interrelación del que proviene.
+    \item Atributos que la componen de los cuales podemos distinguir entre:
+    \begin{itemize}
+     \item \underline{Clave primaria}
+     \item \textsc{Clave alterna}
+     \item \textbf{Clave foránea}
+     \item Resto de atributos
+    \end{itemize}
+    \item Cualquier otro tipo de información que se considere de interés
+          incluir.
+   \end{itemize}
+
+  \paragraph{}A continuación se van a detallar las tablas obtenidas tras la
+  aplicación de las reglas para transformar en modelo conceptual a modelo
+  relacional.
