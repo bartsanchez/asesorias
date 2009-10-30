@@ -1,0 +1,47 @@
+\subsection{Interrelación Asesor - Entrevista General}
+
+   \begin{description}
+      \item[Definición] En esta interrelación se deja constancia de que un
+      asesor puede hacer uso de las entrevistas generales.
+
+      \item[Características] La interrelación presenta las siguientes
+                             características:
+
+         \begin{itemize}
+            \item \textbf{Nombre:} Ase-EntGen
+            \item \textbf{Tipo de la interrelación:} Fuerte.
+            \item \textbf{Cardinalidad de la interrelación:} N:M
+                  \begin{itemize}
+                     \item Asesor: utiliza (0,n)
+                     \item Entrevista General: utilizada\_por (0,n)
+                  \end{itemize}
+            \item \textbf{Número de atributos:} Ninguno.
+         \end{itemize}
+
+      \item[Diagrama] La figura \ref{diagramaAse-EntGen} muestra el diagrama de la
+                      interrelación.
+
+      \item \begin{figure}[!ht]
+            \begin{center}
+            \includegraphics[]{07.Modelo_Entidad-Interrelacion/7.3.Analisis_Interrelaciones/diagramas/Ase-EntGen.pdf}
+            \caption{Diagrama de la interrelación Ase-EntGen.}
+            \label{diagramaAse-EntGen}
+            \end{center}
+         \end{figure}
+
+      \item[Ejemplo práctico del tipo de interrelación]
+
+      \item \begin{center}
+            \begin{tabular}{ | r r | }
+            \hline
+            \multicolumn{2}{ | c | }{\textbf{Tipo de interrelación Ase-EntGen}} \\
+            \hline
+            \textbf{Asesor} & \\
+            dni\_pasaporte & 98765432Z \\
+            \hline
+            \textbf{Entrevista Asesor} & \\
+            id\_entrevista & 24 \\
+            \hline
+            \end{tabular}
+         \end{center}
+   \end{description}
