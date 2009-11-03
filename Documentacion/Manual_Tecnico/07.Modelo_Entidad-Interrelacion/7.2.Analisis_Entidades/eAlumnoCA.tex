@@ -9,7 +9,7 @@
       \begin{itemize}
          \item \textbf{Nombre:} Alumno Curso Académico.
          \item \textbf{Tipo:} Débil por identificación con respecto a Alumno.
-         \item \textbf{Número de atributos:} 21 propios y 1 heredado.
+         \item \textbf{Número de atributos:} 1 propio y 1 heredado.
          \item \textbf{Atributo/s identificador/es principal/es:} dni\_pasaporte y \\curso\_académico.
          \item \textbf{Atributo/s identificador/es alternativo/s:} -
          \item \textbf{Atributo/s heredado/s:} dni\_pasaporte del tipo
@@ -25,8 +25,8 @@
             \end{center}
          \end{figure}
 
-   \item[Descripción de los atributos propios] Esta entidad presenta los
-   siguientes atributos propios:
+   \item[Descripción de los atributos propios] Esta entidad presenta el
+   siguiente atributo propio:
 
    \begin{itemize}
    \item \textbf{curso\_académico}
@@ -36,37 +36,6 @@
          \item \textbf{Carácter:}  Obligatorio.
          \item \textbf{Ejemplo práctico:} 2008.
          \item \textbf{Información adicional:} El dato se hereda del tipo de entidad Asignatura Curso Académico. Es la clave primaria junto con dni\_pasaporte.
-      \end{itemize}
-   \item \textbf{pregunta\_asesorX} ($\forall X \in N : 1 \leq X \leq 10$)
-      \begin{itemize}
-         \item \textbf{Definición:} Hace referencia a los atributos donde se
-         almacenará la información de las preguntas que realice el asesor
-         a los alumnos a través de las plantillas para entrevistas.
-         \item \textbf{Dominio:} Conjunto de caracteres alfanuméricos.
-         \item \textbf{Carácter:}  Opcional.
-         \item \textbf{Ejemplo práctico:} Dominio de inglés.
-         \item \textbf{Información adicional:} Conjunto de diez atributos
-         (desde \textit{pregunta\_asesor1} hasta \textit{pregunta\_asesor10})
-         que por motivos de redundancia, y teniendo en cuenta su naturaleza, se
-         ha decidido detallar de manera uniforme. La información de cada uno
-         de estos atributos se obtiene a través de las entrevistas que puede
-         realizar el asesor a sus alumnos.
-      \end{itemize}
-   \item \textbf{respuesta\_alumnoX} ($\forall X \in N : 1 \leq X \leq 10$)
-      \begin{itemize}
-         \item \textbf{Definición:} Hace referencia a los atributos donde se
-         almacenará la información de las respuestas de los alumnos a las
-         preguntas realizadas por los asesores a través de las plantillas para
-         entrevistas.
-         \item \textbf{Dominio:} Conjunto de caracteres alfanuméricos.
-         \item \textbf{Carácter:}  Opcional.
-         \item \textbf{Ejemplo práctico:} Muy alto.
-         \item \textbf{Información adicional:} Conjunto de diez atributos
-         (desde \textit{respuesta\_alumno1} hasta \textit{respuesta\_alumno10})
-         que por motivos de redundancia, y teniendo en cuenta su naturaleza, se
-         ha decidido detallar de manera uniforme. La información de cada uno
-         de estos atributos se obtiene a través de las entrevistas que puede
-         realizar el asesor a sus alumnos.
       \end{itemize}
    \end{itemize}
 
@@ -80,22 +49,6 @@
             dni\_pasaporte & 01234567A \\
             \hline
             curso\_académico & 2008 \\
-            \hline
-            pregunta\_asesor1 & Nivel de inglés \\
-            \hline
-            \multicolumn{2}{ | c | }{.} \\
-            \multicolumn{2}{ | c | }{.} \\
-            \multicolumn{2}{ | c | }{.} \\
-            \hline
-            pregunta\_asesor10 & ¿Compagina trabajo y estudios? \\
-            \hline
-            respuesta\_alumno1 & Muy alto \\
-            \hline
-            \multicolumn{2}{ | c | }{.} \\
-            \multicolumn{2}{ | c | }{.} \\
-            \multicolumn{2}{ | c | }{.} \\
-            \hline
-            respuesta\_alumno10 & Sí \\
             \hline
             \end{tabular}
          \end{center}
