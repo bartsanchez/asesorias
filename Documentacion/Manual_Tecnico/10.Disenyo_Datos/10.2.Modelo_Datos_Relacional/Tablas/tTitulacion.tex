@@ -3,7 +3,20 @@
       \paragraph{}Esta tabla se obtiene a través del tipo de entidad
       \textit{Titulación}, tomando los atributos de ésta (regla RTECAR-1).
       Además, mantiene una referencia con la tabla \textit{Centro} a través
-      del atributo \textit{id\_centro} (regla RTECAR-3.1).
+      del atributo \textit{id\_centro} (regla RTECAR-3.1\footnote{Regla
+      RTECAR-3.1: \textit{``Si en un tipo de interrelación binaria 1:N ambos
+      tipos de entidad participan de forma total, o el tipo de entidad que
+      interviene con cardinalidad máxima muchos participa de forma parcial,
+      entonces, cada tipo de entidad se transforma en una tabla por aplicación
+      de la regla RTECAR-1, y el identificador del tipo de entidad que participa
+      con cardinalidad máxima uno pasa a formar parte de la tabla
+      correspondiente al tipo de entidad que participa con cardinalidad máxima
+      muchos. Este atributo será definido como clave foránea de esta tabla (no
+      pudiendo tomar valores nulos) manteniendo una referencia con la tabla
+      correspondiente al tipo de entidad que participa con cardinalidad máxima
+      uno. Si el tipo de interrelación tuviera atributos asociados, estos
+      atributos pasan a formar parte de la tabla correspondiente al tipo de
+      entidad que participa con cardinalidad máxima muchos.}}).
 
       \paragraph{}La clave principal de la tabla se compone con la agregación de
       los atributos \textit{id\_centro} e \textit{id\_titulación}. Posee una

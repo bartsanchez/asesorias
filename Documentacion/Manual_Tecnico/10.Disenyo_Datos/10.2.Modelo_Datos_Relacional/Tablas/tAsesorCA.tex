@@ -1,0 +1,18 @@
+   \subsection{Tabla AsesoresCursoAcadémico}
+
+      \paragraph{}Esta tabla se obtiene a través del tipo de entidad
+      \textit{Asesor Curso Académico}, tomando los atributos de ésta (regla
+      RTECAR-1). Además, mantiene una referencia con la tabla \textit{Asesor} a
+      través del atributo \textit{dni\_pasaporte} (regla RTECAR-3.1).
+
+      \paragraph{}La clave principal de la tabla está compuesta por la
+      agregación de los atributos \textit{dni\_pasaporte} y
+      \textit{curso\_académico}.
+
+      \paragraph{}La tabla \textit{AlumnosCursoAcadémico} queda de la siguiente
+      forma:
+
+      \begin{description}
+         \item[AsesoresCursoAcadémico] \begin{flushleft}(\underline{\textbf{dni\_pasaporte},
+         curso\_académico})\end{flushleft}
+      \end{description}

@@ -1,0 +1,21 @@
+   \subsection{Tabla AsignaturasCursoAcadémico}
+
+      \paragraph{}Esta tabla se obtiene a través del tipo de entidad
+      \textit{Asignatura Curso Académico}, tomando los atributos de ésta
+      (regla RTECAR-1). Además, mantiene una referencia con la tabla
+      \textit{Asignatura} a través de los atributos \textit{id\_centro},
+      \textit{id\_titulación} e \textit{id\_asignatura} (regla
+      RTECAR-3.1).
+
+      \paragraph{}La clave principal de esta tabla se compone con la agregación
+      de los atributos \textit{id\_centro}, \textit{id\_titulación},
+      \textit{id\_asignatura} y \textit{curso\_académico}.
+
+      \paragraph{}La tabla \textit{AsignaturasCursoAcadémico} queda de la
+      siguiente forma:
+
+      \begin{description}
+         \item[AsignaturasCursoAcadémico] \begin{flushleft}(\underline{\textbf{id\_centro},
+         \textbf{id\_titulación}, \textbf{id\_asignatura},} \underline{curso\_académico})
+         \end{flushleft}
+      \end{description}
