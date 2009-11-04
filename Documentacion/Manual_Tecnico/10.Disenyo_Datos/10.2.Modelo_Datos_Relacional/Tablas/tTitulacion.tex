@@ -1,0 +1,20 @@
+   \subsection{Tabla Titulaciones}
+
+      \paragraph{}Esta tabla se obtiene a través del tipo de entidad
+      \textit{Titulación}, tomando los atributos de ésta (regla RTECAR-1).
+      Además, mantiene una referencia con la tabla \textit{Centro} a través
+      del atributo \textit{id\_centro} (regla RTECAR-3.1).
+
+      \paragraph{}La clave principal de la tabla se compone con la agregación de
+      los atributos \textit{id\_centro} e \textit{id\_titulación}. Posee una
+      clave alterna que será la formada por la agregación de los atributos
+      \textit{id\_centro}, \textit{nombre\_titulación} y
+      \textit{plan\_estudios}.
+
+      \paragraph{}La tabla \textit{Titulaciones} queda de la siguiente forma:
+
+      \begin{description}
+         \item[Titulaciones] \begin{flushleft}(\underline{\textbf{ID\_CENTRO},
+         id\_titulación}, \textsc{nombre\_titulación},
+         \textsc{plan\_estudios})\end{flushleft}
+      \end{description}

@@ -1,0 +1,22 @@
+   \subsection{Tabla Asignaturas}
+
+      \paragraph{}Esta tabla se obtiene a través del tipo de entidad
+      \textit{Asignatura}, tomando los atributos de ésta (regla RTECAR-1).
+      Además, mantiene una referencia con la tabla \textit{Titulación} a través
+      de los atributos \textit{id\_centro} e \textit{id\_titulación} (regla
+      RTECAR-3.1).
+
+      \paragraph{}La clave principal de esta tabla se compone con la agregación
+      de los atributos \textit{id\_centro}, \textit{id\_titulación} e
+      \textit{id\_asignatura}. Posee una clave alterna que será la formada por
+      la agregación de los atributos \textit{id\_centro},
+      \textit{id\_titulación} y \textit{nombre\_asignatura}.
+
+      \paragraph{}La tabla \textit{Asignaturas} queda de la siguiente forma:
+
+      \begin{description}
+         \item[Asignaturas] \begin{flushleft}(\underline{\textbf{ID\_CENTRO},
+         \textbf{ID\_TITULACIÓN}, id\_asignatura},
+         \textsc{nombre\_asignatura}, curso, tipo, nCréditosTeóricos,
+         nCréditosPrácticos)\end{flushleft}
+      \end{description}
