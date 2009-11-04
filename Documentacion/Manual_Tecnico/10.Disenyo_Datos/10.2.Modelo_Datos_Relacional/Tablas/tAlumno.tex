@@ -1,0 +1,23 @@
+   \subsection{Tabla Alumnos}
+
+      \paragraph{}Esta tabla se obtiene a través del tipo de entidad
+      \textit{Alumno}, tomando los atributos de ésta (regla
+      RTECAR-1\footnote{Regla RTECAR-1: \textit{``Todos los tipos de entidad
+      presentes en el esquema conceptual se transformarán en tablas o relaciones
+      en el esquema relacional manteniendo el número y tipo de atributos, así
+      como la característica de identificador de estos atributos.''}}).
+
+      \paragraph{}La clave principal de esta tabla es el atributo
+      \textit{dni\_pasaporte}. Posee una clave alterna que será la formada por
+      el atributo \textit{correo\_electrónico}.
+
+      \paragraph{}La tabla \textit{Alumnos} queda de la siguiente forma:
+
+      \begin{description}
+         \item[Alumnos] \begin{flushleft}(\underline{dni\_pasaporte},
+         \textsc{correo\_electrónico}, nombre, apellidos, fecha\_nacimiento,
+         dirección\_córdoba, teléfono, dirección\_familiar, localidad\_familiar,
+         provincia\_familiar, código\_postal, teléfono\_familiar, ingreso,
+         otros\_estudios\_universitarios, modalidad\_acceso\_universidad,
+         calificación\_acceso)\end{flushleft}
+      \end{description}
