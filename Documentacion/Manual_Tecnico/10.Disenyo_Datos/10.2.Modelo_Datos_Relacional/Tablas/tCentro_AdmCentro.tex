@@ -1,0 +1,27 @@
+   \subsection{Tabla Centro\_AdministradoresCentro}
+
+      \paragraph{}Esta tabla surge de la interrelación AC-C, existente entre
+      los tipos de entidad \textit{Administrador Centro} y \textit{Centro}
+      (regla RTECAR-4\footnote{Regla RTECAR-4: \textit{En un tipo de
+      interrelación binaria N:N cada tipo de entidad se transforma en una tabla
+      por aplicación de la regla RTECAR-1 y se genera una nueva tabla para
+      representar al tipo de interrelación. Esta tabla estará formada por los
+      identificadores de los tipos de entidad que intervienen en el tipo
+      de interrelación y por todos los atributos asociados al tipo de
+      interrelación. La clave principal de esta tabla será la agregación de los
+      atributos identificadores correspondientes a los tipos de entidad que
+      intervienen en el tipo de interrelación.}}), tomando los atributos de
+      ésta. Gracias a esta interrelación, se podrá conocer los diferentes
+      administradores de existen en un centro.
+
+      \paragraph{}La clave principal de esta tabla la forman la agregación de
+      los atributos \textit{id\_centro} e \textit{id\_adm\_centro}. Estos
+      atributos son a su vez claves foráneas.
+
+      \paragraph{}La tabla \textit{Centro\_AdministradoresCentro} queda de la
+      siguiente forma:
+
+      \begin{description}
+         \item[Centro\_AdministradoresCentro] \begin{flushleft}(\underline{\textbf{id\_centro},
+         \textbf{id\_adm\_centro}})\end{flushleft}
+      \end{description}
