@@ -10,7 +10,7 @@
       \begin{itemize}
          \item \textbf{Nombre:} Plantilla Entrevista Asesor.
          \item \textbf{Tipo:} Fuerte.
-         \item \textbf{Número de atributos:} 1 propio y 2 heredados.
+         \item \textbf{Número de atributos:} 2 propios y 2 heredados.
          \item \textbf{Atributo/s identificador/es principal/es:} id\_entrevista\_asesor.
          \item \textbf{Atributo/s identificador/es alternativo/s:} -
          \item \textbf{Atributo/s heredado/s:} dni\_pasaporte y curso\_académico
@@ -26,8 +26,8 @@
             \end{center}
          \end{figure}
 
-   \item[Descripción de los atributos propios] Esta entidad presenta el
-   siguiente atributo propio:
+   \item[Descripción de los atributos propios] La entidad presenta los
+   siguientes atributos propios:
 
    \begin{itemize}
     \item \textbf{id\_entrevista\_asesor}
@@ -40,6 +40,17 @@
          \item \textbf{Información adicional:} El dato lo genera el sistema
                cuando se introduce una nueva plantilla de entrevista de asesor
                en el sistema. Es la clave primaria.
+      \end{itemize}
+    \item \textbf{última\_modificación}
+      \begin{itemize}
+         \item \textbf{Definición:} Establece el día, mes y año cuando se
+            produjo la última modificación de la entidad.
+         \item \textbf{Dominio:} Formato de fecha: dd/mm/aaaa.
+         \item \textbf{Carácter:} Opcional.
+         \item \textbf{Ejemplo práctico:} 02/02/2009.
+         \item \textbf{Información adicional:} El dato lo genera el sistema
+               cuando se modifica una plantilla de entrevista de asesor en
+               el sistema.
       \end{itemize}
    \end{itemize}
 
@@ -55,6 +66,8 @@
             curso\_académico & 2008 \\
             \hline
             id\_entrevista\_asesor & 36 \\
+            \hline
+            última\_modificación & 02/02/2009 \\
             \hline
             \end{tabular}
          \end{center}

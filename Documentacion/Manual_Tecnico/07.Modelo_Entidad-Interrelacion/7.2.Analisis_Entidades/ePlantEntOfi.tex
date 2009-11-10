@@ -11,7 +11,7 @@
       \begin{itemize}
          \item \textbf{Nombre:} Plantilla Entrevista Oficial.
          \item \textbf{Tipo:} Fuerte.
-         \item \textbf{Número de atributos:} 1.
+         \item \textbf{Número de atributos:} 2.
          \item \textbf{Atributo/s identificador/es principal/es:} id\_entrevista\_oficial.
          \item \textbf{Atributo/s identificador/es alternativo/s:} -
          \item \textbf{Atributo/s heredado/s:} -
@@ -26,8 +26,8 @@
             \end{center}
          \end{figure}
 
-   \item[Descripción de los atributos propios] Esta entidad presenta el
-   siguiente atributo propio:
+   \item[Descripción de los atributos propios] La entidad presenta los
+   siguientes atributos propios:
 
    \begin{itemize}
     \item \textbf{id\_entrevista\_oficial}
@@ -41,6 +41,17 @@
                cuando se introduce una nueva plantilla de entrevista oficial en
                el sistema. Es la clave primaria.
       \end{itemize}
+    \item \textbf{última\_modificación}
+      \begin{itemize}
+         \item \textbf{Definición:} Establece el día, mes y año cuando se
+            produjo la última modificación de la entidad.
+         \item \textbf{Dominio:} Formato de fecha: dd/mm/aaaa.
+         \item \textbf{Carácter:} Opcional.
+         \item \textbf{Ejemplo práctico:} 02/02/2009.
+         \item \textbf{Información adicional:} El dato lo genera el sistema
+               cuando se modifica una plantilla de entrevista oficial en
+               el sistema.
+      \end{itemize}
    \end{itemize}
 
    \item[Ejemplo práctico]
@@ -51,6 +62,8 @@
             \multicolumn{2}{ | c | }{\textbf{Tipo de entidad Plantilla Entrevista Oficial}} \\
             \hline
             id\_entrevista\_oficial & 24 \\
+            \hline
+            última\_modificación & 02/02/2009 \\
             \hline
             \end{tabular}
          \end{center}
