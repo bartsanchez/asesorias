@@ -11,7 +11,7 @@
          \item \textbf{Nombre:} Pregunta Oficial.
          \item \textbf{Tipo:} Débil por identificación con respecto a
          Plantilla Entrevista Oficial.
-         \item \textbf{Número de atributos:} 2 propios y 1 heredado.
+         \item \textbf{Número de atributos:} 3 propios y 1 heredado.
          \item \textbf{Atributo/s identificador/es principal/es:} id\_pregunta\_oficial.
          \item \textbf{Atributo/s identificador/es alternativo/s:} -
          \item \textbf{Atributo/s heredado/s:} id\_entrevista\_oficial del tipo
@@ -54,6 +54,16 @@
          administrador principal al introducir una nueva pregunta oficial en el
          sistema.
       \end{itemize}
+    \item \textbf{última\_modificación}
+      \begin{itemize}
+         \item \textbf{Definición:} Establece el día, mes y año cuando se
+            produjo la última modificación de la entidad.
+         \item \textbf{Dominio:} Formato de fecha: dd/mm/aaaa.
+         \item \textbf{Carácter:} Opcional.
+         \item \textbf{Ejemplo práctico:} 02/02/2009.
+         \item \textbf{Información adicional:} El dato lo genera el sistema
+               cuando se modifica una pregunta oficial en el sistema.
+      \end{itemize}
    \end{itemize}
 
    \item[Ejemplo práctico]
@@ -68,6 +78,8 @@
             id\_pregunta\_oficial & 55 \\
             \hline
             enunciado & ¿Quién le ha informado de esta carrera? \\
+            \hline
+            última\_modificación & 02/02/2009 \\
             \hline
             \end{tabular}
          \end{center}
