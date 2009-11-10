@@ -10,7 +10,7 @@
          \item \textbf{Nombre:} Pregunta Asesor.
          \item \textbf{Tipo:} Débil por identificación con respecto a
          Alumno Curso Académico.
-         \item \textbf{Número de atributos:} 3 propios y 2 heredados.
+         \item \textbf{Número de atributos:} 5 propios y 2 heredados.
          \item \textbf{Atributo/s identificador/es principal/es:} dni\_pasaporte
          junto con curso\_académico e id\_reunión.
          \item \textbf{Atributo/s identificador/es alternativo/s:} -
@@ -42,25 +42,45 @@
                cuando se introduce una nueva reunión en el sistema. Es la clave
                primaria.
       \end{itemize}
-   \item \textbf{fecha}
+    \item \textbf{fecha}
+      \begin{itemize}
+        \item \textbf{Definición:} Establece el día, mes y año cuando se
+        produce la reunión.
+        \item \textbf{Dominio:} Formato de fecha: dd/mm/aaaa.
+        \item \textbf{Carácter:} Opcional.
+        \item \textbf{Ejemplo práctico:} 01/01/2009.
+        \item \textbf{Información adicional:} El dato lo introduce el
+        usuario asesor cuando introduce una nueva reunión en el sistema.
+      \end{itemize}
+    \item \textbf{tipo}
+      \begin{itemize}
+        \item \textbf{Definición:} Establece el tipo de reunión realizada,
+        ya sea grupal o individual.
+        \item \textbf{Dominio:} Unos de los valores: grupal o individual.
+        \item \textbf{Carácter:} Obligatorio.
+        \item \textbf{Ejemplo práctico:} Individual.
+        \item \textbf{Información adicional:} El dato lo introduce el
+         usuario asesor cuando introduce una nueva reunión en el sistema.
+      \end{itemize}
+    \item \textbf{comentario\_asesor}
           \begin{itemize}
-            \item \textbf{Definición:} Establece el día, mes y año cuando se
-            produce la reunión.
-            \item \textbf{Dominio:} Formato de fecha: dd/mm/aaaa.
+            \item \textbf{Definición:} Información extra que pueda ser
+            interesante conocer por parte del usuario asesor.
+            \item \textbf{Dominio:} Conjunto de caracteres alfanuméricos.
             \item \textbf{Carácter:} Opcional.
-            \item \textbf{Ejemplo práctico:} 01/01/2009.
+            \item \textbf{Ejemplo práctico:} Pendiente de entregar el proyecto.
             \item \textbf{Información adicional:} El dato lo introduce el
-            usuario asesor cuando introduce una nueva reunión en el sistema.
+            usuario asesor al llevarse a cabo una reunión.
          \end{itemize}
-   \item \textbf{tipo}
+    \item \textbf{comentario\_alumno}
           \begin{itemize}
-            \item \textbf{Definición:} Establece el tipo de reunión realizada,
-            ya sea grupal o individual.
-            \item \textbf{Dominio:} Unos de los valores: grupal o individual.
-            \item \textbf{Carácter:} Obligatorio.
-            \item \textbf{Ejemplo práctico:} Individual.
+            \item \textbf{Definición:} Información extra que pueda ser
+            interesante conocer por parte del usuario alumno.
+            \item \textbf{Dominio:} Conjunto de caracteres alfanuméricos.
+            \item \textbf{Carácter:} Opcional.
+            \item \textbf{Ejemplo práctico:} Terminando el manual técnico.
             \item \textbf{Información adicional:} El dato lo introduce el
-            usuario asesor cuando introduce una nueva reunión en el sistema.
+            usuario alumno al llevarse a cabo una reunión.
          \end{itemize}
    \end{itemize}
 
@@ -80,6 +100,10 @@
             fecha & 01/01/2009 \\
             \hline
             tipo & Individual \\
+            \hline
+            comentario\_asesor & Pendiente de entregar el proyecto \\
+            \hline
+            comentario\_alumno & Terminando el manual técnico \\
             \hline
             \end{tabular}
          \end{center}
