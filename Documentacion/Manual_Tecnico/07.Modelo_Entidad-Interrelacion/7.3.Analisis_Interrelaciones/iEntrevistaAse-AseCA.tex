@@ -1,0 +1,53 @@
+\subsection{Interrelación Plantilla Entrevista Asesor - Asesor Curso Académico}
+
+   \begin{description}
+      \item[Definición] En esta interrelación se deja constancia de que un
+      usuario asesor puede hacer uso de plantillas de entrevistas de asesor
+      durante un determinado curso académico.
+
+      \item[Características] La interrelación presenta las siguientes
+                             características:
+
+         \begin{itemize}
+            \item \textbf{Nombre:} AseCA-PEA
+            \item \textbf{Tipo de la interrelación:} El tipo de entidad
+            Plantilla Entrevista Asesor es débil por identificación respecto al
+            tipo de entidad Asesor Curso Académico.
+            \item \textbf{Cardinalidad de la interrelación:} 1:N
+                  \begin{itemize}
+                     \item Plantilla Entrevista Asesor: utilizada\_por (1,1)
+                     \item Asesor Curso Académico: utiliza (0,n)
+                  \end{itemize}
+            \item \textbf{Número de atributos:} Ninguno.
+         \end{itemize}
+
+      \item[Diagrama] La figura \ref{diagramaPEA-AseCA} muestra el diagrama de
+      la interrelación.
+
+      \item \begin{figure}[!ht]
+            \begin{center}
+            \includegraphics[]{07.Modelo_Entidad-Interrelacion/7.3.Analisis_Interrelaciones/diagramas/PEA-AseCA.pdf}
+            \caption{Diagrama de la interrelación PEA-AseCA.}
+            \label{diagramaPEA-AseCA}
+            \end{center}
+         \end{figure}
+
+      \item[Ejemplo práctico del tipo de interrelación]
+
+      \item \begin{center}
+            \begin{tabular}{ | r r | }
+            \hline
+            \multicolumn{2}{ | c | }{\textbf{Tipo de interrelación PEA-AseCA}} \\
+            \hline
+            \textbf{Plantilla Entrevista Asesor} & \\
+            dni\_pasaporte & 98765432Z \\
+            curso\_académico & 2008 \\
+            id\_entrevista\_asesor & 36 \\
+            \hline
+            \textbf{Asesor Curso Académico} & \\
+            dni\_pasaporte & 98765432Z \\
+            curso\_académico & 2008 \\
+            \hline
+            \end{tabular}
+         \end{center}
+   \end{description}
