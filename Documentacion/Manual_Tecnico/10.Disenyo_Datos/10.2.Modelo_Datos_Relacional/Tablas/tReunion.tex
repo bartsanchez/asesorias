@@ -1,0 +1,19 @@
+   \subsection{Tabla Reuniones}
+
+      \paragraph{}Esta tabla se obtiene a través del tipo de entidad
+      \textit{Reunión}, tomando los atributos de ésta (regla RTECAR-1).
+      Además, mantiene una referencia con la tabla \textit{Alumno Curso
+      Académico} a través de los atributos \textit{dni\_pasaporte} y
+      \textit{curso\_académico} (regla RTECAR-3.1).
+
+      \paragraph{}La clave principal de esta tabla se compone con la agregación
+      de los atributos \textit{dni\_pasaporte}, \textit{curso\_académico} e
+      \textit{id\_reunión}.
+
+      \paragraph{}La tabla \textit{Reuniones} queda de la siguiente forma:
+
+      \begin{description}
+         \item[Reuniones] \begin{flushleft}(\underline{\textbf{dni\_pasaporte},
+         \textbf{curso\_académico}, id\_reunión}, fecha, tipo,
+         comentario\_asesor, comentario\_alumno)\end{flushleft}
+      \end{description}
