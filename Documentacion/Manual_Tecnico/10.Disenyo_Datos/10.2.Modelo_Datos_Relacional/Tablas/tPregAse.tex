@@ -1,0 +1,21 @@
+   \subsection{Tabla PreguntasAsesores}
+
+      \paragraph{}Esta tabla se obtiene a través del tipo de entidad
+      \textit{Pregunta Asesor}, tomando los atributos de ésta
+      (regla RTECAR-1). Además, mantiene una referencia con la tabla
+      \textit{Plantilla Entrevista Asesor} a través de los atributos
+      \textit{dni\_pasaporte}, \textit{curso\_académico} e
+      \textit{id\_entrevista\_asesor} (regla RTECAR-3.1).
+
+      \paragraph{}La clave principal de esta tabla se compone con la agregación
+      de los atributos \textit{dni\_pasaporte}, \textit{curso\_académico},
+      \textit{id\_entrevista\_asesor} e \textit{id\_pregunta\_asesor}.
+
+      \paragraph{}La tabla \textit{PreguntasAsesores} queda de la
+      siguiente forma:
+
+      \begin{description}
+         \item[PreguntasAsesores] \begin{flushleft}(\underline{\textbf{dni\_pasaporte},
+         \textbf{curso\_académico}, \textbf{id\_entrevista\_asesor},}
+         \underline{id\_pregunta\_asesor}, enunciado, última\_modificación)\end{flushleft}
+      \end{description}
