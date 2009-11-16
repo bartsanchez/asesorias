@@ -1,0 +1,52 @@
+\section{Normalización de relaciones}
+
+  \paragraph{}El modelo relacional está soportado sobre una teoría de igual
+  nombre basada en los principios de la teoría general de conjuntos. El
+  proceso de normalización debe aplicarse independientemente del
+  sistema de gestión de base de datos utilizado.
+
+  \paragraph{}Este proceso elimina redundancias superfluas, aminorando de
+  esta forma el espacio físico requerido para el almacenamiento de la
+  información, por lo que se reducen los posibles problemas de
+  integridad de la información almacenada en la base de datos.
+
+  \paragraph{}Aumenta el desempeño, tanto de las operaciones de
+  actualización de la información almacenada en la base de datos,
+  como de las interrogaciones sobre la información almacenada en la
+  misma.
+
+  \paragraph{}Representa de forma coherente los objetos y relaciones
+  presentes en el dominio del problema, y cuya información es
+  almacenada en la base de datos.
+
+  \paragraph{}El proceso de normalización va a ser aplicado a cada una de
+  las tablas obtenidas mediante el modelo relacional para lograr un
+  modelo más óptimo que cumpla con las características anteriormente
+  descritas.
+
+  \paragraph{}Todas las tablas obtenidas en el modelo relacional satisfacen
+  la primera forman normal, (FN1\footnote{FN1: \textit{Una relación R satisface
+  la primera forma normal si, y sólo si, todos los dominios subyacentes de la
+  relación R contienen valores atómicos}.}) ya que no existe en ninguna tabla
+  atributos múltiples.
+
+  \paragraph{}El que una relación se encuentre en FN1 es condición
+  indispensable aunque no suficiente para garantizar la consistencia del
+  modelo relacional.
+
+  \paragraph{}El proceso de normalización que se va a aplicar a continuación
+  hará uso de los diagramas de dependencias funcionales que permiten
+  representar las dependencias existentes entre los atributos de las
+  tablas.
+
+  \paragraph{}El proceso de normalización concluirá cuando todas las tablas
+  obtenidas mediante el modelo relacional satisfagan la forma normal
+  de Boyce-Codd (FNBC\footnote{FNBC: \textit{Una relación R satisface la forma
+  normal de Boyce-Codd si, y sólo si, se encuentra en FN1, y cada determinante
+  funcional es una clave candidata de la relación R}.}), ya que en este momento
+  se considera que el esquema relacional es lo suficientemente consistente.
+
+  \paragraph{}A continuación se mostrarán cada una de las tablas obtenidas
+  tras la aplicación de la FNBC.
+
+
