@@ -1,0 +1,22 @@
+  \subsection{Tabla Reunión\_PreguntasOficiales}
+
+      \paragraph{}Esta tabla surge de la interrelación R-PO, existente entre
+      los tipos de entidad \textit{Reunión} y \textit{Pregunta Oficial}
+      (regla RTECAR-4), tomando los atributos de ésta. Gracias a esta
+      interrelación, se podrá conocer las diferentes preguntas oficiales que
+      componen una reunión.
+
+      \paragraph{}La clave principal de esta tabla la forman la agregación de
+      los atributos \textit{dni\_pasaporte}, \textit{curso\_académico},
+      \textit{id\_reunión}, \textit{id\_entrevista\_oficial} e
+      \textit{id\_pregunta\_oficial}. Estos atributos son a su vez claves
+      foráneas.
+
+      \paragraph{}La tabla \textit{Reunión\_PreguntasOficiales} queda de la
+      siguiente forma:
+
+      \begin{description}
+         \item[Reunión\_PreguntasOficiales] \begin{flushleft}(\underline{\textbf{dni\_pasaporte}, \textbf{curso\_académico},
+         \textbf{id\_reunión}}, \underline{\textbf{id\_entrevista\_oficial},
+         \textbf{id\_pregunta\_oficial}}, respuesta)\end{flushleft}
+      \end{description}
