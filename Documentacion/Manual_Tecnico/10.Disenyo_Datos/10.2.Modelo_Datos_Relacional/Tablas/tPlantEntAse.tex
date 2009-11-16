@@ -1,0 +1,20 @@
+   \subsection{Tabla PlantillasEntrevistaAsesor}
+
+      \paragraph{}Esta tabla se obtiene a través del tipo de entidad
+      \textit{Plantilla Entrevista Asesor}, tomando los atributos de ésta
+      (regla RTECAR-1). Además, mantiene una referencia con la tabla
+      \textit{Asesor Curso Académico} a través de los atributos
+      \textit{dni\_pasaporte} y \textit{curso\_académico} (regla RTECAR-3.1).
+
+      \paragraph{}La clave principal de esta tabla se compone con la agregación
+      de los atributos \textit{dni\_pasaporte}, \textit{curso\_académico} e
+      \textit{id\_entrevista\_asesor}.
+
+      \paragraph{}La tabla \textit{PlantillasEntrevistaAsesor} queda de la
+      siguiente forma:
+
+      \begin{description}
+         \item[PlantillasEntrevistaAsesor] \begin{flushleft}(\underline{\textbf{dni\_pasaporte},
+         \textbf{curso\_académico},} \underline{id\_entrevista\_asesor},
+         última\_modificación)\end{flushleft}
+      \end{description}
