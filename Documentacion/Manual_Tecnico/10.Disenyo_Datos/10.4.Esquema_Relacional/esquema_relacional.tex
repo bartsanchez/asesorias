@@ -4,20 +4,6 @@
   tablas anteriores, se obtiene el modelo relacional final siguiente:
 
   \begin{description}
-    \item[Alumnos] \begin{flushleft}(\underline{dni\_pasaporte},
-    \textsc{correo\_electrónico}, nombre, apellidos, fecha\_nacimiento,
-    dirección\_córdoba, teléfono, dirección\_familiar, localidad\_familiar,
-    provincia\_familiar, código\_postal, teléfono\_familiar, ingreso,
-    otros\_estudios\_universitarios, modalidad\_acceso\_universidad,
-    calificación\_acceso)\end{flushleft}
-  \end{description}
-
-  \begin{description}
-    \item[Asesores] \begin{flushleft}(\underline{dni\_pasaporte},
-    \textsc{correo\_electrónico}, nombre, apellidos)\end{flushleft}
-  \end{description}
-
-  \begin{description}
     \item[Centros] \begin{flushleft}(\underline{id\_centro},
     \textsc{nombre\_centro})\end{flushleft}
   \end{description}
@@ -25,11 +11,6 @@
   \begin{description}
     \item[AdministradoresCentro] \begin{flushleft}(\underline{id\_adm\_centro},
     nombre\_adm\_centro)\end{flushleft}
-  \end{description}
-
-  \begin{description}
-    \item[Departamentos] \begin{flushleft}(\underline{id\_departamento},
-    \textsc{nombre\_departamento})\end{flushleft}
   \end{description}
 
   \begin{description}
@@ -52,23 +33,18 @@
   \end{description}
 
   \begin{description}
-    \item[AlumnosCursoAcadémico] \begin{flushleft}(\underline{\textbf{dni\_pasaporte},
-    curso\_académico})\end{flushleft}
+    \item[Departamentos] \begin{flushleft}(\underline{id\_departamento},
+    \textsc{nombre\_departamento})\end{flushleft}
+  \end{description}
+
+  \begin{description}
+    \item[Asesores] \begin{flushleft}(\underline{dni\_pasaporte},
+    \textsc{correo\_electrónico}, nombre, apellidos)\end{flushleft}
   \end{description}
 
   \begin{description}
     \item[AsesoresCursoAcadémico] \begin{flushleft}(\underline{\textbf{dni\_pasaporte},
     curso\_académico})\end{flushleft}
-  \end{description}
-
-  \begin{description}
-    \item[Reuniones] \begin{flushleft}(\underline{\textbf{dni\_pasaporte},
-    \textbf{curso\_académico}, id\_reunión}, fecha, tipo,
-    comentario\_asesor, comentario\_alumno)\end{flushleft}
-  \end{description}
-
-  \begin{description}
-    \item[PlantillasEntrevistaOficial] \begin{flushleft}(\underline{id\_entrevista\_oficial}, última\_modificación)\end{flushleft}
   \end{description}
 
   \begin{description}
@@ -78,14 +54,45 @@
   \end{description}
 
   \begin{description}
+    \item[PreguntasAsesores] \begin{flushleft}(\underline{\textbf{dni\_pasaporte},
+    \textbf{curso\_académico}, \textbf{id\_entrevista\_asesor},}
+    \underline{id\_pregunta\_asesor}, enunciado, última\_modificación)\end{flushleft}
+  \end{description}
+
+  \begin{description}
+    \item[Alumnos] \begin{flushleft}(\underline{dni\_pasaporte},
+    \textsc{correo\_electrónico}, nombre, apellidos, fecha\_nacimiento,
+    dirección\_córdoba, teléfono, dirección\_familiar, localidad\_familiar,
+    provincia\_familiar, código\_postal, teléfono\_familiar, ingreso,
+    otros\_estudios\_universitarios, modalidad\_acceso\_universidad,
+    calificación\_acceso)\end{flushleft}
+  \end{description}
+
+  \begin{description}
+    \item[AlumnosCursoAcadémico] \begin{flushleft}(\underline{\textbf{dni\_pasaporte},
+    curso\_académico})\end{flushleft}
+  \end{description}
+
+  \begin{description}
+    \item[CalificacionesAlumnoAsignaturaCA] \begin{flushleft}(         \underline{\textbf{dni\_pasaporte}, \textbf{curso\_académico},}
+    \underline{\textbf{id\_centro}, \textbf{id\_titulación},
+    \textbf{id\_asignatura}, convocatoria}, nota, comentario)
+    \end{flushleft}
+  \end{description}
+
+  \begin{description}
+    \item[PlantillasEntrevistaOficial] \begin{flushleft}(\underline{id\_entrevista\_oficial}, última\_modificación)\end{flushleft}
+  \end{description}
+
+  \begin{description}
     \item[PreguntasOficiales] \begin{flushleft}(\underline{\textbf{id\_entrevista\_oficial},
     id\_pregunta\_oficial}, enunciado, última\_modificación)\end{flushleft}
   \end{description}
 
   \begin{description}
-    \item[PreguntasAsesores] \begin{flushleft}(\underline{\textbf{dni\_pasaporte},
-    \textbf{curso\_académico}, \textbf{id\_entrevista\_asesor},}
-    \underline{id\_pregunta\_asesor}, enunciado, última\_modificación)\end{flushleft}
+    \item[Reuniones] \begin{flushleft}(\underline{\textbf{dni\_pasaporte},
+    \textbf{curso\_académico}, id\_reunión}, fecha, tipo,
+    comentario\_asesor, comentario\_alumno)\end{flushleft}
   \end{description}
 
   \begin{description}
@@ -94,21 +101,14 @@
   \end{description}
 
   \begin{description}
-    \item[Asignatura\_Alumnos\_CursoAcadémico] \begin{flushleft}(\underline{\textbf{id\_centro}, \textbf{id\_titulación},}
-    \underline{\textbf{id\_asignatura}, \textbf{curso\_académico},
-    \textbf{dni\_pasaporte}, convocatoria}, nota,
-    comentario)\end{flushleft}
+    \item[Reunión\_PreguntasAsesores] \begin{flushleft}(\underline{\textbf{dni\_pasaporte}, \textbf{curso\_académico},
+    \textbf{id\_reunión}}, \underline{\textbf{dni\_pasaporte},
+    \textbf{id\_entrevista\_asesor}, \textbf{id\_pregunta\_asesor}},
+    respuesta)\end{flushleft}
   \end{description}
 
   \begin{description}
     \item[Reunión\_PreguntasOficiales] \begin{flushleft}(\underline{\textbf{dni\_pasaporte}, \textbf{curso\_académico},
     \textbf{id\_reunión}}, \underline{\textbf{id\_entrevista\_oficial},
     \textbf{id\_pregunta\_oficial}}, respuesta)\end{flushleft}
-  \end{description}
-
-  \begin{description}
-    \item[Reunión\_PreguntasAsesores] \begin{flushleft}(\underline{\textbf{dni\_pasaporte}, \textbf{curso\_académico},
-    \textbf{id\_reunión}}, \underline{\textbf{dni\_pasaporte},
-    \textbf{id\_entrevista\_asesor}, \textbf{id\_pregunta\_asesor}},
-    respuesta)\end{flushleft}
   \end{description}
