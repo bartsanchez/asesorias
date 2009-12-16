@@ -9,7 +9,7 @@
       \begin{itemize}
          \item \textbf{Nombre:} Alumno Curso Académico.
          \item \textbf{Tipo:} Débil por identificación con respecto a Alumno.
-         \item \textbf{Número de atributos:} 1 propio y 1 heredado.
+         \item \textbf{Número de atributos:} 2 propios y 1 heredado.
          \item \textbf{Atributo/s identificador/es principal/es:} dni\_pasaporte y \\curso\_académico.
          \item \textbf{Atributo/s identificador/es alternativo/s:} -
          \item \textbf{Atributo/s heredado/s:} dni\_pasaporte del tipo
@@ -37,6 +37,16 @@
          \item \textbf{Ejemplo práctico:} 2008.
          \item \textbf{Información adicional:} El dato se hereda del tipo de entidad Asignatura Curso Académico. Es la clave primaria junto con dni\_pasaporte.
       \end{itemize}
+   \item \textbf{observaciones}
+      \begin{itemize}
+         \item \textbf{Definición:} Información extra que pueda ser necesario
+         conocer.
+         \item \textbf{Dominio:} Conjunto de caracteres alfanuméricos.
+         \item \textbf{Carácter:}  Opcional.
+         \item \textbf{Ejemplo práctico:} Ejemplo de observación.
+         \item \textbf{Información adicional:} El dato lo proporicona el usuario
+         alumno al modificar su información personal.
+      \end{itemize}
    \end{itemize}
 
    \item[Ejemplo práctico]
@@ -49,6 +59,8 @@
             dni\_pasaporte & 01234567A \\
             \hline
             curso\_académico & 2008 \\
+            \hline
+            observaciones & Ejemplo de observación. \\
             \hline
             \end{tabular}
          \end{center}
