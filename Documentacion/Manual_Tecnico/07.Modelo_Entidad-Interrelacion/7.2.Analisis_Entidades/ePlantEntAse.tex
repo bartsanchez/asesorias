@@ -10,7 +10,7 @@
       \begin{itemize}
          \item \textbf{Nombre:} Plantilla Entrevista Asesor.
          \item \textbf{Tipo:} Fuerte.
-         \item \textbf{Número de atributos:} 2 propios y 2 heredados.
+         \item \textbf{Número de atributos:} 3 propios y 2 heredados.
          \item \textbf{Atributo/s identificador/es principal/es:} dni\_pasaporte
          junto con curso\_académico e id\_entrevista\_asesor.
          \item \textbf{Atributo/s identificador/es alternativo/s:} -
@@ -42,6 +42,17 @@
                cuando se introduce una nueva plantilla de entrevista de asesor
                en el sistema. Es la clave primaria.
       \end{itemize}
+    \item \textbf{descripción}
+      \begin{itemize}
+         \item \textbf{Definición:} Establece una breve descripción que permite
+         reconocer una plantilla de entrevista de asesor del resto.
+         \item \textbf{Dominio:} Conjunto de caracteres alfanuméricos.
+         \item \textbf{Carácter:} Opcional.
+         \item \textbf{Ejemplo práctico:} Plantilla sobre prácticas.
+         \item \textbf{Información adicional:} El dato lo introduce el
+         usuario asesor al introducir una nueva plantilla de entrevista de
+         asesor en el sistema.
+      \end{itemize}
     \item \textbf{última\_modificación}
       \begin{itemize}
          \item \textbf{Definición:} Establece el día, mes y año cuando se
@@ -67,6 +78,8 @@
             curso\_académico & 2008 \\
             \hline
             id\_entrevista\_asesor & 36 \\
+            \hline
+            descripción & Plantilla sobre prácticas \\
             \hline
             última\_modificación & 02/02/2009 \\
             \hline
