@@ -23,6 +23,16 @@
                      \item Pregunta Oficial: aparece\_en (0,n)
                   \end{itemize}
             \item \textbf{Número de atributos:} Uno: respuesta.
+            \item \textbf{Restricciones:} Debido a que existe un ciclo en el
+                  modelo Entidad-Relación planteado (ver la figura
+                  \ref{diagramaER} ) que afecta a las entidades \textit{Alumno
+                  Curso Académico}, \textit{Asesor Curso Académico},
+                  \textit{Plantilla Entrevista Asesor}, \textit{Pregunta Asesor}
+                  y \textit{Reunión}, no es posible controlar que un determinado
+                  \textit{Alumno Curso Académico} tenga reuniones exclusivamente
+                  con las \textit{Pregunta Asesor} de su \textit{Asesor Curso
+                  Académico}, por lo que será necesario controlar este
+                  comportamiento mediante la lógica de la aplicación.
          \end{itemize}
 
       \item[Diagrama] La figura \ref{diagramaR-PA} muestra el diagrama de la
