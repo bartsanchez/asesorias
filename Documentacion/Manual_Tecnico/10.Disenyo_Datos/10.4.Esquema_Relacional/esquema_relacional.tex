@@ -34,22 +34,22 @@
 
   \begin{description}
     \item[Departamentos] \begin{flushleft}(\underline{id\_departamento},
-    \textsc{nombre\_departamento})\end{flushleft}
+    \textsc{nombre\_departamento}, teléfono)\end{flushleft}
   \end{description}
 
   \begin{description}
     \item[Asesores] \begin{flushleft}(\underline{dni\_pasaporte},
-    \textsc{correo\_electrónico}, nombre, apellidos)\end{flushleft}
+    \textsc{correo\_electrónico}, nombre, apellidos, teléfono)\end{flushleft}
   \end{description}
 
   \begin{description}
     \item[AsesoresCursoAcadémico] \begin{flushleft}(\underline{\textbf{dni\_pasaporte},
-    curso\_académico})\end{flushleft}
+    curso\_académico}, observaciones)\end{flushleft}
   \end{description}
 
   \begin{description}
     \item[PlantillasEntrevistaAsesor] \begin{flushleft}(\underline{\textbf{dni\_pasaporte},
-    \textbf{curso\_académico},} \underline{id\_entrevista\_asesor},
+    \textbf{curso\_académico},} \underline{id\_entrevista\_asesor}, descripción,
     última\_modificación)\end{flushleft}
   \end{description}
 
@@ -70,7 +70,7 @@
 
   \begin{description}
     \item[AlumnosCursoAcadémico] \begin{flushleft}(\underline{\textbf{dni\_pasaporte},
-    curso\_académico})\end{flushleft}
+    curso\_académico}, observaciones)\end{flushleft}
   \end{description}
 
   \begin{description}
@@ -81,7 +81,8 @@
   \end{description}
 
   \begin{description}
-    \item[PlantillasEntrevistaOficial] \begin{flushleft}(\underline{id\_entrevista\_oficial}, última\_modificación)\end{flushleft}
+    \item[PlantillasEntrevistaOficial] \begin{flushleft}(\underline{id\_entrevista\_oficial}, descripción,
+    última\_modificación)\end{flushleft}
   \end{description}
 
   \begin{description}
