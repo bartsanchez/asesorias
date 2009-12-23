@@ -8,5 +8,8 @@
   plan_estudios      int(4)         NOT NULL,
   PRIMARY KEY pk_titulaciones (id_centro, id_titulación),
   UNIQUE uk_titulaciones (nombre_titulación, plan_estudios)
+  FOREIGN KEY titulacion_fk_centro (id_centro)
+  REFERENCES Centros (id_centro)
+  ON DELETE CASCADE ON UPDATE CASCADE
   );
 \end{verbatim}
