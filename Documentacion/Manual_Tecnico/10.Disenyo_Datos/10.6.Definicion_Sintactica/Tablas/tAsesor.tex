@@ -1,0 +1,13 @@
+\subsection{Tabla Asesores}
+
+\begin{verbatim}
+  CREATE TABLE Asesores(
+  dni_pasaporte      varchar(9)     NOT NULL,
+  correo_electrónico varchar(50)    NOT NULL,
+  nombre             varchar(50)    NOT NULL,
+  apellidos          varchar(100)   NOT NULL,
+  teléfono           int(9),
+  PRIMARY KEY pk_asesores (dni_pasaporte),
+  UNIQUE uk_asesores (correo_eletrónico)
+  );
+\end{verbatim}
