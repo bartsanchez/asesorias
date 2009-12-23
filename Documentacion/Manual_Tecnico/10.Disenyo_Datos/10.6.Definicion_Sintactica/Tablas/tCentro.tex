@@ -1,0 +1,10 @@
+\subsection{Tabla Centros}
+
+\begin{verbatim}
+  CREATE TABLE Centros(
+  id_centro     int(2)      NOT NULL auto_increment,
+  nombre_centro varchar(25) NOT NULL,
+  PRIMARY KEY pk_centros (id_centro),
+  UNIQUE uk_centros (nombre_centro)
+  );
+\end{verbatim}
