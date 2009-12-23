@@ -1,0 +1,10 @@
+\subsection{Tabla AdministradoresCentro}
+
+\begin{verbatim}
+  CREATE TABLE AdministradoresCentro(
+  id_adm_centro     int(2)      NOT NULL auto_increment,
+  nombre_adm_centro varchar(25) NOT NULL,
+  PRIMARY KEY pk_adminCentro (id_adm_centro),
+  UNIQUE uk_adminCentro (nombre_adm_centro)
+  );
+\end{verbatim}
