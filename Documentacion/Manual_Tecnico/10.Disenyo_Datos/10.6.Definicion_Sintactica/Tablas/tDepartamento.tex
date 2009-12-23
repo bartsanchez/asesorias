@@ -1,0 +1,11 @@
+\subsection{Tabla Departamentos}
+
+\begin{verbatim}
+  CREATE TABLE Departamentos(
+  id_departamento     int(2)      NOT NULL AUTO_INCREMENT,
+  nombre_departamento varchar(25) NOT NULL,
+  teléfono            int(9),
+  PRIMARY KEY pk_departamentos (id_departamento),
+  UNIQUE uk_departamento (nombre_departamento)
+  );
+\end{verbatim}
