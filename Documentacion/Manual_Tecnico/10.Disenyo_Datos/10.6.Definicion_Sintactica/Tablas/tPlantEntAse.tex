@@ -1,0 +1,17 @@
+\subsection{Tabla PlantillasEntrevistaAsesor}
+
+\begin{verbatim}
+  CREATE TABLE PlantillasEntrevistaAsesor(
+  dni_pasaporte         varchar(9)     NOT NULL,
+  curso_académico       int(4)         NOT NULL,
+  id_entrevista_asesor  int(3)         NOT NULL AUTO_INCREMENT,
+  descripción           varchar(100),
+  última_modificación   date           NOT NULL,
+  PRIMARY KEY pk_plantEntAse (dni_pasaporte, curso_académico,
+                              id_entrevista_asesor),
+  FOREIGN KEY plantEntAse_fk_asesoresCA (dni_pasaporte,
+                                         curso_académico)
+  REFERENCES AsesoresCursoAcadémico (dni_pasaporte, curso_académico)
+  ON DELETE CASCADE ON UPDATE CASCADE
+  );
+\end{verbatim}
