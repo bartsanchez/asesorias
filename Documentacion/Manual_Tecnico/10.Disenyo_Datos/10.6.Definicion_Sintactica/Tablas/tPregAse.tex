@@ -1,0 +1,21 @@
+\subsection{Tabla PreguntasAsesores}
+
+\begin{verbatim}
+  CREATE TABLE PreguntasAsesores(
+  dni_pasaporte         varchar(9)     NOT NULL,
+  curso_académico       int(4)         NOT NULL,
+  id_entrevista_asesor  int(3)         NOT NULL,
+  id_pregunta_asesor    int(3)         NOT NULL AUTO_INCREMENT,
+  enunciado             varchar(150)   NOT NULL,
+  última_modificación   date           NOT NULL,
+  PRIMARY KEY pk_pregAse (dni_pasaporte, curso_académico,
+                          id_entrevista_asesor, id_pregunta_asesor),
+  FOREIGN KEY pregAse_fk_plantEntAse (dni_pasaporte,
+                                      curso_académico,
+                                      id_entrevista_asesor)
+  REFERENCES PlantillasEntrevistaAsesor (dni_pasaporte,
+                                         curso_académico,
+                                         id_entrevista_asesor)
+  ON DELETE CASCADE ON UPDATE CASCADE
+  );
+\end{verbatim}
