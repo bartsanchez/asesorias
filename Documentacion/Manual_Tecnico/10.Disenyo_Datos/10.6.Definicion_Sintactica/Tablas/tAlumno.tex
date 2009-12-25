@@ -1,0 +1,24 @@
+\subsection{Tabla Alumnos}
+
+\begin{verbatim}
+  CREATE TABLE Alumnos(
+  dni_pasaporte                  varchar(9)     NOT NULL,
+  correo_electrónico             varchar(50)    NOT NULL,
+  nombre                         varchar(50)    NOT NULL,
+  apellidos                      varchar(100)   NOT NULL,
+  fecha_nacimiento               date,
+  dirección_córdoba              varchar(100),
+  teléfono                       int(9),
+  dirección_familiar             varchar(100),
+  localidad_familiar             varchar(50),
+  provincia_familiar             varchar(50),
+  código_postal                  varchar(7),
+  teléfono_familiar              int(9),
+  ingreso                        int(4),
+  otros_estudios_universitarios  varchar(50),
+  modalidad_acceso_universidad   varchar(50),
+  calificación_acceso            float(4,2),
+  PRIMARY KEY pk_alumnos (dni_pasaporte),
+  UNIQUE uk_alumnos (correo_eletrónico)
+  );
+\end{verbatim}
