@@ -1,0 +1,19 @@
+\subsection{Tabla Reuniones}
+
+\begin{verbatim}
+  CREATE TABLE Reuniones(
+  dni_pasaporte      varchar(9)     NOT NULL,
+  curso_académico    int(4)         NOT NULL,
+  id_reunión         int(3)         NOT NULL AUTO_INCREMENT,
+  fecha              date           NOT NULL,
+  tipo               enum('Grupal',
+                     'Individual')  NOT NULL,
+  comentario_asesor  varchar(100),
+  comentario_alumno  varchar(100),
+  PRIMARY KEY pk_reuniones (dni_pasaporte, curso_académico,
+                            id_reunión),
+  FOREIGN KEY reuniones_fk_AlCA (dni_pasaporte, curso_académico)
+  REFERENCES AlumnosCursoAcadémico (dni_pasaporte, curso_académico)
+  ON DELETE CASCADE ON UPDATE CASCADE
+  );
+\end{verbatim}

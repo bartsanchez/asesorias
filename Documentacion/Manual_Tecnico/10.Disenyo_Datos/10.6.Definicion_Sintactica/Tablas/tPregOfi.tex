@@ -1,0 +1,14 @@
+\subsection{Tabla PreguntasOficiales}
+
+\begin{verbatim}
+  CREATE TABLE PreguntasOficiales(
+  id_entrevista_oficial int(3)         NOT NULL,
+  id_pregunta_oficial   int(3)         NOT NULL AUTO_INCREMENT,
+  enunciado             varchar(150)   NOT NULL,
+  última_modificación   date           NOT NULL,
+  PRIMARY KEY pk_pregOfi ( id_entrevista_oficial, id_pregunta_oficial),
+  FOREIGN KEY pregOfi_fk_plantEntOfi (id_entrevista_oficial)
+  REFERENCES PlantillasEntrevistaOficial (id_entrevista_oficial)
+  ON DELETE CASCADE ON UPDATE CASCADE
+  );
+\end{verbatim}
