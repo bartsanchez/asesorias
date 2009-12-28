@@ -1,0 +1,13 @@
+\subsection{Tabla AlumnosCursoAcadémico}
+
+\begin{verbatim}
+  CREATE TABLE AlumnosCursoAcadémico(
+  dni_pasaporte   varchar(9)     NOT NULL,
+  curso_académico int(4)         NOT NULL,
+  observaciones   varchar(100),
+  PRIMARY KEY pk_alumnosCA (dni_pasaporte, curso_académico),
+  FOREIGN KEY alumnosCA_fk_alumnos (dni_pasaporte)
+  REFERENCES Alumnos (dni_pasaporte)
+  ON DELETE CASCADE ON UPDATE CASCADE
+  );
+\end{verbatim}
