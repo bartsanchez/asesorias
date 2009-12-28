@@ -1,0 +1,15 @@
+\subsection{Tabla Centro\_AdministradoresCentro}
+
+\begin{verbatim}
+  CREATE TABLE Centro_AdministradoresCentro(
+  id_centro       int(2)      NOT NULL,
+  id_adm_centro   int(2)      NOT NULL,
+  PRIMARY KEY pk_centros (id_centro, id_adm_centro),
+  FOREIGN KEY CAC_fk_centros (id_centro)
+  REFERENCES Centros (id_centro)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY CAC_fk_admCentro (id_adm_centro)
+  REFERENCES AdministradoresCentro (id_adm_centro)
+  ON DELETE CASCADE ON UPDATE CASCADE
+  );
+\end{verbatim}
