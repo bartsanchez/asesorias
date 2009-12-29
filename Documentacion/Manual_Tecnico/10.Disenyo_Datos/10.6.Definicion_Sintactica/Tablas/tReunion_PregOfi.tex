@@ -1,0 +1,24 @@
+\subsection{Tabla Reunión\_PreguntasOficiales}
+
+\begin{verbatim}
+  CREATE TABLE Reunión_PreguntasOficiales(
+  dni_pasaporte         varchar(9)     NOT NULL,
+  curso_académico       int(4)         NOT NULL,
+  id_reunión            int(3)         NOT NULL,
+  id_entrevista_oficial int(3)         NOT NULL,
+  id_pregunta_oficial   int(3)         NOT NULL,
+  respuesta             varchar(150)   NOT NULL,
+  PRIMARY KEY pk_reuPregOfi (dni_pasaporte, curso_académico,
+                             id_reunión, id_entrevista_oficial,
+                             id_pregunta_oficial),
+  FOREIGN KEY reuPregOfi_fk_reuniones (dni_pasaporte, curso_académico,
+                                       id_reunión)
+  REFERENCES Reuniones (dni_pasaporte, curso_académico, id_reunión)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY reuPregOfi_fk_pregOfi (id_entrevista_oficial,
+                                     id_pregunta_oficial)
+  REFERENCES PreguntasOficiales (id_entrevista_oficial,
+                                 id_pregunta_oficial)
+  ON DELETE CASCADE ON UPDATE CASCADE
+  );
+\end{verbatim}
