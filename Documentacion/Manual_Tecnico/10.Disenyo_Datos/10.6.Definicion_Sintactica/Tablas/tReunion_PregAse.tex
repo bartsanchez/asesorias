@@ -1,0 +1,29 @@
+\subsection{Tabla Reunión\_PreguntasAsesores}
+
+\begin{verbatim}
+  CREATE TABLE Reunión_PreguntasAsesores(
+  dni_pasaporte_alumno  varchar(9)     NOT NULL,
+  curso_académico       int(4)         NOT NULL,
+  id_reunión            int(3)         NOT NULL,
+  dni_pasaporte_asesor  varchar(9)     NOT NULL,
+  id_entrevista_asesor  int(3)         NOT NULL,
+  id_pregunta_asesor    int(3)         NOT NULL,
+  respuesta             varchar(150)   NOT NULL,
+  PRIMARY KEY pk_reuPregAse (dni_pasaporte_alumno, curso_académico,
+                             id_reunión, dni_pasaporte_asesor,
+                             id_entrevista_asesor, id_pregunta_asesor),
+  FOREIGN KEY reuPregAse_fk_reuniones (dni_pasaporte_alumno,
+                                       curso_académico,
+                                       id_reunión)
+  REFERENCES Reuniones (dni_pasaporte_alumno, curso_académico,
+                        id_reunión)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY reuPregAse_fk_pregAse (dni_pasaporte_asesor,
+                                     id_entrevista_asesor,
+                                     id_pregunta_asesor)
+  REFERENCES PreguntasAsesores (dni_pasaporte_asesor,
+                                id_entrevista_asesor,
+                                id_pregunta_asesor)
+  ON DELETE CASCADE ON UPDATE CASCADE
+  );
+\end{verbatim}
