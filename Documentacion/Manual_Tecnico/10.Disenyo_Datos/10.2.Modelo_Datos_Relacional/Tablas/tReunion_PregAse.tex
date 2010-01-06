@@ -17,12 +17,19 @@
       cuenta el atributo del mismo nombre de la entidad
       \textit{Pregunta Asesor}, por tener forzosamente el mismo valor.
 
+      \paragraph{}Por otro lado es necesario diferenciar los dos atributos del
+      mismo nombre pero que provienen de entidades distintas
+      (\textit{dni\_pasaporte}). Para ello, se renombrarán dichos atributos como
+      \textit{dni\_pasaporte\_alumno} para el atributo que proviene del tipo de
+      entidad \textit{Reunión}, y \textit{dni\_pasaporte\_asesor} para el
+      atributo que proviene del tipo de entidad \textit{Pregunta Asesor}.
+
       \paragraph{}La tabla \textit{Reunión\_PreguntasAsesores} queda de la
       siguiente forma:
 
       \begin{description}
-         \item[Reunión\_PreguntasAsesores] \begin{flushleft}(\underline{\textbf{dni\_pasaporte}, \textbf{curso\_académico},
-         \textbf{id\_reunión}}, \underline{\textbf{dni\_pasaporte},
-         \textbf{id\_entrevista\_asesor}, \textbf{id\_pregunta\_asesor}},
+         \item[Reunión\_PreguntasAsesores] \begin{flushleft}(\underline{\textbf{dni\_pasaporte\_alumno}, \textbf{curso\_académico},}
+         \underline{\textbf{id\_reunión}, \textbf{dni\_pasaporte\_asesor},
+         \textbf{id\_entrevista\_asesor},} \underline{\textbf{id\_pregunta\_asesor}},
          respuesta)\end{flushleft}
       \end{description}
