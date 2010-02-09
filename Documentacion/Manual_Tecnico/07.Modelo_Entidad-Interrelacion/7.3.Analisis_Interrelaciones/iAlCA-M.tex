@@ -1,42 +1,41 @@
-\subsection{Interrelación Alumno Curso Académico - Calificación Alumno
-            Asignatura CA}
+\subsection{Interrelación Alumno Curso Académico - Matrícula}
 
    \begin{description}
       \item[Definición] En esta interrelación se deja constancia de que un
-      alumno obtendrá una calificación de una asignatura en una determinada
-      convocatoria durante un curso académico.
+      alumno estará matriculado de una determinada asignatura durante un curso
+      académico.
 
       \begin{itemize}
        \item Un \textit{Alumno Curso Académico} puede tener varias
-             \textit{Calificación Alumno Asignatura CA}.
-       \item Una \textit{Calificación Alumno Asignatura CA} solamente puede
-             pertenecer a un \textit{Alumno Curso Académico}.
+             \textit{Matrícula}.
+       \item Una \textit{Matrícula} solamente puede pertenecer a un
+             \textit{Alumno Curso Académico}.
       \end{itemize}
 
       \item[Características] La interrelación presenta las siguientes
                              características:
 
          \begin{itemize}
-            \item \textbf{Nombre:} AlCA-Cal
+            \item \textbf{Nombre:} AlCA-M
             \item \textbf{Tipo de la interrelación:} El tipo de entidad
-                  Calificación Alumno Asignatura CAes débil por identificación
-                  respecto al tipo de entidad Alumno Curso Académico.
+                  Matrícula es débil por identificación respecto al tipo de
+                  entidad Alumno Curso Académico.
             \item \textbf{Cardinalidad de la interrelación:} 1:N
                   \begin{itemize}
                      \item Alumno Curso Académico: tiene (0,n)
-                     \item Calificación Alumno Asignatura CA: pertenece\_a (1,1)
+                     \item Matrícula: pertenece\_a (1,1)
                   \end{itemize}
             \item \textbf{Número de atributos:} Ninguno.
          \end{itemize}
 
-      \item[Diagrama] La figura \ref{diagramaAlCA-Cal} muestra el diagrama de la
+      \item[Diagrama] La figura \ref{diagramaAlCA-M} muestra el diagrama de la
                       interrelación.
 
       \item \begin{figure}[!ht]
             \begin{center}
-            \includegraphics[]{07.Modelo_Entidad-Interrelacion/7.3.Analisis_Interrelaciones/diagramas/AlCA-Cal.pdf}
-            \caption{Diagrama de la interrelación AlCA-Cal.}
-            \label{diagramaAlCA-Cal}
+            \includegraphics[]{07.Modelo_Entidad-Interrelacion/7.3.Analisis_Interrelaciones/diagramas/AlCA-M.pdf}
+            \caption{Diagrama de la interrelación AlCA-M.}
+            \label{diagramaAlCA-M}
             \end{center}
          \end{figure}
 
@@ -45,19 +44,18 @@
       \item \begin{center}
             \begin{tabular}{ | r r | }
             \hline
-            \multicolumn{2}{ | c | }{\textbf{Tipo de interrelación AlCA-Cal}} \\
+            \multicolumn{2}{ | c | }{\textbf{Tipo de interrelación AlCA-M}} \\
             \hline
             \textbf{Alumno Curso Académico} & \\
             dni\_pasaporte & 01234567A \\
             curso\_académico & 2008 \\
             \hline
-            \textbf{Calificación Alumno Asignatura CA} & \\
-            dni\_pasaporte & 01234567A \\
-            curso\_académico & 2008 \\
+            \textbf{Matrícula} & \\
             id\_centro & 15 \\
             id\_titulación & 3\\
             id\_asignatura & 17\\
-            convocatoria & febrero \\
+            curso\_académico & 2008 \\
+            dni\_pasaporte & 01234567A \\
             \hline
             \end{tabular}
          \end{center}
