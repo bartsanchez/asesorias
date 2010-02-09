@@ -1,20 +1,18 @@
-\subsection{Tipo de entidad Calificación Alumno Asignatura CA}
+\subsection{Tipo de entidad Matrícula}
 
    \begin{description}
 
-   \item[Definición] Se refiere al objeto del mundo real: \emph{``Calificación
-   obtenida por un alumno en una determinada asignatura durante un curso
-   académico''}.
+   \item[Definición] Se refiere al objeto del mundo real: \emph{``Registro de un
+   alumno en una determinada asignatura como resultado de la matriculación''}.
 
    \item[Características] La entidad presenta las siguientes características:
       \begin{itemize}
-         \item \textbf{Nombre:} Calificación Alumno Asignatura CA.
+         \item \textbf{Nombre:} Matrícula.
          \item \textbf{Tipo:} Débil por identificación con respecto a las
          entidades Alumno Curso Académico y Asignatura Curso Académico.
-         \item \textbf{Número de atributos:} 3 propio y 5 heredados.
+         \item \textbf{Número de atributos:} 1 propio y 5 heredados.
          \item \textbf{Atributo/s identificador/es principal/es:} dni\_pasaporte
-         junto con curso\_académico, id\_centro, id\_titulación, id\_asignatura
-         y convocatoria.
+         junto con curso\_académico, id\_centro, id\_titulación e id\_asignatura.
          \item \textbf{Atributo/s identificador/es alternativo/s:} -
          \item \textbf{Atributo/s heredado/s:} dni\_pasaporte y curso\_académico
          del tipo de entidad Alumno Curso Académico, junto a los atributos id\_centro,
@@ -30,43 +28,19 @@
          máximo permitido por la normativa vigente.
       \end{itemize}
 
-   \item[Diagrama] La figura \ref{diagramaCalAlACA} muestra el diagrama de la entidad.
+   \item[Diagrama] La figura \ref{diagramaMatricula} muestra el diagrama de la entidad.
    \item \begin{figure}[!ht]
             \begin{center}
-            \includegraphics[]{07.Modelo_Entidad-Interrelacion/7.2.Analisis_Entidades/diagramas/cal_al_aca.pdf}
-            \caption{Diagrama de la entidad Calificación Alumno Asignatura CA.}
-            \label{diagramaCalAlACA}
+            \includegraphics[]{07.Modelo_Entidad-Interrelacion/7.2.Analisis_Entidades/diagramas/matricula.pdf}
+            \caption{Diagrama de la entidad Matrícula.}
+            \label{diagramaMatricula}
             \end{center}
          \end{figure}
 
-   \item[Descripción de los atributos propios] La entidad presenta los
-   siguientes atributos propios:
+   \item[Descripción de los atributos propios] La entidad presenta el
+   siguiente atributo propio:
 
    \begin{itemize}
-    \item \textbf{convocatoria}
-    \begin{itemize}
-      \item \textbf{Definición:} Establece la convocatoria en la que el
-      alumno se presenta a la asignatura.
-      \item \textbf{Dominio:} Conjunto de caracteres alfanuméricos.
-      \item \textbf{Carácter:} Obligatorio.
-      \item \textbf{Ejemplo práctico:} febrero.
-      \item \textbf{Información adicional:} Forma parte de la clave primaria de la
-      entidad. El dato lo introduce el usuario alumno al actualizar
-      su información personal, o bien el usuario asesor si
-      comprueba que la información no es correcta.
-    \end{itemize}
-    \item \textbf{nota}
-    \begin{itemize}
-      \item \textbf{Definición:} Establece la calificación obtenida por un
-      alumno en una asignatura durante un curso académico.
-      \item \textbf{Dominio:} Conjunto de reales positivos.
-      \item \textbf{Carácter:} Opcional.
-      \item \textbf{Ejemplo práctico:} 8,4.
-      \item \textbf{Información adicional:} El dato lo introduce el
-      usuario alumno al actualizar su información personal , o
-      bien el usuario asesor si comprueba que la información no es
-      correcta.
-    \end{itemize}
     \item \textbf{comentario}
     \begin{itemize}
       \item \textbf{Definición:} Información extra que pueda ser
@@ -86,7 +60,7 @@
    \item \begin{center}
             \begin{tabular}{ | l | l | }
             \hline
-            \multicolumn{2}{ | c | }{\textbf{Tipo de entidad Calificación Alumno Asignatura CA}} \\
+            \multicolumn{2}{ | c | }{\textbf{Tipo de entidad Matrícula}} \\
             \hline
             dni\_pasaporte & 01234567A \\
             \hline
@@ -97,10 +71,6 @@
             id\_titulación & 3\\
             \hline
             id\_asignatura & 17\\
-            \hline
-            convocatoria & febrero \\
-            \hline
-            nota & 8,4 \\
             \hline
             comentario & Prácticas superadas \\
             \hline
