@@ -18,6 +18,13 @@
    \paragraph{}Las ventajas de este modelo son:
 
    \begin{itemize}
+    \item Genera esquemas que representan fielmente la información, los objetos
+    y relaciones entre ellos existentes en el dominio del problema.
+    \item La información contenida puede ser entendida fácilmente por los
+    usuarios que no tienen una preparación previa en este área.
+    \item Hace posible ampliar el esquema de la base de datos sin modificar la
+    estructura lógica existente y, por tanto, sin modificar los programas de
+    aplicación.
     \item Garantiza herramientas para evitar la duplicidad de registros, a
     través de campos claves o llaves.
     \item Garantiza la integridad referencial: Así, al eliminar un registro,
@@ -26,14 +33,21 @@
    \end{itemize}
 
    \paragraph{}El proceso de traducción de esquemas conceptuales a lógicos
-   consiste en la aplicación, por pasos, de una serie de reglas que, aplicadas a
-   los esquemas conceptuales, transforman los objetos de estos esquemas en
-   objetos pertenecientes a los esquemas lógicos. La aplicación de las reglas va
-   a dar lugar a la transformación de los tipos de entidad y los tipos de
-   interrelación que forman parte de los esquemas conceptuales, en tablas o
-   relaciones, los únicos objetos que intervienen en los esquemas lógicos
-   relacionales. Para cada una de las tablas obtenidas, se va a proporcionar la
-   siguiente información:
+   consiste en la aplicación, por pasos, de una serie de reglas\footnote{Tanto
+   para la definición como para la aplicación de dichas reglas se ha tenido
+   como referencia \textit{Bases de datos: Desde Chen hasta Codd con ORACLE}, de
+   Luque Ruiz et al. \cite{luqueRuiz}. Dichas reglas son conocidas como RTECAR;
+   es decir, reglas
+   de transformación de esquemas conceptuales a esquemas relacionales, no sin
+   antes tener en cuenta unas reglas preparatorias llamadas PRTECAR, que
+   faciliten y garanticen la fiabilidad del proceso de transformación.} que,
+   aplicadas a los esquemas conceptuales, transforman los
+   objetos de estos esquemas en objetos pertenecientes a los esquemas lógicos.
+   La aplicación de las reglas va a dar lugar a la transformación de los tipos
+   de entidad y los tipos de interrelación que forman parte de los esquemas
+   conceptuales, en tablas o relaciones, los únicos objetos que intervienen en
+   los esquemas lógicos relacionales. Para cada una de las tablas obtenidas, se
+   va a proporcionar la siguiente información:
 
    \begin{itemize}
     \item Nombre.
