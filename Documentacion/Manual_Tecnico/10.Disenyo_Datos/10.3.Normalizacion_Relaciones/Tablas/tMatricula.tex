@@ -1,4 +1,4 @@
-\subsection{Tabla CalificacionesAlumnoAsignaturaCA}
+\subsection{Tabla Matrículas}
 
   \paragraph{}Esta tabla se encuentra en FNBC puesto que el único determinante
   funcional existente es el identificador principal y todas las dependencias
@@ -7,12 +7,11 @@
  \begin{center}
     \begin{minipage}{4.2cm}{\begin{flushright}\begin{tabular}{ | c | }
                   \hline
-                  (dni\_pasaporte + \\
-                  curso\_académico + \\
-                  id\_centro + \\
+                  (id\_centro + \\
                   id\_titulación + \\
                   id\_asignatura + \\
-                  convocatoria) \\
+                  curso\_académico + \\
+                  dni\_pasaporte) \\
                   \hline
                  \end{tabular}\end{flushright} }
     \end{minipage}
@@ -20,7 +19,6 @@
     \end{minipage}
     \begin{minipage}{5.9cm}{\begin{tabular}{ | c | }
                   \hline
-                  nota \\
                   comentario \\
                   \hline
                  \end{tabular} }
