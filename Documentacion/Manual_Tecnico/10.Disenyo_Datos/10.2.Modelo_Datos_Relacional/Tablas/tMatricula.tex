@@ -1,7 +1,7 @@
-   \subsection{Tabla CalificacionesAlumnoAsignaturaCA}
+   \subsection{Tabla Matrículas}
 
       \paragraph{}Esta tabla se obtiene a través del tipo de entidad
-      \textit{Calificación Alumno Asignatura CA}, tomando los atributos de ésta
+      \textit{Matrícula}, tomando los atributos de ésta
       (regla RTECAR-1). Además, mantiene una referencia con la tabla
       \textit{Asignatura Curso Académico} a través de los atributos
       \textit{id\_centro}, \textit{id\_titulación}, \textit{id\_asignatura} y
@@ -14,16 +14,17 @@
       Académico}, que contiene, forzosamente, la misma información.
 
       \paragraph{}La clave principal de esta tabla se compone con la agregación
-      de los atributos \textit{dni\_pasaporte}, \textit{curso\_académico},
-      \textit{id\_centro}, \textit{id\_titulación}, \textit{id\_asignatura} y
-      \textit{convocatoria}.
+      de los atributos \textit{id\_centro}, \textit{id\_titulación},
+      \textit{id\_asignatura}, \textit{curso\_académico} y
+      \textit{dni\_pasaporte}.
 
-      \paragraph{}La tabla \textit{AsignaturasCursoAcadémico} queda de la
+      \paragraph{}La tabla \textit{Matrículas} queda de la
       siguiente forma:
 
       \begin{description}
-         \item[CalificacionesAlumnoAsignaturaCA] \begin{flushleft}(         \underline{\textbf{dni\_pasaporte}, \textbf{curso\_académico},}
-         \underline{\textbf{id\_centro}, \textbf{id\_titulación},
-         \textbf{id\_asignatura}, convocatoria}, nota, comentario)
+         \item[Matrículas] \begin{flushleft}(\underline{\textbf{id\_centro},
+         \textbf{id\_titulación}, \textbf{id\_asignatura},
+         \textbf{curso\_académico},} \underline{\textbf{dni\_pasaporte}},
+         comentario)
          \end{flushleft}
       \end{description}
