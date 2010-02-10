@@ -1,0 +1,46 @@
+\section{Diagramas de flujo de datos}
+
+  \paragraph{}Los diagramas de flujo de datos son una representación gráfica en
+  forma de red que refleja el flujo de la información y las transformaciones que
+  se aplican sobre ella al moverse desde la entrada hasta la salida de un
+  sistema software. Un DFD representa qué funciones o qué transformaciones deben
+  realizarse sobre los datos, pero no cuándo se realizan o en qué orden.
+
+  \paragraph{}Los diagramas de flujo de datos ayudan a modelar las funciones que
+  debe realizar el sistema, permitiendo una descomposición funcional del sistema
+  en distintos niveles de detalle.
+
+  \paragraph{}El refinamiento de estos diagramas se hace mediante niveles,
+  comenzando por el nivel 0 o diagrama de contexto del sistema y finalizando en
+  un nivel que ya no pueda descomponerse más debido a su sencillez.
+
+  \paragraph{}Existen diferentes metodologías para la representación de los
+  diagramas de flujo de datos, aquí se usará la metodología de Yourdon-DeMarco
+  por ser una de las más extendidas.
+
+  \paragraph{}La notación básica de esta metodología hace uso de los siguientes
+  componentes: el proceso (que se clasifica en simple o compuesto), el flujo, el
+  almacén y la entidad externa.
+
+  \begin{description}
+   \item[Proceso simple] El proceso simple se representa gráficamente mediante
+        un círculo blanco y muestra una parte del sistema que transforma
+        entradas en salidas: es decir, muestra cómo es que una o más entradas
+        se transforman en salidas. Este tipo de proceso no se refinará o
+        descompondrá más.
+   \item[Proceso compuesto] El proceso compuesto se representa gráficamente
+        mediante un círculo gris y representa lo mismo que el proceso simple con
+        la diferencia de que este proceso sí se refinará o descompondrá más en
+        el siguiente nivel de abstracción.
+   \item[Flujo] El flujo se representa gráficamente mediante una flecha que
+        entra o sale de un proceso, un almacén o una entidad externa. El flujo
+        se utiliza para describir el movimiento de bloques o paquetes de
+        información de una parte del sistema a otra.
+   \item[Almacén] El almacén se representa gráficamente mediante dos líneas
+        paralelas y se utiliza para modelar una colección de paquetes
+        de datos en reposo.
+   \item[Entidad externa] La entidad externa es representada gráficamente
+        por un rectángulo. Es la fuente o el destino de la información que
+        fluye por el sistema. Dicho de otra forma, es un productor o consumidor
+        de información que reside fuera de los límites del sistema.
+  \end{description}
