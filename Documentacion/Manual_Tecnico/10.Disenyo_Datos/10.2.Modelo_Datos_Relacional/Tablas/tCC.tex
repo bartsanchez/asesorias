@@ -1,0 +1,24 @@
+   \subsection{Tabla CalificacionesConvocatoria}
+
+      \paragraph{}Esta tabla se obtiene a través del tipo de entidad
+      \textit{Calificación Convocatoria}, tomando los atributos de ésta
+      (regla RTECAR-1). Además, mantiene una referencia con la tabla
+      \textit{Matrícula} a través de los atributos \textit{id\_centro},
+      \textit{id\_titulación}, \textit{id\_asignatura},
+      \textit{curso\_académico} y \textit{dni\_pasaporte} (regla RTECAR-3.1).
+
+      \paragraph{}La clave principal de esta tabla se compone con la agregación
+      de los atributos \textit{id\_centro}, \textit{id\_titulación},
+      \textit{id\_asignatura}, \textit{curso\_académico},
+      \textit{dni\_pasaporte} y \textit{convocatoria}.
+
+      \paragraph{}La tabla \textit{CalificacionesConvocatoria} queda de la
+      siguiente forma:
+
+      \begin{description}
+         \item[CalificacionesConvocatoria] \begin{flushleft}(
+         \underline{\textbf{id\_centro}, \textbf{id\_titulación},
+         \textbf{id\_asignatura},} \underline{\textbf{curso\_académico},
+         \textbf{dni\_pasaporte}, convocatoria}, nota, comentario)
+         \end{flushleft}
+      \end{description}
