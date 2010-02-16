@@ -1,1 +1,40 @@
 \subsection{Nivel de abstracción 0: Diagrama de contexto}
+
+  \paragraph{}En este diagrama se representará el funcionamiento de la
+  aplicación de manera general, así como la interacción que mantiene el usuario
+  con el sistema por medio de las entidades externas que generan flujos de
+  entrada de información (Teclado, Ratón, Sistema y Unidad de almacenamiento) y
+  los que reciben y procesan los flujos de salida de información del sistema
+  (Pantalla, Impresora). A continuación se describirán las entidades externas
+  que intervienen en el Diagrama de contexto.
+
+  \begin{description}
+   \item[Teclado] Permitirá al usuario introducir información en el sistema.
+
+   \item[Ratón] Su función será la de permitir al usuario moverse por la
+                aplicación.
+   \item[Sistema] La información que proporcionará a la aplicación será la fecha
+                  y hora del sistema en el que se encuentre instalada.
+   \item[Unidad de almacenamiento] Representa toda unidad de almacenamiento
+                                   externa que proporcionará archivos tales como
+                                   imágenes, archivos pdf, sonidos, etc.
+   \item[Servidor] Esta entidad interactúa con la aplicación proporcionando
+                   flujos de información de entrada, cuando se le solicita
+                   alguna página que tenga almacenada, y flujos de salida,
+                   cuando la aplicación realice alguna operación que necesite
+                   almacenar una página en el servidor.
+   \item[Pantalla] Recibirá los flujos de información de salida de la aplicación
+                   y será la encargada de mostrarlos al usuario.
+   \item[Impresora] Recibirá información de salida de la aplicación y se
+                    encargará de imprimirla en papel.
+  \end{description}
+
+  \paragraph{}La figura \ref{diagramaContexto} muestra el Diagrama de contexto.
+
+        \begin{figure}[!ht]
+            \begin{center}
+            \includegraphics[]{08.Analisis_Funcional/8.2.DFDs/Niveles/Diagramas/diagrama_contexto.pdf}
+            \caption{Diagrama de contexto.}
+            \label{diagramaContexto}
+            \end{center}
+         \end{figure}
