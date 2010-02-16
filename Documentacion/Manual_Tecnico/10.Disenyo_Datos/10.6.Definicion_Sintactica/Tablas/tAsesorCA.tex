@@ -4,10 +4,14 @@
   CREATE TABLE AsesoresCursoAcadémico(
   dni_pasaporte   varchar(9)     NOT NULL,
   curso_académico int(4)         NOT NULL,
+  id_departamento int(2)         NOT NULL,
   observaciones   varchar(100),
   PRIMARY KEY pk_asesoresCA (dni_pasaporte, curso_académico),
   FOREIGN KEY asesoresCA_fk_asesores (dni_pasaporte)
   REFERENCES Asesores (dni_pasaporte)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY asesoresCA_fk_departamentos (id_departamento)
+  REFERENCES Departamentos (id_departamento)
   ON DELETE CASCADE ON UPDATE CASCADE
   );
 \end{verbatim}
