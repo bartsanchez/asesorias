@@ -14,3 +14,15 @@ class AdministradorCentro(models.Model):
 
 	def __unicode__(self):
 		return self.nombre_adm_centro
+
+class Titulacion(models.Model):
+	id_centro = models.ForeignKey('Centro', db_column='id_centro')
+	id_titulacion = models.AutoField(primary_key=True)
+	nombre_titulacion = models.CharField(max_length=100)
+	plan_estudios = models.IntegerField()
+
+	class Meta:
+		unique_together = (("id_centro", "id_titulacion"), ("nombre_titulacion", "plan_estudios"))
+
+	def __unicode__(self):
+		return self.nombre_titulacion
