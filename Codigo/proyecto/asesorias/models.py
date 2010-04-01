@@ -214,6 +214,7 @@ class Reunion(models.Model):
 	comentario_asesor = models.CharField(max_length=100)
 	comentario_alumno = models.CharField(max_length=100)
 	preguntasasesores = models.ManyToManyField('PreguntaAsesor')
+	preguntasoficiales = models.ManyToManyField('PreguntaOficial')
 
 	class Meta:
 		unique_together = ("dni_pasaporte", "curso_academico", "id_reunion")
