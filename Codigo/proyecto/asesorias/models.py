@@ -4,6 +4,7 @@ from django.db import models
 class Centro(models.Model):
 	id_centro = models.AutoField(primary_key=True)
 	nombre_centro = models.CharField(max_length=25, unique=True)
+	administradorescentro = models.ManyToManyField('AdministradorCentro')
 
 	def __unicode__(self):
 		return self.nombre_centro
@@ -11,7 +12,6 @@ class Centro(models.Model):
 class AdministradorCentro(models.Model):
 	id_adm_centro = models.AutoField(primary_key=True)
 	nombre_adm_centro = models.CharField(max_length=25, unique=True)
-	centros = models.ManyToManyField('Centro')
 
 	def __unicode__(self):
 		return self.nombre_adm_centro
@@ -213,6 +213,7 @@ class Reunion(models.Model):
 	tipo = models.CharField(max_length=3, choices=TIPOS_REUNION)
 	comentario_asesor = models.CharField(max_length=100)
 	comentario_alumno = models.CharField(max_length=100)
+	preguntasasesores = models.ManyToManyField('PreguntaAsesor')
 
 	class Meta:
 		unique_together = ("dni_pasaporte", "curso_academico", "id_reunion")
