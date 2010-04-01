@@ -198,3 +198,24 @@ class PreguntaOficial(models.Model):
 
 	def __unicode__(self):
 		return self.enunciado
+
+class Reunion(models.Model):
+	TIPOS_REUNION = (
+		('GRU', 'Grupal'),
+		('IND', 'Individual'),
+	)
+
+	dni_pasaporte = models.ForeignKey('Alumno', db_column='dni_pasaporte')
+	curso_academico = models.IntegerField()
+	id_reunion = models.AutoField(primary_key=True)
+	fecha = models.DateField()
+	tipo = models.CharField(max_length=3, choices=TIPOS_REUNION)
+	comentario_asesor = models.CharField(max_length=100)
+	comentario_alumno = models.CharField(max_length=100)
+
+	class Meta:
+		unique_together = ("dni_pasaporte", "curso_academico", "id_reunion")
+
+	def __unicode__(self):
+		return self.id_reunion
+
