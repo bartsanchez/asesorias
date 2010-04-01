@@ -134,3 +134,17 @@ class Alumno(models.Model):
 	otros_estudios_universitarios = models.CharField(max_length=50)
 	modalidad_acceso_universidad = models.CharField(max_length=50)
 	calificacion_acceso = models.FloatField()
+
+	def __unicode__(self):
+		return self.dni_pasaporte
+
+class AlumnoCursoAcademico(models.Model):
+	dni_pasaporte = models.ForeignKey('Alumno', db_column='dni_pasaporte')
+	curso_academico = models.IntegerField()
+	observaciones = models.CharField(max_length=100)
+
+	class Meta:
+		unique_together = ("dni_pasaporte", "curso_academico")
+
+	def __unicode__(self):
+		return self.curso_academico
