@@ -178,3 +178,11 @@ class CalificacionConvocatoria(models.Model):
 
 	def __unicode__(self):
 		return self.convocatoria
+
+class PlantillaEntrevistaOficial(models.Model):
+	id_entrevista_oficial = models.AutoField(primary_key=True)
+	descripcion = models.CharField(max_length=100)
+	ultima_modificacion = models.DateField()
+
+	def __unicode__(self):
+		return self.descripcion
