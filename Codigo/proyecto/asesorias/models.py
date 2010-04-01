@@ -80,3 +80,14 @@ class Asesor(models.Model):
 	def __unicode__(self):
 		return self.correo_electronico
 
+class AsesorCursoAcademico(models.Model):
+	dni_pasaporte = models.ForeignKey('Asesor', db_column='dni_pasaporte')
+	curso_academico = models.IntegerField()
+	observaciones = models.CharField(max_length=100)
+	id_departamento = models.ForeignKey('Departamento', db_column='id_departamento')
+
+	class Meta:
+		unique_together = ("dni_pasaporte", "curso_academico")
+
+	def __unicode__(self):
+		return self.dni_pasaporte
