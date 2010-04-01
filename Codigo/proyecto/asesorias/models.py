@@ -64,7 +64,7 @@ class AsignaturaCursoAcademico(models.Model):
 
 class Departamento(models.Model):
 	id_departamento = models.AutoField(primary_key=True)
-	nombre_departamento = models.CharField(max_length=25)
+	nombre_departamento = models.CharField(max_length=25, unique=True)
 	telefono = models.IntegerField()
 
 	def __unicode__(self):
@@ -72,7 +72,7 @@ class Departamento(models.Model):
 
 class Asesor(models.Model):
 	dni_pasaporte = models.CharField(primary_key=True, max_length=9)
-	correo_electronico = models.CharField(max_length=50)
+	correo_electronico = models.CharField(max_length=50, unique=True)
 	nombre = models.CharField(max_length=50)
 	apellidos = models.CharField(max_length=100)
 	telefono = models.IntegerField()
@@ -118,3 +118,19 @@ class PreguntaAsesor(models.Model):
 
 	def __unicode__(self):
 		return self.id_pregunta_asesor
+
+class Alumno(models.Model):
+	dni_pasaporte = models.CharField(primary_key=True, max_length=9)
+	correo_electronico = models.CharField(max_length=50, unique=True)
+	nombre = models.CharField(max_length=50)
+	apellidos = models.CharField(max_length=100)
+	fecha_nacimiento = models.DateField()
+	direccion_cordoba = models.CharField(max_length=100)
+	localidad_familiar = models.CharField(max_length=50)
+	provincia_familiar = models.CharField(max_length=50)
+	codigo_postal = models.CharField(max_length=7)
+	telefono_familiar = models.IntegerField()
+	ingreso = models.IntegerField()
+	otros_estudios_universitarios = models.CharField(max_length=50)
+	modalidad_acceso_universidad = models.CharField(max_length=50)
+	calificacion_acceso = models.FloatField()
