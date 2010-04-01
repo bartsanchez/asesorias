@@ -61,3 +61,11 @@ class AsignaturaCursoAcademico(models.Model):
 
 	def __unicode__(self):
 		return self.curso_academico
+
+class Departamento(models.Model):
+	id_departamento = models.AutoField(primary_key=True)
+	nombre_departamento = models.CharField(max_length=25)
+	telefono = models.IntegerField()
+
+	def __unicode__(self):
+		return self.nombre_departamento
