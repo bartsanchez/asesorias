@@ -1,0 +1,20 @@
+from proyecto.asesorias.models import Centro, AdministradorCentro, Titulacion, Asignatura, AsignaturaCursoAcademico, Departamento, Asesor, AsesorCursoAcademico, PlantillaEntrevistaAsesor, PreguntaAsesor, Alumno, AlumnoCursoAcademico, Matricula, CalificacionConvocatoria, PlantillaEntrevistaOficial, PreguntaOficial, Reunion
+from django.contrib import admin
+
+admin.site.register(Centro)
+admin.site.register(AdministradorCentro)
+admin.site.register(Titulacion)
+admin.site.register(Asignatura)
+admin.site.register(AsignaturaCursoAcademico)
+admin.site.register(Departamento)
+admin.site.register(Asesor)
+admin.site.register(AsesorCursoAcademico)
+admin.site.register(PlantillaEntrevistaAsesor)
+admin.site.register(PreguntaAsesor)
+admin.site.register(Alumno)
+admin.site.register(AlumnoCursoAcademico)
+admin.site.register(Matricula)
+admin.site.register(CalificacionConvocatoria)
+admin.site.register(PlantillaEntrevistaOficial)
+admin.site.register(PreguntaOficial)
+admin.site.register(Reunion)
