@@ -35,8 +35,8 @@ class Asignatura(models.Model):
 		('LCN', 'Libre configuracion'),
 	)
 
-	id_titulacion = models.ForeignKey('Titulacion', db_column='id_titulacion')
 	id_centro = models.ForeignKey('Centro', db_column='id_centro')
+	id_titulacion = models.ForeignKey('Titulacion', db_column='id_titulacion')
 	id_asignatura = models.AutoField(primary_key=True)
 	nombre_asignatura = models.CharField(max_length=50)
 	curso = models.IntegerField()
@@ -49,3 +49,15 @@ class Asignatura(models.Model):
 
 	def __unicode__(self):
 		return self.nombre_asignatura
+
+class AsignaturaCursoAcademico(models.Model):
+	id_centro = models.ForeignKey('Centro', db_column='id_centro')
+	id_titulacion = models.ForeignKey('Titulacion', db_column='id_titulacion')
+	id_asignatura = models.ForeignKey('Asignatura', db_column='id_asignatura')
+	curso_academico = models.IntegerField()
+
+	class Meta:
+		unique_together = ("id_centro", "id_titulacion", "id_asignatura", "curso_academico")
+
+	def __unicode__(self):
+		return self.curso_academico
