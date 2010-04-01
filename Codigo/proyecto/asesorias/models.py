@@ -69,3 +69,14 @@ class Departamento(models.Model):
 
 	def __unicode__(self):
 		return self.nombre_departamento
+
+class Asesor(models.Model):
+	dni_pasaporte = models.CharField(primary_key=True, max_length=9)
+	correo_electronico = models.CharField(max_length=50)
+	nombre = models.CharField(max_length=50)
+	apellidos = models.CharField(max_length=100)
+	telefono = models.IntegerField()
+
+	def __unicode__(self):
+		return self.correo_electronico
+
