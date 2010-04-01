@@ -186,3 +186,15 @@ class PlantillaEntrevistaOficial(models.Model):
 
 	def __unicode__(self):
 		return self.descripcion
+
+class PreguntaOficial(models.Model):
+	id_entrevista_oficial = models.ForeignKey('PlantillaEntrevistaOficial', db_column='id_entrevista_oficial')
+	id_pregunta_oficial = models.AutoField(primary_key=True)
+	enunciado = models.CharField(max_length=150)
+	ultima_modificacion = models.DateField()
+
+	class Meta:
+		unique_together = ("id_entrevista_oficial", "id_pregunta_oficial")
+
+	def __unicode__(self):
+		return self.enunciado
