@@ -104,3 +104,17 @@ class PlantillaEntrevistaAsesor(models.Model):
 
 	def __unicode__(self):
 		return self.id_entrevista_asesor
+
+class PreguntaAsesor(models.Model):
+	dni_pasaporte = models.ForeignKey('Asesor', db_column='dni_pasaporte')
+	curso_academico = models.IntegerField()
+	id_entrevista_asesor = models.ForeignKey('PlantillaEntrevistaAsesor', db_column='id_entrevista_asesor')
+	id_pregunta_asesor = models.AutoField(primary_key=True)
+	enunciado = models.CharField(max_length=150)
+	ultima_modificacion = models.DateField()
+
+	class Meta:
+		unique_together = ("dni_pasaporte", "curso_academico", "id_entrevista_asesor", "id_pregunta_asesor")
+
+	def __unicode__(self):
+		return self.id_pregunta_asesor
