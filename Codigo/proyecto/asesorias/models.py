@@ -11,6 +11,7 @@ class Centro(models.Model):
 class AdministradorCentro(models.Model):
 	id_adm_centro = models.AutoField(primary_key=True)
 	nombre_adm_centro = models.CharField(max_length=25, unique=True)
+	centros = models.ManyToManyField('Centro')
 
 	def __unicode__(self):
 		return self.nombre_adm_centro
