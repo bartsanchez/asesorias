@@ -26,3 +26,26 @@ class Titulacion(models.Model):
 
 	def __unicode__(self):
 		return self.nombre_titulacion
+
+class Asignatura(models.Model):
+	TIPOS_ASIGNATURAS = (
+		('TRO', 'Troncal'),
+		('OBL', 'Obligatoria'),
+		('OPT', 'Optativa'),
+		('LCN', 'Libre configuracion'),
+	)
+
+	id_titulacion = models.ForeignKey('Titulacion', db_column='id_titulacion')
+	id_centro = models.ForeignKey('Centro', db_column='id_centro')
+	id_asignatura = models.AutoField(primary_key=True)
+	nombre_asignatura = models.CharField(max_length=50)
+	curso = models.IntegerField()
+	tipo = models.CharField(max_length=3, choices=TIPOS_ASIGNATURAS)
+	nCreditosTeoricos = models.FloatField()
+	nCreditosPracticos = models.FloatField()
+
+	class Meta:
+		unique_together = ("id_centro", "id_titulacion", "id_asignatura")
+
+	def __unicode__(self):
+		return self.nombre_asignatura
