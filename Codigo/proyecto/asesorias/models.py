@@ -162,3 +162,19 @@ class Matricula(models.Model):
 
 	def __unicode__(self):
 		return self.dni_pasaporte
+
+class CalificacionConvocatoria(models.Model):
+	id_centro = models.ForeignKey('Centro', db_column='id_centro')
+	id_titulacion = models.ForeignKey('Titulacion', db_column='id_titulacion')
+	id_asignatura = models.ForeignKey('Asignatura', db_column='id_asignatura')
+	curso_academico = models.IntegerField()
+	dni_pasaporte = models.ForeignKey('Alumno', db_column='dni_pasaporte')
+	convocatoria = models.CharField(max_length=15)
+	nota = models.FloatField()
+	comentario = models.CharField(max_length=100)
+
+	class Meta:
+		unique_together = ("id_centro", "id_titulacion", "id_asignatura", "curso_academico", "dni_pasaporte", "convocatoria")
+
+	def __unicode__(self):
+		return self.convocatoria
