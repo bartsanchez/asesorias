@@ -4,7 +4,10 @@ from django.db import models
 class Centro(models.Model):
 	id_centro = models.AutoField(primary_key=True)
 	nombre_centro = models.CharField(max_length=25, unique=True)
-	administradorescentro = models.ManyToManyField('AdministradorCentro')
+	administradorescentro = models.ManyToManyField('AdministradorCentro', db_table='Centro_AdministradoresCentro')
+
+	class Meta:
+		db_table = "Centros"
 
 	def __unicode__(self):
 		return self.nombre_centro
@@ -12,6 +15,9 @@ class Centro(models.Model):
 class AdministradorCentro(models.Model):
 	id_adm_centro = models.AutoField(primary_key=True)
 	nombre_adm_centro = models.CharField(max_length=25, unique=True)
+
+	class Meta:
+		db_table = "AdministradoresCentro"
 
 	def __unicode__(self):
 		return self.nombre_adm_centro
@@ -23,6 +29,7 @@ class Titulacion(models.Model):
 	plan_estudios = models.IntegerField()
 
 	class Meta:
+		db_table = "Titulaciones"
 		unique_together = (("id_centro", "id_titulacion"), ("nombre_titulacion", "plan_estudios"))
 
 	def __unicode__(self):
@@ -46,6 +53,7 @@ class Asignatura(models.Model):
 	nCreditosPracticos = models.FloatField()
 
 	class Meta:
+		db_table = "Asignaturas"
 		unique_together = ("id_centro", "id_titulacion", "id_asignatura")
 
 	def __unicode__(self):
@@ -58,6 +66,7 @@ class AsignaturaCursoAcademico(models.Model):
 	curso_academico = models.IntegerField()
 
 	class Meta:
+		db_table = "AsignaturasCursoAcademico"
 		unique_together = ("id_centro", "id_titulacion", "id_asignatura", "curso_academico")
 
 	def __unicode__(self):
@@ -67,6 +76,9 @@ class Departamento(models.Model):
 	id_departamento = models.AutoField(primary_key=True)
 	nombre_departamento = models.CharField(max_length=25, unique=True)
 	telefono = models.IntegerField()
+
+	class Meta:
+		db_table = "Departamentos"
 
 	def __unicode__(self):
 		return self.nombre_departamento
@@ -78,6 +90,9 @@ class Asesor(models.Model):
 	apellidos = models.CharField(max_length=100)
 	telefono = models.IntegerField()
 
+	class Meta:
+		db_table = "Asesores"
+
 	def __unicode__(self):
 		return self.correo_electronico
 
@@ -88,6 +103,7 @@ class AsesorCursoAcademico(models.Model):
 	id_departamento = models.ForeignKey('Departamento', db_column='id_departamento')
 
 	class Meta:
+		db_table = "AsesoresCursoAcademico"
 		unique_together = ("dni_pasaporte", "curso_academico")
 
 	def __unicode__(self):
@@ -101,6 +117,7 @@ class PlantillaEntrevistaAsesor(models.Model):
 	ultima_modificacion = models.DateField()
 
 	class Meta:
+		db_table = "PlantillasEntrevistaAsesor"
 		unique_together = ("dni_pasaporte", "curso_academico", "id_entrevista_asesor")
 
 	def __unicode__(self):
@@ -115,6 +132,7 @@ class PreguntaAsesor(models.Model):
 	ultima_modificacion = models.DateField()
 
 	class Meta:
+		db_table = "PreguntasAsesores"
 		unique_together = ("dni_pasaporte", "curso_academico", "id_entrevista_asesor", "id_pregunta_asesor")
 
 	def __unicode__(self):
@@ -136,6 +154,9 @@ class Alumno(models.Model):
 	modalidad_acceso_universidad = models.CharField(max_length=50)
 	calificacion_acceso = models.FloatField()
 
+	class Meta:
+		db_table = "Alumnos"
+
 	def __unicode__(self):
 		return self.dni_pasaporte
 
@@ -145,6 +166,7 @@ class AlumnoCursoAcademico(models.Model):
 	observaciones = models.CharField(max_length=100)
 
 	class Meta:
+		db_table = "AlumnosCursoAcademico"
 		unique_together = ("dni_pasaporte", "curso_academico")
 
 	def __unicode__(self):
@@ -159,6 +181,7 @@ class Matricula(models.Model):
 	comentario = models.CharField(max_length=100)
 
 	class Meta:
+		db_table = "Matriculas"
 		unique_together = ("id_centro", "id_titulacion", "id_asignatura", "curso_academico", "dni_pasaporte")
 
 	def __unicode__(self):
@@ -175,6 +198,7 @@ class CalificacionConvocatoria(models.Model):
 	comentario = models.CharField(max_length=100)
 
 	class Meta:
+		db_table = "CalificacionesConvocatoria"
 		unique_together = ("id_centro", "id_titulacion", "id_asignatura", "curso_academico", "dni_pasaporte", "convocatoria")
 
 	def __unicode__(self):
@@ -184,6 +208,9 @@ class PlantillaEntrevistaOficial(models.Model):
 	id_entrevista_oficial = models.AutoField(primary_key=True)
 	descripcion = models.CharField(max_length=100)
 	ultima_modificacion = models.DateField()
+
+	class Meta:
+		db_table = "PlantillasEntrevistaOficial"
 
 	def __unicode__(self):
 		return self.descripcion
@@ -195,6 +222,7 @@ class PreguntaOficial(models.Model):
 	ultima_modificacion = models.DateField()
 
 	class Meta:
+		db_table = "PreguntasOficiales"
 		unique_together = ("id_entrevista_oficial", "id_pregunta_oficial")
 
 	def __unicode__(self):
@@ -213,10 +241,11 @@ class Reunion(models.Model):
 	tipo = models.CharField(max_length=3, choices=TIPOS_REUNION)
 	comentario_asesor = models.CharField(max_length=100)
 	comentario_alumno = models.CharField(max_length=100)
-	preguntasasesores = models.ManyToManyField('PreguntaAsesor')
-	preguntasoficiales = models.ManyToManyField('PreguntaOficial')
+	preguntasasesores = models.ManyToManyField('PreguntaAsesor', db_table='Reunion_PreguntasAsesores')
+	preguntasoficiales = models.ManyToManyField('PreguntaOficial', db_table='Reunion_PreguntasOficiales')
 
 	class Meta:
+		db_table = "Reuniones"
 		unique_together = ("dni_pasaporte", "curso_academico", "id_reunion")
 
 	def __unicode__(self):
