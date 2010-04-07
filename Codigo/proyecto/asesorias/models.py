@@ -23,8 +23,9 @@ class AdministradorCentro(models.Model):
 		return self.nombre_adm_centro
 
 class Titulacion(models.Model):
+	codigo_titulacion = models.AutoField(primary_key=True)
 	id_centro = models.ForeignKey('Centro', db_column='id_centro')
-	id_titulacion = models.AutoField(primary_key=True)
+	id_titulacion = models.IntegerField()
 	nombre_titulacion = models.CharField(max_length=100)
 	plan_estudios = models.IntegerField()
 
@@ -33,7 +34,7 @@ class Titulacion(models.Model):
 		unique_together = (("id_centro", "id_titulacion"), ("nombre_titulacion", "plan_estudios"))
 
 	def __unicode__(self):
-		return self.nombre_titulacion
+		return self.codigo_titulacion
 
 class Asignatura(models.Model):
 	TIPOS_ASIGNATURAS = (
@@ -43,9 +44,10 @@ class Asignatura(models.Model):
 		('LCN', 'Libre configuracion'),
 	)
 
-	id_centro = models.ForeignKey('Centro', db_column='id_centro')
-	id_titulacion = models.ForeignKey('Titulacion', db_column='id_titulacion')
-	id_asignatura = models.AutoField(primary_key=True)
+	codigo_asignatura = models.AutoField(primary_key=True)
+	id_centro = models.IntegerField()
+	id_titulacion = models.IntegerField()
+	id_asignatura = models.IntegerField()
 	nombre_asignatura = models.CharField(max_length=50)
 	curso = models.IntegerField()
 	tipo = models.CharField(max_length=3, choices=TIPOS_ASIGNATURAS)
@@ -57,12 +59,13 @@ class Asignatura(models.Model):
 		unique_together = ("id_centro", "id_titulacion", "id_asignatura")
 
 	def __unicode__(self):
-		return self.nombre_asignatura
+		return self.codigo_asignatura
 
 class AsignaturaCursoAcademico(models.Model):
-	id_centro = models.ForeignKey('Centro', db_column='id_centro')
-	id_titulacion = models.ForeignKey('Titulacion', db_column='id_titulacion')
-	id_asignatura = models.ForeignKey('Asignatura', db_column='id_asignatura')
+	codigo_asignaturaCursoAcademico = models.AutoField(primary_key=True)
+	id_centro = models.IntegerField()
+	id_titulacion = models.IntegerField()
+	id_asignatura = models.IntegerField()
 	curso_academico = models.IntegerField()
 
 	class Meta:
@@ -70,7 +73,7 @@ class AsignaturaCursoAcademico(models.Model):
 		unique_together = ("id_centro", "id_titulacion", "id_asignatura", "curso_academico")
 
 	def __unicode__(self):
-		return self.curso_academico
+		return self.codigo_asignaturaCursoAcademico
 
 class Departamento(models.Model):
 	id_departamento = models.AutoField(primary_key=True)
@@ -97,6 +100,7 @@ class Asesor(models.Model):
 		return self.correo_electronico
 
 class AsesorCursoAcademico(models.Model):
+	codigo_asesorCursoAcademico = models.AutoField(primary_key=True)
 	dni_pasaporte = models.ForeignKey('Asesor', db_column='dni_pasaporte')
 	curso_academico = models.IntegerField()
 	observaciones = models.CharField(max_length=100)
@@ -107,12 +111,13 @@ class AsesorCursoAcademico(models.Model):
 		unique_together = ("dni_pasaporte", "curso_academico")
 
 	def __unicode__(self):
-		return self.dni_pasaporte
+		return self.codigo_asesorCursoAcademico
 
 class PlantillaEntrevistaAsesor(models.Model):
-	dni_pasaporte = models.ForeignKey('Asesor', db_column='dni_pasaporte')
+	codigo_plantillaEntrevistaAsesor = models.AutoField(primary_key=True)
+	dni_pasaporte = models.CharField(max_length=9)
 	curso_academico = models.IntegerField()
-	id_entrevista_asesor = models.AutoField(primary_key=True)
+	id_entrevista_asesor = models.IntegerField()
 	descripcion = models.CharField(max_length=100)
 	ultima_modificacion = models.DateField()
 
@@ -121,13 +126,14 @@ class PlantillaEntrevistaAsesor(models.Model):
 		unique_together = ("dni_pasaporte", "curso_academico", "id_entrevista_asesor")
 
 	def __unicode__(self):
-		return self.id_entrevista_asesor
+		return self.codigo_plantillaEntrevistaAsesor
 
 class PreguntaAsesor(models.Model):
-	dni_pasaporte = models.ForeignKey('Asesor', db_column='dni_pasaporte')
+	codigo_preguntaAsesor = models.AutoField(primary_key=True)
+	dni_pasaporte = models.CharField(max_length=9)
 	curso_academico = models.IntegerField()
-	id_entrevista_asesor = models.ForeignKey('PlantillaEntrevistaAsesor', db_column='id_entrevista_asesor')
-	id_pregunta_asesor = models.AutoField(primary_key=True)
+	id_entrevista_asesor = models.IntegerField()
+	id_pregunta_asesor = models.IntegerField()
 	enunciado = models.CharField(max_length=150)
 	ultima_modificacion = models.DateField()
 
@@ -136,7 +142,7 @@ class PreguntaAsesor(models.Model):
 		unique_together = ("dni_pasaporte", "curso_academico", "id_entrevista_asesor", "id_pregunta_asesor")
 
 	def __unicode__(self):
-		return self.id_pregunta_asesor
+		return self.codigo_preguntaAsesor
 
 class Alumno(models.Model):
 	dni_pasaporte = models.CharField(primary_key=True, max_length=9)
@@ -161,7 +167,8 @@ class Alumno(models.Model):
 		return self.dni_pasaporte
 
 class AlumnoCursoAcademico(models.Model):
-	dni_pasaporte = models.ForeignKey('Alumno', db_column='dni_pasaporte')
+	codigo_alumnoCursoAcademico = models.AutoField(primary_key=True)
+	dni_pasaporte = models.CharField(max_length=9)
 	curso_academico = models.IntegerField()
 	observaciones = models.CharField(max_length=100)
 
@@ -170,14 +177,15 @@ class AlumnoCursoAcademico(models.Model):
 		unique_together = ("dni_pasaporte", "curso_academico")
 
 	def __unicode__(self):
-		return self.curso_academico
+		return self.codigo_alumnoCursoAcademico
 
 class Matricula(models.Model):
-	id_centro = models.ForeignKey('Centro', db_column='id_centro')
-	id_titulacion = models.ForeignKey('Titulacion', db_column='id_titulacion')
-	id_asignatura = models.ForeignKey('Asignatura', db_column='id_asignatura')
+	codigo_matricula = models.AutoField(primary_key=True)
+	id_centro = models.IntegerField()
+	id_titulacion = models.IntegerField()
+	id_asignatura = models.IntegerField()
 	curso_academico = models.IntegerField()
-	dni_pasaporte = models.ForeignKey('Alumno', db_column='dni_pasaporte')
+	dni_pasaporte = models.CharField(max_length=9)
 	comentario = models.CharField(max_length=100)
 
 	class Meta:
@@ -185,14 +193,15 @@ class Matricula(models.Model):
 		unique_together = ("id_centro", "id_titulacion", "id_asignatura", "curso_academico", "dni_pasaporte")
 
 	def __unicode__(self):
-		return self.dni_pasaporte
+		return self.codigo_matricula
 
 class CalificacionConvocatoria(models.Model):
-	id_centro = models.ForeignKey('Centro', db_column='id_centro')
-	id_titulacion = models.ForeignKey('Titulacion', db_column='id_titulacion')
-	id_asignatura = models.ForeignKey('Asignatura', db_column='id_asignatura')
+	codigo_calificacionConvocatoria = models.AutoField(primary_key=True)
+	id_centro = models.IntegerField()
+	id_titulacion = models.IntegerField()
+	id_asignatura = models.IntegerField()
 	curso_academico = models.IntegerField()
-	dni_pasaporte = models.ForeignKey('Alumno', db_column='dni_pasaporte')
+	dni_pasaporte = models.CharField(max_length=9)
 	convocatoria = models.CharField(max_length=15)
 	nota = models.FloatField()
 	comentario = models.CharField(max_length=100)
@@ -202,7 +211,7 @@ class CalificacionConvocatoria(models.Model):
 		unique_together = ("id_centro", "id_titulacion", "id_asignatura", "curso_academico", "dni_pasaporte", "convocatoria")
 
 	def __unicode__(self):
-		return self.convocatoria
+		return self.codigo_calificacionConvocatoria
 
 class PlantillaEntrevistaOficial(models.Model):
 	id_entrevista_oficial = models.AutoField(primary_key=True)
@@ -216,8 +225,9 @@ class PlantillaEntrevistaOficial(models.Model):
 		return self.descripcion
 
 class PreguntaOficial(models.Model):
+	codigo_pregunta_oficial = models.AutoField(primary_key=True)
 	id_entrevista_oficial = models.ForeignKey('PlantillaEntrevistaOficial', db_column='id_entrevista_oficial')
-	id_pregunta_oficial = models.AutoField(primary_key=True)
+	id_pregunta_oficial = models.IntegerField()
 	enunciado = models.CharField(max_length=150)
 	ultima_modificacion = models.DateField()
 
@@ -226,7 +236,7 @@ class PreguntaOficial(models.Model):
 		unique_together = ("id_entrevista_oficial", "id_pregunta_oficial")
 
 	def __unicode__(self):
-		return self.enunciado
+		return self.codigo_pregunta_oficial
 
 class Reunion(models.Model):
 	TIPOS_REUNION = (
@@ -234,9 +244,10 @@ class Reunion(models.Model):
 		('IND', 'Individual'),
 	)
 
-	dni_pasaporte = models.ForeignKey('Alumno', db_column='dni_pasaporte')
+	codigo_reunion = models.AutoField(primary_key=True)
+	dni_pasaporte = models.CharField(max_length=9)
 	curso_academico = models.IntegerField()
-	id_reunion = models.AutoField(primary_key=True)
+	id_reunion = models.IntegerField()
 	fecha = models.DateField()
 	tipo = models.CharField(max_length=3, choices=TIPOS_REUNION)
 	comentario_asesor = models.CharField(max_length=100)
@@ -249,5 +260,5 @@ class Reunion(models.Model):
 		unique_together = ("dni_pasaporte", "curso_academico", "id_reunion")
 
 	def __unicode__(self):
-		return self.id_reunion
+		return self.codigo_reunion
 
