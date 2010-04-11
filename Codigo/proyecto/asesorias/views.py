@@ -1,10 +1,10 @@
 # Create your views here.
 from django.shortcuts import render_to_response
-from asesorias.forms import LoginForm
+from django.contrib.auth.forms import AuthenticationForm
 
 def login(request):
 	if request.method == 'POST':
-		form = LoginForm(request.POST)
+		form = AuthenticationForm(request.POST)
 	else:
-		form = LoginForm()
+		form = AuthenticationForm()
 	return render_to_response('asesorias/login.html', {'form': form})
