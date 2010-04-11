@@ -2,7 +2,7 @@
 from django.shortcuts import render_to_response
 from asesorias.forms import LoginForm
 
-def index(request):
+def login(request):
 	if request.method == 'POST':
 		form = LoginForm(request.POST)
 	else:
