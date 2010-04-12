@@ -34,8 +34,11 @@ def authentication(request):
 
 @login_required()
 def alumnos(request, username):
-	msg = []
 	from proyecto.asesorias.models import Alumno
-	alumno = Alumno.objects.get(pk=username)
-	msg.append(alumno.correo_electronico)
-	return render_to_response('asesorias/alumnos.html', {'alumno': alumno, 'msg': msg})
+	try:
+		alumno = Alumno.objects.get(pk=username)
+		return render_to_response('asesorias/alumnos.html', {'alumno': alumno})
+	except:
+		error = True
+		return render_to_response('asesorias/alumnos.html', {'error': error})
+

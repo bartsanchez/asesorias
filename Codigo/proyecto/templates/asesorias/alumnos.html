@@ -1,5 +1,11 @@
 <h1>Alumnos.</h1>
 
+{% if error %}
+
+<p>El usuario no pertenece al alumnado.</p>
+
+{% else %}
+
 <ul>
 	<li>dni_pasaporte: {{ alumno.dni_pasaporte }}</li>
 	<li>correo electrónico: {{ alumno.correo_electronico }}</li>
@@ -15,3 +21,6 @@
 	<li>otros estudios universitarios: {{ alumno.otros_estudios_universitarios }}</li>
 	<li>modalidad acceso universidad: {{ alumno.modalidad_acceso_universidad }}</li>
 	<li>calificacion acceso: {{ alumno.calificacion_acceso }}</li>
+</ul>
+
+{% endif %}
