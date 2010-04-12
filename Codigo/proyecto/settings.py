@@ -80,3 +80,5 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'proyecto.asesorias'
 )
+
+LOGIN_URL = ('/asesorias/')
