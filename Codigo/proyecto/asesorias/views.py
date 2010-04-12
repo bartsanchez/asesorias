@@ -38,4 +38,4 @@ def alumnos(request, username):
 	from proyecto.asesorias.models import Alumno
 	alumno = Alumno.objects.get(pk=username)
 	msg.append(alumno.correo_electronico)
-	return render_to_response('asesorias/alumnos.html', {'msg': msg})
+	return render_to_response('asesorias/alumnos.html', {'alumno': alumno, 'msg': msg})
