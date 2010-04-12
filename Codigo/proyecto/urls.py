@@ -15,4 +15,5 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
 	(r'^asesorias/$', 'proyecto.asesorias.views.authentication'),
+	(r'^asesorias/alumnos/$', 'proyecto.asesorias.views.alumnos'),
 )

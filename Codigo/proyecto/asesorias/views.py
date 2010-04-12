@@ -1,7 +1,9 @@
 # Create your views here.
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias.forms import LoginForm
-from django.contrib.auth import authenticate, login
+
 
 def authentication(request):
 	msg = []
@@ -15,7 +17,8 @@ def authentication(request):
 				if user.is_active:
 					login(request, user)
 					msg.append('exito')
-				# Redirect to a success page.
+					return HttpResponseRedirect('alumnos/')
+					# Redirect to a success page.
 				else:
 					msg.append('Cuenta desactivada.')
 				# Return a 'disabled account' error message
@@ -27,3 +30,9 @@ def authentication(request):
 	else:
 		form = LoginForm()
 	return render_to_response('asesorias/autentificacion.html', {'form': form, 'error': msg})
+
+def alumnos(request):
+	#from proyecto.asesorias.models import Alumno
+	#alumno = Alumno(dni_pasaporte='123456789')
+	msg = 'hola'
+	return render_to_response('asesorias/alumnos.html', {'msg': msg})
