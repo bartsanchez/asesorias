@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias.forms import LoginForm
+from proyecto.asesorias.models import AdministradorCentro, Asesor, Alumno
 
 
 def authentication(request):
@@ -19,7 +20,9 @@ def authentication(request):
 				if user.is_active:
 					login(request, user)
 					# Redirige a la pagina de alumnos.
-					return HttpResponseRedirect(reverse('proyecto.asesorias.views.alumnos', args=(username,)))
+					rol = obtenerRol(username)
+					if rol == 'alumno':
+						return HttpResponseRedirect(reverse('proyecto.asesorias.views.alumnos', args=(username,)))
 				else:
 					msg.append('Cuenta desactivada.')
 				# Return a 'disabled account' error message
@@ -32,9 +35,44 @@ def authentication(request):
 		form = LoginForm()
 	return render_to_response('asesorias/autentificacion.html', {'form': form, 'error': msg})
 
+
+def obtenerRol(username):
+	def esAdministradorCentro():
+		try:
+			AdministradorCentro.objects.get(pk=username)
+			resultado = True
+		except:
+			resultado = False
+		return resultado
+
+	def esAsesor():
+		try:
+			Asesor.objects.get(pk=username)
+			resultado = True
+		except:
+			resultado = False
+		return resultado
+
+	def esAlumno():
+		try:
+			a = Alumno.objects.get(pk=username)
+			resultado = True
+		except:
+			resultado = False
+		return resultado
+
+	if esAdministradorCentro():
+		rol = 'administradorCentro'
+	elif esAsesor():
+		rol = 'asesor'
+	elif esAlumno():
+		rol = 'alumno'
+	else:
+		rol = 'inactivo'
+	return rol
+
 @login_required()
 def alumnos(request, username):
-	from proyecto.asesorias.models import Alumno
 	try:
 		alumno = Alumno.objects.get(pk=username)
 		return render_to_response('asesorias/alumnos.html', {'alumno': alumno})
