@@ -7,8 +7,6 @@ from asesorias.forms import LoginForm
 from proyecto.asesorias.models import AdministradorCentro, Asesor, Alumno
 
 def authentication(request):
-	# Mensaje para visualizar errores.
-	msg = []
 	# Se ha rellenado el formulario.
 	if request.method == 'POST':
 		# Se obtienen los valores y se valida.
@@ -27,15 +25,15 @@ def authentication(request):
 					if rol == 'alumno':
 						return HttpResponseRedirect(reverse('proyecto.asesorias.views.alumnos', args=(username,)))
 				else:
-					msg.append('Cuenta desactivada.')
+					error = 'Cuenta desactivada.'
 			else:
-				msg.append('Login no valido.')
+				error = 'Login no valido.'
 		else:
-			msg.append('Formulario erroneo')
+			error = 'Formulario erroneo.'
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = LoginForm()
-	return render_to_response('asesorias/autentificacion.html', {'form': form, 'error': msg})
+	return render_to_response('asesorias/autentificacion.html', {'form': form, 'error': error})
 
 def obtenerRol(username):
 	if esAdministradorCentro(username):
