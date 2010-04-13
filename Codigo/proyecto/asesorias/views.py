@@ -3,14 +3,14 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
-from asesorias.forms import LoginForm
-from proyecto.asesorias.models import AdministradorCentro, Asesor, Alumno
+from asesorias import forms
+from asesorias.models import AdministradorCentro, Asesor, Alumno
 
 def authentication(request):
 	# Se ha rellenado el formulario.
 	if request.method == 'POST':
 		# Se obtienen los valores y se valida.
-		form = LoginForm(request.POST)
+		form = forms.LoginForm(request.POST)
 		if form.is_valid():
 			# Se autentifica el usuario.
 			username = request.POST['username']
@@ -32,7 +32,8 @@ def authentication(request):
 			error = 'Formulario erroneo.'
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
-		form = LoginForm()
+		form = forms.LoginForm()
+		error = ''
 	return render_to_response('asesorias/autentificacion.html', {'form': form, 'error': error})
 
 def obtenerRol(username):
@@ -82,3 +83,7 @@ def alumnos(request, username):
 		error = True
 		return render_to_response('asesorias/alumnos.html', {'error': error})
 
+def addCentro(request):
+	form = forms.addCentroForm()
+	error = 'sin errores'
+	return render_to_response('asesorias/addCentro.html', {'form': form, 'error': error})
