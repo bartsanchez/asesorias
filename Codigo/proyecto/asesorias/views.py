@@ -25,6 +25,8 @@ def authentication(request):
 					# Si es alumno se redirige a la pagina de alumnos.
 					if rol == 'alumno':
 						return HttpResponseRedirect(reverse('proyecto.asesorias.views.alumnos', args=(username,)))
+					else:
+						error = 'El usuario no tiene rol.'
 				else:
 					error = 'Cuenta desactivada.'
 			else:
@@ -38,7 +40,7 @@ def authentication(request):
 	return render_to_response('asesorias/autentificacion.html', {'form': form, 'error': error})
 
 def obtenerRol(username):
-	if vistasAdministradorCentro.existeAdministradorCentro(username):
+	if vistasAdministradorCentro.obtenerAdministradorCentro(username):
 		rol = 'administradorCentro'
 	elif esAsesor(username):
 		rol = 'asesor'
@@ -74,10 +76,3 @@ def alumnos(request, username):
 	else:
 		error = True
 		return render_to_response('asesorias/alumnos.html', {'error': error})
-
-#def delCentro(request, centro):
-	## Comprobamos que exista el centro.
-	#try:
-		#c = models.Centro.objects.get(nombre_centro=centro)
-		## Obtiene los datos del centro.
-		#form = forms.CentroForm(instance=c)

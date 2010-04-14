@@ -2,11 +2,11 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
 
-# Comprueba si existe un administrador de centro.
-def existeAdministradorCentro(admin_centro):
+# Comprueba si existe un administrador de centro y, de ser asi, lo devuelve.
+def obtenerAdministradorCentro(administrador_centro):
 	try:
-		models.AdministradorCentro.objects.get(pk=admin_centro)
-		resultado = True
+		# Obtiene el administrador centro cuyo id es administrador_centro.
+		resultado = models.AdministradorCentro.objects.get(nombre_adm_centro=administrador_centro)
 	except:
 		resultado = False
 	return resultado
@@ -28,3 +28,15 @@ def addAdministradorCentro(request):
 		form = forms.AdministradorCentroForm()
 		error = False
 	return render_to_response('asesorias/AdministradorCentro/addAdministradorCentro.html', {'form': form, 'error': error})
+
+def delAdministradorCentro(request, administrador_centro):
+	# Se obtiene la instancia del administrador de centro.
+	instancia_admin_centro = obtenerAdministradorCentro(administrador_centro)
+	# Si existe se elimina.
+	if instancia_admin_centro:
+		instancia_admin_centro.delete()
+		error = False
+	# El administrador de centro no existe.
+	else:
+		error = 'No se ha podido eliminar el administrador de centro.'
+	return render_to_response('asesorias/AdministradorCentro/delAdministradorCentro.html', {'error': error})
