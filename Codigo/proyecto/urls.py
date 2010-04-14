@@ -17,4 +17,5 @@ urlpatterns = patterns('',
 	(r'^asesorias/$', 'proyecto.asesorias.views.authentication'),
 	(r'^asesorias/alumnos/(?P<username>\w+)/$', 'proyecto.asesorias.views.alumnos'),
 	(r'^asesorias/centro/add/$', 'proyecto.asesorias.views.addCentro'),
+	(r'^asesorias/centro/(?P<centro>\w+)/edit/$', 'proyecto.asesorias.views.editCentro'),
 )

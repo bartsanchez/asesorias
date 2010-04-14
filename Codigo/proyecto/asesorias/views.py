@@ -3,8 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
-from asesorias import forms
-from asesorias.models import AdministradorCentro, Asesor, Alumno
+from asesorias import forms, models
 
 def authentication(request):
 	# Se ha rellenado el formulario.
@@ -51,7 +50,7 @@ def obtenerRol(username):
 # Comprueba si el usuario es Administrador de centro.
 def esAdministradorCentro(username):
 	try:
-		AdministradorCentro.objects.get(pk=username)
+		models.AdministradorCentro.objects.get(pk=username)
 		resultado = True
 	except:
 		resultado = False
@@ -60,7 +59,7 @@ def esAdministradorCentro(username):
 # Comprueba si el usuario es Asesor.
 def esAsesor(username):
 	try:
-		Asesor.objects.get(pk=username)
+		models.Asesor.objects.get(pk=username)
 		resultado = True
 	except:
 		resultado = False
@@ -69,7 +68,7 @@ def esAsesor(username):
 # Comprueba si el usuario es Alumno.
 def esAlumno(username):
 	try:
-		Alumno.objects.get(pk=username)
+		models.Alumno.objects.get(pk=username)
 		resultado = True
 	except:
 		resultado = False
@@ -78,7 +77,7 @@ def esAlumno(username):
 @login_required()
 def alumnos(request, username):
 	if esAlumno(username):
-		alumno = Alumno.objects.get(pk=username)
+		alumno = models.Alumno.objects.get(pk=username)
 		return render_to_response('asesorias/alumnos.html', {'alumno': alumno})
 	else:
 		error = True
@@ -88,22 +87,28 @@ def addCentro(request):
 	# Se ha rellenado el formulario.
 	if request.method == 'POST':
 		# Se obtienen los valores y se valida.
-		form = forms.addCentroForm(request.POST)
+		form = forms.CentroForm(request.POST)
 		if form.is_valid():
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
 			# Se redirige
 			return HttpResponseRedirect('/asesorias')
+		else:
+			error = 'Formulario invalido'
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
-		form = forms.addCentroForm()
+		form = forms.CentroForm()
 		error = 'sin errores'
 	return render_to_response('asesorias/addCentro.html', {'form': form, 'error': error})
 
-#def editCentro(request, centro):
-	#try:
-		#forms.editCentroForm(instance=centro)
-		#error = False
-	#except:
-		#error = True
-	#return return render_to_response('asesorias/editCentro.html', {'error': error})
+def editCentro(request, centro):
+	# Comprobamos que exista el centro
+	try:
+		c = models.Centro.objects.get(nombre_centro=centro)
+		form = forms.CentroForm(instance=c)
+		error = False
+		return render_to_response('asesorias/editCentro.html', {'form': form, 'error': error})
+	# El centro no existe
+	except:
+		error = True
+	return render_to_response('asesorias/editCentro.html', {'error': error})
