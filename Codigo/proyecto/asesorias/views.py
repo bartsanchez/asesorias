@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import forms, models
-from asesorias.vistas import vistasCentro
+from asesorias.vistas import vistasCentro, vistasAdministradorCentro
 
 def authentication(request):
 	# Se ha rellenado el formulario.
@@ -38,7 +38,7 @@ def authentication(request):
 	return render_to_response('asesorias/autentificacion.html', {'form': form, 'error': error})
 
 def obtenerRol(username):
-	if esAdministradorCentro(username):
+	if vistasAdministradorCentro.existeAdministradorCentro(username):
 		rol = 'administradorCentro'
 	elif esAsesor(username):
 		rol = 'asesor'
@@ -47,15 +47,6 @@ def obtenerRol(username):
 	else:
 		rol = 'inactivo'
 	return rol
-
-# Comprueba si el usuario es Administrador de centro.
-def esAdministradorCentro(username):
-	try:
-		models.AdministradorCentro.objects.get(pk=username)
-		resultado = True
-	except:
-		resultado = False
-	return resultado
 
 # Comprueba si el usuario es Asesor.
 def esAsesor(username):
