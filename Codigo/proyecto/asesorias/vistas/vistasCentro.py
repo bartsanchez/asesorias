@@ -35,15 +35,27 @@ def addCentro(request):
 	else:
 		form = forms.CentroForm()
 		error = 'sin errores'
-	return render_to_response('asesorias/addCentro.html', {'form': form, 'error': error})
+	return render_to_response('asesorias/Centro/addCentro.html', {'form': form, 'error': error})
 
 def editCentro(request, centro):
 	instancia_centro = obtenerCentro(centro)
 	if instancia_centro:
 		form = forms.CentroForm(instance=instancia_centro)
 		error = False
-		return render_to_response('asesorias/editCentro.html', {'form': form, 'error': error})
+		return render_to_response('asesorias/Centro/editCentro.html', {'form': form, 'error': error})
 	# El centro no existe
 	else:
 		error = True
-	return render_to_response('asesorias/editCentro.html', {'error': error})
+	return render_to_response('asesorias/Centro/editCentro.html', {'error': error})
+
+def delCentro(request, centro):
+	# Se obtiene la instancia del centro.
+	instancia_centro = obtenerCentro(centro)
+	# Si existe se elimina.
+	if instancia_centro:
+		instancia_centro.delete()
+		error = False
+	# El centro no existe.
+	else:
+		error = True
+	return render_to_response('asesorias/Centro/delCentro.html', {'error': error})
