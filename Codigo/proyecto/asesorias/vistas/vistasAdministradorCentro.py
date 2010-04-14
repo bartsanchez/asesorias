@@ -5,7 +5,7 @@ from asesorias import models, forms
 # Comprueba si existe un administrador de centro y, de ser asi, lo devuelve.
 def obtenerAdministradorCentro(administrador_centro):
 	try:
-		# Obtiene el administrador centro cuyo id es administrador_centro.
+		# Obtiene el administrador centro cuyo nombre es administrador_centro.
 		resultado = models.AdministradorCentro.objects.get(nombre_adm_centro=administrador_centro)
 	except:
 		resultado = False

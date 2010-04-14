@@ -2,20 +2,12 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
 
-# Comprueba si existe un centro.
-def existeCentro(centro):
-	try:
-		models.Centro.objects.get(nombre_centro=centro)
-		resultado = True
-	except:
-		resultado = False
-	return resultado
-
+# Comprueba si existe un centro y, de ser asi, lo devuelve.
 def obtenerCentro(centro):
-	if existeCentro(centro):
-		# Obtiene el centro cuyo nombre de centro es nombre_centro.
+	try:
+		# Obtiene el centro cuyo nombre es centro.
 		resultado = models.Centro.objects.get(nombre_centro=centro)
-	else:
+	except:
 		resultado = False
 	return resultado
 
