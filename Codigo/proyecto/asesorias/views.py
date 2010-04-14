@@ -102,9 +102,10 @@ def addCentro(request):
 	return render_to_response('asesorias/addCentro.html', {'form': form, 'error': error})
 
 def editCentro(request, centro):
-	# Comprobamos que exista el centro
+	# Comprobamos que exista el centro.
 	try:
 		c = models.Centro.objects.get(nombre_centro=centro)
+		# Obtiene los datos del centro.
 		form = forms.CentroForm(instance=c)
 		error = False
 		return render_to_response('asesorias/editCentro.html', {'form': form, 'error': error})
