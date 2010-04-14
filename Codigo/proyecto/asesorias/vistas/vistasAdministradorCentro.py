@@ -29,6 +29,31 @@ def addAdministradorCentro(request):
 		error = False
 	return render_to_response('asesorias/AdministradorCentro/addAdministradorCentro.html', {'form': form, 'error': error})
 
+def editAdministradorCentro(request, administrador_centro):
+	# Se obtiene la instancia del administrador de centro.
+	instancia_admin_centro = obtenerAdministradorCentro(administrador_centro)
+	# Si existe se edita.
+	if instancia_admin_centro:
+		# Se carga el formulario para el administrador de centro centro existente.
+		form = forms.AdministradorCentroForm(instance=instancia_admin_centro)
+		error = False
+		# Se ha modificado el formulario original.
+		if request.method == 'POST':
+			# Se actualiza el formulario con la nueva informacion.
+			form = forms.AdministradorCentroForm(request.POST, instance=instancia_admin_centro)
+			# Si es valido se guarda.
+			if form.is_valid():
+				form.save()
+				# Redirige a la pagina de inicio.
+				return HttpResponseRedirect('/asesorias/')
+			else:
+				error = 'Formulario invalido'
+		return render_to_response('asesorias/AdministradorCentro/editAdministradorCentro.html', {'form': form, 'error': error})
+	# El administrador de centro no existe
+	else:
+		error = 'No existe tal administrador de centro'
+	return render_to_response('asesorias/AdministradorCentro/editAdministradorCentro.html', {'error': error})
+
 def delAdministradorCentro(request, administrador_centro):
 	# Se obtiene la instancia del administrador de centro.
 	instancia_admin_centro = obtenerAdministradorCentro(administrador_centro)
