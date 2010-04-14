@@ -38,10 +38,24 @@ def addCentro(request):
 	return render_to_response('asesorias/Centro/addCentro.html', {'form': form, 'error': error})
 
 def editCentro(request, centro):
+	# Se obtiene la instancia del centro.
 	instancia_centro = obtenerCentro(centro)
+	# Si existe se edita.
 	if instancia_centro:
+		# Se carga el formulario para el centro existente.
 		form = forms.CentroForm(instance=instancia_centro)
 		error = False
+		# Se ha modificado el formulario original.
+		if request.method == 'POST':
+			# Se actualiza el formulario con la nueva informacion.
+			form = forms.CentroForm(request.POST, instance=instancia_centro)
+			# Si es valido se guarda.
+			if form.is_valid():
+				form.save()
+				# Redirige a la pagina de inicio.
+				return HttpResponseRedirect('/asesorias/')
+			else:
+				error = 'Formulario invalido'
 		return render_to_response('asesorias/Centro/editCentro.html', {'form': form, 'error': error})
 	# El centro no existe
 	else:
