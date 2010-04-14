@@ -27,14 +27,14 @@ def addCentro(request):
 		if form.is_valid():
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
-			# Se redirige
-			return HttpResponseRedirect('/asesorias')
+			# Redirige a la pagina de inicio.
+			return HttpResponseRedirect('/asesorias/')
 		else:
-			error = 'Formulario invalido'
+			error = 'Formulario invalido.'
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.CentroForm()
-		error = 'sin errores'
+		error = False
 	return render_to_response('asesorias/Centro/addCentro.html', {'form': form, 'error': error})
 
 def editCentro(request, centro):
@@ -57,5 +57,5 @@ def delCentro(request, centro):
 		error = False
 	# El centro no existe.
 	else:
-		error = True
+		error = 'No se ha podido eliminar el centro.'
 	return render_to_response('asesorias/Centro/delCentro.html', {'error': error})
