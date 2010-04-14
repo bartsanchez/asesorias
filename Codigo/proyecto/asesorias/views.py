@@ -101,15 +101,37 @@ def addCentro(request):
 		error = 'sin errores'
 	return render_to_response('asesorias/addCentro.html', {'form': form, 'error': error})
 
-def editCentro(request, centro):
-	# Comprobamos que exista el centro.
+# Comprueba si existe un centro.
+def existeCentro(centro):
 	try:
-		c = models.Centro.objects.get(nombre_centro=centro)
-		# Obtiene los datos del centro.
-		form = forms.CentroForm(instance=c)
+		models.Centro.objects.get(nombre_centro=centro)
+		resultado = True
+	except:
+		resultado = False
+	return resultado
+
+def obtenerCentro(centro):
+	if existeCentro(centro):
+		# Obtiene el centro cuyo nombre de centro es nombre_centro.
+		resultado = models.Centro.objects.get(nombre_centro=centro)
+	else:
+		resultado = False
+	return resultado
+
+def editCentro(request, centro):
+	instancia_centro = obtenerCentro(centro)
+	if instancia_centro:
+		form = forms.CentroForm(instance=instancia_centro)
 		error = False
 		return render_to_response('asesorias/editCentro.html', {'form': form, 'error': error})
 	# El centro no existe
-	except:
+	else:
 		error = True
 	return render_to_response('asesorias/editCentro.html', {'error': error})
+
+#def delCentro(request, centro):
+	## Comprobamos que exista el centro.
+	#try:
+		#c = models.Centro.objects.get(nombre_centro=centro)
+		## Obtiene los datos del centro.
+		#form = forms.CentroForm(instance=c)
