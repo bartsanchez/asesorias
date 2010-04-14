@@ -22,6 +22,7 @@ def authentication(request):
 					login(request, user)
 					# Obtiene el rol del usuario (Administrador centro, asesor o alumno).
 					rol = obtenerRol(username)
+					# Si es alumno se redirige a la pagina de alumnos.
 					if rol == 'alumno':
 						return HttpResponseRedirect(reverse('proyecto.asesorias.views.alumnos', args=(username,)))
 				else:
@@ -84,6 +85,25 @@ def alumnos(request, username):
 		return render_to_response('asesorias/alumnos.html', {'error': error})
 
 def addCentro(request):
-	form = forms.addCentroForm()
-	error = 'sin errores'
+	# Se ha rellenado el formulario.
+	if request.method == 'POST':
+		# Se obtienen los valores y se valida.
+		form = forms.addCentroForm(request.POST)
+		if form.is_valid():
+			# Se guarda la informacion del formulario en el sistema.
+			form.save()
+			# Se redirige
+			return HttpResponseRedirect('/asesorias')
+	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
+	else:
+		form = forms.addCentroForm()
+		error = 'sin errores'
 	return render_to_response('asesorias/addCentro.html', {'form': form, 'error': error})
+
+#def editCentro(request, centro):
+	#try:
+		#forms.editCentroForm(instance=centro)
+		#error = False
+	#except:
+		#error = True
+	#return return render_to_response('asesorias/editCentro.html', {'error': error})
