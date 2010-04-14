@@ -19,4 +19,5 @@ urlpatterns = patterns('',
 	(r'^asesorias/centro/add/$', 'proyecto.asesorias.vistas.vistasCentro.addCentro'),
 	(r'^asesorias/centro/(?P<centro>\w+)/edit/$', 'proyecto.asesorias.vistas.vistasCentro.editCentro'),
 	(r'^asesorias/centro/(?P<centro>\w+)/del/$', 'proyecto.asesorias.vistas.vistasCentro.delCentro'),
+	(r'^asesorias/administradorCentro/add/$', 'proyecto.asesorias.vistas.vistasAdministradorCentro.addAdministradorCentro'),
 )

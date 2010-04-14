@@ -8,3 +8,7 @@ class LoginForm(forms.Form):
 class CentroForm(forms.ModelForm):
 	class Meta:
 		model = models.Centro
+
+class AdministradorCentroForm(forms.ModelForm):
+	class Meta:
+		model = models.AdministradorCentro
