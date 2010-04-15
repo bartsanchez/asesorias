@@ -4,7 +4,6 @@ from django.db import models
 class Centro(models.Model):
 	id_centro = models.AutoField(primary_key=True)
 	nombre_centro = models.CharField(max_length=25, unique=True)
-	administradorescentro = models.ManyToManyField('AdministradorCentro', db_table='Centro_AdministradoresCentro')
 
 	class Meta:
 		db_table = "Centros"
@@ -262,3 +261,14 @@ class Reunion(models.Model):
 	def __unicode__(self):
 		return self.codigo_reunion
 
+class CentroAdministradorCentro(models.Model):
+	codigo_centro_administradorCentro = models.AutoField(primary_key=True)
+	id_centro = models.ForeignKey('Centro', db_column='id_centro')
+	id_adm_centro = models.ForeignKey('AdministradorCentro', db_column='id_adm_centro')
+
+	class Meta:
+		db_table = "CentroAdministradorCentro"
+		unique_together = ("id_centro", "id_adm_centro")
+
+	def __unicode__(self):
+		return unicode(self.id_centro) + ": " + unicode(self.id_adm_centro)
