@@ -8,6 +8,9 @@ class Centro(models.Model):
 	class Meta:
 		db_table = "Centros"
 
+	def getId(self):
+		return self.id_centro
+
 	def __unicode__(self):
 		return self.nombre_centro
 
@@ -17,6 +20,9 @@ class AdministradorCentro(models.Model):
 
 	class Meta:
 		db_table = "AdministradoresCentro"
+
+	def getId(self):
+		return self.id_adm_centro
 
 	def __unicode__(self):
 		return self.nombre_adm_centro
@@ -31,6 +37,12 @@ class Titulacion(models.Model):
 	class Meta:
 		db_table = "Titulaciones"
 		unique_together = (("id_centro", "id_titulacion"), ("nombre_titulacion", "plan_estudios"))
+
+	def getId(self):
+		return self.codigo_titulacion
+
+	def getIdTitulacion(self):
+		return self.id_titulacion
 
 	def __unicode__(self):
 		return self.codigo_titulacion
