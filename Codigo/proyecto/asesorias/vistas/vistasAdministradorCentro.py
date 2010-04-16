@@ -51,7 +51,7 @@ def editAdministradorCentro(request, administrador_centro):
 		return render_to_response('asesorias/AdministradorCentro/editAdministradorCentro.html', {'form': form, 'error': error})
 	# El administrador de centro no existe
 	else:
-		error = 'No existe tal administrador de centro'
+		error = 'No existe tal administrador de centro.'
 	return render_to_response('asesorias/AdministradorCentro/editAdministradorCentro.html', {'error': error})
 
 def delAdministradorCentro(request, administrador_centro):

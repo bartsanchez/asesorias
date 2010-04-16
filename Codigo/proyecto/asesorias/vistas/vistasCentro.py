@@ -51,7 +51,7 @@ def editCentro(request, centro):
 		return render_to_response('asesorias/Centro/editCentro.html', {'form': form, 'error': error})
 	# El centro no existe
 	else:
-		error = True
+		error = 'No existe tal centro.'
 	return render_to_response('asesorias/Centro/editCentro.html', {'error': error})
 
 def delCentro(request, centro):
