@@ -12,3 +12,7 @@ class CentroForm(forms.ModelForm):
 class AdministradorCentroForm(forms.ModelForm):
 	class Meta:
 		model = models.AdministradorCentro
+
+class Centro_AdministradorCentroForm(forms.ModelForm):
+	class Meta:
+		model = models.CentroAdministradorCentro
