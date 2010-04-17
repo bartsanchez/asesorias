@@ -47,7 +47,6 @@ def obtenerListaDeIdsTitulacionesDeCentro(centro):
 	# En el caso de que no exista el centro se devuelve False.
 	else:
 		resultado = False
-
 	return resultado
 
 #def determinarSiguienteIdTitulacionEnCentro(centro):
