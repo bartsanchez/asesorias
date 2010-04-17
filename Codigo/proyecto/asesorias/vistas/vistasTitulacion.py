@@ -24,7 +24,7 @@ def obtenerTitulacionesDeCentro(centro):
 		resultado = False
 	return resultado
 
-# Obtiene una lista con los ids de las titulaciones de un determinado centro.
+# Obtiene una lista ordenada con los ids de las titulaciones de un determinado centro.
 def obtenerListaDeIdsTitulacionesDeCentro(centro):
 	# Se comprueba si existe el centro.
 	existe_centro = vistasCentro.obtenerCentro(centro)
@@ -40,6 +40,8 @@ def obtenerListaDeIdsTitulacionesDeCentro(centro):
 			# Por cada titulacion del centro se extrae su id y se inserta en la nueva lista.
 			for titulacion in lista_titulaciones_de_centro:
 				lista_ids_titulaciones.append(titulacion.id_titulacion)
+			# Ordena la lista con los ids de las titulaciones de menor a mayor.
+			lista_ids_titulaciones.sort()
 		# Resultado sera una lista de ids, o una lista vacia si el centro no tiene titulaciones
 		resultado = lista_ids_titulaciones
 	# En el caso de que no exista el centro se devuelve False.
@@ -47,6 +49,10 @@ def obtenerListaDeIdsTitulacionesDeCentro(centro):
 		resultado = False
 
 	return resultado
+
+#def determinarSiguienteIdTitulacionEnCentro(centro):
+	#while True:
+		#if
 
 def addTitulacion(request):
 	# Se ha rellenado el formulario.
