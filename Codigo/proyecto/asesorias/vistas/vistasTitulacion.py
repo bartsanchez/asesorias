@@ -46,7 +46,6 @@ def obtenerListaDeIdsTitulacionesDeCentro(centro):
 	else:
 		resultado = False
 
-
 	return resultado
 
 def addTitulacion(request):
