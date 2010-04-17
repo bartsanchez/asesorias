@@ -49,9 +49,19 @@ def obtenerListaDeIdsTitulacionesDeCentro(centro):
 		resultado = False
 	return resultado
 
-#def determinarSiguienteIdTitulacionEnCentro(centro):
-	#while True:
-		#if
+# Determina el primer id_titulacion disponible para un determinado centro.
+def determinarSiguienteIdTitulacionEnCentro(lista_ids_titulaciones):
+	# Inicializamos el contador a 1, que es el primer valor valido para un id.
+	contador = 1
+	# Recorre el bucle determinando si una posicion se encuentra o no.
+	while True:
+		# La posicion determinada por contador aparece en la lista, por lo tanto se encuentra la id_titulacion en el centro.
+		if lista_ids_titulaciones.count(contador) > 0:
+			contador += 1
+		# No existe tal id_titulacion en el centro.
+		else:
+			break
+	return contador
 
 def addTitulacion(request):
 	# Se ha rellenado el formulario.
