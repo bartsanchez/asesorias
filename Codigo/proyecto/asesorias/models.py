@@ -45,7 +45,7 @@ class Titulacion(models.Model):
 		return self.id_titulacion
 
 	def __unicode__(self):
-		return self.nombre_titulacion
+		return unicode(self.plan_estudios) + ": " + unicode(self.nombre_titulacion)
 
 class Asignatura(models.Model):
 	TIPOS_ASIGNATURAS = (

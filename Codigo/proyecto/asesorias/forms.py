@@ -16,3 +16,7 @@ class AdministradorCentroForm(forms.ModelForm):
 class Centro_AdministradorCentroForm(forms.ModelForm):
 	class Meta:
 		model = models.CentroAdministradorCentro
+
+class TitulacionForm(forms.ModelForm):
+	class Meta:
+		model = models.Titulacion

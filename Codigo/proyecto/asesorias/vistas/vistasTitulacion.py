@@ -66,8 +66,24 @@ def determinarSiguienteIdTitulacionEnCentro(lista_ids_titulaciones):
 def addTitulacion(request):
 	# Se ha rellenado el formulario.
 	if request.method == 'POST':
+		# Se extraen los valores pasados por el metodo POST.
+		id_centro = request.POST['id_centro']
+		nombre_titulacion = request.POST['nombre_titulacion']
+		plan_estudios = request.POST['plan_estudios']
+
+		# Se obtiene una instancia del centro a traves de su id.
+		instancia_centro = models.Centro.objects.get(pk=id_centro)
+
+		# Se crea una lista temporal que albergara los ids de las titulaciones existentes en el centro para determinar el siguiente id_titulacion.
+		lista_ids_titulaciones = []
+		lista_ids_titulaciones = obtenerListaDeIdsTitulacionesDeCentro(instancia_centro.nombre_centro)
+		id_titulacion = determinarSiguienteIdTitulacionEnCentro(lista_ids_titulaciones)
+
+		# Datos necesarios para crear la nueva titulacion
+		datos_titulacion = {'id_centro': id_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'id_titulacion': id_titulacion}
+
 		# Se obtienen los valores y se valida.
-		form = forms.TitulacionForm(request.POST)
+		form = forms.TitulacionForm(datos_titulacion)
 		if form.is_valid():
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
