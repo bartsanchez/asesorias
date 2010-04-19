@@ -4,12 +4,12 @@ from asesorias import models, forms
 from asesorias.vistas import vistasCentro
 
 # Comprueba si existe una titulacion y, de ser asi, la devuelve.
-def obtenerTitulacion(centro, titulacion):
+def obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios):
 	try:
 		# Obtiene la instancia de centro para posteriormente obtener el id.
-		instancia_centro = vistasCentro.obtenerCentro(centro)
+		instancia_centro = vistasCentro.obtenerCentro(nombre_centro)
 		# Obtiene la titulacion cuyo centro es centro y el nombre de la titulacion es nombre_titulacion.
-		resultado = models.Titulacion.objects.get(id_centro=instancia_centro.getId(), nombre_titulacion=titulacion)
+		resultado = models.Titulacion.objects.get(id_centro=instancia_centro.getId(), nombre_titulacion=nombre_titulacion, plan_estudios=plan_estudios)
 	except:
 		resultado = False
 	return resultado
@@ -122,14 +122,14 @@ def addTitulacion(request):
 		#error = True
 	#return render_to_response('asesorias/Titulacion/editTitulacion.html', {'error': error})
 
-#def delTitulacion(request, titulacion):
-	## Se obtiene la instancia de la titulacion.
-	#instancia_titulacion= obtenerTitulacion(titulacion)
-	## Si existe se elimina.
-	#if instancia_titulacion:
-		#instancia_titulacion.delete()
-		#error = False
-	## La titulacion no existe.
-	#else:
-		#error = 'No se ha podido eliminar la titulacion.'
-	#return render_to_response('asesorias/Titulacion/delTitulacion.html', {'error': error})
+def delTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
+	# Se obtiene la instancia de la titulacion.
+	instancia_titulacion= obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios)
+	# Si existe se elimina.
+	if instancia_titulacion:
+		instancia_titulacion.delete()
+		error = False
+	# La titulacion no existe.
+	else:
+		error = 'No se ha podido eliminar la titulacion.'
+	return render_to_response('asesorias/Titulacion/delTitulacion.html', {'error': error})
