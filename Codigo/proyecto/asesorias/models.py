@@ -36,7 +36,7 @@ class Titulacion(models.Model):
 
 	class Meta:
 		db_table = "Titulaciones"
-		unique_together = (("id_centro", "id_titulacion"), ("nombre_titulacion", "plan_estudios"))
+		unique_together = (("id_centro", "id_titulacion"), ("id_centro", "nombre_titulacion", "plan_estudios"))
 
 	def getId(self):
 		return self.codigo_titulacion
