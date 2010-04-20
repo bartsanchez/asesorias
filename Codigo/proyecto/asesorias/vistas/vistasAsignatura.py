@@ -34,7 +34,10 @@ def obtenerListaDeIdsAsignaturasDeTitulacion(instancia_titulacion):
 	return resultado
 
 # Determina el primer id_asignatura disponible para una determinada titulacion.
-def determinarSiguienteIdAsignaturaEnTitulacion(lista_ids_asignaturas):
+def determinarSiguienteIdAsignaturaEnTitulacion(instancia_titulacion):
+	# Se obtiene una lista ordenada con los ids de las asignaturas existentes en la titulacion.
+	lista_ids_asignaturas = obtenerListaDeIdsAsignaturasDeTitulacion(instancia_titulacion)
+
 	# Inicializamos el contador a 1, que es el primer valor valido para un id.
 	contador = 1
 	# Recorre el bucle determinando si una posicion se encuentra o no.
@@ -66,9 +69,7 @@ def addAsignatura(request):
 		id_titulacion = instancia_titulacion.getIdTitulacion()
 
 		# Se crea una lista temporal que albergara los ids de las asignaturas existentes en la titulacion para determinar la siguiente id_asignatura.
-		lista_ids_asignaturas= []
-		lista_ids_asignaturas= obtenerListaDeIdsAsignaturasDeTitulacion(instancia_titulacion)
-		id_asignatura = determinarSiguienteIdAsignaturaEnTitulacion(lista_ids_asignaturas)
+		id_asignatura = determinarSiguienteIdAsignaturaEnTitulacion(instancia_titulacion)
 
 		# Datos necesarios para crear la nueva titulacion
 		datos_asignatura = {'id_centro': id_centro, 'id_titulacion': id_titulacion, 'id_asignatura': id_asignatura, 'nombre_asignatura': nombre_asignatura, 'curso': curso, 'tipo': tipo, 'nCreditosTeoricos': n_creditos_teoricos, 'nCreditosPracticos': n_creditos_practicos, 'titulacion': codigo_titulacion}
