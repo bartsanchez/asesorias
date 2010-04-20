@@ -97,30 +97,54 @@ def addTitulacion(request):
 		error = False
 	return render_to_response('asesorias/Titulacion/addTitulacion.html', {'form': form, 'error': error})
 
-#def editTitulacion(request, titulacion):
-	## Se obtiene la instancia de la titulacion.
-	#instancia_titulacion = obtenerTitulacion(titulacion)
-	## Si existe se edita.
-	#if instancia_titulacion:
-		## Se carga el formulario para la titulacion existente.
-		#form = forms.TitulacionForm(instance=titulacion)
-		#error = False
-		## Se ha modificado el formulario original.
-		#if request.method == 'POST':
-			## Se actualiza el formulario con la nueva informacion.
-			#form = forms.TitulacionForm(request.POST, instance=instancia_titulacion)
-			## Si es valido se guarda.
-			#if form.is_valid():
-				#form.save()
-				## Redirige a la pagina de inicio.
-				#return HttpResponseRedirect('/asesorias/')
-			#else:
-				#error = 'Formulario invalido'
-		#return render_to_response('asesorias/Titulacion/editTitulacion.html', {'form': form, 'error': error})
-	## La titulacion no existe
-	#else:
-		#error = True
-	#return render_to_response('asesorias/Titulacion/editTitulacion.html', {'error': error})
+def editTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
+	# Se obtiene la instancia de la titulacion.
+	instancia_titulacion = obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios)
+	# Si existe se edita.
+	if instancia_titulacion:
+		# Se carga el formulario para la titulacion existente.
+		form = forms.TitulacionForm(instance=instancia_titulacion)
+		error = False
+		# Se ha modificado el formulario original.
+		if request.method == 'POST':
+			# Se extraen el valor id_centro para saber si se ha cambiado el centro de la titulacion.
+			id_centro = request.POST['id_centro']
+			# Se ha modificado el centro de la titulacion.
+			if id_centro != instancia_titulacion.id_centro:
+				# Se obtienen el resto de valores necesarios a traves de POST.
+				nombre_titulacion = request.POST['nombre_titulacion']
+				plan_estudios = request.POST['plan_estudios']
+
+				# Obtenemos una instancia del centro
+				instancia_centro = models.Centro.objects.get(pk=id_centro)
+
+				# Se crea una lista temporal que albergara los ids de las titulaciones existentes en el centro para determinar el siguiente id_titulacion.
+				lista_ids_titulaciones = []
+				lista_ids_titulaciones = obtenerListaDeIdsTitulacionesDeCentro(instancia_centro.nombre_centro)
+				id_titulacion = determinarSiguienteIdTitulacionEnCentro(lista_ids_titulaciones)
+
+				# Datos necesarios para crear la nueva titulacion
+				datos_titulacion = {'id_centro': id_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'id_titulacion': id_titulacion}
+
+				# Se actualiza el formulario con la nueva informacion.
+				form = forms.TitulacionForm(datos_titulacion, instance=instancia_titulacion)
+			# No se ha modificado el centro de la titulacion.
+			else:
+				# Se actualiza el formulario con la nueva informacion.
+				form = forms.AdministradorCentroForm(request.POST, instance=instancia_titulacion)
+			# Si es valido se guarda.
+			if form.is_valid():
+				form.save()
+				# Redirige a la pagina de inicio.
+				return HttpResponseRedirect('/asesorias/')
+			else:
+				error = 'Formulario invalido'
+
+		return render_to_response('asesorias/Titulacion/editTitulacion.html', {'form': form, 'error': error})
+	# La titulacion no existe
+	else:
+		error = 'No existe tal titulacion.'
+	return render_to_response('asesorias/Titulacion/editTitulacion.html', {'error': error})
 
 def delTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 	# Se obtiene la instancia de la titulacion.

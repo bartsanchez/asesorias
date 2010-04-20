@@ -8,10 +8,15 @@
 
 <form action="" method="post">
     {% for field in form %}
-        <div class="fieldWrapper">
-            {{ field.errors }}
-            {{ field.label_tag }}: {{ field }}
-        </div>
+
+		<!-- Excluye el campo id_titulacion que se controlará por software. -->
+		{% ifnotequal field.name 'id_titulacion' %}
+			<div class="fieldWrapper">
+				{{ field.errors }}
+				{{ field.label_tag }}: {{ field }}
+			</div>
+		{% endifnotequal %}
+
     {% endfor %}
     <p><input type="submit" value="Editar"/></p>
 </form>

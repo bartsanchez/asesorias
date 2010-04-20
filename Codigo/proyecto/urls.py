@@ -30,6 +30,6 @@ urlpatterns = patterns('',
 	(r'^asesorias/centro_administradorCentro/(?P<centro>\w+)/(?P<administrador_centro>\w+)/del/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.delCentro_administradorCentro'),
 
 	(r'^asesorias/titulacion/add/$', 'proyecto.asesorias.vistas.vistasTitulacion.addTitulacion'),
-	#(r'^asesorias/titulacion/(?P<titulacion>\w+)/edit/$', 'proyecto.asesorias.vistas.vistasTitulacion.editTitulacion'),
+	(r'^asesorias/titulacion/(?P<nombre_centro>\w+)/(?P<nombre_titulacion>\w+)/(?P<plan_estudios>\d+)/edit/$', 'proyecto.asesorias.vistas.vistasTitulacion.editTitulacion'),
 	(r'^asesorias/titulacion/(?P<nombre_centro>\w+)/(?P<nombre_titulacion>\w+)/(?P<plan_estudios>\d+)/del/$', 'proyecto.asesorias.vistas.vistasTitulacion.delTitulacion'),
 )
