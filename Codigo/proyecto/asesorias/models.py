@@ -45,7 +45,7 @@ class Titulacion(models.Model):
 		return self.id_titulacion
 
 	def __unicode__(self):
-		return unicode(self.plan_estudios) + ": " + unicode(self.nombre_titulacion)
+		return unicode(self.id_centro) + ": " + unicode(self.plan_estudios) + " -> " + unicode(self.nombre_titulacion)
 
 class Asignatura(models.Model):
 	TIPOS_ASIGNATURAS = (
@@ -70,7 +70,7 @@ class Asignatura(models.Model):
 		unique_together = ("id_centro", "id_titulacion", "id_asignatura")
 
 	def __unicode__(self):
-		return self.codigo_asignatura
+		return unicode(self.id_centro) + ": " + unicode(self.id_titulacion) + " -> " + unicode(self.nombre_asignatura)
 
 class AsignaturaCursoAcademico(models.Model):
 	codigo_asignaturaCursoAcademico = models.AutoField(primary_key=True)

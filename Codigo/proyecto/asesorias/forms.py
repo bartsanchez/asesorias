@@ -13,10 +13,18 @@ class AdministradorCentroForm(forms.ModelForm):
 	class Meta:
 		model = models.AdministradorCentro
 
-class Centro_AdministradorCentroForm(forms.ModelForm):
-	class Meta:
-		model = models.CentroAdministradorCentro
-
 class TitulacionForm(forms.ModelForm):
 	class Meta:
 		model = models.Titulacion
+
+class AsignaturaForm(forms.ModelForm):
+	TITULACIONES = [(titulacion.codigo_titulacion, unicode(titulacion.id_centro) + ': ' + unicode(titulacion.nombre_titulacion) + ' (' + unicode(titulacion.plan_estudios) + ')' ) for titulacion in models.Titulacion.objects.all()]
+
+	titulacion = forms.ChoiceField(choices=TITULACIONES)
+
+	class Meta:
+		model = models.Asignatura
+
+class Centro_AdministradorCentroForm(forms.ModelForm):
+	class Meta:
+		model = models.CentroAdministradorCentro
