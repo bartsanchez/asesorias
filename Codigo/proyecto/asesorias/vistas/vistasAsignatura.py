@@ -68,7 +68,7 @@ def addAsignatura(request):
 		id_centro = instancia_titulacion.getIdCentro()
 		id_titulacion = instancia_titulacion.getIdTitulacion()
 
-		# Se crea una lista temporal que albergara los ids de las asignaturas existentes en la titulacion para determinar la siguiente id_asignatura.
+		# Se determina el siguiente id_asignatura para la titulacion.
 		id_asignatura = determinarSiguienteIdAsignaturaEnTitulacion(instancia_titulacion)
 
 		# Datos necesarios para crear la nueva titulacion

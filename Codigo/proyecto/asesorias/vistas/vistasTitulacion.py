@@ -50,7 +50,10 @@ def obtenerListaDeIdsTitulacionesDeCentro(centro):
 	return resultado
 
 # Determina el primer id_titulacion disponible para un determinado centro.
-def determinarSiguienteIdTitulacionEnCentro(lista_ids_titulaciones):
+def determinarSiguienteIdTitulacionEnCentro(instancia_centro):
+	# Se obtiene una lista ordenada con los ids de las titulaciones existentes en el centro.
+	lista_ids_titulaciones= obtenerListaDeIdsTitulacionesDeCentro(instancia_centro.nombre_centro)
+
 	# Inicializamos el contador a 1, que es el primer valor valido para un id.
 	contador = 1
 	# Recorre el bucle determinando si una posicion se encuentra o no.
@@ -74,10 +77,8 @@ def addTitulacion(request):
 		# Se obtiene una instancia del centro a traves de su id.
 		instancia_centro = models.Centro.objects.get(pk=id_centro)
 
-		# Se crea una lista temporal que albergara los ids de las titulaciones existentes en el centro para determinar el siguiente id_titulacion.
-		lista_ids_titulaciones = []
-		lista_ids_titulaciones = obtenerListaDeIdsTitulacionesDeCentro(instancia_centro.nombre_centro)
-		id_titulacion = determinarSiguienteIdTitulacionEnCentro(lista_ids_titulaciones)
+		# Se determina el siguiente id_titulacion para el centro.
+		id_titulacion = determinarSiguienteIdTitulacionEnCentro(instancia_centro)
 
 		# Datos necesarios para crear la nueva titulacion
 		datos_titulacion = {'id_centro': id_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'id_titulacion': id_titulacion}
