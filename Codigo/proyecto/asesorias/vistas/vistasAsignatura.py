@@ -1,13 +1,12 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
-from asesorias.vistas import vistasCentro
 
 # Obtiene una lista con las asignaturas de una determinada titulacion.
 def obtenerAsignaturasDeTitulacion(instancia_titulacion):
 	try:
 		# Obtiene todas las asignaturas que pertenecen a la titulacion pasada por argumento.
-		resultado = models.Asignatura.objects.filter(codigo_titulacion=instancia_titulacion.codigo_titulacion)
+		resultado = models.Asignatura.objects.filter(id_titulacion=instancia_titulacion.getIdTitulacion())
 	except:
 		resultado = False
 	return resultado
@@ -52,7 +51,7 @@ def addAsignatura(request):
 	# Se ha rellenado el formulario.
 	if request.method == 'POST':
 		# Se extraen los valores pasados por el metodo POST.
-		id_titulacion = request.POST['titulacion']
+		codigo_titulacion = request.POST['titulacion']
 		nombre_asignatura= request.POST['nombre_asignatura']
 		curso = request.POST['curso']
 		tipo = request.POST['tipo']
@@ -60,11 +59,11 @@ def addAsignatura(request):
 		n_creditos_practicos= request.POST['nCreditosPracticos']
 
 		# Se obtiene una instancia de la titulacion a traves de su id.
-		instancia_titulacion = models.Titulacion.objects.get(pk=id_titulacion)
+		instancia_titulacion = models.Titulacion.objects.get(pk=codigo_titulacion)
 
-		# Se determina el id_centro para esa titulacion.
-		instancia_centro = vistasCentro.obtenerCentro(unicode(instancia_titulacion.id_centro))
-		id_centro = instancia_centro.getId()
+		# Se determina el id_centro e id_titulacion para esa titulacion.
+		id_centro = instancia_titulacion.getIdCentro()
+		id_titulacion = instancia_titulacion.getIdTitulacion()
 
 		# Se crea una lista temporal que albergara los ids de las asignaturas existentes en la titulacion para determinar la siguiente id_asignatura.
 		lista_ids_asignaturas= []
@@ -72,7 +71,7 @@ def addAsignatura(request):
 		id_asignatura = determinarSiguienteIdAsignaturaEnTitulacion(lista_ids_asignaturas)
 
 		# Datos necesarios para crear la nueva titulacion
-		datos_asignatura = {'id_centro': id_centro, 'id_titulacion': id_titulacion, 'id_asignatura': id_asignatura, 'nombre_asignatura': nombre_asignatura, 'curso': curso, 'tipo': tipo, 'nCreditosTeoricos': n_creditos_teoricos, 'nCreditosPracticos': n_creditos_practicos, 'titulacion': id_titulacion}
+		datos_asignatura = {'id_centro': id_centro, 'id_titulacion': id_titulacion, 'id_asignatura': id_asignatura, 'nombre_asignatura': nombre_asignatura, 'curso': curso, 'tipo': tipo, 'nCreditosTeoricos': n_creditos_teoricos, 'nCreditosPracticos': n_creditos_practicos, 'titulacion': codigo_titulacion}
 
 		# Se obtienen los valores y se valida.
 		form = forms.AsignaturaForm(datos_asignatura)
@@ -83,7 +82,6 @@ def addAsignatura(request):
 			return HttpResponseRedirect('/asesorias/')
 		else:
 			error = 'Formulario invalido.'
-			print form.errors
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AsignaturaForm()

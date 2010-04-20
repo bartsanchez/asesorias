@@ -41,6 +41,9 @@ class Titulacion(models.Model):
 	def getId(self):
 		return self.codigo_titulacion
 
+	def getIdCentro(self):
+		return self.id_centro.getId()
+
 	def getIdTitulacion(self):
 		return self.id_titulacion
 
