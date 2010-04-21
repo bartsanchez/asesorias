@@ -1,6 +1,19 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias.vistas import vistasAsignatura
+
+# Comprueba si existe una asignatura curso academico y, de ser asi, la devuelve.
+def obtenerAsignaturaCursoAcademico(nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura, curso_academico):
+	try:
+		# Obtiene la instancia de asignatura para posteriormente obtener el id.
+		instancia_asignatura= vistasAsignatura.obtenerAsignatura(nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura)
+
+		# Obtiene la instancia de la asignatura curso academico.
+		resultado = models.AsignaturaCursoAcademico.objects.get(id_centro=instancia_asignatura.getIdCentro(), id_titulacion=instancia_asignatura.getIdTitulacion(), id_asignatura=instancia_asignatura.getIdAsignatura(), curso_academico=curso_academico)
+	except:
+		resultado = False
+	return resultado
 
 def addAsignaturaCursoAcademico(request):
 	# Se ha rellenado el formulario.
@@ -34,3 +47,15 @@ def addAsignaturaCursoAcademico(request):
 		form = forms.AsignaturaCursoAcademicoForm()
 		error = False
 	return render_to_response('asesorias/AsignaturaCursoAcademico/addAsignaturaCursoAcademico.html', {'form': form, 'error': error})
+
+def delAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura, curso_academico):
+	# Se obtiene la instancia de la asignatura curso academico.
+	instancia_asignatura_curso_academico= obtenerAsignaturaCursoAcademico(nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura, curso_academico)
+	# Si existe se elimina.
+	if instancia_asignatura_curso_academico:
+		instancia_asignatura_curso_academico.delete()
+		error = False
+	# La asignatura no existe.
+	else:
+		error = 'No se ha podido eliminar la asignatura curso academico.'
+	return render_to_response('asesorias/AsignaturaCursoAcademico/delAsignaturaCursoAcademico.html', {'error': error})

@@ -72,6 +72,15 @@ class Asignatura(models.Model):
 		db_table = "Asignaturas"
 		unique_together = ("id_centro", "id_titulacion", "id_asignatura")
 
+	def getIdCentro(self):
+		return self.id_centro
+
+	def getIdTitulacion(self):
+		return self.id_titulacion
+
+	def getIdAsignatura(self):
+		return self.id_asignatura
+
 	def determinarNombreCentro(self):
 		titulacion = Titulacion.objects.get(id_centro=self.id_centro, id_titulacion=self.id_titulacion)
 		return unicode(titulacion.id_centro)
