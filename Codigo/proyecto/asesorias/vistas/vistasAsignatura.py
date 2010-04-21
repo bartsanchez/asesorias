@@ -1,6 +1,20 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias.vistas import vistasTitulacion
+
+# Comprueba si existe una asignatura y, de ser asi, la devuelve.
+def obtenerAsignatura(nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura):
+	try:
+		# Obtiene la instancia de titulacion para posteriormente obtener el id.
+		instancia_titulacion = vistasTitulacion.obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios)
+
+		# Obtiene la instancia de la asignatura.
+		resultado = models.Asignatura.objects.get(id_centro=instancia_titulacion.getIdCentro(), id_titulacion=instancia_titulacion.getIdTitulacion(), nombre_asignatura=nombre_asignatura)
+	except:
+		resultado = False
+	return resultado
+
 
 # Obtiene una lista con las asignaturas de una determinada titulacion.
 def obtenerAsignaturasDeTitulacion(instancia_titulacion):
@@ -88,3 +102,15 @@ def addAsignatura(request):
 		form = forms.AsignaturaForm()
 		error = False
 	return render_to_response('asesorias/Asignatura/addAsignatura.html', {'form': form, 'error': error})
+
+def delAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura):
+	# Se obtiene la instancia de la asignatura.
+	instancia_asignatura= obtenerAsignatura(nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura)
+	# Si existe se elimina.
+	if instancia_asignatura:
+		instancia_asignatura.delete()
+		error = False
+	# La asignatura no existe.
+	else:
+		error = 'No se ha podido eliminar la asignatura.'
+	return render_to_response('asesorias/Asignatura/delAsignatura.html', {'error': error})
