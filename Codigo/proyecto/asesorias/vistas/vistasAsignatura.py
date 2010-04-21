@@ -109,7 +109,7 @@ def editAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nom
 	# Si existe se edita.
 	if instancia_asignatura:
 		# Se carga el formulario para la asignatura existente.
-		form = forms.AsignaturaForm(instance=instancia_asignatura)
+		form = forms.AsignaturaForm(instance=instancia_asignatura, initial={'titulacion': vistasTitulacion.obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios).codigo_titulacion})
 		error = False
 		# Se ha modificado el formulario original.
 		if request.method == 'POST':
