@@ -85,7 +85,7 @@ def addAsignatura(request):
 		# Se determina el siguiente id_asignatura para la titulacion.
 		id_asignatura = determinarSiguienteIdAsignaturaEnTitulacion(instancia_titulacion)
 
-		# Datos necesarios para crear la nueva titulacion
+		# Datos necesarios para crear la nueva asignatura
 		datos_asignatura = {'id_centro': id_centro, 'id_titulacion': id_titulacion, 'id_asignatura': id_asignatura, 'nombre_asignatura': nombre_asignatura, 'curso': curso, 'tipo': tipo, 'nCreditosTeoricos': n_creditos_teoricos, 'nCreditosPracticos': n_creditos_practicos, 'titulacion': codigo_titulacion}
 
 		# Se obtienen los valores y se valida.
@@ -102,6 +102,54 @@ def addAsignatura(request):
 		form = forms.AsignaturaForm()
 		error = False
 	return render_to_response('asesorias/Asignatura/addAsignatura.html', {'form': form, 'error': error})
+
+def editAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura):
+	# Se obtiene la instancia de la asignatura.
+	instancia_asignatura= obtenerAsignatura(nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura)
+	# Si existe se edita.
+	if instancia_asignatura:
+		# Se carga el formulario para la asignatura existente.
+		form = forms.AsignaturaForm(instance=instancia_asignatura)
+		error = False
+		# Se ha modificado el formulario original.
+		if request.method == 'POST':
+			# Se obtienen el resto de valores necesarios a traves de POST.
+			codigo_titulacion = request.POST['titulacion']
+			nombre_asignatura= request.POST['nombre_asignatura']
+			curso = request.POST['curso']
+			tipo = request.POST['tipo']
+			n_creditos_teoricos = request.POST['nCreditosTeoricos']
+			n_creditos_practicos= request.POST['nCreditosPracticos']
+
+			# Se crea una instancia de la titulacion.
+			instancia_titulacion = models.Titulacion.objects.get(pk=codigo_titulacion)
+
+			# Se determina el id_centro e id_titulacion para esa titulacion.
+			id_centro = instancia_titulacion.getIdCentro()
+			id_titulacion = instancia_titulacion.getIdTitulacion()
+
+			# Se determina el siguiente id_titulacion para el centro.
+			id_asignatura = determinarSiguienteIdAsignaturaEnTitulacion(instancia_titulacion)
+
+			# Datos necesarios para crear la nueva asignatura
+			datos_asignatura = {'id_centro': id_centro, 'id_titulacion': id_titulacion, 'id_asignatura': id_asignatura, 'nombre_asignatura': nombre_asignatura, 'curso': curso, 'tipo': tipo, 'nCreditosTeoricos': n_creditos_teoricos, 'nCreditosPracticos': n_creditos_practicos, 'titulacion': codigo_titulacion}
+
+			# Se actualiza el formulario con la nueva informacion.
+			form = forms.AsignaturaForm(datos_asignatura, instance=instancia_asignatura)
+
+			# Si es valido se guarda.
+			if form.is_valid():
+				form.save()
+				# Redirige a la pagina de inicio.
+				return HttpResponseRedirect('/asesorias/')
+			else:
+				error = 'Formulario invalido'
+
+		return render_to_response('asesorias/Asignatura/editAsignatura.html', {'form': form, 'error': error})
+	# La asignatura no existe
+	else:
+		error = 'No existe tal asignatura.'
+	return render_to_response('asesorias/Asignatura/editAsignatura.html', {'error': error})
 
 def delAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura):
 	# Se obtiene la instancia de la asignatura.

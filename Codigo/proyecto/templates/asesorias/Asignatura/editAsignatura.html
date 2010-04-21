@@ -9,12 +9,16 @@
 <form action="" method="post">
     {% for field in form %}
 
-		<!-- Excluye el campo id_titulacion que se controlará por software. -->
+		<!-- Excluye los campos que forman parte de la clave que se controlarán por software. -->
+		{% ifnotequal field.name 'id_centro' %}
 		{% ifnotequal field.name 'id_titulacion' %}
+		{% ifnotequal field.name 'id_asignatura' %}
 			<div class="fieldWrapper">
 				{{ field.errors }}
 				{{ field.label_tag }}: {{ field }}
 			</div>
+		{% endifnotequal %}
+		{% endifnotequal %}
 		{% endifnotequal %}
 
     {% endfor %}

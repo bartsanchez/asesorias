@@ -34,5 +34,6 @@ urlpatterns = patterns('',
 	(r'^asesorias/titulacion/(?P<nombre_centro>\w+)/(?P<nombre_titulacion>\w+)/(?P<plan_estudios>\d+)/del/$', 'proyecto.asesorias.vistas.vistasTitulacion.delTitulacion'),
 
 	(r'^asesorias/asignatura/add/$', 'proyecto.asesorias.vistas.vistasAsignatura.addAsignatura'),
+	(r'^asesorias/asignatura/(?P<nombre_centro>\w+)/(?P<nombre_titulacion>\w+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>\w+)/edit/$', 'proyecto.asesorias.vistas.vistasAsignatura.editAsignatura'),
 	(r'^asesorias/asignatura/(?P<nombre_centro>\w+)/(?P<nombre_titulacion>\w+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>\w+)/del/$', 'proyecto.asesorias.vistas.vistasAsignatura.delAsignatura'),
 )
