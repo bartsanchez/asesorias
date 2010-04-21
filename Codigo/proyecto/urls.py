@@ -25,10 +25,6 @@ urlpatterns = patterns('',
 	(r'^asesorias/administradorCentro/(?P<administrador_centro>\w+)/edit/$', 'proyecto.asesorias.vistas.vistasAdministradorCentro.editAdministradorCentro'),
 	(r'^asesorias/administradorCentro/(?P<administrador_centro>\w+)/del/$', 'proyecto.asesorias.vistas.vistasAdministradorCentro.delAdministradorCentro'),
 
-	(r'^asesorias/centro_administradorCentro/add/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.addCentro_administradorCentro'),
-	(r'^asesorias/centro_administradorCentro/(?P<centro>\w+)/(?P<administrador_centro>\w+)/edit/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.editCentro_administradorCentro'),
-	(r'^asesorias/centro_administradorCentro/(?P<centro>\w+)/(?P<administrador_centro>\w+)/del/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.delCentro_administradorCentro'),
-
 	(r'^asesorias/titulacion/add/$', 'proyecto.asesorias.vistas.vistasTitulacion.addTitulacion'),
 	(r'^asesorias/titulacion/(?P<nombre_centro>\w+)/(?P<nombre_titulacion>\w+)/(?P<plan_estudios>\d+)/edit/$', 'proyecto.asesorias.vistas.vistasTitulacion.editTitulacion'),
 	(r'^asesorias/titulacion/(?P<nombre_centro>\w+)/(?P<nombre_titulacion>\w+)/(?P<plan_estudios>\d+)/del/$', 'proyecto.asesorias.vistas.vistasTitulacion.delTitulacion'),
@@ -36,4 +32,10 @@ urlpatterns = patterns('',
 	(r'^asesorias/asignatura/add/$', 'proyecto.asesorias.vistas.vistasAsignatura.addAsignatura'),
 	(r'^asesorias/asignatura/(?P<nombre_centro>\w+)/(?P<nombre_titulacion>\w+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>\w+)/edit/$', 'proyecto.asesorias.vistas.vistasAsignatura.editAsignatura'),
 	(r'^asesorias/asignatura/(?P<nombre_centro>\w+)/(?P<nombre_titulacion>\w+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>\w+)/del/$', 'proyecto.asesorias.vistas.vistasAsignatura.delAsignatura'),
+
+	(r'^asesorias/asignaturaCursoAcademico/add/$', 'proyecto.asesorias.vistas.vistasAsignaturaCursoAcademico.addAsignaturaCursoAcademico'),
+
+	(r'^asesorias/centro_administradorCentro/add/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.addCentro_administradorCentro'),
+	(r'^asesorias/centro_administradorCentro/(?P<centro>\w+)/(?P<administrador_centro>\w+)/edit/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.editCentro_administradorCentro'),
+	(r'^asesorias/centro_administradorCentro/(?P<centro>\w+)/(?P<administrador_centro>\w+)/del/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.delCentro_administradorCentro'),
 )
