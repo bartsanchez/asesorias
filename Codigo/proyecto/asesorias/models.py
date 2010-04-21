@@ -72,8 +72,16 @@ class Asignatura(models.Model):
 		db_table = "Asignaturas"
 		unique_together = ("id_centro", "id_titulacion", "id_asignatura")
 
+	def determinarNombreCentro(self):
+		titulacion = Titulacion.objects.get(id_centro=self.id_centro, id_titulacion=self.id_titulacion)
+		return unicode(titulacion.id_centro)
+
+	def determinarNombreTitulacion(self):
+		titulacion = Titulacion.objects.get(id_centro=self.id_centro, id_titulacion=self.id_titulacion)
+		return unicode(titulacion.nombre_titulacion)
+
 	def __unicode__(self):
-		return unicode(self.id_centro) + ": " + unicode(self.id_titulacion) + " -> " + unicode(self.nombre_asignatura)
+		return unicode(self.determinarNombreCentro()) + ": " + unicode(self.determinarNombreTitulacion()) + " -> " + unicode(self.nombre_asignatura)
 
 class AsignaturaCursoAcademico(models.Model):
 	codigo_asignaturaCursoAcademico = models.AutoField(primary_key=True)
