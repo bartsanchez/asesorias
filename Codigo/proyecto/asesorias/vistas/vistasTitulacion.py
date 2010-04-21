@@ -111,7 +111,7 @@ def editTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 			# Se extraen el valor id_centro para saber si se ha cambiado el centro de la titulacion.
 			id_centro = request.POST['id_centro']
 			# Se ha modificado el centro de la titulacion.
-			if id_centro != instancia_titulacion.id_centro:
+			if id_centro != instancia_titulacion.getIdCentro():
 				# Se obtienen el resto de valores necesarios a traves de POST.
 				nombre_titulacion = request.POST['nombre_titulacion']
 				plan_estudios = request.POST['plan_estudios']
@@ -130,7 +130,7 @@ def editTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 			# No se ha modificado el centro de la titulacion.
 			else:
 				# Se actualiza el formulario con la nueva informacion.
-				form = forms.AdministradorCentroForm(request.POST, instance=instancia_titulacion)
+				form = forms.TitulacionForm(request.POST, instance=instancia_titulacion)
 			# Si es valido se guarda.
 			if form.is_valid():
 				form.save()
