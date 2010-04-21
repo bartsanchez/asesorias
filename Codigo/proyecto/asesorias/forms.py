@@ -18,12 +18,16 @@ class TitulacionForm(forms.ModelForm):
 		model = models.Titulacion
 
 class AsignaturaForm(forms.ModelForm):
-	TITULACIONES = [(titulacion.codigo_titulacion, unicode(titulacion.id_centro) + ': ' + unicode(titulacion.nombre_titulacion) + ' (' + unicode(titulacion.plan_estudios) + ')' ) for titulacion in models.Titulacion.objects.all()]
-
-	titulacion = forms.ChoiceField(choices=TITULACIONES)
+	titulacion = forms.ModelChoiceField(models.Titulacion.objects.all())
 
 	class Meta:
 		model = models.Asignatura
+
+class AsignaturaCursoAcademicoForm(forms.ModelForm):
+	asignatura = forms.ModelChoiceField(models.Asignatura.objects.all())
+
+	class Meta:
+		model = models.AsignaturaCursoAcademico
 
 class Centro_AdministradorCentroForm(forms.ModelForm):
 	class Meta:
