@@ -108,29 +108,23 @@ def editTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 		error = False
 		# Se ha modificado el formulario original.
 		if request.method == 'POST':
-			# Se extraen el valor id_centro para saber si se ha cambiado el centro de la titulacion.
+			# Se obtienen el resto de valores necesarios a traves de POST.
 			id_centro = request.POST['id_centro']
-			# Se ha modificado el centro de la titulacion.
-			if id_centro != instancia_titulacion.getIdCentro():
-				# Se obtienen el resto de valores necesarios a traves de POST.
-				nombre_titulacion = request.POST['nombre_titulacion']
-				plan_estudios = request.POST['plan_estudios']
+			nombre_titulacion = request.POST['nombre_titulacion']
+			plan_estudios = request.POST['plan_estudios']
 
-				# Obtenemos una instancia del centro
-				instancia_centro = models.Centro.objects.get(pk=id_centro)
+			# Obtenemos una instancia del centro
+			instancia_centro = models.Centro.objects.get(pk=id_centro)
 
-				# Se determina el siguiente id_titulacion para el centro.
-				id_titulacion = determinarSiguienteIdTitulacionEnCentro(instancia_centro)
+			# Se determina el siguiente id_titulacion para el centro.
+			id_titulacion = determinarSiguienteIdTitulacionEnCentro(instancia_centro)
 
-				# Datos necesarios para crear la nueva titulacion
-				datos_titulacion = {'id_centro': id_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'id_titulacion': id_titulacion}
+			# Datos necesarios para crear la nueva titulacion
+			datos_titulacion = {'id_centro': id_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'id_titulacion': id_titulacion}
 
-				# Se actualiza el formulario con la nueva informacion.
-				form = forms.TitulacionForm(datos_titulacion, instance=instancia_titulacion)
-			# No se ha modificado el centro de la titulacion.
-			else:
-				# Se actualiza el formulario con la nueva informacion.
-				form = forms.TitulacionForm(request.POST, instance=instancia_titulacion)
+			# Se actualiza el formulario con la nueva informacion.
+			form = forms.TitulacionForm(datos_titulacion, instance=instancia_titulacion)
+
 			# Si es valido se guarda.
 			if form.is_valid():
 				form.save()
