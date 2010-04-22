@@ -39,7 +39,7 @@ def addAsignaturaCursoAcademico(request):
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
 			# Redirige a la pagina de inicio.
-			return HttpResponseRedirect('/asesorias/')
+			return HttpResponseRedirect('/asesorias/asignaturaCursoAcademico/list')
 		else:
 			error = 'Formulario invalido.'
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
@@ -80,7 +80,7 @@ def editAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, plan
 			if form.is_valid():
 				form.save()
 				# Redirige a la pagina de inicio.
-				return HttpResponseRedirect('/asesorias/')
+				return HttpResponseRedirect('/asesorias/asignaturaCursoAcademico/list')
 			else:
 				error = 'Formulario invalido'
 
@@ -96,8 +96,19 @@ def delAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, plan_
 	# Si existe se elimina.
 	if instancia_asignatura_curso_academico:
 		instancia_asignatura_curso_academico.delete()
-		error = False
+		return HttpResponseRedirect('/asesorias/asignaturaCursoAcademico/list')
 	# La asignatura no existe.
 	else:
 		error = 'No se ha podido eliminar la asignatura curso academico.'
 	return render_to_response('asesorias/AsignaturaCursoAcademico/delAsignaturaCursoAcademico.html', {'error': error})
+
+def listAsignaturaCursoAcademico(request):
+	# Se obtiene una lista con todos las asignaturas curso academico.
+	lista_asignaturas_curso_academico = models.AsignaturaCursoAcademico.objects.all()
+	# Al menos existe una asignatura curso academico.
+	if lista_asignaturas_curso_academico:
+		error = False
+	# No existen asignaturas curso academico actualmente.
+	else:
+		error = 'No existen asignaturas curso academico actualmente en el sistema.'
+	return render_to_response('asesorias/AsignaturaCursoAcademico/listAsignaturaCursoAcademico.html', {'lista_asignaturas_curso_academico': lista_asignaturas_curso_academico, 'error': error})

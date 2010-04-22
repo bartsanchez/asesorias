@@ -115,6 +115,10 @@ class AsignaturaCursoAcademico(models.Model):
 		asignatura = Asignatura.objects.get(id_centro=self.id_centro, id_titulacion=self.id_titulacion, id_asignatura=self.id_asignatura)
 		return unicode(asignatura.determinarNombreTitulacion())
 
+	def determinarPlanEstudios(self):
+		asignatura = Asignatura.objects.get(id_centro=self.id_centro, id_titulacion=self.id_titulacion, id_asignatura=self.id_asignatura)
+		return unicode(asignatura.determinarPlanEstudios())
+
 	def determinarNombreAsignatura(self):
 		asignatura = Asignatura.objects.get(id_centro=self.id_centro, id_titulacion=self.id_titulacion, id_asignatura=self.id_asignatura)
 		return unicode(asignatura.nombre_asignatura)
