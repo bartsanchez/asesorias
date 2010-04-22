@@ -17,9 +17,12 @@ urlpatterns = patterns('',
 	(r'^asesorias/$', 'proyecto.asesorias.views.authentication'),
 	(r'^asesorias/alumnos/(?P<username>[\s\w]+)/$', 'proyecto.asesorias.views.alumnos'),
 
+	(r'^asesorias/admin/$', 'proyecto.asesorias.vistas.vistasAdministradorPrincipal.index'),
+
 	(r'^asesorias/centro/add/$', 'proyecto.asesorias.vistas.vistasCentro.addCentro'),
 	(r'^asesorias/centro/(?P<centro>[\s\w]+)/edit/$', 'proyecto.asesorias.vistas.vistasCentro.editCentro'),
 	(r'^asesorias/centro/(?P<centro>[\s\w]+)/del/$', 'proyecto.asesorias.vistas.vistasCentro.delCentro'),
+	(r'^asesorias/centro/list/$', 'proyecto.asesorias.vistas.vistasCentro.listCentro'),
 
 	(r'^asesorias/administradorCentro/add/$', 'proyecto.asesorias.vistas.vistasAdministradorCentro.addAdministradorCentro'),
 	(r'^asesorias/administradorCentro/(?P<administrador_centro>[\s\w]+)/edit/$', 'proyecto.asesorias.vistas.vistasAdministradorCentro.editAdministradorCentro'),
