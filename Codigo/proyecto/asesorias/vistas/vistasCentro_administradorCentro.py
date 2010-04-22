@@ -24,7 +24,7 @@ def addCentro_administradorCentro(request):
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
 			# Redirige a la pagina de inicio.
-			return HttpResponseRedirect('/asesorias/')
+			return HttpResponseRedirect('/asesorias/centro_administradorCentro/list')
 		else:
 			error = 'Formulario invalido.'
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
@@ -49,7 +49,7 @@ def editCentro_administradorCentro(request, centro, administrador_centro):
 			if form.is_valid():
 				form.save()
 				# Redirige a la pagina de inicio.
-				return HttpResponseRedirect('/asesorias/')
+				return HttpResponseRedirect('/asesorias/centro_administradorCentro/list')
 			else:
 				error = 'Formulario invalido'
 		return render_to_response('asesorias/Centro_AdministradorCentro/editCentro_administradorCentro.html', {'form': form, 'error': error})
@@ -64,8 +64,19 @@ def delCentro_administradorCentro(request, centro, administrador_centro):
 	# Si existe se elimina.
 	if instancia_centro_administradorCentro:
 		instancia_centro_administradorCentro.delete()
-		error = False
+		return HttpResponseRedirect('/asesorias/centro_administradorCentro/list')
 	# El centro_administradorCentro no existe.
 	else:
 		error = 'No se ha podido eliminar el centro_administradorCentro.'
 	return render_to_response('asesorias/Centro_AdministradorCentro/delCentro_administradorCentro.html', {'error': error})
+
+def listCentro_administradorCentro(request):
+	# Se obtiene una lista con todos los centros administrador de centro.
+	lista_centros_administradorCentro = models.CentroAdministradorCentro.objects.all()
+	# Al menos existe un centro administrador de centro.
+	if lista_centros_administradorCentro:
+		error = False
+	# No existen centros administrador de centro actualmente.
+	else:
+		error = 'No existen centros-administrador de centro actualmente en el sistema.'
+	return render_to_response('asesorias/Centro_AdministradorCentro/listCentro_administradorCentro.html', {'lista_centros_administradorCentro': lista_centros_administradorCentro, 'error': error})
