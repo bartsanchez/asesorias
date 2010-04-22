@@ -76,3 +76,6 @@ def alumnos(request, username):
 	else:
 		error = True
 		return render_to_response('asesorias/alumnos.html', {'error': error})
+
+def administrador(request):
+	return render_to_response('asesorias/administrador.html')
