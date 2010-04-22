@@ -2,6 +2,15 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
 
+# Comprueba si existe un departamento y, de ser asi, lo devuelve.
+def obtenerDepartamento(nombre_departamento):
+	try:
+		# Obtiene el departamento cuyo nombre es departamento.
+		resultado = models.Departamento.objects.get(nombre_departamento=nombre_departamento)
+	except:
+		resultado = False
+	return resultado
+
 def addDepartamento(request):
 	# Se ha rellenado el formulario.
 	if request.method == 'POST':
@@ -19,3 +28,15 @@ def addDepartamento(request):
 		form = forms.DepartamentoForm()
 		error = False
 	return render_to_response('asesorias/Departamento/addDepartamento.html', {'form': form, 'error': error})
+
+def delDepartamento(request, nombre_departamento):
+	# Se obtiene la instancia del departamento.
+	instancia_departamento = obtenerDepartamento(nombre_departamento)
+	# Si existe se elimina.
+	if instancia_departamento:
+		instancia_departamento.delete()
+		error = False
+	# El centro no existe.
+	else:
+		error = 'No se ha podido eliminar el departamento.'
+	return render_to_response('asesorias/Departamento/delDepartamento.html', {'error': error})
