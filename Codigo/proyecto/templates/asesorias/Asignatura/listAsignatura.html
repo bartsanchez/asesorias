@@ -1,0 +1,19 @@
+<h1>Lista de asignaturas.</h1>
+
+<a href="../add">Crear nuevo</a>
+
+{% if error %}
+
+{{ error }}
+
+{% else %}
+
+	{% for asignatura in lista_asignaturas %}
+		<ul>
+			<li>{{ asignatura }}</li>
+			<a href="../{{ asignatura.determinarNombreCentro }}/{{ asignatura.determinarNombreTitulacion }}/{{ asignatura.determinarPlanEstudios }}/{{ asignatura.nombre_asignatura }}/edit">Editar</a>
+			<a href="../{{ asignatura.determinarNombreCentro }}/{{ asignatura.determinarNombreTitulacion }}/{{ asignatura.determinarPlanEstudios }}/{{ asignatura.nombre_asignatura }}/del">Eliminar</a>
+		</ul>
+	{% endfor %}
+
+{% endif %}

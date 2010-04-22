@@ -94,7 +94,7 @@ def addAsignatura(request):
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
 			# Redirige a la pagina de inicio.
-			return HttpResponseRedirect('/asesorias/')
+			return HttpResponseRedirect('/asesorias/asignatura/list')
 		else:
 			error = 'Formulario invalido.'
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
@@ -141,7 +141,7 @@ def editAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nom
 			if form.is_valid():
 				form.save()
 				# Redirige a la pagina de inicio.
-				return HttpResponseRedirect('/asesorias/')
+				return HttpResponseRedirect('/asesorias/asignatura/list')
 			else:
 				error = 'Formulario invalido'
 
@@ -157,8 +157,20 @@ def delAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nomb
 	# Si existe se elimina.
 	if instancia_asignatura:
 		instancia_asignatura.delete()
-		error = False
+		return HttpResponseRedirect('/asesorias/asignatura/list')
 	# La asignatura no existe.
 	else:
 		error = 'No se ha podido eliminar la asignatura.'
 	return render_to_response('asesorias/Asignatura/delAsignatura.html', {'error': error})
+
+def listAsignatura(request):
+	# Se obtiene una lista con todas las asignaturas.
+	lista_asignaturas = models.Asignatura.objects.all()
+	# Al menos existe una asignatura.
+	if lista_asignaturas:
+		error = False
+	# No existen asignaturas actualmente.
+	else:
+		error = 'No existen asignaturas actualmente en el sistema.'
+	return render_to_response('asesorias/Asignatura/listAsignatura.html', {'lista_asignaturas': lista_asignaturas, 'error': error})
+

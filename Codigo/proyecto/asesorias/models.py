@@ -89,6 +89,10 @@ class Asignatura(models.Model):
 		titulacion = Titulacion.objects.get(id_centro=self.id_centro, id_titulacion=self.id_titulacion)
 		return unicode(titulacion.nombre_titulacion)
 
+	def determinarPlanEstudios(self):
+		titulacion = Titulacion.objects.get(id_centro=self.id_centro, id_titulacion=self.id_titulacion)
+		return unicode(titulacion.plan_estudios)
+
 	def __unicode__(self):
 		return unicode(self.determinarNombreCentro()) + ": " + unicode(self.determinarNombreTitulacion()) + " -> " + unicode(self.nombre_asignatura)
 
