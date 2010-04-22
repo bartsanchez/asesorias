@@ -15,29 +15,31 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
 	(r'^asesorias/$', 'proyecto.asesorias.views.authentication'),
-	(r'^asesorias/alumnos/(?P<username>\w+)/$', 'proyecto.asesorias.views.alumnos'),
+	(r'^asesorias/alumnos/(?P<username>[\s\w]+)/$', 'proyecto.asesorias.views.alumnos'),
 
 	(r'^asesorias/centro/add/$', 'proyecto.asesorias.vistas.vistasCentro.addCentro'),
-	(r'^asesorias/centro/(?P<centro>\w+)/edit/$', 'proyecto.asesorias.vistas.vistasCentro.editCentro'),
-	(r'^asesorias/centro/(?P<centro>\w+)/del/$', 'proyecto.asesorias.vistas.vistasCentro.delCentro'),
+	(r'^asesorias/centro/(?P<centro>[\s\w]+)/edit/$', 'proyecto.asesorias.vistas.vistasCentro.editCentro'),
+	(r'^asesorias/centro/(?P<centro>[\s\w]+)/del/$', 'proyecto.asesorias.vistas.vistasCentro.delCentro'),
 
 	(r'^asesorias/administradorCentro/add/$', 'proyecto.asesorias.vistas.vistasAdministradorCentro.addAdministradorCentro'),
-	(r'^asesorias/administradorCentro/(?P<administrador_centro>\w+)/edit/$', 'proyecto.asesorias.vistas.vistasAdministradorCentro.editAdministradorCentro'),
-	(r'^asesorias/administradorCentro/(?P<administrador_centro>\w+)/del/$', 'proyecto.asesorias.vistas.vistasAdministradorCentro.delAdministradorCentro'),
+	(r'^asesorias/administradorCentro/(?P<administrador_centro>[\s\w]+)/edit/$', 'proyecto.asesorias.vistas.vistasAdministradorCentro.editAdministradorCentro'),
+	(r'^asesorias/administradorCentro/(?P<administrador_centro>[\s\w]+)/del/$', 'proyecto.asesorias.vistas.vistasAdministradorCentro.delAdministradorCentro'),
 
 	(r'^asesorias/titulacion/add/$', 'proyecto.asesorias.vistas.vistasTitulacion.addTitulacion'),
-	(r'^asesorias/titulacion/(?P<nombre_centro>\w+)/(?P<nombre_titulacion>\w+)/(?P<plan_estudios>\d+)/edit/$', 'proyecto.asesorias.vistas.vistasTitulacion.editTitulacion'),
-	(r'^asesorias/titulacion/(?P<nombre_centro>\w+)/(?P<nombre_titulacion>\w+)/(?P<plan_estudios>\d+)/del/$', 'proyecto.asesorias.vistas.vistasTitulacion.delTitulacion'),
+	(r'^asesorias/titulacion/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/edit/$', 'proyecto.asesorias.vistas.vistasTitulacion.editTitulacion'),
+	(r'^asesorias/titulacion/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/del/$', 'proyecto.asesorias.vistas.vistasTitulacion.delTitulacion'),
 
 	(r'^asesorias/asignatura/add/$', 'proyecto.asesorias.vistas.vistasAsignatura.addAsignatura'),
-	(r'^asesorias/asignatura/(?P<nombre_centro>\w+)/(?P<nombre_titulacion>\w+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>\w+)/edit/$', 'proyecto.asesorias.vistas.vistasAsignatura.editAsignatura'),
-	(r'^asesorias/asignatura/(?P<nombre_centro>\w+)/(?P<nombre_titulacion>\w+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>\w+)/del/$', 'proyecto.asesorias.vistas.vistasAsignatura.delAsignatura'),
+	(r'^asesorias/asignatura/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/edit/$', 'proyecto.asesorias.vistas.vistasAsignatura.editAsignatura'),
+	(r'^asesorias/asignatura/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/del/$', 'proyecto.asesorias.vistas.vistasAsignatura.delAsignatura'),
 
 	(r'^asesorias/asignaturaCursoAcademico/add/$', 'proyecto.asesorias.vistas.vistasAsignaturaCursoAcademico.addAsignaturaCursoAcademico'),
-	(r'^asesorias/asignaturaCursoAcademico/(?P<nombre_centro>\w+)/(?P<nombre_titulacion>\w+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>\w+)/(?P<curso_academico>\d+)/edit/$', 'proyecto.asesorias.vistas.vistasAsignaturaCursoAcademico.editAsignaturaCursoAcademico'),
-	(r'^asesorias/asignaturaCursoAcademico/(?P<nombre_centro>\w+)/(?P<nombre_titulacion>\w+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>\w+)/(?P<curso_academico>\d+)/del/$', 'proyecto.asesorias.vistas.vistasAsignaturaCursoAcademico.delAsignaturaCursoAcademico'),
+	(r'^asesorias/asignaturaCursoAcademico/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/edit/$', 'proyecto.asesorias.vistas.vistasAsignaturaCursoAcademico.editAsignaturaCursoAcademico'),
+	(r'^asesorias/asignaturaCursoAcademico/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/del/$', 'proyecto.asesorias.vistas.vistasAsignaturaCursoAcademico.delAsignaturaCursoAcademico'),
+
+	(r'^asesorias/departamento/add/$', 'proyecto.asesorias.vistas.vistasDepartamento.addDepartamento'),
 
 	(r'^asesorias/centro_administradorCentro/add/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.addCentro_administradorCentro'),
-	(r'^asesorias/centro_administradorCentro/(?P<centro>\w+)/(?P<administrador_centro>\w+)/edit/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.editCentro_administradorCentro'),
-	(r'^asesorias/centro_administradorCentro/(?P<centro>\w+)/(?P<administrador_centro>\w+)/del/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.delCentro_administradorCentro'),
+	(r'^asesorias/centro_administradorCentro/(?P<centro>[\s\w]+)/(?P<administrador_centro>[\s\w]+)/edit/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.editCentro_administradorCentro'),
+	(r'^asesorias/centro_administradorCentro/(?P<centro>[\s\w]+)/(?P<administrador_centro>[\s\w]+)/del/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.delCentro_administradorCentro'),
 )
