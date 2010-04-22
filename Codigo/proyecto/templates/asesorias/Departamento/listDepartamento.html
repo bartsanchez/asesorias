@@ -1,0 +1,19 @@
+<h1>Lista de departamentos.</h1>
+
+<a href="../add">Crear nuevo</a>
+
+{% if error %}
+
+{{ error }}
+
+{% else %}
+
+	{% for departamento in lista_departamentos%}
+		<ul>
+			<li>{{ departamento }}</li>
+			<a href="../{{ departamento }}/edit">Editar</a>
+			<a href="../{{ departamento }}/del">Eliminar</a>
+		</ul>
+	{% endfor %}
+
+{% endif %}

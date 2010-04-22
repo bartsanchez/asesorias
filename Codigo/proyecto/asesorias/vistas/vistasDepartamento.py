@@ -20,7 +20,7 @@ def addDepartamento(request):
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
 			# Redirige a la pagina de inicio.
-			return HttpResponseRedirect('/asesorias/')
+			return HttpResponseRedirect('/asesorias/departamento/list')
 		else:
 			error = 'Formulario invalido.'
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
@@ -45,7 +45,7 @@ def editDepartamento(request, nombre_departamento):
 			if form.is_valid():
 				form.save()
 				# Redirige a la pagina de inicio.
-				return HttpResponseRedirect('/asesorias/')
+				return HttpResponseRedirect('/asesorias/departamento/list')
 			else:
 				error = 'Formulario invalido'
 		return render_to_response('asesorias/Departamento/editDepartamento.html', {'form': form, 'error': error})
@@ -60,8 +60,19 @@ def delDepartamento(request, nombre_departamento):
 	# Si existe se elimina.
 	if instancia_departamento:
 		instancia_departamento.delete()
-		error = False
+		return HttpResponseRedirect('/asesorias/departamento/list')
 	# El centro no existe.
 	else:
 		error = 'No se ha podido eliminar el departamento.'
 	return render_to_response('asesorias/Departamento/delDepartamento.html', {'error': error})
+
+def listDepartamento(request):
+	# Se obtiene una lista con todos los departamentos.
+	lista_departamentos = models.Departamento.objects.all()
+	# Al menos existe un departamento.
+	if lista_departamentos:
+		error = False
+	# No existen departamentos actualmente.
+	else:
+		error = 'No existen departamentos actualmente en el sistema.'
+	return render_to_response('asesorias/Departamento/listDepartamento.html', {'lista_departamentos': lista_departamentos, 'error': error})
