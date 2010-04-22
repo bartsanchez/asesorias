@@ -65,3 +65,14 @@ def delCentro(request, centro):
 	else:
 		error = 'No se ha podido eliminar el centro.'
 	return render_to_response('asesorias/Centro/delCentro.html', {'error': error})
+
+def listCentro(request):
+	# Se obtiene una lista con todos los centros.
+	lista_centros = models.Centro.objects.all()
+	# Al menos existe un centro.
+	if lista_centros:
+		error = False
+	# No existen centros actualmente.
+	else:
+		error = 'No existen centros actualmente en el sistema.'
+	return render_to_response('asesorias/Centro/listCentro.html', {'lista_centros': lista_centros, 'error': error})
