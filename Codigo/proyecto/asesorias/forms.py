@@ -29,6 +29,10 @@ class AsignaturaCursoAcademicoForm(forms.ModelForm):
 	class Meta:
 		model = models.AsignaturaCursoAcademico
 
+class DepartamentoForm(forms.ModelForm):
+	class Meta:
+		model = models.Departamento
+
 class Centro_AdministradorCentroForm(forms.ModelForm):
 	class Meta:
 		model = models.CentroAdministradorCentro
