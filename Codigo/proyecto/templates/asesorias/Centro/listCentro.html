@@ -1,0 +1,19 @@
+<h1>Lista de centros.</h1>
+
+{% if error %}
+
+{{ error }}
+
+{% else %}
+
+	<a href="../add">Crear nuevo</a>
+
+	{% for centro in lista_centros %}
+		<ul>
+			<li>{{ centro.nombre_centro }}</li>
+			<a href="../{{ centro.nombre_centro }}/edit">Editar</a>
+			<a href="../{{ centro.nombre_centro }}/del">Eliminar</a>
+		</ul>
+	{% endfor %}
+
+{% endif %}
