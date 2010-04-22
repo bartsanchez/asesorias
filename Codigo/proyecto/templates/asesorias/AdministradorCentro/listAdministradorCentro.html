@@ -1,0 +1,19 @@
+<h1>Lista de administradores de centro.</h1>
+
+<a href="../add">Crear nuevo</a>
+
+{% if error %}
+
+{{ error }}
+
+{% else %}
+
+	{% for administrador_centro in lista_administradores_centro %}
+		<ul>
+			<li>{{ administrador_centro }}</li>
+			<a href="../{{ administrador_centro }}/edit">Editar</a>
+			<a href="../{{ administrador_centro }}/del">Eliminar</a>
+		</ul>
+	{% endfor %}
+
+{% endif %}
