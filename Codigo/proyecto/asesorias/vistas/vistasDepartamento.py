@@ -29,6 +29,31 @@ def addDepartamento(request):
 		error = False
 	return render_to_response('asesorias/Departamento/addDepartamento.html', {'form': form, 'error': error})
 
+def editDepartamento(request, nombre_departamento):
+	# Se obtiene la instancia del departamento.
+	instancia_departamento= obtenerDepartamento(nombre_departamento)
+	# Si existe se edita.
+	if instancia_departamento:
+		# Se carga el formulario para el centro existente.
+		form = forms.DepartamentoForm(instance=instancia_departamento)
+		error = False
+		# Se ha modificado el formulario original.
+		if request.method == 'POST':
+			# Se actualiza el formulario con la nueva informacion.
+			form = forms.DepartamentoForm(request.POST, instance=instancia_departamento)
+			# Si es valido se guarda.
+			if form.is_valid():
+				form.save()
+				# Redirige a la pagina de inicio.
+				return HttpResponseRedirect('/asesorias/')
+			else:
+				error = 'Formulario invalido'
+		return render_to_response('asesorias/Departamento/editDepartamento.html', {'form': form, 'error': error})
+	# El departamento no existe
+	else:
+		error = 'No existe tal departamento.'
+	return render_to_response('asesorias/Departamento/editDepartamento.html', {'error': error})
+
 def delDepartamento(request, nombre_departamento):
 	# Se obtiene la instancia del departamento.
 	instancia_departamento = obtenerDepartamento(nombre_departamento)
