@@ -1,0 +1,19 @@
+<h1>Lista de titulaciones.</h1>
+
+<a href="../add">Crear nuevo</a>
+
+{% if error %}
+
+{{ error }}
+
+{% else %}
+
+	{% for titulacion in lista_titulaciones %}
+		<ul>
+			<li>{{ titulacion }}</li>
+			<a href="../{{ titulacion.id_centro}}/{{ titulacion.nombre_titulacion}}/{{ titulacion.plan_estudios }}/edit">Editar</a>
+			<a href="../{{ titulacion.id_centro}}/{{ titulacion.nombre_titulacion}}/{{ titulacion.plan_estudios }}/del">Eliminar</a>
+		</ul>
+	{% endfor %}
+
+{% endif %}

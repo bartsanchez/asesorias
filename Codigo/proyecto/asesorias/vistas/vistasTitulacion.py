@@ -89,7 +89,7 @@ def addTitulacion(request):
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
 			# Redirige a la pagina de inicio.
-			return HttpResponseRedirect('/asesorias/')
+			return HttpResponseRedirect('/asesorias/titulacion/list')
 		else:
 			error = 'Formulario invalido.'
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
@@ -129,7 +129,7 @@ def editTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 			if form.is_valid():
 				form.save()
 				# Redirige a la pagina de inicio.
-				return HttpResponseRedirect('/asesorias/')
+				return HttpResponseRedirect('/asesorias/titulacion/list')
 			else:
 				error = 'Formulario invalido'
 
@@ -145,8 +145,19 @@ def delTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 	# Si existe se elimina.
 	if instancia_titulacion:
 		instancia_titulacion.delete()
-		error = False
+		return HttpResponseRedirect('/asesorias/titulacion/list')
 	# La titulacion no existe.
 	else:
 		error = 'No se ha podido eliminar la titulacion.'
 	return render_to_response('asesorias/Titulacion/delTitulacion.html', {'error': error})
+
+def listTitulacion(request):
+	# Se obtiene una lista con todas las titulaciones.
+	lista_titulaciones= models.Titulacion.objects.all()
+	# Al menos existe una titulacion.
+	if lista_titulaciones:
+		error = False
+	# No existen titulaciones actualmente.
+	else:
+		error = 'No existen titulaciones actualmente en el sistema.'
+	return render_to_response('asesorias/Titulacion/listTitulacion.html', {'lista_titulaciones': lista_titulaciones, 'error': error})
