@@ -2,9 +2,9 @@
 
 <a href="../add">Crear nuevo</a>
 
-{% if error %}
+{% if not lista_centros %}
 
-{{ error }}
+<p>No existen actualmente centros en el sistema.</p>
 
 {% else %}
 
