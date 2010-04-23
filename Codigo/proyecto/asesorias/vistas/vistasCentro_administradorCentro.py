@@ -25,13 +25,10 @@ def addCentro_administradorCentro(request):
 			form.save()
 			# Redirige a la pagina de inicio.
 			return HttpResponseRedirect('/asesorias/centro_administradorCentro/list')
-		else:
-			error = 'Formulario invalido.'
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.Centro_AdministradorCentroForm()
-		error = False
-	return render_to_response('asesorias/Centro_AdministradorCentro/addCentro_administradorCentro.html', {'form': form, 'error': error})
+	return render_to_response('asesorias/Centro_AdministradorCentro/addCentro_administradorCentro.html', {'form': form})
 
 def editCentro_administradorCentro(request, centro, administrador_centro):
 	# Se obtiene la instancia del centro_administradorCentro.
@@ -40,7 +37,6 @@ def editCentro_administradorCentro(request, centro, administrador_centro):
 	if instancia_centro_administradorCentro:
 		# Se carga el formulario para el centro existente.
 		form = forms.Centro_AdministradorCentroForm(instance=instancia_centro_administradorCentro)
-		error = False
 		# Se ha modificado el formulario original.
 		if request.method == 'POST':
 			# Se actualiza el formulario con la nueva informacion.
@@ -50,13 +46,10 @@ def editCentro_administradorCentro(request, centro, administrador_centro):
 				form.save()
 				# Redirige a la pagina de inicio.
 				return HttpResponseRedirect('/asesorias/centro_administradorCentro/list')
-			else:
-				error = 'Formulario invalido'
-		return render_to_response('asesorias/Centro_AdministradorCentro/editCentro_administradorCentro.html', {'form': form, 'error': error})
 	# El centro_administradorCentro no existe
 	else:
-		error = 'No existe tal administrador de centro en dicho centro.'
-	return render_to_response('asesorias/Centro_AdministradorCentro/editCentro_administradorCentro.html', {'error': error})
+		form = False
+	return render_to_response('asesorias/Centro_AdministradorCentro/editCentro_administradorCentro.html', {'form': form})
 
 def delCentro_administradorCentro(request, centro, administrador_centro):
 	# Se obtiene la instancia del centro_administradorCentro.
@@ -67,7 +60,7 @@ def delCentro_administradorCentro(request, centro, administrador_centro):
 		return HttpResponseRedirect('/asesorias/centro_administradorCentro/list')
 	# El centro_administradorCentro no existe.
 	else:
-		error = 'No se ha podido eliminar el centro_administradorCentro.'
+		error = True
 	return render_to_response('asesorias/Centro_AdministradorCentro/delCentro_administradorCentro.html', {'error': error})
 
 def listCentro_administradorCentro(request):
