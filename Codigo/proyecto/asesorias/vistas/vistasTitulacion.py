@@ -90,13 +90,10 @@ def addTitulacion(request):
 			form.save()
 			# Redirige a la pagina de inicio.
 			return HttpResponseRedirect('/asesorias/titulacion/list')
-		else:
-			error = 'Formulario invalido.'
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.TitulacionForm()
-		error = False
-	return render_to_response('asesorias/Titulacion/addTitulacion.html', {'form': form, 'error': error})
+	return render_to_response('asesorias/Titulacion/addTitulacion.html', {'form': form})
 
 def editTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 	# Se obtiene la instancia de la titulacion.
@@ -130,14 +127,10 @@ def editTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 				form.save()
 				# Redirige a la pagina de inicio.
 				return HttpResponseRedirect('/asesorias/titulacion/list')
-			else:
-				error = 'Formulario invalido'
-
-		return render_to_response('asesorias/Titulacion/editTitulacion.html', {'form': form, 'error': error})
 	# La titulacion no existe
 	else:
-		error = 'No existe tal titulacion.'
-	return render_to_response('asesorias/Titulacion/editTitulacion.html', {'error': error})
+		form = False
+	return render_to_response('asesorias/Titulacion/editTitulacion.html', {'form': form})
 
 def delTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 	# Se obtiene la instancia de la titulacion.
@@ -148,7 +141,7 @@ def delTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 		return HttpResponseRedirect('/asesorias/titulacion/list')
 	# La titulacion no existe.
 	else:
-		error = 'No se ha podido eliminar la titulacion.'
+		error = True
 	return render_to_response('asesorias/Titulacion/delTitulacion.html', {'error': error})
 
 def listTitulacion(request):
