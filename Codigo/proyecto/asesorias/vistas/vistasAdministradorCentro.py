@@ -33,7 +33,6 @@ def editAdministradorCentro(request, administrador_centro):
 	if instancia_admin_centro:
 		# Se carga el formulario para el administrador de centro centro existente.
 		form = forms.AdministradorCentroForm(instance=instancia_admin_centro)
-		error = False
 		# Se ha modificado el formulario original.
 		if request.method == 'POST':
 			# Se actualiza el formulario con la nueva informacion.
