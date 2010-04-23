@@ -2,9 +2,9 @@
 
 <a href="../add">Crear nuevo</a>
 
-{% if error %}
+{% if not lista_administradores_centro %}
 
-{{ error }}
+<p>No existen actualmente administradores de centro en el sistema.</p>
 
 {% else %}
 
