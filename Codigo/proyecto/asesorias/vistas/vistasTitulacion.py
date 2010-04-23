@@ -102,7 +102,6 @@ def editTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 	if instancia_titulacion:
 		# Se carga el formulario para la titulacion existente.
 		form = forms.TitulacionForm(instance=instancia_titulacion)
-		error = False
 		# Se ha modificado el formulario original.
 		if request.method == 'POST':
 			# Se obtienen el resto de valores necesarios a traves de POST.
