@@ -1,12 +1,10 @@
 <h1>Añadir asignatura curso académico.</h1>
 
-{% if error %}
+{% if form.errors %}
 
-{{ error }}
+{{ form.errors }}
 
-<a href="../list">Volver</a>
-
-{% else %}
+{% endif %}
 
 <form action="" method="post">
     {% for field in form %}
@@ -26,5 +24,3 @@
     {% endfor %}
     <p><input type="submit" value="Añadir"/></p>
 </form>
-
-{% endif %}

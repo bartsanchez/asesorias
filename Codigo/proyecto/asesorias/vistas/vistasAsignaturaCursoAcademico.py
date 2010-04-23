@@ -40,13 +40,10 @@ def addAsignaturaCursoAcademico(request):
 			form.save()
 			# Redirige a la pagina de inicio.
 			return HttpResponseRedirect('/asesorias/asignaturaCursoAcademico/list')
-		else:
-			error = 'Formulario invalido.'
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AsignaturaCursoAcademicoForm()
-		error = False
-	return render_to_response('asesorias/AsignaturaCursoAcademico/addAsignaturaCursoAcademico.html', {'form': form, 'error': error})
+	return render_to_response('asesorias/AsignaturaCursoAcademico/addAsignaturaCursoAcademico.html', {'form': form})
 
 def editAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura, curso_academico):
 	# Se obtiene la instancia de la asignatura curso academico.
@@ -55,7 +52,6 @@ def editAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, plan
 	if instancia_asignatura_curso_academico:
 		# Se carga el formulario para la asignatura existente.
 		form = forms.AsignaturaCursoAcademicoForm(instance=instancia_asignatura_curso_academico, initial={'asignatura': vistasAsignatura.obtenerAsignatura(nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura).codigo_asignatura})
-		error = False
 		# Se ha modificado el formulario original.
 		if request.method == 'POST':
 			# Se obtienen el resto de valores necesarios a traves de POST.
@@ -81,14 +77,10 @@ def editAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, plan
 				form.save()
 				# Redirige a la pagina de inicio.
 				return HttpResponseRedirect('/asesorias/asignaturaCursoAcademico/list')
-			else:
-				error = 'Formulario invalido'
-
-		return render_to_response('asesorias/AsignaturaCursoAcademico/editAsignaturaCursoAcademico.html', {'form': form, 'error': error})
 	# La asignatura curso academico no existe
 	else:
-		error = 'No existe tal asignatura curso academico.'
-	return render_to_response('asesorias/AsignaturaCursoAcademico/editAsignaturaCursoAcademico.html', {'error': error})
+		form = False
+	return render_to_response('asesorias/AsignaturaCursoAcademico/editAsignaturaCursoAcademico.html', {'form': form})
 
 def delAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura, curso_academico):
 	# Se obtiene la instancia de la asignatura curso academico.
@@ -99,7 +91,7 @@ def delAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, plan_
 		return HttpResponseRedirect('/asesorias/asignaturaCursoAcademico/list')
 	# La asignatura no existe.
 	else:
-		error = 'No se ha podido eliminar la asignatura curso academico.'
+		error = True
 	return render_to_response('asesorias/AsignaturaCursoAcademico/delAsignaturaCursoAcademico.html', {'error': error})
 
 def listAsignaturaCursoAcademico(request):
