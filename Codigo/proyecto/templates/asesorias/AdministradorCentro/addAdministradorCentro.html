@@ -1,13 +1,5 @@
 <h1>Añadir administrador centro.</h1>
 
-{% if error %}
-
-{{ error }}
-
-<a href="../list">Volver</a>
-
-{% else %}
-
 <form action="" method="post">
     {% for field in form %}
         <div class="fieldWrapper">
@@ -17,5 +9,3 @@
     {% endfor %}
     <p><input type="submit" value="Añadir"/></p>
 </form>
-
-{% endif %}

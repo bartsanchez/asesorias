@@ -21,13 +21,10 @@ def addAdministradorCentro(request):
 			form.save()
 			# Redirige a la pagina de inicio.
 			return HttpResponseRedirect('/asesorias/administradorCentro/list')
-		else:
-			error = 'Formulario invalido.'
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AdministradorCentroForm()
-		error = False
-	return render_to_response('asesorias/AdministradorCentro/addAdministradorCentro.html', {'form': form, 'error': error})
+	return render_to_response('asesorias/AdministradorCentro/addAdministradorCentro.html', {'form': form})
 
 def editAdministradorCentro(request, administrador_centro):
 	# Se obtiene la instancia del administrador de centro.
@@ -46,13 +43,10 @@ def editAdministradorCentro(request, administrador_centro):
 				form.save()
 				# Redirige a la pagina de inicio.
 				return HttpResponseRedirect('/asesorias/administradorCentro/list')
-			else:
-				error = 'Formulario invalido'
-		return render_to_response('asesorias/AdministradorCentro/editAdministradorCentro.html', {'form': form, 'error': error})
 	# El administrador de centro no existe
 	else:
-		error = 'No existe tal administrador de centro.'
-	return render_to_response('asesorias/AdministradorCentro/editAdministradorCentro.html', {'error': error})
+		form = False
+	return render_to_response('asesorias/AdministradorCentro/editAdministradorCentro.html', {'form': form})
 
 def delAdministradorCentro(request, administrador_centro):
 	# Se obtiene la instancia del administrador de centro.
@@ -63,7 +57,7 @@ def delAdministradorCentro(request, administrador_centro):
 		return HttpResponseRedirect('/asesorias/administradorCentro/list')
 	# El administrador de centro no existe.
 	else:
-		error = 'No se ha podido eliminar el administrador de centro.'
+		error = True
 	return render_to_response('asesorias/AdministradorCentro/delAdministradorCentro.html', {'error': error})
 
 def listAdministradorCentro(request):
