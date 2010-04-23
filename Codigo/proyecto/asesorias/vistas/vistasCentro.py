@@ -21,13 +21,11 @@ def addCentro(request):
 			form.save()
 			# Redirige a la pagina de inicio.
 			return HttpResponseRedirect('/asesorias/centro/list')
-		else:
-			error = 'Formulario invalido.'
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.CentroForm()
 		error = False
-	return render_to_response('asesorias/Centro/addCentro.html', {'form': form, 'error': error})
+	return render_to_response('asesorias/Centro/addCentro.html', {'form': form})
 
 def editCentro(request, centro):
 	# Se obtiene la instancia del centro.
@@ -36,7 +34,6 @@ def editCentro(request, centro):
 	if instancia_centro:
 		# Se carga el formulario para el centro existente.
 		form = forms.CentroForm(instance=instancia_centro)
-		error = False
 		# Se ha modificado el formulario original.
 		if request.method == 'POST':
 			# Se actualiza el formulario con la nueva informacion.
@@ -46,13 +43,10 @@ def editCentro(request, centro):
 				form.save()
 				# Redirige a la pagina de inicio.
 				return HttpResponseRedirect('/asesorias/centro/list')
-			else:
-				error = 'Formulario invalido'
-		return render_to_response('asesorias/Centro/editCentro.html', {'form': form, 'error': error})
-	# El centro no existe
+	# El centro no existe.
 	else:
-		error = 'No existe tal centro.'
-	return render_to_response('asesorias/Centro/editCentro.html', {'error': error})
+		form = False
+	return render_to_response('asesorias/Centro/editCentro.html', {'form': form})
 
 def delCentro(request, centro):
 	# Se obtiene la instancia del centro.
@@ -63,7 +57,7 @@ def delCentro(request, centro):
 		return HttpResponseRedirect('/asesorias/centro/list')
 	# El centro no existe.
 	else:
-		error = 'No se ha podido eliminar el centro.'
+		error = True
 	return render_to_response('asesorias/Centro/delCentro.html', {'error': error})
 
 def listCentro(request):
