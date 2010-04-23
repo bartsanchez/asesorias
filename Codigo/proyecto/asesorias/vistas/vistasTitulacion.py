@@ -146,10 +146,4 @@ def delTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 def listTitulacion(request):
 	# Se obtiene una lista con todas las titulaciones.
 	lista_titulaciones= models.Titulacion.objects.all()
-	# Al menos existe una titulacion.
-	if lista_titulaciones:
-		error = False
-	# No existen titulaciones actualmente.
-	else:
-		error = 'No existen titulaciones actualmente en el sistema.'
-	return render_to_response('asesorias/Titulacion/listTitulacion.html', {'lista_titulaciones': lista_titulaciones, 'error': error})
+	return render_to_response('asesorias/Titulacion/listTitulacion.html', {'lista_titulaciones': lista_titulaciones})
