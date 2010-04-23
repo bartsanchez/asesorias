@@ -158,11 +158,5 @@ def delAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nomb
 def listAsignatura(request):
 	# Se obtiene una lista con todas las asignaturas.
 	lista_asignaturas = models.Asignatura.objects.all()
-	# Al menos existe una asignatura.
-	if lista_asignaturas:
-		error = False
-	# No existen asignaturas actualmente.
-	else:
-		error = 'No existen asignaturas actualmente en el sistema.'
-	return render_to_response('asesorias/Asignatura/listAsignatura.html', {'lista_asignaturas': lista_asignaturas, 'error': error})
+	return render_to_response('asesorias/Asignatura/listAsignatura.html', {'lista_asignaturas': lista_asignaturas})
 
