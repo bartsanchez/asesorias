@@ -148,7 +148,7 @@ class Asesor(models.Model):
 		db_table = "Asesores"
 
 	def __unicode__(self):
-		return self.correo_electronico
+		return self.dni_pasaporte
 
 class AsesorCursoAcademico(models.Model):
 	codigo_asesorCursoAcademico = models.AutoField(primary_key=True)
