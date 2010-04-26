@@ -2,9 +2,9 @@
 
 <a href="../add">Crear nuevo</a>
 
-{% if error %}
+{% if not lista_departamentos %}
 
-{{ error }}
+<p>No existen actualmente departamentos en el sistema.</p>
 
 {% else %}
 

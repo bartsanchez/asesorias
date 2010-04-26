@@ -62,10 +62,4 @@ def delDepartamento(request, nombre_departamento):
 def listDepartamento(request):
 	# Se obtiene una lista con todos los departamentos.
 	lista_departamentos = models.Departamento.objects.all()
-	# Al menos existe un departamento.
-	if lista_departamentos:
-		error = False
-	# No existen departamentos actualmente.
-	else:
-		error = 'No existen departamentos actualmente en el sistema.'
-	return render_to_response('asesorias/Departamento/listDepartamento.html', {'lista_departamentos': lista_departamentos, 'error': error})
+	return render_to_response('asesorias/Departamento/listDepartamento.html', {'lista_departamentos': lista_departamentos})
