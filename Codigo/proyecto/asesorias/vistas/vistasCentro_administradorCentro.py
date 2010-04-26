@@ -66,10 +66,4 @@ def delCentro_administradorCentro(request, centro, administrador_centro):
 def listCentro_administradorCentro(request):
 	# Se obtiene una lista con todos los centros administrador de centro.
 	lista_centros_administradorCentro = models.CentroAdministradorCentro.objects.all()
-	# Al menos existe un centro administrador de centro.
-	if lista_centros_administradorCentro:
-		error = False
-	# No existen centros administrador de centro actualmente.
-	else:
-		error = 'No existen centros-administrador de centro actualmente en el sistema.'
-	return render_to_response('asesorias/Centro_AdministradorCentro/listCentro_administradorCentro.html', {'lista_centros_administradorCentro': lista_centros_administradorCentro, 'error': error})
+	return render_to_response('asesorias/Centro_AdministradorCentro/listCentro_administradorCentro.html', {'lista_centros_administradorCentro': lista_centros_administradorCentro})
