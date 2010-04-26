@@ -33,6 +33,10 @@ class DepartamentoForm(forms.ModelForm):
 	class Meta:
 		model = models.Departamento
 
+class AsesorForm(forms.ModelForm):
+	class Meta:
+		model = models.Asesor
+
 class Centro_AdministradorCentroForm(forms.ModelForm):
 	class Meta:
 		model = models.CentroAdministradorCentro
