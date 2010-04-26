@@ -2,9 +2,9 @@
 
 <a href="../add">Crear nuevo</a>
 
-{% if error %}
+{% if not lista_asignaturas_curso_academico %}
 
-{{ error }}
+<p>No existen actualmente asignaturas curso académico en el sistema.</p>
 
 {% else %}
 

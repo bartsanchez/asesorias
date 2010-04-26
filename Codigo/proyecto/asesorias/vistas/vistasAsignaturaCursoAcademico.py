@@ -97,10 +97,4 @@ def delAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, plan_
 def listAsignaturaCursoAcademico(request):
 	# Se obtiene una lista con todos las asignaturas curso academico.
 	lista_asignaturas_curso_academico = models.AsignaturaCursoAcademico.objects.all()
-	# Al menos existe una asignatura curso academico.
-	if lista_asignaturas_curso_academico:
-		error = False
-	# No existen asignaturas curso academico actualmente.
-	else:
-		error = 'No existen asignaturas curso academico actualmente en el sistema.'
-	return render_to_response('asesorias/AsignaturaCursoAcademico/listAsignaturaCursoAcademico.html', {'lista_asignaturas_curso_academico': lista_asignaturas_curso_academico, 'error': error})
+	return render_to_response('asesorias/AsignaturaCursoAcademico/listAsignaturaCursoAcademico.html', {'lista_asignaturas_curso_academico': lista_asignaturas_curso_academico})
