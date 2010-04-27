@@ -37,6 +37,10 @@ class AsesorForm(forms.ModelForm):
 	class Meta:
 		model = models.Asesor
 
+class AsesorCursoAcademicoForm(forms.ModelForm):
+	class Meta:
+		model = models.AsesorCursoAcademico
+
 class Centro_AdministradorCentroForm(forms.ModelForm):
 	class Meta:
 		model = models.CentroAdministradorCentro

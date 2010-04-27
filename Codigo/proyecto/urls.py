@@ -53,6 +53,9 @@ urlpatterns = patterns('',
 	(r'^asesorias/asesor/(?P<dni_pasaporte>[\s\w]+)/del/$', 'proyecto.asesorias.vistas.vistasAsesor.delAsesor'),
 	(r'^asesorias/asesor/list/$', 'proyecto.asesorias.vistas.vistasAsesor.listAsesor'),
 
+	(r'^asesorias/asesorCursoAcademico/add/$', 'proyecto.asesorias.vistas.vistasAsesorCursoAcademico.addAsesorCursoAcademico'),
+	(r'^asesorias/asesorCursoAcademico/list/$', 'proyecto.asesorias.vistas.vistasAsesorCursoAcademico.listAsesorCursoAcademico'),
+
 	(r'^asesorias/centro_administradorCentro/add/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.addCentro_administradorCentro'),
 	(r'^asesorias/centro_administradorCentro/(?P<centro>[\s\w]+)/(?P<administrador_centro>[\s\w]+)/edit/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.editCentro_administradorCentro'),
 	(r'^asesorias/centro_administradorCentro/(?P<centro>[\s\w]+)/(?P<administrador_centro>[\s\w]+)/del/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.delCentro_administradorCentro'),
