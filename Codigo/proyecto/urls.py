@@ -99,8 +99,10 @@ urlpatterns += patterns('',
 
 urlpatterns += patterns('',
 	(r'^asesorias/asesorCursoAcademico/add/$', 'proyecto.asesorias.vistas.vistasAsesorCursoAcademico.addAsesorCursoAcademico'),
-	(r'^asesorias/asesorCursoAcademico/list/$', 'proyecto.asesorias.vistas.vistasAsesorCursoAcademico.listAsesorCursoAcademico'),
+	(r'^asesorias/asesorCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/edit/$', 'proyecto.asesorias.vistas.vistasAsesorCursoAcademico.editAsesorCursoAcademico'),
 	(r'^asesorias/asesorCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/del/$', 'proyecto.asesorias.vistas.vistasAsesorCursoAcademico.delAsesorCursoAcademico'),
+	(r'^asesorias/asesorCursoAcademico/list/$', 'proyecto.asesorias.vistas.vistasAsesorCursoAcademico.listAsesorCursoAcademico'),
+
 )
 
 # ----------------------------------------- #

@@ -26,6 +26,27 @@ def addAsesorCursoAcademico(request):
 		form = forms.AsesorCursoAcademicoForm()
 	return render_to_response('asesorias/AsesorCursoAcademico/addAsesorCursoAcademico.html', {'form': form})
 
+def editAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
+	# Se obtiene la instancia del asesor curso academico.
+	instancia_asesor_curso_academico= obtenerAsesorCursoAcademico(dni_pasaporte, curso_academico)
+	# Si existe se edita.
+	if instancia_asesor_curso_academico:
+		# Se carga el formulario para la asignatura existente.
+		form = forms.AsesorCursoAcademicoForm(instance=instancia_asesor_curso_academico)
+		# Se ha modificado el formulario original.
+		if request.method == 'POST':
+			# Se actualiza el formulario con la nueva informacion.
+			form = forms.AsesorCursoAcademicoForm(request.POST, instance=instancia_asesor_curso_academico)
+			# Si es valido se guarda.
+			if form.is_valid():
+				form.save()
+				# Redirige a la pagina de inicio.
+				return HttpResponseRedirect('/asesorias/asesorCursoAcademico/list')
+	# El asesor curso academico no existe.
+	else:
+		form = False
+	return render_to_response('asesorias/AsesorCursoAcademico/editAsesorCursoAcademico.html', {'form': form})
+
 def delAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
 	# Se obtiene la instancia del asesor curso academico.
 	instancia_asesor_curso_academico= obtenerAsesorCursoAcademico(dni_pasaporte, curso_academico)
