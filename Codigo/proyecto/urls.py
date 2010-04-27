@@ -105,6 +105,14 @@ urlpatterns += patterns('',
 
 )
 
+# ------------------------------------------- #
+# Url's de plantillas de entrevista de asesor #
+# ------------------------------------------- #
+urlpatterns += patterns('',
+	(r'^asesorias/plantillaEntrevistaAsesor/add/$', 'proyecto.asesorias.vistas.vistasPlantillaEntrevistaAsesor.addPlantillaEntrevistaAsesor'),
+	(r'^asesorias/plantillaEntrevistaAsesor/list/$', 'proyecto.asesorias.vistas.vistasPlantillaEntrevistaAsesor.listPlantillaEntrevistaAsesor'),
+)
+
 # ----------------------------------------- #
 # Url's de centro - administrador de centro #
 # ----------------------------------------- #

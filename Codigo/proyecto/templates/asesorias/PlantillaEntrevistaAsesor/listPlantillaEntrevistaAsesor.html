@@ -1,0 +1,19 @@
+<h1>Lista de plantillas de entrevista de asesor.</h1>
+
+<a href="../add">Crear nuevo</a>
+
+{% if not lista_plantillas_entrevista_asesor %}
+
+<p>No existen actualmente plantillas de entrevista de asesor en el sistema.</p>
+
+{% else %}
+
+	{% for plantilla_entrevista_asesor in lista_plantillas_entrevista_asesor %}
+		<ul>
+			<li>{{ plantilla_entrevista_asesor }}</li>
+			<a href="../{{ plantilla_entrevista_asesor }}/edit">Editar</a>
+			<a href="../{{ plantilla_entrevista_asesor }}/del">Eliminar</a>
+		</ul>
+	{% endfor %}
+
+{% endif %}

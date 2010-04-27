@@ -1,0 +1,23 @@
+<h1>Añadir plantillas de entrevista de asesor.</h1>
+
+{{ form.errors }}
+
+<form action="" method="post">
+    {% for field in form %}
+
+		<!-- Excluye los campos que forman parte de la clave que se controlarán por software. -->
+		{% ifnotequal field.name 'dni_pasaporte' %}
+		{% ifnotequal field.name 'curso_academico' %}
+		{% ifnotequal field.name 'id_entrevista_asesor' %}
+
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field.label_tag }}: {{ field }}
+        </div>
+		{% endifnotequal %}
+		{% endifnotequal %}
+		{% endifnotequal %}
+
+    {% endfor %}
+    <p><input type="submit" value="Añadir"/></p>
+</form>

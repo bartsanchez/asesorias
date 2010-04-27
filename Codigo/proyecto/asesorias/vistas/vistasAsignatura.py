@@ -15,7 +15,6 @@ def obtenerAsignatura(nombre_centro, nombre_titulacion, plan_estudios, nombre_as
 		resultado = False
 	return resultado
 
-
 # Obtiene una lista con las asignaturas de una determinada titulacion.
 def obtenerAsignaturasDeTitulacion(instancia_titulacion):
 	try:

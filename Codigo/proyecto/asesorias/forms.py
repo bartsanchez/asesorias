@@ -41,6 +41,12 @@ class AsesorCursoAcademicoForm(forms.ModelForm):
 	class Meta:
 		model = models.AsesorCursoAcademico
 
+class PlantillaEntrevistaAsesorForm(forms.ModelForm):
+	asesor = forms.ModelChoiceField(models.AsesorCursoAcademico.objects.all())
+
+	class Meta:
+		model = models.PlantillaEntrevistaAsesor
+
 class Centro_AdministradorCentroForm(forms.ModelForm):
 	class Meta:
 		model = models.CentroAdministradorCentro
