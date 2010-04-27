@@ -2,6 +2,15 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
 
+# Comprueba si existe un asesor curso academico y, de ser asi, la devuelve.
+def obtenerAsesorCursoAcademico(dni_pasaporte, curso_academico):
+	try:
+		# Obtiene la instancia de asesor curso academico.
+		resultado = models.AsesorCursoAcademico.objects.get(dni_pasaporte=dni_pasaporte, curso_academico=curso_academico)
+	except:
+		resultado = False
+	return resultado
+
 def addAsesorCursoAcademico(request):
 	# Se ha rellenado el formulario.
 	if request.method == 'POST':
@@ -16,6 +25,18 @@ def addAsesorCursoAcademico(request):
 	else:
 		form = forms.AsesorCursoAcademicoForm()
 	return render_to_response('asesorias/AsesorCursoAcademico/addAsesorCursoAcademico.html', {'form': form})
+
+def delAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
+	# Se obtiene la instancia del asesor curso academico.
+	instancia_asesor_curso_academico= obtenerAsesorCursoAcademico(dni_pasaporte, curso_academico)
+	# Si existe se elimina.
+	if instancia_asesor_curso_academico:
+		instancia_asesor_curso_academico.delete()
+		return HttpResponseRedirect('/asesorias/asesorCursoAcademico/list')
+	# El asesor curso academico no existe.
+	else:
+		error = True
+	return render_to_response('asesorias/AsesorCursoAcademico/delAsesorCursoAcademico.html', {'error': error})
 
 def listAsesorCursoAcademico(request):
 	# Se obtiene una lista con todos las asesores curso academico.
