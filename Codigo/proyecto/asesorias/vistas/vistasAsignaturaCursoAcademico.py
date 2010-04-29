@@ -11,7 +11,7 @@ def obtenerAsignaturaCursoAcademico(nombre_centro, nombre_titulacion, plan_estud
 		instancia_asignatura= vistasAsignatura.obtenerAsignatura(nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura)
 
 		# Obtiene la instancia de la asignatura curso academico.
-		resultado = models.AsignaturaCursoAcademico.objects.get(id_centro=instancia_asignatura.getIdCentro(), id_titulacion=instancia_asignatura.getIdTitulacion(), id_asignatura=instancia_asignatura.getIdAsignatura(), curso_academico=curso_academico)
+		resultado = models.AsignaturaCursoAcademico.objects.get(id_centro=instancia_asignatura.id_centro, id_titulacion=instancia_asignatura.id_titulacion, id_asignatura=instancia_asignatura.id_asignatura, curso_academico=curso_academico)
 	except:
 		resultado = False
 	return resultado
