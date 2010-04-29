@@ -11,7 +11,7 @@ def obtenerAsignatura(nombre_centro, nombre_titulacion, plan_estudios, nombre_as
 		instancia_titulacion = vistasTitulacion.obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios)
 
 		# Obtiene la instancia de la asignatura.
-		resultado = models.Asignatura.objects.get(id_centro=instancia_titulacion.getIdCentro(), id_titulacion=instancia_titulacion.getIdTitulacion(), nombre_asignatura=nombre_asignatura)
+		resultado = models.Asignatura.objects.get(id_centro=instancia_titulacion.id_centro_id, id_titulacion=instancia_titulacion.id_titulacion, nombre_asignatura=nombre_asignatura)
 	except:
 		resultado = False
 	return resultado
@@ -20,7 +20,7 @@ def obtenerAsignatura(nombre_centro, nombre_titulacion, plan_estudios, nombre_as
 def obtenerAsignaturasDeTitulacion(instancia_titulacion):
 	try:
 		# Obtiene todas las asignaturas que pertenecen a la titulacion pasada por argumento.
-		resultado = models.Asignatura.objects.filter(id_titulacion=instancia_titulacion.getIdTitulacion())
+		resultado = models.Asignatura.objects.filter(id_titulacion=instancia_titulacion.id_titulacion)
 	except:
 		resultado = False
 	return resultado
@@ -79,8 +79,8 @@ def addAsignatura(request):
 		instancia_titulacion = models.Titulacion.objects.get(pk=codigo_titulacion)
 
 		# Se determina el id_centro e id_titulacion para esa titulacion.
-		id_centro = instancia_titulacion.getIdCentro()
-		id_titulacion = instancia_titulacion.getIdTitulacion()
+		id_centro = instancia_titulacion.id_centro_id
+		id_titulacion = instancia_titulacion.id_titulacion
 
 		# Se determina el siguiente id_asignatura para la titulacion.
 		id_asignatura = determinarSiguienteIdAsignaturaEnTitulacion(instancia_titulacion)
@@ -121,8 +121,8 @@ def editAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nom
 			instancia_titulacion = models.Titulacion.objects.get(pk=codigo_titulacion)
 
 			# Se determina el id_centro e id_titulacion para esa titulacion.
-			id_centro = instancia_titulacion.getIdCentro()
-			id_titulacion = instancia_titulacion.getIdTitulacion()
+			id_centro = instancia_titulacion.id_centro_id
+			id_titulacion = instancia_titulacion.id_titulacion
 
 			# Se determina el siguiente id_titulacion para el centro.
 			id_asignatura = determinarSiguienteIdAsignaturaEnTitulacion(instancia_titulacion)
