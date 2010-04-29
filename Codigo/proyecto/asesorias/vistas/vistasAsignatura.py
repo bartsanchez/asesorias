@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
@@ -92,8 +93,8 @@ def addAsignatura(request):
 		if form.is_valid():
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
-			# Redirige a la pagina de inicio.
-			return HttpResponseRedirect('/asesorias/asignatura/list')
+			# Redirige a la pagina de listar asignaturas.
+			return HttpResponseRedirect( reverse('listAsignatura') )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AsignaturaForm()
@@ -135,8 +136,8 @@ def editAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nom
 			# Si es valido se guarda.
 			if form.is_valid():
 				form.save()
-				# Redirige a la pagina de inicio.
-				return HttpResponseRedirect('/asesorias/asignatura/list')
+				# Redirige a la pagina de listar asignaturas.
+				return HttpResponseRedirect( reverse('listAsignatura') )
 	# La asignatura no existe
 	else:
 		form = False
@@ -148,7 +149,8 @@ def delAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nomb
 	# Si existe se elimina.
 	if instancia_asignatura:
 		instancia_asignatura.delete()
-		return HttpResponseRedirect('/asesorias/asignatura/list')
+		# Redirige a la pagina de listar asignaturas.
+		return HttpResponseRedirect( reverse('listAsignatura') )
 	# La asignatura no existe.
 	else:
 		error = True
