@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias.vistas import vistasAsesorCursoAcademico
 
 # Comprueba si existe una plantilla de entrevista de asesor y, de ser asi, la devuelve.
 def obtenerPlantillaEntrevistaAsesor(dni_pasaporte, curso_academico, id_entrevista_asesor):
@@ -63,7 +64,7 @@ def addPlantillaEntrevistaAsesor(request):
 	# Se ha rellenado el formulario.
 	if request.method == 'POST':
 		# Se extraen los valores pasados por el metodo POST.
-		codigo_asesor_curso_academico = request.POST['asesor']
+		codigo_asesor_curso_academico = request.POST['asesor_curso_academico']
 		descripcion = request.POST['descripcion']
 		ultima_modificacion = request.POST['ultima_modificacion']
 
@@ -78,7 +79,7 @@ def addPlantillaEntrevistaAsesor(request):
 		id_entrevista_asesor = determinarSiguienteIdPlantillaDeAsesorCursoAcademico(instancia_asesor_curso_academico)
 
 		# Datos necesarios para crear la nueva plantilla.
-		datos_plantilla_entrevista_asesor = {'dni_pasaporte': dni_pasaporte, 'curso_academico': curso_academico, 'id_entrevista_asesor': id_entrevista_asesor, 'descripcion': descripcion, 'ultima_modificacion': ultima_modificacion, 'asesor': codigo_asesor_curso_academico}
+		datos_plantilla_entrevista_asesor = {'dni_pasaporte': dni_pasaporte, 'curso_academico': curso_academico, 'id_entrevista_asesor': id_entrevista_asesor, 'descripcion': descripcion, 'ultima_modificacion': ultima_modificacion, 'asesor_curso_academico': codigo_asesor_curso_academico}
 
 		# Se obtienen los valores y se valida.
 		form = forms.PlantillaEntrevistaAsesorForm(datos_plantilla_entrevista_asesor)
@@ -91,6 +92,46 @@ def addPlantillaEntrevistaAsesor(request):
 	else:
 		form = forms.PlantillaEntrevistaAsesorForm()
 	return render_to_response('asesorias/PlantillaEntrevistaAsesor/addPlantillaEntrevistaAsesor.html', {'form': form})
+
+def editPlantillaEntrevistaAsesor(request, dni_pasaporte, curso_academico, id_entrevista_asesor):
+	# Se obtiene la instancia de la plantilla de entrevista de asesor.
+	instancia_plantilla_entrevista_asesor = obtenerPlantillaEntrevistaAsesor(dni_pasaporte, curso_academico, id_entrevista_asesor)
+	# Si existe se edita.
+	if instancia_plantilla_entrevista_asesor:
+		# Se carga el formulario para la plantilla existente.
+		form = forms.PlantillaEntrevistaAsesorForm(instance=instancia_plantilla_entrevista_asesor, initial={'asesor_curso_academico': vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(dni_pasaporte, curso_academico).codigo_asesorCursoAcademico})
+		# Se ha modificado el formulario original.
+		if request.method == 'POST':
+			# Se obtienen el resto de valores necesarios a traves de POST.
+			codigo_asesor_curso_academico = request.POST['asesor_curso_academico']
+			descripcion = request.POST['descripcion']
+			ultima_modificacion = request.POST['ultima_modificacion']
+
+			# Se obtiene una instancia del asesor curso academico a traves de su id.
+			instancia_asesor_curso_academico = models.AsesorCursoAcademico.objects.get(pk=codigo_asesor_curso_academico)
+
+			# Se determina el dni_pasaporte y curso academico para ese asesor curso academico.
+			dni_pasaporte = instancia_asesor_curso_academico.dni_pasaporte
+			curso_academico = instancia_asesor_curso_academico.curso_academico
+
+			# Se determina el siguiente id_entrevista_asesor para el asesor curso academico.
+			id_entrevista_asesor = determinarSiguienteIdPlantillaDeAsesorCursoAcademico(instancia_asesor_curso_academico)
+
+			# Datos necesarios para crear la nueva plantilla.
+			datos_plantilla_entrevista_asesor = {'dni_pasaporte': dni_pasaporte, 'curso_academico': curso_academico, 'id_entrevista_asesor': id_entrevista_asesor, 'descripcion': descripcion, 'ultima_modificacion': ultima_modificacion, 'asesor_curso_academico': codigo_asesor_curso_academico}
+
+			# Se actualiza el formulario con la nueva informacion.
+			form = forms.PlantillaEntrevistaAsesorForm(datos_plantilla_entrevista_asesor, instance=instancia_plantilla_entrevista_asesor)
+
+			# Si es valido se guarda.
+			if form.is_valid():
+				form.save()
+				# Redirige a la pagina de inicio.
+				return HttpResponseRedirect('/asesorias/plantillaEntrevistaAsesor/list')
+	# La plantilla de asesor no existe.
+	else:
+		form = False
+	return render_to_response('asesorias/PlantillaEntrevistaAsesor/editPlantillaEntrevistaAsesor.html', {'form': form})
 
 def delPlantillaEntrevistaAsesor(request, dni_pasaporte, curso_academico, id_entrevista_asesor):
 	# Se obtiene la instancia de la asignatura curso academico.
