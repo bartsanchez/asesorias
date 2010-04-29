@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
@@ -19,8 +20,8 @@ def addDepartamento(request):
 		if form.is_valid():
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
-			# Redirige a la pagina de inicio.
-			return HttpResponseRedirect('/asesorias/departamento/list')
+			# Redirige a la pagina de listar departamentos.
+			return HttpResponseRedirect( reverse('listDepartamento') )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.DepartamentoForm()
@@ -40,8 +41,8 @@ def editDepartamento(request, nombre_departamento):
 			# Si es valido se guarda.
 			if form.is_valid():
 				form.save()
-				# Redirige a la pagina de inicio.
-				return HttpResponseRedirect('/asesorias/departamento/list')
+				# Redirige a la pagina de listar departamentos.
+				return HttpResponseRedirect( reverse('listDepartamento') )
 	# El departamento no existe.
 	else:
 		form = False
@@ -53,7 +54,8 @@ def delDepartamento(request, nombre_departamento):
 	# Si existe se elimina.
 	if instancia_departamento:
 		instancia_departamento.delete()
-		return HttpResponseRedirect('/asesorias/departamento/list')
+		# Redirige a la pagina de listar departamentos.
+		return HttpResponseRedirect( reverse('listDepartamento') )
 	# El centro no existe.
 	else:
 		error = True
