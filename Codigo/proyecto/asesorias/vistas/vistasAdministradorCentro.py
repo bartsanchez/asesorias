@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
@@ -19,8 +20,8 @@ def addAdministradorCentro(request):
 		if form.is_valid():
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
-			# Redirige a la pagina de inicio.
-			return HttpResponseRedirect('/asesorias/administradorCentro/list')
+			# Redirige a la pagina de listar administradores de centro.
+			return HttpResponseRedirect( reverse('listAdministradorCentro') )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AdministradorCentroForm()
@@ -40,8 +41,8 @@ def editAdministradorCentro(request, administrador_centro):
 			# Si es valido se guarda.
 			if form.is_valid():
 				form.save()
-				# Redirige a la pagina de inicio.
-				return HttpResponseRedirect('/asesorias/administradorCentro/list')
+				# Redirige a la pagina de listar administradores de centro.
+				return HttpResponseRedirect( reverse('listAdministradorCentro') )
 	# El administrador de centro no existe
 	else:
 		form = False
@@ -53,7 +54,8 @@ def delAdministradorCentro(request, administrador_centro):
 	# Si existe se elimina.
 	if instancia_admin_centro:
 		instancia_admin_centro.delete()
-		return HttpResponseRedirect('/asesorias/administradorCentro/list')
+		# Redirige a la pagina de listar administradores de centro.
+		return HttpResponseRedirect( reverse('listAdministradorCentro') )
 	# El administrador de centro no existe.
 	else:
 		error = True
