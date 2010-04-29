@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
@@ -88,8 +89,8 @@ def addTitulacion(request):
 		if form.is_valid():
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
-			# Redirige a la pagina de inicio.
-			return HttpResponseRedirect('/asesorias/titulacion/list')
+			# Redirige a la pagina de listar titulaciones.
+			return HttpResponseRedirect( reverse('listTitulacion') )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.TitulacionForm()
@@ -124,8 +125,8 @@ def editTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 			# Si es valido se guarda.
 			if form.is_valid():
 				form.save()
-				# Redirige a la pagina de inicio.
-				return HttpResponseRedirect('/asesorias/titulacion/list')
+				# Redirige a la pagina de listar titulaciones.
+				return HttpResponseRedirect( reverse('listTitulacion') )
 	# La titulacion no existe
 	else:
 		form = False
@@ -137,7 +138,8 @@ def delTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 	# Si existe se elimina.
 	if instancia_titulacion:
 		instancia_titulacion.delete()
-		return HttpResponseRedirect('/asesorias/titulacion/list')
+		# Redirige a la pagina de listar titulaciones.
+		return HttpResponseRedirect( reverse('listTitulacion') )
 	# La titulacion no existe.
 	else:
 		error = True
