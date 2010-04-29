@@ -8,9 +8,6 @@ class Centro(models.Model):
 	class Meta:
 		db_table = "Centros"
 
-	def getId(self):
-		return self.id_centro
-
 	def __unicode__(self):
 		return self.nombre_centro
 
