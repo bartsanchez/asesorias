@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
@@ -19,8 +20,8 @@ def addAsesor(request):
 		if form.is_valid():
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
-			# Redirige a la pagina de inicio.
-			return HttpResponseRedirect('/asesorias/asesor/list')
+			# Redirige a la pagina de listar asesores.
+			return HttpResponseRedirect( reverse('listAsesor') )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AsesorForm()
@@ -40,8 +41,8 @@ def editAsesor(request, dni_pasaporte):
 			# Si es valido se guarda.
 			if form.is_valid():
 				form.save()
-				# Redirige a la pagina de inicio.
-				return HttpResponseRedirect('/asesorias/asesor/list')
+				# Redirige a la pagina de listar asesores.
+				return HttpResponseRedirect( reverse('listAsesor') )
 	# El asesor no existe.
 	else:
 		form = False
@@ -53,7 +54,8 @@ def delAsesor(request, dni_pasaporte):
 	# Si existe se elimina.
 	if instancia_asesor:
 		instancia_asesor.delete()
-		return HttpResponseRedirect('/asesorias/asesor/list')
+		# Redirige a la pagina de listar asesores.
+		return HttpResponseRedirect( reverse('listAsesor') )
 	# El asesor no existe.
 	else:
 		error = True
