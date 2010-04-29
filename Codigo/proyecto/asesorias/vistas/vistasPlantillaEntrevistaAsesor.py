@@ -2,6 +2,15 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
 
+# Comprueba si existe una plantilla de entrevista de asesor y, de ser asi, la devuelve.
+def obtenerPlantillaEntrevistaAsesor(dni_pasaporte, curso_academico, id_entrevista_asesor):
+	try:
+		# Obtiene la plantilla de entrevista de asesor.
+		resultado = models.PlantillaEntrevistaAsesor.objects.get(dni_pasaporte=dni_pasaporte, curso_academico=curso_academico, id_entrevista_asesor=id_entrevista_asesor)
+	except:
+		resultado = False
+	return resultado
+
 # Obtiene una lista con las plantillas de un determinado asesor curso academico.
 def obtenerPlantillasDeAsesorCursoAcademico(instancia_asesor_curso_academico):
 	try:
@@ -82,6 +91,18 @@ def addPlantillaEntrevistaAsesor(request):
 	else:
 		form = forms.PlantillaEntrevistaAsesorForm()
 	return render_to_response('asesorias/PlantillaEntrevistaAsesor/addPlantillaEntrevistaAsesor.html', {'form': form})
+
+def delPlantillaEntrevistaAsesor(request, dni_pasaporte, curso_academico, id_entrevista_asesor):
+	# Se obtiene la instancia de la asignatura curso academico.
+	instancia_plantilla_entrevista_asesor = obtenerPlantillaEntrevistaAsesor(dni_pasaporte, curso_academico, id_entrevista_asesor)
+	# Si existe se elimina.
+	if instancia_plantilla_entrevista_asesor:
+		instancia_plantilla_entrevista_asesor.delete()
+		return HttpResponseRedirect('/asesorias/plantillaEntrevistaAsesor/list')
+	# La plantilla no existe.
+	else:
+		error = True
+	return render_to_response('asesorias/PlantillaEntrevistaAsesor/delPlantillaEntrevistaAsesor.html', {'error': error})
 
 def listPlantillaEntrevistaAsesor(request):
 	# Se obtiene una lista con todos las plantillas de entrevista de asesor.

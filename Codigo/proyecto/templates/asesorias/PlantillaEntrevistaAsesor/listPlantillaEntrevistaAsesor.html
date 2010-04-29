@@ -11,8 +11,8 @@
 	{% for plantilla_entrevista_asesor in lista_plantillas_entrevista_asesor %}
 		<ul>
 			<li>{{ plantilla_entrevista_asesor }}</li>
-			<a href="../{{ plantilla_entrevista_asesor }}/edit">Editar</a>
-			<a href="../{{ plantilla_entrevista_asesor }}/del">Eliminar</a>
+			<a href="../{{ plantilla_entrevista_asesor.dni_pasaporte }}/{{ plantilla_entrevista_asesor.curso_academico }}/{{ plantilla_entrevista_asesor.id_entrevista_asesor }}/edit">Editar</a>
+			<a href="../{{ plantilla_entrevista_asesor.dni_pasaporte }}/{{ plantilla_entrevista_asesor.curso_academico }}/{{ plantilla_entrevista_asesor.id_entrevista_asesor }}/del">Eliminar</a>
 		</ul>
 	{% endfor %}
 
