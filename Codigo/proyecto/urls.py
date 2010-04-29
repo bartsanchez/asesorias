@@ -108,11 +108,12 @@ urlpatterns += patterns('',
 # ------------------------------------------- #
 # Url's de plantillas de entrevista de asesor #
 # ------------------------------------------- #
+
 urlpatterns += patterns('',
 	(r'^asesorias/plantillaEntrevistaAsesor/add/$', 'proyecto.asesorias.vistas.vistasPlantillaEntrevistaAsesor.addPlantillaEntrevistaAsesor'),
 	(r'^asesorias/plantillaEntrevistaAsesor/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/(?P<id_entrevista_asesor>\d+)/edit/$', 'proyecto.asesorias.vistas.vistasPlantillaEntrevistaAsesor.editPlantillaEntrevistaAsesor'),
 	(r'^asesorias/plantillaEntrevistaAsesor/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/(?P<id_entrevista_asesor>\d+)/del/$', 'proyecto.asesorias.vistas.vistasPlantillaEntrevistaAsesor.delPlantillaEntrevistaAsesor'),
-	(r'^asesorias/plantillaEntrevistaAsesor/list/$', 'proyecto.asesorias.vistas.vistasPlantillaEntrevistaAsesor.listPlantillaEntrevistaAsesor'),
+	url(r'^asesorias/plantillaEntrevistaAsesor/list/$', 'proyecto.asesorias.vistas.vistasPlantillaEntrevistaAsesor.listPlantillaEntrevistaAsesor', name='listPlantillaEntrevistaAsesor'),
 )
 
 # ----------------------------------------- #

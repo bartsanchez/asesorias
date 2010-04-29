@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
@@ -86,8 +87,8 @@ def addPlantillaEntrevistaAsesor(request):
 		if form.is_valid():
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
-			# Redirige a la pagina de inicio.
-			return HttpResponseRedirect('/asesorias/plantillaEntrevistaAsesor/list')
+			# Redirige a la pagina de listar plantillas de entrevista de asesor.
+			return HttpResponseRedirect( reverse('listPlantillaEntrevistaAsesor') )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.PlantillaEntrevistaAsesorForm()
@@ -126,8 +127,8 @@ def editPlantillaEntrevistaAsesor(request, dni_pasaporte, curso_academico, id_en
 			# Si es valido se guarda.
 			if form.is_valid():
 				form.save()
-				# Redirige a la pagina de inicio.
-				return HttpResponseRedirect('/asesorias/plantillaEntrevistaAsesor/list')
+				# Redirige a la pagina de listar plantillas de entrevista de asesor.
+				return HttpResponseRedirect( reverse('listPlantillaEntrevistaAsesor') )
 	# La plantilla de asesor no existe.
 	else:
 		form = False
@@ -139,7 +140,8 @@ def delPlantillaEntrevistaAsesor(request, dni_pasaporte, curso_academico, id_ent
 	# Si existe se elimina.
 	if instancia_plantilla_entrevista_asesor:
 		instancia_plantilla_entrevista_asesor.delete()
-		return HttpResponseRedirect('/asesorias/plantillaEntrevistaAsesor/list')
+		# Redirige a la pagina de listar plantillas de entrevista de asesor.
+		return HttpResponseRedirect( reverse('listPlantillaEntrevistaAsesor') )
 	# La plantilla no existe.
 	else:
 		error = True
