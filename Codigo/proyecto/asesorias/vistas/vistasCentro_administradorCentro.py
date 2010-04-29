@@ -11,7 +11,7 @@ def obtenerCentro_administradorCentro(centro, administrador_centro):
 		instancia_centro = vistasCentro.obtenerCentro(centro)
 		instancia_administrador_centro = vistasAdministradorCentro.obtenerAdministradorCentro(administrador_centro)
 		# Obtiene el centro_administradorCentro cuyo centro es centro y cuyo administrador de centro es administrador_centro, a traves de los id's.
-		resultado = models.CentroAdministradorCentro.objects.get(id_centro=instancia_centro.id_centro, id_adm_centro=instancia_administrador_centro.getId())
+		resultado = models.CentroAdministradorCentro.objects.get(id_centro=instancia_centro.id_centro, id_adm_centro=instancia_administrador_centro.id_adm_centro)
 	except:
 		resultado = False
 	return resultado

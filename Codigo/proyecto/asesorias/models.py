@@ -18,9 +18,6 @@ class AdministradorCentro(models.Model):
 	class Meta:
 		db_table = "AdministradoresCentro"
 
-	def getId(self):
-		return self.id_adm_centro
-
 	def __unicode__(self):
 		return self.nombre_adm_centro
 
