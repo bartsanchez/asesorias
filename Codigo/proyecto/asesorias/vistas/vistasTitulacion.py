@@ -10,7 +10,7 @@ def obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios):
 		# Obtiene la instancia de centro para posteriormente obtener el id.
 		instancia_centro = vistasCentro.obtenerCentro(nombre_centro)
 		# Obtiene la titulacion cuyo centro es centro y el nombre de la titulacion es nombre_titulacion.
-		resultado = models.Titulacion.objects.get(id_centro=instancia_centro.getId(), nombre_titulacion=nombre_titulacion, plan_estudios=plan_estudios)
+		resultado = models.Titulacion.objects.get(id_centro=instancia_centro.id_centro, nombre_titulacion=nombre_titulacion, plan_estudios=plan_estudios)
 	except:
 		resultado = False
 	return resultado
@@ -20,7 +20,7 @@ def obtenerTitulacionesDeCentro(centro):
 	try:
 		instancia_centro = vistasCentro.obtenerCentro(centro)
 		# Obtiene todas las titulaciones que pertenece al centro pasado por argumento.
-		resultado = models.Titulacion.objects.filter(id_centro=instancia_centro.getId())
+		resultado = models.Titulacion.objects.filter(id_centro=instancia_centro.id_centro)
 	except:
 		resultado = False
 	return resultado
