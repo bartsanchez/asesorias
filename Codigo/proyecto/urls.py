@@ -68,7 +68,7 @@ urlpatterns += patterns('',
 	(r'^asesorias/asignaturaCursoAcademico/add/$', 'proyecto.asesorias.vistas.vistasAsignaturaCursoAcademico.addAsignaturaCursoAcademico'),
 	(r'^asesorias/asignaturaCursoAcademico/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/edit/$', 'proyecto.asesorias.vistas.vistasAsignaturaCursoAcademico.editAsignaturaCursoAcademico'),
 	(r'^asesorias/asignaturaCursoAcademico/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/del/$', 'proyecto.asesorias.vistas.vistasAsignaturaCursoAcademico.delAsignaturaCursoAcademico'),
-	(r'^asesorias/asignaturaCursoAcademico/list/$', 'proyecto.asesorias.vistas.vistasAsignaturaCursoAcademico.listAsignaturaCursoAcademico'),
+	url(r'^asesorias/asignaturaCursoAcademico/list/$', 'proyecto.asesorias.vistas.vistasAsignaturaCursoAcademico.listAsignaturaCursoAcademico', name='listAsignaturaCursoAcademico'),
 )
 
 # --------------------- #
