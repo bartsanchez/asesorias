@@ -116,6 +116,15 @@ urlpatterns += patterns('',
 	url(r'^asesorias/plantillaEntrevistaAsesor/list/$', 'proyecto.asesorias.vistas.vistasPlantillaEntrevistaAsesor.listPlantillaEntrevistaAsesor', name='listPlantillaEntrevistaAsesor'),
 )
 
+# ------------------------------------------- #
+# Url's de preguntas de asesor #
+# ------------------------------------------- #
+
+urlpatterns += patterns('',
+	(r'^asesorias/preguntaAsesor/add/$', 'proyecto.asesorias.vistas.vistasPreguntaAsesor.addPreguntaAsesor'),
+	url(r'^asesorias/preguntaAsesor/list/$', 'proyecto.asesorias.vistas.vistasPreguntaAsesor.listPreguntaAsesor', name='listPreguntaAsesor'),
+)
+
 # ----------------------------------------- #
 # Url's de centro - administrador de centro #
 # ----------------------------------------- #

@@ -1,0 +1,19 @@
+<h1>Lista de preguntas de asesor.</h1>
+
+<a href="../add">Crear nuevo</a>
+
+{% if not lista_preguntas_asesor %}
+
+<p>No existen actualmente preguntas de asesor en el sistema.</p>
+
+{% else %}
+
+	{% for pregunta_asesor in lista_preguntas_asesor %}
+		<ul>
+			<li>{{ pregunta_asesor }}</li>
+			<!--<a href="../{{ plantilla_entrevista_asesor.dni_pasaporte }}/{{ plantilla_entrevista_asesor.curso_academico }}/{{ plantilla_entrevista_asesor.id_entrevista_asesor }}/edit">Editar</a>
+			<a href="../{{ plantilla_entrevista_asesor.dni_pasaporte }}/{{ plantilla_entrevista_asesor.curso_academico }}/{{ plantilla_entrevista_asesor.id_entrevista_asesor }}/del">Eliminar</a>-->
+		</ul>
+	{% endfor %}
+
+{% endif %}

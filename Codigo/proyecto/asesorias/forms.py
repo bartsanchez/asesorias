@@ -47,6 +47,12 @@ class PlantillaEntrevistaAsesorForm(forms.ModelForm):
 	class Meta:
 		model = models.PlantillaEntrevistaAsesor
 
+class PreguntaAsesorForm(forms.ModelForm):
+	plantilla_entrevista_asesor = forms.ModelChoiceField(models.PlantillaEntrevistaAsesor.objects.all())
+
+	class Meta:
+		model = models.PreguntaAsesor
+
 class Centro_AdministradorCentroForm(forms.ModelForm):
 	class Meta:
 		model = models.CentroAdministradorCentro

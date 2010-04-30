@@ -169,7 +169,7 @@ class PreguntaAsesor(models.Model):
 		unique_together = ("dni_pasaporte", "curso_academico", "id_entrevista_asesor", "id_pregunta_asesor")
 
 	def __unicode__(self):
-		return self.codigo_preguntaAsesor
+		return unicode(self.curso_academico) + ': ' + unicode(self.dni_pasaporte) + ' -> ' + unicode(self.id_entrevista_asesor) + ' -> ' + unicode(self.id_pregunta_asesor)
 
 class Alumno(models.Model):
 	dni_pasaporte = models.CharField(primary_key=True, max_length=9)
