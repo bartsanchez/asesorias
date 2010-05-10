@@ -102,7 +102,6 @@ urlpatterns += patterns('',
 	(r'^asesorias/asesorCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/edit/$', 'proyecto.asesorias.vistas.vistasAsesorCursoAcademico.editAsesorCursoAcademico'),
 	(r'^asesorias/asesorCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/del/$', 'proyecto.asesorias.vistas.vistasAsesorCursoAcademico.delAsesorCursoAcademico'),
 	url(r'^asesorias/asesorCursoAcademico/list/$', 'proyecto.asesorias.vistas.vistasAsesorCursoAcademico.listAsesorCursoAcademico', name='listAsesorCursoAcademico'),
-
 )
 
 # ------------------------------------------- #
@@ -116,13 +115,79 @@ urlpatterns += patterns('',
 	url(r'^asesorias/plantillaEntrevistaAsesor/list/$', 'proyecto.asesorias.vistas.vistasPlantillaEntrevistaAsesor.listPlantillaEntrevistaAsesor', name='listPlantillaEntrevistaAsesor'),
 )
 
-# ------------------------------------------- #
+# -----------------------------#
 # Url's de preguntas de asesor #
-# ------------------------------------------- #
+# -----------------------------#
 
 urlpatterns += patterns('',
 	(r'^asesorias/preguntaAsesor/add/$', 'proyecto.asesorias.vistas.vistasPreguntaAsesor.addPreguntaAsesor'),
+	(r'^asesorias/preguntaAsesor/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/(?P<id_entrevista_asesor>\d+)/(?P<id_pregunta_asesor>\d+)/edit/$', 'proyecto.asesorias.vistas.vistasPreguntaAsesor.editPreguntaAsesor'),
+	(r'^asesorias/preguntaAsesor/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/(?P<id_entrevista_asesor>\d+)/(?P<id_pregunta_asesor>\d+)/del/$', 'proyecto.asesorias.vistas.vistasPreguntaAsesor.delPreguntaAsesor'),
 	url(r'^asesorias/preguntaAsesor/list/$', 'proyecto.asesorias.vistas.vistasPreguntaAsesor.listPreguntaAsesor', name='listPreguntaAsesor'),
+)
+
+# ----------------#
+# Url's de alumno #
+# ----------------#
+
+urlpatterns += patterns('',
+	(r'^asesorias/alumno/add/$', 'proyecto.asesorias.vistas.vistasAlumno.addAlumno'),
+	(r'^asesorias/alumno/(?P<dni_pasaporte>[\s\w]+)/edit/$', 'proyecto.asesorias.vistas.vistasAlumno.editAlumno'),
+	(r'^asesorias/alumno/(?P<dni_pasaporte>[\s\w]+)/del/$', 'proyecto.asesorias.vistas.vistasAlumno.delAlumno'),
+	url(r'^asesorias/alumno/list/$', 'proyecto.asesorias.vistas.vistasAlumno.listAlumno', name='listAlumno'),
+)
+
+# ------------------------------- #
+# Url's de alumno curso academico #
+# ------------------------------- #
+
+urlpatterns += patterns('',
+	(r'^asesorias/alumnoCursoAcademico/add/$', 'proyecto.asesorias.vistas.vistasAlumnoCursoAcademico.addAlumnoCursoAcademico'),
+	(r'^asesorias/alumnoCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/edit/$', 'proyecto.asesorias.vistas.vistasAlumnoCursoAcademico.editAlumnoCursoAcademico'),
+	(r'^asesorias/alumnoCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/del/$', 'proyecto.asesorias.vistas.vistasAlumnoCursoAcademico.delAlumnoCursoAcademico'),
+	url(r'^asesorias/alumnoCursoAcademico/list/$', 'proyecto.asesorias.vistas.vistasAlumnoCursoAcademico.listAlumnoCursoAcademico', name='listAlumnoCursoAcademico'),
+)
+
+# ------------------ #
+# Url's de matricula #
+# ------------------ #
+
+urlpatterns += patterns('',
+	(r'^asesorias/matricula/add/$', 'proyecto.asesorias.vistas.vistasMatricula.addMatricula'),
+	(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/(?P<dni_pasaporte>[\s\w]+)/edit/$', 'proyecto.asesorias.vistas.vistasMatricula.editMatricula'),
+	(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/(?P<dni_pasaporte>[\s\w]+)/del/$', 'proyecto.asesorias.vistas.vistasMatricula.delMatricula'),
+	url(r'^asesorias/matricula/list/$', 'proyecto.asesorias.vistas.vistasMatricula.listMatricula', name='listMatricula'),
+)
+
+# ---------------------------------- #
+# Url's de calificacion convocatoria #
+# ---------------------------------- #
+
+urlpatterns += patterns('',
+	(r'^asesorias/calificacionConvocatoria/add/$', 'proyecto.asesorias.vistas.vistasCalificacionConvocatoria.addCalificacionConvocatoria'),
+	(r'^asesorias/calificacionConvocatoria/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/(?P<dni_pasaporte>[\s\w]+)/(?P<convocatoria>[\s\w]+)/edit/$', 'proyecto.asesorias.vistas.vistasCalificacionConvocatoria.editCalificacionConvocatoria'),
+	(r'^asesorias/calificacionConvocatoria/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/(?P<dni_pasaporte>[\s\w]+)/(?P<convocatoria>[\s\w]+)/del/$', 'proyecto.asesorias.vistas.vistasCalificacionConvocatoria.delCalificacionConvocatoria'),
+	url(r'^asesorias/calificacionConvocatoria/list/$', 'proyecto.asesorias.vistas.vistasCalificacionConvocatoria.listCalificacionConvocatoria', name='listCalificacionConvocatoria'),
+)
+
+# ---------------------------------------- #
+# Url's de plantilla de entrevista oficial #
+# ---------------------------------------- #
+
+urlpatterns += patterns('',
+	(r'^asesorias/plantillaEntrevistaOficial/add/$', 'proyecto.asesorias.vistas.vistasPlantillaEntrevistaOficial.addPlantillaEntrevistaOficial'),
+	(r'^asesorias/plantillaEntrevistaOficial/(?P<id_entrevista_oficial>[\s\w]+)/del/$', 'proyecto.asesorias.vistas.vistasPlantillaEntrevistaOficial.delPlantillaEntrevistaOficial'),
+	(r'^asesorias/plantillaEntrevistaOficial/(?P<id_entrevista_oficial>[\s\w]+)/edit/$', 'proyecto.asesorias.vistas.vistasPlantillaEntrevistaOficial.editPlantillaEntrevistaOficial'),
+	url(r'^asesorias/plantillaEntrevistaOficial/list/$', 'proyecto.asesorias.vistas.vistasPlantillaEntrevistaOficial.listPlantillaEntrevistaOficial', name='listPlantillaEntrevistaOficial'),
+)
+
+# ---------------------------- #
+# Url's de preguntas oficiales #
+# ---------------------------- #
+
+urlpatterns += patterns('',
+	(r'^asesorias/preguntaOficial/add/$', 'proyecto.asesorias.vistas.vistasPreguntaOficial.addPreguntaOficial'),
+	url(r'^asesorias/preguntaOficial/list/$', 'proyecto.asesorias.vistas.vistasPreguntaOficial.listPreguntaOficial', name='listPreguntaOficial'),
 )
 
 # ----------------------------------------- #
