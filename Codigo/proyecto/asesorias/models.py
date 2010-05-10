@@ -296,7 +296,7 @@ class PreguntaOficial(models.Model):
 		unique_together = ("id_entrevista_oficial", "id_pregunta_oficial")
 
 	def __unicode__(self):
-		return self.codigo_pregunta_oficial
+		return unicode(self.id_entrevista_oficial) + ' : '+ unicode(self.id_pregunta_oficial)
 
 class Reunion(models.Model):
 	TIPOS_REUNION = (
