@@ -11,9 +11,17 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
-	(r'^asesorias/$', 'proyecto.asesorias.views.authentication'),
 	(r'^asesorias/administrador/$', 'proyecto.asesorias.views.administrador'),
-	(r'^asesorias/alumnos/(?P<username>[\s\w]+)/$', 'proyecto.asesorias.views.alumnos'),
+	url(r'^asesorias/alumno/$', 'proyecto.asesorias.views.alumno', name='vista_alumno'),
+)
+
+# ------------------------- #
+# Url's gestion de usuarios #
+# ------------------------- #
+
+urlpatterns += patterns('',
+	url(r'^asesorias/$', 'proyecto.asesorias.vistas.vistasGestionUsuarios.authentication', name='authentication'),
+	url(r'^asesorias/logout/$', 'proyecto.asesorias.vistas.vistasGestionUsuarios.logout_view', name='logout'),
 )
 
 # --------------- #

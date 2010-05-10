@@ -1,10 +1,4 @@
-<h1>Alumnos.</h1>
-
-{% if error %}
-
-<p>El usuario no pertenece al alumnado.</p>
-
-{% else %}
+<h1>Alumno: {{ alumno }}</h1>
 
 <ul>
 	<li>dni_pasaporte: {{ alumno.dni_pasaporte }}</li>
@@ -23,4 +17,4 @@
 	<li>calificacion acceso: {{ alumno.calificacion_acceso }}</li>
 </ul>
 
-{% endif %}
+<a href="../logout">Salir</a>
