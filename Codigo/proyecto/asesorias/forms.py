@@ -53,6 +53,37 @@ class PreguntaAsesorForm(forms.ModelForm):
 	class Meta:
 		model = models.PreguntaAsesor
 
+class AlumnoForm(forms.ModelForm):
+	class Meta:
+		model = models.Alumno
+
+class AlumnoCursoAcademicoForm(forms.ModelForm):
+	class Meta:
+		model = models.AlumnoCursoAcademico
+
+class MatriculaForm(forms.ModelForm):
+	alumno_curso_academico = forms.ModelChoiceField(models.AlumnoCursoAcademico.objects.all())
+	asignatura_curso_academico = forms.ModelChoiceField(models.AsignaturaCursoAcademico.objects.all())
+
+	class Meta:
+		model = models.Matricula
+
+class CalificacionConvocatoriaForm(forms.ModelForm):
+	matricula = forms.ModelChoiceField(models.Matricula.objects.all())
+
+	class Meta:
+		model = models.CalificacionConvocatoria
+
+class PlantillaEntrevistaOficialForm(forms.ModelForm):
+	class Meta:
+		model = models.PlantillaEntrevistaOficial
+
+class PreguntaOficialForm(forms.ModelForm):
+	plantilla_entrevista_oficial = forms.ModelChoiceField(models.PlantillaEntrevistaOficial.objects.all())
+
+	class Meta:
+		model = models.PreguntaOficial
+
 class Centro_AdministradorCentroForm(forms.ModelForm):
 	class Meta:
 		model = models.CentroAdministradorCentro

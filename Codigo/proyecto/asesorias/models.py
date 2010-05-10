@@ -195,7 +195,7 @@ class Alumno(models.Model):
 
 class AlumnoCursoAcademico(models.Model):
 	codigo_alumnoCursoAcademico = models.AutoField(primary_key=True)
-	dni_pasaporte = models.CharField(max_length=9)
+	dni_pasaporte = models.ForeignKey('Alumno', db_column='dni_pasaporte')
 	curso_academico = models.IntegerField()
 	observaciones = models.CharField(max_length=100)
 
@@ -204,7 +204,7 @@ class AlumnoCursoAcademico(models.Model):
 		unique_together = ("dni_pasaporte", "curso_academico")
 
 	def __unicode__(self):
-		return self.codigo_alumnoCursoAcademico
+		return unicode(self.curso_academico) + ': ' + unicode(self.dni_pasaporte)
 
 class Matricula(models.Model):
 	codigo_matricula = models.AutoField(primary_key=True)
@@ -219,8 +219,24 @@ class Matricula(models.Model):
 		db_table = "Matriculas"
 		unique_together = ("id_centro", "id_titulacion", "id_asignatura", "curso_academico", "dni_pasaporte")
 
+	def determinarNombreCentro(self):
+		asignatura = Asignatura.objects.get(id_centro=self.id_centro, id_titulacion=self.id_titulacion, id_asignatura=self.id_asignatura)
+		return unicode(asignatura.determinarNombreCentro())
+
+	def determinarNombreTitulacion(self):
+		asignatura = Asignatura.objects.get(id_centro=self.id_centro, id_titulacion=self.id_titulacion, id_asignatura=self.id_asignatura)
+		return unicode(asignatura.determinarNombreTitulacion())
+
+	def determinarPlanEstudios(self):
+		asignatura = Asignatura.objects.get(id_centro=self.id_centro, id_titulacion=self.id_titulacion, id_asignatura=self.id_asignatura)
+		return unicode(asignatura.determinarPlanEstudios())
+
+	def determinarNombreAsignatura(self):
+		asignatura = Asignatura.objects.get(id_centro=self.id_centro, id_titulacion=self.id_titulacion, id_asignatura=self.id_asignatura)
+		return unicode(asignatura.nombre_asignatura)
+
 	def __unicode__(self):
-		return self.codigo_matricula
+		return unicode(self.determinarNombreCentro()) + ': ' + unicode(self.determinarNombreTitulacion()) + ': ' + unicode(self.determinarPlanEstudios()) + ': ' + unicode(self.determinarNombreAsignatura()) + ': ' + unicode(self.curso_academico) + ': ' + unicode(self.dni_pasaporte)
 
 class CalificacionConvocatoria(models.Model):
 	codigo_calificacionConvocatoria = models.AutoField(primary_key=True)
@@ -237,8 +253,25 @@ class CalificacionConvocatoria(models.Model):
 		db_table = "CalificacionesConvocatoria"
 		unique_together = ("id_centro", "id_titulacion", "id_asignatura", "curso_academico", "dni_pasaporte", "convocatoria")
 
+	def determinarNombreCentro(self):
+		asignatura = Asignatura.objects.get(id_centro=self.id_centro, id_titulacion=self.id_titulacion, id_asignatura=self.id_asignatura)
+		return unicode(asignatura.determinarNombreCentro())
+
+	def determinarNombreTitulacion(self):
+		asignatura = Asignatura.objects.get(id_centro=self.id_centro, id_titulacion=self.id_titulacion, id_asignatura=self.id_asignatura)
+		return unicode(asignatura.determinarNombreTitulacion())
+
+	def determinarPlanEstudios(self):
+		asignatura = Asignatura.objects.get(id_centro=self.id_centro, id_titulacion=self.id_titulacion, id_asignatura=self.id_asignatura)
+		return unicode(asignatura.determinarPlanEstudios())
+
+	def determinarNombreAsignatura(self):
+		asignatura = Asignatura.objects.get(id_centro=self.id_centro, id_titulacion=self.id_titulacion, id_asignatura=self.id_asignatura)
+		return unicode(asignatura.nombre_asignatura)
+
 	def __unicode__(self):
-		return self.codigo_calificacionConvocatoria
+		return unicode(self.determinarNombreCentro()) + ': ' + unicode(self.determinarNombreTitulacion()) + ': ' + unicode(self.determinarPlanEstudios()) + ': ' + unicode(self.determinarNombreAsignatura()) + ': ' + unicode(self.curso_academico) + ': ' + unicode(self.dni_pasaporte) + ': ' + self.convocatoria
+
 
 class PlantillaEntrevistaOficial(models.Model):
 	id_entrevista_oficial = models.AutoField(primary_key=True)
@@ -249,7 +282,7 @@ class PlantillaEntrevistaOficial(models.Model):
 		db_table = "PlantillasEntrevistaOficial"
 
 	def __unicode__(self):
-		return self.descripcion
+		return unicode(self.id_entrevista_oficial)
 
 class PreguntaOficial(models.Model):
 	codigo_pregunta_oficial = models.AutoField(primary_key=True)
