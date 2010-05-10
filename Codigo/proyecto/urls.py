@@ -187,6 +187,7 @@ urlpatterns += patterns('',
 
 urlpatterns += patterns('',
 	(r'^asesorias/preguntaOficial/add/$', 'proyecto.asesorias.vistas.vistasPreguntaOficial.addPreguntaOficial'),
+	(r'^asesorias/preguntaOficial/(?P<id_entrevista_oficial>\d+)/(?P<id_pregunta_oficial>\d+)/edit/$', 'proyecto.asesorias.vistas.vistasPreguntaOficial.editPreguntaOficial'),
 	(r'^asesorias/preguntaOficial/(?P<id_entrevista_oficial>\d+)/(?P<id_pregunta_oficial>\d+)/del/$', 'proyecto.asesorias.vistas.vistasPreguntaOficial.delPreguntaOficial'),
 	url(r'^asesorias/preguntaOficial/list/$', 'proyecto.asesorias.vistas.vistasPreguntaOficial.listPreguntaOficial', name='listPreguntaOficial'),
 )
