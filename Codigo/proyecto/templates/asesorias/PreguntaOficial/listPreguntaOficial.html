@@ -1,0 +1,19 @@
+<h1>Lista de preguntas oficiales.</h1>
+
+<a href="../add">Crear nuevo</a>
+
+{% if not lista_preguntas_oficiales %}
+
+<p>No existen actualmente preguntas oficiales en el sistema.</p>
+
+{% else %}
+
+	{% for pregunta_oficial in lista_preguntas_oficiales %}
+		<ul>
+			<li>{{ pregunta_oficial }}</li>
+			<a href="../{{ pregunta_oficial.dni_pasaporte }}/pregunta_oficial.id_entrevista_asesor }}/{{ pregunta_oficial.id_pregunta_oficial }}/edit">Editar</a>
+			<a href="../{{ pregunta_oficial.dni_pasaporte }}/{{ pregunta_oficial.curso_academico }}/{{ pregunta_oficial.id_entrevista_asesor }}/{{ pregunta_oficial.id_pregunta_oficial }}/del">Eliminar</a>
+		</ul>
+	{% endfor %}
+
+{% endif %}

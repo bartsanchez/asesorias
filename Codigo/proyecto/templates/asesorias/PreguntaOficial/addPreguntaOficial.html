@@ -1,0 +1,22 @@
+<h1>Añadir preguntas de asesor.</h1>
+
+{{ form.errors }}
+
+<form action="" method="post">
+    {% for field in form %}
+
+		<!-- Excluye los campos que forman parte de la clave que se controlarán por software. -->
+		{% ifnotequal field.name 'id_entrevista_oficial' %}
+		{% ifnotequal field.name 'id_pregunta_oficial' %}
+
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field.label_tag }}: {{ field }}
+        </div>
+
+		{% endifnotequal %}
+		{% endifnotequal %}
+
+    {% endfor %}
+    <p><input type="submit" value="Añadir"/></p>
+</form>
