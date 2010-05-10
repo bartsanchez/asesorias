@@ -1,0 +1,19 @@
+<h1>Lista de alumnos.</h1>
+
+<a href="../add">Crear nuevo</a>
+
+{% if not lista_alumnos%}
+
+<p>No existen actualmente alumnos en el sistema.</p>
+
+{% else %}
+
+	{% for alumno in lista_alumnos%}
+		<ul>
+			<li>{{ alumno }}</li>
+			<a href="../{{ alumno }}/edit">Editar</a>
+			<a href="../{{ alumno }}/del">Eliminar</a>
+		</ul>
+	{% endfor %}
+
+{% endif %}
