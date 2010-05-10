@@ -1,0 +1,13 @@
+<h1>Añadir plantillas de entrevista oficiales.</h1>
+
+{{ form.errors }}
+
+<form action="" method="post">
+    {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field.label_tag }}: {{ field }}
+        </div>
+    {% endfor %}
+    <p><input type="submit" value="Añadir"/></p>
+</form>

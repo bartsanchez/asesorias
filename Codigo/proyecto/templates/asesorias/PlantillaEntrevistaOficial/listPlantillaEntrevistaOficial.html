@@ -1,0 +1,19 @@
+<h1>Lista de plantillas de entrevista oficiales.</h1>
+
+<a href="../add">Crear nuevo</a>
+
+{% if not lista_plantillas_entrevista_oficial %}
+
+<p>No existen actualmente plantillas de entrevista oficiales en el sistema.</p>
+
+{% else %}
+
+	{% for plantilla_entrevista_oficial in lista_plantillas_entrevista_oficial %}
+		<ul>
+			<li>{{ plantilla_entrevista_oficial }}</li>
+			<a href="../{{ plantilla_entrevista_oficial }}/edit">Editar</a>
+			<a href="../{{ plantilla_entrevista_oficial }}/del">Eliminar</a>
+		</ul>
+	{% endfor %}
+
+{% endif %}
