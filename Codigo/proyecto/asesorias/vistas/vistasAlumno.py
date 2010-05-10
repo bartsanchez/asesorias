@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -20,6 +21,15 @@ def addAlumno(request):
 		if form.is_valid():
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
+
+			# Se crea un usuario django.
+			username = request.POST['dni_pasaporte']
+			email = request.POST['correo_electronico']
+			password = username
+
+			user = User.objects.create_user(username, email, password)
+			user.save()
+
 			# Redirige a la pagina de listar asesores.
 			return HttpResponseRedirect( reverse('listAlumno') )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
