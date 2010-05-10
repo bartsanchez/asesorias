@@ -1,0 +1,15 @@
+<h1>Añadir alumno curso académico.</h1>
+
+{{ form.errors }}
+
+<form action="" method="post">
+    {% for field in form %}
+
+		<div class="fieldWrapper">
+			{{ field.errors }}
+			{{ field.label_tag }}: {{ field }}
+		</div>
+
+    {% endfor %}
+    <p><input type="submit" value="Añadir"/></p>
+</form>

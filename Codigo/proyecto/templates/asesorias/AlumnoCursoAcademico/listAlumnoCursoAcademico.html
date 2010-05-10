@@ -1,0 +1,19 @@
+<h1>Lista de alumnos curso académico.</h1>
+
+<a href="../add">Crear nuevo</a>
+
+{% if not lista_alumnos_curso_academico %}
+
+<p>No existen actualmente alumnos curso académico en el sistema.</p>
+
+{% else %}
+
+	{% for alumno_curso_academico in lista_alumnos_curso_academico %}
+		<ul>
+			<li>{{ alumno_curso_academico }}</li>
+			<a href="../{{ alumno_curso_academico.dni_pasaporte }}/{{ alumno_curso_academico.curso_academico }}/edit">Editar</a>
+			<a href="../{{ alumno_curso_academico.dni_pasaporte }}/{{ alumno_curso_academico.curso_academico }}/del">Eliminar</a>
+		</ul>
+	{% endfor %}
+
+{% endif %}

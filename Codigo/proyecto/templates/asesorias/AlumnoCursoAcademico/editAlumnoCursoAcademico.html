@@ -1,0 +1,23 @@
+<h1>Editar alumno curso académico.</h1>
+
+{% if not form %}
+
+<p>No existe tal alumno curso académico.</p>
+
+<a href="../../../list">Volver</a>
+
+{% else %}
+
+{{ form.errors }}
+
+<form action="" method="post">
+    {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field.label_tag }}: {{ field }}
+        </div>
+    {% endfor %}
+    <p><input type="submit" value="Editar"/></p>
+</form>
+
+{% endif %}
