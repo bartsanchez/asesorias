@@ -3,6 +3,15 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
 
+# Comprueba si existe una pregunta oficial y, de ser asi, la devuelve.
+def obtenerPreguntaOficial(id_entrevista_oficial, id_pregunta_oficial):
+	try:
+		# Obtiene la pregunta oficial.
+		resultado = models.PreguntaOficial.objects.get(id_entrevista_oficial=id_entrevista_oficial, id_pregunta_oficial=id_pregunta_oficial)
+	except:
+		resultado = False
+	return resultado
+
 # Obtiene una lista con las preguntas de una determinada plantilla oficial.
 def obtenerPreguntasDePlantillaOficial(instancia_plantilla_entrevista_oficial):
 	try:
@@ -82,6 +91,19 @@ def addPreguntaOficial(request):
 	else:
 		form = forms.PreguntaOficialForm()
 	return render_to_response('asesorias/PreguntaOficial/addPreguntaOficial.html', {'form': form})
+
+def delPreguntaOficial(request, id_entrevista_oficial, id_pregunta_oficial):
+	# Se obtiene la instancia de la pregunta oficial.
+	instancia_pregunta_oficial = obtenerPreguntaOficial(id_entrevista_oficial, id_pregunta_oficial)
+	# Si existe se elimina.
+	if instancia_pregunta_oficial:
+		instancia_pregunta_oficial.delete()
+		# Redirige a la pagina de listar preguntas oficiales.
+		return HttpResponseRedirect( reverse('listPreguntaOficial') )
+	# La pregunta no existe.
+	else:
+		error = True
+	return render_to_response('asesorias/PreguntaOficial/delPreguntaOficial.html', {'error': error})
 
 def listPreguntaOficial(request):
 	# Se obtiene una lista con todos las preguntas oficiales.
