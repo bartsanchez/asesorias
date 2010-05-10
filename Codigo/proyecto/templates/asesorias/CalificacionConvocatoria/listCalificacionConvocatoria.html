@@ -1,0 +1,19 @@
+<h1>Lista de calificaciones convocatoria.</h1>
+
+<a href="../add">Crear nuevo</a>
+
+{% if not lista_calificaciones %}
+
+<p>No existen actualmente calificaciones en el sistema.</p>
+
+{% else %}
+
+	{% for calificacion in lista_calificaciones %}
+		<ul>
+			<li>{{ calificacion }}</li>
+			<a href="../{{ calificacion.determinarNombreCentro }}/{{ calificacion.determinarNombreTitulacion }}/{{ calificacion.determinarPlanEstudios}}/{{ calificacion.determinarNombreAsignatura}}/{{ calificacion.curso_academico }}/{{ calificacion.dni_pasaporte }}/{{ calificacion.convocatoria}}/edit">Editar</a>
+			<a href="../{{ calificacion.determinarNombreCentro }}/{{ calificacion.determinarNombreTitulacion }}/{{ calificacion.determinarPlanEstudios}}/{{ calificacion.determinarNombreAsignatura}}/{{ calificacion.curso_academico }}/{{ calificacion.dni_pasaporte }}/{{ calificacion.convocatoria}}/del">Eliminar</a>
+		</ul>
+	{% endfor %}
+
+{% endif %}

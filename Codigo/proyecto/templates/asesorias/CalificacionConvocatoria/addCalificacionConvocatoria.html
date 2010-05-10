@@ -1,0 +1,26 @@
+<h1>Añadir calificación convocatoria.</h1>
+
+{{ form.errors }}
+
+<form action="" method="post">
+    {% for field in form %}
+
+		<!-- Excluye los campos que forman parte de la clave que se controlarán por software. -->
+		{% ifnotequal field.name 'id_centro' %}
+		{% ifnotequal field.name 'id_titulacion' %}
+		{% ifnotequal field.name 'id_asignatura' %}
+		{% ifnotequal field.name 'curso_academico' %}
+		{% ifnotequal field.name 'dni_pasaporte' %}
+			<div class="fieldWrapper">
+				{{ field.errors }}
+				{{ field.label_tag }}: {{ field }}
+			</div>
+		{% endifnotequal %}
+		{% endifnotequal %}
+		{% endifnotequal %}
+		{% endifnotequal %}
+		{% endifnotequal %}
+
+    {% endfor %}
+    <p><input type="submit" value="Añadir"/></p>
+</form>
