@@ -2,6 +2,16 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias.vistas import vistasPlantillaEntrevistaAsesor
+
+# Comprueba si existe una pregunta de asesor y, de ser asi, la devuelve.
+def obtenerPreguntaAsesor(dni_pasaporte, curso_academico, id_entrevista_asesor, id_pregunta_asesor):
+	try:
+		# Obtiene la pregunta de asesor.
+		resultado = models.PreguntaAsesor.objects.get(dni_pasaporte=dni_pasaporte, curso_academico=curso_academico, id_entrevista_asesor=id_entrevista_asesor, id_pregunta_asesor=id_pregunta_asesor)
+	except:
+		resultado = False
+	return resultado
 
 # Obtiene una lista con las preguntas de una determinada plantilla de asesor.
 def obtenerPreguntasDePlantillaDeAsesor(instancia_plantilla_entrevista_asesor):
@@ -84,6 +94,60 @@ def addPreguntaAsesor(request):
 	else:
 		form = forms.PreguntaAsesorForm()
 	return render_to_response('asesorias/PreguntaAsesor/addPreguntaAsesor.html', {'form': form})
+
+def editPreguntaAsesor(request, dni_pasaporte, curso_academico, id_entrevista_asesor, id_pregunta_asesor):
+	# Se obtiene la instancia de la pregunta de asesor.
+	instancia_pregunta_asesor = obtenerPreguntaAsesor(dni_pasaporte, curso_academico, id_entrevista_asesor, id_pregunta_asesor)
+	# Si existe se edita.
+	if instancia_pregunta_asesor:
+		# Se carga el formulario para la pregunta existente.
+		form = forms.PreguntaAsesorForm(instance=instancia_pregunta_asesor, initial={'plantilla_entrevista_asesor': vistasPlantillaEntrevistaAsesor.obtenerPlantillaEntrevistaAsesor(dni_pasaporte, curso_academico, id_entrevista_asesor).codigo_plantillaEntrevistaAsesor})
+		# Se ha modificado el formulario original.
+		if request.method == 'POST':
+			# Se obtienen el resto de valores necesarios a traves de POST.
+			codigo_plantilla_entrevista_asesor = request.POST['plantilla_entrevista_asesor']
+			enunciado = request.POST['enunciado']
+			ultima_modificacion = request.POST['ultima_modificacion']
+
+			# Se obtiene una instancia de la plantilla de asesor a traves de su id.
+			instancia_plantilla_entrevista_asesor = models.PlantillaEntrevistaAsesor.objects.get(pk=codigo_plantilla_entrevista_asesor)
+
+			# Se determina el dni_pasaporte, curso academico e id_entrevista_asesor para esa plantilla de asesor.
+			dni_pasaporte = instancia_plantilla_entrevista_asesor.dni_pasaporte
+			curso_academico = instancia_plantilla_entrevista_asesor.curso_academico
+			id_entrevista_asesor = instancia_plantilla_entrevista_asesor.id_entrevista_asesor
+
+			# Se determina el siguiente id_pregunta_asesor para la plantilla de entrevista de asesor.
+			id_pregunta_asesor = determinarSiguienteIdPreguntaDePlantillaDeAsesor(instancia_plantilla_entrevista_asesor)
+
+			# Datos necesarios para crear la nueva plantilla.
+			datos_pregunta_asesor = {'dni_pasaporte': dni_pasaporte, 'curso_academico': curso_academico, 'id_entrevista_asesor': id_entrevista_asesor, 'id_pregunta_asesor': id_pregunta_asesor, 'enunciado': enunciado, 'ultima_modificacion': ultima_modificacion, 'plantilla_entrevista_asesor': codigo_plantilla_entrevista_asesor}
+
+			# Se actualiza el formulario con la nueva informacion.
+			form = forms.PreguntaAsesorForm(datos_pregunta_asesor, instance=instancia_pregunta_asesor)
+
+			# Si es valido se guarda.
+			if form.is_valid():
+				form.save()
+				# Redirige a la pagina de listar preguntas de asesor.
+				return HttpResponseRedirect( reverse('listPreguntaAsesor') )
+	# La pregunta de asesor no existe.
+	else:
+		form = False
+	return render_to_response('asesorias/PreguntaAsesor/editPreguntaAsesor.html', {'form': form})
+
+def delPreguntaAsesor(request, dni_pasaporte, curso_academico, id_entrevista_asesor, id_pregunta_asesor):
+	# Se obtiene la instancia de la pregunta de asesor.
+	instancia_pregunta_asesor = obtenerPreguntaAsesor(dni_pasaporte, curso_academico, id_entrevista_asesor, id_pregunta_asesor)
+	# Si existe se elimina.
+	if instancia_pregunta_asesor:
+		instancia_pregunta_asesor.delete()
+		# Redirige a la pagina de listar preguntas de asesor.
+		return HttpResponseRedirect( reverse('listPreguntaAsesor') )
+	# La pregunta no existe.
+	else:
+		error = True
+	return render_to_response('asesorias/PreguntaAsesor/delPreguntaAsesor.html', {'error': error})
 
 def listPreguntaAsesor(request):
 	# Se obtiene una lista con todos las preguntas de asesor.
