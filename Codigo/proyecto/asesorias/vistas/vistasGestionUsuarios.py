@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import forms, models
-from asesorias.vistas import vistasAdministradorCentro, vistasAlumno
+from asesorias.vistas import vistasAdministradorCentro, vistasAsesor, vistasAlumno
 
 # Vista que controla la autentificacion en el sistema.
 def authentication(request):
@@ -27,8 +27,12 @@ def authentication(request):
 
 					# Obtiene el rol del usuario (Administrador centro, asesor o alumno).
 					rol = obtenerRol(username)
+
+					# Si es asesor se redirige a la pagina de asesores.
+					if rol == 'asesor':
+						return HttpResponseRedirect( reverse('vista_asesor') )
 					# Si es alumno se redirige a la pagina de alumnos.
-					if rol == 'alumno':
+					elif rol == 'alumno':
 						return HttpResponseRedirect( reverse('vista_alumno') )
 					else:
 						error = 'El usuario no tiene rol.'
@@ -55,8 +59,8 @@ def logout_view(request):
 def obtenerRol(username):
 	if vistasAdministradorCentro.obtenerAdministradorCentro(username):
 		rol = 'administradorCentro'
-	#elif esAsesor(username):
-		#rol = 'asesor'
+	elif vistasAsesor.obtenerAsesor(username):
+		rol = 'asesor'
 	elif vistasAlumno.obtenerAlumno(username):
 		rol = 'alumno'
 	else:

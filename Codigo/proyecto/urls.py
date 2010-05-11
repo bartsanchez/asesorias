@@ -12,6 +12,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
 	url(r'^asesorias/administrador/$', 'proyecto.asesorias.views.administrador', name='vista_administrador'),
+	url(r'^asesorias/asesor/$', 'proyecto.asesorias.views.asesor', name='vista_asesor'),
 	url(r'^asesorias/alumno/$', 'proyecto.asesorias.views.alumno', name='vista_alumno'),
 )
 
