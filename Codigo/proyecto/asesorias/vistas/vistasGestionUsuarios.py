@@ -20,6 +20,11 @@ def authentication(request):
 			if user is not None:
 				if user.is_active:
 					login(request, user)
+
+					# Comprueba si el usuario es administrador principal.
+					if user.is_superuser:
+						return HttpResponseRedirect( reverse('vista_administrador') )
+
 					# Obtiene el rol del usuario (Administrador centro, asesor o alumno).
 					rol = obtenerRol(username)
 					# Si es alumno se redirige a la pagina de alumnos.
