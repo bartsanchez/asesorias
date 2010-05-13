@@ -3,6 +3,15 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
 
+# Comprueba si existe una reunion y, de ser asi, la devuelve.
+def obtenerReunion(dni_pasaporte, curso_academico, id_reunion):
+	try:
+		# Obtiene la reunion.
+		resultado = models.Reunion.objects.get(dni_pasaporte=dni_pasaporte, curso_academico=curso_academico, id_reunion=id_reunion)
+	except:
+		resultado = False
+	return resultado
+
 # Obtiene una lista con las reuniones de un determinado alumno curso academico.
 def obtenerReunionesDeAlumnoCursoAcademico(instancia_alumno_curso_academico):
 	try:
@@ -85,6 +94,19 @@ def addReunion(request):
 	else:
 		form = forms.ReunionForm()
 	return render_to_response('asesorias/Reunion/addReunion.html', {'form': form})
+
+def delReunion(request, dni_pasaporte, curso_academico, id_reunion):
+	# Se obtiene la instancia de la reunion.
+	instancia_reunion= obtenerReunion(dni_pasaporte, curso_academico, id_reunion)
+	# Si existe se elimina.
+	if instancia_reunion:
+		instancia_reunion.delete()
+		# Redirige a la pagina de listar reuniones.
+		return HttpResponseRedirect( reverse('listReunion') )
+	# La reunion no existe.
+	else:
+		error = True
+	return render_to_response('asesorias/Reunion/delReunion.html', {'error': error})
 
 def listReunion(request):
 	# Se obtiene una lista con todos las reuniones.

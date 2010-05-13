@@ -1,0 +1,19 @@
+<h1>Lista de reuniones.</h1>
+
+<a href="../add">Crear nuevo</a>
+
+{% if not lista_reuniones %}
+
+<p>No existen actualmente reuniones en el sistema.</p>
+
+{% else %}
+
+	{% for reunion in lista_reuniones %}
+		<ul>
+			<li>{{ reunion }}</li>
+			<a href="../{{ reunion.dni_pasaporte }}/{{ reunion.curso_academico }}/{{ reunion.id_reunion }}/edit">Editar</a>
+			<a href="../{{ reunion.dni_pasaporte }}/{{ reunion.curso_academico }}/{{ reunion.id_reunion }}/del">Eliminar</a>
+		</ul>
+	{% endfor %}
+
+{% endif %}

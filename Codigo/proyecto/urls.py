@@ -207,6 +207,7 @@ urlpatterns += patterns('',
 
 urlpatterns += patterns('',
 	(r'^asesorias/reunion/add/$', 'proyecto.asesorias.vistas.vistasReunion.addReunion'),
+	(r'^asesorias/reunion/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/(?P<id_reunion>\d+)/del/$', 'proyecto.asesorias.vistas.vistasReunion.delReunion'),
 	url(r'^asesorias/reunion/list/$', 'proyecto.asesorias.vistas.vistasReunion.listReunion', name='listReunion'),
 )
 
