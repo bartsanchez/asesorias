@@ -2,6 +2,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias.vistas import vistasAlumnoCursoAcademico
 
 # Comprueba si existe una reunion y, de ser asi, la devuelve.
 def obtenerReunion(dni_pasaporte, curso_academico, id_reunion):
@@ -94,6 +95,48 @@ def addReunion(request):
 	else:
 		form = forms.ReunionForm()
 	return render_to_response('asesorias/Reunion/addReunion.html', {'form': form})
+
+def editReunion(request, dni_pasaporte, curso_academico, id_reunion):
+	# Se obtiene la instancia de la reunion.
+	instancia_reunion = obtenerReunion(dni_pasaporte, curso_academico, id_reunion)
+	# Si existe se edita.
+	if instancia_reunion:
+		# Se carga el formulario para la plantilla existente.
+		form = forms.ReunionForm(instance=instancia_reunion, initial={'alumno_curso_academico': vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(dni_pasaporte, curso_academico).codigo_alumnoCursoAcademico})
+		# Se ha modificado el formulario original.
+		if request.method == 'POST':
+			# Se extraen los valores pasados por el metodo POST.
+			codigo_alumno_curso_academico = request.POST['alumno_curso_academico']
+			fecha = request.POST['fecha']
+			tipo = request.POST['tipo']
+			comentario_asesor = request.POST['comentario_asesor']
+			comentario_alumno = request.POST['comentario_alumno']
+
+			# Se obtiene una instancia del alumno curso academico a traves de su id.
+			instancia_alumno_curso_academico = models.AlumnoCursoAcademico.objects.get(pk=codigo_alumno_curso_academico)
+
+			# Se determina el dni_pasaporte y curso academico para ese alumno curso academico.
+			dni_pasaporte = instancia_alumno_curso_academico.dni_pasaporte
+			curso_academico = instancia_alumno_curso_academico.curso_academico
+
+			# Se determina el siguiente id_reunion para el alumno curso academico.
+			id_reunion = determinarSiguienteIdReunionDeAlumnoCursoAcademico(instancia_alumno_curso_academico)
+
+			# Datos necesarios para crear la nueva plantilla.
+			datos_reunion = {'dni_pasaporte': dni_pasaporte, 'curso_academico': curso_academico, 'id_reunion': id_reunion, 'fecha': fecha, 'tipo': tipo, 'comentario_asesor': comentario_asesor, 'comentario_alumno': comentario_alumno, 'alumno_curso_academico': codigo_alumno_curso_academico}
+
+			# Se actualiza el formulario con la nueva informacion.
+			form = forms.ReunionForm(datos_reunion, instance=instancia_reunion)
+
+			# Si es valido se guarda.
+			if form.is_valid():
+				form.save()
+				# Redirige a la pagina de listar reuniones.
+				return HttpResponseRedirect( reverse('listReunion') )
+	# La reunion no existe.
+	else:
+		form = False
+	return render_to_response('asesorias/Reunion/editReunion.html', {'form': form})
 
 def delReunion(request, dni_pasaporte, curso_academico, id_reunion):
 	# Se obtiene la instancia de la reunion.
