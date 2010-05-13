@@ -201,6 +201,15 @@ urlpatterns += patterns('',
 	url(r'^asesorias/preguntaOficial/list/$', 'proyecto.asesorias.vistas.vistasPreguntaOficial.listPreguntaOficial', name='listPreguntaOficial'),
 )
 
+# ---------------- #
+# Url's de reunion #
+# ---------------- #
+
+urlpatterns += patterns('',
+	(r'^asesorias/reunion/add/$', 'proyecto.asesorias.vistas.vistasReunion.addReunion'),
+	url(r'^asesorias/reunion/list/$', 'proyecto.asesorias.vistas.vistasReunion.listReunion', name='listReunion'),
+)
+
 # ----------------------------------------- #
 # Url's de centro - administrador de centro #
 # ----------------------------------------- #

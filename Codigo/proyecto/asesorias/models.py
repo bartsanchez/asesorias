@@ -312,15 +312,13 @@ class Reunion(models.Model):
 	tipo = models.CharField(max_length=3, choices=TIPOS_REUNION)
 	comentario_asesor = models.CharField(max_length=100)
 	comentario_alumno = models.CharField(max_length=100)
-	preguntasasesores = models.ManyToManyField('PreguntaAsesor', db_table='Reunion_PreguntasAsesores')
-	preguntasoficiales = models.ManyToManyField('PreguntaOficial', db_table='Reunion_PreguntasOficiales')
 
 	class Meta:
 		db_table = "Reuniones"
 		unique_together = ("dni_pasaporte", "curso_academico", "id_reunion")
 
 	def __unicode__(self):
-		return self.codigo_reunion
+		return unicode(self.curso_academico) + ': ' + unicode(self.dni_pasaporte) + ' -> ' + unicode(self.id_reunion)
 
 class CentroAdministradorCentro(models.Model):
 	codigo_centro_administradorCentro = models.AutoField(primary_key=True)
