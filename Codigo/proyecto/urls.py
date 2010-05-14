@@ -222,3 +222,12 @@ urlpatterns += patterns('',
 	(r'^asesorias/centro_administradorCentro/(?P<centro>[\s\w]+)/(?P<administrador_centro>[\s\w]+)/del/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.delCentro_administradorCentro'),
 	url(r'^asesorias/centro_administradorCentro/list/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.listCentro_administradorCentro', name='listCentro_administradorCentro'),
 )
+
+# ------------------------------------- #
+# Url's de reunion - pregunta de asesor #
+# ------------------------------------- #
+
+urlpatterns += patterns('',
+	(r'^asesorias/reunion_preguntaAsesor/add/$', 'proyecto.asesorias.vistas.vistasReunion_preguntaAsesor.addReunion_preguntaAsesor'),
+	url(r'^asesorias/reunion_preguntaAsesor/list/$', 'proyecto.asesorias.vistas.vistasReunion_preguntaAsesor.listReunion_preguntaAsesor', name='listReunion_preguntaAsesor'),
+)
