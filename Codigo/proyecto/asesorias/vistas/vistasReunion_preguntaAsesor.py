@@ -3,6 +3,15 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
 
+# Comprueba si existe una reunion - pregunta de asesor y, de ser asi, la devuelve.
+def obtenerReunion_preguntaAsesor(dni_pasaporte_alumno, curso_academico, id_reunion, dni_pasaporte_asesor, id_entrevista_asesor, id_pregunta_asesor):
+	try:
+		# Obtiene la instancia de reunion - pregunta de asesor.
+		resultado = models.ReunionPreguntaAsesor.objects.get(dni_pasaporte_alumno=dni_pasaporte_alumno, curso_academico=curso_academico, id_reunion=id_reunion, dni_pasaporte_asesor=dni_pasaporte_asesor, id_entrevista_asesor=id_entrevista_asesor, id_pregunta_asesor=id_pregunta_asesor)
+	except:
+		resultado = False
+	return resultado
+
 def addReunion_preguntaAsesor(request):
 	# Se ha rellenado el formulario.
 	if request.method == 'POST':
@@ -41,6 +50,20 @@ def addReunion_preguntaAsesor(request):
 	else:
 		form = forms.Reunion_PreguntaAsesorForm()
 	return render_to_response('asesorias/Reunion_PreguntaAsesor/addReunion_preguntaAsesor.html', {'form': form})
+
+def delReunion_preguntaAsesor(request, dni_pasaporte_alumno, curso_academico, id_reunion, dni_pasaporte_asesor, id_entrevista_asesor, id_pregunta_asesor):
+	# Se obtiene la instancia de la reunion - pregunta de asesor.
+	instancia_reunion_preguntaAsesor = obtenerReunion_preguntaAsesor(dni_pasaporte_alumno, curso_academico, id_reunion, dni_pasaporte_asesor, id_entrevista_asesor, id_pregunta_asesor)
+
+	# Si existe se elimina.
+	if instancia_reunion_preguntaAsesor:
+		instancia_reunion_preguntaAsesor.delete()
+		# Redirige a la pagina de listar reuniones - preguntas de asesor.
+		return HttpResponseRedirect( reverse('listReunion_preguntaAsesor') )
+	# La reunion - pregunta de asesor no existe.
+	else:
+		error = True
+	return render_to_response('asesorias/Reunion_PreguntaAsesor/delReunion_preguntaAsesor.html', {'error': error})
 
 def listReunion_preguntaAsesor(request):
 	# Se obtiene una lista con todas las reuniones - pregunta de asesor.

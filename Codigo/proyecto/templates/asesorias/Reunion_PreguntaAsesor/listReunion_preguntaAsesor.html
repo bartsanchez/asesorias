@@ -11,8 +11,8 @@
 	{% for reunion_preguntaAsesor in lista_reuniones_pregunta_de_asesor %}
 		<ul>
 			<li>{{ reunion_preguntaAsesor }}</li>
-			<!--<a href="../{{ reunion_preguntaAsesor.determinarNombreCentro }}/{{ reunion_preguntaAsesor.determinarNombreTitulacion }}/{{ reunion_preguntaAsesor.determinarPlanEstudios}}/{{ reunion_preguntaAsesor.determinarNombreAsignatura}}/{{ reunion_preguntaAsesor.curso_academico }}/{{ reunion_preguntaAsesor.dni_pasaporte }}/edit">Editar</a>
-			<a href="../{{ reunion_preguntaAsesor.determinarNombreCentro }}/{{ reunion_preguntaAsesor.determinarNombreTitulacion }}/{{ reunion_preguntaAsesor.determinarPlanEstudios}}/{{ reunion_preguntaAsesor.determinarNombreAsignatura}}/{{ reunion_preguntaAsesor.curso_academico }}/{{ reunion_preguntaAsesor.dni_pasaporte }}/del">Eliminar</a>-->
+			<a href="../{{ reunion_preguntaAsesor.dni_pasaporte_alumno }}/{{ reunion_preguntaAsesor.curso_academico }}/{{ reunion_preguntaAsesor.id_reunion}}/{{ reunion_preguntaAsesor.dni_pasaporte_asesor}}/{{ reunion_preguntaAsesor.id_entrevista_asesor }}/{{ reunion_preguntaAsesor.id_pregunta_asesor }}/edit">Editar</a>
+			<a href="../{{ reunion_preguntaAsesor.dni_pasaporte_alumno }}/{{ reunion_preguntaAsesor.curso_academico }}/{{ reunion_preguntaAsesor.id_reunion}}/{{ reunion_preguntaAsesor.dni_pasaporte_asesor}}/{{ reunion_preguntaAsesor.id_entrevista_asesor }}/{{ reunion_preguntaAsesor.id_pregunta_asesor }}/del">Eliminar</a>
 		</ul>
 	{% endfor %}
 
