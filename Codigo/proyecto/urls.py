@@ -229,6 +229,7 @@ urlpatterns += patterns('',
 
 urlpatterns += patterns('',
 	(r'^asesorias/reunion_preguntaAsesor/add/$', 'proyecto.asesorias.vistas.vistasReunion_preguntaAsesor.addReunion_preguntaAsesor'),
+	(r'^asesorias/reunion_preguntaAsesor/(?P<dni_pasaporte_alumno>[\s\w]+)/(?P<curso_academico>\d+)/(?P<id_reunion>\d+)/(?P<dni_pasaporte_asesor>[\s\w]+)/(?P<id_entrevista_asesor>\d+)/(?P<id_pregunta_asesor>\d+)/edit/$', 'proyecto.asesorias.vistas.vistasReunion_preguntaAsesor.editReunion_preguntaAsesor'),
 	(r'^asesorias/reunion_preguntaAsesor/(?P<dni_pasaporte_alumno>[\s\w]+)/(?P<curso_academico>\d+)/(?P<id_reunion>\d+)/(?P<dni_pasaporte_asesor>[\s\w]+)/(?P<id_entrevista_asesor>\d+)/(?P<id_pregunta_asesor>\d+)/del/$', 'proyecto.asesorias.vistas.vistasReunion_preguntaAsesor.delReunion_preguntaAsesor'),
 	url(r'^asesorias/reunion_preguntaAsesor/list/$', 'proyecto.asesorias.vistas.vistasReunion_preguntaAsesor.listReunion_preguntaAsesor', name='listReunion_preguntaAsesor'),
 )
