@@ -331,3 +331,20 @@ class CentroAdministradorCentro(models.Model):
 
 	def __unicode__(self):
 		return unicode(self.id_centro) + ": " + unicode(self.id_adm_centro)
+
+class ReunionPreguntaAsesor(models.Model):
+	codigo_reunion_preguntasAsesores = models.AutoField(primary_key=True)
+	dni_pasaporte_alumno = models.CharField(max_length=9)
+	curso_academico = models.IntegerField()
+	id_reunion = models.IntegerField()
+	dni_pasaporte_asesor = models.CharField(max_length=9)
+	id_entrevista_asesor = models.IntegerField()
+	id_pregunta_asesor = models.IntegerField()
+	respuesta = models.CharField(max_length=150)
+
+	class Meta:
+		db_table = "ReunionPreguntaAsesor"
+		unique_together = ("dni_pasaporte_alumno", "curso_academico", "id_reunion", "dni_pasaporte_asesor", "id_entrevista_asesor", "id_pregunta_asesor")
+
+	def __unicode__(self):
+		return unicode(self.dni_pasaporte_alumno) + " : " + unicode(self.curso_academico) + " : " + unicode(self.id_reunion) + " : " + unicode(self.dni_pasaporte_asesor)  + " : " + unicode(self.id_entrevista_asesor) + " : " + unicode(self.id_pregunta_asesor)

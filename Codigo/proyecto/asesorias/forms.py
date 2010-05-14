@@ -93,3 +93,10 @@ class ReunionForm(forms.ModelForm):
 class Centro_AdministradorCentroForm(forms.ModelForm):
 	class Meta:
 		model = models.CentroAdministradorCentro
+
+class Reunion_PreguntaAsesorForm(forms.ModelForm):
+	reunion = forms.ModelChoiceField(models.Reunion.objects.all())
+	pregunta_asesor = forms.ModelChoiceField(models.PreguntaAsesor.objects.all())
+
+	class Meta:
+		model = models.ReunionPreguntaAsesor
