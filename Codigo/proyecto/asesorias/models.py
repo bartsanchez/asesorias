@@ -146,7 +146,7 @@ class PlantillaEntrevistaAsesor(models.Model):
 	curso_academico = models.IntegerField()
 	id_entrevista_asesor = models.IntegerField()
 	descripcion = models.CharField(max_length=100)
-	ultima_modificacion = models.DateField()
+	ultima_modificacion = models.DateField(auto_now=True)
 
 	class Meta:
 		db_table = "PlantillasEntrevistaAsesor"

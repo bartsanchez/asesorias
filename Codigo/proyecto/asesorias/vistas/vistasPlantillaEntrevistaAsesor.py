@@ -67,7 +67,6 @@ def addPlantillaEntrevistaAsesor(request):
 		# Se extraen los valores pasados por el metodo POST.
 		codigo_asesor_curso_academico = request.POST['asesor_curso_academico']
 		descripcion = request.POST['descripcion']
-		ultima_modificacion = request.POST['ultima_modificacion']
 
 		# Se obtiene una instancia del asesor curso academico a traves de su id.
 		instancia_asesor_curso_academico = models.AsesorCursoAcademico.objects.get(pk=codigo_asesor_curso_academico)
@@ -80,7 +79,7 @@ def addPlantillaEntrevistaAsesor(request):
 		id_entrevista_asesor = determinarSiguienteIdPlantillaDeAsesorCursoAcademico(instancia_asesor_curso_academico)
 
 		# Datos necesarios para crear la nueva plantilla.
-		datos_plantilla_entrevista_asesor = {'dni_pasaporte': dni_pasaporte, 'curso_academico': curso_academico, 'id_entrevista_asesor': id_entrevista_asesor, 'descripcion': descripcion, 'ultima_modificacion': ultima_modificacion, 'asesor_curso_academico': codigo_asesor_curso_academico}
+		datos_plantilla_entrevista_asesor = {'dni_pasaporte': dni_pasaporte, 'curso_academico': curso_academico, 'id_entrevista_asesor': id_entrevista_asesor, 'descripcion': descripcion, 'asesor_curso_academico': codigo_asesor_curso_academico}
 
 		# Se obtienen los valores y se valida.
 		form = forms.PlantillaEntrevistaAsesorForm(datos_plantilla_entrevista_asesor)
@@ -106,7 +105,6 @@ def editPlantillaEntrevistaAsesor(request, dni_pasaporte, curso_academico, id_en
 			# Se obtienen el resto de valores necesarios a traves de POST.
 			codigo_asesor_curso_academico = request.POST['asesor_curso_academico']
 			descripcion = request.POST['descripcion']
-			ultima_modificacion = request.POST['ultima_modificacion']
 
 			# Se obtiene una instancia del asesor curso academico a traves de su id.
 			instancia_asesor_curso_academico = models.AsesorCursoAcademico.objects.get(pk=codigo_asesor_curso_academico)
@@ -119,7 +117,7 @@ def editPlantillaEntrevistaAsesor(request, dni_pasaporte, curso_academico, id_en
 			id_entrevista_asesor = determinarSiguienteIdPlantillaDeAsesorCursoAcademico(instancia_asesor_curso_academico)
 
 			# Datos necesarios para crear la nueva plantilla.
-			datos_plantilla_entrevista_asesor = {'dni_pasaporte': dni_pasaporte, 'curso_academico': curso_academico, 'id_entrevista_asesor': id_entrevista_asesor, 'descripcion': descripcion, 'ultima_modificacion': ultima_modificacion, 'asesor_curso_academico': codigo_asesor_curso_academico}
+			datos_plantilla_entrevista_asesor = {'dni_pasaporte': dni_pasaporte, 'curso_academico': curso_academico, 'id_entrevista_asesor': id_entrevista_asesor, 'descripcion': descripcion, 'asesor_curso_academico': codigo_asesor_curso_academico}
 
 			# Se actualiza el formulario con la nueva informacion.
 			form = forms.PlantillaEntrevistaAsesorForm(datos_plantilla_entrevista_asesor, instance=instancia_plantilla_entrevista_asesor)
