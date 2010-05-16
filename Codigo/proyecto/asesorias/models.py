@@ -115,7 +115,7 @@ class Departamento(models.Model):
 
 class Asesor(models.Model):
 	dni_pasaporte = models.CharField(primary_key=True, max_length=9)
-	correo_electronico = models.CharField(max_length=50, unique=True)
+	correo_electronico = models.EmailField(unique=True)
 	nombre = models.CharField(max_length=50)
 	apellidos = models.CharField(max_length=100)
 	telefono = models.IntegerField()
@@ -173,7 +173,7 @@ class PreguntaAsesor(models.Model):
 
 class Alumno(models.Model):
 	dni_pasaporte = models.CharField(primary_key=True, max_length=9)
-	correo_electronico = models.CharField(max_length=50, unique=True)
+	correo_electronico = models.EmailField(unique=True)
 	nombre = models.CharField(max_length=50)
 	apellidos = models.CharField(max_length=100)
 	fecha_nacimiento = models.DateField()
