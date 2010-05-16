@@ -162,7 +162,7 @@ class PreguntaAsesor(models.Model):
 	id_entrevista_asesor = models.IntegerField()
 	id_pregunta_asesor = models.IntegerField()
 	enunciado = models.CharField(max_length=150)
-	ultima_modificacion = models.DateField()
+	ultima_modificacion = models.DateField(auto_now=True)
 
 	class Meta:
 		db_table = "PreguntasAsesores"
