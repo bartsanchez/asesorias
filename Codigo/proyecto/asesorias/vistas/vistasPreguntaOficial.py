@@ -67,7 +67,6 @@ def addPreguntaOficial(request):
 		# Se extraen los valores pasados por el metodo POST.
 		codigo_plantilla_entrevista_oficial = request.POST['plantilla_entrevista_oficial']
 		enunciado = request.POST['enunciado']
-		ultima_modificacion = request.POST['ultima_modificacion']
 
 		# Se obtiene una instancia de la plantilla oficial a traves de su id.
 		instancia_plantilla_entrevista_oficial = models.PlantillaEntrevistaOficial.objects.get(pk=codigo_plantilla_entrevista_oficial)
@@ -79,7 +78,7 @@ def addPreguntaOficial(request):
 		id_pregunta_oficial = determinarSiguienteIdPreguntaDePlantillaOficial(instancia_plantilla_entrevista_oficial)
 
 		# Datos necesarios para crear la nueva plantilla.
-		datos_pregunta_oficial = {'id_entrevista_oficial': id_entrevista_oficial, 'id_pregunta_oficial': id_pregunta_oficial, 'enunciado': enunciado, 'ultima_modificacion': ultima_modificacion, 'plantilla_entrevista_oficial': codigo_plantilla_entrevista_oficial}
+		datos_pregunta_oficial = {'id_entrevista_oficial': id_entrevista_oficial, 'id_pregunta_oficial': id_pregunta_oficial, 'enunciado': enunciado, 'plantilla_entrevista_oficial': codigo_plantilla_entrevista_oficial}
 
 		# Se obtienen los valores y se valida.
 		form = forms.PreguntaOficialForm(datos_pregunta_oficial)
@@ -105,7 +104,6 @@ def editPreguntaOficial(request, id_entrevista_oficial, id_pregunta_oficial):
 			# Se extraen los valores pasados por el metodo POST.
 			codigo_plantilla_entrevista_oficial = request.POST['plantilla_entrevista_oficial']
 			enunciado = request.POST['enunciado']
-			ultima_modificacion = request.POST['ultima_modificacion']
 
 			# Se obtiene una instancia de la plantilla oficial a traves de su id.
 			instancia_plantilla_entrevista_oficial = models.PlantillaEntrevistaOficial.objects.get(pk=codigo_plantilla_entrevista_oficial)
@@ -117,7 +115,7 @@ def editPreguntaOficial(request, id_entrevista_oficial, id_pregunta_oficial):
 			id_pregunta_oficial = determinarSiguienteIdPreguntaDePlantillaOficial(instancia_plantilla_entrevista_oficial)
 
 			# Datos necesarios para crear la nueva plantilla.
-			datos_pregunta_oficial = {'id_entrevista_oficial': id_entrevista_oficial, 'id_pregunta_oficial': id_pregunta_oficial, 'enunciado': enunciado, 'ultima_modificacion': ultima_modificacion, 'plantilla_entrevista_oficial': codigo_plantilla_entrevista_oficial}
+			datos_pregunta_oficial = {'id_entrevista_oficial': id_entrevista_oficial, 'id_pregunta_oficial': id_pregunta_oficial, 'enunciado': enunciado,  'plantilla_entrevista_oficial': codigo_plantilla_entrevista_oficial}
 
 			# Se actualiza el formulario con la nueva informacion.
 			form = forms.PreguntaOficialForm(datos_pregunta_oficial, instance=instancia_pregunta_oficial)

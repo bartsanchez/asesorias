@@ -276,7 +276,7 @@ class CalificacionConvocatoria(models.Model):
 class PlantillaEntrevistaOficial(models.Model):
 	id_entrevista_oficial = models.AutoField(primary_key=True)
 	descripcion = models.CharField(max_length=100)
-	ultima_modificacion = models.DateField()
+	ultima_modificacion = models.DateField(auto_now=True)
 
 	class Meta:
 		db_table = "PlantillasEntrevistaOficial"
@@ -289,7 +289,7 @@ class PreguntaOficial(models.Model):
 	id_entrevista_oficial = models.ForeignKey('PlantillaEntrevistaOficial', db_column='id_entrevista_oficial')
 	id_pregunta_oficial = models.IntegerField()
 	enunciado = models.CharField(max_length=150)
-	ultima_modificacion = models.DateField()
+	ultima_modificacion = models.DateField(auto_now=True)
 
 	class Meta:
 		db_table = "PreguntasOficiales"
