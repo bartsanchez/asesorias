@@ -1,23 +1,43 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//ES"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
 <head>
-    <link rel="stylesheet" href="style.css" />
-    <title>{% block title %}My amazing site{% endblock %}</title>
+	<link type="text/css" rel="stylesheet" href="http://localhost/media/css/base.css" />
+	<title>{% block title %}Asesorías Académicas.{% endblock %}</title>
 </head>
 
 <body>
-    <div id="sidebar">
-        {% block sidebar %}
-        <ul>
-            <li><a href="/asesorias/">Home</a></li>
-        </ul>
-        {% endblock %}
-    </div>
+	<!-- Container -->
+	<div id="container">
 
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
+		<!-- Header -->
+		<div id="header">
+			{% block header %}
+			{% endblock %}
+		</div>
+
+		<!-- Sidebar -->
+		<div id="sidebar">
+			{% block sidebar %}
+			<ul>
+				<li><a href="/asesorias/">Home</a></li>
+			</ul>
+			{% endblock %}
+		</div>
+
+		<!-- Content -->
+		<div id="content">
+			{% block content %}
+			{% endblock %}
+		</div>
+
+		<!-- Footer -->
+		<div id="footer">
+			{% block footer %}
+			{% endblock %}
+		</div>
+
+	</div>
 </body>
 </html>
 
