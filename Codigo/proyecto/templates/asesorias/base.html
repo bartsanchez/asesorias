@@ -13,22 +13,28 @@
 		<!-- Header -->
 		<div id="header">
 			{% block header %}
-			{% endblock %}
-		</div>
-
-		<!-- Sidebar -->
-		<div id="sidebar">
-			{% block sidebar %}
-			<ul>
-				<li><a href="/asesorias/">Home</a></li>
-			</ul>
+			<h1>Django</ul>
 			{% endblock %}
 		</div>
 
 		<!-- Content -->
 		<div id="content">
-			{% block content %}
-			{% endblock %}
+
+			<!-- Sidebar -->
+			<div id="sidebar">
+				{% block sidebar %}
+				<ul>
+					<li><a href="/asesorias/">Home</a></li>
+				</ul>
+				{% endblock %}
+			</div>
+
+			<!-- Content-main -->
+			<div id="content-main">
+				{% block content %}
+				{% endblock %}
+			</div>
+
 		</div>
 
 		<!-- Footer -->
