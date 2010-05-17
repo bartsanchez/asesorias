@@ -13,7 +13,7 @@
 		<!-- Header -->
 		<div id="header">
 			{% block header %}
-			<h1>Django</ul>
+			<h1>Asesorías Académicas</h1>
 			{% endblock %}
 		</div>
 
@@ -23,9 +23,12 @@
 			<!-- Sidebar -->
 			<div id="sidebar">
 				{% block sidebar %}
-				<ul>
-					<li><a href="/asesorias/">Home</a></li>
-				</ul>
+				<div class="module" id="menu">
+					<h2>Menú</h2>
+					<h3>Sesión</h3>
+
+					<a href="../logout/">Salir</a>
+				</div>
 				{% endblock %}
 			</div>
 
