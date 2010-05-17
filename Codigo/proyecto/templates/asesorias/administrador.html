@@ -1,23 +1,27 @@
-<h1>Administrador.</h1>
+{% extends "asesorias/base.html" %}
 
-<ul>
-	<li><a href="../centro/list">Centros.</a></li>
-	<li><a href="../administradorCentro/list">Administradores de centro.</a></li>
-	<li><a href="../titulacion/list">Titulaciones.</a></li>
-	<li><a href="../asignatura/list">Asignaturas.</a></li>
-	<li><a href="../asignaturaCursoAcademico/list">Asignaturas Curso Académico.</a></li>
-	<li><a href="../departamento/list">Departamentos.</a></li>
-	<li><a href="../asesor/list">Asesores.</a></li>
-	<li><a href="../asesorCursoAcademico/list">Asesores Curso Académico.</a></li>
-	<li><a href="../plantillaEntrevistaAsesor/list">Plantillas de entrevista de asesor.</li>
-	<li><a href="../preguntaAsesor/list">Preguntas de asesor.</li>
-	<li><a href="../alumno/list">Alumnos.</a></li>
-	<li><a href="../alumnoCursoAcademico/list">Alumnos Curso Académico.</a></li>
-	<li><a href="../matricula/list">Matrículas.</a></li>
-	<li><a href="../calificacionConvocatoria/list">Calificaciones convocatoria.</a></li>
-	<li><a href="../plantillaEntrevistaOficial/list">Plantillas de entrevista oficiales.</a></li>
-	<li><a href="../preguntaOficial/list">Preguntas oficiales.</a></li>
-	<li><a href="../reunion/list">Reuniones.</a></li>
-	<li><a href="../centro_administradorCentro/list">Centros-administradorCentro.</a></li>
-	<li><a href="../reunion_preguntaAsesor/list">Reuniones-preguntasAsesor.</a></li>
-</ul>
+	{% block content %}
+		<h1>Administrador.</h1>
+
+		<ul>
+			<li><a href="../centro/list">Centros.</a></li>
+			<li><a href="../administradorCentro/list">Administradores de centro.</a></li>
+			<li><a href="../titulacion/list">Titulaciones.</a></li>
+			<li><a href="../asignatura/list">Asignaturas.</a></li>
+			<li><a href="../asignaturaCursoAcademico/list">Asignaturas Curso Académico.</a></li>
+			<li><a href="../departamento/list">Departamentos.</a></li>
+			<li><a href="../asesor/list">Asesores.</a></li>
+			<li><a href="../asesorCursoAcademico/list">Asesores Curso Académico.</a></li>
+			<li><a href="../plantillaEntrevistaAsesor/list">Plantillas de entrevista de asesor.</li>
+			<li><a href="../preguntaAsesor/list">Preguntas de asesor.</li>
+			<li><a href="../alumno/list">Alumnos.</a></li>
+			<li><a href="../alumnoCursoAcademico/list">Alumnos Curso Académico.</a></li>
+			<li><a href="../matricula/list">Matrículas.</a></li>
+			<li><a href="../calificacionConvocatoria/list">Calificaciones convocatoria.</a></li>
+			<li><a href="../plantillaEntrevistaOficial/list">Plantillas de entrevista oficiales.</a></li>
+			<li><a href="../preguntaOficial/list">Preguntas oficiales.</a></li>
+			<li><a href="../reunion/list">Reuniones.</a></li>
+			<li><a href="../centro_administradorCentro/list">Centros-administradorCentro.</a></li>
+			<li><a href="../reunion_preguntaAsesor/list">Reuniones-preguntasAsesor.</a></li>
+		</ul>
+	{% endblock %}
