@@ -1,19 +1,31 @@
-<h1>Lista de centros.</h1>
+{% extends "asesorias/base.html" %}
 
-<a href="../add">Crear nuevo</a>
+{% block content %}
+	<h1>Lista de centros.</h1>
 
-{% if not lista_centros %}
+	<a href="../add">Crear nuevo</a>
 
-<p>No existen actualmente centros en el sistema.</p>
+	{% if not lista_centros %}
 
-{% else %}
+	<p>No existen actualmente centros en el sistema.</p>
 
-	{% for centro in lista_centros %}
-		<ul>
-			<li>{{ centro.nombre_centro }}</li>
-			<a href="../{{ centro.nombre_centro }}/edit">Editar</a>
-			<a href="../{{ centro.nombre_centro }}/del">Eliminar</a>
-		</ul>
-	{% endfor %}
+	{% else %}
 
-{% endif %}
+		<div class="module">
+			<table summary="Lista de centros.">
+			<caption><a href="" class="section">Lista de centros</a></caption>
+
+			<!-- Centros -->
+			{% for centro in lista_centros %}
+			<tr>
+				<th scope="row"><a href="../{{ centro.nombre_centro }}/edit">{{ centro.nombre_centro }}</a></th>
+				<td><a href="../{{ centro.nombre_centro }}/del" class="deletelink">Eliminar</a></td>
+			</tr>
+			{% endfor %}
+
+			</table>
+		</div>
+
+	{% endif %}
+
+{% endblock %}
