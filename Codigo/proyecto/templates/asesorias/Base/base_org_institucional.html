@@ -1,0 +1,18 @@
+{% extends "asesorias/Base/base.html" %}
+
+	<!-- Establece el login del usuario. -->
+	{% block username %}{{ administrador }}{% endblock %}
+
+	<!-- Determina el elemento activo en el menú horizontal -->
+	{% block opcion_org_institucional %}class="active"{% endblock %}
+
+	{% block org_institucional %}
+									<ul>
+										<li><a href="http://localhost:8000/asesorias/centro/list">Centros</a></li>
+										<li><a href="http://localhost:8000/asesorias/administradorCentro/list">Administradores de centro</a></li>
+										<li><a href="http://localhost:8000/asesorias/centro_administradorCentro/list">Centros - Administradores de centro</a></li>
+										<li><a href="http://localhost:8000/asesorias/titulacion/list">Titulaciones</a></li>
+										<li><a href="http://localhost:8000/asesorias/asignatura/list">Asignaturas</a></li>
+										<li><a href="http://localhost:8000/asesorias/asignaturaCursoAcademico/list">Asignaturas Curso Académico</a></li>
+									</ul>
+	{% endblock %}

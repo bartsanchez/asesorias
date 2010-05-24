@@ -2,8 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
 from asesorias.vistas import vistasAsesor, vistasAlumno
 
+@login_required()
 def administrador(request):
-	return render_to_response('asesorias/administrador.html')
+	return render_to_response('asesorias/AdministradorPrincipal/administrador_inicio.html', {'administrador': request.user})
 
 @login_required()
 def asesor(request):

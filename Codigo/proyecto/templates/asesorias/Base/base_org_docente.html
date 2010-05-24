@@ -1,0 +1,15 @@
+{% extends "asesorias/Base/base.html" %}
+
+	<!-- Establece el login del usuario. -->
+	{% block username %}{{ administrador }}{% endblock %}
+
+	<!-- Determina el elemento activo en el menú horizontal -->
+	{% block opcion_org_docente %}class="active"{% endblock %}
+
+	{% block org_docente %}
+									<ul>
+										<li><a href="http://localhost:8000/asesorias/departamento/list">Departamentos</a></li>
+										<li><a href="http://localhost:8000/asesorias/asesor/list">Asesores</a></li>
+										<li><a href="http://localhost:8000/asesorias/asesorCursoAcademico/list">Asesores Curso Académico</a></li>
+									</ul>
+	{% endblock %}
