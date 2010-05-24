@@ -8,7 +8,7 @@
 
 	{% block reuniones %}
 									<ul>
-										<li><a href="http://localhost:8000/asesorias/reunion/list">Reuniones</a></li>
-										<li><a href="http://localhost:8000/asesorias/reunion_preguntaAsesor/list">Reuniones - Pregunta Asesor</a></li>
+										<li><a href="{% url listReunion %}">Reuniones</a></li>
+										<li><a href="{% url listReunion_preguntaAsesor %}">Reuniones - Pregunta Asesor</a></li>
 									</ul>
 	{% endblock %}

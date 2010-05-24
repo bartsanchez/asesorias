@@ -8,9 +8,9 @@
 
 	{% block alumnos %}
 									<ul>
-										<li><a href="http://localhost:8000/asesorias/alumno/list">Alumnos</a></li>
-										<li><a href="http://localhost:8000/asesorias/alumno/list">Alumnos Curso Académico</a></li>
-										<li><a href="http://localhost:8000/asesorias/matricula/list">Matrículas</a></li>
-										<li><a href="http://localhost:8000/asesorias/calificacionConvocatoria/list">Calificaciones Convocatoria</a></li>
+										<li><a href="{% url listAlumno %}">Alumnos</a></li>
+										<li><a href="{% url listAlumnoCursoAcademico %}">Alumnos Curso Académico</a></li>
+										<li><a href="{% url listMatricula %}">Matrículas</a></li>
+										<li><a href="{% url listCalificacionConvocatoria%}">Calificaciones Convocatoria</a></li>
 									</ul>
 	{% endblock %}

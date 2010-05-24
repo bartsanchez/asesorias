@@ -1,0 +1,31 @@
+{% extends "asesorias/Base/base_org_docente.html" %}
+
+	{% block content %}
+			<h1>Administrador</h1>
+
+			<div class="module">
+				<table summary="Organización docente.">
+				<caption><h2>Organización docente</h2></caption>
+
+				<!-- Departamentos. -->
+				<tr>
+					<th scope="row"><a href="../departamento/list/">Departamentos</a></th>
+					<td><a href="../departamento/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				<!-- Asesores. -->
+				<tr>
+					<th scope="row"><a href="../asesor/list/">Asesores</a></th>
+					<td><a href="../asesor/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				<!-- Asesores Curso Académico. -->
+				<tr>
+					<th scope="row"><a href="../asesorCursoAcademico/list/">Asesores Curso Académico</a></th>
+					<td><a href="../asesorCursoAcademico/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				</table>
+			</div>
+
+	{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "asesorias/Base/base_alumnos.html" %}
+
+	{% block content %}
+			<h1>Administrador</h1>
+
+			<div class="module">
+				<table summary="Administración de alumnos.">
+				<caption><h2>Alumnos</h2></caption>
+
+				<!-- Alumnos. -->
+				<tr>
+					<th scope="row"><a href="../alumno/list/">Alumnos</a></th>
+					<td><a href="../alumno/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				<!-- Alumnos Curso Académico. -->
+				<tr>
+					<th scope="row"><a href="../alumnoCursoAcademico/list/">Alumnos Curso Académico</a></th>
+					<td><a href="../alumnoCursoAcademico/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				<!-- Matrículas. -->
+				<tr>
+					<th scope="row"><a href="../matricula/list/">Matrículas</a></th>
+					<td><a href="../matricula/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				<!-- Calificaciones Convocatoria. -->
+				<tr>
+					<th scope="row"><a href="../calificacionConvocatoria/list/">Calificaciones Convocatoria</a></th>
+					<td><a href="../calificacionConvocatoria/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				</table>
+			</div>
+
+	{% endblock %}

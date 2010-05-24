@@ -1,0 +1,52 @@
+{% extends "asesorias/Base/base_org_institucional.html" %}
+
+	{% block content %}
+			<h1>Administrador</h1>
+
+
+			<div class="module">
+				<table summary="Administración de centros.">
+				<caption><h2>Organización institucional</h2></caption>
+
+
+				<!-- Centros -->
+				<tr>
+					<th scope="row"><a href="../centro/list/">Centros</a></th>
+					<td><a href="../centro/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				<!-- Administradores de centro. -->
+				<tr>
+					<th scope="row"><a href="../administradorCentro/list/">Administradores de centro</a></th>
+					<td><a href="../administradorCentro/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				<!-- Centros - Administradores de centro. -->
+				<tr>
+					<th scope="row"><a href="../centro_administradorCentro/list/">Centros - Administradores de centro</a></th>
+					<td><a href="../centro_administradorCentro/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				<!-- Titulaciones. -->
+				<tr>
+					<th scope="row"><a href="../titulacion/list/">Titulaciones</a></th>
+					<td><a href="../titulacion/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				<!-- Asignaturas. -->
+				<tr>
+					<th scope="row"><a href="../asignatura/list/">Asignaturas</a></th>
+					<td><a href="../asignatura/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+
+				<!-- Asignaturas Curso Académico. -->
+				<tr>
+					<th scope="row"><a href="../asignaturaCursoAcademico/list/">Asignaturas Curso Académico</a></th>
+					<td><a href="../asignaturaCursoAcademico/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				</table>
+			</div>
+
+	{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "asesorias/Base/base_plantillas.html" %}
+
+	{% block content %}
+			<h1>Administrador</h1>
+
+			<div class="module">
+				<table summary="Administración de plantillas.">
+				<caption><h2>Plantillas de entrevista</h2></caption>
+
+				<!-- Plantillas de entrevista oficiales. -->
+				<tr>
+					<th scope="row"><a href="../plantillaEntrevistaOficial/list/">Plantillas de entrevista oficiales</a></th>
+					<td><a href="../plantillaEntrevistaOficial/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				<!-- Preguntas oficiales. -->
+				<tr>
+					<th scope="row"><a href="../preguntaOficial/list/">Preguntas oficiales</a></th>
+					<td><a href="../preguntaOficial/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				<!-- Plantillas de entrevista de asesor. -->
+				<tr>
+					<th scope="row"><a href="../plantillaEntrevistaAsesor/list/">Plantillas de entrevista de asesor</a></th>
+					<td><a href="../plantillaEntrevistaAsesor/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				<!-- Preguntas de asesor. -->
+				<tr>
+					<th scope="row"><a href="../preguntaAsesor/list/">Preguntas de asesor</a></th>
+					<td><a href="../preguntaAsesor/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				</table>
+			</div>
+
+	{% endblock %}

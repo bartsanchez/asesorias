@@ -23,7 +23,7 @@ def authentication(request):
 
 					# Comprueba si el usuario es administrador principal.
 					if user.is_superuser:
-						return HttpResponseRedirect( reverse('vista_administrador') )
+						return HttpResponseRedirect( reverse('administrador_inicio') )
 
 					# Obtiene el rol del usuario (Administrador centro, asesor o alumno).
 					rol = obtenerRol(username)

@@ -20,12 +20,12 @@
 		<!-- Menú horizontal -->
 		<div id="hmenu">
 			<ul id="menu">
-				<li><a href="#" {% block opcion_inicio %}{% endblock %}>Inicio</a></li>
-				<li><a href="#" {% block opcion_org_institucional %}{% endblock %}>Organización institucional</a></li>
-				<li><a href="#" {% block opcion_org_docente %}{% endblock %}>Organización docente</a></li>
-				<li><a href="#" {% block opcion_alumnos %}{% endblock %}>Alumnos</a></li>
-				<li><a href="#" {% block opcion_reuniones %}{% endblock %}>Reuniones</a></li>
-				<li><a href="#" {% block opcion_plantillas %}{% endblock %}>Plantillas de entrevista</a></li>
+				<li><a href="{% url administrador_inicio %}" {% block opcion_inicio %}{% endblock %}>Inicio</a></li>
+				<li><a href="{% url administrador_org_institucional %}" {% block opcion_org_institucional %}{% endblock %}>Organización institucional</a></li>
+				<li><a href="{% url administrador_org_docente %}" {% block opcion_org_docente %}{% endblock %}>Organización docente</a></li>
+				<li><a href="{% url administrador_alumnos %}" {% block opcion_alumnos %}{% endblock %}>Alumnos</a></li>
+				<li><a href="{% url administrador_reuniones %}" {% block opcion_reuniones %}{% endblock %}>Reuniones</a></li>
+				<li><a href="{% url administrador_plantillas %}" {% block opcion_plantillas %}{% endblock %}>Plantillas de entrevista</a></li>
 			</ul>
 		</div>
 
@@ -41,8 +41,8 @@
 							<ul>
 								<li><h3>{% block username %}{% endblock %}</h3>
 									<ul>
-										<li><a href="http://localhost:8000/asesorias/administrador/">Inicio</a></li>
-										<li><a href="http://localhost:8000/asesorias/logout/">Salir</a></li>
+										<li><a href="{% url administrador_inicio %}">Inicio</a></li>
+										<li><a href="{% url logout %}">Salir</a></li>
 									</ul>
 								</li>
 							</ul>
@@ -54,19 +54,20 @@
 					<ul>
 						<li><h2>Asesorías Académicas</h2>
 							<ul>
-								<li><h3><a href="{% url listCentro %}">Organización institucional</a></h3>
+								<li><h3><a href="{% url administrador_org_institucional %}">Organización institucional</a></h3>
 									{% block org_institucional %}{% endblock %}
 								</li>
-								<li><h3><a href="#">Organización docente</a></h3>
+								<li><h3><a href="{% url administrador_org_docente %}">Organización docente</a></h3>
 									{% block org_docente %}{% endblock %}
 								</li>
-								<li><h3><a href="#">Alumnos</a></h3>
+								<li><h3><a href="{% url administrador_alumnos %}">Alumnos</a></h3>
 									{% block alumnos %}{% endblock %}
 								</li>
-								<li><h3><a href="#">Reuniones</a></h3>
+								<li><h3><a href="{% url administrador_reuniones %}">Reuniones</a></h3>
 									{% block reuniones %}{% endblock %}
 								</li>
-								<li><h3><a href="#">Plantillas de entrevista</a></h3>
+								<li><h3><a href="{% url administrador_plantillas %}">Plantillas de entrevista</a></h3>
+									{% block plantillas %}{% endblock %}
 								</li>
 							</ul>
 						</li>

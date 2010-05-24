@@ -1,0 +1,25 @@
+{% extends "asesorias/Base/base_reuniones.html" %}
+
+	{% block content %}
+			<h1>Administrador</h1>
+
+			<div class="module">
+				<table summary="Administración de reuniones.">
+				<caption><h2>Reuniones</h2></caption>
+
+				<!-- Reuniones. -->
+				<tr>
+					<th scope="row"><a href="../reunion/list/">Reuniones</a></th>
+					<td><a href="../reunion/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				<!-- Reuniones - Preguntas de asesor. -->
+				<tr>
+					<th scope="row"><a href="../reunion_preguntaAsesor/list/">Reuniónes - Preguntas de asesor</a></th>
+					<td><a href="../reunion_preguntaAsesor/add/" class="addlink">Añadir</a></td>
+				</tr>
+
+				</table>
+			</div>
+
+	{% endblock %}

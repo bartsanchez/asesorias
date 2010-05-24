@@ -8,8 +8,8 @@
 
 	{% block org_docente %}
 									<ul>
-										<li><a href="http://localhost:8000/asesorias/departamento/list">Departamentos</a></li>
-										<li><a href="http://localhost:8000/asesorias/asesor/list">Asesores</a></li>
-										<li><a href="http://localhost:8000/asesorias/asesorCursoAcademico/list">Asesores Curso Académico</a></li>
+										<li><a href="{% url listDepartamento %}">Departamentos</a></li>
+										<li><a href="{% url listAsesor %}">Asesores</a></li>
+										<li><a href="{% url listAsesorCursoAcademico %}">Asesores Curso Académico</a></li>
 									</ul>
 	{% endblock %}
