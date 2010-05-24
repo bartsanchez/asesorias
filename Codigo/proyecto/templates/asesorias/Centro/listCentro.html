@@ -3,7 +3,7 @@
 {% block content %}
 	<h1>Lista de centros.</h1>
 
-	<a href="../add">Crear nuevo</a>
+	<a href="{% url addCentro %}">Crear nuevo</a>
 
 	{% if not lista_centros %}
 
@@ -18,8 +18,8 @@
 			<!-- Centros -->
 			{% for centro in lista_centros %}
 			<tr>
-				<th scope="row"><a href="../{{ centro.nombre_centro }}/edit">{{ centro.nombre_centro }}</a></th>
-				<td><a href="../{{ centro.nombre_centro }}/del" class="deletelink">Eliminar</a></td>
+				<th scope="row"><a href="{% url editCentro centro.nombre_centro %}">{{ centro.nombre_centro }}</a></th>
+				<td><a href="{% url delCentro centro.nombre_centro %}" class="deletelink">Eliminar</a></td>
 			</tr>
 			{% endfor %}
 
