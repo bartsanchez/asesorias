@@ -11,42 +11,40 @@
 
 				<!-- Centros -->
 				<tr>
-					<th scope="row"><a href="../centro/list/">Centros</a></th>
-					<td><a href="../centro/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listCentro %}">Centros</a></th>
+					<td><a href="{% url addCentro %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				<!-- Administradores de centro. -->
 				<tr>
-					<th scope="row"><a href="../administradorCentro/list/">Administradores de centro</a></th>
-					<td><a href="../administradorCentro/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listAdministradorCentro %}">Administradores de centro</a></th>
+					<td><a href="{% url addAdministradorCentro %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				<!-- Centros - Administradores de centro. -->
 				<tr>
-					<th scope="row"><a href="../centro_administradorCentro/list/">Centros - Administradores de centro</a></th>
-					<td><a href="../centro_administradorCentro/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listCentro_administradorCentro %}">Centros - Administradores de centro</a></th>
+					<td><a href="{% url addCentro_administradorCentro %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				<!-- Titulaciones. -->
 				<tr>
-					<th scope="row"><a href="../titulacion/list/">Titulaciones</a></th>
-					<td><a href="../titulacion/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listTitulacion %}">Titulaciones</a></th>
+					<td><a href="{% url addTitulacion %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				<!-- Asignaturas. -->
 				<tr>
-					<th scope="row"><a href="../asignatura/list/">Asignaturas</a></th>
-					<td><a href="../asignatura/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listAsignatura %}">Asignaturas</a></th>
+					<td><a href="{% url addAsignatura %}" class="addlink">Añadir</a></td>
 				</tr>
 
 
 				<!-- Asignaturas Curso Académico. -->
 				<tr>
-					<th scope="row"><a href="../asignaturaCursoAcademico/list/">Asignaturas Curso Académico</a></th>
-					<td><a href="../asignaturaCursoAcademico/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listAsignaturaCursoAcademico %}">Asignaturas Curso Académico</a></th>
+					<td><a href="{% url addAsignaturaCursoAcademico %}" class="addlink">Añadir</a></td>
 				</tr>
-
-				</table>
 			</div>
 
 			<div class="module">
@@ -55,20 +53,20 @@
 
 				<!-- Departamentos. -->
 				<tr>
-					<th scope="row"><a href="../departamento/list/">Departamentos</a></th>
-					<td><a href="../departamento/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listDepartamento %}">Departamentos</a></th>
+					<td><a href="{% url addDepartamento %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				<!-- Asesores. -->
 				<tr>
-					<th scope="row"><a href="../asesor/list/">Asesores</a></th>
-					<td><a href="../asesor/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listAsesor %}">Asesores</a></th>
+					<td><a href="{% url addAsesor %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				<!-- Asesores Curso Académico. -->
 				<tr>
-					<th scope="row"><a href="../asesorCursoAcademico/list/">Asesores Curso Académico</a></th>
-					<td><a href="../asesorCursoAcademico/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listAsesorCursoAcademico %}">Asesores Curso Académico</a></th>
+					<td><a href="{% url addAsesorCursoAcademico %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				</table>
@@ -80,26 +78,26 @@
 
 				<!-- Alumnos. -->
 				<tr>
-					<th scope="row"><a href="../alumno/list/">Alumnos</a></th>
-					<td><a href="../alumno/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listAlumno %}">Alumnos</a></th>
+					<td><a href="{% url addAlumno %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				<!-- Alumnos Curso Académico. -->
 				<tr>
-					<th scope="row"><a href="../alumnoCursoAcademico/list/">Alumnos Curso Académico</a></th>
-					<td><a href="../alumnoCursoAcademico/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listAlumnoCursoAcademico %}">Alumnos Curso Académico</a></th>
+					<td><a href="{% url addAlumnoCursoAcademico %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				<!-- Matrículas. -->
 				<tr>
-					<th scope="row"><a href="../matricula/list/">Matrículas</a></th>
-					<td><a href="../matricula/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listMatricula %}">Matrículas</a></th>
+					<td><a href="{% url addMatricula %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				<!-- Calificaciones Convocatoria. -->
 				<tr>
-					<th scope="row"><a href="../calificacionConvocatoria/list/">Calificaciones Convocatoria</a></th>
-					<td><a href="../calificacionConvocatoria/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listCalificacionConvocatoria %}">Calificaciones Convocatoria</a></th>
+					<td><a href="{% url addCalificacionConvocatoria %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				</table>
@@ -111,14 +109,14 @@
 
 				<!-- Reuniones. -->
 				<tr>
-					<th scope="row"><a href="../reunion/list/">Reuniones</a></th>
-					<td><a href="../reunion/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listReunion %}">Reuniones</a></th>
+					<td><a href="{% url addReunion %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				<!-- Reuniones - Preguntas de asesor. -->
 				<tr>
-					<th scope="row"><a href="../reunion_preguntaAsesor/list/">Reuniónes - Preguntas de asesor</a></th>
-					<td><a href="../reunion_preguntaAsesor/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listReunion_preguntaAsesor %}">Reuniónes - Preguntas de asesor</a></th>
+					<td><a href="{% url addReunion_preguntaAsesor %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				</table>
@@ -130,26 +128,26 @@
 
 				<!-- Plantillas de entrevista oficiales. -->
 				<tr>
-					<th scope="row"><a href="../plantillaEntrevistaOficial/list/">Plantillas de entrevista oficiales</a></th>
-					<td><a href="../plantillaEntrevistaOficial/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listPlantillaEntrevistaOficial %}">Plantillas de entrevista oficiales</a></th>
+					<td><a href="{% url addPlantillaEntrevistaOficial %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				<!-- Preguntas oficiales. -->
 				<tr>
-					<th scope="row"><a href="../preguntaOficial/list/">Preguntas oficiales</a></th>
-					<td><a href="../preguntaOficial/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listPreguntaOficial %}">Preguntas oficiales</a></th>
+					<td><a href="{% url addPreguntaOficial %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				<!-- Plantillas de entrevista de asesor. -->
 				<tr>
-					<th scope="row"><a href="../plantillaEntrevistaAsesor/list/">Plantillas de entrevista de asesor</a></th>
-					<td><a href="../plantillaEntrevistaAsesor/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listPlantillaEntrevistaAsesor %}">Plantillas de entrevista de asesor</a></th>
+					<td><a href="{% url addPlantillaEntrevistaAsesor %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				<!-- Preguntas de asesor. -->
 				<tr>
-					<th scope="row"><a href="../preguntaAsesor/list/">Preguntas de asesor</a></th>
-					<td><a href="../preguntaAsesor/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listPreguntaAsesor %}">Preguntas de asesor</a></th>
+					<td><a href="{% url addPreguntaAsesor %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				</table>

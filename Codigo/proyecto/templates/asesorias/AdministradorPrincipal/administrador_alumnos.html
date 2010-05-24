@@ -9,26 +9,26 @@
 
 				<!-- Alumnos. -->
 				<tr>
-					<th scope="row"><a href="../alumno/list/">Alumnos</a></th>
-					<td><a href="../alumno/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listAlumno %}">Alumnos</a></th>
+					<td><a href="{% url addAlumno %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				<!-- Alumnos Curso Académico. -->
 				<tr>
-					<th scope="row"><a href="../alumnoCursoAcademico/list/">Alumnos Curso Académico</a></th>
-					<td><a href="../alumnoCursoAcademico/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listAlumnoCursoAcademico %}">Alumnos Curso Académico</a></th>
+					<td><a href="{% url addAlumnoCursoAcademico %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				<!-- Matrículas. -->
 				<tr>
-					<th scope="row"><a href="../matricula/list/">Matrículas</a></th>
-					<td><a href="../matricula/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listMatricula %}">Matrículas</a></th>
+					<td><a href="{% url addMatricula %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				<!-- Calificaciones Convocatoria. -->
 				<tr>
-					<th scope="row"><a href="../calificacionConvocatoria/list/">Calificaciones Convocatoria</a></th>
-					<td><a href="../calificacionConvocatoria/add/" class="addlink">Añadir</a></td>
+					<th scope="row"><a href="{% url listCalificacionConvocatoria %}">Calificaciones Convocatoria</a></th>
+					<td><a href="{% url addCalificacionConvocatoria %}" class="addlink">Añadir</a></td>
 				</tr>
 
 				</table>
