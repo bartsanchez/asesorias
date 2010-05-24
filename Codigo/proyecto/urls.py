@@ -11,7 +11,6 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
-	(r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': '/asesorias/media/'}),
 	url(r'^asesorias/asesor/$', 'proyecto.asesorias.views.asesor', name='vista_asesor'),
 	url(r'^asesorias/alumno/$', 'proyecto.asesorias.views.alumno', name='vista_alumno'),
 )
@@ -20,12 +19,12 @@ urlpatterns = patterns('',
 # Url's de administrador principal #
 # -------------------------------- #
 urlpatterns = patterns('',
-	url(r'^asesorias/administrador/$', 'proyecto.asesorias.views.administrador_inicio', name='administrador_inicio'),
-	url(r'^asesorias/administrador/organizacion_institucional/$', 'proyecto.asesorias.views.administrador_org_institucional', name='administrador_org_institucional'),
-	url(r'^asesorias/administrador/organizacion_docente/$', 'proyecto.asesorias.views.administrador_org_docente', name='administrador_org_docente'),
-	url(r'^asesorias/administrador/alumnos/$', 'proyecto.asesorias.views.administrador_alumnos', name='administrador_alumnos'),
-	url(r'^asesorias/administrador/reuniones/$', 'proyecto.asesorias.views.administrador_reuniones', name='administrador_reuniones'),
-	url(r'^asesorias/administrador/plantillas/$', 'proyecto.asesorias.views.administrador_plantillas', name='administrador_plantillas'),
+	url(r'^asesorias/administrador/$', 'proyecto.asesorias.vistas.vistasAdministradorPrincipal.administrador_inicio', name='administrador_inicio'),
+	url(r'^asesorias/administrador/organizacion_institucional/$', 'proyecto.asesorias.vistas.vistasAdministradorPrincipal.administrador_org_institucional', name='administrador_org_institucional'),
+	url(r'^asesorias/administrador/organizacion_docente/$', 'proyecto.asesorias.vistas.vistasAdministradorPrincipal.administrador_org_docente', name='administrador_org_docente'),
+	url(r'^asesorias/administrador/alumnos/$', 'proyecto.asesorias.vistas.vistasAdministradorPrincipal.administrador_alumnos', name='administrador_alumnos'),
+	url(r'^asesorias/administrador/reuniones/$', 'proyecto.asesorias.vistas.vistasAdministradorPrincipal.administrador_reuniones', name='administrador_reuniones'),
+	url(r'^asesorias/administrador/plantillas/$', 'proyecto.asesorias.vistas.vistasAdministradorPrincipal.administrador_plantillas', name='administrador_plantillas'),
 )
 
 # ------------------------- #
