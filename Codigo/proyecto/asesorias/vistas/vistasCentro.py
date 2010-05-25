@@ -26,7 +26,7 @@ def addCentro(request):
 	else:
 		form = forms.CentroForm()
 		error = False
-	return render_to_response('asesorias/Centro/addCentro.html', {'form': form})
+	return render_to_response('asesorias/Centro/addCentro.html', {'user': request.user, 'form': form})
 
 def editCentro(request, centro):
 	# Se obtiene la instancia del centro.
@@ -47,7 +47,7 @@ def editCentro(request, centro):
 	# El centro no existe.
 	else:
 		form = False
-	return render_to_response('asesorias/Centro/editCentro.html', {'form': form})
+	return render_to_response('asesorias/Centro/editCentro.html', {'user': request.user, 'form': form})
 
 def delCentro(request, centro):
 	# Se obtiene la instancia del centro.
@@ -60,9 +60,9 @@ def delCentro(request, centro):
 	# El centro no existe.
 	else:
 		error = True
-	return render_to_response('asesorias/Centro/delCentro.html', {'error': error})
+	return render_to_response('asesorias/Centro/delCentro.html', {'user': request.user, 'error': error})
 
 def listCentro(request):
 	# Se obtiene una lista con todos los centros.
 	lista_centros = models.Centro.objects.all()
-	return render_to_response('asesorias/Centro/listCentro.html', {'lista_centros': lista_centros})
+	return render_to_response('asesorias/Centro/listCentro.html', {'user': request.user, 'lista_centros': lista_centros})
