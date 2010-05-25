@@ -1,9 +1,15 @@
-<h1>Eliminar centro.</h1>
+{% extends "asesorias/Base/base_org_institucional.html" %}
 
-{% if error %}
+{% block content %}
 
-<p>No existe tal titulación.</p>
+	<h1>Eliminar centro.</h1>
 
-<a href="../../list">Volver</a>
+	{% if error %}
 
-{% endif %}
+	<p>No existe tal centro.</p>
+
+	<a href="{% url listCentro %}">Lista de centros</a>
+
+	{% endif %}
+
+{% endblock %}

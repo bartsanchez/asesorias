@@ -1,31 +1,32 @@
 {% extends "asesorias/Base/base_org_institucional.html" %}
 
 {% block content %}
+
 	<h1>Lista de centros.</h1>
 
-	<a href="{% url addCentro %}">Crear nuevo</a>
+	<a href="{% url addCentro %}" class="addlink">Crear nuevo</a>
 
-	{% if not lista_centros %}
+	<div class="module">
+		<table summary="Lista de centros.">
+		<caption><h2>Lista de centros</h2></caption>
 
-	<p>No existen actualmente centros en el sistema.</p>
+		{% if not lista_centros %}
 
-	{% else %}
+		<tr><th scope="row"><p>No existen actualmente centros en el sistema.</p></th></tr>
 
-		<div class="module">
-			<table summary="Lista de centros.">
-			<caption><a href="" class="section">Lista de centros</a></caption>
+		{% else %}
 
-			<!-- Centros -->
-			{% for centro in lista_centros %}
-			<tr>
-				<th scope="row"><a href="{% url editCentro centro.nombre_centro %}">{{ centro.nombre_centro }}</a></th>
-				<td><a href="{% url delCentro centro.nombre_centro %}" class="deletelink">Eliminar</a></td>
-			</tr>
-			{% endfor %}
-
-			</table>
-		</div>
+		<!-- Centros -->
+		{% for centro in lista_centros %}
+		<tr>
+			<th scope="row"><a href="{% url editCentro centro.nombre_centro %}">{{ centro.nombre_centro }}</a></th>
+			<td><a href="{% url delCentro centro.nombre_centro %}" class="deletelink">Eliminar</a></td>
+		</tr>
+		{% endfor %}
 
 	{% endif %}
+
+		</table>
+	</div>
 
 {% endblock %}

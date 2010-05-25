@@ -1,23 +1,46 @@
-<h1>Editar centro.</h1>
+{% extends "asesorias/Base/base_org_institucional.html" %}
 
-{% if not form %}
+{% block content %}
 
-<p>No existe tal titulación.</p>
+	<h1>Editar centro.</h1>
 
-<a href="../../list">Volver</a>
+	{% if not form %}
 
-{% else %}
+	<p>No existe tal centro.</p>
 
-{{ form.errors }}
+	<a href="{% url listCentro %}">Lista de centros</a>
 
-<form action="" method="post">
-    {% for field in form %}
-        <div class="fieldWrapper">
-            {{ field.errors }}
-            {{ field.label_tag }}: {{ field }}
-        </div>
-    {% endfor %}
-    <p><input type="submit" value="Editar"/></p>
-</form>
+	{% else %}
 
-{% endif %}
+	{% if form.subject.errors %}
+	<ol>
+		{% for error in form.subject.errors %}
+        <li><strong>{{ error|escape }}</strong></li>
+		{% endfor %}
+	</ol>
+	{% endif %}
+
+	<div class="module">
+
+		<form action="" method="post">
+
+			{% for field in form %}
+			<div class="fieldWrapper">
+				<table summary="Añadir centro.">
+				<caption><h2>Añadir centro</h2></caption>
+				<tr>
+					<th scope="row">{{ field.label_tag }}</th>
+					<td>{{ field }}</td>
+				</tr>
+				</table>
+			</div>
+			{% endfor %}
+
+			<p><input type="submit" value="Añadir"/></p>
+		</form>
+
+	</div>
+
+	{% endif %}
+
+{% endblock %}

@@ -18,7 +18,7 @@ urlpatterns = patterns('',
 # -------------------------------- #
 # Url's de administrador principal #
 # -------------------------------- #
-urlpatterns = patterns('',
+urlpatterns += patterns('',
 	url(r'^asesorias/administrador/$', 'proyecto.asesorias.vistas.vistasAdministradorPrincipal.administrador_inicio', name='administrador_inicio'),
 	url(r'^asesorias/administrador/organizacion_institucional/$', 'proyecto.asesorias.vistas.vistasAdministradorPrincipal.administrador_org_institucional', name='administrador_org_institucional'),
 	url(r'^asesorias/administrador/organizacion_docente/$', 'proyecto.asesorias.vistas.vistasAdministradorPrincipal.administrador_org_docente', name='administrador_org_docente'),
