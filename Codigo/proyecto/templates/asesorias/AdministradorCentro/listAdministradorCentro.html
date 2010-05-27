@@ -1,19 +1,32 @@
-<h1>Lista de administradores de centro.</h1>
+{% extends "asesorias/Base/base_org_institucional.html" %}
 
-<a href="../add">Crear nuevo</a>
+{% block content %}
 
-{% if not lista_administradores_centro %}
+	<h1>Lista de administradores de centro.</h1>
 
-<p>No existen actualmente administradores de centro en el sistema.</p>
+	<a href="{% url addAdministradorCentro %}" class="addlink">Crear nuevo</a>
 
-{% else %}
+	<div class="module">
+		<table summary="Lista de administradores de centro.">
+		<caption><h2>Lista de administradores de centro</h2></caption>
 
-	{% for administrador_centro in lista_administradores_centro %}
-		<ul>
-			<li>{{ administrador_centro }}</li>
-			<a href="../{{ administrador_centro }}/edit">Editar</a>
-			<a href="../{{ administrador_centro }}/del">Eliminar</a>
-		</ul>
-	{% endfor %}
+		{% if not lista_administradores_centro %}
 
-{% endif %}
+		<tr><th scope="row"><p>No existen actualmente administradores de centro en el sistema.</p></th></tr>
+
+		{% else %}
+
+		<!-- Administradores de centro -->
+		{% for administrador_centro in lista_administradores_centro %}
+		<tr>
+			<th scope="row"><a href="{% url editAdministradorCentro administrador_centro.nombre_adm_centro %}">{{ administrador_centro.nombre_adm_centro }}</a></th>
+			<td><a href="{% url delAdministradorCentro administrador_centro.nombre_adm_centro %}" class="deletelink">Eliminar</a></td>
+		</tr>
+		{% endfor %}
+
+		{% endif %}
+
+		</table>
+	</div>
+
+{% endblock %}
