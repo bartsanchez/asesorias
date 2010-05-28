@@ -1,0 +1,30 @@
+table * {
+	padding: 4px;
+}
+
+h2, caption {
+	margin: 0;
+	vertical-align: center;
+	font-size: 12px;
+	text-align: left;
+	font-weight: bold;
+	background: #7CA0C7;
+	color: white;
+}
+
+td, th {
+	width: 100%;
+	font-size: 11px;
+	border-left: 1px solid #eee;
+	border-right: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+}
+
+th {
+	text-align: left;
+	font-weight: bold;
+}
+
+td {
+	text-align: right;
+}
