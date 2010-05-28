@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
-from asesorias import models, forms
+from asesorias import models, forms, views
 
 # Comprueba si existe un centro y, de ser asi, lo devuelve.
 def obtenerCentro(centro):
@@ -66,3 +66,9 @@ def listCentro(request):
 	# Se obtiene una lista con todos los centros.
 	lista_centros = models.Centro.objects.all()
 	return render_to_response('asesorias/Centro/listCentro.html', {'user': request.user, 'lista_centros': lista_centros})
+
+def generarPDFListaCentros(request):
+	# Se obtiene una lista con todos los centros.
+	lista_centros = models.Centro.objects.all()
+
+	return views.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_centros, 'name': 'centros',} )
