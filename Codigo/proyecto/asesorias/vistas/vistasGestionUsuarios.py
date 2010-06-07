@@ -46,7 +46,7 @@ def authentication(request):
 	else:
 		form = forms.LoginForm()
 		error = ''
-	return render_to_response('asesorias/autentificacion.html', {'form': form, 'error': error})
+	return render_to_response('asesorias/Login/login.html', {'form': form, 'error': error})
 
 # Vista que controla la salida del sistema de un usuario.
 def logout_view(request):
