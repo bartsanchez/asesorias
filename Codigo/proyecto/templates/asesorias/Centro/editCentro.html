@@ -12,12 +12,15 @@
 
 	{% else %}
 
-	{% if form.subject.errors %}
-	<ol>
-		{% for error in form.subject.errors %}
-        <li><strong>{{ error|escape }}</strong></li>
-		{% endfor %}
-	</ol>
+	{% if form.errors %}
+	<div id="form-error">
+		<p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+		<ul>
+			{% for field in form %}
+			<li>{{ field.errors|striptags }}</li>
+			{% endfor %}
+		</ul>
+	</div>
 	{% endif %}
 
 	<div class="module">

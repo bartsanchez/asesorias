@@ -1,9 +1,15 @@
-<h1>Eliminar administrador centro.</h1>
+{% extends "asesorias/Base/base_org_institucional.html" %}
 
-{% if error %}
+{% block content %}
 
-<p>No existe tal administrador de centro.</p>
+	<h1>Eliminar administrador centro.</h1>
 
-<a href="../../list">Volver</a>
+	{% if error %}
 
-{% endif %}
+	<p>No existe tal administrador de centro.</p>
+
+	<a href="{% url listAdministradorCentro %}">Lista de administradores de centro</a>
+
+	{% endif %}
+
+{% endblock %}
