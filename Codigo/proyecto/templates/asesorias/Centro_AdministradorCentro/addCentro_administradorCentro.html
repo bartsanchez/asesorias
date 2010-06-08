@@ -1,13 +1,39 @@
-<h1>Añadir centro-administrador de centro.</h1>
+{% extends "asesorias/Base/base_org_institucional.html" %}
 
-{{ form.errors }}
+{% block content %}
 
-<form action="" method="post">
-    {% for field in form %}
-        <div class="fieldWrapper">
-            {{ field.errors }}
-            {{ field.label_tag }}: {{ field }}
-        </div>
-    {% endfor %}
-    <p><input type="submit" value="Añadir"/></p>
-</form>
+	<h1>Añadir centro-administrador de centro.</h1>
+
+	{% if form.errors %}
+	<div id="form-error">
+		<p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+		<ul>
+			{% for field in form %}
+			<li>{{ field.errors|striptags }}</li>
+			{% endfor %}
+		</ul>
+	</div>
+	{% endif %}
+
+	<div class="module">
+
+		<form action="" method="post">
+
+			<div class="fieldWrapper">
+				<table summary="Añadir centro - administrador de centro.">
+				<caption><h2>Añadir centro - administrador de centro</h2></caption>
+				{% for field in form %}
+				<tr>
+					<th scope="row">{{ field.label_tag }}</th>
+					<td>{{ field }}</td>
+				</tr>
+				{% endfor %}
+				</table>
+			</div>
+
+			<p><input type="submit" value="Confirmar"/></p>
+		</form>
+
+	</div>
+
+{% endblock %}
