@@ -29,7 +29,7 @@ def addCentro_administradorCentro(request):
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.Centro_AdministradorCentroForm()
-	return render_to_response('asesorias/Centro_AdministradorCentro/addCentro_administradorCentro.html', {'form': form})
+	return render_to_response('asesorias/Centro_AdministradorCentro/addCentro_administradorCentro.html', {'user': request.user, 'form': form})
 
 def editCentro_administradorCentro(request, centro, administrador_centro):
 	# Se obtiene la instancia del centro_administradorCentro.
@@ -50,7 +50,7 @@ def editCentro_administradorCentro(request, centro, administrador_centro):
 	# El centro_administradorCentro no existe
 	else:
 		form = False
-	return render_to_response('asesorias/Centro_AdministradorCentro/editCentro_administradorCentro.html', {'form': form})
+	return render_to_response('asesorias/Centro_AdministradorCentro/editCentro_administradorCentro.html', {'user': request.user, 'form': form})
 
 def delCentro_administradorCentro(request, centro, administrador_centro):
 	# Se obtiene la instancia del centro_administradorCentro.
@@ -63,12 +63,12 @@ def delCentro_administradorCentro(request, centro, administrador_centro):
 	# El centro_administradorCentro no existe.
 	else:
 		error = True
-	return render_to_response('asesorias/Centro_AdministradorCentro/delCentro_administradorCentro.html', {'error': error})
+	return render_to_response('asesorias/Centro_AdministradorCentro/delCentro_administradorCentro.html', {'user': request.user, 'error': error})
 
 def listCentro_administradorCentro(request):
 	# Se obtiene una lista con todos los centros administrador de centro.
 	lista_centros_administradorCentro = models.CentroAdministradorCentro.objects.all()
-	return render_to_response('asesorias/Centro_AdministradorCentro/listCentro_administradorCentro.html', {'lista_centros_administradorCentro': lista_centros_administradorCentro})
+	return render_to_response('asesorias/Centro_AdministradorCentro/listCentro_administradorCentro.html', {'user': request.user, 'lista_centros_administradorCentro': lista_centros_administradorCentro})
 
 def generarPDFListaCentros_administradorCentro(request):
 	# Se obtiene una lista con todos los centros.
