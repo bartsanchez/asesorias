@@ -25,7 +25,7 @@ def addAdministradorCentro(request):
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AdministradorCentroForm()
-	return render_to_response('asesorias/AdministradorCentro/addAdministradorCentro.html', {'form': form})
+	return render_to_response('asesorias/AdministradorCentro/addAdministradorCentro.html', {'user': request.user, 'form': form})
 
 def editAdministradorCentro(request, administrador_centro):
 	# Se obtiene la instancia del administrador de centro.
@@ -46,7 +46,7 @@ def editAdministradorCentro(request, administrador_centro):
 	# El administrador de centro no existe
 	else:
 		form = False
-	return render_to_response('asesorias/AdministradorCentro/editAdministradorCentro.html', {'form': form})
+	return render_to_response('asesorias/AdministradorCentro/editAdministradorCentro.html', {'user': request.user, 'form': form})
 
 def delAdministradorCentro(request, administrador_centro):
 	# Se obtiene la instancia del administrador de centro.
@@ -59,12 +59,12 @@ def delAdministradorCentro(request, administrador_centro):
 	# El administrador de centro no existe.
 	else:
 		error = True
-	return render_to_response('asesorias/AdministradorCentro/delAdministradorCentro.html', {'error': error})
+	return render_to_response('asesorias/AdministradorCentro/delAdministradorCentro.html', {'user': request.user, 'error': error})
 
 def listAdministradorCentro(request):
 	# Se obtiene una lista con todos los administradores de centro.
 	lista_administradores_centro = models.AdministradorCentro.objects.all()
-	return render_to_response('asesorias/AdministradorCentro/listAdministradorCentro.html', {'lista_administradores_centro': lista_administradores_centro})
+	return render_to_response('asesorias/AdministradorCentro/listAdministradorCentro.html', {'user': request.user, 'lista_administradores_centro': lista_administradores_centro})
 
 def generarPDFListaAdministradoresCentro(request):
 	# Se obtiene una lista con todos los administradores de centro.
