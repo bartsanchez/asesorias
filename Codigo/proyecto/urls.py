@@ -69,6 +69,7 @@ urlpatterns += patterns('',
 	url(r'^asesorias/titulacion/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/edit/$', 'proyecto.asesorias.vistas.vistasTitulacion.editTitulacion', name='editTitulacion'),
 	url(r'^asesorias/titulacion/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/del/$', 'proyecto.asesorias.vistas.vistasTitulacion.delTitulacion', name='delTitulacion'),
 	url(r'^asesorias/titulacion/list/$', 'proyecto.asesorias.vistas.vistasTitulacion.listTitulacion', name='listTitulacion'),
+	url(r'^asesorias/titulacion/generarPDF/$', 'proyecto.asesorias.vistas.vistasTitulacion.generarPDFListaTitulaciones', name='generarPDFListaTitulaciones'),
 )
 
 # ------------------- #

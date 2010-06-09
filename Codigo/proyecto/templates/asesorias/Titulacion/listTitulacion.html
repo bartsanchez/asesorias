@@ -1,19 +1,34 @@
-<h1>Lista de titulaciones.</h1>
+{% extends "asesorias/Base/base_org_institucional.html" %}
 
-<a href="../add">Crear nuevo</a>
+{% block content %}
 
-{% if not lista_titulaciones %}
+	<h1>Lista de titulaciones.</h1>
 
-<p>No existen actualmente titulaciones en el sistema.</p>
+	<a href="{% url addTitulacion %}" class="addlink">Crear nuevo</a>
+	<a href="{% url generarPDFListaTitulaciones %}" class="pdflink">Generar PDF</a>
 
-{% else %}
+	<div class="module">
+		<table summary="Lista de titulaciones.">
+		<caption><h2>Lista de titulaciones</h2></caption>
 
-	{% for titulacion in lista_titulaciones %}
-		<ul>
-			<li>{{ titulacion }}</li>
-			<a href="../{{ titulacion.id_centro}}/{{ titulacion.nombre_titulacion}}/{{ titulacion.plan_estudios }}/edit">Editar</a>
-			<a href="../{{ titulacion.id_centro}}/{{ titulacion.nombre_titulacion}}/{{ titulacion.plan_estudios }}/del">Eliminar</a>
-		</ul>
-	{% endfor %}
+		{% if not lista_titulaciones %}
 
-{% endif %}
+		<tr><th scope="row"><p>No existen actualmente titulaciones en el sistema.</p></th></tr>
+
+		{% else %}
+
+		<!-- Titulaciones -->
+		{% for titulacion in lista_titulaciones %}
+		<tr>
+			<th scope="row"><a href="{% url editTitulacion titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}">{{ titulacion.nombre_titulacion }}</a></th>
+			<td><a href="{% url editTitulacion titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}" class="editlink">Editar</a></td>
+			<td><a href="{% url delTitulacion titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}" class="deletelink">Eliminar</a></td>
+		</tr>
+		{% endfor %}
+
+		{% endif %}
+
+		</table>
+	</div>
+
+{% endblock %}
