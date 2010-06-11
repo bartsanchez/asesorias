@@ -19,17 +19,17 @@
 
 		<form action="" method="post">
 
-			{% for field in form %}
 			<div class="fieldWrapper">
 				<table summary="Añadir administrador de centro.">
 				<caption><h2>Añadir administrador de centro</h2></caption>
+				{% for field in form %}
 				<tr>
 					<th scope="row">{{ field.label_tag }}</th>
 					<td>{{ field }}</td>
 				</tr>
+				{% endfor %}
 				</table>
 			</div>
-			{% endfor %}
 
 			<p><input type="submit" value="Confirmar"/></p>
 		</form>
