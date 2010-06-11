@@ -17,10 +17,14 @@
 
 		{% else %}
 
+		<tr>
+			<th>Centro : Administrador de centro</th>
+		</tr>
+
 		<!-- Centros-Administrador de centro -->
 		{% for centro_administradorCentro in lista_centros_administradorCentro %}
 		<tr>
-			<th scope="row"><a href="{% url editCentro_administradorCentro centro_administradorCentro.id_centro centro_administradorCentro.id_adm_centro %}">{{ centro_administradorCentro.id_centro }}: {{ centro_administradorCentro.id_adm_centro }}</a></th>
+			<th scope="row"><a href="{% url editCentro_administradorCentro centro_administradorCentro.id_centro centro_administradorCentro.id_adm_centro %}">{{ centro_administradorCentro.id_centro }} : {{ centro_administradorCentro.id_adm_centro }}</a></th>
 			<td><a href="{% url editCentro_administradorCentro centro_administradorCentro.id_centro centro_administradorCentro.id_adm_centro %}" class="editlink">Editar</a></td>
 			<td><a href="{% url delCentro_administradorCentro centro_administradorCentro.id_centro centro_administradorCentro.id_adm_centro %}" class="deletelink">Eliminar</a></td>
 		</tr>
