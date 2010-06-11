@@ -1,28 +1,54 @@
-<h1>Editar titulación.</h1>
+{% extends "asesorias/Base/base_org_institucional.html" %}
 
-{% if not form %}
+{% block content %}
 
-<p>No existe tal titulación.</p>
+	<h1>Editar titulación.</h1>
 
-<a href="../../../../list">Volver</a>
+	{% if not form %}
 
-{% else %}
+	<p>No existe tal titulación.</p>
 
-{{ form.errors }}
+	<a href="{% url listTitulacion %}">Lista de titulaciones</a>
 
-<form action="" method="post">
-    {% for field in form %}
+	{% else %}
 
-		<!-- Excluye el campo id_titulacion que se controlará por software. -->
-		{% ifnotequal field.name 'id_titulacion' %}
+	{% if form.errors %}
+	<div id="form-error">
+		<p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+		<ul>
+			{% for field in form %}
+			<li>{{ field.errors|striptags }}</li>
+			{% endfor %}
+		</ul>
+	</div>
+	{% endif %}
+
+	<div class="module">
+
+		<form action="" method="post">
+
 			<div class="fieldWrapper">
-				{{ field.errors }}
-				{{ field.label_tag }}: {{ field }}
+				<table summary="Editar titulación.">
+				<caption><h2>Editar titulación</h2></caption>
+				{% for field in form %}
+
+				{# Excluye el campo id_titulacion que se controlará por software. #}
+				{% ifnotequal field.name 'id_titulacion' %}
+				<tr>
+					<th scope="row">{{ field.label_tag }}</th>
+					<td>{{ field }}</td>
+				</tr>
+				{% endifnotequal %}
+
+				{% endfor %}
+				</table>
 			</div>
-		{% endifnotequal %}
 
-    {% endfor %}
-    <p><input type="submit" value="Editar"/></p>
-</form>
+			<p><input type="submit" value="Confirmar"/></p>
+		</form>
 
-{% endif %}
+	</div>
+
+	{% endif %}
+
+{% endblock %}
