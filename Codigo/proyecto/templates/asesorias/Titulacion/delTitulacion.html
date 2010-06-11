@@ -1,9 +1,15 @@
-<h1>Eliminar titulación.</h1>
+{% extends "asesorias/Base/base_org_institucional.html" %}
 
-{% if error %}
+{% block content %}
 
-<p>No existe tal titulación.</p>
+	<h1>Eliminar titulación.</h1>
 
-<a href="../../../../list">Volver</a>
+	{% if error %}
 
-{% endif %}
+	<p>No existe tal titulación.</p>
+
+	<a href="{% url listTitulacion %}">Lista de titulaciones</a>
+
+	{% endif %}
+
+{% endblock %}
