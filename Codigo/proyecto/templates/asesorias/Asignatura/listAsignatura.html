@@ -17,6 +17,10 @@
 
 		{% else %}
 
+		<tr>
+			<th>Nombre de centro : Nombre de titulación : Nombre de asignatura</th>
+		</tr>
+
 		{% for asignatura in lista_asignaturas %}
 		<tr>
 			<th scope="row"><a href="{% url editAsignatura asignatura.determinarNombreCentro asignatura.determinarNombreTitulacion asignatura.determinarPlanEstudios asignatura.nombre_asignatura %}">{{ asignatura }}</a></th>
