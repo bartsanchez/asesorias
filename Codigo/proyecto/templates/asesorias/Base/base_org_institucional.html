@@ -8,7 +8,7 @@
 
 	{% block org_institucional %}
 									<ul>
-										<li><a href="{% url listCentro %}">Centros</a></li>
+										<li><a href="{% url listCentro 'nombre_centro' %}">Centros</a></li>
 										<li><a href="{% url listAdministradorCentro %}">Administradores de centro</a></li>
 										<li><a href="{% url listCentro_administradorCentro %}">Centros - Administradores de centro</a></li>
 										<li><a href="{% url listTitulacion %}">Titulaciones</a></li>

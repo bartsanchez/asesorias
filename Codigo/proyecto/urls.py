@@ -44,7 +44,7 @@ urlpatterns += patterns('',
 	url(r'^asesorias/centro/add/$', 'proyecto.asesorias.vistas.vistasCentro.addCentro', name='addCentro'),
 	url(r'^asesorias/centro/(?P<centro>[\s\w]+)/edit/$', 'proyecto.asesorias.vistas.vistasCentro.editCentro', name='editCentro'),
 	url(r'^asesorias/centro/(?P<centro>[\s\w]+)/del/$', 'proyecto.asesorias.vistas.vistasCentro.delCentro', name='delCentro'),
-	url(r'^asesorias/centro/list/$', 'proyecto.asesorias.vistas.vistasCentro.listCentro', name='listCentro'),
+	url(r'^asesorias/centro/list/(?P<orden>[\s\w]*)/$', 'proyecto.asesorias.vistas.vistasCentro.listCentro', name='listCentro'),
 	url(r'^asesorias/centro/generarPDF/$', 'proyecto.asesorias.vistas.vistasCentro.generarPDFListaCentros', name='generarPDFListaCentros'),
 )
 

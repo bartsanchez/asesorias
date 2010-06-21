@@ -62,10 +62,14 @@ def delCentro(request, centro):
 		error = True
 	return render_to_response('asesorias/Centro/delCentro.html', {'user': request.user, 'error': error})
 
-def listCentro(request):
+def listCentro(request, orden):
 	# Se obtiene una lista con todos los centros.
-	lista_centros = models.Centro.objects.all()
-	return render_to_response('asesorias/Centro/listCentro.html', {'user': request.user, 'lista_centros': lista_centros})
+	lista_centros = models.Centro.objects.order_by('nombre_centro')
+
+	if orden == '_nombre_centro':
+		lista_centros = lista_centros.reverse()
+
+	return render_to_response('asesorias/Centro/listCentro.html', {'user': request.user, 'lista_centros': lista_centros, 'orden': orden})
 
 def generarPDFListaCentros(request):
 	# Se obtiene una lista con todos los centros.

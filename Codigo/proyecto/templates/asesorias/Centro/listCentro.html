@@ -17,6 +17,14 @@
 
 		{% else %}
 
+		<tr>
+			{% ifequal orden 'nombre_centro' %}
+			<th><a href={% url listCentro '_nombre_centro' %}>Nombre de centro &#11015;</a></th>
+			{% else %}
+			<th><a href={% url listCentro 'nombre_centro' %}>Nombre de centro &#11014;</a></th>
+			{% endifequal %}
+		</tr>
+
 		<!-- Centros -->
 		{% for centro in lista_centros %}
 		<tr>
