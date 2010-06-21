@@ -1,19 +1,37 @@
-<h1>Lista de asignaturas curso académico.</h1>
+{% extends "asesorias/Base/base_org_institucional.html" %}
 
-<a href="../add">Crear nuevo</a>
+{% block content %}
 
-{% if not lista_asignaturas_curso_academico %}
+	<h1>Lista de asignaturas curso académico.</h1>
 
-<p>No existen actualmente asignaturas curso académico en el sistema.</p>
+	<a href="{% url addAsignaturaCursoAcademico %}" class="addlink">Crear nuevo</a>
+	<a href="{% url generarPDFListaAsignaturasCursoAcademico %}" class="pdflink">Generar PDF</a>
 
-{% else %}
+	<div class="module">
+		<table summary="Lista de asignaturas curso académico.">
+		<caption><h2>Lista de asignaturas curso académico</h2></caption>
 
-	{% for asignatura_curso_academico in lista_asignaturas_curso_academico %}
-		<ul>
-			<li>{{ asignatura_curso_academico }}</li>
-			<a href="../{{ asignatura_curso_academico.determinarNombreCentro }}/{{ asignatura_curso_academico.determinarNombreTitulacion }}/{{ asignatura_curso_academico.determinarPlanEstudios }}/{{ asignatura_curso_academico.determinarNombreAsignatura }}/{{ asignatura_curso_academico.curso_academico }}/edit">Editar</a>
-			<a href="../{{ asignatura_curso_academico.determinarNombreCentro }}/{{ asignatura_curso_academico.determinarNombreTitulacion }}/{{ asignatura_curso_academico.determinarPlanEstudios }}/{{ asignatura_curso_academico.determinarNombreAsignatura }}/{{ asignatura_curso_academico.curso_academico }}/del">Eliminar</a>
-		</ul>
-	{% endfor %}
+		{% if not lista_asignaturas_curso_academico %}
 
-{% endif %}
+		<tr><th scope="row"><p>No existen actualmente asignaturas curso académico en el sistema.</p></th></tr>
+
+		{% else %}
+
+		<tr>
+			<th>Nombre de centro : Nombre de titulación : Plan de estudios : Nombre de asignatura : Curso académico</th>
+		</tr>
+
+		{% for asignatura_curso_academico in lista_asignaturas_curso_academico %}
+		<tr>
+			<th scope="row"><a href="{% url editAsignaturaCursoAcademico asignatura_curso_academico.determinarNombreCentro asignatura_curso_academico.determinarNombreTitulacion asignatura_curso_academico.determinarPlanEstudios asignatura_curso_academico.determinarNombreAsignatura asignatura_curso_academico.curso_academico %}">{{ asignatura_curso_academico }}</a></th>
+			<td><a href="{% url editAsignaturaCursoAcademico asignatura_curso_academico.determinarNombreCentro asignatura_curso_academico.determinarNombreTitulacion asignatura_curso_academico.determinarPlanEstudios asignatura_curso_academico.determinarNombreAsignatura asignatura_curso_academico.curso_academico %}" class="editlink">Editar</a></td>
+			<td><a href="{% url delAsignaturaCursoAcademico asignatura_curso_academico.determinarNombreCentro asignatura_curso_academico.determinarNombreTitulacion asignatura_curso_academico.determinarPlanEstudios asignatura_curso_academico.determinarNombreAsignatura asignatura_curso_academico.curso_academico %}" class="deletelink">Eliminar</a></td>
+		</tr>
+		{% endfor %}
+
+		{% endif %}
+
+		</table>
+	</div>
+
+{% endblock %}

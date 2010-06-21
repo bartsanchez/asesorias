@@ -100,7 +100,7 @@ class AsignaturaCursoAcademico(models.Model):
 		return unicode(asignatura.nombre_asignatura)
 
 	def __unicode__(self):
-		return unicode(self.determinarNombreCentro()) + ": " + unicode(self.determinarNombreTitulacion()) + " -> " + unicode(self.determinarNombreAsignatura()) + " (" + unicode(self.curso_academico) + ")"
+		return unicode(self.determinarNombreCentro()) + " : " + unicode(self.determinarNombreTitulacion()) + " : " + unicode(self.determinarNombreAsignatura()) + " : " + unicode(self.curso_academico)
 
 class Departamento(models.Model):
 	id_departamento = models.AutoField(primary_key=True)
@@ -330,7 +330,7 @@ class CentroAdministradorCentro(models.Model):
 		unique_together = ("id_centro", "id_adm_centro")
 
 	def __unicode__(self):
-		return unicode(self.id_centro) + ": " + unicode(self.id_adm_centro)
+		return unicode(self.id_centro) + " : " + unicode(self.id_adm_centro)
 
 class ReunionPreguntaAsesor(models.Model):
 	codigo_reunion_preguntasAsesores = models.AutoField(primary_key=True)

@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
-from asesorias import models, forms
+from asesorias import models, forms, views
 from asesorias.vistas import vistasAsignatura
 
 # Comprueba si existe una asignatura curso academico y, de ser asi, la devuelve.
@@ -100,3 +100,9 @@ def listAsignaturaCursoAcademico(request):
 	# Se obtiene una lista con todos las asignaturas curso academico.
 	lista_asignaturas_curso_academico = models.AsignaturaCursoAcademico.objects.all()
 	return render_to_response('asesorias/AsignaturaCursoAcademico/listAsignaturaCursoAcademico.html', {'lista_asignaturas_curso_academico': lista_asignaturas_curso_academico})
+
+def generarPDFListaAsignaturasCursoAcademico(request):
+	# Se obtiene una lista con todos las asignaturas curso academico.
+	lista_asignaturas_curso_academico = models.AsignaturaCursoAcademico.objects.all()
+
+	return views.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_asignaturas_curso_academico, 'name': 'asignaturas curso academico',} )
