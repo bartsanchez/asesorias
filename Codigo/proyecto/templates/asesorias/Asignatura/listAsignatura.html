@@ -1,19 +1,33 @@
-<h1>Lista de asignaturas.</h1>
+{% extends "asesorias/Base/base_org_institucional.html" %}
 
-<a href="../add">Crear nuevo</a>
+{% block content %}
 
-{% if not lista_asignaturas %}
+	<h1>Lista de asignaturas.</h1>
 
-<p>No existen actualmente asignaturas en el sistema.</p>
+	<a href="{% url addAsignatura %}" class="addlink">Crear nuevo</a>
+	<a href="{% url generarPDFListaAsignaturas %}" class="pdflink">Generar PDF</a>
 
-{% else %}
+	<div class="module">
+		<table summary="Lista de asignaturas.">
+		<caption><h2>Lista de asignaturas</h2></caption>
 
-	{% for asignatura in lista_asignaturas %}
-		<ul>
-			<li>{{ asignatura }}</li>
-			<a href="../{{ asignatura.determinarNombreCentro }}/{{ asignatura.determinarNombreTitulacion }}/{{ asignatura.determinarPlanEstudios }}/{{ asignatura.nombre_asignatura }}/edit">Editar</a>
-			<a href="../{{ asignatura.determinarNombreCentro }}/{{ asignatura.determinarNombreTitulacion }}/{{ asignatura.determinarPlanEstudios }}/{{ asignatura.nombre_asignatura }}/del">Eliminar</a>
-		</ul>
-	{% endfor %}
+		{% if not lista_asignaturas %}
 
-{% endif %}
+		<tr><th scope="row"><p>No existen actualmente asignaturas en el sistema.</p></th></tr>
+
+		{% else %}
+
+		{% for asignatura in lista_asignaturas %}
+		<tr>
+			<th scope="row"><a href="{% url editAsignatura asignatura.determinarNombreCentro asignatura.determinarNombreTitulacion asignatura.determinarPlanEstudios asignatura.nombre_asignatura %}">{{ asignatura }}</a></th>
+			<td><a href="{% url editAsignatura asignatura.determinarNombreCentro asignatura.determinarNombreTitulacion asignatura.determinarPlanEstudios asignatura.nombre_asignatura %}" class="editlink">Editar</a></td>
+			<td><a href="{% url delAsignatura asignatura.determinarNombreCentro asignatura.determinarNombreTitulacion asignatura.determinarPlanEstudios asignatura.nombre_asignatura %}" class="deletelink">Eliminar</a></td>
+		</tr>
+		{% endfor %}
+
+		{% endif %}
+
+		</table>
+	</div>
+
+{% endblock %}

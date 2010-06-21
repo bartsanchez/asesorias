@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
-from asesorias import models, forms
+from asesorias import models, forms, views
 from asesorias.vistas import vistasTitulacion
 
 # Comprueba si existe una asignatura y, de ser asi, la devuelve.
@@ -161,3 +161,8 @@ def listAsignatura(request):
 	lista_asignaturas = models.Asignatura.objects.all()
 	return render_to_response('asesorias/Asignatura/listAsignatura.html', {'lista_asignaturas': lista_asignaturas})
 
+def generarPDFListaAsignaturas(request):
+	# Se obtiene una lista con todas las asignaturas.
+	lista_asignaturas = models.Asignatura.objects.all()
+
+	return views.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_asignaturas, 'name': 'asignaturas',} )
