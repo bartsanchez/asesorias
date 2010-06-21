@@ -1,22 +1,49 @@
-<h1>Añadir asignatura curso académico.</h1>
+{% extends "asesorias/Base/base_org_institucional.html" %}
 
-{{ form.errors }}
+{% block content %}
 
-<form action="" method="post">
-    {% for field in form %}
+	<h1>Añadir asignatura curso académico.</h1>
 
-		<!-- Excluye los campos que forman parte de la clave que se controlarán por software. -->
-		{% ifnotequal field.name 'id_centro' %}
-		{% ifnotequal field.name 'id_titulacion' %}
-		{% ifnotequal field.name 'id_asignatura' %}
+	{% if form.errors %}
+	<div id="form-error">
+		<p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+		<ul>
+			{% for field in form %}
+			<li>{{ field.errors|striptags }}</li>
+			{% endfor %}
+		</ul>
+	</div>
+	{% endif %}
+
+	<div class="module">
+
+		<form action="" method="post">
+
 			<div class="fieldWrapper">
-				{{ field.errors }}
-				{{ field.label_tag }}: {{ field }}
-			</div>
-		{% endifnotequal %}
-		{% endifnotequal %}
-		{% endifnotequal %}
+				<table summary="Añadir asignatura curso académico.">
+				<caption><h2>Añadir asignatura curso académico</h2></caption>
 
-    {% endfor %}
-    <p><input type="submit" value="Añadir"/></p>
-</form>
+				{% for field in form %}
+
+				{# Excluye los campos que forman parte de la clave que se controlarán por software. #}
+				{% ifnotequal field.name 'id_centro' %}
+				{% ifnotequal field.name 'id_titulacion' %}
+				{% ifnotequal field.name 'id_asignatura' %}
+				<tr>
+					<th scope="row">{{ field.label_tag }}</th>
+					<td>{{ field }}</td>
+				</tr>
+				{% endifnotequal %}
+				{% endifnotequal %}
+				{% endifnotequal %}
+
+				{% endfor %}
+				</table>
+			</div>
+
+			<p><input type="submit" value="Confirmar"/></p>
+		</form>
+
+	</div>
+
+{% endblock %}
