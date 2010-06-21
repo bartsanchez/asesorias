@@ -20,7 +20,7 @@
 		<!-- Centros -->
 		{% for centro in lista_centros %}
 		<tr>
-			<th scope="row"><a href="{% url editCentro centro.nombre_centro %}">{{ centro.nombre_centro }}</a></th>
+			<th scope="row"><a href="{% url editCentro centro.nombre_centro %}">{{ centro }}</a></th>
 			<td><a href="{% url editCentro centro.nombre_centro %}" class="editlink">Editar</a></td>
 			<td><a href="{% url delCentro centro.nombre_centro %}" class="deletelink">Eliminar</a></td>
 		</tr>
