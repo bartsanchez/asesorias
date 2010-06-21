@@ -1,9 +1,15 @@
-<h1>Eliminar asignatura curso académico.</h1>
+{% extends "asesorias/Base/base_org_institucional.html" %}
 
-{% if error %}
+{% block content %}
 
-<p>No existe tal asignatura curso académico.</p>
+	<h1>Eliminar asignatura curso académico.</h1>
 
-<a href="../../../../../../list">Volver</a>
+	{% if error %}
 
-{% endif %}
+	<p>No existe tal asignatura curso académico.</p>
+
+	<a href="{% url listAsignaturaCursoAcademico %}">Volver</a>
+
+	{% endif %}
+
+{% endblock %}
