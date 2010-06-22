@@ -7,9 +7,29 @@
 	<a href="{% url addCentro %}" class="addlink">Crear nuevo</a>
 	<a href="{% url generarPDFListaCentros %}" class="pdflink">Generar PDF</a>
 
+
+	<div class="search">
+
+		<form action="" method="post">
+
+			<div class="fieldWrapper">
+				<table summary="Realizar búsqueda.">
+				{% for field in form %}
+				<tr>
+					<th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
+					<td>{{ field }}</td>
+				</tr>
+				{% endfor %}
+				</table>
+			</div>
+
+		</form>
+
+	</div>
+
 	<div class="module">
 		<table summary="Lista de centros.">
-		<caption><h2>Lista de centros</h2></caption>
+		<caption><h2>Lista de centros{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
 
 		{% if not lista_centros %}
 
@@ -17,6 +37,7 @@
 
 		{% else %}
 
+		{% if not busqueda %}
 		<tr>
 			{% ifequal orden 'nombre_centro' %}
 			<th><a href={% url listCentro '_nombre_centro' %}>Nombre de centro &#11015;</a></th>
@@ -24,6 +45,7 @@
 			<th><a href={% url listCentro 'nombre_centro' %}>Nombre de centro &#11014;</a></th>
 			{% endifequal %}
 		</tr>
+		{% endif %}
 
 		<!-- Centros -->
 		{% for centro in lista_centros %}

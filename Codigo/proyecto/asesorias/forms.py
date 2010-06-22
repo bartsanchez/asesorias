@@ -100,3 +100,6 @@ class Reunion_PreguntaAsesorForm(forms.ModelForm):
 
 	class Meta:
 		model = models.ReunionPreguntaAsesor
+
+class SearchForm(forms.Form):
+	busqueda = forms.CharField(label="Busqueda", max_length=50)

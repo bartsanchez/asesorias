@@ -63,13 +63,30 @@ def delCentro(request, centro):
 	return render_to_response('asesorias/Centro/delCentro.html', {'user': request.user, 'error': error})
 
 def listCentro(request, orden):
-	# Se obtiene una lista con todos los centros.
-	lista_centros = models.Centro.objects.order_by('nombre_centro')
+	# Se ha realizado una busqueda.
+	if request.method == 'POST':
+		# Se obtienen los valores y se valida.
+		form = forms.SearchForm(request.POST)
+		# Si es valido se realiza la busqueda.
+		if form.is_valid():
+			busqueda = request.POST['busqueda']
+			lista_centros = models.Centro.objects.filter(nombre_centro__contains=busqueda).order_by('nombre_centro')
+		else:
+			busqueda = False
+			lista_centros = models.Centro.objects.order_by('nombre_centro')
+	# No se ha realizado busqueda.
+	else:
+		# Formulario para una posible busqueda.
+		form = forms.SearchForm()
+		busqueda = False
 
-	if orden == '_nombre_centro':
-		lista_centros = lista_centros.reverse()
+		# Se obtiene una lista con todos los centros.
+		lista_centros = models.Centro.objects.order_by('nombre_centro')
 
-	return render_to_response('asesorias/Centro/listCentro.html', {'user': request.user, 'lista_centros': lista_centros, 'orden': orden})
+		if orden == '_nombre_centro':
+			lista_centros = lista_centros.reverse()
+
+	return render_to_response('asesorias/Centro/listCentro.html', {'user': request.user, 'form': form, 'lista_centros': lista_centros, 'busqueda': busqueda, 'orden': orden})
 
 def generarPDFListaCentros(request):
 	# Se obtiene una lista con todos los centros.
