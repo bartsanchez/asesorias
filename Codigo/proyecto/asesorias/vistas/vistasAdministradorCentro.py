@@ -21,7 +21,7 @@ def addAdministradorCentro(request):
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
 			# Redirige a la pagina de listar administradores de centro.
-			return HttpResponseRedirect( reverse('listAdministradorCentro') )
+			return HttpResponseRedirect( reverse('listAdministradorCentro', kwargs={'orden': 'nombre_adm_centro'}) )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AdministradorCentroForm()
@@ -42,7 +42,7 @@ def editAdministradorCentro(request, administrador_centro):
 			if form.is_valid():
 				form.save()
 				# Redirige a la pagina de listar administradores de centro.
-				return HttpResponseRedirect( reverse('listAdministradorCentro') )
+				return HttpResponseRedirect( reverse('listAdministradorCentro', kwargs={'orden': 'nombre_adm_centro'}) )
 	# El administrador de centro no existe
 	else:
 		form = False
@@ -55,16 +55,36 @@ def delAdministradorCentro(request, administrador_centro):
 	if instancia_admin_centro:
 		instancia_admin_centro.delete()
 		# Redirige a la pagina de listar administradores de centro.
-		return HttpResponseRedirect( reverse('listAdministradorCentro') )
+		return HttpResponseRedirect( reverse('listAdministradorCentro', kwargs={'orden': 'nombre_adm_centro'}) )
 	# El administrador de centro no existe.
 	else:
 		error = True
 	return render_to_response('asesorias/AdministradorCentro/delAdministradorCentro.html', {'user': request.user, 'error': error})
 
-def listAdministradorCentro(request):
-	# Se obtiene una lista con todos los administradores de centro.
-	lista_administradores_centro = models.AdministradorCentro.objects.all()
-	return render_to_response('asesorias/AdministradorCentro/listAdministradorCentro.html', {'user': request.user, 'lista_administradores_centro': lista_administradores_centro})
+def listAdministradorCentro(request, orden):
+	# Se ha realizado una busqueda.
+	if request.method == 'POST':
+		# Se obtienen los valores y se valida.
+		form = forms.SearchForm(request.POST)
+		# Si es valido se realiza la busqueda.
+		if form.is_valid():
+			busqueda = request.POST['busqueda']
+			lista_administradores_centro = models.AdministradorCentro.objects.filter(nombre_adm_centro__contains=busqueda).order_by('nombre_adm_centro')
+		else:
+			busqueda = False
+			lista_administradores_centro = models.AdministradorCentro.objects.order_by('nombre_adm_centro')
+	# No se ha realizado busqueda.
+	else:
+		# Formulario para una posible busqueda.
+		form = forms.SearchForm()
+		busqueda = False
+
+		# Se obtiene una lista con todos los centros.
+		lista_administradores_centro = models.AdministradorCentro.objects.order_by('nombre_adm_centro')
+
+		if orden == '_nombre_adm_centro':
+			lista_administradores_centro = lista_administradores_centro.reverse()
+	return render_to_response('asesorias/AdministradorCentro/listAdministradorCentro.html', {'user': request.user, 'form': form, 'lista_administradores_centro': lista_administradores_centro, 'busqueda': busqueda, 'orden': orden})
 
 def generarPDFListaAdministradoresCentro(request):
 	# Se obtiene una lista con todos los administradores de centro.

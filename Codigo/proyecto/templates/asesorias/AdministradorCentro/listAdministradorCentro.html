@@ -7,15 +7,44 @@
 	<a href="{% url addAdministradorCentro %}" class="addlink">Crear nuevo</a>
 	<a href="{% url generarPDFListaAdministradoresCentro %}" class="pdflink">Generar PDF</a>
 
+	<div class="search">
+
+		<form action="" method="post">
+
+			<div class="fieldWrapper">
+				<table summary="Realizar búsqueda.">
+				{% for field in form %}
+				<tr>
+					<th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
+					<td>{{ field }}</td>
+				</tr>
+				{% endfor %}
+				</table>
+			</div>
+
+		</form>
+
+	</div>
+
 	<div class="module">
 		<table summary="Lista de administradores de centro.">
-		<caption><h2>Lista de administradores de centro</h2></caption>
+		<caption><h2>Lista de administradores de centro{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
 
 		{% if not lista_administradores_centro %}
 
 		<tr><th scope="row"><p>No existen actualmente administradores de centro en el sistema.</p></th></tr>
 
 		{% else %}
+
+		{% if not busqueda %}
+		<tr>
+			{% ifequal orden 'nombre_adm_centro' %}
+			<th colspan="3"><a href={% url listAdministradorCentro '_nombre_adm_centro' %}>Nombre de administrador de centro &#11015;</a></th>
+			{% else %}
+			<th colspan="3"><a href={% url listAdministradorCentro 'nombre_adm_centro' %}>Nombre de administrador de centro &#11014;</a></th>
+			{% endifequal %}
+		</tr>
+		{% endif %}
 
 		<!-- Administradores de centro -->
 		{% for administrador_centro in lista_administradores_centro %}
