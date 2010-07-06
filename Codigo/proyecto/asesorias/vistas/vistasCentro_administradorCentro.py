@@ -25,7 +25,7 @@ def addCentro_administradorCentro(request):
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
 			# Redirige a la pagina de listar centro - administradorCentro.
-			return HttpResponseRedirect( reverse('listCentro_administradorCentro') )
+			return HttpResponseRedirect( reverse('listCentro_administradorCentro', kwargs={'orden': 'nombre_centro'}) )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.Centro_AdministradorCentroForm()
@@ -46,7 +46,7 @@ def editCentro_administradorCentro(request, centro, administrador_centro):
 			if form.is_valid():
 				form.save()
 				# Redirige a la pagina de listar centro - administradorCentro.
-				return HttpResponseRedirect( reverse('listCentro_administradorCentro') )
+				return HttpResponseRedirect( reverse('listCentro_administradorCentro', kwargs={'orden': 'nombre_centro'}) )
 	# El centro_administradorCentro no existe
 	else:
 		form = False
@@ -59,16 +59,60 @@ def delCentro_administradorCentro(request, centro, administrador_centro):
 	if instancia_centro_administradorCentro:
 		instancia_centro_administradorCentro.delete()
 		# Redirige a la pagina de listar centro - administradorCentro.
-		return HttpResponseRedirect( reverse('listCentro_administradorCentro') )
+		return HttpResponseRedirect( reverse('listCentro_administradorCentro', kwargs={'orden': 'nombre_centro'}) )
 	# El centro_administradorCentro no existe.
 	else:
 		error = True
 	return render_to_response('asesorias/Centro_AdministradorCentro/delCentro_administradorCentro.html', {'user': request.user, 'error': error})
 
-def listCentro_administradorCentro(request):
+def listCentro_administradorCentro(request, orden):
+	# Se establece el ordenamiento inicial.
+	if (orden == 'nombre_adm_centro') or (orden == '_nombre_adm_centro'):
+		orden_inicial = 'id_adm_centro'
+	else:
+		orden_inicial = 'id_centro'
+
 	# Se obtiene una lista con todos los centros administrador de centro.
-	lista_centros_administradorCentro = models.CentroAdministradorCentro.objects.all()
-	return render_to_response('asesorias/Centro_AdministradorCentro/listCentro_administradorCentro.html', {'user': request.user, 'lista_centros_administradorCentro': lista_centros_administradorCentro})
+	lista_centros_administradorCentro = models.CentroAdministradorCentro.objects.order_by(orden_inicial)
+
+	# Se ha realizado una busqueda.
+	if request.method == 'POST':
+		# Se obtienen los valores y se valida.
+		form = forms.SearchForm(request.POST)
+		# Si es valido se realiza la busqueda.
+		if form.is_valid():
+			busqueda = request.POST['busqueda']
+
+			# Se crea una lista auxiliar que albergara el resultado de la busqueda.
+			lista_aux = []
+
+			# Se recorren los elementos determinando si coinciden con la busqueda.
+			for centro_adm_centro in lista_centros_administradorCentro:
+				# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
+				cadena = unicode(centro_adm_centro.id_centro) + unicode(centro_adm_centro.id_adm_centro)
+
+				# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
+				if cadena.find(busqueda) >= 0:
+					lista_aux.append(centro_adm_centro)
+
+			# La lista final a devolver sera la lista auxiliar.
+			lista_centros_administradorCentro = lista_aux
+
+		else:
+			busqueda = False
+	# No se ha realizado busqueda.
+	else:
+		# Formulario para una posible busqueda.
+		form = forms.SearchForm()
+		busqueda = False
+
+		if orden == '_nombre_centro':
+			lista_centros_administradorCentro = lista_centros_administradorCentro.reverse()
+
+		if orden == '_nombre_adm_centro':
+			lista_centros_administradorCentro = lista_centros_administradorCentro.reverse()
+
+	return render_to_response('asesorias/Centro_AdministradorCentro/listCentro_administradorCentro.html', {'user': request.user, 'form': form, 'lista_centros_administradorCentro': lista_centros_administradorCentro, 'busqueda': busqueda, 'orden': orden})
 
 def generarPDFListaCentros_administradorCentro(request):
 	# Se obtiene una lista con todos los centros.
