@@ -106,10 +106,8 @@ def listCentro_administradorCentro(request, orden):
 		form = forms.SearchForm()
 		busqueda = False
 
-		if orden == '_nombre_centro':
-			lista_centros_administradorCentro = lista_centros_administradorCentro.reverse()
-
-		if orden == '_nombre_adm_centro':
+		# Si el orden es descendente se invierte la lista.
+		if (orden == '_nombre_centro') or (orden == '_nombre_adm_centro'):
 			lista_centros_administradorCentro = lista_centros_administradorCentro.reverse()
 
 	return render_to_response('asesorias/Centro_AdministradorCentro/listCentro_administradorCentro.html', {'user': request.user, 'form': form, 'lista_centros_administradorCentro': lista_centros_administradorCentro, 'busqueda': busqueda, 'orden': orden})
