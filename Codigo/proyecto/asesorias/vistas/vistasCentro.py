@@ -63,6 +63,9 @@ def delCentro(request, centro):
 	return render_to_response('asesorias/Centro/delCentro.html', {'user': request.user, 'error': error})
 
 def listCentro(request, orden):
+	# Se obtiene una lista con todos los centros.
+	lista_centros = models.Centro.objects.order_by('nombre_centro')
+
 	# Se ha realizado una busqueda.
 	if request.method == 'POST':
 		# Se obtienen los valores y se valida.
@@ -70,18 +73,14 @@ def listCentro(request, orden):
 		# Si es valido se realiza la busqueda.
 		if form.is_valid():
 			busqueda = request.POST['busqueda']
-			lista_centros = models.Centro.objects.filter(nombre_centro__contains=busqueda).order_by('nombre_centro')
+			lista_centros = lista_centros.filter(nombre_centro__contains=busqueda)
 		else:
 			busqueda = False
-			lista_centros = models.Centro.objects.order_by('nombre_centro')
 	# No se ha realizado busqueda.
 	else:
 		# Formulario para una posible busqueda.
 		form = forms.SearchForm()
 		busqueda = False
-
-		# Se obtiene una lista con todos los centros.
-		lista_centros = models.Centro.objects.order_by('nombre_centro')
 
 		if orden == '_nombre_centro':
 			lista_centros = lista_centros.reverse()

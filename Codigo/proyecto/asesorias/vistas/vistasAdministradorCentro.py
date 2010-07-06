@@ -62,6 +62,9 @@ def delAdministradorCentro(request, administrador_centro):
 	return render_to_response('asesorias/AdministradorCentro/delAdministradorCentro.html', {'user': request.user, 'error': error})
 
 def listAdministradorCentro(request, orden):
+	# Se obtiene una lista con todos los centros.
+	lista_administradores_centro = models.AdministradorCentro.objects.order_by('nombre_adm_centro')
+
 	# Se ha realizado una busqueda.
 	if request.method == 'POST':
 		# Se obtienen los valores y se valida.
@@ -69,21 +72,18 @@ def listAdministradorCentro(request, orden):
 		# Si es valido se realiza la busqueda.
 		if form.is_valid():
 			busqueda = request.POST['busqueda']
-			lista_administradores_centro = models.AdministradorCentro.objects.filter(nombre_adm_centro__contains=busqueda).order_by('nombre_adm_centro')
+			lista_administradores_centro = lista_administradores_centro.filter(nombre_adm_centro__contains=busqueda)
 		else:
 			busqueda = False
-			lista_administradores_centro = models.AdministradorCentro.objects.order_by('nombre_adm_centro')
 	# No se ha realizado busqueda.
 	else:
 		# Formulario para una posible busqueda.
 		form = forms.SearchForm()
 		busqueda = False
 
-		# Se obtiene una lista con todos los centros.
-		lista_administradores_centro = models.AdministradorCentro.objects.order_by('nombre_adm_centro')
-
 		if orden == '_nombre_adm_centro':
 			lista_administradores_centro = lista_administradores_centro.reverse()
+
 	return render_to_response('asesorias/AdministradorCentro/listAdministradorCentro.html', {'user': request.user, 'form': form, 'lista_administradores_centro': lista_administradores_centro, 'busqueda': busqueda, 'orden': orden})
 
 def generarPDFListaAdministradoresCentro(request):
