@@ -70,7 +70,7 @@ class Asignatura(models.Model):
 		return unicode(titulacion.plan_estudios)
 
 	def __unicode__(self):
-		return unicode(self.determinarNombreCentro()) + " : " + unicode(self.determinarNombreTitulacion()) + " : " + unicode(self.nombre_asignatura)
+		return unicode(self.determinarNombreCentro()) + " : " + unicode(self.determinarNombreTitulacion()) + " : " + unicode(self.nombre_asignatura) + " : " + unicode(self.determinarPlanEstudios())
 
 class AsignaturaCursoAcademico(models.Model):
 	codigo_asignaturaCursoAcademico = models.AutoField(primary_key=True)

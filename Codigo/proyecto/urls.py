@@ -80,7 +80,7 @@ urlpatterns += patterns('',
 	url(r'^asesorias/asignatura/add/$', 'proyecto.asesorias.vistas.vistasAsignatura.addAsignatura', name='addAsignatura'),
 	url(r'^asesorias/asignatura/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/edit/$', 'proyecto.asesorias.vistas.vistasAsignatura.editAsignatura', name='editAsignatura'),
 	url(r'^asesorias/asignatura/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/del/$', 'proyecto.asesorias.vistas.vistasAsignatura.delAsignatura', name='delAsignatura'),
-	url(r'^asesorias/asignatura/list/$', 'proyecto.asesorias.vistas.vistasAsignatura.listAsignatura', name='listAsignatura'),
+	url(r'^asesorias/asignatura/list/(?P<orden>[\s\w]*)/$', 'proyecto.asesorias.vistas.vistasAsignatura.listAsignatura', name='listAsignatura'),
 	url(r'^asesorias/asignatura/generarPDF/$', 'proyecto.asesorias.vistas.vistasAsignatura.generarPDFListaAsignaturas', name='generarPDFListaAsignaturas'),
 )
 
