@@ -7,9 +7,28 @@
 	<a href="{% url addAsignaturaCursoAcademico %}" class="addlink">Crear nuevo</a>
 	<a href="{% url generarPDFListaAsignaturasCursoAcademico %}" class="pdflink">Generar PDF</a>
 
+	<div class="search">
+
+		<form action="" method="post">
+
+			<div class="fieldWrapper">
+				<table summary="Realizar búsqueda.">
+				{% for field in form %}
+				<tr>
+					<th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
+					<td>{{ field }}</td>
+				</tr>
+				{% endfor %}
+				</table>
+			</div>
+
+		</form>
+
+	</div>
+
 	<div class="module">
 		<table summary="Lista de asignaturas curso académico.">
-		<caption><h2>Lista de asignaturas curso académico</h2></caption>
+		<caption><h2>Lista de asignaturas curso académico{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
 
 		{% if not lista_asignaturas_curso_academico %}
 
@@ -17,9 +36,47 @@
 
 		{% else %}
 
+		{% if not busqueda %}
 		<tr>
-			<th>Nombre de centro : Nombre de titulación : Plan de estudios : Nombre de asignatura : Curso académico</th>
+			{% ifequal orden '_nombre_centro' %}
+			<th colspan="3"><a href={% url listAsignaturaCursoAcademico 'nombre_centro' %}>Centro &#11014;</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_titulacion' %}>Titulación</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_asignatura' %}>Asignatura</a> : <a href={% url listAsignaturaCursoAcademico 'curso_academico' %}>Curso académico</a> : <a href={% url listAsignaturaCursoAcademico 'plan_estudios' %}>Plan estudios</a></th>
+			{% else %}
+				{% ifequal orden 'nombre_titulacion' %}
+				<th colspan="3"><a href={% url listAsignaturaCursoAcademico 'nombre_centro' %}>Centro</a> : <a href={% url listAsignaturaCursoAcademico '_nombre_titulacion' %}>Titulación &#11015;</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_asignatura' %}>Asignatura</a> : <a href={% url listAsignaturaCursoAcademico 'curso_academico' %}>Curso académico</a> : <a href={% url listAsignaturaCursoAcademico 'plan_estudios' %}>Plan estudios</a></th>
+				{% else %}
+					{% ifequal orden '_nombre_titulacion' %}
+					<th colspan="3"><a href={% url listAsignaturaCursoAcademico 'nombre_centro' %}>Centro</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_titulacion' %}>Titulación &#11014;</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_asignatura' %}>Asignatura</a> : <a href={% url listAsignaturaCursoAcademico 'curso_academico' %}>Curso académico</a> : <a href={% url listAsignaturaCursoAcademico 'plan_estudios' %}>Plan estudios</a></th>
+					{% else %}
+						{% ifequal orden 'nombre_asignatura' %}
+						<th colspan="3"><a href={% url listAsignaturaCursoAcademico 'nombre_centro' %}>Centro</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_titulacion' %}>Titulación</a> : <a href={% url listAsignaturaCursoAcademico '_nombre_asignatura' %}>Asignatura &#11015;</a> : <a href={% url listAsignaturaCursoAcademico 'curso_academico' %}>Curso académico</a> : <a href={% url listAsignaturaCursoAcademico 'plan_estudios' %}>Plan estudios</a></th>
+						{% else %}
+							{% ifequal orden '_nombre_asignatura' %}
+							<th colspan="3"><a href={% url listAsignaturaCursoAcademico 'nombre_centro' %}>Centro</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_titulacion' %}>Titulación</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_asignatura' %}>Asignatura &#11014;</a> : <a href={% url listAsignaturaCursoAcademico 'curso_academico' %}>Curso académico</a> : <a href={% url listAsignaturaCursoAcademico 'plan_estudios' %}>Plan estudios</a></th>
+							{% else %}
+								{% ifequal orden 'plan_estudios' %}
+								<th colspan="3"><a href={% url listAsignaturaCursoAcademico 'nombre_centro' %}>Centro</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_titulacion' %}>Titulación</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_asignatura' %}>Asignatura</a> : <a href={% url listAsignaturaCursoAcademico 'curso_academico' %}>Curso académico</a> : <a href={% url listAsignaturaCursoAcademico '_plan_estudios' %}>Plan estudios &#11015;</a></th>
+								{% else %}
+									{% ifequal orden '_plan_estudios' %}
+									<th colspan="3"><a href={% url listAsignaturaCursoAcademico 'nombre_centro' %}>Centro</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_titulacion' %}>Titulación</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_asignatura' %}>Asignatura</a> : <a href={% url listAsignaturaCursoAcademico 'curso_academico' %}>Curso académico</a> : <a href={% url listAsignaturaCursoAcademico 'plan_estudios' %}>Plan estudios &#11014;</a></th>
+									{% else %}
+										{% ifequal orden 'curso_academico' %}
+										<th colspan="3"><a href={% url listAsignaturaCursoAcademico 'nombre_centro' %}>Centro</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_titulacion' %}>Titulación</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_asignatura' %}>Asignatura</a> : <a href={% url listAsignaturaCursoAcademico '_curso_academico' %}>Curso académico &#11015;</a> : <a href={% url listAsignaturaCursoAcademico 'plan_estudios' %}>Plan estudios</a></th>
+										{% else %}
+											{% ifequal orden '_curso_academico' %}
+											<th colspan="3"><a href={% url listAsignaturaCursoAcademico 'nombre_centro' %}>Centro</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_titulacion' %}>Titulación</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_asignatura' %}>Asignatura</a> : <a href={% url listAsignaturaCursoAcademico 'curso_academico' %}>Curso académico &#11014;</a> : <a href={% url listAsignaturaCursoAcademico 'plan_estudios' %}>Plan estudios</a></th>
+											{% else %}
+												<th colspan="3"><a href={% url listAsignaturaCursoAcademico '_nombre_centro' %}>Centro &#11015;</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_titulacion' %}>Titulación</a> : <a href={% url listAsignaturaCursoAcademico 'nombre_asignatura' %}>Asignatura</a> : <a href={% url listAsignaturaCursoAcademico 'curso_academico' %}>Curso académico</a> : <a href={% url listAsignaturaCursoAcademico 'plan_estudios' %}>Plan estudios</a></th>
+											{% endifequal %}
+										{% endifequal %}
+									{% endifequal %}
+								{% endifequal %}
+							{% endifequal %}
+						{% endifequal %}
+					{% endifequal %}
+				{% endifequal %}
+			{% endifequal %}
 		</tr>
+		{% endif %}
 
 		{% for asignatura_curso_academico in lista_asignaturas_curso_academico %}
 		<tr>

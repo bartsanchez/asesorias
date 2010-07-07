@@ -201,7 +201,6 @@ def ordenarPorTitulacion(lista_asignaturas):
 	return lista_aux
 
 def ordenarPorPlanEstudios(lista_asignaturas):
-	print True, lista_asignaturas
 	# Lista auxiliar que albergara la nueva lista.
 	lista_aux = []
 
