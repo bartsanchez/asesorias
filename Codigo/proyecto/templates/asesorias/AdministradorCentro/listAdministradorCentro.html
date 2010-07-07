@@ -39,9 +39,9 @@
 		{% if not busqueda %}
 		<tr>
 			{% ifequal orden '_nombre_adm_centro' %}
-			<th colspan="3"><a href={% url listAdministradorCentro 'nombre_adm_centro' %}>Nombre de administrador de centro &#11014;</a></th>
+			<th colspan="3"><a href={% url listAdministradorCentro 'nombre_adm_centro' %}>Administrador de centro &#11014;</a></th>
 			{% else %}
-			<th colspan="3"><a href={% url listAdministradorCentro '_nombre_adm_centro' %}>Nombre de administrador de centro &#11015;</a></th>
+			<th colspan="3"><a href={% url listAdministradorCentro '_nombre_adm_centro' %}>Administrador de centro &#11015;</a></th>
 			{% endifequal %}
 		</tr>
 		{% endif %}
