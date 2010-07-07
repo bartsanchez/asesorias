@@ -33,7 +33,7 @@ class Titulacion(models.Model):
 		unique_together = (("id_centro", "id_titulacion"), ("id_centro", "nombre_titulacion", "plan_estudios"))
 
 	def __unicode__(self):
-		return unicode(self.id_centro) + ": " + unicode(self.plan_estudios) + " -> " + unicode(self.nombre_titulacion)
+		return unicode(self.id_centro) + " : " + unicode(self.nombre_titulacion) + " : " + unicode(self.plan_estudios)
 
 class Asignatura(models.Model):
 	TIPOS_ASIGNATURAS = (

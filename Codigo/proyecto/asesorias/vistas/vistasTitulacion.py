@@ -90,7 +90,7 @@ def addTitulacion(request):
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
 			# Redirige a la pagina de listar titulaciones.
-			return HttpResponseRedirect( reverse('listTitulacion') )
+			return HttpResponseRedirect( reverse('listTitulacion', kwargs={'orden': 'nombre_centro'}) )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.TitulacionForm()
@@ -126,7 +126,7 @@ def editTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 			if form.is_valid():
 				form.save()
 				# Redirige a la pagina de listar titulaciones.
-				return HttpResponseRedirect( reverse('listTitulacion') )
+				return HttpResponseRedirect( reverse('listTitulacion', kwargs={'orden': 'nombre_centro'}) )
 	# La titulacion no existe
 	else:
 		form = False
@@ -139,16 +139,59 @@ def delTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 	if instancia_titulacion:
 		instancia_titulacion.delete()
 		# Redirige a la pagina de listar titulaciones.
-		return HttpResponseRedirect( reverse('listTitulacion') )
+		return HttpResponseRedirect( reverse('listTitulacion', kwargs={'orden': 'nombre_centro'}) )
 	# La titulacion no existe.
 	else:
 		error = True
 	return render_to_response('asesorias/Titulacion/delTitulacion.html', {'error': error})
 
-def listTitulacion(request):
-	# Se obtiene una lista con todas las titulaciones.
-	lista_titulaciones= models.Titulacion.objects.all()
-	return render_to_response('asesorias/Titulacion/listTitulacion.html', {'lista_titulaciones': lista_titulaciones})
+def listTitulacion(request, orden):
+	# Se establece el ordenamiento inicial.
+	if (orden == 'nombre_titulacion') or (orden == '_nombre_titulacion'):
+		orden_inicial = 'nombre_titulacion'
+	elif (orden == 'plan_estudios') or (orden == '_plan_estudios'):
+		orden_inicial = 'plan_estudios'
+	else:
+		orden_inicial = 'id_centro'
+
+	# Se obtiene una lista con todos las titulaciones.
+	lista_titulaciones = models.Titulacion.objects.order_by(orden_inicial)
+
+	# Se ha realizado una busqueda.
+	if request.method == 'POST':
+		# Se obtienen los valores y se valida.
+		form = forms.SearchForm(request.POST)
+		# Si es valido se realiza la busqueda.
+		if form.is_valid():
+			busqueda = request.POST['busqueda']
+
+			# Se crea una lista auxiliar que albergara el resultado de la busqueda.
+			lista_aux = []
+
+			# Se recorren los elementos determinando si coinciden con la busqueda.
+			for titulacion in lista_titulaciones:
+				# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
+				cadena = unicode(titulacion.id_centro) + unicode(titulacion.nombre_titulacion) + unicode(titulacion.plan_estudios)
+
+				# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
+				if cadena.find(busqueda) >= 0:
+					lista_aux.append(titulacion)
+
+			# La lista final a devolver sera la lista auxiliar.
+			lista_titulaciones = lista_aux
+
+		else:
+			busqueda = False
+	# No se ha realizado busqueda.
+	else:
+		# Formulario para una posible busqueda.
+		form = forms.SearchForm()
+		busqueda = False
+
+		if (orden == '_nombre_centro') or (orden == '_nombre_titulacion') or (orden == '_plan_estudios'):
+			lista_titulaciones = lista_titulaciones.reverse()
+
+	return render_to_response('asesorias/Titulacion/listTitulacion.html', {'user': request.user, 'form': form, 'lista_titulaciones': lista_titulaciones, 'busqueda': busqueda, 'orden': orden})
 
 def generarPDFListaTitulaciones(request):
 	# Se obtiene una lista con todas las titulaciones.
