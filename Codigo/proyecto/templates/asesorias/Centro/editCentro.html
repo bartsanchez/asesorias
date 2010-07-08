@@ -17,8 +17,9 @@
 		<p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
 		<ul>
 			{% for field in form %}
-			<li>{{ field.errors|striptags }}</li>
+				{% if field.errors %}<li>{{ field.errors|striptags }}</li>{% endif %}
 			{% endfor %}
+			{% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
 		</ul>
 	</div>
 	{% endif %}
