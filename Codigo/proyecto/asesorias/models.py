@@ -329,6 +329,14 @@ class CentroAdministradorCentro(models.Model):
 		db_table = "CentroAdministradorCentro"
 		unique_together = ("id_centro", "id_adm_centro")
 
+	def determinarNombreCentro(self):
+		centro = Centro.objects.get(id_centro=self.id_centro_id)
+		return unicode(centro.nombre_centro)
+
+	def determinarNombreAdministradorCentro(self):
+		administrador_centro = AdministradorCentro.objects.get(id_adm_centro=self.id_adm_centro_id)
+		return unicode(administrador_centro.nombre_adm_centro)
+
 	def __unicode__(self):
 		return unicode(self.id_centro) + " : " + unicode(self.id_adm_centro)
 

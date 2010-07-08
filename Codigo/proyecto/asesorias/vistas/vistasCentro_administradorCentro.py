@@ -65,6 +65,50 @@ def delCentro_administradorCentro(request, centro, administrador_centro):
 		error = True
 	return render_to_response('asesorias/Centro_AdministradorCentro/delCentro_administradorCentro.html', {'user': request.user, 'error': error})
 
+def ordenarPorCentro(lista_centros_administradorCentro):
+	# Lista auxiliar que albergara la nueva lista.
+	lista_aux = []
+
+	# Se recorre la lista de centros obteniendo los nombres de centro de cada centro.
+	for centro in lista_centros_administradorCentro:
+		# Se introducen los nombres de centro en la nueva lista.
+		lista_aux.append(centro.determinarNombreCentro())
+	# Obtenemos un set (valores unicos) ordenado con los valores de la lista.
+	set_aux = sorted( set(lista_aux) )
+
+	# Lista auxiliar que albergara la nueva lista.
+	lista_aux = []
+
+	# Para cada nombre de centro (de manera ordenada) se crea una lista con los centros en el orden correcto.
+	for s in set_aux:
+		for centro in lista_centros_administradorCentro:
+			if ( centro.determinarNombreCentro() == s):
+				lista_aux.append(centro)
+
+	return lista_aux
+
+def ordenarPorAdministradorCentro(lista_centros_administradorCentro):
+	# Lista auxiliar que albergara la nueva lista.
+	lista_aux = []
+
+	# Se recorre la lista de centros obteniendo los nombres de administrador de centro de cada centro.
+	for centro in lista_centros_administradorCentro:
+		# Se introducen los nombres de centro en la nueva lista.
+		lista_aux.append(centro.determinarNombreAdministradorCentro())
+	# Obtenemos un set (valores unicos) ordenado con los valores de la lista.
+	set_aux = sorted( set(lista_aux) )
+
+	# Lista auxiliar que albergara la nueva lista.
+	lista_aux = []
+
+	# Para cada nombre de administrador de centro (de manera ordenada) se crea una lista con los centros en el orden correcto.
+	for s in set_aux:
+		for centro in lista_centros_administradorCentro:
+			if ( centro.determinarNombreAdministradorCentro() == s):
+				lista_aux.append(centro)
+
+	return lista_aux
+
 def listCentro_administradorCentro(request, orden):
 	# Se establece el ordenamiento inicial.
 	if (orden == 'nombre_adm_centro') or (orden == '_nombre_adm_centro'):
@@ -74,6 +118,12 @@ def listCentro_administradorCentro(request, orden):
 
 	# Se obtiene una lista con todos los centros administrador de centro.
 	lista_centros_administradorCentro = models.CentroAdministradorCentro.objects.order_by(orden_inicial)
+
+	# Se debe hacer el ordenamiento de manera especial ya que estos atributos son enteros y ordenamos alfabeticamente.
+	if (orden_inicial == 'id_centro'):
+		lista_centros_administradorCentro = ordenarPorCentro(lista_centros_administradorCentro)
+	elif (orden_inicial == 'id_adm_centro'):
+		lista_centros_administradorCentro = ordenarPorAdministradorCentro(lista_centros_administradorCentro)
 
 	# Se ha realizado una busqueda.
 	if request.method == 'POST':
@@ -108,7 +158,7 @@ def listCentro_administradorCentro(request, orden):
 
 		# Si el orden es descendente se invierte la lista.
 		if (orden == '_nombre_centro') or (orden == '_nombre_adm_centro'):
-			lista_centros_administradorCentro = lista_centros_administradorCentro.reverse()
+			lista_centros_administradorCentro = reversed(lista_centros_administradorCentro)
 
 	return render_to_response('asesorias/Centro_AdministradorCentro/listCentro_administradorCentro.html', {'user': request.user, 'form': form, 'lista_centros_administradorCentro': lista_centros_administradorCentro, 'busqueda': busqueda, 'orden': orden})
 
