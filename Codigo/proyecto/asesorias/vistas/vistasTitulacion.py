@@ -145,6 +145,28 @@ def delTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 		error = True
 	return render_to_response('asesorias/Titulacion/delTitulacion.html', {'error': error})
 
+def ordenarPorCentro(lista_titulaciones):
+	# Lista auxiliar que albergara la nueva lista.
+	lista_aux = []
+
+	# Se recorre la lista de titulaciones obteniendo los nombres de centro de cada titulacion.
+	for titulacion in lista_titulaciones:
+		# Se introducen los nombres de centro en la nueva lista.
+		lista_aux.append(titulacion.determinarNombreCentro())
+	# Obtenemos un set (valores unicos) ordenado con los valores de la lista.
+	set_aux = sorted( set(lista_aux) )
+
+	# Lista auxiliar que albergara la nueva lista.
+	lista_aux = []
+
+	# Para cada nombre de centro (de manera ordenada) se crea una lista con las titulaciones en el orden correcto.
+	for s in set_aux:
+		for titulacion in lista_titulaciones:
+			if ( titulacion.determinarNombreCentro() == s):
+				lista_aux.append(titulacion)
+
+	return lista_aux
+
 def listTitulacion(request, orden):
 	# Se establece el ordenamiento inicial.
 	if (orden == 'nombre_titulacion') or (orden == '_nombre_titulacion'):
@@ -156,6 +178,9 @@ def listTitulacion(request, orden):
 
 	# Se obtiene una lista con todos las titulaciones.
 	lista_titulaciones = models.Titulacion.objects.order_by(orden_inicial)
+
+	if (orden_inicial == 'id_centro'):
+		lista_titulaciones = ordenarPorCentro(lista_titulaciones)
 
 	# Se ha realizado una busqueda.
 	if request.method == 'POST':
@@ -189,7 +214,7 @@ def listTitulacion(request, orden):
 		busqueda = False
 
 		if (orden == '_nombre_centro') or (orden == '_nombre_titulacion') or (orden == '_plan_estudios'):
-			lista_titulaciones = lista_titulaciones.reverse()
+			lista_titulaciones = reversed(lista_titulaciones)
 
 	return render_to_response('asesorias/Titulacion/listTitulacion.html', {'user': request.user, 'form': form, 'lista_titulaciones': lista_titulaciones, 'busqueda': busqueda, 'orden': orden})
 

@@ -32,6 +32,10 @@ class Titulacion(models.Model):
 		db_table = "Titulaciones"
 		unique_together = (("id_centro", "id_titulacion"), ("id_centro", "nombre_titulacion", "plan_estudios"))
 
+	def determinarNombreCentro(self):
+		centro = Centro.objects.get(id_centro=self.id_centro_id)
+		return unicode(centro.nombre_centro)
+
 	def __unicode__(self):
 		return unicode(self.id_centro) + " : " + unicode(self.nombre_titulacion) + " : " + unicode(self.plan_estudios)
 
