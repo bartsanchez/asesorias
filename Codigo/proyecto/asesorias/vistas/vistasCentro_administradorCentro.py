@@ -140,7 +140,7 @@ def listCentro_administradorCentro(request, centro, orden):
 			# Se recorren los elementos determinando si coinciden con la busqueda.
 			for centro_adm_centro in lista_centros_administradorCentro:
 				# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
-				cadena = unicode(centro_adm_centro.id_centro) + unicode(centro_adm_centro.id_adm_centro)
+				cadena = unicode(centro_adm_centro.id_adm_centro)
 
 				# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
 				if cadena.find(busqueda) >= 0:
