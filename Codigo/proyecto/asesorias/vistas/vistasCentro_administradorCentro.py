@@ -111,7 +111,7 @@ def selectCentro(request):
 			return HttpResponseRedirect( reverse('listCentro_administradorCentro', kwargs={'centro': centro, 'orden': 'nombre_adm_centro'}) )
 
 		else:
-			HttpResponseRedirect( reverse('selectCentro') )
+			HttpResponseRedirect( reverse('selectCentro_CentroAdministradorCentro') )
 
 	else:
 		form = forms.CentroFormSelect()

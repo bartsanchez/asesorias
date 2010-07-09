@@ -237,7 +237,7 @@ urlpatterns += patterns('',
 	url(r'^asesorias/centro_administradorCentro/(?P<centro>[\s\w]+)/(?P<administrador_centro>[\s\w]+)/edit/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.editCentro_administradorCentro', name='editCentro_administradorCentro'),
 	url(r'^asesorias/centro_administradorCentro/(?P<centro>[\s\w]+)/(?P<administrador_centro>[\s\w]+)/del/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.delCentro_administradorCentro', name='delCentro_administradorCentro'),
 	url(r'^asesorias/centro_administradorCentro/list/(?P<centro>[\s\w]+)/(?P<orden>[\s\w]*)/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.listCentro_administradorCentro', name='listCentro_administradorCentro'),
-	url(r'^asesorias/centro_administradorCentro/select/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.selectCentro', name='selectCentro'),
+	url(r'^asesorias/centro_administradorCentro/select/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.selectCentro', name='selectCentro_CentroAdministradorCentro'),
 	url(r'^asesorias/centro_administradorCentro/generarPDF/$', 'proyecto.asesorias.vistas.vistasCentro_administradorCentro.generarPDFListaCentros_administradorCentro', name='generarPDFListaCentros_administradorCentro'),
 )
 
