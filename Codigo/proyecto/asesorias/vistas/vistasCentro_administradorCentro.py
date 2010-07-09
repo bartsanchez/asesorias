@@ -24,8 +24,13 @@ def addCentro_administradorCentro(request):
 		if form.is_valid():
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
+
+			# Determina el centro al que inserta.
+			id_centro = request.POST['id_centro']
+			centro = models.Centro.objects.get(id_centro=id_centro)
+
 			# Redirige a la pagina de listar centro - administradorCentro.
-			return HttpResponseRedirect( reverse('listCentro_administradorCentro', kwargs={'orden': 'nombre_centro'}) )
+			return HttpResponseRedirect( reverse('listCentro_administradorCentro', kwargs={'centro': centro, 'orden': 'nombre_adm_centro'}) )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.Centro_AdministradorCentroForm()
@@ -45,8 +50,13 @@ def editCentro_administradorCentro(request, centro, administrador_centro):
 			# Si es valido se guarda.
 			if form.is_valid():
 				form.save()
+
+				# Determina el centro al que inserta.
+				id_centro = request.POST['id_centro']
+				centro = models.Centro.objects.get(id_centro=id_centro)
+
 				# Redirige a la pagina de listar centro - administradorCentro.
-				return HttpResponseRedirect( reverse('listCentro_administradorCentro', kwargs={'orden': 'nombre_centro'}) )
+				return HttpResponseRedirect( reverse('listCentro_administradorCentro', kwargs={'centro': centro, 'orden': 'nombre_adm_centro'}) )
 	# El centro_administradorCentro no existe
 	else:
 		form = False
@@ -59,33 +69,11 @@ def delCentro_administradorCentro(request, centro, administrador_centro):
 	if instancia_centro_administradorCentro:
 		instancia_centro_administradorCentro.delete()
 		# Redirige a la pagina de listar centro - administradorCentro.
-		return HttpResponseRedirect( reverse('listCentro_administradorCentro', kwargs={'orden': 'nombre_centro'}) )
+		return HttpResponseRedirect( reverse('listCentro_administradorCentro', kwargs={'centro': centro, 'orden': 'nombre_adm_centro'}) )
 	# El centro_administradorCentro no existe.
 	else:
 		error = True
 	return render_to_response('asesorias/Centro_AdministradorCentro/delCentro_administradorCentro.html', {'user': request.user, 'error': error})
-
-def ordenarPorCentro(lista_centros_administradorCentro):
-	# Lista auxiliar que albergara la nueva lista.
-	lista_aux = []
-
-	# Se recorre la lista de centros obteniendo los nombres de centro de cada centro.
-	for centro in lista_centros_administradorCentro:
-		# Se introducen los nombres de centro en la nueva lista.
-		lista_aux.append(centro.determinarNombreCentro())
-	# Obtenemos un set (valores unicos) ordenado con los valores de la lista.
-	set_aux = sorted( set(lista_aux) )
-
-	# Lista auxiliar que albergara la nueva lista.
-	lista_aux = []
-
-	# Para cada nombre de centro (de manera ordenada) se crea una lista con los centros en el orden correcto.
-	for s in set_aux:
-		for centro in lista_centros_administradorCentro:
-			if ( centro.determinarNombreCentro() == s):
-				lista_aux.append(centro)
-
-	return lista_aux
 
 def ordenarPorAdministradorCentro(lista_centros_administradorCentro):
 	# Lista auxiliar que albergara la nueva lista.
@@ -109,26 +97,39 @@ def ordenarPorAdministradorCentro(lista_centros_administradorCentro):
 
 	return lista_aux
 
-def listCentro_administradorCentro(request, orden):
-	# Se establece el ordenamiento inicial.
-	if (orden == 'nombre_adm_centro') or (orden == '_nombre_adm_centro'):
-		orden_inicial = 'id_adm_centro'
-	else:
-		orden_inicial = 'id_centro'
+def selectCentro(request):
+	# Se ha introducido un centro.
+	if request.method == 'POST':
 
+		# Se obtiene el centro y se valida.
+		form = forms.CentroFormSelect(request.POST)
+
+		# Si es valido se redirige a listar centros.
+		if form.is_valid():
+			centro = request.POST['centro']
+
+			return HttpResponseRedirect( reverse('listCentro_administradorCentro', kwargs={'centro': centro, 'orden': 'nombre_adm_centro'}) )
+
+		else:
+			HttpResponseRedirect( reverse('selectCentro') )
+
+	else:
+		form = forms.CentroFormSelect()
+
+	return render_to_response('asesorias/Centro_AdministradorCentro/selectCentro.html', {'user': request.user, 'form': form})
+
+def listCentro_administradorCentro(request, centro, orden):
 	# Se obtiene una lista con todos los centros administrador de centro.
-	lista_centros_administradorCentro = models.CentroAdministradorCentro.objects.order_by(orden_inicial)
+	lista_centros_administradorCentro = models.CentroAdministradorCentro.objects.filter(id_centro=vistasCentro.obtenerCentro(centro).id_centro).order_by('id_adm_centro')
 
 	# Se debe hacer el ordenamiento de manera especial ya que estos atributos son enteros y ordenamos alfabeticamente.
-	if (orden_inicial == 'id_centro'):
-		lista_centros_administradorCentro = ordenarPorCentro(lista_centros_administradorCentro)
-	elif (orden_inicial == 'id_adm_centro'):
-		lista_centros_administradorCentro = ordenarPorAdministradorCentro(lista_centros_administradorCentro)
+	lista_centros_administradorCentro = ordenarPorAdministradorCentro(lista_centros_administradorCentro)
 
 	# Se ha realizado una busqueda.
 	if request.method == 'POST':
 		# Se obtienen los valores y se valida.
 		form = forms.SearchForm(request.POST)
+
 		# Si es valido se realiza la busqueda.
 		if form.is_valid():
 			busqueda = request.POST['busqueda']
@@ -150,6 +151,7 @@ def listCentro_administradorCentro(request, orden):
 
 		else:
 			busqueda = False
+
 	# No se ha realizado busqueda.
 	else:
 		# Formulario para una posible busqueda.
@@ -157,10 +159,10 @@ def listCentro_administradorCentro(request, orden):
 		busqueda = False
 
 		# Si el orden es descendente se invierte la lista.
-		if (orden == '_nombre_centro') or (orden == '_nombre_adm_centro'):
+		if (orden == '_nombre_adm_centro'):
 			lista_centros_administradorCentro = reversed(lista_centros_administradorCentro)
 
-	return render_to_response('asesorias/Centro_AdministradorCentro/listCentro_administradorCentro.html', {'user': request.user, 'form': form, 'lista_centros_administradorCentro': lista_centros_administradorCentro, 'busqueda': busqueda, 'orden': orden})
+	return render_to_response('asesorias/Centro_AdministradorCentro/listCentro_administradorCentro.html', {'user': request.user, 'form': form, 'lista_centros_administradorCentro': lista_centros_administradorCentro, 'busqueda': busqueda, 'centro': centro, 'orden': orden})
 
 def generarPDFListaCentros_administradorCentro(request):
 	# Se obtiene una lista con todos los centros.

@@ -1,0 +1,23 @@
+{% extends "asesorias/Base/base_org_institucional.html" %}
+
+{% block content %}
+
+	<h1>Lista de centros-administrador de centro.</h1>
+
+	<h2>Seleccionar centro.</h2>
+
+	<div class="form">
+
+		<form action="" method="post">
+
+			<div class="fieldWrapper">
+				{% for field in form %}
+					<div><p>{{ field.label_tag }}: {{ field }}<input type="submit" value="OK" class="yeslink"/></p></div>
+				{% endfor %}
+			</div>
+
+		</form>
+
+	</div>
+
+{% endblock %}

@@ -4,6 +4,10 @@
 
 	<h1>Lista de centros-administrador de centro.</h1>
 
+	<div class="form">
+		<div><p>Centro: <b>{{ centro }}</b> <a href={% url selectCentro %} class="deletelink"></a></p></div>
+	</div>
+
 	<a href="{% url addCentro_administradorCentro %}" class="addlink">Crear nuevo</a>
 	<a href="{% url generarPDFListaCentros_administradorCentro %}" class="pdflink">Generar PDF</a>
 
@@ -32,24 +36,16 @@
 
 		{% if not lista_centros_administradorCentro %}
 
-		<tr><th scope="row"><p>No existen actualmente centros-administrador de centro en el sistema.</p></th></tr>
+		<tr><th scope="row"><p>No existen actualmente centros-administrador de centro para este centro en el sistema.</p></th></tr>
 
 		{% else %}
 
 		{% if not busqueda %}
 		<tr>
-			{% ifequal orden '_nombre_centro' %}
-			<th colspan="3"><a href={% url listCentro_administradorCentro 'nombre_centro' %}>Centro &#11014;</a> : <a href={% url listCentro_administradorCentro 'nombre_adm_centro' %}>Administrador de Centro</a></th>
+			{% ifequal orden 'nombre_adm_centro' %}
+			<th colspan="3"><a href={% url listCentro_administradorCentro centro '_nombre_adm_centro' %}>Administrador de Centro &#11015;</a></th>
 			{% else %}
-				{% ifequal orden 'nombre_adm_centro' %}
-				<th colspan="3"><a href={% url listCentro_administradorCentro 'nombre_centro' %}>Centro</a> : <a href={% url listCentro_administradorCentro '_nombre_adm_centro' %}>Administrador de Centro &#11015;</a></th>
-				{% else %}
-					{% ifequal orden '_nombre_adm_centro' %}
-					<th colspan="3"><a href={% url listCentro_administradorCentro 'nombre_centro' %}>Centro</a> : <a href={% url listCentro_administradorCentro 'nombre_adm_centro' %}>Administrador de Centro &#11014;</a></th>
-					{% else %}
-					<th colspan="3"><a href={% url listCentro_administradorCentro '_nombre_centro' %}>Centro &#11015;</a> : <a href={% url listCentro_administradorCentro 'nombre_adm_centro' %}>Administrador de Centro</a></th>
-					{% endifequal %}
-				{% endifequal %}
+				<th colspan="3"><a href={% url listCentro_administradorCentro centro 'nombre_adm_centro' %}>Administrador de Centro &#11014;</a></th>
 			{% endifequal %}
 		</tr>
 		{% endif %}
@@ -57,7 +53,7 @@
 		<!-- Centros-Administrador de centro -->
 		{% for centro_administradorCentro in lista_centros_administradorCentro %}
 		<tr>
-			<th scope="row"><a href="{% url editCentro_administradorCentro centro_administradorCentro.id_centro centro_administradorCentro.id_adm_centro %}">{{ centro_administradorCentro }}</a></th>
+			<th scope="row"><a href="{% url editCentro_administradorCentro centro_administradorCentro.id_centro centro_administradorCentro.id_adm_centro %}">{{ centro_administradorCentro.id_adm_centro }}</a></th>
 			<td><a href="{% url editCentro_administradorCentro centro_administradorCentro.id_centro centro_administradorCentro.id_adm_centro %}" class="editlink">Editar</a></td>
 			<td><a href="{% url delCentro_administradorCentro centro_administradorCentro.id_centro centro_administradorCentro.id_adm_centro %}" class="deletelink">Eliminar</a></td>
 		</tr>
