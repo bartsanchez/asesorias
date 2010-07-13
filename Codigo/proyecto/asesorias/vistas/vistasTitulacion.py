@@ -89,8 +89,12 @@ def addTitulacion(request):
 		if form.is_valid():
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
+
+			# Determina el centro al que inserta.
+			centro = models.Centro.objects.get(id_centro=id_centro)
+
 			# Redirige a la pagina de listar titulaciones.
-			return HttpResponseRedirect( reverse('listTitulacion', kwargs={'orden': 'nombre_centro'}) )
+			return HttpResponseRedirect( reverse('listTitulacion', kwargs={'centro': centro, 'orden': 'nombre_titulacion' }) )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.TitulacionForm()
@@ -125,8 +129,12 @@ def editTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 			# Si es valido se guarda.
 			if form.is_valid():
 				form.save()
+
+				# Determina el centro al que inserta.
+				centro = models.Centro.objects.get(id_centro=id_centro)
+
 				# Redirige a la pagina de listar titulaciones.
-				return HttpResponseRedirect( reverse('listTitulacion', kwargs={'orden': 'nombre_centro'}) )
+				return HttpResponseRedirect( reverse('listTitulacion', kwargs={'centro': centro, 'orden': 'nombre_centro'}) )
 	# La titulacion no existe
 	else:
 		form = False
@@ -139,48 +147,44 @@ def delTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 	if instancia_titulacion:
 		instancia_titulacion.delete()
 		# Redirige a la pagina de listar titulaciones.
-		return HttpResponseRedirect( reverse('listTitulacion', kwargs={'orden': 'nombre_centro'}) )
+		return HttpResponseRedirect( reverse('listTitulacion', kwargs={'centro': nombre_centro, 'orden': 'nombre_centro'}) )
 	# La titulacion no existe.
 	else:
 		error = True
 	return render_to_response('asesorias/Titulacion/delTitulacion.html', {'error': error})
 
-def ordenarPorCentro(lista_titulaciones):
-	# Lista auxiliar que albergara la nueva lista.
-	lista_aux = []
+def selectCentro(request):
+	# Se ha introducido un centro.
+	if request.method == 'POST':
 
-	# Se recorre la lista de titulaciones obteniendo los nombres de centro de cada titulacion.
-	for titulacion in lista_titulaciones:
-		# Se introducen los nombres de centro en la nueva lista.
-		lista_aux.append(titulacion.determinarNombreCentro())
-	# Obtenemos un set (valores unicos) ordenado con los valores de la lista.
-	set_aux = sorted( set(lista_aux) )
+		# Se obtiene el centro y se valida.
+		form = forms.CentroFormSelect(request.POST)
 
-	# Lista auxiliar que albergara la nueva lista.
-	lista_aux = []
+		# Si es valido se redirige a listar centros.
+		if form.is_valid():
+			centro = request.POST['centro']
 
-	# Para cada nombre de centro (de manera ordenada) se crea una lista con las titulaciones en el orden correcto.
-	for s in set_aux:
-		for titulacion in lista_titulaciones:
-			if ( titulacion.determinarNombreCentro() == s):
-				lista_aux.append(titulacion)
+			return HttpResponseRedirect( reverse('listTitulacion', kwargs={'centro': centro, 'orden': 'nombre_titulacion'}) )
 
-	return lista_aux
+		else:
+			HttpResponseRedirect( reverse('selectCentro_Titulacion') )
 
-def listTitulacion(request, orden):
-	# Se establece el ordenamiento inicial.
-	if (orden == 'nombre_titulacion') or (orden == '_nombre_titulacion'):
-		orden_inicial = 'nombre_titulacion'
-	elif (orden == 'plan_estudios') or (orden == '_plan_estudios'):
-		orden_inicial = 'plan_estudios'
 	else:
-		orden_inicial = 'id_centro'
+		form = forms.CentroFormSelect()
+
+	return render_to_response('asesorias/Titulacion/selectCentro.html', {'user': request.user, 'form': form})
+
+def listTitulacion(request, centro, orden):
+	# Se establece el ordenamiento inicial.
+	if (orden == 'plan_estudios') or (orden == '_plan_estudios'):
+		orden_inicial = 'plan_estudios'
+		orden_secundario = 'nombre_titulacion'
+	else:
+		orden_inicial = 'nombre_titulacion'
+		orden_secundario = 'plan_estudios'
 
 	# Se obtiene una lista con todos las titulaciones.
-	lista_titulaciones = models.Titulacion.objects.order_by(orden_inicial)
-
-	if (orden_inicial == 'id_centro'):
-		lista_titulaciones = ordenarPorCentro(lista_titulaciones)
+	lista_titulaciones = models.Titulacion.objects.filter(id_centro=vistasCentro.obtenerCentro(centro).id_centro).order_by(orden_inicial, orden_secundario )
 
 	# Se ha realizado una busqueda.
 	if request.method == 'POST':
@@ -196,7 +200,7 @@ def listTitulacion(request, orden):
 			# Se recorren los elementos determinando si coinciden con la busqueda.
 			for titulacion in lista_titulaciones:
 				# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
-				cadena = unicode(titulacion.id_centro) + unicode(titulacion.nombre_titulacion) + unicode(titulacion.plan_estudios)
+				cadena = unicode(titulacion.nombre_titulacion) + unicode(titulacion.plan_estudios)
 
 				# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
 				if cadena.find(busqueda) >= 0:
@@ -213,10 +217,10 @@ def listTitulacion(request, orden):
 		form = forms.SearchForm()
 		busqueda = False
 
-		if (orden == '_nombre_centro') or (orden == '_nombre_titulacion') or (orden == '_plan_estudios'):
+		if (orden == '_nombre_titulacion') or (orden == '_plan_estudios'):
 			lista_titulaciones = reversed(lista_titulaciones)
 
-	return render_to_response('asesorias/Titulacion/listTitulacion.html', {'user': request.user, 'form': form, 'lista_titulaciones': lista_titulaciones, 'busqueda': busqueda, 'orden': orden})
+	return render_to_response('asesorias/Titulacion/listTitulacion.html', {'user': request.user, 'form': form, 'lista_titulaciones': lista_titulaciones, 'busqueda': busqueda, 'centro': centro, 'orden': orden})
 
 def generarPDFListaTitulaciones(request):
 	# Se obtiene una lista con todas las titulaciones.

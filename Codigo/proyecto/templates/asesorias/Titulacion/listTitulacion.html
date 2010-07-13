@@ -4,6 +4,10 @@
 
 	<h1>Lista de titulaciones.</h1>
 
+	<div class="form">
+		<div><p>Centro: <b>{{ centro }}</b> <a href={% url selectCentro_Titulacion %} class="deletelink"></a></p></div>
+	</div>
+
 	<a href="{% url addTitulacion %}" class="addlink">Crear nuevo</a>
 	<a href="{% url generarPDFListaTitulaciones %}" class="pdflink">Generar PDF</a>
 
@@ -38,26 +42,24 @@
 
 		{% if not busqueda %}
 		<tr>
-			{% ifequal orden '_nombre_centro' %}
-			<th colspan="3"><a href={% url listTitulacion 'nombre_centro' %}>Centro &#11014;</a> : <a href={% url listTitulacion 'nombre_titulacion' %}>Titulación</a> : <a href={% url listTitulacion 'plan_estudios' %}>Plan estudios</a></th>
+			{% ifequal orden '_nombre_titulacion' %}
+			<th colspan="3"><a href={% url listTitulacion centro 'nombre_titulacion' %}>Titulación &#11014;</a> : <a href={% url listTitulacion centro 'plan_estudios' %}>Plan estudios</a></th>
+
 			{% else %}
-				{% ifequal orden 'nombre_titulacion' %}
-				<th colspan="3"><a href={% url listTitulacion 'nombre_centro' %}>Centro</a> : <a href={% url listTitulacion '_nombre_titulacion' %}>Titulación &#11015;</a> : <a href={% url listTitulacion 'plan_estudios' %}>Plan estudios</a></th>
-				{% else %}
-					{% ifequal orden '_nombre_titulacion' %}
-					<th colspan="3"><a href={% url listTitulacion 'nombre_centro' %}>Centro</a> : <a href={% url listTitulacion 'nombre_titulacion' %}>Titulación &#11014;</a> : <a href={% url listTitulacion 'plan_estudios' %}>Plan estudios</a></th>
-					{% else %}
-						{% ifequal orden 'plan_estudios' %}
-						<th colspan="3"><a href={% url listTitulacion 'nombre_centro' %}>Centro</a> : <a href={% url listTitulacion 'nombre_titulacion' %}>Titulación</a> : <a href={% url listTitulacion '_plan_estudios' %}>Plan estudios &#11015;</a></th>
-						{% else %}
-							{% ifequal orden '_plan_estudios' %}
-							<th colspan="3"><a href={% url listTitulacion 'nombre_centro' %}>Centro</a> : <a href={% url listTitulacion 'nombre_titulacion' %}>Titulación</a> : <a href={% url listTitulacion 'plan_estudios' %}>Plan estudios &#11014;</a></th>
-							{% else %}
-							<th colspan="3"><a href={% url listTitulacion '_nombre_centro' %}>Centro &#11015;</a> : <a href={% url listTitulacion 'nombre_titulacion' %}>Titulación</a> : <a href={% url listTitulacion 'plan_estudios' %}>Plan estudios</a></th>
-							{% endifequal %}
-						{% endifequal %}
-					{% endifequal %}
-				{% endifequal %}
+
+			{% ifequal orden 'plan_estudios' %}
+			<th colspan="3"><a href={% url listTitulacion centro 'nombre_titulacion' %}>Titulación</a> : <a href={% url listTitulacion centro '_plan_estudios' %}>Plan estudios &#11015;</a></th>
+
+			{% else %}
+
+			{% ifequal orden '_plan_estudios' %}
+			<th colspan="3"><a href={% url listTitulacion centro 'nombre_titulacion' %}>Titulación</a> : <a href={% url listTitulacion centro 'plan_estudios' %}>Plan estudios &#11014;</a></th>
+
+			{% else %}
+			<th colspan="3"><a href={% url listTitulacion centro '_nombre_titulacion' %}>Titulación &#11015;</a> : <a href={% url listTitulacion centro 'plan_estudios' %}>Plan estudios</a></th>
+
+			{% endifequal %}
+			{% endifequal %}
 			{% endifequal %}
 		</tr>
 		{% endif %}
@@ -65,7 +67,7 @@
 		<!-- Titulaciones -->
 		{% for titulacion in lista_titulaciones %}
 		<tr>
-			<th scope="row"><a href="{% url editTitulacion titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}">{{ titulacion }}</a></th>
+			<th scope="row"><a href="{% url editTitulacion titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}">{{ titulacion.nombre_titulacion }} : {{ titulacion.plan_estudios }}</a></th>
 			<td><a href="{% url editTitulacion titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}" class="editlink">Editar</a></td>
 			<td><a href="{% url delTitulacion titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}" class="deletelink">Eliminar</a></td>
 		</tr>

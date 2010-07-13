@@ -68,7 +68,8 @@ urlpatterns += patterns('',
 	url(r'^asesorias/titulacion/add/$', 'proyecto.asesorias.vistas.vistasTitulacion.addTitulacion', name='addTitulacion'),
 	url(r'^asesorias/titulacion/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/edit/$', 'proyecto.asesorias.vistas.vistasTitulacion.editTitulacion', name='editTitulacion'),
 	url(r'^asesorias/titulacion/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/del/$', 'proyecto.asesorias.vistas.vistasTitulacion.delTitulacion', name='delTitulacion'),
-	url(r'^asesorias/titulacion/list/(?P<orden>[\s\w]*)/$', 'proyecto.asesorias.vistas.vistasTitulacion.listTitulacion', name='listTitulacion'),
+	url(r'^asesorias/titulacion/list/(?P<centro>[\s\w]+)/(?P<orden>[\s\w]*)/$', 'proyecto.asesorias.vistas.vistasTitulacion.listTitulacion', name='listTitulacion'),
+	url(r'^asesorias/titulacion/select/$', 'proyecto.asesorias.vistas.vistasTitulacion.selectCentro', name='selectCentro_Titulacion'),
 	url(r'^asesorias/titulacion/generarPDF/$', 'proyecto.asesorias.vistas.vistasTitulacion.generarPDFListaTitulaciones', name='generarPDFListaTitulaciones'),
 )
 
