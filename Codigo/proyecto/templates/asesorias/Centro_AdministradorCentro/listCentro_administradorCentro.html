@@ -44,8 +44,10 @@
 		<tr>
 			{% ifequal orden 'nombre_adm_centro' %}
 			<th colspan="3"><a href={% url listCentro_administradorCentro centro '_nombre_adm_centro' %}>Administrador de Centro &#11015;</a></th>
+
 			{% else %}
-				<th colspan="3"><a href={% url listCentro_administradorCentro centro 'nombre_adm_centro' %}>Administrador de Centro &#11014;</a></th>
+			<th colspan="3"><a href={% url listCentro_administradorCentro centro 'nombre_adm_centro' %}>Administrador de Centro &#11014;</a></th>
+
 			{% endifequal %}
 		</tr>
 		{% endif %}
