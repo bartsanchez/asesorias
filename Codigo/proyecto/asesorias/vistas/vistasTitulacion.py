@@ -175,6 +175,13 @@ def selectCentro(request):
 	return render_to_response('asesorias/Titulacion/selectCentro.html', {'user': request.user, 'form': form})
 
 def listTitulacion(request, centro, orden):
+	# Se comprueba que exista el centro pasado por argumento.
+	instancia_centro = vistasCentro.obtenerCentro(centro)
+
+	# El centro no existe, se redirige.
+	if not (instancia_centro):
+		return HttpResponseRedirect( reverse('selectCentro_Titulacion') )
+
 	# Se establece el ordenamiento inicial.
 	if (orden == 'plan_estudios') or (orden == '_plan_estudios'):
 		orden_inicial = 'plan_estudios'
@@ -184,7 +191,7 @@ def listTitulacion(request, centro, orden):
 		orden_secundario = 'plan_estudios'
 
 	# Se obtiene una lista con todos las titulaciones.
-	lista_titulaciones = models.Titulacion.objects.filter(id_centro=vistasCentro.obtenerCentro(centro).id_centro).order_by(orden_inicial, orden_secundario )
+	lista_titulaciones = models.Titulacion.objects.filter(id_centro=instancia_centro.id_centro).order_by(orden_inicial, orden_secundario )
 
 	# Se ha realizado una busqueda.
 	if request.method == 'POST':
