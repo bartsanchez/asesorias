@@ -119,8 +119,15 @@ def selectCentro(request):
 	return render_to_response('asesorias/Centro_AdministradorCentro/selectCentro.html', {'user': request.user, 'form': form})
 
 def listCentro_administradorCentro(request, centro, orden):
+	# Se comprueba que exista el centro pasado por argumento.
+	instancia_centro = vistasCentro.obtenerCentro(centro)
+
+	# El centro no existe, se redirige.
+	if not (instancia_centro):
+		return HttpResponseRedirect( reverse('selectCentro_CentroAdministradorCentro') )
+
 	# Se obtiene una lista con todos los centros administrador de centro.
-	lista_centros_administradorCentro = models.CentroAdministradorCentro.objects.filter(id_centro=vistasCentro.obtenerCentro(centro).id_centro).order_by('id_adm_centro')
+	lista_centros_administradorCentro = models.CentroAdministradorCentro.objects.filter(id_centro=instancia_centro.id_centro).order_by('id_adm_centro')
 
 	# Se debe hacer el ordenamiento de manera especial ya que estos atributos son enteros y ordenamos alfabeticamente.
 	lista_centros_administradorCentro = ordenarPorAdministradorCentro(lista_centros_administradorCentro)
