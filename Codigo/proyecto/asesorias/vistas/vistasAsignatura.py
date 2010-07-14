@@ -222,6 +222,54 @@ def ordenarPorPlanEstudios(lista_asignaturas):
 
 	return lista_aux
 
+def selectCentro(request):
+	# Se ha introducido un centro.
+	if request.method == 'POST':
+
+		# Se obtiene el centro y se valida.
+		form = forms.CentroFormSelect(request.POST)
+
+		# Si es valido se redirige a listar centros.
+		if form.is_valid():
+			centro = request.POST['centro']
+
+			# Se crea una instancia del centro para pasar el nombre de centro por argumento.
+			instancia_centro = models.Centro.objects.get(pk=centro)
+
+			return HttpResponseRedirect( reverse('selectTitulacion_Asignatura', kwargs={'nombre_centro': instancia_centro.nombre_centro}) )
+
+		else:
+			HttpResponseRedirect( reverse('selectCentro_Asignatura') )
+
+	else:
+		form = forms.CentroFormSelect()
+
+	return render_to_response('asesorias/Asignatura/selectCentro.html', {'user': request.user, 'form': form})
+
+def selectTitulacion(request, nombre_centro):
+	# Se ha introducido una titulacion.
+	if request.method == 'POST':
+
+		# Se obtiene la titulacion y se valida.
+		form = forms.TitulacionFormSelect(request.POST)
+
+		# Si es valido se redirige a listar asignaturas.
+		if form.is_valid():
+			titulacion = request.POST['titulacion']
+
+			# Se crea una instancia del centro para pasar el nombre de centro por argumento.
+			instancia_titulacion = models.Titulacion.objects.get(pk=titulacion)
+
+			return HttpResponseRedirect( reverse('listTitulacion', kwargs={'centro': nombre_centro, 'orden': 'nombre_titulacion'}) )
+
+		else:
+			HttpResponseRedirect( reverse('selectTitulacion_Asignatura') )
+
+	else:
+		form = forms.TitulacionFormSelect( id_centro=models.Centro.objects.get(nombre_centro=nombre_centro).id_centro )
+
+	return render_to_response('asesorias/Asignatura/selectTitulacion.html', {'user': request.user, 'form': form, 'nombre_centro': nombre_centro})
+
 def listAsignatura(request, orden):
 	# Se establece el ordenamiento inicial.
 	if (orden == 'nombre_titulacion') or (orden == '_nombre_titulacion'):

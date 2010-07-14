@@ -20,6 +20,13 @@ class TitulacionForm(forms.ModelForm):
 	class Meta:
 		model = models.Titulacion
 
+class TitulacionFormSelect(forms.Form):
+	titulacion = forms.ModelChoiceField(queryset=models.Titulacion.objects.none())
+
+	def __init__(self, id_centro, *args, **kwargs):
+		super(TitulacionFormSelect, self).__init__(*args, **kwargs)
+		self.fields['titulacion'].queryset = models.Titulacion.objects.filter(id_centro=id_centro)
+
 class AsignaturaForm(forms.ModelForm):
 	titulacion = forms.ModelChoiceField(models.Titulacion.objects.all())
 
