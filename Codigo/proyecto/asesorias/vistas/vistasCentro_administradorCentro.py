@@ -51,12 +51,8 @@ def editCentro_administradorCentro(request, centro, administrador_centro):
 			if form.is_valid():
 				form.save()
 
-				# Determina el centro al que inserta.
-				id_centro = request.POST['id_centro']
-				centro = models.Centro.objects.get(id_centro=id_centro)
-
 				# Redirige a la pagina de listar centro - administradorCentro.
-				return HttpResponseRedirect( reverse('listCentro_administradorCentro', kwargs={'centro': centro, 'orden': 'nombre_adm_centro'}) )
+				return HttpResponseRedirect( reverse('listCentro_administradorCentro', kwargs={'centro': instancia_centro_administradorCentro.id_centro, 'orden': 'nombre_adm_centro'}) )
 	# El centro_administradorCentro no existe
 	else:
 		form = False
