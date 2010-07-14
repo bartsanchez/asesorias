@@ -90,11 +90,8 @@ def addTitulacion(request):
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
 
-			# Determina el centro al que inserta.
-			centro = models.Centro.objects.get(id_centro=id_centro)
-
 			# Redirige a la pagina de listar titulaciones.
-			return HttpResponseRedirect( reverse('listTitulacion', kwargs={'centro': centro, 'orden': 'nombre_titulacion' }) )
+			return HttpResponseRedirect( reverse('listTitulacion', kwargs={'centro': instancia_centro.nombre_centro, 'orden': 'nombre_titulacion' }) )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.TitulacionForm()
@@ -130,11 +127,8 @@ def editTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 			if form.is_valid():
 				form.save()
 
-				# Determina el centro al que inserta.
-				centro = models.Centro.objects.get(id_centro=id_centro)
-
 				# Redirige a la pagina de listar titulaciones.
-				return HttpResponseRedirect( reverse('listTitulacion', kwargs={'centro': centro, 'orden': 'nombre_centro'}) )
+				return HttpResponseRedirect( reverse('listTitulacion', kwargs={'centro': instancia_centro.nombre_centro, 'orden': 'nombre_centro'}) )
 	# La titulacion no existe
 	else:
 		form = False
