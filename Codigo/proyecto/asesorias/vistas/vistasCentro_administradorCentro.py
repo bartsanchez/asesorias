@@ -108,7 +108,10 @@ def selectCentro(request):
 		if form.is_valid():
 			centro = request.POST['centro']
 
-			return HttpResponseRedirect( reverse('listCentro_administradorCentro', kwargs={'centro': centro, 'orden': 'nombre_adm_centro'}) )
+			# Se crea una instancia del centro para pasar el nombre de centro por argumento.
+			instancia_centro = models.Centro.objects.get(pk=centro)
+
+			return HttpResponseRedirect( reverse('listCentro_administradorCentro', kwargs={'centro': instancia_centro.nombre_centro, 'orden': 'nombre_adm_centro'}) )
 
 		else:
 			HttpResponseRedirect( reverse('selectCentro_CentroAdministradorCentro') )

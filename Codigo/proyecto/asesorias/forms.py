@@ -10,9 +10,7 @@ class CentroForm(forms.ModelForm):
 		model = models.Centro
 
 class CentroFormSelect(forms.Form):
-	CHOICES = [(c.nombre_centro, c.nombre_centro) for c in models.Centro.objects.order_by('nombre_centro')]
-
-	centro = forms.CharField(widget=forms.Select(choices=CHOICES))
+	centro = forms.ModelChoiceField(models.Centro.objects.order_by('nombre_centro'))
 
 class AdministradorCentroForm(forms.ModelForm):
 	class Meta:
