@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms, views
-from asesorias.vistas import vistasTitulacion
+from asesorias.vistas import vistasCentro, vistasTitulacion
 
 # Comprueba si existe una asignatura y, de ser asi, la devuelve.
 def obtenerAsignatura(nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura):
@@ -93,8 +93,12 @@ def addAsignatura(request):
 		if form.is_valid():
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
+
+			# Determina el centro al que inserta.
+			centro = models.Centro.objects.get(id_centro=id_centro)
+
 			# Redirige a la pagina de listar asignaturas.
-			return HttpResponseRedirect( reverse('listAsignatura', kwargs={'orden': 'nombre_centro'}) )
+			return HttpResponseRedirect( reverse('listAsignatura', kwargs={'nombre_centro': instancia_titulacion.determinarNombreCentro(), 'nombre_titulacion': instancia_titulacion.nombre_titulacion, 'plan_estudios': instancia_titulacion.plan_estudios, 'orden': 'nombre_centro'}) )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AsignaturaForm()
@@ -137,7 +141,7 @@ def editAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nom
 			if form.is_valid():
 				form.save()
 				# Redirige a la pagina de listar asignaturas.
-				return HttpResponseRedirect( reverse('listAsignatura', kwargs={'orden': 'nombre_centro'}) )
+				return HttpResponseRedirect( reverse('listAsignatura', kwargs={'nombre_centro': instancia_titulacion.determinarNombreCentro(), 'nombre_titulacion': instancia_titulacion.nombre_titulacion, 'plan_estudios': instancia_titulacion.plan_estudios, 'orden': 'nombre_centro'}) )
 	# La asignatura no existe
 	else:
 		form = False
@@ -150,77 +154,11 @@ def delAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nomb
 	if instancia_asignatura:
 		instancia_asignatura.delete()
 		# Redirige a la pagina de listar asignaturas.
-		return HttpResponseRedirect( reverse('listAsignatura', kwargs={'orden': 'nombre_centro'}) )
+		return HttpResponseRedirect( reverse('listAsignatura', kwargs={'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'orden': 'nombre_centro'}) )
 	# La asignatura no existe.
 	else:
 		error = True
 	return render_to_response('asesorias/Asignatura/delAsignatura.html', {'error': error})
-
-def ordenarPorCentro(lista_asignaturas):
-	# Lista auxiliar que albergara la nueva lista.
-	lista_aux = []
-
-	# Se recorre la lista de asignaturas obteniendo los nombres de centro de cada asignatura.
-	for asignatura in lista_asignaturas:
-		# Se introducen los nombres de centro en la nueva lista.
-		lista_aux.append(asignatura.determinarNombreCentro())
-	# Obtenemos un set (valores unicos) ordenado con los valores de la lista.
-	set_aux = sorted( set(lista_aux) )
-
-	# Lista auxiliar que albergara la nueva lista.
-	lista_aux = []
-
-	# Para cada nombre de centro (de manera ordenada) se crea una lista con las asignaturas en el orden correcto.
-	for s in set_aux:
-		for asignatura in lista_asignaturas:
-			if ( asignatura.determinarNombreCentro() == s):
-				lista_aux.append(asignatura)
-
-	return lista_aux
-
-def ordenarPorTitulacion(lista_asignaturas):
-	# Lista auxiliar que albergara la nueva lista.
-	lista_aux = []
-
-	# Se recorre la lista de asignaturas obteniendo los nombres de titulacion de cada asignatura.
-	for asignatura in lista_asignaturas:
-		# Se introducen los nombres de centro en la nueva lista.
-		lista_aux.append(asignatura.determinarNombreTitulacion())
-	# Obtenemos un set (valores unicos) ordenado con los valores de la lista.
-	set_aux = sorted( set(lista_aux) )
-
-	# Lista auxiliar que albergara la nueva lista.
-	lista_aux = []
-
-	# Para cada nombre de titulacion (de manera ordenada) se crea una lista con las asignaturas en el orden correcto.
-	for s in set_aux:
-		for asignatura in lista_asignaturas:
-			if ( asignatura.determinarNombreTitulacion() == s):
-				lista_aux.append(asignatura)
-
-	return lista_aux
-
-def ordenarPorPlanEstudios(lista_asignaturas):
-	# Lista auxiliar que albergara la nueva lista.
-	lista_aux = []
-
-	# Se recorre la lista de asignaturas obteniendo los planes de estudios de cada asignatura.
-	for asignatura in lista_asignaturas:
-		# Se introducen los planes de estudio en la nueva lista.
-		lista_aux.append(asignatura.determinarPlanEstudios())
-	# Obtenemos un set (valores unicos) ordenado con los valores de la lista.
-	set_aux = sorted( set(lista_aux) )
-
-	# Lista auxiliar que albergara la nueva lista.
-	lista_aux = []
-
-	# Para cada plan de estudios titulacion (de manera ordenada) se crea una lista con las asignaturas en el orden correcto.
-	for s in set_aux:
-		for asignatura in lista_asignaturas:
-			if ( asignatura.determinarPlanEstudios() == s):
-				lista_aux.append(asignatura)
-
-	return lista_aux
 
 def selectCentro(request):
 	# Se ha introducido un centro.
@@ -239,7 +177,7 @@ def selectCentro(request):
 			return HttpResponseRedirect( reverse('selectTitulacion_Asignatura', kwargs={'nombre_centro': instancia_centro.nombre_centro}) )
 
 		else:
-			HttpResponseRedirect( reverse('selectCentro_Asignatura') )
+			return HttpResponseRedirect( reverse('selectCentro_Asignatura') )
 
 	else:
 		form = forms.CentroFormSelect()
@@ -247,48 +185,51 @@ def selectCentro(request):
 	return render_to_response('asesorias/Asignatura/selectCentro.html', {'user': request.user, 'form': form})
 
 def selectTitulacion(request, nombre_centro):
+	# Se obtiene el posible centro.
+	instancia_centro = vistasCentro.obtenerCentro(nombre_centro)
+
+	# Se comprueba que exista el centro.
+	if not instancia_centro:
+		return HttpResponseRedirect( reverse('selectCentro_Asignatura') )
+	else:
+		id_centro = instancia_centro.id_centro
+
 	# Se ha introducido una titulacion.
 	if request.method == 'POST':
 
 		# Se obtiene la titulacion y se valida.
-		form = forms.TitulacionFormSelect(request.POST)
+		form = forms.TitulacionFormSelect(id_centro, request.POST)
 
 		# Si es valido se redirige a listar asignaturas.
 		if form.is_valid():
 			titulacion = request.POST['titulacion']
 
-			# Se crea una instancia del centro para pasar el nombre de centro por argumento.
+			# Se crea una instancia de la titulacion para pasar los argumentos.
 			instancia_titulacion = models.Titulacion.objects.get(pk=titulacion)
 
-			return HttpResponseRedirect( reverse('listTitulacion', kwargs={'centro': nombre_centro, 'orden': 'nombre_titulacion'}) )
+			return HttpResponseRedirect( reverse('listAsignatura', kwargs={'nombre_centro': nombre_centro, 'nombre_titulacion': instancia_titulacion.nombre_titulacion, 'plan_estudios': instancia_titulacion.plan_estudios, 'orden': 'nombre_asignatura'}) )
 
 		else:
-			HttpResponseRedirect( reverse('selectTitulacion_Asignatura') )
+			return HttpResponseRedirect( reverse('selectTitulacion_Asignatura', kwargs={'nombre_centro': nombre_centro}) )
 
 	else:
-		form = forms.TitulacionFormSelect( id_centro=models.Centro.objects.get(nombre_centro=nombre_centro).id_centro )
+		form = forms.TitulacionFormSelect(id_centro=id_centro)
 
 	return render_to_response('asesorias/Asignatura/selectTitulacion.html', {'user': request.user, 'form': form, 'nombre_centro': nombre_centro})
 
-def listAsignatura(request, orden):
-	# Se establece el ordenamiento inicial.
-	if (orden == 'nombre_titulacion') or (orden == '_nombre_titulacion'):
-		orden_inicial = 'id_titulacion'
-	elif (orden == 'nombre_asignatura') or (orden == '_nombre_asignatura'):
-		orden_inicial = 'nombre_asignatura'
+def listAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, orden):
+	# Se obtiene la posible titulacion.
+	instancia_titulacion = vistasTitulacion.obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios)
+
+	# Se comprueba que exista la titulacion.
+	if not instancia_titulacion:
+		return HttpResponseRedirect( reverse('selectCentro_Asignatura') )
 	else:
-		orden_inicial = 'id_centro'
+		id_centro = instancia_titulacion.id_centro_id
+		id_titulacion = instancia_titulacion.id_titulacion
 
 	# Se obtiene una lista con todas las asignaturas.
-	lista_asignaturas = models.Asignatura.objects.order_by(orden_inicial)
-
-	# Se debe hacer el ordenamiento de manera especial ya que estos atributos son enteros y ordenamos alfabeticamente.
-	if (orden == 'plan_estudios') or (orden == '_plan_estudios'):
-		lista_asignaturas = ordenarPorPlanEstudios(lista_asignaturas)
-	elif (orden_inicial == 'id_centro'):
-		lista_asignaturas = ordenarPorCentro(lista_asignaturas)
-	elif (orden_inicial == 'id_titulacion'):
-		lista_asignaturas = ordenarPorTitulacion(lista_asignaturas)
+	lista_asignaturas = models.Asignatura.objects.filter(id_centro=id_centro, id_titulacion=id_titulacion).order_by('nombre_asignatura')
 
 	# Se ha realizado una busqueda.
 	if request.method == 'POST':
@@ -304,7 +245,7 @@ def listAsignatura(request, orden):
 			# Se recorren los elementos determinando si coinciden con la busqueda.
 			for asignatura in lista_asignaturas:
 				# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
-				cadena = unicode(asignatura.determinarNombreCentro()) + unicode(asignatura.determinarNombreTitulacion()) + unicode(asignatura.nombre_asignatura) + unicode(asignatura.determinarPlanEstudios())
+				cadena = unicode(asignatura.nombre_asignatura)
 
 				# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
 				if cadena.find(busqueda) >= 0:
@@ -322,10 +263,10 @@ def listAsignatura(request, orden):
 		busqueda = False
 
 		# Si el orden es descendente se invierte la lista.
-		if (orden == '_nombre_centro') or (orden == '_nombre_titulacion') or (orden == '_nombre_asignatura') or (orden == '_plan_estudios'):
+		if (orden == '_nombre_asignatura'):
 			lista_asignaturas = reversed(lista_asignaturas)
 
-	return render_to_response('asesorias/Asignatura/listAsignatura.html', {'user': request.user, 'form': form, 'lista_asignaturas': lista_asignaturas, 'busqueda': busqueda, 'orden': orden})
+	return render_to_response('asesorias/Asignatura/listAsignatura.html', {'user': request.user, 'form': form, 'lista_asignaturas': lista_asignaturas, 'busqueda': busqueda, 'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'orden': orden})
 
 def generarPDFListaAsignaturas(request):
 	# Se obtiene una lista con todas las asignaturas.

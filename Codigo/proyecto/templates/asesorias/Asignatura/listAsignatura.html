@@ -4,6 +4,11 @@
 
 	<h1>Lista de asignaturas.</h1>
 
+	<div class="form">
+		<div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_Asignatura %} class="deletelink"></a></p></div>
+		<div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_Asignatura nombre_centro %} class="deletelink"></a></p></div>
+	</div>
+
 	<a href="{% url addAsignatura %}" class="addlink">Crear nuevo</a>
 	<a href="{% url generarPDFListaAsignaturas %}" class="pdflink">Generar PDF</a>
 
@@ -32,40 +37,19 @@
 
 		{% if not lista_asignaturas %}
 
-		<tr><th scope="row"><p>No existen actualmente asignaturas en el sistema.</p></th></tr>
+		<tr><th scope="row"><p>No existen actualmente asignaturas para esa titulación en el sistema.</p></th></tr>
 
 		{% else %}
 
 		{% if not busqueda %}
 		<tr>
-			{% ifequal orden '_nombre_centro' %}
-			<th colspan="3"><a href={% url listAsignatura 'nombre_centro' %}>Centro &#11014;</a> : <a href={% url listAsignatura 'nombre_titulacion' %}>Titulación</a> : <a href={% url listAsignatura 'nombre_asignatura' %}>Asignatura</a> : <a href={% url listAsignatura 'plan_estudios' %}>Plan estudios</a></th>
+			{% ifequal orden '_nombre_asignatura' %}
+			<th colspan="3"><a href={% url listAsignatura nombre_centro nombre_titulacion plan_estudios 'nombre_asignatura' %}>Asignatura &#11014;</a></th>
+
 			{% else %}
-				{% ifequal orden 'nombre_titulacion' %}
-				<th colspan="3"><a href={% url listAsignatura 'nombre_centro' %}>Centro</a> : <a href={% url listAsignatura '_nombre_titulacion' %}>Titulación &#11015;</a> : <a href={% url listAsignatura 'nombre_asignatura' %}>Asignatura</a> : <a href={% url listAsignatura 'plan_estudios' %}>Plan estudios</a></th>
-				{% else %}
-					{% ifequal orden '_nombre_titulacion' %}
-					<th colspan="3"><a href={% url listAsignatura 'nombre_centro' %}>Centro</a> : <a href={% url listAsignatura 'nombre_titulacion' %}>Titulación &#11014;</a> : <a href={% url listAsignatura 'nombre_asignatura' %}>Asignatura</a> : <a href={% url listAsignatura 'plan_estudios' %}>Plan estudios</a></th>
-					{% else %}
-						{% ifequal orden 'nombre_asignatura' %}
-						<th colspan="3"><a href={% url listAsignatura 'nombre_centro' %}>Centro</a> : <a href={% url listAsignatura 'nombre_titulacion' %}>Titulación</a> : <a href={% url listAsignatura '_nombre_asignatura' %}>Asignatura &#11015;</a> : <a href={% url listAsignatura 'plan_estudios' %}>Plan estudios</a></th>
-						{% else %}
-							{% ifequal orden '_nombre_asignatura' %}
-							<th colspan="3"><a href={% url listAsignatura 'nombre_centro' %}>Centro</a> : <a href={% url listAsignatura 'nombre_titulacion' %}>Titulación</a> : <a href={% url listAsignatura 'nombre_asignatura' %}>Asignatura &#11014;</a> : <a href={% url listAsignatura 'plan_estudios' %}>Plan estudios</a></th>
-							{% else %}
-								{% ifequal orden 'plan_estudios' %}
-								<th colspan="3"><a href={% url listAsignatura 'nombre_centro' %}>Centro</a> : <a href={% url listAsignatura 'nombre_titulacion' %}>Titulación</a> : <a href={% url listAsignatura 'nombre_asignatura' %}>Asignatura</a> : <a href={% url listAsignatura '_plan_estudios' %}>Plan estudios &#11015;</a></th>
-								{% else %}
-									{% ifequal orden '_plan_estudios' %}
-									<th colspan="3"><a href={% url listAsignatura 'nombre_centro' %}>Centro</a> : <a href={% url listAsignatura 'nombre_titulacion' %}>Titulación</a> : <a href={% url listAsignatura 'nombre_asignatura' %}>Asignatura</a> : <a href={% url listAsignatura 'plan_estudios' %}>Plan estudios &#11014;</a></th>
-									{% else %}
-										<th colspan="3"><a href={% url listAsignatura '_nombre_centro' %}>Centro &#11015;</a> : <a href={% url listAsignatura 'nombre_titulacion' %}>Titulación</a> : <a href={% url listAsignatura 'nombre_asignatura' %}>Asignatura</a> : <a href={% url listAsignatura 'plan_estudios' %}>Plan estudios</a></th>
-									{% endifequal %}
-								{% endifequal %}
-							{% endifequal %}
-						{% endifequal %}
-					{% endifequal %}
-				{% endifequal %}
+
+			<th colspan="3"><a href={% url listAsignatura nombre_centro nombre_titulacion plan_estudios '_nombre_asignatura' %}>Asignatura &#11015;</a></th>
+
 			{% endifequal %}
 		</tr>
 		{% endif %}
