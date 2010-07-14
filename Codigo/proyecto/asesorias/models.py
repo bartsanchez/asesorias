@@ -37,7 +37,7 @@ class Titulacion(models.Model):
 		return unicode(centro.nombre_centro)
 
 	def __unicode__(self):
-		return unicode(self.id_centro) + " : " + unicode(self.nombre_titulacion) + " : " + unicode(self.plan_estudios)
+		return unicode(self.nombre_titulacion) + " (" + unicode(self.plan_estudios) + ")"
 
 class Asignatura(models.Model):
 	TIPOS_ASIGNATURAS = (
