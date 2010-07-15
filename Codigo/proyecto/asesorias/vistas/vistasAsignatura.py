@@ -94,9 +94,6 @@ def addAsignatura(request):
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
 
-			# Determina el centro al que inserta.
-			centro = models.Centro.objects.get(id_centro=id_centro)
-
 			# Redirige a la pagina de listar asignaturas.
 			return HttpResponseRedirect( reverse('listAsignatura', kwargs={'nombre_centro': instancia_titulacion.determinarNombreCentro(), 'nombre_titulacion': instancia_titulacion.nombre_titulacion, 'plan_estudios': instancia_titulacion.plan_estudios, 'orden': 'nombre_centro'}) )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
