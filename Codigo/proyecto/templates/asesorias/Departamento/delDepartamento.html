@@ -1,9 +1,15 @@
-<h1>Eliminar departamento.</h1>
+{% extends "asesorias/Base/base_org_docente.html" %}
 
-{% if error %}
+{% block content %}
 
-<p>No existe tal departamento.</p>
+	<h1>Eliminar departamento.</h1>
 
-<a href="../../list">Volver</a>
+	{% if error %}
 
-{% endif %}
+	<p>No existe tal departamento.</p>
+
+	<a href="{% url listDepartamento 'nombre_departamento' %}">Lista de departamentos</a>
+
+	{% endif %}
+
+{% endblock %}
