@@ -31,11 +31,11 @@ def addAsesor(request):
 			user.save()
 
 			# Redirige a la pagina de listar asesores.
-			return HttpResponseRedirect( reverse('listAsesor') )
+			return HttpResponseRedirect( reverse('listAsesor', kwargs={'orden': 'nombre_asesor'}) )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AsesorForm()
-	return render_to_response('asesorias/Asesor/addAsesor.html', {'form': form})
+	return render_to_response('asesorias/Asesor/addAsesor.html', {'user': request.user, 'form': form})
 
 def editAsesor(request, dni_pasaporte):
 	# Se obtiene la instancia del asesor.
@@ -52,11 +52,11 @@ def editAsesor(request, dni_pasaporte):
 			if form.is_valid():
 				form.save()
 				# Redirige a la pagina de listar asesores.
-				return HttpResponseRedirect( reverse('listAsesor') )
+				return HttpResponseRedirect( reverse('listAsesor', kwargs={'orden': 'nombre_asesor'}) )
 	# El asesor no existe.
 	else:
 		form = False
-	return render_to_response('asesorias/Asesor/editAsesor.html', {'form': form})
+	return render_to_response('asesorias/Asesor/editAsesor.html', {'user': request.user, 'form': form})
 
 def delAsesor(request, dni_pasaporte):
 	# Se obtiene la instancia del asesor.
@@ -65,13 +65,39 @@ def delAsesor(request, dni_pasaporte):
 	if instancia_asesor:
 		instancia_asesor.delete()
 		# Redirige a la pagina de listar asesores.
-		return HttpResponseRedirect( reverse('listAsesor') )
+		return HttpResponseRedirect( reverse('listAsesor', kwargs={'orden': 'nombre_asesor'}) )
 	# El asesor no existe.
 	else:
 		error = True
-	return render_to_response('asesorias/Asesor/delAsesor.html', {'error': error})
+	return render_to_response('asesorias/Asesor/delAsesor.html', {'user': request.user, 'error': error})
 
-def listAsesor(request):
+def listAsesor(request, orden):
+	# Se obtiene una lista con todos los asesores.
+	lista_asesores = models.Asesor.objects.order_by('dni_pasaporte')
+
+	# Se ha realizado una busqueda.
+	if request.method == 'POST':
+		# Se obtienen los valores y se valida.
+		form = forms.SearchForm(request.POST)
+		# Si es valido se realiza la busqueda.
+		if form.is_valid():
+			busqueda = request.POST['busqueda']
+			lista_asesores = lista_asesores.filter(dni_pasaporte__contains=busqueda)
+		else:
+			busqueda = False
+	# No se ha realizado busqueda.
+	else:
+		# Formulario para una posible busqueda.
+		form = forms.SearchForm()
+		busqueda = False
+
+		if orden == '_nombre_asesor':
+			lista_asesores = lista_asesores.reverse()
+
+	return render_to_response('asesorias/Asesor/listAsesor.html', {'user': request.user, 'form': form, 'lista_asesores': lista_asesores, 'busqueda': busqueda, 'orden': orden})
+
+def generarPDFListaAsesores(request):
 	# Se obtiene una lista con todos los asesores.
 	lista_asesores = models.Asesor.objects.all()
-	return render_to_response('asesorias/Asesor/listAsesor.html', {'lista_asesores': lista_asesores })
+
+	return views.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_asesores , 'name': 'asesores',} )

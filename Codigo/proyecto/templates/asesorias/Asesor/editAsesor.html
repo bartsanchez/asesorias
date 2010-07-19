@@ -1,23 +1,50 @@
-<h1>Editar asesor.</h1>
+{% extends "asesorias/Base/base_org_docente.html" %}
 
-{% if not form %}
+{% block content %}
 
-<p>No existe tal asesor.</p>
+	<h1>Editar asesor.</h1>
 
-<a href="../../list">Volver</a>
+	{% if not form %}
 
-{% else %}
+	<p>No existe tal asesor.</p>
 
-{{ form.errors }}
+	<a href="{% url listAsesor 'nombre_asesor' %}">Lista de asesores</a>
 
-<form action="" method="post">
-    {% for field in form %}
-        <div class="fieldWrapper">
-            {{ field.errors }}
-            {{ field.label_tag }}: {{ field }}
-        </div>
-    {% endfor %}
-    <p><input type="submit" value="Editar"/></p>
-</form>
+	{% else %}
 
-{% endif %}
+	{% if form.errors %}
+	<div id="form-error">
+		<p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+		<ul>
+			{% for field in form %}
+				{% if field.errors %}<li>{{ field.errors|striptags }}</li>{% endif %}
+			{% endfor %}
+			{% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
+		</ul>
+	</div>
+	{% endif %}
+
+	<div class="module">
+
+		<form action="" method="post">
+
+			<div class="fieldWrapper">
+				<table summary="Editar asesor.">
+				<caption><h2>Editar asesor</h2></caption>
+				{% for field in form %}
+				<tr>
+					<th scope="row">{{ field.label_tag }}</th>
+					<td>{{ field }}</td>
+				</tr>
+				{% endfor %}
+				</table>
+			</div>
+
+			<p><input type="submit" value="Confirmar"/></p>
+		</form>
+
+	</div>
+
+	{% endif %}
+
+{% endblock %}
