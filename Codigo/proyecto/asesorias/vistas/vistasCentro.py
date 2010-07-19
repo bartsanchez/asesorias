@@ -25,7 +25,7 @@ def addCentro(request):
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.CentroForm()
-		error = False
+
 	return render_to_response('asesorias/Centro/addCentro.html', {'user': request.user, 'form': form})
 
 def editCentro(request, centro):
