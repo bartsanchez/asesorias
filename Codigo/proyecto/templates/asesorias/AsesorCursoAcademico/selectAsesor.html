@@ -1,0 +1,27 @@
+{% extends "asesorias/Base/base_org_docente.html" %}
+
+{% block content %}
+
+	<h1>Lista de asesores curso académico.</h1>
+
+	<h2>Seleccionar asesor.</h2>
+
+	<div class="form">
+
+		<form action="" method="post">
+
+			<div class="fieldWrapper">
+				{% for field in form %}
+					<div><p>{{ field.label_tag }}: {{ field }}<input type="submit" value="OK" class="yeslink"/></p></div>
+				{% endfor %}
+			</div>
+
+		</form>
+
+	</div>
+
+	<div class="form">
+		<div><p><a href={% url selectDepartamentoOAsesor_AsesorCursoAcademico %}>Volver</a></p></div>
+	</div>
+
+{% endblock %}

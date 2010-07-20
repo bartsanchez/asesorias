@@ -63,7 +63,10 @@ def delAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
 	return render_to_response('asesorias/AsesorCursoAcademico/delAsesorCursoAcademico.html', {'error': error})
 
 def selectDepartamentoOAsesor(request):
-	# Se ha introducido un departamento o asesor.
+	return render_to_response('asesorias/AsesorCursoAcademico/selectDepartamentoOAsesor.html', {'user': request.user})
+
+def selectDepartamento(request):
+	# Se ha introducido un departamento.
 	if request.method == 'POST':
 
 		# Se obtiene el departamento y se valida.
@@ -82,10 +85,33 @@ def selectDepartamentoOAsesor(request):
 			HttpResponseRedirect( reverse('selectDepartamento_AsesorCursoAcademico') )
 
 	else:
-		form_departamento = forms.DepartamentoFormSelect()
-		form_asesor = forms.AsesorFormSelect()
+		form = forms.DepartamentoFormSelect()
 
-	return render_to_response('asesorias/AsesorCursoAcademico/selectDepartamentoOAsesor.html', {'user': request.user, 'form_departamento': form_departamento, 'form_asesor': form_asesor})
+	return render_to_response('asesorias/AsesorCursoAcademico/selectDepartamento.html', {'user': request.user, 'form': form})
+
+def selectAsesor(request):
+	# Se ha introducido un asesor.
+	if request.method == 'POST':
+
+		# Se obtiene el asesor y se valida.
+		form = forms.AsesorFormSelect(request.POST)
+
+		# Si es valido se redirige a listar asesores curso academico.
+		if form.is_valid():
+			asesor = request.POST['asesor']
+
+			# Se crea una instancia del asesor para pasar el nombre de asesor por argumento.
+			instancia_asesor = models.Departamento.objects.get(pk=departamento)
+
+			return HttpResponseRedirect( reverse('selectAsesor_AsesorCursoAcademico', kwargs={'nombre_departamento': instancia_departamento.nombre_departamento}) )
+
+		else:
+			HttpResponseRedirect( reverse('selectDepartamento_AsesorCursoAcademico') )
+
+	else:
+		form = forms.AsesorFormSelect()
+
+	return render_to_response('asesorias/AsesorCursoAcademico/selectAsesor.html', {'user': request.user, 'form': form})
 
 def listAsesorCursoAcademico(request):
 	# Se obtiene una lista con todos las asesores curso academico.
