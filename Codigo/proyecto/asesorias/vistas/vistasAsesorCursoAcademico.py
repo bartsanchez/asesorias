@@ -2,6 +2,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias.vistas import vistasDepartamento
 
 # Comprueba si existe un asesor curso academico y, de ser asi, la devuelve.
 def obtenerAsesorCursoAcademico(dni_pasaporte, curso_academico):
@@ -60,6 +61,63 @@ def delAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
 	else:
 		error = True
 	return render_to_response('asesorias/AsesorCursoAcademico/delAsesorCursoAcademico.html', {'error': error})
+
+def selectDepartamento(request):
+	# Se ha introducido un centro.
+	if request.method == 'POST':
+
+		# Se obtiene el departamento y se valida.
+		form = forms.DepartamentoFormSelect(request.POST)
+
+		# Si es valido se redirige a listar departamentos.
+		if form.is_valid():
+			departamento = request.POST['departamento']
+
+			# Se crea una instancia del departamento para pasar el nombre de departamento por argumento.
+			instancia_departamento = models.Departamento.objects.get(pk=departamento)
+
+			return HttpResponseRedirect( reverse('selectAsesor_AsesorCursoAcademico', kwargs={'nombre_departamento': instancia_departamento.nombre_departamento}) )
+
+		else:
+			HttpResponseRedirect( reverse('selectDepartamento_AsesorCursoAcademico') )
+
+	else:
+		form = forms.DepartamentoFormSelect()
+
+	return render_to_response('asesorias/AsesorCursoAcademico/selectDepartamento.html', {'user': request.user, 'form': form})
+
+def selectAsesor(request, nombre_departamento):
+	# Se obtiene el posible departamento.
+	instancia_departamento = vistasDepartamento.obtenerDepartamento(nombre_departamento)
+
+	# Se comprueba que exista el departamento.
+	if not instancia_departamento:
+		return HttpResponseRedirect( reverse('selectDepartamento_AsesorCursoAcademico') )
+	else:
+		id_departamento = instancia_departamento.id_departamento
+
+	# Se ha introducido un asesor.
+	if request.method == 'POST':
+
+		# Se obtiene el asesor y se valida.
+		form = forms.TitulacionFormSelect(id_centro, request.POST)
+
+		# Si es valido se redirige a listar asesores curso academico.
+		if form.is_valid():
+			asesor = request.POST['asesor_curso_academico']
+
+			# Se crea una instancia del asesor para pasar los argumentos.
+			instancia_asesor = models.AsesorCursoAcademico.objects.get(pk=asesor)
+
+			return HttpResponseRedirect( reverse('listAsesorCursoAcademico', kwargs={'nombre_departamento': nombre_departamento, 'asesor': instancia_asesor.nombre_asesor, 'orden': 'dni_pasaporte'}) )
+
+		else:
+			return HttpResponseRedirect( reverse('selectTitulacion_Asignatura', kwargs={'nombre_centro': nombre_centro}) )
+
+	else:
+		form = forms.AsesorCursoAcademicoFormSelect(id_departamento=id_departamento)
+
+	return render_to_response('asesorias/AsesorCursoAcademico/selectAsesor.html', {'user': request.user, 'form': form, 'nombre_departamento': nombre_departamento})
 
 def listAsesorCursoAcademico(request):
 	# Se obtiene una lista con todos las asesores curso academico.
