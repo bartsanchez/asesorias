@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias.utils import vistasPDF
 
 # Comprueba si existe un asesor y, de ser asi, lo devuelve.
 def obtenerAsesor(dni_pasaporte):
@@ -100,4 +101,4 @@ def generarPDFListaAsesores(request):
 	# Se obtiene una lista con todos los asesores.
 	lista_asesores = models.Asesor.objects.all()
 
-	return views.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_asesores , 'name': 'asesores',} )
+	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_asesores , 'name': 'asesores',} )
