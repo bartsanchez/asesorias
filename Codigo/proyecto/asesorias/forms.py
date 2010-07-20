@@ -59,17 +59,12 @@ class AsesorForm(forms.ModelForm):
 	class Meta:
 		model = models.Asesor
 
+class AsesorFormSelect(forms.Form):
+	asesor = forms.ModelChoiceField(models.Asesor.objects.order_by('dni_pasaporte'))
+
 class AsesorCursoAcademicoForm(forms.ModelForm):
 	class Meta:
 		model = models.AsesorCursoAcademico
-
-class AsesorCursoAcademicoFormSelect(forms.Form):
-	asesor_curso_academico = forms.ModelChoiceField(queryset=models.AsesorCursoAcademico.objects.all())
-
-	# Necesario para actualizar el queryset en tiempo de ejecucion, a traves del argumento id_departamento.
-	def __init__(self, id_departamento, *args, **kwargs):
-		super(AsesorCursoAcademicoFormSelect, self).__init__(*args, **kwargs)
-		self.fields['asesor_curso_academico'].queryset = models.AsesorCursoAcademico.objects.filter(id_departamento=id_departamento).order_by('dni_pasaporte')
 
 class PlantillaEntrevistaAsesorForm(forms.ModelForm):
 	asesor_curso_academico = forms.ModelChoiceField(models.AsesorCursoAcademico.objects.all())
