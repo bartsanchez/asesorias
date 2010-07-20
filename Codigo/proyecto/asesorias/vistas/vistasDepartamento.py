@@ -1,7 +1,8 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
-from asesorias import models, forms, views
+from asesorias import models, forms
+from asesorias.utils import vistasPDF
 
 # Comprueba si existe un departamento y, de ser asi, lo devuelve.
 def obtenerDepartamento(nombre_departamento):
@@ -91,4 +92,4 @@ def generarPDFListaDepartamentos(request):
 	# Se obtiene una lista con todos los departamentos.
 	lista_departamentos = models.Departamento.objects.all()
 
-	return views.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_departamentos, 'name': 'departamentos',} )
+	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_departamentos, 'name': 'departamentos',} )

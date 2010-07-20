@@ -1,8 +1,9 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
-from asesorias import models, forms, views
+from asesorias import models, forms
 from asesorias.vistas import vistasCentro
+from asesorias.utils import vistasPDF
 
 # Comprueba si existe una titulacion y, de ser asi, la devuelve.
 def obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios):
@@ -230,4 +231,4 @@ def generarPDFListaTitulaciones(request):
 	# Se obtiene una lista con todas las titulaciones.
 	lista_titulaciones = models.Titulacion.objects.all()
 
-	return views.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_titulaciones, 'name': 'titulaciones',} )
+	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_titulaciones, 'name': 'titulaciones',} )

@@ -1,7 +1,8 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
-from asesorias import models, forms, views
+from asesorias import models, forms
+from asesorias.utils import vistasPDF
 
 # Comprueba si existe un administrador de centro y, de ser asi, lo devuelve.
 def obtenerAdministradorCentro(administrador_centro):
@@ -90,4 +91,4 @@ def generarPDFListaAdministradoresCentro(request):
 	# Se obtiene una lista con todos los administradores de centro.
 	lista_administradores_centro = models.AdministradorCentro.objects.all()
 
-	return views.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_administradores_centro, 'name': 'administradores de centro',} )
+	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_administradores_centro, 'name': 'administradores de centro',} )
