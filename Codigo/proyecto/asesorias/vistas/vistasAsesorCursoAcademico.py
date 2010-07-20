@@ -2,7 +2,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
-from asesorias.vistas import vistasDepartamento
+from asesorias.vistas import vistasAsesor
+from asesorias.utils import vistasPDF
 
 # Comprueba si existe un asesor curso academico y, de ser asi, la devuelve.
 def obtenerAsesorCursoAcademico(dni_pasaporte, curso_academico):
@@ -101,19 +102,114 @@ def selectAsesor(request):
 			asesor = request.POST['asesor']
 
 			# Se crea una instancia del asesor para pasar el nombre de asesor por argumento.
-			instancia_asesor = models.Departamento.objects.get(pk=departamento)
+			instancia_asesor = models.Asesor.objects.get(pk=asesor)
 
-			return HttpResponseRedirect( reverse('selectAsesor_AsesorCursoAcademico', kwargs={'nombre_departamento': instancia_departamento.nombre_departamento}) )
+			return HttpResponseRedirect( reverse('listAsesorCursoAcademico_Asesor', kwargs={'dni_pasaporte': asesor, 'orden': 'curso_academico'}) )
 
 		else:
-			HttpResponseRedirect( reverse('selectDepartamento_AsesorCursoAcademico') )
+			HttpResponseRedirect( reverse('selectAsesor_AsesorCursoAcademico') )
 
 	else:
 		form = forms.AsesorFormSelect()
 
 	return render_to_response('asesorias/AsesorCursoAcademico/selectAsesor.html', {'user': request.user, 'form': form})
 
-def listAsesorCursoAcademico(request):
-	# Se obtiene una lista con todos las asesores curso academico.
+def listAsesorCursoAcademico_Departamento(request, nombre_departamento, orden):
+	# Se comprueba que exista el asesor pasado por argumento.
+	instancia_asesor = vistasAsesor.obtenerAsesor(dni_pasaporte)
+
+	# El asesor no existe, se redirige.
+	if not (instancia_asesor):
+		return HttpResponseRedirect( reverse('selectDepartamentoOAsesor_AsesorCursoAcademico') )
+
+	# Se obtiene una lista con todos los asesores curso academico.
+	lista_asesores_curso_academico = models.AsesorCursoAcademico.objects.filter(dni_pasaporte=dni_pasaporte).order_by('dni_pasaporte')
+
+	# Se ha realizado una busqueda.
+	if request.method == 'POST':
+		# Se obtienen los valores y se valida.
+		form = forms.SearchForm(request.POST)
+		# Si es valido se realiza la busqueda.
+		if form.is_valid():
+			busqueda = request.POST['busqueda']
+
+			# Se crea una lista auxiliar que albergara el resultado de la busqueda.
+			lista_aux = []
+
+			# Se recorren los elementos determinando si coinciden con la busqueda.
+			for asesor in lista_asesores_curso_academico:
+				# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
+				cadena = unicode(instancia_asesor.curso_academico)
+
+				# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
+				if cadena.find(busqueda) >= 0:
+					lista_aux.append(asesor)
+
+			# La lista final a devolver sera la lista auxiliar.
+			lista_asesores_curso_academico = lista_aux
+
+		else:
+			busqueda = False
+	# No se ha realizado busqueda.
+	else:
+		# Formulario para una posible busqueda.
+		form = forms.SearchForm()
+		busqueda = False
+
+		if (orden == '_dni_pasaporte'):
+			lista_asesores_curso_academico = reversed(lista_asesores_curso_academico)
+
+	return render_to_response('asesorias/AsesorCursoAcademico/listAsesorCursoAcademico_Asesor.html', {'user': request.user, 'form': form, 'lista_asesores_curso_academico': lista_asesores_curso_academico, 'busqueda': busqueda, 'asesor': dni_pasaporte, 'orden': orden})
+
+def listAsesorCursoAcademico_Asesor(request, dni_pasaporte, orden):
+	# Se comprueba que exista el asesor pasado por argumento.
+	instancia_asesor = vistasAsesor.obtenerAsesor(dni_pasaporte)
+
+	# El asesor no existe, se redirige.
+	if not (instancia_asesor):
+		return HttpResponseRedirect( reverse('selectDepartamentoOAsesor_AsesorCursoAcademico') )
+
+	# Se obtiene una lista con todos los asesores curso academico.
+	lista_asesores_curso_academico = models.AsesorCursoAcademico.objects.filter(dni_pasaporte=dni_pasaporte).order_by('curso_academico')
+
+	# Se ha realizado una busqueda.
+	if request.method == 'POST':
+		# Se obtienen los valores y se valida.
+		form = forms.SearchForm(request.POST)
+		# Si es valido se realiza la busqueda.
+		if form.is_valid():
+			busqueda = request.POST['busqueda']
+
+			# Se crea una lista auxiliar que albergara el resultado de la busqueda.
+			lista_aux = []
+
+			# Se recorren los elementos determinando si coinciden con la busqueda.
+			for asesor in lista_asesores_curso_academico:
+				# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
+				cadena = unicode(asesor.curso_academico)
+
+				# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
+				if cadena.find(busqueda) >= 0:
+					lista_aux.append(asesor)
+
+			# La lista final a devolver sera la lista auxiliar.
+			lista_asesores_curso_academico = lista_aux
+
+		else:
+			busqueda = False
+	# No se ha realizado busqueda.
+	else:
+		# Formulario para una posible busqueda.
+		form = forms.SearchForm()
+		busqueda = False
+
+		if (orden == '_curso_academico'):
+			lista_asesores_curso_academico = reversed(lista_asesores_curso_academico)
+
+	return render_to_response('asesorias/AsesorCursoAcademico/listAsesorCursoAcademico_Asesor.html', {'user': request.user, 'form': form, 'lista_asesores_curso_academico': lista_asesores_curso_academico, 'busqueda': busqueda, 'asesor': dni_pasaporte, 'orden': orden})
+
+def generarPDFListaAsesoresCursoAcademico(request):
+	# Se obtiene una lista con todos los asesores curso academico.
 	lista_asesores_curso_academico = models.AsesorCursoAcademico.objects.all()
-	return render_to_response('asesorias/AsesorCursoAcademico/listAsesorCursoAcademico.html', {'lista_asesores_curso_academico': lista_asesores_curso_academico})
+
+	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_asesores_curso_academico, 'name': 'asesores curso academico',} )

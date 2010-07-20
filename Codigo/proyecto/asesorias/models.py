@@ -142,7 +142,7 @@ class AsesorCursoAcademico(models.Model):
 		unique_together = ("dni_pasaporte", "curso_academico")
 
 	def __unicode__(self):
-		return unicode(self.curso_academico) + ': ' + unicode(self.dni_pasaporte)
+		return unicode(self.curso_academico)
 
 class PlantillaEntrevistaAsesor(models.Model):
 	codigo_plantillaEntrevistaAsesor = models.AutoField(primary_key=True)
