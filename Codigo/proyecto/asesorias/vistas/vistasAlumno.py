@@ -66,11 +66,11 @@ def delAlumno(request, dni_pasaporte):
 	if instancia_alumno:
 		instancia_alumno.delete()
 		# Redirige a la pagina de listar alumnos.
-		return HttpResponseRedirect( reverse('listAlumno') )
+		return HttpResponseRedirect( reverse('listAlumno', kwargs={'orden': 'nombre_asesor'}) )
 	# El alumno no existe.
 	else:
 		error = True
-	return render_to_response('asesorias/Alumno/delAlumno.html', {'error': error})
+	return render_to_response('asesorias/Alumno/delAlumno.html', {'user': request.user, 'error': error})
 
 def listAlumno(request, orden):
 	# Se obtiene una lista con todos los alumnos.
