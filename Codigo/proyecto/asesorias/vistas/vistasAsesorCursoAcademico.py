@@ -160,7 +160,7 @@ def listAsesorCursoAcademico_Departamento(request, nombre_departamento, dni_pasa
 		return HttpResponseRedirect( reverse('selectDepartamentoOAsesor_AsesorCursoAcademico') )
 
 	# Se obtiene una lista con todos los asesores curso academico.
-	lista_asesores_curso_academico = models.AsesorCursoAcademico.objects.filter(id_departamento=instancia_departamento.id_departamento, dni_pasaporte=dni_pasaporte).order_by('dni_pasaporte')
+	lista_asesores_curso_academico = models.AsesorCursoAcademico.objects.filter(id_departamento=instancia_departamento.id_departamento, dni_pasaporte=dni_pasaporte).order_by('curso_academico')
 
 	# Se ha realizado una busqueda.
 	if request.method == 'POST':
@@ -193,7 +193,7 @@ def listAsesorCursoAcademico_Departamento(request, nombre_departamento, dni_pasa
 		form = forms.SearchForm()
 		busqueda = False
 
-		if (orden == '_dni_pasaporte'):
+		if (orden == '_curso_academico'):
 			lista_asesores_curso_academico = reversed(lista_asesores_curso_academico)
 
 	return render_to_response('asesorias/AsesorCursoAcademico/listAsesorCursoAcademico_Departamento.html', {'user': request.user, 'form': form, 'lista_asesores_curso_academico': lista_asesores_curso_academico, 'busqueda': busqueda, 'nombre_departamento': nombre_departamento, 'asesor': dni_pasaporte, 'orden': orden})
