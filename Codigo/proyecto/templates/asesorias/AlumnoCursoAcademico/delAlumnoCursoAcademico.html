@@ -1,9 +1,15 @@
-<h1>Eliminar alumno curso académico.</h1>
+{% extends "asesorias/Base/base_alumnos.html" %}
 
-{% if error %}
+{% block content %}
 
-<p>No existe tal alumno curso académico.</p>
+	<h1>Eliminar alumno curso académico.</h1>
 
-<a href="../../../list">Volver</a>
+	{% if error %}
 
-{% endif %}
+	<p>No existe tal alumno curso académico.</p>
+
+	<a href="{% url selectAlumno_AlumnoCursoAcademico %}">Lista de alumnos curso académico</a>
+
+	{% endif %}
+
+{% endblock %}

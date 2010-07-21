@@ -60,11 +60,11 @@ def delAlumnoCursoAcademico(request, dni_pasaporte, curso_academico):
 	if instancia_alumno_curso_academico:
 		instancia_alumno_curso_academico.delete()
 		# Redirige a la pagina de listar alumnos curso academico.
-		return HttpResponseRedirect( reverse('listAlumnoCursoAcademico') )
+		return HttpResponseRedirect( reverse('listAlumnoCursoAcademico', kwargs={'dni_pasaporte': instancia_alumno_curso_academico.dni_pasaporte, 'orden': 'curso_academico'}) )
 	# El alumno curso academico no existe.
 	else:
 		error = True
-	return render_to_response('asesorias/AlumnoCursoAcademico/delAlumnoCursoAcademico.html', {'error': error})
+	return render_to_response('asesorias/AlumnoCursoAcademico/delAlumnoCursoAcademico.html', {'user': request.user, 'error': error})
 
 def selectAlumno(request):
 	# Se ha introducido un alumno.
