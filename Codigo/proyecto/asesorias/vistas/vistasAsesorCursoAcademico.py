@@ -189,7 +189,7 @@ def listAsesorCursoAcademico_Departamento(request, nombre_departamento, dni_pasa
 			# Se recorren los elementos determinando si coinciden con la busqueda.
 			for asesor in lista_asesores_curso_academico:
 				# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
-				cadena = unicode(instancia_asesor.curso_academico)
+				cadena = unicode(asesor.curso_academico)
 
 				# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
 				if cadena.find(busqueda) >= 0:
