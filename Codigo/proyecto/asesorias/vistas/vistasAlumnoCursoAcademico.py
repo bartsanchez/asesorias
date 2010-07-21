@@ -22,12 +22,15 @@ def addAlumnoCursoAcademico(request):
 		if form.is_valid():
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
+
+			dni_pasaporte = request.POST['dni_pasaporte']
+
 			# Redirige a la pagina de listar alumnos curso academico.
-			return HttpResponseRedirect( reverse('listAlumnoCursoAcademico') )
+			return HttpResponseRedirect( reverse('listAlumnoCursoAcademico', kwargs={'dni_pasaporte': dni_pasaporte, 'orden': 'curso_academico'}) )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AlumnoCursoAcademicoForm()
-	return render_to_response('asesorias/AlumnoCursoAcademico/addAlumnoCursoAcademico.html', {'form': form})
+	return render_to_response('asesorias/AlumnoCursoAcademico/addAlumnoCursoAcademico.html', {'user': request.user, 'form': form})
 
 def editAlumnoCursoAcademico(request, dni_pasaporte, curso_academico):
 	# Se obtiene la instancia del alumno curso academico.
