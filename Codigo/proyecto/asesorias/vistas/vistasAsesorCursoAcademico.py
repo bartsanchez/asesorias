@@ -33,7 +33,7 @@ def addAsesorCursoAcademico(request):
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AsesorCursoAcademicoForm()
-	return render_to_response('asesorias/AsesorCursoAcademico/addAsesorCursoAcademico.html', {'form': form})
+	return render_to_response('asesorias/AsesorCursoAcademico/addAsesorCursoAcademico.html', {'user': request.user, 'form': form})
 
 def editAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
 	# Se obtiene la instancia del asesor curso academico.
@@ -59,7 +59,7 @@ def editAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
 	# El asesor curso academico no existe.
 	else:
 		form = False
-	return render_to_response('asesorias/AsesorCursoAcademico/editAsesorCursoAcademico.html', {'form': form})
+	return render_to_response('asesorias/AsesorCursoAcademico/editAsesorCursoAcademico.html', {'user': request.user, 'form': form})
 
 def delAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
 	# Se obtiene la instancia del asesor curso academico.
@@ -74,7 +74,7 @@ def delAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
 	# El asesor curso academico no existe.
 	else:
 		error = True
-	return render_to_response('asesorias/AsesorCursoAcademico/delAsesorCursoAcademico.html', {'error': error})
+	return render_to_response('asesorias/AsesorCursoAcademico/delAsesorCursoAcademico.html', {'user': request.user, 'error': error})
 
 def selectDepartamentoOAsesor(request):
 	return render_to_response('asesorias/AsesorCursoAcademico/selectDepartamentoOAsesor.html', {'user': request.user})
