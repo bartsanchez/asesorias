@@ -22,8 +22,14 @@ def addAsesorCursoAcademico(request):
 		if form.is_valid():
 			# Se guarda la informacion del formulario en el sistema.
 			form.save()
+
+			# Se obtiene el departamento y el asesor para redirigir.
+			id_departamento = request.POST['id_departamento']
+			dni_pasaporte = request.POST['dni_pasaporte']
+			nombre_departamento = models.Departamento.objects.get(pk=id_departamento)
+
 			# Redirige a la pagina de listar asesores curso academico.
-			return HttpResponseRedirect( reverse('listAsesorCursoAcademico') )
+			return HttpResponseRedirect( reverse('listAsesorCursoAcademico_Departamento', kwargs={'nombre_departamento': nombre_departamento, 'dni_pasaporte': dni_pasaporte, 'orden': 'curso_academico'}) )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AsesorCursoAcademicoForm()
@@ -43,8 +49,13 @@ def editAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
 			# Si es valido se guarda.
 			if form.is_valid():
 				form.save()
+
+				# Se obtiene el departamento y el asesor para redirigir.
+				nombre_departamento = instancia_asesor_curso_academico.id_departamento
+				dni_pasaporte = instancia_asesor_curso_academico.dni_pasaporte
+
 				# Redirige a la pagina de listar asesores curso academico.
-				return HttpResponseRedirect( reverse('listAsesorCursoAcademico') )
+				return HttpResponseRedirect( reverse('listAsesorCursoAcademico_Departamento', kwargs={'nombre_departamento': nombre_departamento, 'dni_pasaporte': dni_pasaporte, 'orden': 'curso_academico'}) )
 	# El asesor curso academico no existe.
 	else:
 		form = False
@@ -55,9 +66,11 @@ def delAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
 	instancia_asesor_curso_academico= obtenerAsesorCursoAcademico(dni_pasaporte, curso_academico)
 	# Si existe se elimina.
 	if instancia_asesor_curso_academico:
+		nombre_departamento = instancia_asesor_curso_academico.id_departamento
+
 		instancia_asesor_curso_academico.delete()
 		# Redirige a la pagina de listar asesores curso academico.
-		return HttpResponseRedirect( reverse('listAsesorCursoAcademico') )
+		return HttpResponseRedirect( reverse('listAsesorCursoAcademico_Departamento', kwargs={'nombre_departamento': nombre_departamento, 'dni_pasaporte': dni_pasaporte, 'orden': 'curso_academico'}) )
 	# El asesor curso academico no existe.
 	else:
 		error = True
