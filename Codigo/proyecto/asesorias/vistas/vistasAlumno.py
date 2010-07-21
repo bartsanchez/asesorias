@@ -53,11 +53,11 @@ def editAlumno(request, dni_pasaporte):
 			if form.is_valid():
 				form.save()
 				# Redirige a la pagina de listar asesores.
-				return HttpResponseRedirect( reverse('listAlumno') )
+				return HttpResponseRedirect( reverse('listAlumno', kwargs={'orden': 'nombre_asesor'}) )
 	# El alumno no existe.
 	else:
 		form = False
-	return render_to_response('asesorias/Alumno/editAlumno.html', {'form': form})
+	return render_to_response('asesorias/Alumno/editAlumno.html', {'user': request.user, 'form': form})
 
 def delAlumno(request, dni_pasaporte):
 	# Se obtiene la instancia del alumno.
