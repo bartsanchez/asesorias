@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias.utils import vistasPDF
 
 # Comprueba si existe un alumno y, de ser asi, lo devuelve.
 def obtenerAlumno(dni_pasaporte):
@@ -71,7 +72,33 @@ def delAlumno(request, dni_pasaporte):
 		error = True
 	return render_to_response('asesorias/Alumno/delAlumno.html', {'error': error})
 
-def listAlumno(request):
+def listAlumno(request, orden):
+	# Se obtiene una lista con todos los alumnos.
+	lista_alumnos = models.Alumno.objects.order_by('dni_pasaporte')
+
+	# Se ha realizado una busqueda.
+	if request.method == 'POST':
+		# Se obtienen los valores y se valida.
+		form = forms.SearchForm(request.POST)
+		# Si es valido se realiza la busqueda.
+		if form.is_valid():
+			busqueda = request.POST['busqueda']
+			lista_alumnos = lista_alumnos.filter(dni_pasaporte__contains=busqueda)
+		else:
+			busqueda = False
+	# No se ha realizado busqueda.
+	else:
+		# Formulario para una posible busqueda.
+		form = forms.SearchForm()
+		busqueda = False
+
+		if orden == '_nombre_alumno':
+			lista_alumnos = lista_alumnos.reverse()
+
+	return render_to_response('asesorias/Alumno/listAlumno.html', {'user': request.user, 'form': form, 'lista_alumnos': lista_alumnos, 'busqueda': busqueda, 'orden': orden})
+
+def generarPDFListaAlumnos(request):
 	# Se obtiene una lista con todos los alumnos.
 	lista_alumnos = models.Alumno.objects.all()
-	return render_to_response('asesorias/Alumno/listAlumno.html', {'lista_alumnos': lista_alumnos})
+
+	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_alumnos, 'name': 'alumnos',} )

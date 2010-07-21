@@ -173,7 +173,8 @@ urlpatterns += patterns('',
 	url(r'^asesorias/alumno/add/$', 'proyecto.asesorias.vistas.vistasAlumno.addAlumno', name='addAlumno'),
 	url(r'^asesorias/alumno/(?P<dni_pasaporte>[\s\w]+)/edit/$', 'proyecto.asesorias.vistas.vistasAlumno.editAlumno', name='editAlumno'),
 	url(r'^asesorias/alumno/(?P<dni_pasaporte>[\s\w]+)/del/$', 'proyecto.asesorias.vistas.vistasAlumno.delAlumno', name='delAlumno'),
-	url(r'^asesorias/alumno/list/$', 'proyecto.asesorias.vistas.vistasAlumno.listAlumno', name='listAlumno'),
+	url(r'^asesorias/alumno/list/(?P<orden>[\s\w]*)/$', 'proyecto.asesorias.vistas.vistasAlumno.listAlumno', name='listAlumno'),
+	url(r'^asesorias/alumno/generarPDF/$', 'proyecto.asesorias.vistas.vistasAlumno.generarPDFListaAlumnos', name='generarPDFListaAlumnos'),
 )
 
 # ------------------------------- #
