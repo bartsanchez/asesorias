@@ -32,11 +32,11 @@ def addAlumno(request):
 			user.save()
 
 			# Redirige a la pagina de listar asesores.
-			return HttpResponseRedirect( reverse('listAlumno') )
+			return HttpResponseRedirect( reverse('listAlumno', kwargs={'orden': 'nombre_alumno'}) )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AlumnoForm()
-	return render_to_response('asesorias/Alumno/addAlumno.html', {'form': form})
+	return render_to_response('asesorias/Alumno/addAlumno.html', {'user': request.user, 'form': form})
 
 def editAlumno(request, dni_pasaporte):
 	# Se obtiene la instancia del alumno.
