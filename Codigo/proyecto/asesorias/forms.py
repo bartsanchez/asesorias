@@ -93,6 +93,9 @@ class AlumnoForm(forms.ModelForm):
 	class Meta:
 		model = models.Alumno
 
+class AlumnoFormSelect(forms.Form):
+	alumno = forms.ModelChoiceField(models.Alumno.objects.order_by('dni_pasaporte'))
+
 class AlumnoCursoAcademicoForm(forms.ModelForm):
 	class Meta:
 		model = models.AlumnoCursoAcademico

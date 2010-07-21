@@ -1,19 +1,69 @@
-<h1>Lista de alumnos curso académico.</h1>
+{% extends "asesorias/Base/base_alumnos.html" %}
 
-<a href="../add">Crear nuevo</a>
+{% block content %}
 
-{% if not lista_alumnos_curso_academico %}
+	<h1>Lista de alumnos curso académico.</h1>
 
-<p>No existen actualmente alumnos curso académico en el sistema.</p>
+	<div class="form">
+		<div><p>Alumno: <b>{{ alumno }}</b> <a href={% url selectAlumno_AlumnoCursoAcademico %} class="deletelink"></a></p></div>
+	</div>
 
-{% else %}
+	<a href="{% url addAlumnoCursoAcademico %}" class="addlink">Crear nuevo</a>
+	<a href="{% url generarPDFListaAlumnosCursoAcademico %}" class="pdflink">Generar PDF</a>
 
-	{% for alumno_curso_academico in lista_alumnos_curso_academico %}
-		<ul>
-			<li>{{ alumno_curso_academico }}</li>
-			<a href="../{{ alumno_curso_academico.dni_pasaporte }}/{{ alumno_curso_academico.curso_academico }}/edit">Editar</a>
-			<a href="../{{ alumno_curso_academico.dni_pasaporte }}/{{ alumno_curso_academico.curso_academico }}/del">Eliminar</a>
-		</ul>
-	{% endfor %}
+	<div class="search">
 
-{% endif %}
+		<form action="" method="post">
+
+			<div class="fieldWrapper">
+				<table summary="Realizar búsqueda.">
+				{% for field in form %}
+				<tr>
+					<th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
+					<td>{{ field }}</td>
+				</tr>
+				{% endfor %}
+				</table>
+			</div>
+
+		</form>
+
+	</div>
+
+	<div class="module">
+		<table summary="Lista de alumnos curso académico.">
+		<caption><h2>Lista de alumnos curso académico{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
+
+		{% if not lista_alumnos_curso_academico %}
+
+		<tr><th scope="row"><p>No existen actualmente alumnos curso académico para este alumno en el sistema.</p></th></tr>
+
+		{% else %}
+
+		{% if not busqueda %}
+		<tr>
+			{% ifequal orden '_curso_academico' %}
+			<th colspan="3"><a href={% url listAlumnoCursoAcademico alumno 'curso_academico' %}>Curso académico &#11014;</a></th>
+
+			{% else %}
+			<th colspan="3"><a href={% url listAlumnoCursoAcademico alumno '_curso_academico' %}>Curso académico &#11015;</a></th>
+
+			{% endifequal %}
+		</tr>
+		{% endif %}
+
+		<!-- Alumnos Curso Academico -->
+		{% for alumno in lista_alumnos_curso_academico %}
+		<tr>
+			<th scope="row"><a href="{% url editAlumnoCursoAcademico alumno.dni_pasaporte alumno.curso_academico %}">{{ alumno }}</a></th>
+			<td><a href="{% url editAlumnoCursoAcademico alumno.dni_pasaporte alumno.curso_academico %}" class="editlink">Editar</a></td>
+			<td><a href="{% url delAlumnoCursoAcademico alumno.dni_pasaporte alumno.curso_academico %}" class="deletelink">Eliminar</a></td>
+		</tr>
+		{% endfor %}
+
+		{% endif %}
+
+		</table>
+	</div>
+
+{% endblock %}

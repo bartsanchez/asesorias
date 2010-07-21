@@ -185,7 +185,9 @@ urlpatterns += patterns('',
 	url(r'^asesorias/alumnoCursoAcademico/add/$', 'proyecto.asesorias.vistas.vistasAlumnoCursoAcademico.addAlumnoCursoAcademico', name='addAlumnoCursoAcademico'),
 	url(r'^asesorias/alumnoCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/edit/$', 'proyecto.asesorias.vistas.vistasAlumnoCursoAcademico.editAlumnoCursoAcademico', name='editAlumnoCursoAcademico'),
 	url(r'^asesorias/alumnoCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/del/$', 'proyecto.asesorias.vistas.vistasAlumnoCursoAcademico.delAlumnoCursoAcademico', name='delAlumnoCursoAcademico'),
-	url(r'^asesorias/alumnoCursoAcademico/list/$', 'proyecto.asesorias.vistas.vistasAlumnoCursoAcademico.listAlumnoCursoAcademico', name='listAlumnoCursoAcademico'),
+	url(r'^asesorias/alumnoCursoAcademico/list/(?P<dni_pasaporte>[\s\w]+)/(?P<orden>[\s\w]*)/$', 'proyecto.asesorias.vistas.vistasAlumnoCursoAcademico.listAlumnoCursoAcademico', name='listAlumnoCursoAcademico'),
+	url(r'^asesorias/alumnoCursoAcademico/selectAlumno/$', 'proyecto.asesorias.vistas.vistasAlumnoCursoAcademico.selectAlumno', name='selectAlumno_AlumnoCursoAcademico'),
+	url(r'^asesorias/alumnoCursoAcademico/generarPDF/$', 'proyecto.asesorias.vistas.vistasAlumnoCursoAcademico.generarPDFListaAlumnosCursoAcademico', name='generarPDFListaAlumnosCursoAcademico'),
 )
 
 # ------------------ #
