@@ -47,11 +47,11 @@ def editAlumnoCursoAcademico(request, dni_pasaporte, curso_academico):
 			if form.is_valid():
 				form.save()
 				# Redirige a la pagina de listar alumnos curso academico.
-				return HttpResponseRedirect( reverse('listAlumnoCursoAcademico') )
+				return HttpResponseRedirect( reverse('listAlumnoCursoAcademico', kwargs={'dni_pasaporte': instancia_alumno_curso_academico.dni_pasaporte, 'orden': 'curso_academico'}) )
 	# El alumno curso academico no existe.
 	else:
 		form = False
-	return render_to_response('asesorias/AlumnoCursoAcademico/editAlumnoCursoAcademico.html', {'form': form})
+	return render_to_response('asesorias/AlumnoCursoAcademico/editAlumnoCursoAcademico.html', {'user': request.user, 'form': form})
 
 def delAlumnoCursoAcademico(request, dni_pasaporte, curso_academico):
 	# Se obtiene la instancia del alumno curso academico.
