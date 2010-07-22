@@ -89,6 +89,6 @@ def listAdministradorCentro(request, orden):
 
 def generarPDFListaAdministradoresCentro(request):
 	# Se obtiene una lista con todos los administradores de centro.
-	lista_administradores_centro = models.AdministradorCentro.objects.all()
+	lista_administradores_centro = models.AdministradorCentro.objects.order_by('nombre_adm_centro')
 
 	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_administradores_centro, 'name': 'administradores de centro',} )
