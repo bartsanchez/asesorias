@@ -240,7 +240,7 @@ class Matricula(models.Model):
 		return unicode(asignatura.nombre_asignatura)
 
 	def __unicode__(self):
-		return unicode(self.determinarNombreCentro()) + ': ' + unicode(self.determinarNombreTitulacion()) + ': ' + unicode(self.determinarPlanEstudios()) + ': ' + unicode(self.determinarNombreAsignatura()) + ': ' + unicode(self.curso_academico) + ': ' + unicode(self.dni_pasaporte)
+		return unicode(self.dni_pasaporte)
 
 class CalificacionConvocatoria(models.Model):
 	codigo_calificacionConvocatoria = models.AutoField(primary_key=True)

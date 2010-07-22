@@ -226,16 +226,16 @@ def selectAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, pl
 	if request.method == 'POST':
 
 		# Se obtiene la titulacion y se valida.
-		form = forms.AsignaturaCursoAcademicoFormSelect(id_centro, id_titulacion, request.POST)
+		form = forms.AsignaturaCursoAcademicoFormSelect(id_centro, id_titulacion, id_asignatura, request.POST)
 
 		# Si es valido se redirige a listar asignaturas curso academico.
 		if form.is_valid():
-			asignatura = request.POST['asignatura']
+			asignatura_curso_academico = request.POST['asignatura_curso_academico']
 
 			# Se crea una instancia de la asignatura para pasar los argumentos.
-			instancia_asignatura = models.Asignatura.objects.get(pk=asignatura)
+			instancia_asignatura_curso_academico = models.AsignaturaCursoAcademico.objects.get(pk=asignatura_curso_academico)
 
-			return HttpResponseRedirect( reverse('listAsignaturaCursoAcademico', kwargs={'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'nombre_asignatura': instancia_asignatura.nombre_asignatura, 'orden': 'curso_academico'}) )
+			return HttpResponseRedirect( reverse('listMatricula', kwargs={'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'nombre_asignatura': nombre_asignatura, 'curso_academico': instancia_asignatura_curso_academico.curso_academico, 'orden': 'curso_academico'}) )
 
 		else:
 			return HttpResponseRedirect( reverse('selectAsignatura_Matricula', kwargs={'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios}) )
@@ -245,7 +245,54 @@ def selectAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, pl
 
 	return render_to_response('asesorias/Matricula/selectAsignaturaCursoAcademico.html', {'user': request.user, 'form': form, 'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'nombre_asignatura': nombre_asignatura})
 
-def listMatricula(request):
-	# Se obtiene una lista con todas las matriculsa.
-	lista_matriculas = models.Matricula.objects.all()
-	return render_to_response('asesorias/Matricula/listMatricula.html', {'lista_matriculas': lista_matriculas})
+def listMatricula(request, nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura, curso_academico, orden):
+	# Se obtiene la posible asignatura_curso_academico.
+	instancia_asignatura_curso_academico = vistasAsignaturaCursoAcademico.obtenerAsignaturaCursoAcademico(nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura, curso_academico)
+
+	# Se comprueba que exista la asignatura curso academico.
+	if not instancia_asignatura_curso_academico:
+		return HttpResponseRedirect( reverse('selectAsignaturaCursoAcademicoOAlumnoCursoAcademico') )
+	else:
+		id_centro = instancia_asignatura_curso_academico.id_centro
+		id_titulacion = instancia_asignatura_curso_academico.id_titulacion
+		id_asignatura = instancia_asignatura_curso_academico.id_asignatura
+
+	# Se obtiene una lista con todos las matriculas.
+	lista_matriculas = models.Matricula.objects.filter(id_centro=id_centro, id_titulacion=id_titulacion, id_asignatura=id_asignatura, curso_academico=curso_academico).all()
+
+	# Se ha realizado una busqueda.
+	if request.method == 'POST':
+		# Se obtienen los valores y se valida.
+		form = forms.SearchForm(request.POST)
+		# Si es valido se realiza la busqueda.
+		if form.is_valid():
+			busqueda = request.POST['busqueda']
+
+			# Se crea una lista auxiliar que albergara el resultado de la busqueda.
+			lista_aux = []
+
+			# Se recorren los elementos determinando si coinciden con la busqueda.
+			for matricula in lista_matriculas:
+				# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
+				cadena = unicode(matricula.curso_academico)
+
+				# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
+				if cadena.find(busqueda) >= 0:
+					lista_aux.append(matricula)
+
+			# La lista final a devolver sera la lista auxiliar.
+			lista_matriculas = lista_aux
+
+		else:
+			busqueda = False
+	# No se ha realizado busqueda.
+	else:
+		# Formulario para una posible busqueda.
+		form = forms.SearchForm()
+		busqueda = False
+
+		# Si el orden es descendente se invierte la lista.
+		if (orden == '_curso_academico'):
+			lista_matriculas = reversed(lista_matriculas)
+
+	return render_to_response('asesorias/Matricula/listMatricula.html', {'user': request.user, 'form': form, 'lista_matriculas': lista_matriculas, 'busqueda': busqueda, 'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'nombre_asignatura': nombre_asignatura, 'curso_academico': curso_academico, 'orden': orden})
