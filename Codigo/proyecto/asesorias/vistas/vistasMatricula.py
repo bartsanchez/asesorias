@@ -226,7 +226,7 @@ def selectAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, pl
 	if request.method == 'POST':
 
 		# Se obtiene la titulacion y se valida.
-		form = forms.AsignaturaFormSelect(id_centro, id_titulacion, request.POST)
+		form = forms.AsignaturaCursoAcademicoFormSelect(id_centro, id_titulacion, request.POST)
 
 		# Si es valido se redirige a listar asignaturas curso academico.
 		if form.is_valid():
