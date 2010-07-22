@@ -90,6 +90,6 @@ def listCentro(request, orden):
 
 def generarPDFListaCentros(request):
 	# Se obtiene una lista con todos los centros.
-	lista_centros = models.Centro.objects.all()
+	lista_centros = models.Centro.objects.order_by('nombre_centro')
 
 	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_centros, 'name': 'centros',} )
