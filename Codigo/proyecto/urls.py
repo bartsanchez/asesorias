@@ -203,6 +203,7 @@ urlpatterns += patterns('',
 	url(r'^asesorias/matricula/selectCentro/$', 'proyecto.asesorias.vistas.vistasMatricula.selectCentro', name='selectCentro_Matricula'),
 	url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/selectTitulacion/$', 'proyecto.asesorias.vistas.vistasMatricula.selectTitulacion', name='selectTitulacion_Matricula'),
 	url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/selectAsignatura/$', 'proyecto.asesorias.vistas.vistasMatricula.selectAsignatura', name='selectAsignatura_Matricula'),
+	url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/selectAsignaturaCursoAcademicoOAlumnoCursoAcademico/$', 'proyecto.asesorias.vistas.vistasMatricula.selectAsignaturaCursoAcademico', name='selectAsignaturaCursoAcademico_Matricula'),
 )
 
 # ---------------------------------- #

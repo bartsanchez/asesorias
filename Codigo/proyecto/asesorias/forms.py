@@ -48,6 +48,14 @@ class AsignaturaCursoAcademicoForm(forms.ModelForm):
 	class Meta:
 		model = models.AsignaturaCursoAcademico
 
+class AsignaturaCursoAcademicoFormSelect(forms.Form):
+	asignatura_curso_academico = forms.ModelChoiceField(queryset=models.AsignaturaCursoAcademico.objects.all())
+
+	# Necesario para actualizar el queryset en tiempo de ejecucion, a traves de los argumentos id_centro e id_titulacion e id_asignatura.
+	def __init__(self, id_centro, id_titulacion, id_asignatura, *args, **kwargs):
+		super(AsignaturaCursoAcademicoFormSelect, self).__init__(*args, **kwargs)
+		self.fields['asignatura_curso_academico'].queryset = models.AsignaturaCursoAcademico.objects.filter(id_centro=id_centro, id_titulacion=id_titulacion, id_asignatura=id_asignatura).order_by('curso_academico')
+
 class DepartamentoForm(forms.ModelForm):
 	class Meta:
 		model = models.Departamento
