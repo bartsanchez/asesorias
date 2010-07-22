@@ -1,0 +1,27 @@
+{% extends "asesorias/Base/base_alumnos.html" %}
+
+{% block content %}
+
+	<h1>Lista de matrículas.</h1>
+
+	<h2>Seleccionar titulación.</h2>
+
+	<div class="form">
+		<div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_Matricula %} class="deletelink"></a></p></div>
+	</div>
+
+	<div class="form">
+
+		<form action="" method="post">
+
+			<div class="fieldWrapper">
+				{% for field in form %}
+					<div><p>{{ field.label_tag }} (Plan de estudios): {{ field }}<input type="submit" value="OK" class="yeslink"/></p></div>
+				{% endfor %}
+			</div>
+
+		</form>
+
+	</div>
+
+{% endblock %}

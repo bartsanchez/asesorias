@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
-from asesorias.vistas import vistasAsignatura, vistasAsignaturaCursoAcademico, vistasAlumnoCursoAcademico
+from asesorias.vistas import vistasAsignatura, vistasAsignaturaCursoAcademico, vistasAlumnoCursoAcademico, vistasCentro, vistasTitulacion
 
 # Comprueba si existe una matricula y, de ser asi, la devuelve.
 def obtenerMatricula(nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura, curso_academico, dni_pasaporte):
@@ -115,6 +115,100 @@ def delMatricula(request, nombre_centro, nombre_titulacion, plan_estudios, nombr
 	else:
 		error = True
 	return render_to_response('asesorias/Matricula/delMatricula.html', {'error': error})
+
+def selectAsignaturaCursoAcademicoOAlumnoCursoAcademico(request):
+	return render_to_response('asesorias/Matricula/selectAsignaturaCursoAcademicoOAlumnoCursoAcademico.html', {'user': request.user})
+
+def selectCentro(request):
+	# Se ha introducido un centro.
+	if request.method == 'POST':
+
+		# Se obtiene el centro y se valida.
+		form = forms.CentroFormSelect(request.POST)
+
+		# Si es valido se redirige a listar centros.
+		if form.is_valid():
+			centro = request.POST['centro']
+
+			# Se crea una instancia del centro para pasar el nombre de centro por argumento.
+			instancia_centro = models.Centro.objects.get(pk=centro)
+
+			return HttpResponseRedirect( reverse('selectTitulacion_Matricula', kwargs={'nombre_centro': instancia_centro.nombre_centro}) )
+
+		else:
+			return HttpResponseRedirect( reverse('selectCentro_Matricula') )
+
+	else:
+		form = forms.CentroFormSelect()
+
+	return render_to_response('asesorias/Matricula/selectCentro.html', {'user': request.user, 'form': form})
+
+def selectTitulacion(request, nombre_centro):
+	# Se obtiene el posible centro.
+	instancia_centro = vistasCentro.obtenerCentro(nombre_centro)
+
+	# Se comprueba que exista el centro.
+	if not instancia_centro:
+		return HttpResponseRedirect( reverse('selectCentro_Matricula') )
+	else:
+		id_centro = instancia_centro.id_centro
+
+	# Se ha introducido una titulacion.
+	if request.method == 'POST':
+
+		# Se obtiene la titulacion y se valida.
+		form = forms.TitulacionFormSelect(id_centro, request.POST)
+
+		# Si es valido se redirige a listar asignaturas.
+		if form.is_valid():
+			titulacion = request.POST['titulacion']
+
+			# Se crea una instancia de la titulacion para pasar los argumentos.
+			instancia_titulacion = models.Titulacion.objects.get(pk=titulacion)
+
+			return HttpResponseRedirect( reverse('selectAsignatura_Matricula', kwargs={'nombre_centro': instancia_titulacion.determinarNombreCentro(), 'nombre_titulacion': instancia_titulacion.nombre_titulacion, 'plan_estudios': instancia_titulacion.plan_estudios}) )
+
+		else:
+			return HttpResponseRedirect( reverse('selectTitulacion_Matricula', kwargs={'nombre_centro': nombre_centro}) )
+
+	else:
+		form = forms.TitulacionFormSelect(id_centro=id_centro)
+
+	return render_to_response('asesorias/Matricula/selectTitulacion.html', {'user': request.user, 'form': form, 'nombre_centro': nombre_centro})
+
+def selectAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios):
+	# Se obtiene la posible titulacion.
+	instancia_titulacion = vistasTitulacion.obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios)
+
+	# Se comprueba que exista la titulacion.
+	if not instancia_titulacion:
+		return HttpResponseRedirect( reverse('selectTitulacion_Matricula', kwargs={'nombre_centro': nombre_centro}) )
+	else:
+		id_centro = instancia_titulacion.id_centro_id
+		id_titulacion = instancia_titulacion.id_titulacion
+
+	# Se ha introducido una titulacion.
+	if request.method == 'POST':
+
+		# Se obtiene la titulacion y se valida.
+		form = forms.AsignaturaFormSelect(id_centro, id_titulacion, request.POST)
+
+		# Si es valido se redirige a listar asignaturas curso academico.
+		if form.is_valid():
+			asignatura = request.POST['asignatura']
+
+			# Se crea una instancia de la asignatura para pasar los argumentos.
+			instancia_asignatura = models.Asignatura.objects.get(pk=asignatura)
+
+			return HttpResponseRedirect( reverse('listAsignaturaCursoAcademico', kwargs={'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'nombre_asignatura': instancia_asignatura.nombre_asignatura, 'orden': 'curso_academico'}) )
+
+		else:
+			return HttpResponseRedirect( reverse('selectAsignatura_Matricula', kwargs={'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios}) )
+
+	else:
+		form = forms.AsignaturaFormSelect(id_centro=id_centro, id_titulacion=id_titulacion)
+
+	return render_to_response('asesorias/Matricula/selectAsignatura.html', {'user': request.user, 'form': form, 'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios})
 
 def listMatricula(request):
 	# Se obtiene una lista con todas las matriculsa.
