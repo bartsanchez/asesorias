@@ -261,7 +261,7 @@ urlpatterns += patterns('',
 	url(r'^asesorias/centro_administradorCentro/(?P<centro>[\s\w]+)/(?P<administrador_centro>[\s\w]+)/del/$', 'asesorias.vistas.vistasCentro_administradorCentro.delCentro_administradorCentro', name='delCentro_administradorCentro'),
 	url(r'^asesorias/centro_administradorCentro/list/(?P<centro>[\s\w]+)/(?P<orden>[\s\w]*)/$', 'asesorias.vistas.vistasCentro_administradorCentro.listCentro_administradorCentro', name='listCentro_administradorCentro'),
 	url(r'^asesorias/centro_administradorCentro/select/$', 'asesorias.vistas.vistasCentro_administradorCentro.selectCentro', name='selectCentro_CentroAdministradorCentro'),
-	url(r'^asesorias/centro_administradorCentro/generarPDF/$', 'asesorias.vistas.vistasCentro_administradorCentro.generarPDFListaCentros_administradorCentro', name='generarPDFListaCentros_administradorCentro'),
+	url(r'^asesorias/centro_administradorCentro/generarPDF/(?P<centro>[\s\w]+)/(?P<busqueda>[\s\w]+)/$', 'asesorias.vistas.vistasCentro_administradorCentro.generarPDFListaCentros_administradorCentro', name='generarPDFListaCentros_administradorCentro'),
 )
 
 # ------------------------------------- #

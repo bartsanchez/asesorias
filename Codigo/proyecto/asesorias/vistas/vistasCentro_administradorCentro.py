@@ -171,8 +171,32 @@ def listCentro_administradorCentro(request, centro, orden):
 
 	return render_to_response('asesorias/Centro_AdministradorCentro/listCentro_administradorCentro.html', {'user': request.user, 'form': form, 'lista_centros_administradorCentro': lista_centros_administradorCentro, 'busqueda': busqueda, 'centro': centro, 'orden': orden})
 
-def generarPDFListaCentros_administradorCentro(request):
+def generarPDFListaCentros_administradorCentro(request, centro, busqueda):
+	# Se comprueba que exista el centro pasado por argumento.
+	instancia_centro = vistasCentro.obtenerCentro(centro)
+
+	# El centro no existe, se redirige.
+	if not (instancia_centro):
+		return HttpResponseRedirect( reverse('selectCentro_CentroAdministradorCentro') )
+
 	# Se obtiene una lista con todos los centros.
-	lista_centros_administradorCentro = models.CentroAdministradorCentro.objects.all()
+	lista_centros_administradorCentro = models.CentroAdministradorCentro.objects.filter(id_centro=instancia_centro.id_centro).order_by('id_adm_centro')
+
+	# Se ha realizado una busqueda.
+	if busqueda != 'False':
+		# Se crea una lista auxiliar que albergara el resultado de la busqueda.
+		lista_aux = []
+
+		# Se recorren los elementos determinando si coinciden con la busqueda.
+		for centro_adm_centro in lista_centros_administradorCentro:
+			# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
+			cadena = unicode(centro_adm_centro.id_adm_centro)
+
+			# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
+			if cadena.find(busqueda) >= 0:
+				lista_aux.append(centro_adm_centro)
+
+		# La lista final a devolver sera la lista auxiliar.
+		lista_centros_administradorCentro = lista_aux
 
 	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_centros_administradorCentro, 'name': 'centros-administrador de centro',} )
