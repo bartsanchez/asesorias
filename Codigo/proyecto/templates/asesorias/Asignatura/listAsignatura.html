@@ -5,8 +5,8 @@
 	<h1>Lista de asignaturas.</h1>
 
 	<div class="form">
-		<div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_Asignatura %} class="deletelink"></a></p></div>
-		<div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_Asignatura nombre_centro %} class="deletelink"></a></p></div>
+		<div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_Asignatura %} class="updatelink"></a></p></div>
+		<div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_Asignatura nombre_centro %} class="updatelink"></a></p></div>
 	</div>
 
 	<a href="{% url addAsignatura %}" class="addlink">Crear nuevo</a>
