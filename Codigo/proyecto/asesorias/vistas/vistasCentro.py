@@ -88,8 +88,11 @@ def listCentro(request, orden):
 
 	return render_to_response('asesorias/Centro/listCentro.html', {'user': request.user, 'form': form, 'lista_centros': lista_centros, 'busqueda': busqueda, 'orden': orden})
 
-def generarPDFListaCentros(request):
-	# Se obtiene una lista con todos los centros.
+def generarPDFListaCentros(request, busqueda):
 	lista_centros = models.Centro.objects.order_by('nombre_centro')
+
+	# Se ha realizado una busqueda.
+	if busqueda != 'False':
+		lista_centros = lista_centros.filter(nombre_centro__contains=busqueda)
 
 	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_centros, 'name': 'centros',} )
