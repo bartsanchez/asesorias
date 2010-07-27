@@ -58,7 +58,7 @@ urlpatterns += patterns('',
 	url(r'^asesorias/administradorCentro/(?P<administrador_centro>[\s\w]+)/edit/$', 'asesorias.vistas.vistasAdministradorCentro.editAdministradorCentro', name='editAdministradorCentro'),
 	url(r'^asesorias/administradorCentro/(?P<administrador_centro>[\s\w]+)/del/$', 'asesorias.vistas.vistasAdministradorCentro.delAdministradorCentro', name='delAdministradorCentro'),
 	url(r'^asesorias/administradorCentro/list/(?P<orden>[\s\w]*)/$', 'asesorias.vistas.vistasAdministradorCentro.listAdministradorCentro', name='listAdministradorCentro'),
-	url(r'^asesorias/administradorCentro/generarPDF/$', 'asesorias.vistas.vistasAdministradorCentro.generarPDFListaAdministradoresCentro', name='generarPDFListaAdministradoresCentro'),
+	url(r'^asesorias/administradorCentro/generarPDF/(?P<busqueda>[\s\w]+)/$', 'asesorias.vistas.vistasAdministradorCentro.generarPDFListaAdministradoresCentro', name='generarPDFListaAdministradoresCentro'),
 )
 
 # ------------------- #

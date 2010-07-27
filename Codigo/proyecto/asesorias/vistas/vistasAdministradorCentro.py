@@ -87,8 +87,12 @@ def listAdministradorCentro(request, orden):
 
 	return render_to_response('asesorias/AdministradorCentro/listAdministradorCentro.html', {'user': request.user, 'form': form, 'lista_administradores_centro': lista_administradores_centro, 'busqueda': busqueda, 'orden': orden})
 
-def generarPDFListaAdministradoresCentro(request):
+def generarPDFListaAdministradoresCentro(request, busqueda):
 	# Se obtiene una lista con todos los administradores de centro.
 	lista_administradores_centro = models.AdministradorCentro.objects.order_by('nombre_adm_centro')
+
+	# Se ha realizado una busqueda.
+	if busqueda != 'False':
+		lista_administradores_centro = lista_administradores_centro.filter(nombre_adm_centro__contains=busqueda)
 
 	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_administradores_centro, 'name': 'administradores de centro',} )
