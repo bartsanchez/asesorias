@@ -12,7 +12,8 @@
 
 			<div class="fieldWrapper">
 				{% for field in form %}
-					<div><p>{{ field.label_tag }}: {{ field }}<input type="submit" value="OK" class="yeslink"/></p></div>
+					<div><p>{{ field.label_tag }}: {{ field }}<a href="{% url addCentro %}" class="addlink" target="_new"></a></p></div>
+					<div><p><input type="submit" value="OK"/></p></div>
 				{% endfor %}
 			</div>
 
