@@ -68,7 +68,21 @@ def determinarSiguienteIdTitulacionEnCentro(instancia_centro):
 			break
 	return contador
 
-def addTitulacion(request):
+def addTitulacion(request, nombre_centro):
+	# Se comprueba que exista el centro en caso de introducir uno.
+	if nombre_centro != '':
+		# Se comprueba que exista el centro pasado por argumento.
+		instancia_centro = vistasCentro.obtenerCentro(nombre_centro)
+
+		# El centro no existe, se redirige.
+		if not (instancia_centro):
+			return HttpResponseRedirect( reverse('selectCentro_Titulacion') )
+
+		id_centro = instancia_centro.id_centro
+	# No se ha introducido un centro para la titulacion.
+	else:
+		id_centro = ''
+
 	# Se ha rellenado el formulario.
 	if request.method == 'POST':
 		# Se extraen los valores pasados por el metodo POST.
@@ -92,10 +106,10 @@ def addTitulacion(request):
 			form.save()
 
 			# Redirige a la pagina de listar titulaciones.
-			return HttpResponseRedirect( reverse('listTitulacion', kwargs={'centro': instancia_centro.nombre_centro, 'orden': 'nombre_titulacion' }) )
+			return HttpResponseRedirect( reverse('listTitulacion', kwargs={'nombre_centro': instancia_centro.nombre_centro, 'orden': 'nombre_titulacion' }) )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
-		form = forms.TitulacionForm()
+		form = forms.TitulacionForm(initial={'id_centro': id_centro})
 	return render_to_response('asesorias/Titulacion/addTitulacion.html', {'form': form})
 
 def editTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
@@ -129,7 +143,7 @@ def editTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 				form.save()
 
 				# Redirige a la pagina de listar titulaciones.
-				return HttpResponseRedirect( reverse('listTitulacion', kwargs={'centro': instancia_centro.nombre_centro, 'orden': 'nombre_centro'}) )
+				return HttpResponseRedirect( reverse('listTitulacion', kwargs={'nombre_centro': instancia_centro.nombre_centro, 'orden': 'nombre_centro'}) )
 	# La titulacion no existe
 	else:
 		form = False
@@ -142,7 +156,7 @@ def delTitulacion(request, nombre_centro, nombre_titulacion, plan_estudios):
 	if instancia_titulacion:
 		instancia_titulacion.delete()
 		# Redirige a la pagina de listar titulaciones.
-		return HttpResponseRedirect( reverse('listTitulacion', kwargs={'centro': nombre_centro, 'orden': 'nombre_centro'}) )
+		return HttpResponseRedirect( reverse('listTitulacion', kwargs={'nombre_centro': nombre_centro, 'orden': 'nombre_centro'}) )
 	# La titulacion no existe.
 	else:
 		error = True
@@ -162,7 +176,7 @@ def selectCentro(request):
 			# Se crea una instancia del centro para pasar el nombre de centro por argumento.
 			instancia_centro = models.Centro.objects.get(pk=centro)
 
-			return HttpResponseRedirect( reverse('listTitulacion', kwargs={'centro': instancia_centro.nombre_centro, 'orden': 'nombre_titulacion'}) )
+			return HttpResponseRedirect( reverse('listTitulacion', kwargs={'nombre_centro': instancia_centro.nombre_centro, 'orden': 'nombre_titulacion'}) )
 
 		else:
 			HttpResponseRedirect( reverse('selectCentro_Titulacion') )
@@ -172,9 +186,9 @@ def selectCentro(request):
 
 	return render_to_response('asesorias/Titulacion/selectCentro.html', {'user': request.user, 'form': form})
 
-def listTitulacion(request, centro, orden):
+def listTitulacion(request, nombre_centro, orden):
 	# Se comprueba que exista el centro pasado por argumento.
-	instancia_centro = vistasCentro.obtenerCentro(centro)
+	instancia_centro = vistasCentro.obtenerCentro(nombre_centro)
 
 	# El centro no existe, se redirige.
 	if not (instancia_centro):
@@ -225,11 +239,11 @@ def listTitulacion(request, centro, orden):
 		if (orden == '_nombre_titulacion') or (orden == '_plan_estudios'):
 			lista_titulaciones = reversed(lista_titulaciones)
 
-	return render_to_response('asesorias/Titulacion/listTitulacion.html', {'user': request.user, 'form': form, 'lista_titulaciones': lista_titulaciones, 'busqueda': busqueda, 'centro': centro, 'orden': orden})
+	return render_to_response('asesorias/Titulacion/listTitulacion.html', {'user': request.user, 'form': form, 'lista_titulaciones': lista_titulaciones, 'busqueda': busqueda, 'centro': nombre_centro, 'orden': orden})
 
-def generarPDFListaTitulaciones(request, centro, busqueda):
+def generarPDFListaTitulaciones(request, nombre_centro, busqueda):
 	# Se comprueba que exista el centro pasado por argumento.
-	instancia_centro = vistasCentro.obtenerCentro(centro)
+	instancia_centro = vistasCentro.obtenerCentro(nombre_centro)
 
 	# El centro no existe, se redirige.
 	if not (instancia_centro):
