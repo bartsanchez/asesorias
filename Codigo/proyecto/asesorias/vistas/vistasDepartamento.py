@@ -88,8 +88,12 @@ def listDepartamento(request, orden):
 
 	return render_to_response('asesorias/Departamento/listDepartamento.html', {'user': request.user, 'form': form, 'lista_departamentos': lista_departamentos, 'busqueda': busqueda, 'orden': orden})
 
-def generarPDFListaDepartamentos(request):
+def generarPDFListaDepartamentos(request, busqueda):
 	# Se obtiene una lista con todos los departamentos.
-	lista_departamentos = models.Departamento.objects.all()
+	lista_departamentos = models.Departamento.objects.order_by('nombre_departamento')
+
+	# Se ha realizado una busqueda.
+	if busqueda != 'False':
+		lista_departamentos = lista_departamentos.filter(nombre_departamento__contains=busqueda)
 
 	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_departamentos, 'name': 'departamentos',} )

@@ -112,7 +112,7 @@ urlpatterns += patterns('',
 	url(r'^asesorias/departamento/(?P<nombre_departamento>[\s\w]+)/edit/$', 'asesorias.vistas.vistasDepartamento.editDepartamento', name='editDepartamento'),
 	url(r'^asesorias/departamento/(?P<nombre_departamento>[\s\w]+)/del/$', 'asesorias.vistas.vistasDepartamento.delDepartamento', name='delDepartamento'),
 	url(r'^asesorias/departamento/list/(?P<orden>[\s\w]*)/$', 'asesorias.vistas.vistasDepartamento.listDepartamento', name='listDepartamento'),
-	url(r'^asesorias/departamento/generarPDF/$', 'asesorias.vistas.vistasDepartamento.generarPDFListaDepartamentos', name='generarPDFListaDepartamentos'),
+	url(r'^asesorias/departamento/generarPDF/(?P<busqueda>[\s\w]+)/$', 'asesorias.vistas.vistasDepartamento.generarPDFListaDepartamentos', name='generarPDFListaDepartamentos'),
 )
 
 # --------------- #
