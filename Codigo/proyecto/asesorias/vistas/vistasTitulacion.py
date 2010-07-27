@@ -227,8 +227,32 @@ def listTitulacion(request, centro, orden):
 
 	return render_to_response('asesorias/Titulacion/listTitulacion.html', {'user': request.user, 'form': form, 'lista_titulaciones': lista_titulaciones, 'busqueda': busqueda, 'centro': centro, 'orden': orden})
 
-def generarPDFListaTitulaciones(request):
-	# Se obtiene una lista con todas las titulaciones.
-	lista_titulaciones = models.Titulacion.objects.all()
+def generarPDFListaTitulaciones(request, centro, busqueda):
+	# Se comprueba que exista el centro pasado por argumento.
+	instancia_centro = vistasCentro.obtenerCentro(centro)
+
+	# El centro no existe, se redirige.
+	if not (instancia_centro):
+		return HttpResponseRedirect( reverse('selectCentro_Titulacion') )
+
+	# Se obtiene una lista con todos las titulaciones.
+	lista_titulaciones = models.Titulacion.objects.filter(id_centro=instancia_centro.id_centro).order_by('nombre_titulacion', 'plan_estudios')
+
+	# Se ha realizado una busqueda.
+	if busqueda != 'False':
+		# Se crea una lista auxiliar que albergara el resultado de la busqueda.
+		lista_aux = []
+
+		# Se recorren los elementos determinando si coinciden con la busqueda.
+		for titulacion in lista_titulaciones:
+			# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
+			cadena = unicode(titulacion.nombre_titulacion) + unicode(titulacion.plan_estudios)
+
+			# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
+			if cadena.find(busqueda) >= 0:
+				lista_aux.append(titulacion)
+
+		# La lista final a devolver sera la lista auxiliar.
+		lista_titulaciones = lista_aux
 
 	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_titulaciones, 'name': 'titulaciones',} )
