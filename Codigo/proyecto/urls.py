@@ -100,7 +100,7 @@ urlpatterns += patterns('',
 	url(r'^asesorias/asignaturaCursoAcademico/selectCentro/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.selectCentro', name='selectCentro_AsignaturaCursoAcademico'),
 	url(r'^asesorias/asignaturaCursoAcademico/(?P<nombre_centro>[\s\w]+)/selectTitulacion/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.selectTitulacion', name='selectTitulacion_AsignaturaCursoAcademico'),
 	url(r'^asesorias/asignaturaCursoAcademico/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/selectAsignatura/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.selectAsignatura', name='selectAsignatura_AsignaturaCursoAcademico'),
-	url(r'^asesorias/asignaturaCursoAcademico/generarPDF/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.generarPDFListaAsignaturasCursoAcademico', name='generarPDFListaAsignaturasCursoAcademico'),
+	url(r'^asesorias/asignaturaCursoAcademico/generarPDF/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<busqueda>[\s\w]+)/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.generarPDFListaAsignaturasCursoAcademico', name='generarPDFListaAsignaturasCursoAcademico'),
 )
 
 # --------------------- #

@@ -240,8 +240,36 @@ def listAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, plan
 
 	return render_to_response('asesorias/AsignaturaCursoAcademico/listAsignaturaCursoAcademico.html', {'user': request.user, 'form': form, 'lista_asignaturas_curso_academico': lista_asignaturas_curso_academico, 'busqueda': busqueda, 'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'nombre_asignatura': nombre_asignatura, 'orden': orden})
 
-def generarPDFListaAsignaturasCursoAcademico(request):
+def generarPDFListaAsignaturasCursoAcademico(request, nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura, busqueda):
+	# Se obtiene la posible asignatura.
+	instancia_asignatura = vistasAsignatura.obtenerAsignatura(nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura)
+
+	# Se comprueba que exista la asignatura.
+	if not instancia_asignatura:
+		return HttpResponseRedirect( reverse('selectCentro_AsignaturaCursoAcademico') )
+	else:
+		id_centro = instancia_asignatura.id_centro
+		id_titulacion = instancia_asignatura.id_titulacion
+		id_asignatura = instancia_asignatura.id_asignatura
+
 	# Se obtiene una lista con todos las asignaturas curso academico.
-	lista_asignaturas_curso_academico = models.AsignaturaCursoAcademico.objects.all()
+	lista_asignaturas_curso_academico = models.AsignaturaCursoAcademico.objects.filter(id_centro=id_centro, id_titulacion=id_titulacion, id_asignatura=id_asignatura).order_by('curso_academico')
+
+	# Se ha realizado una busqueda.
+	if busqueda != 'False':
+		# Se crea una lista auxiliar que albergara el resultado de la busqueda.
+		lista_aux = []
+
+		# Se recorren los elementos determinando si coinciden con la busqueda.
+		for asignatura in lista_asignaturas_curso_academico:
+			# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
+			cadena = unicode(asignatura.curso_academico)
+
+			# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
+			if cadena.find(busqueda) >= 0:
+				lista_aux.append(asignatura)
+
+		# La lista final a devolver sera la lista auxiliar.
+		lista_asignaturas_curso_academico = lista_aux
 
 	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_asignaturas_curso_academico, 'name': 'asignaturas curso academico',} )
