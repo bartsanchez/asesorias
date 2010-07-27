@@ -266,8 +266,35 @@ def listAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, ord
 
 	return render_to_response('asesorias/Asignatura/listAsignatura.html', {'user': request.user, 'form': form, 'lista_asignaturas': lista_asignaturas, 'busqueda': busqueda, 'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'orden': orden})
 
-def generarPDFListaAsignaturas(request):
+def generarPDFListaAsignaturas(request, nombre_centro, nombre_titulacion, plan_estudios, busqueda):
+	# Se obtiene la posible titulacion.
+	instancia_titulacion = vistasTitulacion.obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios)
+
+	# Se comprueba que exista la titulacion.
+	if not instancia_titulacion:
+		return HttpResponseRedirect( reverse('selectCentro_Asignatura') )
+	else:
+		id_centro = instancia_titulacion.id_centro_id
+		id_titulacion = instancia_titulacion.id_titulacion
+
 	# Se obtiene una lista con todas las asignaturas.
-	lista_asignaturas = models.Asignatura.objects.all()
+	lista_asignaturas = models.Asignatura.objects.filter(id_centro=id_centro, id_titulacion=id_titulacion).order_by('nombre_asignatura')
+
+	# Se ha realizado una busqueda.
+	if busqueda != 'False':
+		# Se crea una lista auxiliar que albergara el resultado de la busqueda.
+		lista_aux = []
+
+		# Se recorren los elementos determinando si coinciden con la busqueda.
+		for asignatura in lista_asignaturas:
+			# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
+			cadena = unicode(asignatura.nombre_asignatura)
+
+			# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
+			if cadena.find(busqueda) >= 0:
+				lista_aux.append(asignatura)
+
+		# La lista final a devolver sera la lista auxiliar.
+		lista_asignaturas = lista_aux
 
 	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_asignaturas, 'name': 'asignaturas',} )
