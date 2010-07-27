@@ -124,7 +124,7 @@ urlpatterns += patterns('',
 	url(r'^asesorias/asesor/(?P<dni_pasaporte>[\s\w]+)/edit/$', 'asesorias.vistas.vistasAsesor.editAsesor', name='editAsesor'),
 	url(r'^asesorias/asesor/(?P<dni_pasaporte>[\s\w]+)/del/$', 'asesorias.vistas.vistasAsesor.delAsesor', name='delAsesor'),
 	url(r'^asesorias/asesor/list/(?P<orden>[\s\w]*)/$', 'asesorias.vistas.vistasAsesor.listAsesor', name='listAsesor'),
-	url(r'^asesorias/asesor/generarPDF/$', 'asesorias.vistas.vistasAsesor.generarPDFListaAsesores', name='generarPDFListaAsesores'),
+	url(r'^asesorias/asesor/generarPDF/(?P<busqueda>[\s\w]+)/$', 'asesorias.vistas.vistasAsesor.generarPDFListaAsesores', name='generarPDFListaAsesores'),
 )
 
 # ------------------------------- #

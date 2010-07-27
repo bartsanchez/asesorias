@@ -97,8 +97,12 @@ def listAsesor(request, orden):
 
 	return render_to_response('asesorias/Asesor/listAsesor.html', {'user': request.user, 'form': form, 'lista_asesores': lista_asesores, 'busqueda': busqueda, 'orden': orden})
 
-def generarPDFListaAsesores(request):
+def generarPDFListaAsesores(request, busqueda):
 	# Se obtiene una lista con todos los asesores.
-	lista_asesores = models.Asesor.objects.all()
+	lista_asesores = models.Asesor.objects.order_by('dni_pasaporte')
+
+	# Se ha realizado una busqueda.
+	if busqueda != 'False':
+		lista_asesores = lista_asesores.filter(dni_pasaporte__contains=busqueda)
 
 	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_asesores , 'name': 'asesores',} )
