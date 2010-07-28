@@ -65,7 +65,7 @@ def determinarSiguienteIdAsignaturaEnTitulacion(instancia_titulacion):
 			break
 	return contador
 
-def addAsignatura(request):
+def addAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios):
 	# Se ha rellenado el formulario.
 	if request.method == 'POST':
 		# Se extraen los valores pasados por el metodo POST.
@@ -100,7 +100,7 @@ def addAsignatura(request):
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AsignaturaForm()
-	return render_to_response('asesorias/Asignatura/addAsignatura.html', {'form': form})
+	return render_to_response('asesorias/Asignatura/addAsignatura.html', {'form': form, 'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios})
 
 def editAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura):
 	# Se obtiene la instancia de la asignatura.
@@ -158,7 +158,7 @@ def delAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nomb
 		error = True
 	return render_to_response('asesorias/Asignatura/delAsignatura.html', {'error': error})
 
-def selectCentro(request):
+def selectCentro(request, tipo):
 	# Se ha introducido un centro.
 	if request.method == 'POST':
 
@@ -172,7 +172,7 @@ def selectCentro(request):
 			# Se crea una instancia del centro para pasar el nombre de centro por argumento.
 			instancia_centro = models.Centro.objects.get(pk=centro)
 
-			return HttpResponseRedirect( reverse('selectTitulacion_Asignatura', kwargs={'nombre_centro': instancia_centro.nombre_centro}) )
+			return HttpResponseRedirect( reverse('selectTitulacion_Asignatura', kwargs={'nombre_centro': instancia_centro.nombre_centro, 'tipo': tipo}) )
 
 		else:
 			return HttpResponseRedirect( reverse('selectCentro_Asignatura') )
@@ -180,9 +180,9 @@ def selectCentro(request):
 	else:
 		form = forms.CentroFormSelect()
 
-	return render_to_response('asesorias/Asignatura/selectCentro.html', {'user': request.user, 'form': form})
+	return render_to_response('asesorias/Asignatura/selectCentro.html', {'user': request.user, 'form': form, 'tipo': tipo})
 
-def selectTitulacion(request, nombre_centro):
+def selectTitulacion(request, nombre_centro, tipo):
 	# Se obtiene el posible centro.
 	instancia_centro = vistasCentro.obtenerCentro(nombre_centro)
 
@@ -205,7 +205,10 @@ def selectTitulacion(request, nombre_centro):
 			# Se crea una instancia de la titulacion para pasar los argumentos.
 			instancia_titulacion = models.Titulacion.objects.get(pk=titulacion)
 
-			return HttpResponseRedirect( reverse('listAsignatura', kwargs={'nombre_centro': nombre_centro, 'nombre_titulacion': instancia_titulacion.nombre_titulacion, 'plan_estudios': instancia_titulacion.plan_estudios, 'orden': 'nombre_asignatura'}) )
+			if tipo == 'add':
+				return HttpResponseRedirect( reverse('addAsignatura', kwargs={'nombre_centro': nombre_centro, 'nombre_titulacion': instancia_titulacion.nombre_titulacion, 'plan_estudios': instancia_titulacion.plan_estudios} ) )
+			else:
+				return HttpResponseRedirect( reverse('listAsignatura', kwargs={'nombre_centro': nombre_centro, 'nombre_titulacion': instancia_titulacion.nombre_titulacion, 'plan_estudios': instancia_titulacion.plan_estudios, 'orden': 'nombre_asignatura'}) )
 
 		else:
 			return HttpResponseRedirect( reverse('selectTitulacion_Asignatura', kwargs={'nombre_centro': nombre_centro}) )
@@ -213,7 +216,7 @@ def selectTitulacion(request, nombre_centro):
 	else:
 		form = forms.TitulacionFormSelect(id_centro=id_centro)
 
-	return render_to_response('asesorias/Asignatura/selectTitulacion.html', {'user': request.user, 'form': form, 'nombre_centro': nombre_centro})
+	return render_to_response('asesorias/Asignatura/selectTitulacion.html', {'user': request.user, 'form': form, 'nombre_centro': nombre_centro, 'tipo': tipo})
 
 def listAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, orden):
 	# Se obtiene la posible titulacion.

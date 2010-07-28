@@ -79,12 +79,12 @@ urlpatterns += patterns('',
 # ------------------- #
 
 urlpatterns += patterns('',
-	url(r'^asesorias/asignatura/add/$', 'asesorias.vistas.vistasAsignatura.addAsignatura', name='addAsignatura'),
+	url(r'^asesorias/asignatura/(?P<nombre_centro>[\s\w]*)/(?P<nombre_titulacion>[\s\w]*)/(?P<plan_estudios>\d*)/add/$', 'asesorias.vistas.vistasAsignatura.addAsignatura', name='addAsignatura'),
 	url(r'^asesorias/asignatura/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/edit/$', 'asesorias.vistas.vistasAsignatura.editAsignatura', name='editAsignatura'),
 	url(r'^asesorias/asignatura/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/del/$', 'asesorias.vistas.vistasAsignatura.delAsignatura', name='delAsignatura'),
 	url(r'^asesorias/asignatura/list/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<orden>[\s\w]*)/$', 'asesorias.vistas.vistasAsignatura.listAsignatura', name='listAsignatura'),
-	url(r'^asesorias/asignatura/selectCentro/$', 'asesorias.vistas.vistasAsignatura.selectCentro', name='selectCentro_Asignatura'),
-	url(r'^asesorias/asignatura/(?P<nombre_centro>[\s\w]+)/selectTitulacion/$', 'asesorias.vistas.vistasAsignatura.selectTitulacion', name='selectTitulacion_Asignatura'),
+	url(r'^asesorias/asignatura/selectCentro/(?P<tipo>[\s\w]+)/$', 'asesorias.vistas.vistasAsignatura.selectCentro', name='selectCentro_Asignatura'),
+	url(r'^asesorias/asignatura/(?P<nombre_centro>[\s\w]+)/selectTitulacion/(?P<tipo>[\s\w]+)/$', 'asesorias.vistas.vistasAsignatura.selectTitulacion', name='selectTitulacion_Asignatura'),
 	url(r'^asesorias/asignatura/generarPDF/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<busqueda>[\s\w]+)/$', 'asesorias.vistas.vistasAsignatura.generarPDFListaAsignaturas', name='generarPDFListaAsignaturas'),
 )
 

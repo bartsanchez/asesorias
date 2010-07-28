@@ -2,7 +2,13 @@
 
 {% block content %}
 
+	{% ifequal tipo 'add' %}
+	<h1>Añadir asignatura.</h1>
+
+	{% else %}
 	<h1>Lista de asignaturas.</h1>
+
+	{% endifequal %}
 
 	<h2>Seleccionar centro.</h2>
 

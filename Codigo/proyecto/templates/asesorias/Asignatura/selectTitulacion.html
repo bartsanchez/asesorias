@@ -2,12 +2,18 @@
 
 {% block content %}
 
+	{% ifequal tipo 'add' %}
+	<h1>Añadir asignatura.</h1>
+
+	{% else %}
 	<h1>Lista de asignaturas.</h1>
+
+	{% endifequal %}
 
 	<h2>Seleccionar titulación.</h2>
 
 	<div class="form">
-		<div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_Asignatura %} class="updatelink"></a></p></div>
+		<div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_Asignatura tipo %} class="updatelink"></a></p></div>
 	</div>
 
 	<div class="form">
