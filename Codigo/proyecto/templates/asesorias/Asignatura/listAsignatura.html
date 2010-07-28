@@ -9,7 +9,7 @@
 		<div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_Asignatura nombre_centro 'list' %} class="updatelink"></a></p></div>
 	</div>
 
-	<a href="{% url addAsignatura %}" class="addlink">Crear nuevo</a>
+	<a href="{% url addAsignatura nombre_centro nombre_titulacion plan_estudios %}" class="addlink">Crear nuevo</a>
 	<a href="{% url generarPDFListaAsignaturas nombre_centro nombre_titulacion plan_estudios busqueda %}" class="pdflink">Generar PDF</a>
 
 	<div class="search">
