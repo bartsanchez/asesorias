@@ -184,8 +184,39 @@ def listAsesorCursoAcademico(request, nombre_departamento, dni_pasaporte, orden)
 
 	return render_to_response('asesorias/AsesorCursoAcademico/listAsesorCursoAcademico.html', {'user': request.user, 'form': form, 'lista_asesores_curso_academico': lista_asesores_curso_academico, 'busqueda': busqueda, 'nombre_departamento': nombre_departamento, 'asesor': dni_pasaporte, 'orden': orden})
 
-def generarPDFListaAsesoresCursoAcademico(request):
+def generarPDFListaAsesoresCursoAcademico(request, nombre_departamento, dni_pasaporte, busqueda):
+	# Se comprueba que exista el departamento pasado por argumento.
+	instancia_departamento = vistasDepartamento.obtenerDepartamento(nombre_departamento)
+
+	# El departamento no existe, se redirige.
+	if not (instancia_departamento):
+		return HttpResponseRedirect( reverse('selectDepartamentoOAsesor_AsesorCursoAcademico') )
+
+	# Se comprueba que exista el asesor pasado por argumento.
+	existe_asesor_curso_academico = models.AsesorCursoAcademico.objects.filter(id_departamento=instancia_departamento.id_departamento, dni_pasaporte=dni_pasaporte)
+
+	# El asesor no existe, se redirige.
+	if not (existe_asesor_curso_academico):
+		return HttpResponseRedirect( reverse('selectDepartamentoOAsesor_AsesorCursoAcademico') )
+
 	# Se obtiene una lista con todos los asesores curso academico.
-	lista_asesores_curso_academico = models.AsesorCursoAcademico.objects.all()
+	lista_asesores_curso_academico = models.AsesorCursoAcademico.objects.filter(id_departamento=instancia_departamento.id_departamento, dni_pasaporte=dni_pasaporte).order_by('curso_academico')
+
+	# Se ha realizado una busqueda.
+	if busqueda != 'False':
+		# Se crea una lista auxiliar que albergara el resultado de la busqueda.
+		lista_aux = []
+
+		# Se recorren los elementos determinando si coinciden con la busqueda.
+		for asesor in lista_asesores_curso_academico:
+			# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
+			cadena = unicode(asesor.curso_academico)
+
+			# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
+			if cadena.find(busqueda) >= 0:
+				lista_aux.append(asesor)
+
+		# La lista final a devolver sera la lista auxiliar.
+		lista_asesores_curso_academico = lista_aux
 
 	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_asesores_curso_academico, 'name': 'asesores curso academico',} )
