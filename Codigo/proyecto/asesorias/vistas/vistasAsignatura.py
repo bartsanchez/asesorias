@@ -100,7 +100,7 @@ def addAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios):
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AsignaturaForm()
-	return render_to_response('asesorias/Asignatura/addAsignatura.html', {'form': form, 'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios})
+	return render_to_response('asesorias/Asignatura/addAsignatura.html', {'user': request.user, 'form': form, 'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios})
 
 def editAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura):
 	# Se obtiene la instancia de la asignatura.
@@ -143,7 +143,7 @@ def editAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nom
 	# La asignatura no existe
 	else:
 		form = False
-	return render_to_response('asesorias/Asignatura/editAsignatura.html', {'form': form})
+	return render_to_response('asesorias/Asignatura/editAsignatura.html', {'user': request.user, 'form': form})
 
 def delAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura):
 	# Se obtiene la instancia de la asignatura.
@@ -156,7 +156,7 @@ def delAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nomb
 	# La asignatura no existe.
 	else:
 		error = True
-	return render_to_response('asesorias/Asignatura/delAsignatura.html', {'error': error})
+	return render_to_response('asesorias/Asignatura/delAsignatura.html', {'user': request.user, 'error': error})
 
 def selectCentro(request, tipo):
 	# Se ha introducido un centro.
