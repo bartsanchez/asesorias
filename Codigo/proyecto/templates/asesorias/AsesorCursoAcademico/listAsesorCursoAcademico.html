@@ -5,7 +5,11 @@
 	<h1>Lista de asesores curso académico.</h1>
 
 	<div class="form">
-		<div><p>Asesor: <b>{{ asesor }}</b> <a href={% url selectAsesor_AsesorCursoAcademico %} class="deletelink"></a></p></div>
+		<div><p>Departamento: <b>{{ nombre_departamento }}</b> <a href={% url selectDepartamento_AsesorCursoAcademico %} class="updatelink"></a></p></div>
+	</div>
+
+	<div class="form">
+		<div><p>Asesor: <b>{{ asesor }}</b> <a href={% url selectAsesor_AsesorCursoAcademico nombre_departamento %} class="updatelink"></a></p></div>
 	</div>
 
 	<a href="{% url addAsesorCursoAcademico %}" class="addlink">Crear nuevo</a>
@@ -43,10 +47,10 @@
 		{% if not busqueda %}
 		<tr>
 			{% ifequal orden '_curso_academico' %}
-			<th colspan="3"><a href={% url listAsesorCursoAcademico_Asesor asesor 'curso_academico' %}>Curso académico &#11014;</a></th>
+			<th colspan="3"><a href={% url listAsesorCursoAcademico nombre_departamento asesor 'curso_academico' %}>Curso académico &#11014;</a></th>
 
 			{% else %}
-			<th colspan="3"><a href={% url listAsesorCursoAcademico_Asesor asesor '_curso_academico' %}>Curso académico &#11015;</a></th>
+			<th colspan="3"><a href={% url listAsesorCursoAcademico nombre_departamento asesor '_curso_academico' %}>Curso académico &#11015;</a></th>
 
 			{% endifequal %}
 		</tr>
