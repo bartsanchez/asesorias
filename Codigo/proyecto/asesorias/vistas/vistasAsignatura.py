@@ -69,7 +69,7 @@ def addAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios):
 	# Se ha rellenado el formulario.
 	if request.method == 'POST':
 		# Se extraen los valores pasados por el metodo POST.
-		codigo_titulacion = request.POST['titulacion']
+		codigo_titulacion = vistasTitulacion.obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios).codigo_titulacion
 		nombre_asignatura= request.POST['nombre_asignatura']
 		curso = request.POST['curso']
 		tipo = request.POST['tipo']

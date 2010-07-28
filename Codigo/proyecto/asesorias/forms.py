@@ -29,8 +29,6 @@ class TitulacionFormSelect(forms.Form):
 		self.fields['titulacion'].queryset = models.Titulacion.objects.filter(id_centro=id_centro).order_by('nombre_titulacion')
 
 class AsignaturaForm(forms.ModelForm):
-	titulacion = forms.ModelChoiceField(models.Titulacion.objects.all())
-
 	class Meta:
 		model = models.Asignatura
 
