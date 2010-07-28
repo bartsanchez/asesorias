@@ -5,12 +5,12 @@
 	<h1>Lista de asignaturas curso académico.</h1>
 
 	<div class="form">
-		<div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_AsignaturaCursoAcademico %} class="updatelink"></a></p></div>
-		<div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_AsignaturaCursoAcademico nombre_centro %} class="updatelink"></a></p></div>
-		<div><p>Asignatura: <b>{{ nombre_asignatura }}</b> <a href={% url selectAsignatura_AsignaturaCursoAcademico nombre_centro nombre_titulacion plan_estudios %} class="updatelink"></a></p></div>
+		<div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_AsignaturaCursoAcademico 'list' %} class="updatelink"></a></p></div>
+		<div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_AsignaturaCursoAcademico nombre_centro 'list' %} class="updatelink"></a></p></div>
+		<div><p>Asignatura: <b>{{ nombre_asignatura }}</b> <a href={% url selectAsignatura_AsignaturaCursoAcademico nombre_centro nombre_titulacion plan_estudios 'list' %} class="updatelink"></a></p></div>
 	</div>
 
-	<a href="{% url addAsignaturaCursoAcademico %}" class="addlink">Crear nuevo</a>
+	<a href="{% url addAsignaturaCursoAcademico nombre_centro nombre_titulacion plan_estudios nombre_asignatura %}" class="addlink">Crear nuevo</a>
 	<a href="{% url generarPDFListaAsignaturasCursoAcademico nombre_centro nombre_titulacion plan_estudios nombre_asignatura busqueda %}" class="pdflink">Generar PDF</a>
 
 	<div class="search">

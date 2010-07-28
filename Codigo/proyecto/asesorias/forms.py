@@ -41,8 +41,6 @@ class AsignaturaFormSelect(forms.Form):
 		self.fields['asignatura'].queryset = models.Asignatura.objects.filter(id_centro=id_centro, id_titulacion=id_titulacion).order_by('nombre_asignatura')
 
 class AsignaturaCursoAcademicoForm(forms.ModelForm):
-	asignatura = forms.ModelChoiceField(models.Asignatura.objects.all())
-
 	class Meta:
 		model = models.AsignaturaCursoAcademico
 

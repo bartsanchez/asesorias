@@ -4,6 +4,12 @@
 
 	<h1>Añadir asignatura curso académico.</h1>
 
+	<div class="form">
+		<div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_AsignaturaCursoAcademico 'add' %} class="updatelink"></a></p></div>
+		<div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_AsignaturaCursoAcademico nombre_centro 'add' %} class="updatelink"></a></p></div>
+		<div><p>Asignatura: <b>{{ nombre_asignatura }}</b> <a href={% url selectAsignatura_AsignaturaCursoAcademico nombre_centro nombre_titulacion plan_estudios 'add' %} class="updatelink"></a></p></div>
+	</div>
+
 	{% if form.errors %}
 	<div id="form-error">
 		<p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>

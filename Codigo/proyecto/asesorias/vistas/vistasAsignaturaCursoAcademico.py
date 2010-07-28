@@ -17,11 +17,11 @@ def obtenerAsignaturaCursoAcademico(nombre_centro, nombre_titulacion, plan_estud
 		resultado = False
 	return resultado
 
-def addAsignaturaCursoAcademico(request):
+def addAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura):
 	# Se ha rellenado el formulario.
 	if request.method == 'POST':
 		# Se extraen los valores pasados por el metodo POST.
-		codigo_asignatura = request.POST['asignatura']
+		codigo_asignatura = vistasAsignatura.obtenerAsignatura(nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura).codigo_asignatura
 		curso_academico = request.POST['curso_academico']
 
 		# Se obtiene una instancia de la asignatura a traves de su id.
@@ -45,7 +45,7 @@ def addAsignaturaCursoAcademico(request):
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AsignaturaCursoAcademicoForm()
-	return render_to_response('asesorias/AsignaturaCursoAcademico/addAsignaturaCursoAcademico.html', {'form': form})
+	return render_to_response('asesorias/AsignaturaCursoAcademico/addAsignaturaCursoAcademico.html', {'user': request.user, 'form': form, 'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'nombre_asignatura': nombre_asignatura})
 
 def editAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura, curso_academico):
 	# Se obtiene la instancia de la asignatura curso academico.
@@ -82,7 +82,7 @@ def editAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, plan
 	# La asignatura curso academico no existe
 	else:
 		form = False
-	return render_to_response('asesorias/AsignaturaCursoAcademico/editAsignaturaCursoAcademico.html', {'form': form})
+	return render_to_response('asesorias/AsignaturaCursoAcademico/editAsignaturaCursoAcademico.html', {'user': request.user, 'form': form})
 
 def delAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura, curso_academico):
 	# Se obtiene la instancia de la asignatura curso academico.
@@ -95,9 +95,9 @@ def delAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, plan_
 	# La asignatura no existe.
 	else:
 		error = True
-	return render_to_response('asesorias/AsignaturaCursoAcademico/delAsignaturaCursoAcademico.html', {'error': error})
+	return render_to_response('asesorias/AsignaturaCursoAcademico/delAsignaturaCursoAcademico.html', {'user': request.user, 'error': error})
 
-def selectCentro(request):
+def selectCentro(request, tipo):
 	# Se ha introducido un centro.
 	if request.method == 'POST':
 
@@ -111,17 +111,17 @@ def selectCentro(request):
 			# Se crea una instancia del centro para pasar el nombre de centro por argumento.
 			instancia_centro = models.Centro.objects.get(pk=centro)
 
-			return HttpResponseRedirect( reverse('selectTitulacion_AsignaturaCursoAcademico', kwargs={'nombre_centro': instancia_centro.nombre_centro}) )
+			return HttpResponseRedirect( reverse('selectTitulacion_AsignaturaCursoAcademico', kwargs={'nombre_centro': instancia_centro.nombre_centro, 'tipo': tipo}) )
 
 		else:
-			return HttpResponseRedirect( reverse('selectCentro_AsignaturaCursoAcademico') )
+			return HttpResponseRedirect( reverse('selectCentro_AsignaturaCursoAcademico', kwargs={'tipo': tipo}) )
 
 	else:
 		form = forms.CentroFormSelect()
 
-	return render_to_response('asesorias/AsignaturaCursoAcademico/selectCentro.html', {'user': request.user, 'form': form})
+	return render_to_response('asesorias/AsignaturaCursoAcademico/selectCentro.html', {'user': request.user, 'form': form, 'tipo': tipo})
 
-def selectTitulacion(request, nombre_centro):
+def selectTitulacion(request, nombre_centro, tipo):
 	# Se obtiene el posible centro.
 	instancia_centro = vistasCentro.obtenerCentro(nombre_centro)
 
@@ -144,23 +144,23 @@ def selectTitulacion(request, nombre_centro):
 			# Se crea una instancia de la titulacion para pasar los argumentos.
 			instancia_titulacion = models.Titulacion.objects.get(pk=titulacion)
 
-			return HttpResponseRedirect( reverse('selectAsignatura_AsignaturaCursoAcademico', kwargs={'nombre_centro': instancia_titulacion.determinarNombreCentro(), 'nombre_titulacion': instancia_titulacion.nombre_titulacion, 'plan_estudios': instancia_titulacion.plan_estudios}) )
+			return HttpResponseRedirect( reverse('selectAsignatura_AsignaturaCursoAcademico', kwargs={'nombre_centro': instancia_titulacion.determinarNombreCentro(), 'nombre_titulacion': instancia_titulacion.nombre_titulacion, 'plan_estudios': instancia_titulacion.plan_estudios, 'tipo': tipo}) )
 
 		else:
-			return HttpResponseRedirect( reverse('selectTitulacion_AsignaturaCursoAcademico', kwargs={'nombre_centro': nombre_centro}) )
+			return HttpResponseRedirect( reverse('selectTitulacion_AsignaturaCursoAcademico', kwargs={'nombre_centro': nombre_centro, 'tipo': tipo}) )
 
 	else:
 		form = forms.TitulacionFormSelect(id_centro=id_centro)
 
-	return render_to_response('asesorias/AsignaturaCursoAcademico/selectTitulacion.html', {'user': request.user, 'form': form, 'nombre_centro': nombre_centro})
+	return render_to_response('asesorias/AsignaturaCursoAcademico/selectTitulacion.html', {'user': request.user, 'form': form, 'nombre_centro': nombre_centro, 'tipo': tipo})
 
-def selectAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios):
+def selectAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, tipo):
 	# Se obtiene la posible titulacion.
 	instancia_titulacion = vistasTitulacion.obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios)
 
 	# Se comprueba que exista la titulacion.
 	if not instancia_titulacion:
-		return HttpResponseRedirect( reverse('selectTitulacion_AsignaturaCursoAcademico', kwargs={'nombre_centro': nombre_centro}) )
+		return HttpResponseRedirect( reverse('selectTitulacion_AsignaturaCursoAcademico', kwargs={'nombre_centro': nombre_centro, 'tipo': tipo}) )
 	else:
 		id_centro = instancia_titulacion.id_centro_id
 		id_titulacion = instancia_titulacion.id_titulacion
@@ -178,7 +178,10 @@ def selectAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios):
 			# Se crea una instancia de la asignatura para pasar los argumentos.
 			instancia_asignatura = models.Asignatura.objects.get(pk=asignatura)
 
-			return HttpResponseRedirect( reverse('listAsignaturaCursoAcademico', kwargs={'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'nombre_asignatura': instancia_asignatura.nombre_asignatura, 'orden': 'curso_academico'}) )
+			if tipo == 'add':
+				return HttpResponseRedirect( reverse('addAsignaturaCursoAcademico', kwargs={'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'nombre_asignatura': instancia_asignatura.nombre_asignatura}) )
+			else:
+				return HttpResponseRedirect( reverse('listAsignaturaCursoAcademico', kwargs={'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'nombre_asignatura': instancia_asignatura.nombre_asignatura, 'orden': 'curso_academico'}) )
 
 		else:
 			return HttpResponseRedirect( reverse('selectAsignatura_AsignaturaCursoAcademico', kwargs={'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios}) )
@@ -186,7 +189,7 @@ def selectAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios):
 	else:
 		form = forms.AsignaturaFormSelect(id_centro=id_centro, id_titulacion=id_titulacion)
 
-	return render_to_response('asesorias/AsignaturaCursoAcademico/selectAsignatura.html', {'user': request.user, 'form': form, 'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios})
+	return render_to_response('asesorias/AsignaturaCursoAcademico/selectAsignatura.html', {'user': request.user, 'form': form, 'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'tipo': tipo})
 
 def listAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura, orden):
 	# Se obtiene la posible asignatura.

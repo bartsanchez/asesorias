@@ -2,13 +2,19 @@
 
 {% block content %}
 
+	{% ifequal tipo 'add' %}
+	<h1>Añadir asignatura curso académico.</h1>
+
+	{% else %}
 	<h1>Lista de asignaturas curso académico.</h1>
+
+	{% endifequal %}
 
 	<h2>Seleccionar asignatura.</h2>
 
 	<div class="form">
-		<div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_AsignaturaCursoAcademico %} class="updatelink"></a></p></div>
-		<div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_AsignaturaCursoAcademico nombre_centro %} class="updatelink"></a></p></div>
+		<div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_AsignaturaCursoAcademico tipo %} class="updatelink"></a></p></div>
+		<div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_AsignaturaCursoAcademico nombre_centro tipo %} class="updatelink"></a></p></div>
 	</div>
 
 	<div class="form">

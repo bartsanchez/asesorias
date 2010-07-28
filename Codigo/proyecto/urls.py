@@ -66,7 +66,7 @@ urlpatterns += patterns('',
 # ------------------- #
 
 urlpatterns += patterns('',
-	url(r'^asesorias/titulacion/(?P<nombre_centro>[\s\w]*)/add/$', 'asesorias.vistas.vistasTitulacion.addTitulacion', name='addTitulacion'),
+	url(r'^asesorias/titulacion/add/(?P<nombre_centro>[\s\w]*)/$', 'asesorias.vistas.vistasTitulacion.addTitulacion', name='addTitulacion'),
 	url(r'^asesorias/titulacion/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/edit/$', 'asesorias.vistas.vistasTitulacion.editTitulacion', name='editTitulacion'),
 	url(r'^asesorias/titulacion/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/del/$', 'asesorias.vistas.vistasTitulacion.delTitulacion', name='delTitulacion'),
 	url(r'^asesorias/titulacion/list/(?P<nombre_centro>[\s\w]+)/(?P<orden>[\s\w]*)/$', 'asesorias.vistas.vistasTitulacion.listTitulacion', name='listTitulacion'),
@@ -79,7 +79,7 @@ urlpatterns += patterns('',
 # ------------------- #
 
 urlpatterns += patterns('',
-	url(r'^asesorias/asignatura/(?P<nombre_centro>[\s\w]*)/(?P<nombre_titulacion>[\s\w]*)/(?P<plan_estudios>\d*)/add/$', 'asesorias.vistas.vistasAsignatura.addAsignatura', name='addAsignatura'),
+	url(r'^asesorias/asignatura/add/(?P<nombre_centro>[\s\w]*)/(?P<nombre_titulacion>[\s\w]*)/(?P<plan_estudios>\d*)/$', 'asesorias.vistas.vistasAsignatura.addAsignatura', name='addAsignatura'),
 	url(r'^asesorias/asignatura/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/edit/$', 'asesorias.vistas.vistasAsignatura.editAsignatura', name='editAsignatura'),
 	url(r'^asesorias/asignatura/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/del/$', 'asesorias.vistas.vistasAsignatura.delAsignatura', name='delAsignatura'),
 	url(r'^asesorias/asignatura/list/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<orden>[\s\w]*)/$', 'asesorias.vistas.vistasAsignatura.listAsignatura', name='listAsignatura'),
@@ -93,13 +93,13 @@ urlpatterns += patterns('',
 # ----------------------------------- #
 
 urlpatterns += patterns('',
-	url(r'^asesorias/asignaturaCursoAcademico/add/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.addAsignaturaCursoAcademico', name='addAsignaturaCursoAcademico'),
+	url(r'^asesorias/asignaturaCursoAcademico/add/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.addAsignaturaCursoAcademico', name='addAsignaturaCursoAcademico'),
 	url(r'^asesorias/asignaturaCursoAcademico/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/edit/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.editAsignaturaCursoAcademico', name='editAsignaturaCursoAcademico'),
 	url(r'^asesorias/asignaturaCursoAcademico/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/del/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.delAsignaturaCursoAcademico', name='delAsignaturaCursoAcademico'),
 	url(r'^asesorias/asignaturaCursoAcademico/list/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<orden>[\s\w]*)/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.listAsignaturaCursoAcademico', name='listAsignaturaCursoAcademico'),
-	url(r'^asesorias/asignaturaCursoAcademico/selectCentro/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.selectCentro', name='selectCentro_AsignaturaCursoAcademico'),
-	url(r'^asesorias/asignaturaCursoAcademico/(?P<nombre_centro>[\s\w]+)/selectTitulacion/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.selectTitulacion', name='selectTitulacion_AsignaturaCursoAcademico'),
-	url(r'^asesorias/asignaturaCursoAcademico/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/selectAsignatura/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.selectAsignatura', name='selectAsignatura_AsignaturaCursoAcademico'),
+	url(r'^asesorias/asignaturaCursoAcademico/selectCentro/(?P<tipo>[\s\w]+)/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.selectCentro', name='selectCentro_AsignaturaCursoAcademico'),
+	url(r'^asesorias/asignaturaCursoAcademico/(?P<nombre_centro>[\s\w]+)/selectTitulacion/(?P<tipo>[\s\w]+)/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.selectTitulacion', name='selectTitulacion_AsignaturaCursoAcademico'),
+	url(r'^asesorias/asignaturaCursoAcademico/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/selectAsignatura/(?P<tipo>[\s\w]+)/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.selectAsignatura', name='selectAsignatura_AsignaturaCursoAcademico'),
 	url(r'^asesorias/asignaturaCursoAcademico/generarPDF/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<busqueda>[\s\w]+)/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.generarPDFListaAsignaturasCursoAcademico', name='generarPDFListaAsignaturasCursoAcademico'),
 )
 
@@ -253,7 +253,7 @@ urlpatterns += patterns('',
 # ----------------------------------------- #
 
 urlpatterns += patterns('',
-	url(r'^asesorias/centro_administradorCentro/(?P<nombre_centro>[\s\w]*)/add/$', 'asesorias.vistas.vistasCentro_administradorCentro.addCentro_administradorCentro', name='addCentro_administradorCentro'),
+	url(r'^asesorias/centro_administradorCentro/add/(?P<nombre_centro>[\s\w]*)/$', 'asesorias.vistas.vistasCentro_administradorCentro.addCentro_administradorCentro', name='addCentro_administradorCentro'),
 	url(r'^asesorias/centro_administradorCentro/(?P<centro>[\s\w]+)/(?P<administrador_centro>[\s\w]+)/edit/$', 'asesorias.vistas.vistasCentro_administradorCentro.editCentro_administradorCentro', name='editCentro_administradorCentro'),
 	url(r'^asesorias/centro_administradorCentro/(?P<centro>[\s\w]+)/(?P<administrador_centro>[\s\w]+)/del/$', 'asesorias.vistas.vistasCentro_administradorCentro.delCentro_administradorCentro', name='delCentro_administradorCentro'),
 	url(r'^asesorias/centro_administradorCentro/list/(?P<centro>[\s\w]+)/(?P<orden>[\s\w]*)/$', 'asesorias.vistas.vistasCentro_administradorCentro.listCentro_administradorCentro', name='listCentro_administradorCentro'),
