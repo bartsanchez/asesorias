@@ -8,7 +8,7 @@
 		<div><p>Centro: <b>{{ centro }}</b> <a href={% url selectCentro_CentroAdministradorCentro %} class="updatelink"></a></p></div>
 	</div>
 
-	<a href="{% url addCentro_administradorCentro %}" class="addlink">Crear nuevo</a>
+	<a href="{% url addCentro_administradorCentro centro %}" class="addlink">Crear nuevo</a>
 	<a href="{% url generarPDFListaCentros_administradorCentro centro busqueda %}" class="pdflink">Generar PDF</a>
 
 	<div class="search">

@@ -256,7 +256,7 @@ urlpatterns += patterns('',
 # ----------------------------------------- #
 
 urlpatterns += patterns('',
-	url(r'^asesorias/centro_administradorCentro/add/$', 'asesorias.vistas.vistasCentro_administradorCentro.addCentro_administradorCentro', name='addCentro_administradorCentro'),
+	url(r'^asesorias/centro_administradorCentro/(?P<nombre_centro>[\s\w]*)/add/$', 'asesorias.vistas.vistasCentro_administradorCentro.addCentro_administradorCentro', name='addCentro_administradorCentro'),
 	url(r'^asesorias/centro_administradorCentro/(?P<centro>[\s\w]+)/(?P<administrador_centro>[\s\w]+)/edit/$', 'asesorias.vistas.vistasCentro_administradorCentro.editCentro_administradorCentro', name='editCentro_administradorCentro'),
 	url(r'^asesorias/centro_administradorCentro/(?P<centro>[\s\w]+)/(?P<administrador_centro>[\s\w]+)/del/$', 'asesorias.vistas.vistasCentro_administradorCentro.delCentro_administradorCentro', name='delCentro_administradorCentro'),
 	url(r'^asesorias/centro_administradorCentro/list/(?P<centro>[\s\w]+)/(?P<orden>[\s\w]*)/$', 'asesorias.vistas.vistasCentro_administradorCentro.listCentro_administradorCentro', name='listCentro_administradorCentro'),

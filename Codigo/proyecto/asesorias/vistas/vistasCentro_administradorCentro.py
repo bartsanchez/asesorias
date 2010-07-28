@@ -17,7 +17,21 @@ def obtenerCentro_administradorCentro(centro, administrador_centro):
 		resultado = False
 	return resultado
 
-def addCentro_administradorCentro(request):
+def addCentro_administradorCentro(request, nombre_centro):
+	# Se comprueba que exista el centro en caso de introducir uno.
+	if nombre_centro != '':
+		# Se comprueba que exista el centro pasado por argumento.
+		instancia_centro = vistasCentro.obtenerCentro(nombre_centro)
+
+		# El centro no existe, se redirige.
+		if not (instancia_centro):
+			return HttpResponseRedirect( reverse('selectCentro_CentroAdministradorCentro') )
+
+		id_centro = instancia_centro.id_centro
+	# No se ha introducido un centro para la titulacion.
+	else:
+		id_centro = ''
+
 	# Se ha rellenado el formulario.
 	if request.method == 'POST':
 		# Se obtienen los valores y se valida.
@@ -34,7 +48,7 @@ def addCentro_administradorCentro(request):
 			return HttpResponseRedirect( reverse('listCentro_administradorCentro', kwargs={'centro': centro, 'orden': 'nombre_adm_centro'}) )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
-		form = forms.Centro_AdministradorCentroForm()
+		form = forms.Centro_AdministradorCentroForm(initial={'id_centro': id_centro})
 	return render_to_response('asesorias/Centro_AdministradorCentro/addCentro_administradorCentro.html', {'user': request.user, 'form': form})
 
 def editCentro_administradorCentro(request, centro, administrador_centro):
