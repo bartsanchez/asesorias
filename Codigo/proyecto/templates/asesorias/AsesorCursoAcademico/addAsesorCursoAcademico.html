@@ -4,11 +4,6 @@
 
 	<h1>Añadir asesor curso académico.</h1>
 
-	<div class="form">
-		<div><p>Departamento: <b>{{ nombre_departamento }}</b></p></div>
-		<div><p>Asesor: <b>{{ asesor }}</b></p></div>
-	</div>
-
 	{% if form.errors %}
 	<div id="form-error">
 		<p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
@@ -30,15 +25,10 @@
 				<caption><h2>Añadir asesor curso académico</h2></caption>
 				{% for field in form %}
 
-				{# Excluye los campos que forman parte de la clave que se controlarán por software. #}
-				{% ifnotequal field.name 'id_departamento' %}
-				{% ifnotequal field.name 'dni_pasaporte' %}
 				<tr>
 					<th scope="row">{{ field.label_tag }}</th>
 					<td>{{ field }}</td>
 				</tr>
-				{% endifnotequal %}
-				{% endifnotequal %}
 
 				{% endfor %}
 				</table>
