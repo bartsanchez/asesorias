@@ -6,7 +6,7 @@
 
 	<div class="form">
 		<div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_Asignatura 'list' %} class="updatelink"></a></p></div>
-		<div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_Asignatura nombre_centro 'list' %} class="updatelink"></a></p></div>
+		<div><p>Titulación (Plan de estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_Asignatura nombre_centro 'list' %} class="updatelink"></a></p></div>
 	</div>
 
 	<a href="{% url addAsignatura nombre_centro nombre_titulacion plan_estudios %}" class="addlink">Crear nuevo</a>
