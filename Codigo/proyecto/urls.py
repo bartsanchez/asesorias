@@ -132,7 +132,7 @@ urlpatterns += patterns('',
 # ------------------------------- #
 
 urlpatterns += patterns('',
-	url(r'^asesorias/asesorCursoAcademico/add/$', 'asesorias.vistas.vistasAsesorCursoAcademico.addAsesorCursoAcademico', name='addAsesorCursoAcademico'),
+	url(r'^asesorias/asesorCursoAcademico/add/(?P<nombre_departamento>[\s\w]+)/(?P<dni_pasaporte>[\s\w]+)/$', 'asesorias.vistas.vistasAsesorCursoAcademico.addAsesorCursoAcademico', name='addAsesorCursoAcademico'),
 	url(r'^asesorias/asesorCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/edit/$', 'asesorias.vistas.vistasAsesorCursoAcademico.editAsesorCursoAcademico', name='editAsesorCursoAcademico'),
 	url(r'^asesorias/asesorCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/del/$', 'asesorias.vistas.vistasAsesorCursoAcademico.delAsesorCursoAcademico', name='delAsesorCursoAcademico'),
 	url(r'^asesorias/asesorCursoAcademico/departamento/(?P<nombre_departamento>[\s\w]+)/(?P<dni_pasaporte>[\s\w]+)/(?P<orden>[\s\w]*)/list/$', 'asesorias.vistas.vistasAsesorCursoAcademico.listAsesorCursoAcademico', name='listAsesorCursoAcademico'),
