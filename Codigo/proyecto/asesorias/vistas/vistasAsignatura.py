@@ -66,6 +66,13 @@ def determinarSiguienteIdAsignaturaEnTitulacion(instancia_titulacion):
 	return contador
 
 def addAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios):
+	# Se obtiene la posible titulacion.
+	instancia_titulacion = vistasTitulacion.obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios)
+
+	# Se comprueba que exista la titulacion.
+	if not instancia_titulacion:
+		return HttpResponseRedirect( reverse('selectCentro_Asignatura', kwargs={'tipo': 'add'}) )
+
 	# Se ha rellenado el formulario.
 	if request.method == 'POST':
 		# Se extraen los valores pasados por el metodo POST.
@@ -112,7 +119,7 @@ def editAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nom
 		# Se ha modificado el formulario original.
 		if request.method == 'POST':
 			# Se obtienen el resto de valores necesarios a traves de POST.
-			codigo_titulacion = request.POST['titulacion']
+			codigo_titulacion = vistasTitulacion.obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios).codigo_titulacion
 			nombre_asignatura= request.POST['nombre_asignatura']
 			curso = request.POST['curso']
 			tipo = request.POST['tipo']
@@ -143,7 +150,7 @@ def editAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nom
 	# La asignatura no existe
 	else:
 		form = False
-	return render_to_response('asesorias/Asignatura/editAsignatura.html', {'user': request.user, 'form': form})
+	return render_to_response('asesorias/Asignatura/editAsignatura.html', {'user': request.user, 'form': form, 'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios})
 
 def delAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura):
 	# Se obtiene la instancia de la asignatura.
@@ -224,7 +231,7 @@ def listAsignatura(request, nombre_centro, nombre_titulacion, plan_estudios, ord
 
 	# Se comprueba que exista la titulacion.
 	if not instancia_titulacion:
-		return HttpResponseRedirect( reverse('selectCentro_Asignatura') )
+		return HttpResponseRedirect( reverse('selectCentro_Asignatura', kwargs={'tipo': 'list'}) )
 	else:
 		id_centro = instancia_titulacion.id_centro_id
 		id_titulacion = instancia_titulacion.id_titulacion

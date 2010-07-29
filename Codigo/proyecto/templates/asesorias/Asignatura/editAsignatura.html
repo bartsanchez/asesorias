@@ -4,6 +4,11 @@
 
 	<h1>Editar asignatura.</h1>
 
+	<div class="form">
+		<div><p>Centro: <b>{{ nombre_centro }}</b></p></div>
+		<div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b></p></div>
+	</div>
+
 	{% if not form %}
 
 	<p>No existe tal asignatura.</p>
