@@ -9,7 +9,7 @@
 		<div><p>Asesor: <b>{{ asesor }}</b> <a href={% url selectAsesor_AsesorCursoAcademico nombre_departamento %} class="updatelink"></a></p></div>
 	</div>
 
-	<a href="{% url addAsesorCursoAcademico %}" class="addlink">Crear nuevo</a>
+	<a href="{% url addAsesorCursoAcademico nombre_departamento asesor %}" class="addlink">Crear nuevo</a>
 	<a href="{% url generarPDFListaAsesoresCursoAcademico nombre_departamento asesor busqueda %}" class="pdflink">Generar PDF</a>
 
 	<div class="search">
