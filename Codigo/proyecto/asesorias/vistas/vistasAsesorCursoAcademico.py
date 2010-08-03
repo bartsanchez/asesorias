@@ -147,7 +147,7 @@ def listAsesorCursoAcademico(request, dni_pasaporte, orden):
 			# Se recorren los elementos determinando si coinciden con la busqueda.
 			for asesor in lista_asesores_curso_academico:
 				# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
-				cadena = unicode(asesor.curso_academico)
+				cadena = unicode(asesor.curso_academico) + unicode(asesor.id_departamento)
 
 				# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
 				if cadena.find(busqueda) >= 0:
@@ -188,7 +188,7 @@ def generarPDFListaAsesoresCursoAcademico(request, dni_pasaporte, busqueda):
 		# Se recorren los elementos determinando si coinciden con la busqueda.
 		for asesor in lista_asesores_curso_academico:
 			# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
-			cadena = unicode(asesor.curso_academico)
+			cadena = unicode(asesor.curso_academico) + unicode(asesor.id_departamento)
 
 			# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
 			if cadena.find(busqueda) >= 0:
