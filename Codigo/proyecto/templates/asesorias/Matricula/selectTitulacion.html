@@ -7,7 +7,7 @@
 	<h2>Seleccionar titulación.</h2>
 
 	<div class="form">
-		<div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_Matricula %} class="deletelink"></a></p></div>
+		<div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_Matricula %} class="updatelink"></a></p></div>
 	</div>
 
 	<div class="form">
@@ -16,7 +16,8 @@
 
 			<div class="fieldWrapper">
 				{% for field in form %}
-					<div><p>{{ field.label_tag }} (Plan de estudios): {{ field }}<input type="submit" value="OK" class="yeslink"/></p></div>
+					<div><p>{{ field.label_tag }} (Plan de estudios): {{ field }}<a href="{% url addTitulacion nombre_centro %}" class="addlink" target="_new"></a></p></div>
+					<div><input type="submit" value="OK"/></p></div>
 				{% endfor %}
 			</div>
 
