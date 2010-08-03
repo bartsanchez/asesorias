@@ -97,8 +97,12 @@ def listAlumno(request, orden):
 
 	return render_to_response('asesorias/Alumno/listAlumno.html', {'user': request.user, 'form': form, 'lista_alumnos': lista_alumnos, 'busqueda': busqueda, 'orden': orden})
 
-def generarPDFListaAlumnos(request):
+def generarPDFListaAlumnos(request, busqueda):
 	# Se obtiene una lista con todos los alumnos.
-	lista_alumnos = models.Alumno.objects.all()
+	lista_alumnos = models.Alumno.objects.order_by('dni_pasaporte')
+
+	# Se ha realizado una busqueda.
+	if busqueda != 'False':
+		lista_alumnos = lista_alumnos.filter(dni_pasaporte__contains=busqueda)
 
 	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_alumnos, 'name': 'alumnos',} )

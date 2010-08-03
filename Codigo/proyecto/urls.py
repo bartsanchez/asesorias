@@ -171,7 +171,7 @@ urlpatterns += patterns('',
 	url(r'^asesorias/alumno/(?P<dni_pasaporte>[\s\w]+)/edit/$', 'asesorias.vistas.vistasAlumno.editAlumno', name='editAlumno'),
 	url(r'^asesorias/alumno/(?P<dni_pasaporte>[\s\w]+)/del/$', 'asesorias.vistas.vistasAlumno.delAlumno', name='delAlumno'),
 	url(r'^asesorias/alumno/list/(?P<orden>[\s\w]*)/$', 'asesorias.vistas.vistasAlumno.listAlumno', name='listAlumno'),
-	url(r'^asesorias/alumno/generarPDF/$', 'asesorias.vistas.vistasAlumno.generarPDFListaAlumnos', name='generarPDFListaAlumnos'),
+	url(r'^asesorias/alumno/generarPDF/(?P<busqueda>[\s\w]+)/$', 'asesorias.vistas.vistasAlumno.generarPDFListaAlumnos', name='generarPDFListaAlumnos'),
 )
 
 # ------------------------------- #
