@@ -135,10 +135,9 @@ urlpatterns += patterns('',
 	url(r'^asesorias/asesorCursoAcademico/add/(?P<nombre_departamento>[\s\w]*)/(?P<dni_pasaporte>[\s\w]*)/$', 'asesorias.vistas.vistasAsesorCursoAcademico.addAsesorCursoAcademico', name='addAsesorCursoAcademico'),
 	url(r'^asesorias/asesorCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/edit/$', 'asesorias.vistas.vistasAsesorCursoAcademico.editAsesorCursoAcademico', name='editAsesorCursoAcademico'),
 	url(r'^asesorias/asesorCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/del/$', 'asesorias.vistas.vistasAsesorCursoAcademico.delAsesorCursoAcademico', name='delAsesorCursoAcademico'),
-	url(r'^asesorias/asesorCursoAcademico/departamento/(?P<nombre_departamento>[\s\w]+)/(?P<dni_pasaporte>[\s\w]+)/(?P<orden>[\s\w]*)/list/$', 'asesorias.vistas.vistasAsesorCursoAcademico.listAsesorCursoAcademico', name='listAsesorCursoAcademico'),
-	url(r'^asesorias/asesorCursoAcademico/selectDepartamento/$', 'asesorias.vistas.vistasAsesorCursoAcademico.selectDepartamento', name='selectDepartamento_AsesorCursoAcademico'),
-	url(r'^asesorias/asesorCursoAcademico/(?P<nombre_departamento>[\s\w]+)/selectAsesor/$', 'asesorias.vistas.vistasAsesorCursoAcademico.selectAsesor', name='selectAsesor_AsesorCursoAcademico'),
-	url(r'^asesorias/asesorCursoAcademico/generarPDF/(?P<nombre_departamento>[\s\w]+)/(?P<dni_pasaporte>[\s\w]+)/(?P<busqueda>[\s\w]+)/$', 'asesorias.vistas.vistasAsesorCursoAcademico.generarPDFListaAsesoresCursoAcademico', name='generarPDFListaAsesoresCursoAcademico'),
+	url(r'^asesorias/asesorCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/(?P<orden>[\s\w]*)/list/$', 'asesorias.vistas.vistasAsesorCursoAcademico.listAsesorCursoAcademico', name='listAsesorCursoAcademico'),
+	url(r'^asesorias/asesorCursoAcademico/selectAsesor/$', 'asesorias.vistas.vistasAsesorCursoAcademico.selectAsesor', name='selectAsesor_AsesorCursoAcademico'),
+	url(r'^asesorias/asesorCursoAcademico/generarPDF/(?P<dni_pasaporte>[\s\w]+)/(?P<busqueda>[\s\w]+)/$', 'asesorias.vistas.vistasAsesorCursoAcademico.generarPDFListaAsesoresCursoAcademico', name='generarPDFListaAsesoresCursoAcademico'),
 )
 
 # ------------------------------------------- #

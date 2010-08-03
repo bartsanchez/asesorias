@@ -45,7 +45,7 @@ def addAsesorCursoAcademico(request, nombre_departamento, dni_pasaporte):
 			nombre_departamento = models.Departamento.objects.get(pk=id_departamento)
 
 			# Redirige a la pagina de listar asesores curso academico.
-			return HttpResponseRedirect( reverse('listAsesorCursoAcademico', kwargs={'nombre_departamento': nombre_departamento, 'dni_pasaporte': dni_pasaporte, 'orden': 'curso_academico'}) )
+			return HttpResponseRedirect( reverse('listAsesorCursoAcademico', kwargs={'dni_pasaporte': dni_pasaporte, 'orden': 'curso_academico'}) )
 	# Si aun no se ha rellenado el formulario, se genera uno en blanco.
 	else:
 		form = forms.AsesorCursoAcademicoForm(initial={'id_departamento': id_departamento, 'dni_pasaporte': dni_pasaporte})
@@ -71,7 +71,7 @@ def editAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
 				dni_pasaporte = instancia_asesor_curso_academico.dni_pasaporte
 
 				# Redirige a la pagina de listar asesores curso academico.
-				return HttpResponseRedirect( reverse('listAsesorCursoAcademico', kwargs={'nombre_departamento': nombre_departamento, 'dni_pasaporte': dni_pasaporte, 'orden': 'curso_academico'}) )
+				return HttpResponseRedirect( reverse('listAsesorCursoAcademico', kwargs={'dni_pasaporte': dni_pasaporte, 'orden': 'curso_academico'}) )
 	# El asesor curso academico no existe.
 	else:
 		form = False
@@ -86,83 +86,52 @@ def delAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
 
 		instancia_asesor_curso_academico.delete()
 		# Redirige a la pagina de listar asesores curso academico.
-		return HttpResponseRedirect( reverse('listAsesorCursoAcademico', kwargs={'nombre_departamento': nombre_departamento, 'dni_pasaporte': dni_pasaporte, 'orden': 'curso_academico'}) )
+		return HttpResponseRedirect( reverse('listAsesorCursoAcademico', kwargs={'dni_pasaporte': dni_pasaporte, 'orden': 'curso_academico'}) )
 	# El asesor curso academico no existe.
 	else:
 		error = True
 	return render_to_response('asesorias/AsesorCursoAcademico/delAsesorCursoAcademico.html', {'user': request.user, 'error': error})
 
-def selectDepartamento(request):
-	# Se ha introducido un departamento.
-	if request.method == 'POST':
-
-		# Se obtiene el departamento y se valida.
-		form = forms.DepartamentoFormSelect(request.POST)
-
-		# Si es valido se redirige a listar departamentos.
-		if form.is_valid():
-			departamento = request.POST['departamento']
-
-			# Se crea una instancia del departamento para pasar el nombre de departamento por argumento.
-			instancia_departamento = models.Departamento.objects.get(pk=departamento)
-
-			return HttpResponseRedirect( reverse('selectAsesor_AsesorCursoAcademico', kwargs={'nombre_departamento': instancia_departamento.nombre_departamento}) )
-
-		else:
-			HttpResponseRedirect( reverse('selectDepartamento_AsesorCursoAcademico') )
-
-	else:
-		form = forms.DepartamentoFormSelect()
-
-	return render_to_response('asesorias/AsesorCursoAcademico/selectDepartamento.html', {'user': request.user, 'form': form})
-
-def selectAsesor(request, nombre_departamento):
-	# Se obtiene el posible departamento.
-	instancia_departamento = vistasDepartamento.obtenerDepartamento(nombre_departamento)
-
-	# Se comprueba que exista el departamento.
-	if not instancia_departamento:
-		return HttpResponseRedirect( reverse('selectDepartamento_AsesorCursoAcademico') )
-	else:
-		id_departamento = instancia_departamento.id_departamento
-
+def selectAsesor(request):
 	# Se ha introducido un asesor.
 	if request.method == 'POST':
 
 		# Se obtiene el asesor y se valida.
-		form = forms.AsesorDepartamentoFormSelect(id_departamento, request.POST)
+		form = forms.AsesorFormSelect(request.POST)
 
 		# Si es valido se redirige a listar asesores curso academico.
 		if form.is_valid():
 			asesor = request.POST['asesor']
 
-			return HttpResponseRedirect( reverse('listAsesorCursoAcademico', kwargs={'nombre_departamento': nombre_departamento, 'dni_pasaporte': asesor, 'orden': 'curso_academico'}) )
+			return HttpResponseRedirect( reverse('listAsesorCursoAcademico', kwargs={'dni_pasaporte': asesor, 'orden': 'curso_academico'}) )
 
 		else:
-			return HttpResponseRedirect( reverse('selectTitulacion_Asignatura', kwargs={'nombre_centro': nombre_centro}) )
+			return HttpResponseRedirect( reverse('selectAsesor_AsesorCursoAcademico') )
 
 	else:
-		form = forms.AsesorDepartamentoFormSelect(id_departamento=id_departamento)
+		form = forms.AsesorFormSelect()
 
-	return render_to_response('asesorias/AsesorCursoAcademico/selectAsesor.html', {'user': request.user, 'form': form, 'nombre_departamento': nombre_departamento})
+	return render_to_response('asesorias/AsesorCursoAcademico/selectAsesor.html', {'user': request.user, 'form': form})
 
-def listAsesorCursoAcademico(request, nombre_departamento, dni_pasaporte, orden):
-	# Se comprueba que exista el departamento pasado por argumento.
-	instancia_departamento = vistasDepartamento.obtenerDepartamento(nombre_departamento)
-
-	# El departamento no existe, se redirige.
-	if not (instancia_departamento):
-		return HttpResponseRedirect( reverse('selectDepartamentoOAsesor_AsesorCursoAcademico') )
-
+def listAsesorCursoAcademico(request, dni_pasaporte, orden):
 	# Se comprueba que exista el asesor pasado por argumento.
-	existe_asesor_curso_academico = models.AsesorCursoAcademico.objects.filter(id_departamento=instancia_departamento.id_departamento, dni_pasaporte=dni_pasaporte)
+	existe_asesor_curso_academico = models.AsesorCursoAcademico.objects.filter(dni_pasaporte=dni_pasaporte)
 
 	# El asesor no existe, se redirige.
 	if not (existe_asesor_curso_academico):
-		return HttpResponseRedirect( reverse('selectDepartamentoOAsesor_AsesorCursoAcademico') )
+		return HttpResponseRedirect( reverse('selectAsesor_AsesorCursoAcademico') )
+
+
+	# Se establece el ordenamiento inicial.
+	if (orden == 'nombre_departamento') or (orden == '_nombre_departamento'):
+		orden_inicial = 'id_departamento'
+		orden_secundario = 'curso_academico'
+	else:
+		orden_inicial = 'curso_academico'
+		orden_secundario = 'id_departamento'
 
 	# Se obtiene una lista con todos los asesores curso academico.
-	lista_asesores_curso_academico = models.AsesorCursoAcademico.objects.filter(id_departamento=instancia_departamento.id_departamento, dni_pasaporte=dni_pasaporte).order_by('curso_academico')
+	lista_asesores_curso_academico = models.AsesorCursoAcademico.objects.filter(dni_pasaporte=dni_pasaporte).order_by(orden_inicial, orden_secundario)
 
 	# Se ha realizado una busqueda.
 	if request.method == 'POST':
@@ -195,28 +164,21 @@ def listAsesorCursoAcademico(request, nombre_departamento, dni_pasaporte, orden)
 		form = forms.SearchForm()
 		busqueda = False
 
-		if (orden == '_curso_academico'):
+		if (orden == '_curso_academico') or (orden == '_nombre_departamento'):
 			lista_asesores_curso_academico = reversed(lista_asesores_curso_academico)
 
-	return render_to_response('asesorias/AsesorCursoAcademico/listAsesorCursoAcademico.html', {'user': request.user, 'form': form, 'lista_asesores_curso_academico': lista_asesores_curso_academico, 'busqueda': busqueda, 'nombre_departamento': nombre_departamento, 'asesor': dni_pasaporte, 'orden': orden})
+	return render_to_response('asesorias/AsesorCursoAcademico/listAsesorCursoAcademico.html', {'user': request.user, 'form': form, 'lista_asesores_curso_academico': lista_asesores_curso_academico, 'busqueda': busqueda, 'asesor': dni_pasaporte, 'orden': orden})
 
-def generarPDFListaAsesoresCursoAcademico(request, nombre_departamento, dni_pasaporte, busqueda):
-	# Se comprueba que exista el departamento pasado por argumento.
-	instancia_departamento = vistasDepartamento.obtenerDepartamento(nombre_departamento)
-
-	# El departamento no existe, se redirige.
-	if not (instancia_departamento):
-		return HttpResponseRedirect( reverse('selectDepartamentoOAsesor_AsesorCursoAcademico') )
-
+def generarPDFListaAsesoresCursoAcademico(request, dni_pasaporte, busqueda):
 	# Se comprueba que exista el asesor pasado por argumento.
-	existe_asesor_curso_academico = models.AsesorCursoAcademico.objects.filter(id_departamento=instancia_departamento.id_departamento, dni_pasaporte=dni_pasaporte)
+	existe_asesor_curso_academico = models.AsesorCursoAcademico.objects.filter(dni_pasaporte=dni_pasaporte)
 
 	# El asesor no existe, se redirige.
 	if not (existe_asesor_curso_academico):
-		return HttpResponseRedirect( reverse('selectDepartamentoOAsesor_AsesorCursoAcademico') )
+		return HttpResponseRedirect( reverse('selectAsesor_AsesorCursoAcademico') )
 
 	# Se obtiene una lista con todos los asesores curso academico.
-	lista_asesores_curso_academico = models.AsesorCursoAcademico.objects.filter(id_departamento=instancia_departamento.id_departamento, dni_pasaporte=dni_pasaporte).order_by('curso_academico')
+	lista_asesores_curso_academico = models.AsesorCursoAcademico.objects.filter(dni_pasaporte=dni_pasaporte).order_by('curso_academico')
 
 	# Se ha realizado una busqueda.
 	if busqueda != 'False':
