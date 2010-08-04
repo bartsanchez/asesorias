@@ -184,7 +184,7 @@ urlpatterns += patterns('',
 	url(r'^asesorias/alumnoCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/del/$', 'asesorias.vistas.vistasAlumnoCursoAcademico.delAlumnoCursoAcademico', name='delAlumnoCursoAcademico'),
 	url(r'^asesorias/alumnoCursoAcademico/list/(?P<dni_pasaporte>[\s\w]+)/(?P<orden>[\s\w]*)/$', 'asesorias.vistas.vistasAlumnoCursoAcademico.listAlumnoCursoAcademico', name='listAlumnoCursoAcademico'),
 	url(r'^asesorias/alumnoCursoAcademico/selectAlumno/$', 'asesorias.vistas.vistasAlumnoCursoAcademico.selectAlumno', name='selectAlumno_AlumnoCursoAcademico'),
-	url(r'^asesorias/alumnoCursoAcademico/generarPDF/$', 'asesorias.vistas.vistasAlumnoCursoAcademico.generarPDFListaAlumnosCursoAcademico', name='generarPDFListaAlumnosCursoAcademico'),
+	url(r'^asesorias/alumnoCursoAcademico/generarPDF/(?P<dni_pasaporte>[\s\w]+)/(?P<busqueda>[\s\w]+)/$', 'asesorias.vistas.vistasAlumnoCursoAcademico.generarPDFListaAlumnosCursoAcademico', name='generarPDFListaAlumnosCursoAcademico'),
 )
 
 # ------------------ #

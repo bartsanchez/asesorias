@@ -137,8 +137,32 @@ def listAlumnoCursoAcademico(request, dni_pasaporte, orden):
 
 	return render_to_response('asesorias/AlumnoCursoAcademico/listAlumnoCursoAcademico.html', {'user': request.user, 'form': form, 'lista_alumnos_curso_academico': lista_alumnos_curso_academico, 'busqueda': busqueda, 'alumno': dni_pasaporte, 'orden': orden})
 
-def generarPDFListaAlumnosCursoAcademico(request):
+def generarPDFListaAlumnosCursoAcademico(request, dni_pasaporte, busqueda):
+	# Se comprueba que exista el alumno pasado por argumento.
+	existe_alumno_curso_academico = models.AlumnoCursoAcademico.objects.filter(dni_pasaporte=dni_pasaporte)
+
+	# El alumno no existe, se redirige.
+	if not (existe_alumno_curso_academico):
+		return HttpResponseRedirect( reverse('selectAlumno_AlumnoCursoAcademico') )
+
 	# Se obtiene una lista con todos los alumnos curso academico.
-	lista_alumnos_curso_academico = models.AlumnoCursoAcademico.objects.all()
+	lista_alumnos_curso_academico = models.AlumnoCursoAcademico.objects.filter(dni_pasaporte=dni_pasaporte).order_by('dni_pasaporte')
+
+	# Se ha realizado una busqueda.
+	if busqueda != 'False':
+		# Se crea una lista auxiliar que albergara el resultado de la busqueda.
+		lista_aux = []
+
+		# Se recorren los elementos determinando si coinciden con la busqueda.
+		for alumno in lista_alumnos_curso_academico:
+			# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
+			cadena = unicode(alumno.curso_academico)
+
+			# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
+			if cadena.find(busqueda) >= 0:
+				lista_aux.append(alumno)
+
+		# La lista final a devolver sera la lista auxiliar.
+		lista_alumnos_curso_academico = lista_aux
 
 	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_alumnos_curso_academico, 'name': 'alumnos curso academico',} )
