@@ -296,3 +296,37 @@ def listMatricula(request, nombre_centro, nombre_titulacion, plan_estudios, nomb
 			lista_matriculas = reversed(lista_matriculas)
 
 	return render_to_response('asesorias/Matricula/listMatricula.html', {'user': request.user, 'form': form, 'lista_matriculas': lista_matriculas, 'busqueda': busqueda, 'nombre_centro': nombre_centro, 'nombre_titulacion': nombre_titulacion, 'plan_estudios': plan_estudios, 'nombre_asignatura': nombre_asignatura, 'curso_academico': curso_academico, 'orden': orden})
+
+def generarPDFListaMatriculas(request, nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura, curso_academico, busqueda):
+	# Se obtiene la posible asignatura curso academico.
+	instancia_asignatura_curso_academico = vistasAsignatura.obtenerAsignaturaCursoAcademico(nombre_centro, nombre_titulacion, plan_estudios, nombre_asignatura, curso_academico)
+
+	# Se comprueba que exista la asignatura curso academico.
+	if not instancia_asignatura_curso_academico:
+		return HttpResponseRedirect( reverse('selectAsignaturaCursoAcademicoOAlumnoCursoAcademico') )
+	else:
+		id_centro = instancia_asignatura_curso_academico.id_centro
+		id_titulacion = instancia_asignatura_curso_academico.id_titulacion
+		id_asignatura = instancia_asignatura_curso_academico.id_asignatura
+
+	# Se obtiene una lista con todas las matriculas.
+	lista_matriculas = models.Matricula.objects.filter(id_centro=id_centro, id_titulacion=id_titulacion, id_asignatura=id_asignatura, curso_academico=curso_academico).order_by('dni_pasaporte')
+
+	# Se ha realizado una busqueda.
+	if busqueda != 'False':
+		# Se crea una lista auxiliar que albergara el resultado de la busqueda.
+		lista_aux = []
+
+		# Se recorren los elementos determinando si coinciden con la busqueda.
+		for matricula in lista_matriculas:
+			# Se crea una cadena auxiliar para examinar si se encuentra el resultado de la busqueda.
+			cadena = unicode(matricula.dni_pasaporte)
+
+			# Si se encuentra la busqueda el elemento se incluye en la lista auxiliar.
+			if cadena.find(busqueda) >= 0:
+				lista_aux.append(matricula)
+
+		# La lista final a devolver sera la lista auxiliar.
+		lista_matriculas = lista_matriculas
+
+	return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', {'mylist': lista_matriculas, 'name': 'matriculas',} )

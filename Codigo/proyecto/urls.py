@@ -201,6 +201,7 @@ urlpatterns += patterns('',
 	url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/selectTitulacion/$', 'asesorias.vistas.vistasMatricula.selectTitulacion', name='selectTitulacion_Matricula'),
 	url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/selectAsignatura/$', 'asesorias.vistas.vistasMatricula.selectAsignatura', name='selectAsignatura_Matricula'),
 	url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/selectAsignaturaCursoAcademicoOAlumnoCursoAcademico/$', 'asesorias.vistas.vistasMatricula.selectAsignaturaCursoAcademico', name='selectAsignaturaCursoAcademico_Matricula'),
+	url(r'^asesorias/matricula/generarPDF/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/(?P<busqueda>[\s\w]+)/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.generarPDFListaAsignaturasCursoAcademico', name='generarPDFListaMatriculas'),
 )
 
 # ---------------------------------- #
