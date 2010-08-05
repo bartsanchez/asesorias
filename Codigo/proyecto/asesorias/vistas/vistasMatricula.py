@@ -232,7 +232,6 @@ def selectAsignaturaCursoAcademico(request, nombre_centro, nombre_titulacion, pl
 	# Se ha introducido una titulacion.
 	if request.method == 'POST':
 
-		print request.POST
 		# Se obtiene la titulacion y se valida.
 		form = forms.AsignaturaCursoAcademicoFormSelect(id_centro, id_titulacion, id_asignatura, request.POST)
 
