@@ -192,15 +192,15 @@ urlpatterns += patterns('',
 # ------------------ #
 
 urlpatterns += patterns('',
-	url(r'^asesorias/matricula/add/$', 'asesorias.vistas.vistasMatricula.addMatricula', name='addMatricula'),
+	url(r'^asesorias/matricula/add/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/$', 'asesorias.vistas.vistasMatricula.addMatricula', name='addMatricula'),
 	url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/(?P<dni_pasaporte>[\s\w]+)/edit/$', 'asesorias.vistas.vistasMatricula.editMatricula', name='editMatricula'),
 	url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/(?P<dni_pasaporte>[\s\w]+)/del/$', 'asesorias.vistas.vistasMatricula.delMatricula', name='delMatricula'),
 	url(r'^asesorias/matricula/list/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/(?P<orden>[\s\w]*)/$', 'asesorias.vistas.vistasMatricula.listMatricula', name='listMatricula'),
 	url(r'^asesorias/matricula/select/$', 'asesorias.vistas.vistasMatricula.selectAsignaturaCursoAcademicoOAlumnoCursoAcademico', name='selectAsignaturaCursoAcademicoOAlumnoCursoAcademico'),
-	url(r'^asesorias/matricula/selectCentro/$', 'asesorias.vistas.vistasMatricula.selectCentro', name='selectCentro_Matricula'),
-	url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/selectTitulacion/$', 'asesorias.vistas.vistasMatricula.selectTitulacion', name='selectTitulacion_Matricula'),
-	url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/selectAsignatura/$', 'asesorias.vistas.vistasMatricula.selectAsignatura', name='selectAsignatura_Matricula'),
-	url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/selectAsignaturaCursoAcademicoOAlumnoCursoAcademico/$', 'asesorias.vistas.vistasMatricula.selectAsignaturaCursoAcademico', name='selectAsignaturaCursoAcademico_Matricula'),
+	url(r'^asesorias/matricula/selectCentro/(?P<tipo>[\s\w]+)/$', 'asesorias.vistas.vistasMatricula.selectCentro', name='selectCentro_Matricula'),
+	url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/selectTitulacion/(?P<tipo>[\s\w]+)/$', 'asesorias.vistas.vistasMatricula.selectTitulacion', name='selectTitulacion_Matricula'),
+	url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/selectAsignatura/(?P<tipo>[\s\w]+)/$', 'asesorias.vistas.vistasMatricula.selectAsignatura', name='selectAsignatura_Matricula'),
+	url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/selectAsignaturaCursoAcademicoOAlumnoCursoAcademico/(?P<tipo>[\s\w]+)/$', 'asesorias.vistas.vistasMatricula.selectAsignaturaCursoAcademico', name='selectAsignaturaCursoAcademico_Matricula'),
 	url(r'^asesorias/matricula/generarPDF/(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/(?P<busqueda>[\s\w]+)/$', 'asesorias.vistas.vistasAsignaturaCursoAcademico.generarPDFListaAsignaturasCursoAcademico', name='generarPDFListaMatriculas'),
 )
 

@@ -134,7 +134,7 @@ def selectTitulacion(request, nombre_centro, tipo):
 
 	# Se comprueba que exista el centro.
 	if not instancia_centro:
-		return HttpResponseRedirect( reverse('selectCentro_AsignaturaCursoAcademico') )
+		return HttpResponseRedirect( reverse('selectCentro_AsignaturaCursoAcademico', kwargs={'tipo': tipo}) )
 	else:
 		id_centro = instancia_centro.id_centro
 

@@ -95,7 +95,6 @@ class AlumnoCursoAcademicoForm(forms.ModelForm):
 
 class MatriculaForm(forms.ModelForm):
 	alumno_curso_academico = forms.ModelChoiceField(models.AlumnoCursoAcademico.objects.all())
-	asignatura_curso_academico = forms.ModelChoiceField(models.AsignaturaCursoAcademico.objects.all())
 
 	class Meta:
 		model = models.Matricula
