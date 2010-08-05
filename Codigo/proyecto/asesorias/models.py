@@ -276,7 +276,6 @@ class CalificacionConvocatoria(models.Model):
 	def __unicode__(self):
 		return unicode(self.determinarNombreCentro()) + ': ' + unicode(self.determinarNombreTitulacion()) + ': ' + unicode(self.determinarPlanEstudios()) + ': ' + unicode(self.determinarNombreAsignatura()) + ': ' + unicode(self.curso_academico) + ': ' + unicode(self.dni_pasaporte) + ': ' + self.convocatoria
 
-
 class PlantillaEntrevistaOficial(models.Model):
 	id_entrevista_oficial = models.AutoField(primary_key=True)
 	descripcion = models.CharField(max_length=100)
