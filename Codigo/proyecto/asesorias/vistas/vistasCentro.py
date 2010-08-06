@@ -22,8 +22,8 @@ def addCentro(request):
             # Se guarda la informacion del formulario en el sistema.
             form.save()
             # Redirige a la pagina de listar centros.
-            return HttpResponseRedirect( reverse('listCentro',
-                kwargs={'orden': 'nombre_centro'}) )
+            return HttpResponseRedirect(reverse('listCentro',
+                kwargs={'orden': 'nombre_centro'}))
     # Si aun no se ha rellenado el formulario, se genera uno en blanco.
     else:
         form = forms.CentroForm()
@@ -47,8 +47,8 @@ def editCentro(request, centro):
             if form.is_valid():
                 form.save()
                 # Redirige a la pagina de listar centros.
-                return HttpResponseRedirect( reverse('listCentro',
-                    kwargs={'orden': 'nombre_centro'}) )
+                return HttpResponseRedirect(reverse('listCentro',
+                    kwargs={'orden': 'nombre_centro'}))
     # El centro no existe.
     else:
         form = False
@@ -62,8 +62,8 @@ def delCentro(request, centro):
     if instancia_centro:
         instancia_centro.delete()
         # Redirige a la pagina de listar centros.
-        return HttpResponseRedirect( reverse('listCentro',
-            kwargs={'orden': 'nombre_centro'}) )
+        return HttpResponseRedirect(reverse('listCentro',
+            kwargs={'orden': 'nombre_centro'}))
     # El centro no existe.
     else:
         error = True
@@ -107,5 +107,5 @@ def generarPDFListaCentros(request, busqueda):
         lista_centros = \
             lista_centros.filter(nombre_centro__contains=busqueda)
 
-    return vistasPDF.render_to_pdf( 'asesorias/plantilla_pdf.html', 
-        {'mylist': lista_centros, 'name': 'centros',} )
+    return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
+        {'mylist': lista_centros, 'name': 'centros',})
