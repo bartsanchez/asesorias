@@ -37,6 +37,30 @@ urlpatterns = patterns('',
 
     (r'^asesorias/asignaturaCursoAcademico/',
         include('asesorias.urls.asignaturaCursoAcademico')),
+
+    (r'^asesorias/departamento/',
+        include('asesorias.urls.departamento')),
+
+    (r'^asesorias/asesor/',
+        include('asesorias.urls.asesor')),
+
+    (r'^asesorias/asesorCursoAcademico/',
+        include('asesorias.urls.asesorCursoAcademico')),
+
+    (r'^asesorias/plantillaEntrevistaAsesor/',
+        include('asesorias.urls.plantillaEntrevistaAsesor')),
+
+    (r'^asesorias/preguntaAsesor/',
+        include('asesorias.urls.preguntaAsesor')),
+
+    (r'^asesorias/alumno/',
+        include('asesorias.urls.alumno')),
+
+    (r'^asesorias/alumnoCursoAcademico/',
+        include('asesorias.urls.alumnoCursoAcademico')),
+
+    (r'^asesorias/matricula/',
+        include('asesorias.urls.matricula')),
 )
 
 # ------------------------- #
@@ -47,269 +71,6 @@ urlpatterns += patterns(VISTAS + 'vistasGestionUsuarios',
     url(r'^asesorias/$', 'authentication', name='authentication'),
 
     url(r'^asesorias/logout/$', 'logout_view', name='logout'),
-)
-
-# --------------------- #
-# Url's de departamento #
-# --------------------- #
-
-urlpatterns += patterns(VISTAS + 'vistasDepartamento',
-    url(r'^asesorias/departamento/add/$',
-        'addDepartamento', name='addDepartamento'),
-
-    url(r'^asesorias/departamento/(?P<nombre_departamento>[\s\w]+)/' +
-        'edit/$',
-
-        'editDepartamento', name='editDepartamento'),
-
-    url(r'^asesorias/departamento/(?P<nombre_departamento>[\s\w]+)/' +
-        'del/$',
-
-        'delDepartamento', name='delDepartamento'),
-
-    url(r'^asesorias/departamento/list/(?P<orden>[\s\w]*)/$',
-        'listDepartamento', name='listDepartamento'),
-
-    url(r'^asesorias/departamento/generarPDF/(?P<busqueda>[\s\w]+)/$',
-        'generarPDFListaDepartamentos',
-        name='generarPDFListaDepartamentos'),
-)
-
-# --------------- #
-# Url's de asesor #
-# --------------- #
-
-urlpatterns += patterns(VISTAS + 'vistasAsesor',
-    url(r'^asesorias/asesor/add/$',
-        'addAsesor', name='addAsesor'),
-
-    url(r'^asesorias/asesor/(?P<dni_pasaporte>[\s\w]+)/edit/$',
-        'editAsesor', name='editAsesor'),
-
-    url(r'^asesorias/asesor/(?P<dni_pasaporte>[\s\w]+)/del/$',
-        'delAsesor', name='delAsesor'),
-
-    url(r'^asesorias/asesor/list/(?P<orden>[\s\w]*)/$',
-        'listAsesor', name='listAsesor'),
-
-    url(r'^asesorias/asesor/generarPDF/(?P<busqueda>[\s\w]+)/$',
-        'generarPDFListaAsesores',
-        name='generarPDFListaAsesores'),
-)
-
-# ------------------------------- #
-# Url's de asesor curso academico #
-# ------------------------------- #
-
-urlpatterns += patterns(VISTAS + 'vistasAsesorCursoAcademico',
-    url(r'^asesorias/asesorCursoAcademico/add/' +
-        '(?P<nombre_departamento>[\s\w]*)/(?P<dni_pasaporte>[\s\w]*)/$',
-
-         'addAsesorCursoAcademico', name='addAsesorCursoAcademico'),
-
-    url(r'^asesorias/asesorCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/' +
-        '(?P<curso_academico>\d+)/edit/$',
-
-        'editAsesorCursoAcademico', name='editAsesorCursoAcademico'),
-
-    url(r'^asesorias/asesorCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/' +
-        '(?P<curso_academico>\d+)/del/$',
-
-        'delAsesorCursoAcademico', name='delAsesorCursoAcademico'),
-
-    url(r'^asesorias/asesorCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/' +
-        '(?P<orden>[\s\w]*)/list/$',
-
-        'listAsesorCursoAcademico', name='listAsesorCursoAcademico'),
-
-    url(r'^asesorias/asesorCursoAcademico/selectAsesor/$',
-        'selectAsesor', name='selectAsesor_AsesorCursoAcademico'),
-
-    url(r'^asesorias/asesorCursoAcademico/generarPDF/' +
-        '(?P<dni_pasaporte>[\s\w]+)/(?P<busqueda>[\s\w]+)/$',
-
-        'generarPDFListaAsesoresCursoAcademico',
-        name='generarPDFListaAsesoresCursoAcademico'),
-)
-
-# ------------------------------------------- #
-# Url's de plantillas de entrevista de asesor #
-# ------------------------------------------- #
-
-urlpatterns += patterns(VISTAS + 'vistasPlantillaEntrevistaAsesor',
-    url(r'^asesorias/plantillaEntrevistaAsesor/add/$',
-        'addPlantillaEntrevistaAsesor',
-        name='addPlantillaEntrevistaAsesor'),
-
-    url(r'^asesorias/plantillaEntrevistaAsesor/' +
-        '(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/' +
-        '(?P<id_entrevista_asesor>\d+)/edit/$',
-
-        'editPlantillaEntrevistaAsesor',
-        name='editPlantillaEntrevistaAsesor'),
-
-    url(r'^asesorias/plantillaEntrevistaAsesor/' +
-        '(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/' +
-        '(?P<id_entrevista_asesor>\d+)/del/$',
-
-        'delPlantillaEntrevistaAsesor',
-        name='delPlantillaEntrevistaAsesor'),
-
-    url(r'^asesorias/plantillaEntrevistaAsesor/list/$',
-        'listPlantillaEntrevistaAsesor',
-        name='listPlantillaEntrevistaAsesor'),
-)
-
-# -----------------------------#
-# Url's de preguntas de asesor #
-# -----------------------------#
-
-urlpatterns += patterns(VISTAS + 'vistasPreguntaAsesor',
-    url(r'^asesorias/preguntaAsesor/add/$',
-        'addPreguntaAsesor', name='addPreguntaAsesor'),
-
-    url(r'^asesorias/preguntaAsesor/(?P<dni_pasaporte>[\s\w]+)/' +
-        '(?P<curso_academico>\d+)/(?P<id_entrevista_asesor>\d+)/' +
-        '(?P<id_pregunta_asesor>\d+)/edit/$',
-
-        'editPreguntaAsesor', name='editPreguntaAsesor'),
-
-    url(r'^asesorias/preguntaAsesor/(?P<dni_pasaporte>[\s\w]+)/' +
-        '(?P<curso_academico>\d+)/(?P<id_entrevista_asesor>\d+)/' +
-        '(?P<id_pregunta_asesor>\d+)/del/$',
-
-        'delPreguntaAsesor', name='delPreguntaAsesor'),
-
-    url(r'^asesorias/preguntaAsesor/list/$',
-        'listPreguntaAsesor', name='listPreguntaAsesor'),
-)
-
-# ----------------#
-# Url's de alumno #
-# ----------------#
-
-urlpatterns += patterns(VISTAS + 'vistasAlumno',
-    url(r'^asesorias/alumno/add/$',
-        'addAlumno', name='addAlumno'),
-
-    url(r'^asesorias/alumno/(?P<dni_pasaporte>[\s\w]+)/edit/$',
-        'editAlumno', name='editAlumno'),
-
-    url(r'^asesorias/alumno/(?P<dni_pasaporte>[\s\w]+)/del/$',
-        'delAlumno', name='delAlumno'),
-
-    url(r'^asesorias/alumno/list/(?P<orden>[\s\w]*)/$',
-        'listAlumno', name='listAlumno'),
-
-    url(r'^asesorias/alumno/generarPDF/(?P<busqueda>[\s\w]+)/$',
-        'generarPDFListaAlumnos',
-        name='generarPDFListaAlumnos'),
-)
-
-# ------------------------------- #
-# Url's de alumno curso academico #
-# ------------------------------- #
-
-urlpatterns += patterns(VISTAS + 'vistasAlumnoCursoAcademico',
-    url(r'^asesorias/alumnoCursoAcademico/add/$',
-        'addAlumnoCursoAcademico', name='addAlumnoCursoAcademico'),
-
-    url(r'^asesorias/alumnoCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/' +
-        '(?P<curso_academico>\d+)/edit/$',
-
-        'editAlumnoCursoAcademico', name='editAlumnoCursoAcademico'),
-
-    url(r'^asesorias/alumnoCursoAcademico/(?P<dni_pasaporte>[\s\w]+)/' +
-        '(?P<curso_academico>\d+)/del/$',
-
-        'delAlumnoCursoAcademico', name='delAlumnoCursoAcademico'),
-
-    url(r'^asesorias/alumnoCursoAcademico/list/' +
-        '(?P<dni_pasaporte>[\s\w]+)/(?P<orden>[\s\w]*)/$',
-
-        'listAlumnoCursoAcademico', name='listAlumnoCursoAcademico'),
-
-    url(r'^asesorias/alumnoCursoAcademico/selectAlumno/$',
-        'selectAlumno', name='selectAlumno_AlumnoCursoAcademico'),
-
-    url(r'^asesorias/alumnoCursoAcademico/generarPDF/' +
-        '(?P<dni_pasaporte>[\s\w]+)/(?P<busqueda>[\s\w]+)/$',
-
-        'generarPDFListaAlumnosCursoAcademico',
-        name='generarPDFListaAlumnosCursoAcademico'),
-)
-
-# ------------------ #
-# Url's de matricula #
-# ------------------ #
-
-urlpatterns += patterns(VISTAS + 'vistasMatricula',
-    url(r'^asesorias/matricula/add/(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
-        '(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/$',
-
-        'addMatricula', name='addMatricula'),
-
-    url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
-        '(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/' +
-        '(?P<dni_pasaporte>[\s\w]+)/edit/$',
-
-        'editMatricula', name='editMatricula'),
-
-    url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
-        '(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/' +
-        '(?P<dni_pasaporte>[\s\w]+)/del/$',
-
-        'delMatricula', name='delMatricula'),
-
-    url(r'^asesorias/matricula/list/(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
-        '(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/' +
-        '(?P<orden>[\s\w]*)/$',
-
-        'listMatricula', name='listMatricula'),
-
-    url(r'^asesorias/matricula/select/$',
-        'selectAsignaturaOAlumnoCursoAcademico',
-        name='selectAsignaturaOAlumnoCursoAcademico'),
-
-    url(r'^asesorias/matricula/selectCentro/(?P<tipo>[\s\w]+)/$',
-        'selectCentro', name='selectCentro_Matricula'),
-
-    url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/' +
-        'selectTitulacion/(?P<tipo>[\s\w]+)/$',
-
-        'selectTitulacion', name='selectTitulacion_Matricula'),
-
-    url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
-        'selectAsignatura/(?P<tipo>[\s\w]+)/$',
-
-        'selectAsignatura', name='selectAsignatura_Matricula'),
-
-    url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
-        '(?P<nombre_asignatura>[\s\w]+)/' +
-        'selectAsignaturaCursoAcademico/(?P<tipo>[\s\w]+)/$',
-
-        'selectAsignaturaCursoAcademico',
-        name='selectAsignaturaCursoAcademico_Matricula'),
-
-    url(r'^asesorias/matricula/(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
-        '(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/' +
-        'selectAlumno/$',
-
-        'selectAlumno', name='selectAlumno_Matricula'),
-
-    url(r'^asesorias/matricula/generarPDF/(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
-        '(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/' +
-        '(?P<busqueda>[\s\w]+)/$',
-
-        'generarPDFListaMatriculas', name='generarPDFListaMatriculas'),
 )
 
 # ---------------------------------- #
