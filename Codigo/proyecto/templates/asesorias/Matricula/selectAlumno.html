@@ -1,0 +1,31 @@
+{% extends "asesorias/Base/base_alumnos.html" %}
+
+{% block content %}
+
+    <h1>Añadir matrícula.</h1>
+
+    <h2>Seleccionar alumno.</h2>
+
+    <div class="form">
+        <div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_Matricula 'add' %} class="updatelink"></a></p></div>
+        <div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_Matricula nombre_centro 'add' %} class="updatelink"></a></p></div>
+        <div><p>Asignatura: <b>{{ nombre_asignatura }}</b> <a href={% url selectAsignatura_Matricula nombre_centro nombre_titulacion plan_estudios 'add' %} class="updatelink"></a></p></div>
+        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAsignaturaCursoAcademico_Matricula nombre_centro nombre_titulacion plan_estudios nombre_asignatura 'add' %} class="updatelink"></a></p></div>
+    </div>
+
+    <div class="form">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                {% for field in form %}
+                    <div><p>{{ field.label_tag }}: {{ field }}<a href="{% url addAlumnoCursoAcademico %}" class="addlink" target="_new"></a></p></div>
+                    <div><input type="submit" value="OK"/></p></div>
+                {% endfor %}
+            </div>
+
+        </form>
+
+    </div>
+
+{% endblock %}
