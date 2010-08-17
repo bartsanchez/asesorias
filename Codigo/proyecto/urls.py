@@ -6,6 +6,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 VISTAS = 'asesorias.vistas.'
+URLS = 'asesorias.urls.'
 
 # ----------------- #
 # Url's principales #
@@ -21,64 +22,64 @@ urlpatterns = patterns('',
         name='vista_alumno'),
 
     (r'^asesorias/administrador/',
-        include('asesorias.urls.administradorPrincipal')),
+        include(URLS + 'administradorPrincipal')),
 
     (r'^asesorias/centro/',
-        include('asesorias.urls.centro')),
+        include(URLS + 'centro')),
 
     (r'^asesorias/administradorCentro/',
-        include('asesorias.urls.administradorCentro')),
+        include(URLS + 'administradorCentro')),
 
     (r'^asesorias/titulacion/',
-        include('asesorias.urls.titulacion')),
+        include(URLS + 'titulacion')),
 
     (r'^asesorias/asignatura/',
-        include('asesorias.urls.asignatura')),
+        include(URLS + 'asignatura')),
 
     (r'^asesorias/asignaturaCursoAcademico/',
-        include('asesorias.urls.asignaturaCursoAcademico')),
+        include(URLS + 'asignaturaCursoAcademico')),
 
     (r'^asesorias/departamento/',
-        include('asesorias.urls.departamento')),
+        include(URLS + 'departamento')),
 
     (r'^asesorias/asesor/',
-        include('asesorias.urls.asesor')),
+        include(URLS + 'asesor')),
 
     (r'^asesorias/asesorCursoAcademico/',
-        include('asesorias.urls.asesorCursoAcademico')),
+        include(URLS + 'asesorCursoAcademico')),
 
     (r'^asesorias/plantillaEntrevistaAsesor/',
-        include('asesorias.urls.plantillaEntrevistaAsesor')),
+        include(URLS + 'plantillaEntrevistaAsesor')),
 
     (r'^asesorias/preguntaAsesor/',
-        include('asesorias.urls.preguntaAsesor')),
+        include(URLS + 'preguntaAsesor')),
 
     (r'^asesorias/alumno/',
-        include('asesorias.urls.alumno')),
+        include(URLS + 'alumno')),
 
     (r'^asesorias/alumnoCursoAcademico/',
-        include('asesorias.urls.alumnoCursoAcademico')),
+        include(URLS + 'alumnoCursoAcademico')),
 
     (r'^asesorias/matricula/',
-        include('asesorias.urls.matricula')),
+        include(URLS + 'matricula')),
 
     (r'^asesorias/calificacionConvocatoria/',
-        include('asesorias.urls.calificacionConvocatoria')),
+        include(URLS + 'calificacionConvocatoria')),
 
     (r'^asesorias/plantillaEntrevistaOficial/',
-        include('asesorias.urls.plantillaEntrevistaOficial')),
+        include(URLS + 'plantillaEntrevistaOficial')),
 
     (r'^asesorias/preguntaOficial/',
-        include('asesorias.urls.preguntaOficial')),
+        include(URLS + 'preguntaOficial')),
 
     (r'^asesorias/reunion/',
-        include('asesorias.urls.reunion')),
+        include(URLS + 'reunion')),
 
     (r'^asesorias/centro_administradorCentro/',
-        include('asesorias.urls.centro_administradorCentro')),
+        include(URLS + 'centro_administradorCentro')),
 
     (r'^asesorias/reunion_preguntaAsesor/',
-        include('asesorias.urls.reunion_preguntaAsesor')),
+        include(URLS + 'reunion_preguntaAsesor')),
 )
 
 # ------------------------- #
