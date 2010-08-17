@@ -19,31 +19,15 @@ urlpatterns = patterns('',
 
     url(r'^asesorias/alumno/$', 'asesorias.views.alumno',
         name='vista_alumno'),
-)
 
-# -------------------------------- #
-# Url's de administrador principal #
-# -------------------------------- #
+    (r'^asesorias/administrador/',
+        include('asesorias.urls.administradorPrincipal')),
 
-urlpatterns += patterns(VISTAS + 'vistasAdministradorPrincipal',
-    url(r'^asesorias/administrador/$',
-        'administrador_inicio', name='administrador_inicio'),
+    (r'^asesorias/centro/',
+        include('asesorias.urls.centro')),
 
-    url(r'^asesorias/administrador/organizacion_institucional/$',
-        'administrador_org_institucional',
-        name='administrador_org_institucional'),
-
-    url(r'^asesorias/administrador/organizacion_docente/$',
-        'administrador_org_docente', name='administrador_org_docente'),
-
-    url(r'^asesorias/administrador/alumnos/$',
-        'administrador_alumnos', name='administrador_alumnos'),
-
-    url(r'^asesorias/administrador/reuniones/$',
-        'administrador_reuniones', name='administrador_reuniones'),
-
-    url(r'^asesorias/administrador/plantillas/$',
-        'administrador_plantillas', name='administrador_plantillas'),
+    (r'^asesorias/administradorCentro/',
+        include('asesorias.urls.administradorCentro')),
 )
 
 # ------------------------- #
@@ -54,54 +38,6 @@ urlpatterns += patterns(VISTAS + 'vistasGestionUsuarios',
     url(r'^asesorias/$', 'authentication', name='authentication'),
 
     url(r'^asesorias/logout/$', 'logout_view', name='logout'),
-)
-
-# --------------- #
-# Url's de centro #
-# --------------- #
-
-urlpatterns += patterns(VISTAS + 'vistasCentro',
-    url(r'^asesorias/centro/add/$', 'addCentro', name='addCentro'),
-
-    url(r'^asesorias/centro/(?P<centro>[\s\w]+)/edit/$',
-        'editCentro', name='editCentro'),
-
-    url(r'^asesorias/centro/(?P<centro>[\s\w]+)/del/$',
-        'delCentro', name='delCentro'),
-
-    url(r'^asesorias/centro/list/(?P<orden>[\s\w]*)/$',
-        'listCentro', name='listCentro'),
-
-    url(r'^asesorias/centro/generarPDF/(?P<busqueda>[\s\w]+)/$',
-        'generarPDFListaCentros', name='generarPDFListaCentros'),
-)
-
-# -------------------------------- #
-# Url's de administrador de centro #
-# -------------------------------- #
-
-urlpatterns += patterns(VISTAS + 'vistasAdministradorCentro',
-    url(r'^asesorias/administradorCentro/add/$',
-        'addAdministradorCentro', name='addAdministradorCentro'),
-
-    url(r'^asesorias/administradorCentro/' +
-        '(?P<administrador_centro>[\s\w]+)/edit/$',
-
-        'editAdministradorCentro', name='editAdministradorCentro'),
-
-    url(r'^asesorias/administradorCentro/' +
-        '(?P<administrador_centro>[\s\w]+)/del/$',
-
-        'delAdministradorCentro', name='delAdministradorCentro'),
-
-    url(r'^asesorias/administradorCentro/list/(?P<orden>[\s\w]*)/$',
-        'listAdministradorCentro', name='listAdministradorCentro'),
-
-    url(r'^asesorias/administradorCentro/generarPDF/' +
-        '(?P<busqueda>[\s\w]+)/$',
-
-        'generarPDFListaAdministradoresCentro',
-        name='generarPDFListaAdministradoresCentro'),
 )
 
 # ------------------- #
