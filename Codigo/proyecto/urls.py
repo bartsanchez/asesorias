@@ -28,6 +28,15 @@ urlpatterns = patterns('',
 
     (r'^asesorias/administradorCentro/',
         include('asesorias.urls.administradorCentro')),
+
+    (r'^asesorias/titulacion/',
+        include('asesorias.urls.titulacion')),
+
+    (r'^asesorias/asignatura/',
+        include('asesorias.urls.asignatura')),
+
+    (r'^asesorias/asignaturaCursoAcademico/',
+        include('asesorias.urls.asignaturaCursoAcademico')),
 )
 
 # ------------------------- #
@@ -38,148 +47,6 @@ urlpatterns += patterns(VISTAS + 'vistasGestionUsuarios',
     url(r'^asesorias/$', 'authentication', name='authentication'),
 
     url(r'^asesorias/logout/$', 'logout_view', name='logout'),
-)
-
-# ------------------- #
-# Url's de titulacion #
-# ------------------- #
-
-urlpatterns += patterns(VISTAS + 'vistasTitulacion',
-    url(r'^asesorias/titulacion/add/(?P<nombre_centro>[\s\w]*)/$',
-         'addTitulacion', name='addTitulacion'),
-
-    url(r'^asesorias/titulacion/(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/edit/$',
-
-        'editTitulacion', name='editTitulacion'),
-
-    url(r'^asesorias/titulacion/(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/del/$',
-
-        'delTitulacion', name='delTitulacion'),
-
-    url(r'^asesorias/titulacion/list/(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<orden>[\s\w]*)/$',
-
-        'listTitulacion', name='listTitulacion'),
-
-    url(r'^asesorias/titulacion/select/$',
-        'selectCentro', name='selectCentro_Titulacion'),
-
-    url(r'^asesorias/titulacion/generarPDF/' +
-        '(?P<nombre_centro>[\s\w]+)/(?P<busqueda>[\s\w]+)/$',
-
-        'generarPDFListaTitulaciones',
-        name='generarPDFListaTitulaciones'),
-)
-
-# ------------------- #
-# Url's de asignatura #
-# ------------------- #
-
-urlpatterns += patterns(VISTAS + 'vistasAsignatura',
-    url(r'^asesorias/asignatura/add/(?P<nombre_centro>[\s\w]*)/' +
-        '(?P<nombre_titulacion>[\s\w]*)/(?P<plan_estudios>\d*)/$',
-
-        'addAsignatura', name='addAsignatura'),
-
-    url(r'^asesorias/asignatura/(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
-        '(?P<nombre_asignatura>[\s\w]+)/edit/$',
-
-        'editAsignatura', name='editAsignatura'),
-
-    url(r'^asesorias/asignatura/(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
-        '(?P<nombre_asignatura>[\s\w]+)/del/$',
-
-        'delAsignatura', name='delAsignatura'),
-
-    url(r'^asesorias/asignatura/list/(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
-        '(?P<orden>[\s\w]*)/$',
-
-        'listAsignatura', name='listAsignatura'),
-
-    url(r'^asesorias/asignatura/selectCentro/(?P<tipo>[\s\w]+)/$',
-        'selectCentro', name='selectCentro_Asignatura'),
-
-    url(r'^asesorias/asignatura/(?P<nombre_centro>[\s\w]+)/' +
-        'selectTitulacion/(?P<tipo>[\s\w]+)/$',
-
-        'selectTitulacion', name='selectTitulacion_Asignatura'),
-
-    url(r'^asesorias/asignatura/generarPDF/' +
-        '(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/' +
-        '(?P<plan_estudios>\d+)/(?P<busqueda>[\s\w]+)/$',
-
-        'generarPDFListaAsignaturas',
-        name='generarPDFListaAsignaturas'),
-)
-
-# ----------------------------------- #
-# Url's de asignatura curso academico #
-# ----------------------------------- #
-
-urlpatterns += patterns(VISTAS + 'vistasAsignaturaCursoAcademico',
-    url(r'^asesorias/asignaturaCursoAcademico/add/' +
-        '(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/' +
-        '(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/$',
-
-        'addAsignaturaCursoAcademico',
-        name='addAsignaturaCursoAcademico'),
-
-    url(r'^asesorias/asignaturaCursoAcademico/' +
-        '(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/' +
-        '(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/' +
-        '(?P<curso_academico>\d+)/edit/$',
-
-        'editAsignaturaCursoAcademico',
-        name='editAsignaturaCursoAcademico'),
-
-    url(r'^asesorias/asignaturaCursoAcademico/' +
-        '(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/' +
-        '(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/' +
-        '(?P<curso_academico>\d+)/del/$',
-
-        'delAsignaturaCursoAcademico',
-        name='delAsignaturaCursoAcademico'),
-
-    url(r'^asesorias/asignaturaCursoAcademico/list/' +
-        '(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/' +
-        '(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/' +
-        '(?P<orden>[\s\w]*)/$',
-
-        'listAsignaturaCursoAcademico',
-        name='listAsignaturaCursoAcademico'),
-
-    url(r'^asesorias/asignaturaCursoAcademico/selectCentro/' +
-        '(?P<tipo>[\s\w]+)/$',
-
-        'selectCentro',
-        name='selectCentro_AsignaturaCursoAcademico'),
-
-    url(r'^asesorias/asignaturaCursoAcademico/' +
-        '(?P<nombre_centro>[\s\w]+)/selectTitulacion/' +
-        '(?P<tipo>[\s\w]+)/$',
-
-        'selectTitulacion',
-        name='selectTitulacion_AsignaturaCursoAcademico'),
-
-    url(r'^asesorias/asignaturaCursoAcademico/' +
-        '(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/' +
-        '(?P<plan_estudios>\d+)/selectAsignatura/(?P<tipo>[\s\w]+)/$',
-
-        'selectAsignatura',
-        name='selectAsignatura_AsignaturaCursoAcademico'),
-
-    url(r'^asesorias/asignaturaCursoAcademico/generarPDF/' +
-        '(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/' +
-        '(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/' +
-        '(?P<busqueda>[\s\w]+)/$',
-
-        'generarPDFListaAsignaturasCursoAcademico',
-        name='generarPDFListaAsignaturasCursoAcademico'),
 )
 
 # --------------------- #
