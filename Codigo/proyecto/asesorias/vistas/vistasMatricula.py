@@ -179,12 +179,22 @@ def delMatricula(request, nombre_centro, nombre_titulacion,
     if instancia_matricula:
         instancia_matricula.delete()
         # Redirige a la pagina de listar matriculas.
-        return HttpResponseRedirect( reverse('listMatricula') )
+        return HttpResponseRedirect(reverse('listMatricula',
+                kwargs={'nombre_centro':
+                instancia_matricula.determinarNombreCentro(),
+                'nombre_titulacion':
+                instancia_matricula.determinarNombreTitulacion(),
+                'plan_estudios':
+                instancia_matricula.determinarPlanEstudios(),
+                'nombre_asignatura':
+                instancia_matricula.determinarNombreAsignatura(),
+                'curso_academico': curso_academico,
+                'orden': 'curso_academico'}))
     # La matricula no existe.
     else:
         error = True
     return render_to_response(PATH + 'delMatricula.html',
-        {'error': error})
+        {'user': request.user, 'error': error})
 
 def selectAsignaturaOAlumnoCursoAcademico(request):
     return render_to_response(PATH +
