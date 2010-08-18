@@ -304,5 +304,17 @@
       "id_adm_centro": 2,
       "id_centro": 2
     }
+  },
+  {
+    "pk": 1,
+    "model": "asesorias.matricula",
+    "fields": {
+      "id_asignatura": 1,
+      "id_titulacion": 1,
+      "dni_pasaporte": "88888888Z",
+      "id_centro": 2,
+      "comentario": "matriculado",
+      "curso_academico": 2010
+    }
   }
 ]
