@@ -7,6 +7,7 @@ from asesorias.vistas import vistasAsignaturaCursoAcademico as \
     vistasAsignaturaCA
 from asesorias.vistas import vistasAlumnoCursoAcademico, vistasCentro
 from asesorias.vistas import vistasTitulacion
+from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/Matricula/'
 
@@ -566,7 +567,7 @@ def generarPDFListaMatriculas(request, nombre_centro, nombre_titulacion,
     plan_estudios, nombre_asignatura, curso_academico, busqueda):
     # Se obtiene la posible asignatura curso academico.
     instancia_asignatura_curso_academico = \
-        vistasAsignatura.obtenerAsignaturaCursoAcademico(
+        vistasAsignaturaCA.obtenerAsignaturaCursoAcademico(
         nombre_centro, nombre_titulacion, plan_estudios,
         nombre_asignatura, curso_academico)
 
