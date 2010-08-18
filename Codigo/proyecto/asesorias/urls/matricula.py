@@ -9,7 +9,8 @@ VISTAS = 'asesorias.vistas.'
 urlpatterns = patterns(VISTAS + 'vistasMatricula',
     url(r'^add/(?P<nombre_centro>[\s\w]+)/' +
         '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
-        '(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/$',
+        '(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/' +
+        '(?P<dni_pasaporte>[\s\w]+)$',
 
         'addMatricula', name='addMatricula'),
 

@@ -40,53 +40,40 @@ def obtenerMatricula(nombre_centro, nombre_titulacion, plan_estudios,
     return resultado
 
 def addMatricula(request, nombre_centro, nombre_titulacion,
-    plan_estudios, nombre_asignatura, curso_academico):
+    plan_estudios, nombre_asignatura, curso_academico, dni_pasaporte):
+
     # Se obtiene la posible asignatura curso academico.
-    instancia_asignatura_curso_academico = \
+    instancia_asignaturaCA = \
         vistasAsignaturaCA.obtenerAsignaturaCursoAcademico(
         nombre_centro, nombre_titulacion, plan_estudios,
         nombre_asignatura, curso_academico)
 
     # Se comprueba que exista la asignatura curso academico.
-    if not instancia_asignatura_curso_academico:
+    if not instancia_asignaturaCA:
         return HttpResponseRedirect(
             reverse(
-            'selectAsignaturaCursoAcademicoOAlumnoCursoAcademico'))
+            'selectAsignaturaOAlumnoCursoAcademico'))
+
+    # Se obtiene el posible alumno curso academico.
+    instancia_alumnoCA =  \
+        vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(
+            dni_pasaporte, curso_academico)
+
+    # Se comprueba que exista el alumno curso academico.
+    if not instancia_alumnoCA:
+        return HttpResponseRedirect(reverse(
+            'selectAsignaturaOAlumnoCursoAcademico'))
 
     # Se ha rellenado el formulario.
     if request.method == 'POST':
         #Se extraen los valores pasados por el metodo POST.
-        codigo_asignaturaCursoAcademico = \
-            request.POST['asignatura_curso_academico']
-        codigo_alumnoCursoAcademico = \
-            request.POST['alumno_curso_academico']
         comentario = request.POST['comentario']
-
-        # Se obtiene una instancia de la asignatura curso academico a
-        # traves de su id.
-        instancia_asignatura_curso_academico = \
-            models.AsignaturaCursoAcademico.objects.get(
-            pk=codigo_asignaturaCursoAcademico)
 
         # Se determina id_centro, id_titulacion e id_asignatura para esa
         # asignatura curso academico.
-        id_centro = instancia_asignatura_curso_academico.id_centro
-        id_titulacion = \
-            instancia_asignatura_curso_academico.id_titulacion
-        id_asignatura = \
-            instancia_asignatura_curso_academico.id_asignatura
-
-        # Se obtiene una instancia del alumno curso academico a traves
-        # de su id.
-        instancia_alumno_curso_academico = \
-            models.AlumnoCursoAcademico.objects.get(
-            pk=codigo_alumnoCursoAcademico)
-
-        # Se determina el curso_academico para ese alumno curso
-        # academico.
-        dni_pasaporte = instancia_alumno_curso_academico.dni_pasaporte
-        curso_academico = \
-            instancia_alumno_curso_academico.curso_academico
+        id_centro = instancia_asignaturaCA.id_centro
+        id_titulacion = instancia_asignaturaCA.id_titulacion
+        id_asignatura = instancia_asignaturaCA.id_asignatura
 
         # Datos necesarios para crear la nueva asignatura
         datos_matricula = {'id_centro': id_centro,
@@ -94,10 +81,7 @@ def addMatricula(request, nombre_centro, nombre_titulacion,
             'id_asignatura': id_asignatura,
             'curso_academico': curso_academico,
             'dni_pasaporte': dni_pasaporte,
-            'comentario': comentario,
-            'asignatura_curso_academico':
-            codigo_asignaturaCursoAcademico,
-            'alumno_curso_academico': codigo_alumnoCursoAcademico}
+            'comentario': comentario}
 
         # Se obtienen los valores y se valida.
         form = forms.MatriculaForm(datos_matricula)
@@ -105,7 +89,17 @@ def addMatricula(request, nombre_centro, nombre_titulacion,
             # Se guarda la informacion del formulario en el sistema.
             form.save()
             # Redirige a la pagina de listar matriculas.
-            return HttpResponseRedirect( reverse('listMatricula') )
+            return HttpResponseRedirect( reverse('listMatricula',
+                kwargs={'nombre_centro':
+                instancia_asignaturaCA.determinarNombreCentro(),
+                'nombre_titulacion':
+                instancia_asignaturaCA.determinarNombreTitulacion(),
+                'plan_estudios':
+                instancia_asignaturaCA.determinarPlanEstudios(),
+                'nombre_asignatura':
+                instancia_asignaturaCA.determinarNombreAsignatura(),
+                'curso_academico': curso_academico,
+                'orden': 'curso_academico'}) )
     # Si aun no se ha rellenado el formulario, se genera uno en blanco.
     else:
         form = forms.MatriculaForm()
@@ -115,7 +109,8 @@ def addMatricula(request, nombre_centro, nombre_titulacion,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios,
         'nombre_asignatura': nombre_asignatura,
-        'curso_academico': curso_academico})
+        'curso_academico': curso_academico,
+        'dni_pasaporte': dni_pasaporte})
 
 def editMatricula(request, nombre_centro, nombre_titulacion,
     plan_estudios, nombre_asignatura, curso_academico, dni_pasaporte):
@@ -483,7 +478,9 @@ def selectAlumno(request, nombre_centro, nombre_titulacion,
                 'nombre_titulacion': nombre_titulacion,
                 'plan_estudios': plan_estudios,
                 'nombre_asignatura': nombre_asignatura,
-                'curso_academico': curso_academico}))
+                'curso_academico': curso_academico,
+                'dni_pasaporte':
+                instancia_alumno_curso_academico.dni_pasaporte}))
 
         else:
             return HttpResponseRedirect(
