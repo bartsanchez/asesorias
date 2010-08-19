@@ -1,0 +1,69 @@
+{% extends "asesorias/Base/base_alumnos.html" %}
+
+{% block content %}
+
+    <h1>Lista de matriculas.</h1>
+
+    <div class="form">
+        <div><p>Alumno: <b>{{ dni_pasaporte }}</b> <a href={% url selectAlumno2_Matricula %} class="updatelink"></a></p></div>
+        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAlumnoCursoAcademico_Matricula dni_pasaporte %} class="updatelink"></a></p></div>
+    </div>
+
+    <a href="{% url selectCentro_Matricula 'add' %}" class="addlink">Crear nuevo</a>
+    <a href="{# url generarPDFListaMatriculas nombre_centro nombre_titulacion plan_estudios nombre_asignatura curso_academico busqueda #}" class="pdflink">Generar PDF</a>
+
+    <div class="search">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Realizar búsqueda.">
+                {% for field in form %}
+                <tr>
+                    <th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="module">
+        <table summary="Lista de matrículas.">
+        <caption><h2>Lista de matrículas{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
+
+        {% if not lista_matriculas %}
+
+        <tr><th scope="row"><p>No existen actualmente matrículas para esta asignatura curso académico en el sistema.</p></th></tr>
+
+        {% else %}
+
+        {% if not busqueda %}
+        <tr>
+            {% ifequal orden '_curso_academico' %}
+            <th colspan="3"><a href={# url listMatricula nombre_centro nombre_titulacion plan_estudios nombre_asignatura curso_academico 'curso_academico' #}>Centro : Titulacion(Plan de estudios) : Asignatura &#11014;</a></th>
+
+            {% else %}
+            <th colspan="3"><a href={# url listMatricula nombre_centro nombre_titulacion plan_estudios nombre_asignatura curso_academico '_curso_academico' #}>Centro : Titulacion(Plan de estudios) : Asignatura &#11015;</a></th>
+
+            {% endifequal %}
+        </tr>
+        {% endif %}
+
+        {% for matricula in lista_matriculas %}
+        <tr>
+            <th scope="row"><a href="{% url editMatricula matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula.dni_pasaporte %}">{{ matricula.determinarNombreCentro }} : {{ matricula.determinarNombreTitulacion }}({{ matricula.determinarPlanEstudios }}) : {{ matricula.determinarNombreAsignatura }}</a></th>
+            <td><a href="{% url editMatricula matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula %}" class="editlink">Editar</a></td>
+            <td><a href="{% url delMatricula matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula.dni_pasaporte %}" class="deletelink">Eliminar</a></td>
+        </tr>
+        {% endfor %}
+
+        {% endif %}
+
+        </table>
+    </div>
+
+{% endblock %}

@@ -5,6 +5,7 @@ from asesorias import models, forms
 from asesorias.vistas import vistasAsignatura
 from asesorias.vistas import vistasAsignaturaCursoAcademico as \
     vistasAsignaturaCA
+from asesorias.vistas import vistasAlumno
 from asesorias.vistas import vistasAlumnoCursoAcademico, vistasCentro
 from asesorias.vistas import vistasTitulacion
 from asesorias.utils import vistasPDF
@@ -488,6 +489,72 @@ def selectAlumno(request, nombre_centro, nombre_titulacion,
         'nombre_asignatura': nombre_asignatura,
         'curso_academico': curso_academico})
 
+def selectAlumno2(request):
+    # Se ha introducido un alumno.
+    if request.method == 'POST':
+
+        # Se obtiene el alumno y se valida.
+        form = forms.AlumnoFormSelect(request.POST)
+
+        # Si es valido se redirige a seleccionar curso academico.
+        if form.is_valid():
+            alumno = request.POST['alumno']
+
+            return HttpResponseRedirect(
+                reverse('selectAlumnoCursoAcademico_Matricula',
+                kwargs={'dni_pasaporte': alumno}))
+
+        else:
+            return HttpResponseRedirect(
+                reverse('selectAlumno2_Matricula'))
+
+    else:
+        form = forms.AlumnoFormSelect()
+
+    return render_to_response(PATH + 'selectAlumno2.html',
+        {'user': request.user, 'form': form})
+
+def selectAlumnoCursoAcademico(request, dni_pasaporte):
+    # Se obtiene el posible alumno.
+    instancia_alumno = vistasAlumno.obtenerAlumno(dni_pasaporte)
+
+    # Se comprueba que exista el alumno.
+    if not instancia_alumno:
+        return HttpResponseRedirect(
+            reverse('selectAlumno2_Matricula'))
+
+    # Se ha introducido un alumno curso academico.
+    if request.method == 'POST':
+        # Se obtiene el alumno curso academico y se valida.
+        form = forms.AlumnoCursoAcademico2FormSelect(dni_pasaporte,
+            request.POST)
+
+        # Si es valido se redirige a listar matriculas.
+        if form.is_valid():
+            alumno_curso_academico = \
+                request.POST['alumno_curso_academico']
+
+            curso_academico = models.AlumnoCursoAcademico.objects.get(
+                pk=alumno_curso_academico).curso_academico
+
+            return HttpResponseRedirect(
+                reverse('listMatricula2',
+                kwargs={'dni_pasaporte': dni_pasaporte,
+                'curso_academico': curso_academico}))
+
+        else:
+            return HttpResponseRedirect(
+                reverse('selectAlumnoCursoAcademico_Matricula',
+                kwargs={'dni_pasaporte': dni_pasaporte}))
+
+    else:
+        form = forms.AlumnoCursoAcademico2FormSelect(
+            dni_pasaporte=dni_pasaporte)
+
+    return render_to_response(PATH + 'selectAlumnoCursoAcademico.html',
+        {'user': request.user, 'form': form,
+        'dni_pasaporte': dni_pasaporte})
+
 def listMatricula(request, nombre_centro, nombre_titulacion,
     plan_estudios, nombre_asignatura, curso_academico, orden):
     # Se obtiene la posible asignatura_curso_academico.
@@ -562,6 +629,67 @@ def listMatricula(request, nombre_centro, nombre_titulacion,
         'nombre_asignatura': nombre_asignatura,
         'curso_academico': curso_academico,
         'orden': orden})
+
+def listMatricula2(request, dni_pasaporte, curso_academico):
+    # Se obtiene el posible alumno_curso_academico.
+    instancia_alumno_curso_academico = \
+        vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(
+        dni_pasaporte, curso_academico)
+
+    # Se comprueba que exista el alumno curso academico.
+    if not instancia_alumno_curso_academico:
+        return HttpResponseRedirect(
+            reverse('selectAlumno2_Matricula'))
+
+    # Se obtiene una lista con todos las matriculas.
+    lista_matriculas = models.Matricula.objects.filter(
+        dni_pasaporte=dni_pasaporte,
+        curso_academico=curso_academico).all()
+
+    # Se ha realizado una busqueda.
+    if request.method == 'POST':
+        # Se obtienen los valores y se valida.
+        form = forms.SearchForm(request.POST)
+        # Si es valido se realiza la busqueda.
+        if form.is_valid():
+            busqueda = request.POST['busqueda']
+
+            # Se crea una lista auxiliar que albergara el resultado de
+            # la busqueda.
+            lista_aux = []
+
+            # Se recorren los elementos determinando si coinciden con
+            # la busqueda.
+            for matricula in lista_matriculas:
+                # Se crea una cadena auxiliar para examinar si se
+                # encuentra el resultado de la busqueda.
+                cadena = (unicode(matricula.determinarNombreCentro()) +
+                    unicode(matricula.determinarNombreTitulacion()) +
+                    unicode(matricula.determinarPlanEstudios()) +
+                    unicode(matricula.determinarNombreAsignatura()))
+
+                # Si se encuentra la busqueda el elemento se incluye en
+                # la lista auxiliar.
+                if cadena.find(busqueda) >= 0:
+                    lista_aux.append(matricula)
+
+            # La lista final a devolver sera la lista auxiliar.
+            lista_matriculas = lista_aux
+
+        else:
+            busqueda = False
+    # No se ha realizado busqueda.
+    else:
+        # Formulario para una posible busqueda.
+        form = forms.SearchForm()
+        busqueda = False
+
+    return render_to_response(PATH + 'listMatricula2.html',
+        {'user': request.user, 'form': form,
+        'lista_matriculas': lista_matriculas,
+        'busqueda': busqueda,
+        'dni_pasaporte': dni_pasaporte,
+        'curso_academico': curso_academico})
 
 def generarPDFListaMatriculas(request, nombre_centro, nombre_titulacion,
     plan_estudios, nombre_asignatura, curso_academico, busqueda):

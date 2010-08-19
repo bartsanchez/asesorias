@@ -35,6 +35,10 @@ urlpatterns = patterns(VISTAS + 'vistasMatricula',
 
         'listMatricula', name='listMatricula'),
 
+    url(r'^list/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/$',
+
+        'listMatricula2', name='listMatricula2'),
+
     url(r'^select/$',
         'selectAsignaturaOAlumnoCursoAcademico',
         name='selectAsignaturaOAlumnoCursoAcademico'),
@@ -67,6 +71,14 @@ urlpatterns = patterns(VISTAS + 'vistasMatricula',
         'selectAlumno/$',
 
         'selectAlumno', name='selectAlumno_Matricula'),
+
+    url(r'^selectAlumno/$',
+        'selectAlumno2', name='selectAlumno2_Matricula'),
+
+    url(r'^(?P<dni_pasaporte>[\s\w]+)/selectAlumnoCursoAcademico/$',
+
+        'selectAlumnoCursoAcademico',
+        name='selectAlumnoCursoAcademico_Matricula'),
 
     url(r'^generarPDF/(?P<nombre_centro>[\s\w]+)/' +
         '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
