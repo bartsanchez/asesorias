@@ -644,7 +644,7 @@ def listMatricula2(request, dni_pasaporte, curso_academico):
     # Se obtiene una lista con todos las matriculas.
     lista_matriculas = models.Matricula.objects.filter(
         dni_pasaporte=dni_pasaporte,
-        curso_academico=curso_academico).all()
+        curso_academico=curso_academico).order_by('codigo_matricula')
 
     # Se ha realizado una busqueda.
     if request.method == 'POST':
