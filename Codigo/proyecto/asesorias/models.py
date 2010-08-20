@@ -243,7 +243,8 @@ class AlumnoCursoAcademico(models.Model):
         unique_together = ("dni_pasaporte", "curso_academico")
 
     def __unicode__(self):
-        return unicode(self.curso_academico)
+        return (unicode(self.dni_pasaporte) + ' (' +
+            unicode(self.curso_academico)) + ') '
 
 class Matricula(models.Model):
     codigo_matricula = models.AutoField(primary_key=True)
