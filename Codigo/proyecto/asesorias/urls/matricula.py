@@ -24,9 +24,23 @@ urlpatterns = patterns(VISTAS + 'vistasMatricula',
     url(r'^(?P<nombre_centro>[\s\w]+)/' +
         '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
         '(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/' +
+        '(?P<dni_pasaporte>[\s\w]+)/_edit/$',
+
+        'editMatricula2', name='editMatricula2'),
+
+    url(r'^(?P<nombre_centro>[\s\w]+)/' +
+        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
+        '(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/' +
         '(?P<dni_pasaporte>[\s\w]+)/del/$',
 
         'delMatricula', name='delMatricula'),
+
+    url(r'^(?P<nombre_centro>[\s\w]+)/' +
+        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
+        '(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/' +
+        '(?P<dni_pasaporte>[\s\w]+)/_del/$',
+
+        'delMatricula2', name='delMatricula2'),
 
     url(r'^list/(?P<nombre_centro>[\s\w]+)/' +
         '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +

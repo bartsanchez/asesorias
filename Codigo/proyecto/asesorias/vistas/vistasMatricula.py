@@ -170,6 +170,54 @@ def editMatricula(request, nombre_centro, nombre_titulacion,
         'curso_academico': curso_academico,
         'dni_pasaporte': dni_pasaporte})
 
+def editMatricula2(request, nombre_centro, nombre_titulacion,
+    plan_estudios, nombre_asignatura, curso_academico, dni_pasaporte):
+    # Se obtiene la instancia de la matricula.
+    instancia_matricula = obtenerMatricula(nombre_centro,
+        nombre_titulacion, plan_estudios, nombre_asignatura,
+        curso_academico, dni_pasaporte)
+    # Si existe se edita.
+    if instancia_matricula:
+        # Se carga el formulario para la matricula existente.
+        form = forms.MatriculaForm(instance=instancia_matricula)
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            # Se obtienen el resto de valores necesarios a traves de
+            # POST.
+            comentario = request.POST['comentario']
+
+            # Datos necesarios para crear la nueva asignatura
+            datos_matricula = {'id_centro':
+                instancia_matricula.id_centro,
+                'id_titulacion': instancia_matricula.id_titulacion,
+                'id_asignatura': instancia_matricula.id_asignatura,
+                'curso_academico': curso_academico,
+                'dni_pasaporte': dni_pasaporte,
+                'comentario': comentario}
+
+            # Se actualiza el formulario con la nueva informacion.
+            form = forms.MatriculaForm(datos_matricula,
+                instance=instancia_matricula)
+
+            # Si es valido se guarda.
+            if form.is_valid():
+                form.save()
+                # Redirige a la pagina de listar matriculas.
+                return HttpResponseRedirect(reverse('listMatricula2',
+                kwargs={'dni_pasaporte': dni_pasaporte,
+                'curso_academico': curso_academico}))
+    # La matricula no existe
+    else:
+        form = False
+    return render_to_response(PATH + 'editMatricula.html',
+        {'user': request.user, 'form': form,
+        'nombre_centro': nombre_centro,
+        'nombre_titulacion': nombre_titulacion,
+        'plan_estudios': plan_estudios,
+        'nombre_asignatura': nombre_asignatura,
+        'curso_academico': curso_academico,
+        'dni_pasaporte': dni_pasaporte})
+
 def delMatricula(request, nombre_centro, nombre_titulacion,
     plan_estudios, nombre_asignatura, curso_academico, dni_pasaporte):
     # Se obtiene la instancia de la matricula.
@@ -192,6 +240,26 @@ def delMatricula(request, nombre_centro, nombre_titulacion,
                 instancia_matricula.determinarNombreAsignatura(),
                 'curso_academico': curso_academico,
                 'orden': 'curso_academico'}))
+    # La matricula no existe.
+    else:
+        error = True
+    return render_to_response(PATH + 'delMatricula.html',
+        {'user': request.user, 'error': error})
+
+def delMatricula2(request, nombre_centro, nombre_titulacion,
+    plan_estudios, nombre_asignatura, curso_academico, dni_pasaporte):
+    # Se obtiene la instancia de la matricula.
+    instancia_matricula = obtenerMatricula(nombre_centro,
+    nombre_titulacion, plan_estudios, nombre_asignatura,
+    curso_academico, dni_pasaporte)
+
+    # Si existe se elimina.
+    if instancia_matricula:
+        instancia_matricula.delete()
+        # Redirige a la pagina de listar matriculas.
+        return HttpResponseRedirect(reverse('listMatricula2',
+                kwargs={'dni_pasaporte': dni_pasaporte,
+                'curso_academico': curso_academico}))
     # La matricula no existe.
     else:
         error = True
