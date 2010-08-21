@@ -100,4 +100,9 @@ urlpatterns = patterns(VISTAS + 'vistasMatricula',
         '(?P<busqueda>[\s\w]+)/$',
 
         'generarPDFListaMatriculas', name='generarPDFListaMatriculas'),
+
+    url(r'^_generarPDF/(?P<dni_pasaporte>[\s\w]+)/' +
+        '(?P<curso_academico>\d+)/(?P<busqueda>[\s\w]+)/$',
+
+        'generarPDFListaMatriculas2',name='generarPDFListaMatriculas2'),
 )
