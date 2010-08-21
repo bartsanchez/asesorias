@@ -19,7 +19,17 @@ def obtenerAlumnoCursoAcademico(dni_pasaporte, curso_academico):
         resultado = False
     return resultado
 
-def addAlumnoCursoAcademico(request):
+def addAlumnoCursoAcademico(request, dni_pasaporte):
+    # Se comprueba que exista el alumno, en caso de introducirlo.
+    if (dni_pasaporte != ''):
+        # Se comprueba que exista el alumno.
+        instancia_alumno = vistasAlumno.obtenerAlumno(dni_pasaporte)
+
+        # Si no existe, se redirige.
+        if not instancia_alumno:
+            return HttpResponseRedirect(
+                reverse('selectAlumno_AlumnoCursoAcademico'))
+
     # Se ha rellenado el formulario.
     if request.method == 'POST':
         # Se obtienen los valores y se valida.
@@ -37,7 +47,8 @@ def addAlumnoCursoAcademico(request):
                 'orden': 'curso_academico'}))
     # Si aun no se ha rellenado el formulario, se genera uno en blanco.
     else:
-        form = forms.AlumnoCursoAcademicoForm()
+        form = forms.AlumnoCursoAcademicoForm(
+            initial={'dni_pasaporte': dni_pasaporte})
     return render_to_response(PATH + 'addAlumnoCursoAcademico.html',
         {'user': request.user, 'form': form})
 

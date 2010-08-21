@@ -7,7 +7,7 @@ VISTAS = 'asesorias.vistas.'
 # ------------------------------- #
 
 urlpatterns = patterns(VISTAS + 'vistasAlumnoCursoAcademico',
-    url(r'^add/$',
+    url(r'^add/(?P<dni_pasaporte>[\s\w]*)/$',
         'addAlumnoCursoAcademico', name='addAlumnoCursoAcademico'),
 
     url(r'^(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/edit/$',
