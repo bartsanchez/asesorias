@@ -860,8 +860,6 @@ def generarPDFListaMatriculas2(request, dni_pasaporte, curso_academico,
     # La lista final a devolver sera la lista auxiliar.
     lista_matriculas = lista_aux
 
-    print lista_matriculas
-
     return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
         {'mylist': lista_matriculas, 'name': 'matriculas. Alumno: ' +
         unicode(dni_pasaporte) + '. Curso academico: ' +

@@ -30,4 +30,7 @@ urlpatterns = patterns(VISTAS + 'vistasCalificacionConvocatoria',
     url(r'^list/$',
         'listCalificacionConvocatoria',
         name='listCalificacionConvocatoria'),
+
+    url(r'^selectCentro/(?P<tipo>[\s\w]+)/$',
+        'selectCentro', name='selectCentro_CalificacionConvocatoria'),
 )
