@@ -1,31 +1,31 @@
 {% extends "asesorias/Base/base_org_docente.html" %}
 
-	{% block content %}
-			<h1>Administrador</h1>
+    {% block content %}
+            <h1>Administrador</h1>
 
-			<div class="module">
-				<table summary="Organización docente.">
-				<caption><h2>Organización docente</h2></caption>
+            <div class="module">
+                <table summary="Organización docente.">
+                <caption><h2>Organización docente</h2></caption>
 
-				<!-- Departamentos. -->
-				<tr>
-					<th scope="row"><a href="{% url listDepartamento 'nombre_departamento' %}">Departamentos</a></th>
-					<td><a href="{% url addDepartamento %}" class="addlink">Añadir</a></td>
-				</tr>
+                <!-- Departamentos. -->
+                <tr>
+                    <th scope="row"><a href="{% url listDepartamento 'nombre_departamento' %}">Departamentos</a></th>
+                    <td><a href="{% url addDepartamento %}" class="addlink">Añadir</a></td>
+                </tr>
 
-				<!-- Asesores. -->
-				<tr>
-					<th scope="row"><a href="{% url listAsesor 'nombre_asesor' %}">Asesores</a></th>
-					<td><a href="{% url addAsesor %}" class="addlink">Añadir</a></td>
-				</tr>
+                <!-- Asesores. -->
+                <tr>
+                    <th scope="row"><a href="{% url listAsesor 'nombre_asesor' %}">Asesores</a></th>
+                    <td><a href="{% url addAsesor %}" class="addlink">Añadir</a></td>
+                </tr>
 
-				<!-- Asesores Curso Académico. -->
-				<tr>
-					<th scope="row"><a href="{% url selectAsesor_AsesorCursoAcademico %}">Asesores Curso Académico</a></th>
-					<td><a href="{% url addAsesorCursoAcademico '' '' %}" class="addlink">Añadir</a></td>
-				</tr>
+                <!-- Asesores Curso Académico. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsesor_AsesorCursoAcademico %}">Asesores Curso Académico</a></th>
+                    <td><a href="{% url addAsesorCursoAcademico '' %}" class="addlink">Añadir</a></td>
+                </tr>
 
-				</table>
-			</div>
+                </table>
+            </div>
 
-	{% endblock %}
+    {% endblock %}

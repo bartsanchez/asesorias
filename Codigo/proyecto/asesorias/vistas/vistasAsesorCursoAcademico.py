@@ -19,25 +19,16 @@ def obtenerAsesorCursoAcademico(dni_pasaporte, curso_academico):
         resultado = False
     return resultado
 
-def addAsesorCursoAcademico(request, nombre_departamento,
-    dni_pasaporte):
-    # Se comprueba que exista el departamento y el asesor, en caso de
-    # introducirlos.
-    if (nombre_departamento != '') and (dni_pasaporte != ''):
-        # Se comprueba que existan el departamento y el asesor.
-        instancia_departamento = vistasDepartamento.obtenerDepartamento(
-            nombre_departamento)
+def addAsesorCursoAcademico(request, dni_pasaporte):
+    # Se comprueba que exista el asesor, en caso de introducirlo.
+    if (dni_pasaporte != ''):
+        # Se comprueba que exista el asesor.
         instancia_asesor = vistasAsesor.obtenerAsesor(dni_pasaporte)
 
-        # Si alguno no existe, se redirige.
-        if (not instancia_departamento) or (not instancia_asesor):
+        # Si no existe, se redirige.
+        if not instancia_asesor:
             return HttpResponseRedirect(
-                reverse('selectDepartamento_AsesorCursoAcademico'))
-
-        id_departamento = instancia_departamento.id_departamento
-    # No se ha introducido ni departamento ni asesor.
-    else:
-        id_departamento = ''
+                reverse('selectAsesor_AsesorCursoAcademico'))
 
     # Se ha rellenado el formulario.
     if request.method == 'POST':
@@ -49,10 +40,7 @@ def addAsesorCursoAcademico(request, nombre_departamento,
             form.save()
 
             # Se obtiene el departamento y el asesor para redirigir.
-            id_departamento = request.POST['id_departamento']
             dni_pasaporte = request.POST['dni_pasaporte']
-            nombre_departamento = models.Departamento.objects.get(
-                pk=id_departamento)
 
             # Redirige a la pagina de listar asesores curso academico.
             return HttpResponseRedirect(
@@ -62,12 +50,9 @@ def addAsesorCursoAcademico(request, nombre_departamento,
     # Si aun no se ha rellenado el formulario, se genera uno en blanco.
     else:
         form = forms.AsesorCursoAcademicoForm(
-            initial={'id_departamento': id_departamento,
-            'dni_pasaporte': dni_pasaporte})
+            initial={'dni_pasaporte': dni_pasaporte})
     return render_to_response(PATH + 'addAsesorCursoAcademico.html',
-        {'user': request.user, 'form': form,
-        'nombre_departamento': nombre_departamento,
-        'asesor': dni_pasaporte})
+        {'user': request.user, 'form': form})
 
 def editAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
     # Se obtiene la instancia del asesor curso academico.
