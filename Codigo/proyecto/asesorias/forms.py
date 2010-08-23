@@ -148,8 +148,6 @@ class MatriculaForm(forms.ModelForm):
         model = models.Matricula
 
 class CalificacionConvocatoriaForm(forms.ModelForm):
-    matricula = forms.ModelChoiceField(models.Matricula.objects.all())
-
     class Meta:
         model = models.CalificacionConvocatoria
 

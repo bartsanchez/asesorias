@@ -1,26 +1,62 @@
-<h1>Añadir calificación convocatoria.</h1>
+{% extends "asesorias/Base/base_alumnos.html" %}
 
-{{ form.errors }}
+{% block content %}
 
-<form action="" method="post">
-    {% for field in form %}
+    <h1>Añadir calificación convocatoria.</h1>
 
-		<!-- Excluye los campos que forman parte de la clave que se controlarán por software. -->
-		{% ifnotequal field.name 'id_centro' %}
-		{% ifnotequal field.name 'id_titulacion' %}
-		{% ifnotequal field.name 'id_asignatura' %}
-		{% ifnotequal field.name 'curso_academico' %}
-		{% ifnotequal field.name 'dni_pasaporte' %}
-			<div class="fieldWrapper">
-				{{ field.errors }}
-				{{ field.label_tag }}: {{ field }}
-			</div>
-		{% endifnotequal %}
-		{% endifnotequal %}
-		{% endifnotequal %}
-		{% endifnotequal %}
-		{% endifnotequal %}
+    <div class="form">
+        <div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_CalificacionConvocatoria 'add' %} class="updatelink"></a></p></div>
+        <div><p>Titulación (Plan de estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_Matricula nombre_centro 'add' %} class="updatelink"></a></p></div>
+        <div><p>Asignatura: <b>{{ nombre_asignatura }}</b> <a href={% url selectAsignatura_CalificacionConvocatoria nombre_centro nombre_titulacion plan_estudios 'add' %} class="updatelink"></a></p></div>
+        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAsignaturaCA_CalificacionConvocatoria nombre_centro nombre_titulacion plan_estudios nombre_asignatura 'add' %} class="updatelink"></a></p></div>
+        <div><p>Alumno: <b>{{ dni_pasaporte }}</b> <a href={% url selectAlumno_CalificacionConvocatoria nombre_centro nombre_titulacion plan_estudios nombre_asignatura curso_academico 'add' %} class="updatelink"></a></p></div>
+    </div>
 
-    {% endfor %}
-    <p><input type="submit" value="Añadir"/></p>
-</form>
+    {% if form.errors %}
+    <div id="form-error">
+        <p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}<li>{{ field.errors|striptags }}</li>{% endif %}
+            {% endfor %}
+            {% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="module">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Añadir calificación convocatoria.">
+                <caption><h2>Añadir calificación convocatoria</h2></caption>
+
+                {% for field in form %}
+
+                {# Excluye los campos que forman parte de la clave que se controlarán por software. #}
+                {% ifnotequal field.name 'id_centro' %}
+                {% ifnotequal field.name 'id_titulacion' %}
+                {% ifnotequal field.name 'id_asignatura' %}
+                {% ifnotequal field.name 'curso_academico' %}
+                {% ifnotequal field.name 'dni_pasaporte' %}
+                <tr>
+                    <th scope="row">{{ field.label_tag }}</th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endifnotequal %}
+                {% endifnotequal %}
+                {% endifnotequal %}
+                {% endifnotequal %}
+                {% endifnotequal %}
+
+                {% endfor %}
+                </table>
+            </div>
+
+            <p><input type="submit" value="Confirmar"/></p>
+        </form>
+
+    </div>
+
+{% endblock %}
