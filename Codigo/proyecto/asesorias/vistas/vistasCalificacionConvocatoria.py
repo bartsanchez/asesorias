@@ -181,12 +181,19 @@ def delCalificacionConvocatoria(request, nombre_centro,
         instancia_calificacion.delete()
         # Redirige a la pagina de listar calificaciones.
         return HttpResponseRedirect(
-            reverse('listCalificacionConvocatoria'))
+            reverse('listCalificacionConvocatoria',
+                    kwargs={'nombre_centro': nombre_centro,
+                    'nombre_titulacion': nombre_titulacion,
+                    'plan_estudios': plan_estudios,
+                    'nombre_asignatura': nombre_asignatura,
+                    'curso_academico': curso_academico,
+                    'dni_pasaporte': dni_pasaporte,
+                    'orden': 'convocatoria'}))
     # La calificacion no existe.
     else:
         error = True
     return render_to_response(PATH + 'delCalificacionConvocatoria.html',
-        {'error': error})
+       {'user': request.user, 'error': error})
 
 def selectCentro(request, tipo):
     # Se ha introducido un centro.
