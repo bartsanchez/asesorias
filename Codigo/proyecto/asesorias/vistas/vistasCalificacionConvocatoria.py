@@ -117,43 +117,26 @@ def editCalificacionConvocatoria(request, nombre_centro,
     if instancia_calificacion:
         # Se carga el formulario para la calificacion existente.
         form = forms.CalificacionConvocatoriaForm(
-            instance=instancia_calificacion,
-            initial={'matricula':
-            vistasMatricula.obtenerMatricula(
-            nombre_centro, nombre_titulacion, plan_estudios,
-            nombre_asignatura, curso_academico,
-            dni_pasaporte).codigo_matricula})
+            instance=instancia_calificacion)
         # Se ha modificado el formulario original.
         if request.method == 'POST':
             #Se extraen los valores pasados por el metodo POST.
-            codigo_matricula = request.POST['matricula']
             convocatoria = request.POST['convocatoria']
             nota = request.POST['nota']
             comentario = request.POST['comentario']
 
-            # Se obtiene una instancia de la matricula a traves de
-            # su id.
-            instancia_matricula = models.Matricula.objects.get(
-                pk=codigo_matricula)
-
-            # Se determina los campos heredados para la calificacion
-            # convocatoria.
-            id_centro = instancia_matricula.id_centro
-            id_titulacion = instancia_matricula.id_titulacion
-            id_asignatura = instancia_matricula.id_asignatura
-            curso_academico = instancia_matricula.curso_academico
-            dni_pasaporte = instancia_matricula.dni_pasaporte
-
             # Datos necesarios para crear la nueva calificacion.
-            datos_calificacion = {'id_centro': id_centro,
-                'id_titulacion': id_titulacion,
-                'id_asignatura': id_asignatura,
+            datos_calificacion = {'id_centro':
+                instancia_calificacion.id_centro,
+                'id_titulacion':
+                instancia_calificacion.id_titulacion,
+                'id_asignatura':
+                instancia_calificacion.id_asignatura,
                 'curso_academico': curso_academico,
                 'dni_pasaporte': dni_pasaporte,
                 'convocatoria': convocatoria,
                 'nota': nota,
-                'comentario': comentario,
-                'matricula': codigo_matricula}
+                'comentario': comentario}
 
             # Se actualiza el formulario con la nueva informacion.
             form = forms.CalificacionConvocatoriaForm(
@@ -164,12 +147,26 @@ def editCalificacionConvocatoria(request, nombre_centro,
                 form.save()
                 # Redirige a la pagina de listar calificaciones.
                 return HttpResponseRedirect(
-                    reverse('listCalificacionConvocatoria'))
+                    reverse('listCalificacionConvocatoria',
+                    kwargs={'nombre_centro': nombre_centro,
+                    'nombre_titulacion': nombre_titulacion,
+                    'plan_estudios': plan_estudios,
+                    'nombre_asignatura': nombre_asignatura,
+                    'curso_academico': curso_academico,
+                    'dni_pasaporte': dni_pasaporte,
+                    'orden': 'convocatoria'}))
     # La calificacion no existe.
     else:
         form = False
     return render_to_response(PATH +
-        'editCalificacionConvocatoria.html', {'form': form})
+        'editCalificacionConvocatoria.html',
+        {'user': request.user, 'form': form,
+        'nombre_centro': nombre_centro,
+        'nombre_titulacion': nombre_titulacion,
+        'plan_estudios': plan_estudios,
+        'nombre_asignatura': nombre_asignatura,
+        'curso_academico': curso_academico,
+        'dni_pasaporte': dni_pasaporte})
 
 def delCalificacionConvocatoria(request, nombre_centro,
     nombre_titulacion, plan_estudios, nombre_asignatura,

@@ -58,8 +58,8 @@
 
         {% for calificacion in lista_calificaciones %}
         <tr>
-            <th scope="row"><a href="{# url editMatricula matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula.dni_pasaporte #}">{{ calificacion }}</a></th>
-            <td><a href="{# url editMatricula matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula.dni_pasaporte #}" class="editlink">Editar</a></td>
+            <th scope="row"><a href="{% url editCalificacionConvocatoria calificacion.determinarNombreCentro calificacion.determinarNombreTitulacion calificacion.determinarPlanEstudios calificacion.determinarNombreAsignatura calificacion.curso_academico calificacion.dni_pasaporte calificacion.convocatoria %}">{{ calificacion }}</a></th>
+            <td><a href="{% url editCalificacionConvocatoria calificacion.determinarNombreCentro calificacion.determinarNombreTitulacion calificacion.determinarPlanEstudios calificacion.determinarNombreAsignatura calificacion.curso_academico calificacion.dni_pasaporte calificacion.convocatoria %}" class="editlink">Editar</a></td>
             <td><a href="{# url delMatricula matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula.dni_pasaporte #}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}
