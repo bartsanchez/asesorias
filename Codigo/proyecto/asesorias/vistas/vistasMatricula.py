@@ -471,6 +471,7 @@ def selectAsignaturaCursoAcademico(request, nombre_centro,
                 kwargs={'nombre_centro': nombre_centro,
                 'nombre_titulacion': nombre_titulacion,
                 'plan_estudios': plan_estudios,
+                'nombre_asignatura': nombre_asignatura,
                 'tipo': tipo}))
 
     else:
@@ -497,12 +498,13 @@ def selectAlumno(request, nombre_centro, nombre_titulacion,
 
     # Se comprueba que exista la asignatura.
     if not instancia_asignatura_curso_academico:
-        return HttpResponseRedirect(reverse('selectAlumno_Matricula',
+        return HttpResponseRedirect(
+            reverse('selectAsignaturaCursoAcademico_Matricula',
             kwargs={'nombre_centro': nombre_centro,
             'nombre_titulacion': nombre_titulacion,
-            'plan_estudios': instancia_titulacion.plan_estudios,
-            'nombre_asignatura': instancia_asignatura.nombre_asignatura,
-            'curso_academico': curso_academico}))
+            'plan_estudios': plan_estudios,
+            'nombre_asignatura': nombre_asignatura,
+            'tipo': 'list'}))
     else:
         id_centro = instancia_asignatura_curso_academico.id_centro
         id_titulacion = \
