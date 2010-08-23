@@ -316,5 +316,33 @@
       "comentario": "matriculado",
       "curso_academico": 2010
     }
+  },
+  {
+    "pk": 1,
+    "model": "asesorias.calificacionconvocatoria",
+    "fields": {
+      "id_asignatura": 1,
+      "id_titulacion": 1,
+      "convocatoria": "febrero",
+      "nota": 7.0,
+      "dni_pasaporte": "88888888Z",
+      "id_centro": 2,
+      "comentario": "notable",
+      "curso_academico": 2010
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asesorias.calificacionconvocatoria",
+    "fields": {
+      "id_asignatura": 1,
+      "id_titulacion": 1,
+      "convocatoria": "diciembre",
+      "nota": 4.0,
+      "dni_pasaporte": "88888888Z",
+      "id_centro": 2,
+      "comentario": "suspenso",
+      "curso_academico": 2010
+    }
   }
 ]
