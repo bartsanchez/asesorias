@@ -348,7 +348,7 @@ class PlantillaEntrevistaOficial(models.Model):
         db_table = "PlantillasEntrevistaOficial"
 
     def __unicode__(self):
-        return unicode(self.id_entrevista_oficial)
+        return unicode(self.descripcion)
 
 class PreguntaOficial(models.Model):
     codigo_pregunta_oficial = models.AutoField(primary_key=True)

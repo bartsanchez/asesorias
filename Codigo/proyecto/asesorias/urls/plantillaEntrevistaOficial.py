@@ -21,8 +21,12 @@ urlpatterns = patterns(VISTAS + 'vistasPlantillaEntrevistaOficial',
         'delPlantillaEntrevistaOficial',
         name='delPlantillaEntrevistaOficial'),
 
-    url(r'^list/$',
+    url(r'^list/(?P<orden>[\s\w]*)/$',
         'listPlantillaEntrevistaOficial',
         name='listPlantillaEntrevistaOficial'),
+
+    url(r'^generarPDF/(?P<busqueda>[\s\w]+)/$',
+        'generarPDFListaPlantillasEntrevistaOficial',
+        name='generarPDFListaPlantillasEntrevistaOficial'),
 )
 

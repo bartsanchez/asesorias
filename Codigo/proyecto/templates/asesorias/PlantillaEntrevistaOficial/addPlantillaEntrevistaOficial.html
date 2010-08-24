@@ -1,13 +1,40 @@
-<h1>Añadir plantillas de entrevista oficiales.</h1>
+{% extends "asesorias/Base/base_plantillas.html" %}
 
-{{ form.errors }}
+{% block content %}
 
-<form action="" method="post">
-    {% for field in form %}
-        <div class="fieldWrapper">
-            {{ field.errors }}
-            {{ field.label_tag }}: {{ field }}
-        </div>
-    {% endfor %}
-    <p><input type="submit" value="Añadir"/></p>
-</form>
+    <h1>Añadir plantilla de entrevista oficial.</h1>
+
+    {% if form.errors %}
+    <div id="form-error">
+        <p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}<li>{{ field.errors|striptags }}</li>{% endif %}
+            {% endfor %}
+            {% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="module">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Añadir plantilla de entrevista oficial.">
+                <caption><h2>Añadir plantilla de entrevista oficial</h2></caption>
+                {% for field in form %}
+                <tr>
+                    <th scope="row">{{ field.label_tag }}</th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
+
+            <p><input type="submit" value="Confirmar"/></p>
+        </form>
+
+    </div>
+
+{% endblock %}

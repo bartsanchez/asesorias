@@ -1,37 +1,37 @@
 {% extends "asesorias/Base/base_plantillas.html" %}
 
-	{% block content %}
-			<h1>Administrador</h1>
+    {% block content %}
+            <h1>Administrador</h1>
 
-			<div class="module">
-				<table summary="Administración de plantillas.">
-				<caption><h2>Plantillas de entrevista</h2></caption>
+            <div class="module">
+                <table summary="Administración de plantillas.">
+                <caption><h2>Plantillas de entrevista</h2></caption>
 
-				<!-- Plantillas de entrevista oficiales. -->
-				<tr>
-					<th scope="row"><a href="{% url listPlantillaEntrevistaOficial %}">Plantillas de entrevista oficiales</a></th>
-					<td><a href="{% url addPlantillaEntrevistaOficial %}" class="addlink">Añadir</a></td>
-				</tr>
+                <!-- Plantillas de entrevista oficiales. -->
+                <tr>
+                    <th scope="row"><a href="{% url listPlantillaEntrevistaOficial 'descripcion' %}">Plantillas de entrevista oficiales</a></th>
+                    <td><a href="{% url addPlantillaEntrevistaOficial %}" class="addlink">Añadir</a></td>
+                </tr>
 
-				<!-- Preguntas oficiales. -->
-				<tr>
-					<th scope="row"><a href="{% url listPreguntaOficial %}">Preguntas oficiales</a></th>
-					<td><a href="{% url addPreguntaOficial %}" class="addlink">Añadir</a></td>
-				</tr>
+                <!-- Preguntas oficiales. -->
+                <tr>
+                    <th scope="row"><a href="{% url listPreguntaOficial %}">Preguntas oficiales</a></th>
+                    <td><a href="{% url addPreguntaOficial %}" class="addlink">Añadir</a></td>
+                </tr>
 
-				<!-- Plantillas de entrevista de asesor. -->
-				<tr>
-					<th scope="row"><a href="{% url listPlantillaEntrevistaAsesor %}">Plantillas de entrevista de asesor</a></th>
-					<td><a href="{% url addPlantillaEntrevistaAsesor %}" class="addlink">Añadir</a></td>
-				</tr>
+                <!-- Plantillas de entrevista de asesor. -->
+                <tr>
+                    <th scope="row"><a href="{% url listPlantillaEntrevistaAsesor %}">Plantillas de entrevista de asesor</a></th>
+                    <td><a href="{% url addPlantillaEntrevistaAsesor %}" class="addlink">Añadir</a></td>
+                </tr>
 
-				<!-- Preguntas de asesor. -->
-				<tr>
-					<th scope="row"><a href="{% url listPreguntaAsesor %}">Preguntas de asesor</a></th>
-					<td><a href="{% url addPreguntaAsesor %}" class="addlink">Añadir</a></td>
-				</tr>
+                <!-- Preguntas de asesor. -->
+                <tr>
+                    <th scope="row"><a href="{% url listPreguntaAsesor %}">Preguntas de asesor</a></th>
+                    <td><a href="{% url addPreguntaAsesor %}" class="addlink">Añadir</a></td>
+                </tr>
 
-				</table>
-			</div>
+                </table>
+            </div>
 
-	{% endblock %}
+    {% endblock %}
