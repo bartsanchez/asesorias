@@ -69,4 +69,12 @@ urlpatterns = patterns(VISTAS + 'vistasCalificacionConvocatoria',
         'selectAlumno/(?P<tipo>[\s\w]+)/$',
 
         'selectAlumno', name='selectAlumno_CalificacionConvocatoria'),
+
+    url(r'^generarPDF/(?P<nombre_centro>[\s\w]+)/' +
+        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
+        '(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/' +
+        '(?P<dni_pasaporte>[\s\w]+)/(?P<busqueda>[\s\w]+)/$',
+
+        'generarPDFListaCalificacionesConvocatoria',
+        name='generarPDFListaCalificacionesConvocatoria'),
 )

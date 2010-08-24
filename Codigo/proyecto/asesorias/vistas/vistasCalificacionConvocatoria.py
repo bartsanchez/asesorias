@@ -7,6 +7,7 @@ from asesorias.vistas import vistasAlumnoCursoAcademico, vistasCentro
 from asesorias.vistas import vistasMatricula, vistasTitulacion
 from asesorias.vistas import vistasAsignaturaCursoAcademico as \
     vistasAsignaturaCA
+from asesorias.utils import vistasPDF
 
 
 PATH = 'asesorias/CalificacionConvocatoria/'
@@ -515,7 +516,7 @@ def listCalificacionConvocatoria(request, nombre_centro,
         id_asignatura = \
             instancia_matricula.id_asignatura
 
-    # Se obtiene una lista con todos las matriculas.
+    # Se obtiene una lista con todos las calificaciones.
     lista_calificaciones = \
         models.CalificacionConvocatoria.objects.filter(
         id_centro=id_centro, id_titulacion=id_titulacion,
@@ -548,7 +549,7 @@ def listCalificacionConvocatoria(request, nombre_centro,
                     lista_aux.append(calificacion)
 
             # La lista final a devolver sera la lista auxiliar.
-            lista_calificaciones = lista_calificaciones
+            lista_calificaciones = lista_aux
 
         else:
             busqueda = False
@@ -574,3 +575,62 @@ def listCalificacionConvocatoria(request, nombre_centro,
         'curso_academico': curso_academico,
         'dni_pasaporte': dni_pasaporte,
         'orden': orden})
+
+def generarPDFListaCalificacionesConvocatoria(request, nombre_centro,
+    nombre_titulacion, plan_estudios, nombre_asignatura,
+    curso_academico, dni_pasaporte, busqueda):
+    # Se obtiene la posible matricula.
+    instancia_matricula = \
+        vistasMatricula.obtenerMatricula(
+        nombre_centro, nombre_titulacion, plan_estudios,
+        nombre_asignatura, curso_academico, dni_pasaporte)
+
+    # Se comprueba que exista la matricula.
+    if not instancia_matricula:
+        return HttpResponseRedirect(reverse(
+            'selectAlumno_CalificacionConvocatoria',
+            kwargs={'nombre_centro': nombre_centro,
+            'nombre_titulacion': nombre_titulacion,
+            'plan_estudios': plan_estudios,
+            'nombre_asignatura': nombre_asignatura,
+            'curso_academico': curso_academico,
+            'tipo': 'list'}))
+    else:
+        id_centro = instancia_matricula.id_centro
+        id_titulacion = \
+            instancia_matricula.id_titulacion
+        id_asignatura = \
+            instancia_matricula.id_asignatura
+
+    # Se obtiene una lista con todos las calificaciones.
+    lista_calificaciones = \
+        models.CalificacionConvocatoria.objects.filter(
+        id_centro=id_centro, id_titulacion=id_titulacion,
+        id_asignatura=id_asignatura,
+        curso_academico=curso_academico,
+        dni_pasaporte=dni_pasaporte).all()
+
+    # Se ha realizado una busqueda.
+    if busqueda != 'False':
+        # Se crea una lista auxiliar que albergara el resultado de
+            # la busqueda.
+            lista_aux = []
+
+            # Se recorren los elementos determinando si coinciden con
+            # la busqueda.
+            for calificacion in lista_calificaciones:
+                # Se crea una cadena auxiliar para examinar si se
+                # encuentra el resultado de la busqueda.
+                cadena = unicode(calificacion.convocatoria)
+
+                # Si se encuentra la busqueda el elemento se incluye en
+                # la lista auxiliar.
+                if cadena.find(busqueda) >= 0:
+                    lista_aux.append(calificacion)
+
+            # La lista final a devolver sera la lista auxiliar.
+            lista_calificaciones = lista_aux
+
+    return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
+        {'mylist': lista_calificaciones,
+        'name': 'calificaciones convocatoria',})

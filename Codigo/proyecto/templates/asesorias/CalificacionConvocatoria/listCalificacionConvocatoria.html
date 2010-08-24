@@ -13,7 +13,7 @@
     </div>
 
     <a href="{% url addCalificacionConvocatoria nombre_centro nombre_titulacion plan_estudios nombre_asignatura curso_academico dni_pasaporte %}" class="addlink">Crear nuevo</a>
-    <a href="{# url generarPDFListaMatriculas nombre_centro nombre_titulacion plan_estudios nombre_asignatura curso_academico busqueda #}" class="pdflink">Generar PDF</a>
+    <a href="{% url generarPDFListaCalificacionesConvocatoria nombre_centro nombre_titulacion plan_estudios nombre_asignatura curso_academico dni_pasaporte busqueda %}" class="pdflink">Generar PDF</a>
 
     <div class="search">
 
