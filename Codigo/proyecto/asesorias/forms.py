@@ -155,10 +155,12 @@ class PlantillaEntrevistaOficialForm(forms.ModelForm):
     class Meta:
         model = models.PlantillaEntrevistaOficial
 
-class PreguntaOficialForm(forms.ModelForm):
-    plantilla_entrevista_oficial = forms.ModelChoiceField(
-        models.PlantillaEntrevistaOficial.objects.all())
+class PlantillaEntrevistaOficialFormSelect(forms.Form):
+    entrevista_oficial = forms.ModelChoiceField(
+        models.PlantillaEntrevistaOficial.objects.order_by(
+        'descripcion'))
 
+class PreguntaOficialForm(forms.ModelForm):
     class Meta:
         model = models.PreguntaOficial
 

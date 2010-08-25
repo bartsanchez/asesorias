@@ -365,8 +365,7 @@ class PreguntaOficial(models.Model):
             "id_pregunta_oficial")
 
     def __unicode__(self):
-        return (unicode(self.id_entrevista_oficial) + ' : '+
-            unicode(self.id_pregunta_oficial))
+        return unicode(self.enunciado)
 
 class Reunion(models.Model):
     TIPOS_REUNION = (

@@ -7,7 +7,7 @@ VISTAS = 'asesorias.vistas.'
 # ---------------------------- #
 
 urlpatterns = patterns(VISTAS + 'vistasPreguntaOficial',
-    url(r'^add/$',
+    url(r'^add/(?P<id_entrevista_oficial>[\s\w]*)/$',
         'addPreguntaOficial', name='addPreguntaOficial'),
 
     url(r'^(?P<id_entrevista_oficial>\d+)/' +
@@ -20,6 +20,10 @@ urlpatterns = patterns(VISTAS + 'vistasPreguntaOficial',
 
         'delPreguntaOficial', name='delPreguntaOficial'),
 
-    url(r'^list/$',
+    url(r'^list/(?P<entrevista_oficial>[\s\w]+)/(?P<orden>[\s\w]*)/$',
         'listPreguntaOficial', name='listPreguntaOficial'),
+
+    url(r'^select/$',
+        'selectEntrevistaOficial',
+        name='selectEntrevistaOficial_PreguntaOficial'),
 )
