@@ -9,7 +9,7 @@
     </div>
 
     <a href="{% url addPreguntaOficial entrevista_oficial %}" class="addlink">Crear nuevo</a>
-    <a href="{# url generarPDFListaTitulaciones centro busqueda #}" class="pdflink">Generar PDF</a>
+    <a href="{% url generarPDFListaPreguntasOficiales entrevista_oficial busqueda %}" class="pdflink">Generar PDF</a>
 
     <div class="search">
 

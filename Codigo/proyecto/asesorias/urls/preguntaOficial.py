@@ -26,4 +26,10 @@ urlpatterns = patterns(VISTAS + 'vistasPreguntaOficial',
     url(r'^select/$',
         'selectEntrevistaOficial',
         name='selectEntrevistaOficial_PreguntaOficial'),
+
+    url(r'^generarPDF/(?P<entrevista_oficial>[\s\w]+)/' +
+        '(?P<busqueda>[\s\w]+)/$',
+
+        'generarPDFListaPreguntasOficiales',
+        name='generarPDFListaPreguntasOficiales'),
 )
