@@ -57,7 +57,7 @@
         <tr>
             <th scope="row"><a href="{% url editPreguntaOficial entrevista_oficial pregunta_oficial.id_pregunta_oficial %}">{{ pregunta_oficial }}</a></th>
             <td><a href="{% url editPreguntaOficial entrevista_oficial pregunta_oficial.id_pregunta_oficial %}" class="editlink">Editar</a></td>
-            <td><a href="{# url delTitulacion titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios #}" class="deletelink">Eliminar</a></td>
+            <td><a href="{% url delPreguntaOficial entrevista_oficial pregunta_oficial.id_pregunta_oficial %}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}
 

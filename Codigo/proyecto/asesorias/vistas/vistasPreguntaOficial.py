@@ -201,12 +201,14 @@ def delPreguntaOficial(request, id_entrevista_oficial,
     if instancia_pregunta_oficial:
         instancia_pregunta_oficial.delete()
         # Redirige a la pagina de listar preguntas oficiales.
-        return HttpResponseRedirect(reverse('listPreguntaOficial'))
+        return HttpResponseRedirect(reverse('listPreguntaOficial',
+            kwargs={'entrevista_oficial': id_entrevista_oficial,
+            'orden': 'enunciado'}))
     # La pregunta no existe.
     else:
         error = True
     return render_to_response(PATH + 'delPreguntaOficial.html',
-        {'error': error})
+        {'user': request.user, 'error': error})
 
 def selectEntrevistaOficial(request):
     # Se ha introducido una plantilla oficial.

@@ -1,9 +1,15 @@
-<h1>Eliminar pregunta oficial.</h1>
+{% extends "asesorias/Base/base_plantillas.html" %}
 
-{% if error %}
+{% block content %}
 
-<p>No existe tal pregunta oficial.</p>
+    <h1>Eliminar pregunta oficial.</h1>
 
-<a href="../../../list">Volver</a>
+    {% if error %}
 
-{% endif %}
+    <p>No existe tal pregunta oficial.</p>
+
+    <a href="{% url selectEntrevistaOficial_PreguntaOficial %}">Lista de preguntas oficiales</a>
+
+    {% endif %}
+
+{% endblock %}
