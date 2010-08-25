@@ -138,7 +138,7 @@ def addTitulacion(request, nombre_centro):
     else:
         form = forms.TitulacionForm(initial={'id_centro': id_centro})
     return render_to_response(PATH + 'addTitulacion.html',
-        {'form': form})
+        {'user': request.user, 'form': form})
 
 def editTitulacion(request, nombre_centro, nombre_titulacion,
     plan_estudios):
