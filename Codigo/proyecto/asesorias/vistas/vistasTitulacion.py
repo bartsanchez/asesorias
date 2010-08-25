@@ -187,7 +187,7 @@ def editTitulacion(request, nombre_centro, nombre_titulacion,
     else:
         form = False
     return render_to_response(PATH + 'editTitulacion.html',
-        {'form': form})
+        {'user': request.user, 'form': form})
 
 def delTitulacion(request, nombre_centro, nombre_titulacion,
     plan_estudios):
@@ -205,7 +205,7 @@ def delTitulacion(request, nombre_centro, nombre_titulacion,
     else:
         error = True
     return render_to_response(PATH + 'delTitulacion.html',
-        {'error': error})
+        {'user': request.user, 'error': error})
 
 def selectCentro(request):
     # Se ha introducido un centro.
