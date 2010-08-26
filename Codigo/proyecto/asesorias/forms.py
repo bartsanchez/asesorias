@@ -91,6 +91,19 @@ class AsesorCursoAcademicoForm(forms.ModelForm):
     class Meta:
         model = models.AsesorCursoAcademico
 
+class AsesorCursoAcademicoFormSelect(forms.Form):
+    asesor_curso_academico = forms.ModelChoiceField(
+        queryset=models.AsesorCursoAcademico.objects.all())
+
+    # Necesario para actualizar el queryset en tiempo de ejecucion, a
+    # traves del argumento dni_pasaporte.
+    def __init__(self, dni_pasaporte, *args, **kwargs):
+        super(AsesorCursoAcademicoFormSelect,
+            self).__init__(*args, **kwargs)
+        self.fields['asesor_curso_academico'].queryset = \
+            models.AsesorCursoAcademico.objects.filter(
+            dni_pasaporte=dni_pasaporte).order_by('curso_academico')
+
 class PlantillaEntrevistaAsesorForm(forms.ModelForm):
     asesor_curso_academico = forms.ModelChoiceField(
         models.AsesorCursoAcademico.objects.all())

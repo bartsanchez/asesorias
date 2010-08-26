@@ -1,0 +1,24 @@
+{% extends "asesorias/Base/base_plantillas.html" %}
+
+{% block content %}
+
+    <h1>Lista de plantillas de entrevista de asesor.</h1>
+
+    <h2>Seleccionar asesor.</h2>
+
+    <div class="form">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                {% for field in form %}
+                    <div><p>{{ field.label_tag }}: {{ field }}<a href="{% url addAsesor %}" class="addlink" target="_new"></a></p></div>
+                    <div><input type="submit" value="OK"/></p></div>
+                {% endfor %}
+            </div>
+
+        </form>
+
+    </div>
+
+{% endblock %}

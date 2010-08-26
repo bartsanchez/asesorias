@@ -2,7 +2,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
-from asesorias.vistas import vistasAsesorCursoAcademico
+from asesorias.vistas import vistasAsesor, vistasAsesorCursoAcademico
 
 PATH = 'asesorias/PlantillaEntrevistaAsesor/'
 
@@ -233,12 +233,131 @@ def delPlantillaEntrevistaAsesor(request, dni_pasaporte,
     return render_to_response(PATH +'delPlantillaEntrevistaAsesor.html',
         {'error': error})
 
-def listPlantillaEntrevistaAsesor(request):
+def selectAsesor(request):
+    # Se ha introducido un asesor.
+    if request.method == 'POST':
+
+        # Se obtiene el asesor y se valida.
+        form = forms.AsesorFormSelect(request.POST)
+
+        # Si es valido se redirige a listar asesores curso academico.
+        if form.is_valid():
+            asesor = request.POST['asesor']
+
+            return HttpResponseRedirect(
+                reverse('selectAsesorCA_PlantillaEntrevistaAsesor',
+                kwargs={'dni_pasaporte': asesor}))
+
+        else:
+            return HttpResponseRedirect(
+                reverse('selectAsesor_PlantillaEntrevistaAsesor'))
+
+    else:
+        form = forms.AsesorFormSelect()
+
+    return render_to_response(PATH + 'selectAsesor.html',
+        {'user': request.user, 'form': form})
+
+def selectAsesorCursoAcademico(request, dni_pasaporte):
+    # Se obtiene el posible asesor.
+    instancia_asesor = vistasAsesor.obtenerAsesor(dni_pasaporte)
+
+    # Se comprueba que exista el asesor.
+    if not instancia_asesor:
+        return HttpResponseRedirect(
+            reverse('selectAsesor_PlantillaEntrevistaAsesor'))
+
+    # Se ha introducido un asesor curso academico.
+    if request.method == 'POST':
+        # Se obtiene el alumno curso academico y se valida.
+        form = forms.AsesorCursoAcademicoFormSelect(dni_pasaporte,
+            request.POST)
+
+        # Si es valido se redirige a listar plantillas.
+        if form.is_valid():
+            asesor_curso_academico = \
+                request.POST['asesor_curso_academico']
+
+            curso_academico = models.AsesorCursoAcademico.objects.get(
+                pk=asesor_curso_academico).curso_academico
+
+            return HttpResponseRedirect(
+                reverse('listPlantillaEntrevistaAsesor',
+                kwargs={'dni_pasaporte': dni_pasaporte,
+                'curso_academico': curso_academico}))
+
+        else:
+            return HttpResponseRedirect(
+                reverse('selectAsesorCA_PlantillaEntrevistaAsesor',
+                kwargs={'dni_pasaporte': dni_pasaporte}))
+
+    else:
+        form = forms.AsesorCursoAcademicoFormSelect(
+            dni_pasaporte=dni_pasaporte)
+
+    return render_to_response(PATH + 'selectAsesorCursoAcademico.html',
+        {'user': request.user, 'form': form,
+        'dni_pasaporte': dni_pasaporte})
+
+def listPlantillaEntrevistaAsesor(request, dni_pasaporte,
+    curso_academico):
+    # Se obtiene el posible asesor curso academico.
+    instancia_asesor_curso_academico = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+        dni_pasaporte, curso_academico)
+
+    # Se comprueba que exista el asesor curso academico.
+    if not instancia_asesor_curso_academico:
+        return HttpResponseRedirect(
+            reverse('selectAsesorCA_PlantillaEntrevistaAsesor',
+            kwargs={'dni_pasaporte': dni_pasaporte}))
+
     # Se obtiene una lista con todos las plantillas de entrevista de
     # asesor.
     lista_plantillas_entrevista_asesor = \
-        models.PlantillaEntrevistaAsesor.objects.all()
+        models.PlantillaEntrevistaAsesor.objects.filter(
+        dni_pasaporte=dni_pasaporte,
+        curso_academico=curso_academico).all()
+
+    # Se ha realizado una busqueda.
+    if request.method == 'POST':
+        # Se obtienen los valores y se valida.
+        form = forms.SearchForm(request.POST)
+        # Si es valido se realiza la busqueda.
+        if form.is_valid():
+            busqueda = request.POST['busqueda']
+
+            # Se crea una lista auxiliar que albergara el resultado de
+            # la busqueda.
+            lista_aux = []
+
+            # Se recorren los elementos determinando si coinciden con
+            # la busqueda.
+            for plantilla in lista_plantillas_entrevista_asesor:
+                # Se crea una cadena auxiliar para examinar si se
+                # encuentra el resultado de la busqueda.
+                cadena = unicode(plantilla.descripcion)
+
+                # Si se encuentra la busqueda el elemento se incluye en
+                # la lista auxiliar.
+                if cadena.find(busqueda) >= 0:
+                    lista_aux.append(plantilla)
+
+            # La lista final a devolver sera la lista auxiliar.
+            lista_matriculas = lista_aux
+
+        else:
+            busqueda = False
+    else:
+        # Formulario para una posible busqueda.
+        form = forms.SearchForm()
+        busqueda = False
+
     return render_to_response(PATH +
         'listPlantillaEntrevistaAsesor.html',
-        {'lista_plantillas_entrevista_asesor':
-        lista_plantillas_entrevista_asesor})
+        {'user': request.user, 'form': form,
+        'lista_plantillas_entrevista_asesor':
+        lista_plantillas_entrevista_asesor,
+        'busqueda': busqueda,
+        'dni_pasaporte': dni_pasaporte,
+        'curso_academico': curso_academico})
