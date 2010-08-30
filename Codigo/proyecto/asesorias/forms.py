@@ -105,9 +105,6 @@ class AsesorCursoAcademicoFormSelect(forms.Form):
             dni_pasaporte=dni_pasaporte).order_by('curso_academico')
 
 class PlantillaEntrevistaAsesorForm(forms.ModelForm):
-    asesor_curso_academico = forms.ModelChoiceField(
-        models.AsesorCursoAcademico.objects.all())
-
     class Meta:
         model = models.PlantillaEntrevistaAsesor
 

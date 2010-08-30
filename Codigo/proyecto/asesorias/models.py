@@ -185,9 +185,7 @@ class PlantillaEntrevistaAsesor(models.Model):
             "id_entrevista_asesor")
 
     def __unicode__(self):
-        return (unicode(self.curso_academico) + ': ' +
-            unicode(self.dni_pasaporte) + ' -> ' +
-            unicode(self.id_entrevista_asesor))
+        return unicode(self.descripcion)
 
 class PreguntaAsesor(models.Model):
     codigo_preguntaAsesor = models.AutoField(primary_key=True)

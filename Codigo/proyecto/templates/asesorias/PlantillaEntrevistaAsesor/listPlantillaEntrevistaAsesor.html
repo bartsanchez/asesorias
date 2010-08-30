@@ -9,7 +9,7 @@
         <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAsesorCA_PlantillaEntrevistaAsesor dni_pasaporte %} class="updatelink"></a></p></div>
     </div>
 
-    <a href="{# url selectCentro_Matricula 'add' #}" class="addlink">Crear nuevo</a>
+    <a href="{% url addPlantillaEntrevistaAsesor dni_pasaporte curso_academico %}" class="addlink">Crear nuevo</a>
     <a href="{# url generarPDFListaMatriculas2 dni_pasaporte curso_academico busqueda #}" class="pdflink">Generar PDF</a>
 
     <div class="search">
@@ -35,7 +35,7 @@
         <table summary="Lista de plantillas de entrevista de asesor.">
         <caption><h2>Lista de plantillas de entrevista de asesor{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
 
-        {% if not lista_matriculas %}
+        {% if not lista_plantillas_entrevista_asesor %}
 
         <tr><th scope="row"><p>No existen actualmente plantillas de entrevista de asesor para este asesor curso académico en el sistema.</p></th></tr>
 
@@ -43,15 +43,15 @@
 
         {% if not busqueda %}
         <tr>
-            <th colspan="3"><a href='#'>Centro : Titulacion : Asignatura</a></th>
+            <th colspan="3"><a href='#'>Descripción</a></th>
         </tr>
         {% endif %}
 
-        {% for matricula in lista_matriculas %}
+        {% for plantilla in lista_plantillas_entrevista_asesor %}
         <tr>
-            <th scope="row"><a href="{# url editMatricula2 matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula.dni_pasaporte #}">{{ matricula.determinarNombreCentro }} : {{ matricula.determinarNombreTitulacion }} : {{ matricula.determinarNombreAsignatura }}</a></th>
+            <th scope="row"><a href="{# url editMatricula2 matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula.dni_pasaporte #}">{{ plantilla }}</a></th>
             <td><a href="{# url editMatricula2 matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula.dni_pasaporte #}" class="editlink">Editar</a></td>
-            <td><a href="{# url delMatricula2 matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula.dni_pasaporte #}" class="deletelink">Eliminar</a></td>
+            <td><a href="{% url delPlantillaEntrevistaAsesor dni_pasaporte curso_academico plantilla.id_entrevista_asesor %}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}
 

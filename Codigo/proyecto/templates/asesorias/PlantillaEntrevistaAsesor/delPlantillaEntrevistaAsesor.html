@@ -1,9 +1,15 @@
-<h1>Eliminar plantilla de entrevista de asesor.</h1>
+{% extends "asesorias/Base/base_plantillas.html" %}
 
-{% if error %}
+{% block content %}
 
-<p>No existe tal plantilla de entrevista de asesor.</p>
+    <h1>Eliminar plantilla de entrevista de asesor.</h1>
 
-<a href="../../../../list">Volver</a>
+    {% if error %}
 
-{% endif %}
+    <p>No existe tal plantilla de entrevista de asesor.</p>
+
+    <a href="{% url selectAsesor_PlantillaEntrevistaAsesor %}">Lista de plantillas de entrevista de asesor</a>
+
+    {% endif %}
+
+{% endblock %}
