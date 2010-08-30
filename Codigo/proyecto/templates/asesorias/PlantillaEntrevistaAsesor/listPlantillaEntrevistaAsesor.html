@@ -49,8 +49,8 @@
 
         {% for plantilla in lista_plantillas_entrevista_asesor %}
         <tr>
-            <th scope="row"><a href="{# url editMatricula2 matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula.dni_pasaporte #}">{{ plantilla }}</a></th>
-            <td><a href="{# url editMatricula2 matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula.dni_pasaporte #}" class="editlink">Editar</a></td>
+            <th scope="row"><a href="{% url editPlantillaEntrevistaAsesor dni_pasaporte curso_academico plantilla.id_entrevista_asesor %}">{{ plantilla }}</a></th>
+            <td><a href="{% url editPlantillaEntrevistaAsesor dni_pasaporte curso_academico plantilla.id_entrevista_asesor %}" class="editlink">Editar</a></td>
             <td><a href="{% url delPlantillaEntrevistaAsesor dni_pasaporte curso_academico plantilla.id_entrevista_asesor %}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}
