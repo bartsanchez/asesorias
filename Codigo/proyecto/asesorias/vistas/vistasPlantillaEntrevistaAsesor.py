@@ -138,7 +138,8 @@ def addPlantillaEntrevistaAsesor(request, dni_pasaporte,
             return HttpResponseRedirect(
                 reverse('listPlantillaEntrevistaAsesor',
                 kwargs={'dni_pasaporte': dni_pasaporte,
-                'curso_academico': curso_academico}))
+                'curso_academico': curso_academico,
+                'orden': 'descripcion'}))
     # Si aun no se ha rellenado el formulario, se genera uno en blanco.
     else:
         form = forms.PlantillaEntrevistaAsesorForm()
@@ -197,7 +198,8 @@ def editPlantillaEntrevistaAsesor(request, dni_pasaporte,
                 return HttpResponseRedirect(
                     reverse('listPlantillaEntrevistaAsesor',
                     kwargs={'dni_pasaporte': dni_pasaporte,
-                    'curso_academico': curso_academico}))
+                    'curso_academico': curso_academico,
+                    'orden': 'descripcion'}))
     # La plantilla de asesor no existe.
     else:
         form = False
@@ -221,7 +223,8 @@ def delPlantillaEntrevistaAsesor(request, dni_pasaporte,
         return HttpResponseRedirect(
             reverse('listPlantillaEntrevistaAsesor',
                 kwargs={'dni_pasaporte': dni_pasaporte,
-                'curso_academico': curso_academico}))
+                'curso_academico': curso_academico,
+                'orden': 'descripcion'}))
     # La plantilla no existe.
     else:
         error = True
@@ -279,7 +282,8 @@ def selectAsesorCursoAcademico(request, dni_pasaporte):
             return HttpResponseRedirect(
                 reverse('listPlantillaEntrevistaAsesor',
                 kwargs={'dni_pasaporte': dni_pasaporte,
-                'curso_academico': curso_academico}))
+                'curso_academico': curso_academico,
+                'orden': 'descripcion'}))
 
         else:
             return HttpResponseRedirect(
@@ -295,7 +299,7 @@ def selectAsesorCursoAcademico(request, dni_pasaporte):
         'dni_pasaporte': dni_pasaporte})
 
 def listPlantillaEntrevistaAsesor(request, dni_pasaporte,
-    curso_academico):
+    curso_academico, orden):
     # Se obtiene el posible asesor curso academico.
     instancia_asesor_curso_academico = \
         vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
@@ -312,7 +316,7 @@ def listPlantillaEntrevistaAsesor(request, dni_pasaporte,
     lista_plantillas_entrevista_asesor = \
         models.PlantillaEntrevistaAsesor.objects.filter(
         dni_pasaporte=dni_pasaporte,
-        curso_academico=curso_academico).all()
+        curso_academico=curso_academico).order_by('descripcion')
 
     # Se ha realizado una busqueda.
     if request.method == 'POST':
@@ -348,6 +352,10 @@ def listPlantillaEntrevistaAsesor(request, dni_pasaporte,
         form = forms.SearchForm()
         busqueda = False
 
+        if orden == '_descripcion':
+            lista_plantillas_entrevista_asesor = \
+                lista_plantillas_entrevista_asesor.reverse()
+
     return render_to_response(PATH +
         'listPlantillaEntrevistaAsesor.html',
         {'user': request.user, 'form': form,
@@ -355,4 +363,5 @@ def listPlantillaEntrevistaAsesor(request, dni_pasaporte,
         lista_plantillas_entrevista_asesor,
         'busqueda': busqueda,
         'dni_pasaporte': dni_pasaporte,
-        'curso_academico': curso_academico})
+        'curso_academico': curso_academico,
+        'orden': orden})
