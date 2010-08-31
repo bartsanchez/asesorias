@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
 from asesorias.vistas import vistasAsesor, vistasAsesorCursoAcademico
+from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/PlantillaEntrevistaAsesor/'
 
@@ -365,3 +366,33 @@ def listPlantillaEntrevistaAsesor(request, dni_pasaporte,
         'dni_pasaporte': dni_pasaporte,
         'curso_academico': curso_academico,
         'orden': orden})
+
+def generarPDFListaPlantillasEntrevistaAsesor(request, dni_pasaporte,
+    curso_academico,busqueda):
+    # Se obtiene el posible asesor curso academico.
+    instancia_asesor_curso_academico = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+        dni_pasaporte, curso_academico)
+
+    # Se comprueba que exista el asesor curso academico.
+    if not instancia_asesor_curso_academico:
+        return HttpResponseRedirect(
+            reverse('selectAsesorCA_PlantillaEntrevistaAsesor',
+            kwargs={'dni_pasaporte': dni_pasaporte}))
+
+    # Se obtiene una lista con todos las plantillas de entrevista de
+    # asesor.
+    lista_plantillas_entrevista_asesor = \
+        models.PlantillaEntrevistaAsesor.objects.filter(
+        dni_pasaporte=dni_pasaporte,
+        curso_academico=curso_academico).order_by('descripcion')
+
+    # Se ha realizado una busqueda.
+    if busqueda != 'False':
+        lista_plantillas_entrevista_asesor = \
+            lista_plantillas_entrevista_asesor.filter(
+            descripcion__contains=busqueda)
+
+    return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
+        {'mylist': lista_plantillas_entrevista_asesor,
+        'name': 'plantillas de entrevista de asesor',})
