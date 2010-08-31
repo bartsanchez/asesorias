@@ -2,8 +2,9 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
-from asesorias.vistas import vistasAsesor
-from asesorias.vistas import vistasPlantillaEntrevistaAsesor
+from asesorias.vistas import vistasAsesor, vistasAsesorCursoAcademico
+from asesorias.vistas import vistasPlantillaEntrevistaAsesor \
+    as vistasPEA
 
 PATH = 'asesorias/PreguntaAsesor/'
 
@@ -110,12 +111,12 @@ def addPreguntaAsesor(request):
 
         # Se determina el dni_pasaporte, curso academico e
         # id_entrevista_asesor para esa plantilla de asesor.
-        dni_pasaporte =
-            instancia_plantilla_entrevista_asesor.dni_pasaporte
-        curso_academico =
-            instancia_plantilla_entrevista_asesor.curso_academico
-        id_entrevista_asesor =
-            instancia_plantilla_entrevista_asesor.id_entrevista_asesor
+        dni_pasaporte = (
+            instancia_plantilla_entrevista_asesor.dni_pasaporte)
+        curso_academico = (
+            instancia_plantilla_entrevista_asesor.curso_academico)
+        id_entrevista_asesor = (
+            instancia_plantilla_entrevista_asesor.id_entrevista_asesor)
 
         # Se determina el siguiente id_pregunta_asesor para la plantilla
         # de entrevista de asesor.
@@ -156,7 +157,9 @@ def editPreguntaAsesor(request, dni_pasaporte, curso_academico,
         form = forms.PreguntaAsesorForm(
             instance=instancia_pregunta_asesor,
             initial={'plantilla_entrevista_asesor':
-            vistasPlantillaEntrevistaAsesor.obtenerPlantillaEntrevistaAsesor(dni_pasaporte, curso_academico, id_entrevista_asesor).codigo_plantillaEntrevistaAsesor})
+            vistasPEA.obtenerPlantillaEntrevistaAsesor(dni_pasaporte,
+            curso_academico,
+            id_entrevista_asesor).codigo_plantillaEntrevistaAsesor})
         # Se ha modificado el formulario original.
         if request.method == 'POST':
             # Se obtienen el resto de valores necesarios a traves de
@@ -167,24 +170,24 @@ def editPreguntaAsesor(request, dni_pasaporte, curso_academico,
 
             # Se obtiene una instancia de la plantilla de asesor a
             # traves de su id.
-            instancia_plantilla_entrevista_asesor = \
+            instancia_entrevista_asesor = \
                 models.PlantillaEntrevistaAsesor.objects.get(
                 pk=codigo_plantilla_entrevista_asesor)
 
             # Se determina el dni_pasaporte, curso academico e
             # id_entrevista_asesor para esa plantilla de asesor.
-            dni_pasaporte =
-                instancia_plantilla_entrevista_asesor.dni_pasaporte
-            curso_academico =
-                instancia_plantilla_entrevista_asesor.curso_academico
-            id_entrevista_asesor =
-                instancia_plantilla_entrevista_asesor.id_entrevista_asesor
+            dni_pasaporte = (
+                instancia_entrevista_asesor.dni_pasaporte)
+            curso_academico = (
+                instancia_entrevista_asesor.curso_academico)
+            id_entrevista_asesor = (
+                instancia_entrevista_asesor.id_entrevista_asesor)
 
             # Se determina el siguiente id_pregunta_asesor para la
             # plantilla de entrevista de asesor.
             id_pregunta_asesor = \
                 determinarSiguienteIdPreguntaDePlantillaDeAsesor(
-                instancia_plantilla_entrevista_asesor)
+                instancia_entrevista_asesor)
 
             # Datos necesarios para crear la nueva plantilla.
             datos_pregunta_asesor = {'dni_pasaporte': dni_pasaporte,
@@ -277,18 +280,11 @@ def selectAsesorCursoAcademico(request, dni_pasaporte, tipo):
             curso_academico = models.AsesorCursoAcademico.objects.get(
                 pk=asesor_curso_academico).curso_academico
 
-            #if tipo == 'add':
-                #return HttpResponseRedirect(
-                    #reverse('addPlantillaEntrevistaAsesor',
-                    #kwargs={'dni_pasaporte': dni_pasaporte,
-                    #'curso_academico': curso_academico}))
-
-            #else:
-                #return HttpResponseRedirect(
-                    #reverse('listPlantillaEntrevistaAsesor',
-                    #kwargs={'dni_pasaporte': dni_pasaporte,
-                    #'curso_academico': curso_academico,
-                    #'orden': 'descripcion'}))
+            return HttpResponseRedirect(
+                reverse('selectPEA_PreguntaAsesor',
+                kwargs={'dni_pasaporte': dni_pasaporte,
+                'curso_academico': curso_academico,
+                'tipo': tipo}))
 
         else:
             return HttpResponseRedirect(
@@ -303,6 +299,60 @@ def selectAsesorCursoAcademico(request, dni_pasaporte, tipo):
     return render_to_response(PATH + 'selectAsesorCursoAcademico.html',
         {'user': request.user, 'form': form,
         'dni_pasaporte': dni_pasaporte, 'tipo': tipo})
+
+def selectPlantillaEntrevistaAsesor(request, dni_pasaporte,
+    curso_academico, tipo):
+    # Se obtiene el posible asesor curso academico.
+    instancia_asesor_curso_academico = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+        dni_pasaporte, curso_academico)
+
+    # Se comprueba que exista el asesor curso academico.
+    if not instancia_asesor_curso_academico:
+        return HttpResponseRedirect(
+            reverse('selectAsesorCA_PreguntaAsesor',
+            kwargs={'dni_pasaporte': dni_pasaporte,
+            'tipo': tipo}))
+
+    # Se ha introducido una plantilla de entrevista de asesor.
+    if request.method == 'POST':
+        # Se obtiene la plantilla de entrevista de asesor y se valida.
+        form = forms.PlantillaEntrevistaAsesorFormSelect(dni_pasaporte,
+            curso_academico, request.POST)
+
+        # Si es valido se redirige a listar preguntas.
+        if form.is_valid():
+            entrevista_asesor = \
+                request.POST['entrevista_asesor']
+
+            import pdb; pdb.set_trace()
+
+            #if tipo == 'add':
+                #return HttpResponseRedirect(
+                    #reverse('addPreguntaAsesor',
+                    #kwargs={'dni_pasaporte': dni_pasaporte,
+                    #'curso_academico': curso_academico,
+                    #'entrevista_asesor': entrevista_asesor}))
+
+            #else:
+                #return HttpResponseRedirect(
+                    #reverse('listPreguntaAsesor',
+                    #kwargs={'dni_pasaporte': dni_pasaporte,
+                    #'curso_academico': curso_academico,
+                    #'entrevista_asesor': entrevista_asesor,
+                    #'orden': 'descripcion'}))
+
+    else:
+        form = forms.PlantillaEntrevistaAsesorFormSelect(
+            dni_pasaporte=dni_pasaporte,
+            curso_academico=curso_academico)
+
+    return render_to_response(PATH +
+        'selectPlantillaEntrevistaAsesor.html',
+        {'user': request.user, 'form': form,
+        'dni_pasaporte': dni_pasaporte,
+        'curso_academico': curso_academico,
+        'tipo': tipo})
 
 def listPreguntaAsesor(request):
     # Se obtiene una lista con todos las preguntas de asesor.

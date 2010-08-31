@@ -108,6 +108,22 @@ class PlantillaEntrevistaAsesorForm(forms.ModelForm):
     class Meta:
         model = models.PlantillaEntrevistaAsesor
 
+class PlantillaEntrevistaAsesorFormSelect(forms.Form):
+    entrevista_asesor = forms.ModelChoiceField(
+        models.PlantillaEntrevistaAsesor.objects.order_by(
+        'descripcion'))
+
+    # Necesario para actualizar el queryset en tiempo de ejecucion, a
+    # traves de los argumentos id_centro e id_titulacion.
+    def __init__(self, dni_pasaporte, curso_academico, *args, **kwargs):
+        super(PlantillaEntrevistaAsesorFormSelect, self).__init__(
+            *args, **kwargs)
+        self.fields['entrevista_asesor'].queryset = \
+            models.PlantillaEntrevistaAsesor.objects.filter(
+            dni_pasaporte=dni_pasaporte,
+            curso_academico=curso_academico).order_by(
+            'descripcion')
+
 class PreguntaAsesorForm(forms.ModelForm):
     plantilla_entrevista_asesor = forms.ModelChoiceField(
         models.PlantillaEntrevistaAsesor.objects.all())

@@ -33,4 +33,10 @@ urlpatterns = patterns(VISTAS + 'vistasPreguntaAsesor',
 
         'selectAsesorCursoAcademico',
         name='selectAsesorCA_PreguntaAsesor'),
+
+    url(r'^(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>[\s\w]+)/' +
+        'selectAsesorCursoAcademico/(?P<tipo>[\s\w]+)/$',
+
+        'selectPlantillaEntrevistaAsesor',
+        name='selectPEA_PreguntaAsesor'),
 )
