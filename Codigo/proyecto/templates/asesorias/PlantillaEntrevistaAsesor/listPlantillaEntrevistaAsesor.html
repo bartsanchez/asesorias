@@ -5,8 +5,8 @@
     <h1>Lista de plantillas de entrevista de asesor.</h1>
 
     <div class="form">
-        <div><p>Asesor: <b>{{ dni_pasaporte }}</b> <a href={% url selectAsesor_PlantillaEntrevistaAsesor %} class="updatelink"></a></p></div>
-        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAsesorCA_PlantillaEntrevistaAsesor dni_pasaporte %} class="updatelink"></a></p></div>
+        <div><p>Asesor: <b>{{ dni_pasaporte }}</b> <a href={% url selectAsesor_PlantillaEntrevistaAsesor 'list' %} class="updatelink"></a></p></div>
+        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAsesorCA_PlantillaEntrevistaAsesor dni_pasaporte 'list' %} class="updatelink"></a></p></div>
     </div>
 
     <a href="{% url addPlantillaEntrevistaAsesor dni_pasaporte curso_academico %}" class="addlink">Crear nuevo</a>

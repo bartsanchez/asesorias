@@ -108,7 +108,8 @@ def addPlantillaEntrevistaAsesor(request, dni_pasaporte,
     if not (instancia_asesor_curso_academico):
         return HttpResponseRedirect(
             reverse('selectAsesorCA_PlantillaEntrevistaAsesor',
-            kwargs={'dni_pasaporte': dni_pasaporte}))
+            kwargs={'dni_pasaporte': dni_pasaporte,
+            'tipo': 'add'}))
 
     # Se ha rellenado el formulario.
     if request.method == 'POST':
@@ -232,7 +233,7 @@ def delPlantillaEntrevistaAsesor(request, dni_pasaporte,
     return render_to_response(PATH +'delPlantillaEntrevistaAsesor.html',
         {'user': request.user, 'error': error})
 
-def selectAsesor(request):
+def selectAsesor(request, tipo):
     # Se ha introducido un asesor.
     if request.method == 'POST':
 
@@ -245,26 +246,28 @@ def selectAsesor(request):
 
             return HttpResponseRedirect(
                 reverse('selectAsesorCA_PlantillaEntrevistaAsesor',
-                kwargs={'dni_pasaporte': asesor}))
+                kwargs={'dni_pasaporte': asesor, 'tipo': tipo}))
 
         else:
             return HttpResponseRedirect(
-                reverse('selectAsesor_PlantillaEntrevistaAsesor'))
+                reverse('selectAsesor_PlantillaEntrevistaAsesor',
+                kwargs={'tipo': tipo}))
 
     else:
         form = forms.AsesorFormSelect()
 
     return render_to_response(PATH + 'selectAsesor.html',
-        {'user': request.user, 'form': form})
+        {'user': request.user, 'form': form, 'tipo': tipo})
 
-def selectAsesorCursoAcademico(request, dni_pasaporte):
+def selectAsesorCursoAcademico(request, dni_pasaporte, tipo):
     # Se obtiene el posible asesor.
     instancia_asesor = vistasAsesor.obtenerAsesor(dni_pasaporte)
 
     # Se comprueba que exista el asesor.
     if not instancia_asesor:
         return HttpResponseRedirect(
-            reverse('selectAsesor_PlantillaEntrevistaAsesor'))
+            reverse('selectAsesor_PlantillaEntrevistaAsesor',
+            kwargs={'tipo': tipo}))
 
     # Se ha introducido un asesor curso academico.
     if request.method == 'POST':
@@ -280,16 +283,24 @@ def selectAsesorCursoAcademico(request, dni_pasaporte):
             curso_academico = models.AsesorCursoAcademico.objects.get(
                 pk=asesor_curso_academico).curso_academico
 
-            return HttpResponseRedirect(
-                reverse('listPlantillaEntrevistaAsesor',
-                kwargs={'dni_pasaporte': dni_pasaporte,
-                'curso_academico': curso_academico,
-                'orden': 'descripcion'}))
+            if tipo == 'add':
+                return HttpResponseRedirect(
+                    reverse('addPlantillaEntrevistaAsesor',
+                    kwargs={'dni_pasaporte': dni_pasaporte,
+                    'curso_academico': curso_academico}))
+
+            else:
+                return HttpResponseRedirect(
+                    reverse('listPlantillaEntrevistaAsesor',
+                    kwargs={'dni_pasaporte': dni_pasaporte,
+                    'curso_academico': curso_academico,
+                    'orden': 'descripcion'}))
 
         else:
             return HttpResponseRedirect(
                 reverse('selectAsesorCA_PlantillaEntrevistaAsesor',
-                kwargs={'dni_pasaporte': dni_pasaporte}))
+                kwargs={'dni_pasaporte': dni_pasaporte,
+                'tipo': tipo}))
 
     else:
         form = forms.AsesorCursoAcademicoFormSelect(
@@ -297,7 +308,7 @@ def selectAsesorCursoAcademico(request, dni_pasaporte):
 
     return render_to_response(PATH + 'selectAsesorCursoAcademico.html',
         {'user': request.user, 'form': form,
-        'dni_pasaporte': dni_pasaporte})
+        'dni_pasaporte': dni_pasaporte, 'tipo': tipo})
 
 def listPlantillaEntrevistaAsesor(request, dni_pasaporte,
     curso_academico, orden):
@@ -310,7 +321,8 @@ def listPlantillaEntrevistaAsesor(request, dni_pasaporte,
     if not instancia_asesor_curso_academico:
         return HttpResponseRedirect(
             reverse('selectAsesorCA_PlantillaEntrevistaAsesor',
-            kwargs={'dni_pasaporte': dni_pasaporte}))
+            kwargs={'dni_pasaporte': dni_pasaporte,
+            'tipo': 'list'}))
 
     # Se obtiene una lista con todos las plantillas de entrevista de
     # asesor.
@@ -378,7 +390,8 @@ def generarPDFListaPlantillasEntrevistaAsesor(request, dni_pasaporte,
     if not instancia_asesor_curso_academico:
         return HttpResponseRedirect(
             reverse('selectAsesorCA_PlantillaEntrevistaAsesor',
-            kwargs={'dni_pasaporte': dni_pasaporte}))
+            kwargs={'dni_pasaporte': dni_pasaporte,
+            'tipo': 'list'}))
 
     # Se obtiene una lista con todos las plantillas de entrevista de
     # asesor.

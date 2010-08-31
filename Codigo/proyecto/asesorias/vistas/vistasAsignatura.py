@@ -269,7 +269,8 @@ def selectCentro(request, tipo):
 
         else:
             return HttpResponseRedirect(
-                reverse('selectCentro_Asignatura'))
+                reverse('selectCentro_Asignatura',
+                kwargs={'tipo': tipo}))
 
     else:
         form = forms.CentroFormSelect()
@@ -284,7 +285,8 @@ def selectTitulacion(request, nombre_centro, tipo):
     # Se comprueba que exista el centro.
     if not instancia_centro:
         return HttpResponseRedirect(
-            reverse('selectCentro_Asignatura'))
+            reverse('selectCentro_Asignatura',
+            kwargs={'tipo': tipo}))
     else:
         id_centro = instancia_centro.id_centro
 
