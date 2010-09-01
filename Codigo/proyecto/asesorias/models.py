@@ -383,9 +383,7 @@ class Reunion(models.Model):
             "id_reunion")
 
     def __unicode__(self):
-        return (unicode(self.curso_academico) + ': ' +
-            unicode(self.dni_pasaporte) + ' -> ' +
-            unicode(self.id_reunion))
+        return unicode(self.fecha)
 
 class CentroAdministradorCentro(models.Model):
     codigo_centro_administradorCentro = \

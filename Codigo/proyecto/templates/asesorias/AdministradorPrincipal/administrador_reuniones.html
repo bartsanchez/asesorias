@@ -1,25 +1,25 @@
 {% extends "asesorias/Base/base_reuniones.html" %}
 
-	{% block content %}
-			<h1>Administrador</h1>
+    {% block content %}
+            <h1>Administrador</h1>
 
-			<div class="module">
-				<table summary="Administración de reuniones.">
-				<caption><h2>Reuniones</h2></caption>
+            <div class="module">
+                <table summary="Administración de reuniones.">
+                <caption><h2>Reuniones</h2></caption>
 
-				<!-- Reuniones. -->
-				<tr>
-					<th scope="row"><a href="{% url listReunion %}">Reuniones</a></th>
-					<td><a href="{% url addReunion %}" class="addlink">Añadir</a></td>
-				</tr>
+                <!-- Reuniones. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAlumno_Reunion %}">Reuniones</a></th>
+                    <td><a href="{# url addReunion #}" class="addlink">Añadir</a></td>
+                </tr>
 
-				<!-- Reuniones - Preguntas de asesor. -->
-				<tr>
-					<th scope="row"><a href="{% url listReunion_preguntaAsesor %}">Reuniónes - Preguntas de asesor</a></th>
-					<td><a href="{% url addReunion_preguntaAsesor %}" class="addlink">Añadir</a></td>
-				</tr>
+                <!-- Reuniones - Preguntas de asesor. -->
+                <tr>
+                    <th scope="row"><a href="{% url listReunion_preguntaAsesor %}">Reuniónes - Preguntas de asesor</a></th>
+                    <td><a href="{% url addReunion_preguntaAsesor %}" class="addlink">Añadir</a></td>
+                </tr>
 
-				</table>
-			</div>
+                </table>
+            </div>
 
-	{% endblock %}
+    {% endblock %}

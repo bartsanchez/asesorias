@@ -1,22 +1,55 @@
-<h1>Añadir reunión.</h1>
+{% extends "asesorias/Base/base_reuniones.html" %}
 
-{{ form.errors }}
+{% block content %}
 
-<form action="" method="post">
-    {% for field in form %}
+    <h1>Añadir reunión.</h1>
 
-		<!-- Excluye los campos que forman parte de la clave que se controlarán por software. -->
-		{% ifnotequal field.name 'dni_pasaporte' %}
-		{% ifnotequal field.name 'curso_academico' %}
-		{% ifnotequal field.name 'id_reunion' %}
-			<div class="fieldWrapper">
-				{{ field.errors }}
-				{{ field.label_tag }}: {{ field }}
-			</div>
-		{% endifnotequal %}
-		{% endifnotequal %}
-		{% endifnotequal %}
+    <div class="form">
+        <div><p>Alumno: <b>{{ dni_pasaporte }}</b> <a href={# url selectAlumno_Reunion 'add' #} class="updatelink"></a></p></div>
+        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={# url selectAlumnoCursoAcademico_Reunion dni_pasaporte 'add' #} class="updatelink"></a></p></div>
+    </div>
 
-    {% endfor %}
-    <p><input type="submit" value="Añadir"/></p>
-</form>
+    {% if form.errors %}
+    <div id="form-error">
+        <p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}<li>{{ field.errors|striptags }}</li>{% endif %}
+            {% endfor %}
+            {% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="module">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Añadir reunión.">
+                <caption><h2>Añadir reunión</h2></caption>
+
+                {% for field in form %}
+
+                {# Excluye los campos que forman parte de la clave que se controlarán por software. #}
+                {% ifnotequal field.name 'curso_academico' %}
+                {% ifnotequal field.name 'dni_pasaporte' %}
+                {% ifnotequal field.name 'id_reunion' %}
+                <tr>
+                    <th scope="row">{{ field.label_tag }}</th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endifnotequal %}
+                {% endifnotequal %}
+                {% endifnotequal %}
+
+                {% endfor %}
+                </table>
+            </div>
+
+            <p><input type="submit" value="Confirmar"/></p>
+        </form>
+
+    </div>
+
+{% endblock %}

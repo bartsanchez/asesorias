@@ -188,9 +188,6 @@ class PreguntaOficialForm(forms.ModelForm):
         model = models.PreguntaOficial
 
 class ReunionForm(forms.ModelForm):
-    alumno_curso_academico = forms.ModelChoiceField(
-        models.AlumnoCursoAcademico.objects.all())
-
     class Meta:
         model = models.Reunion
 

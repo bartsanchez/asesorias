@@ -1,19 +1,63 @@
-<h1>Lista de reuniones.</h1>
+{% extends "asesorias/Base/base_reuniones.html" %}
 
-<a href="../add">Crear nuevo</a>
+{% block content %}
 
-{% if not lista_reuniones %}
+    <h1>Lista de reuniones.</h1>
 
-<p>No existen actualmente reuniones en el sistema.</p>
+    <div class="form">
+        <div><p>Alumno: <b>{{ dni_pasaporte }}</b> <a href={% url selectAlumno_Reunion %} class="updatelink"></a></p></div>
+        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAlumnoCursoAcademico_Reunion dni_pasaporte %} class="updatelink"></a></p></div>
+    </div>
 
-{% else %}
+    <a href="{% url addReunion dni_pasaporte curso_academico %}" class="addlink">Crear nuevo</a>
+    <a href="{# url generarPDFListaMatriculas2 dni_pasaporte curso_academico busqueda #}" class="pdflink">Generar PDF</a>
 
-	{% for reunion in lista_reuniones %}
-		<ul>
-			<li>{{ reunion }}</li>
-			<a href="../{{ reunion.dni_pasaporte }}/{{ reunion.curso_academico }}/{{ reunion.id_reunion }}/edit">Editar</a>
-			<a href="../{{ reunion.dni_pasaporte }}/{{ reunion.curso_academico }}/{{ reunion.id_reunion }}/del">Eliminar</a>
-		</ul>
-	{% endfor %}
+    <div class="search">
 
-{% endif %}
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Realizar búsqueda.">
+                {% for field in form %}
+                <tr>
+                    <th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="module">
+        <table summary="Lista de reuniones.">
+        <caption><h2>Lista de reuniones{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
+
+        {% if not lista_reuniones %}
+
+        <tr><th scope="row"><p>No existen actualmente reuniones para este alumno curso académico en el sistema.</p></th></tr>
+
+        {% else %}
+
+        {% if not busqueda %}
+        <tr>
+            <th colspan="3"><a href='#'>Fecha</a></th>
+        </tr>
+        {% endif %}
+
+        {% for reunion in lista_reuniones %}
+        <tr>
+            <th scope="row"><a href="{% url editReunion dni_pasaporte curso_academico reunion.id_reunion %}">{{ reunion }}</a></th>
+            <td><a href="{% url editReunion dni_pasaporte curso_academico reunion.id_reunion %}" class="editlink">Editar</a></td>
+            <td><a href="{# url delMatricula2 matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula.dni_pasaporte #}" class="deletelink">Eliminar</a></td>
+        </tr>
+        {% endfor %}
+
+        {% endif %}
+
+        </table>
+    </div>
+
+{% endblock %}

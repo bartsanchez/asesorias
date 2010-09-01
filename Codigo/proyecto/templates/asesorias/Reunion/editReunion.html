@@ -1,32 +1,65 @@
-<h1>Editar reunión.</h1>
+{% extends "asesorias/Base/base_reuniones.html" %}
 
-{% if not form %}
+{% block content %}
 
-<p>No existe tal reunión.</p>
+    <h1>Editar reunión.</h1>
 
-<a href="../../../../list">Volver</a>
+    <div class="form">
+        <div><p>Alumno: <b>{{ dni_pasaporte }}</b></p></div>
+        <div><p>Curso académico: <b>{{ curso_academico }}</b></p></div>
+    </div>
 
-{% else %}
+    {% if not form %}
 
-{{ form.errors }}
+    <p>No existe tal reunión.</p>
 
-<form action="" method="post">
-    {% for field in form %}
+    <a href="{% url selectAlumno_Reunion %}">Volver</a>
 
-		<!-- Excluye los campos que forman parte de la clave que se controlarán por software. -->
-		{% ifnotequal field.name 'dni_pasaporte' %}
-		{% ifnotequal field.name 'curso_academico' %}
-		{% ifnotequal field.name 'id_reunion' %}
-			<div class="fieldWrapper">
-				{{ field.errors }}
-				{{ field.label_tag }}: {{ field }}
-			</div>
-		{% endifnotequal %}
-		{% endifnotequal %}
-		{% endifnotequal %}
+    {% else %}
 
-    {% endfor %}
-    <p><input type="submit" value="Editar"/></p>
-</form>
+    {% if form.errors %}
+    <div id="form-error">
+        <p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}<li>{{ field.errors|striptags }}</li>{% endif %}
+            {% endfor %}
+            {% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
+        </ul>
+    </div>
+    {% endif %}
 
-{% endif %}
+    <div class="module">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Editar reunión.">
+                <caption><h2>Editar reunión</h2></caption>
+
+                {% for field in form %}
+
+                <!-- Excluye los campos que forman parte de la clave que se controlarán por software. -->
+                {% ifnotequal field.name 'dni_pasaporte' %}
+                {% ifnotequal field.name 'curso_academico' %}
+                {% ifnotequal field.name 'id_reunion' %}
+                <tr>
+                    <th scope="row">{{ field.label_tag }}</th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endifnotequal %}
+                {% endifnotequal %}
+                {% endifnotequal %}
+
+                {% endfor %}
+                </table>
+            </div>
+
+            <p><input type="submit" value="Confirmar"/></p>
+        </form>
+
+    </div>
+
+    {% endif %}
+
+{% endblock %}
