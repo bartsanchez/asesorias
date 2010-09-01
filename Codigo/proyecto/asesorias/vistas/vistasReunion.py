@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
 from asesorias.vistas import vistasAlumno, vistasAlumnoCursoAcademico
+from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/Reunion/'
 
@@ -353,3 +354,30 @@ def listReunion(request, dni_pasaporte, curso_academico, orden):
         'dni_pasaporte': dni_pasaporte,
         'curso_academico': curso_academico,
         'orden': orden})
+
+def generarPDFListaReuniones(request, dni_pasaporte,
+    curso_academico, busqueda):
+    # Se obtiene el posible alumno_curso_academico.
+    instancia_alumno_curso_academico = \
+        vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(
+        dni_pasaporte, curso_academico)
+
+    # Se comprueba que exista el alumno curso academico.
+    if not instancia_alumno_curso_academico:
+        return HttpResponseRedirect(
+            reverse('selectAlumnoCursoAcademico_Reunion',
+            kwargs={'dni_pasaporte': dni_pasaporte}))
+
+    # Se obtiene una lista con todos las reuniones.
+    lista_reuniones = models.Reunion.objects.filter(
+        dni_pasaporte=dni_pasaporte,
+        curso_academico=curso_academico).order_by('id_reunion')
+
+    # Se ha realizado una busqueda.
+    if busqueda != 'False':
+        lista_reuniones = lista_reuniones.filter(
+            fecha__contains=busqueda)
+
+    return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
+        {'mylist': lista_reuniones,
+        'name': 'reuniones',})
