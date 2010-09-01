@@ -400,5 +400,71 @@
       "id_entrevista_oficial": 2,
       "enunciado": "\u00bfesto es una pregunta2?"
     }
+  },
+  {
+    "pk": 1,
+    "model": "asesorias.plantillaentrevistaasesor",
+    "fields": {
+      "descripcion": "entrevista asesor 1",
+      "id_entrevista_asesor": 1,
+      "curso_academico": 2010,
+      "dni_pasaporte": "30303030L",
+      "ultima_modificacion": "2010-09-01"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asesorias.plantillaentrevistaasesor",
+    "fields": {
+      "descripcion": "entrevista asesor 2",
+      "id_entrevista_asesor": 2,
+      "curso_academico": 2010,
+      "dni_pasaporte": "30303030L",
+      "ultima_modificacion": "2010-09-01"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "asesorias.plantillaentrevistaasesor",
+    "fields": {
+      "descripcion": "otra entrevista asesor 1",
+      "id_entrevista_asesor": 1,
+      "curso_academico": 2008,
+      "dni_pasaporte": "12345678T",
+      "ultima_modificacion": "2010-09-01"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "asesorias.plantillaentrevistaasesor",
+    "fields": {
+      "descripcion": "otra entrevista asesor 2",
+      "id_entrevista_asesor": 2,
+      "curso_academico": 2008,
+      "dni_pasaporte": "12345678T",
+      "ultima_modificacion": "2010-09-01"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "asesorias.plantillaentrevistaasesor",
+    "fields": {
+      "descripcion": "una entrevista de asesor mas 1",
+      "id_entrevista_asesor": 1,
+      "curso_academico": 2004,
+      "dni_pasaporte": "11111111A",
+      "ultima_modificacion": "2010-09-01"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "asesorias.plantillaentrevistaasesor",
+    "fields": {
+      "descripcion": "una entrevista de asesor mas 2",
+      "id_entrevista_asesor": 2,
+      "curso_academico": 2004,
+      "dni_pasaporte": "11111111A",
+      "ultima_modificacion": "2010-09-01"
+    }
   }
 ]
