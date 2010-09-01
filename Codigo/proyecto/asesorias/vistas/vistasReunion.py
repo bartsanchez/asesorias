@@ -266,10 +266,17 @@ def selectAlumnoCursoAcademico(request, dni_pasaporte, tipo):
             curso_academico = models.AlumnoCursoAcademico.objects.get(
                 pk=alumno_curso_academico).curso_academico
 
-            return HttpResponseRedirect(
-                reverse('listReunion',
-                kwargs={'dni_pasaporte': dni_pasaporte,
-                'curso_academico': curso_academico, 'orden': 'fecha'}))
+            if tipo == 'add':
+                return HttpResponseRedirect(
+                    reverse('addReunion',
+                    kwargs={'dni_pasaporte': dni_pasaporte,
+                    'curso_academico': curso_academico}))
+
+            else:
+                return HttpResponseRedirect(
+                    reverse('listReunion',
+                    kwargs={'dni_pasaporte': dni_pasaporte,
+                    'curso_academico': curso_academico, 'orden': 'fecha'}))
 
         else:
             return HttpResponseRedirect(

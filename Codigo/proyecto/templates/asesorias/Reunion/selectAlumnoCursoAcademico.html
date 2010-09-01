@@ -2,7 +2,13 @@
 
 {% block content %}
 
+    {% ifequal tipo 'add' %}
+    <h1>Añadir reunión.</h1>
+
+    {% else %}
     <h1>Lista de reuniones.</h1>
+
+    {% endifequal %}
 
     <h2>Seleccionar curso académico.</h2>
 
