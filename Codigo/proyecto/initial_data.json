@@ -466,5 +466,173 @@
       "dni_pasaporte": "11111111A",
       "ultima_modificacion": "2010-09-01"
     }
+  },
+  {
+    "pk": 1,
+    "model": "asesorias.preguntaasesor",
+    "fields": {
+      "id_entrevista_asesor": 1,
+      "id_pregunta_asesor": 1,
+      "dni_pasaporte": "30303030L",
+      "enunciado": "pregunta 1",
+      "ultima_modificacion": "2010-09-01",
+      "curso_academico": 2010
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asesorias.preguntaasesor",
+    "fields": {
+      "id_entrevista_asesor": 1,
+      "id_pregunta_asesor": 2,
+      "dni_pasaporte": "30303030L",
+      "enunciado": "pregunta 2",
+      "ultima_modificacion": "2010-09-01",
+      "curso_academico": 2010
+    }
+  },
+  {
+    "pk": 3,
+    "model": "asesorias.preguntaasesor",
+    "fields": {
+      "id_entrevista_asesor": 1,
+      "id_pregunta_asesor": 3,
+      "dni_pasaporte": "30303030L",
+      "enunciado": "pregunta 3",
+      "ultima_modificacion": "2010-09-01",
+      "curso_academico": 2010
+    }
+  },
+  {
+    "pk": 4,
+    "model": "asesorias.preguntaasesor",
+    "fields": {
+      "id_entrevista_asesor": 2,
+      "id_pregunta_asesor": 1,
+      "dni_pasaporte": "30303030L",
+      "enunciado": "otra pregunta 1",
+      "ultima_modificacion": "2010-09-01",
+       "curso_academico": 2010
+    }
+  },
+  {
+    "pk": 5,
+    "model": "asesorias.preguntaasesor",
+    "fields": {
+      "id_entrevista_asesor": 2,
+      "id_pregunta_asesor": 2,
+      "dni_pasaporte": "30303030L",
+      "enunciado": "otra pregunta 2",
+      "ultima_modificacion": "2010-09-01",
+      "curso_academico": 2010
+    }
+  },
+  {
+    "pk": 6,
+    "model": "asesorias.preguntaasesor",
+    "fields": {
+      "id_entrevista_asesor": 2,
+      "id_pregunta_asesor": 3,
+      "dni_pasaporte": "30303030L",
+      "enunciado": "otra pregunta 3",
+      "ultima_modificacion": "2010-09-01",
+      "curso_academico": 2010
+    }
+  },
+  {
+    "pk": 7,
+    "model": "asesorias.preguntaasesor",
+    "fields": {
+      "id_entrevista_asesor": 1,
+      "id_pregunta_asesor": 1,
+      "dni_pasaporte": "12345678T",
+      "enunciado": "esto es una pregunta",
+      "ultima_modificacion": "2010-09-01",
+      "curso_academico": 2008
+    }
+  },
+  {
+    "pk": 8,
+    "model": "asesorias.preguntaasesor",
+    "fields": {
+      "id_entrevista_asesor": 1,
+      "id_pregunta_asesor": 2,
+      "dni_pasaporte": "12345678T",
+      "enunciado": "esto es otra pregunta",
+      "ultima_modificacion": "2010-09-01",
+      "curso_academico": 2008
+    }
+  },
+  {
+    "pk": 9,
+    "model": "asesorias.preguntaasesor",
+    "fields": {
+      "id_entrevista_asesor": 2,
+      "id_pregunta_asesor": 1,
+      "dni_pasaporte": "12345678T",
+      "enunciado": "p1",
+      "ultima_modificacion": "2010-09-01",
+      "curso_academico": 2008
+    }
+  },
+  {
+    "pk": 10,
+    "model": "asesorias.preguntaasesor",
+    "fields": {
+      "id_entrevista_asesor": 2,
+      "id_pregunta_asesor": 2,
+      "dni_pasaporte": "12345678T",
+      "enunciado": "p2",
+      "ultima_modificacion": "2010-09-01",
+      "curso_academico": 2008
+    }
+  },
+  {
+    "pk": 11,
+    "model": "asesorias.preguntaasesor",
+    "fields": {
+      "id_entrevista_asesor": 1,
+      "id_pregunta_asesor": 1,
+      "dni_pasaporte": "11111111A",
+      "enunciado": "pre1",
+      "ultima_modificacion": "2010-09-01",
+      "curso_academico": 2004
+    }
+  },
+  {
+    "pk": 12,
+    "model": "asesorias.preguntaasesor",
+    "fields": {
+      "id_entrevista_asesor": 1,
+      "id_pregunta_asesor": 2,
+      "dni_pasaporte": "11111111A",
+      "enunciado": "pre2",
+      "ultima_modificacion": "2010-09-01",
+      "curso_academico": 2004
+    }
+  },
+  {
+    "pk": 13,
+    "model": "asesorias.preguntaasesor",
+    "fields": {
+      "id_entrevista_asesor": 2,
+      "id_pregunta_asesor": 1,
+      "dni_pasaporte": "11111111A",
+      "enunciado": "pregunta1",
+      "ultima_modificacion": "2010-09-01",
+      "curso_academico": 2004
+    }
+  },
+  {
+    "pk": 14,
+    "model": "asesorias.preguntaasesor",
+    "fields": {
+      "id_entrevista_asesor": 2,
+      "id_pregunta_asesor": 2,
+      "dni_pasaporte": "11111111A",
+      "enunciado": "pregunta2",
+      "ultima_modificacion": "2010-09-01",
+      "curso_academico": 2004
+    }
   }
 ]
