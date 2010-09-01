@@ -5,6 +5,7 @@ from asesorias import models, forms
 from asesorias.vistas import vistasAsesor, vistasAsesorCursoAcademico
 from asesorias.vistas import vistasPlantillaEntrevistaAsesor \
     as vistasPEA
+from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/PreguntaAsesor/'
 
@@ -138,7 +139,7 @@ def addPreguntaAsesor(request, dni_pasaporte, curso_academico,
             return HttpResponseRedirect(reverse('listPreguntaAsesor',
                 kwargs={'dni_pasaporte': dni_pasaporte,
                 'curso_academico': curso_academico,
-                'entrevista_asesor': entrevista_asesor,
+                'id_entrevista_asesor': entrevista_asesor,
                 'orden': 'list'}))
     # Si aun no se ha rellenado el formulario, se genera uno en blanco.
     else:
@@ -197,7 +198,7 @@ def editPreguntaAsesor(request, dni_pasaporte, curso_academico,
                     reverse('listPreguntaAsesor',
                     kwargs={'dni_pasaporte': dni_pasaporte,
                     'curso_academico': curso_academico,
-                    'entrevista_asesor': id_entrevista_asesor,
+                    'id_entrevista_asesor': id_entrevista_asesor,
                     'orden': 'list'}))
     # La pregunta de asesor no existe.
     else:
@@ -221,7 +222,7 @@ def delPreguntaAsesor(request, dni_pasaporte, curso_academico,
         return HttpResponseRedirect(reverse('listPreguntaAsesor',
                 kwargs={'dni_pasaporte': dni_pasaporte,
                 'curso_academico': curso_academico,
-                'entrevista_asesor': id_entrevista_asesor,
+                'id_entrevista_asesor': id_entrevista_asesor,
                 'orden': 'list'}))
     # La pregunta no existe.
     else:
@@ -340,7 +341,7 @@ def selectPlantillaEntrevistaAsesor(request, dni_pasaporte,
                     reverse('listPreguntaAsesor',
                     kwargs={'dni_pasaporte': dni_pasaporte,
                     'curso_academico': curso_academico,
-                    'entrevista_asesor': entrevista_asesor,
+                    'id_entrevista_asesor': entrevista_asesor,
                     'orden': 'descripcion'}))
 
     else:
@@ -356,12 +357,12 @@ def selectPlantillaEntrevistaAsesor(request, dni_pasaporte,
         'tipo': tipo})
 
 def listPreguntaAsesor(request, dni_pasaporte, curso_academico,
-    entrevista_asesor, orden):
+    id_entrevista_asesor, orden):
     # Se comprueba que exista la plantilla de entrevista de asesor
     # pasada por argumento.
     instancia_entrevista_asesor = \
         vistasPEA.obtenerPlantillaEntrevistaAsesor(dni_pasaporte,
-        curso_academico, entrevista_asesor)
+        curso_academico, id_entrevista_asesor)
 
     # La plantilla de entrevista de asesor no existe, se redirige.
     if not instancia_entrevista_asesor:
@@ -373,7 +374,7 @@ def listPreguntaAsesor(request, dni_pasaporte, curso_academico,
     # Se obtiene una lista con todas las preguntas de asesor.
     lista_preguntas_asesor = models.PreguntaAsesor.objects.filter(
         dni_pasaporte=dni_pasaporte, curso_academico=curso_academico,
-        id_entrevista_asesor=entrevista_asesor).order_by('enunciado')
+        id_entrevista_asesor=id_entrevista_asesor).order_by('enunciado')
 
     # Se ha realizado una busqueda.
     if request.method == 'POST':
@@ -418,6 +419,34 @@ def listPreguntaAsesor(request, dni_pasaporte, curso_academico,
         'busqueda': busqueda,
         'dni_pasaporte': dni_pasaporte,
         'curso_academico': curso_academico,
-        'entrevista_asesor': entrevista_asesor,
+        'entrevista_asesor': id_entrevista_asesor,
         'orden': orden})
 
+def generarPDFListaPreguntasAsesor(request, dni_pasaporte,
+    curso_academico, id_entrevista_asesor, busqueda):
+    # Se comprueba que exista la plantilla de entrevista de asesor
+    # pasada por argumento.
+    instancia_entrevista_asesor = \
+        vistasPEA.obtenerPlantillaEntrevistaAsesor(dni_pasaporte,
+        curso_academico, id_entrevista_asesor)
+
+    # La plantilla de entrevista de asesor no existe, se redirige.
+    if not instancia_entrevista_asesor:
+        return HttpResponseRedirect(reverse('selectPEA_PreguntaAsesor',
+        kwargs={'dni_pasaporte': dni_pasaporte,
+        'curso_academico': curso_academico,
+        'tipo': 'list'}))
+
+    # Se obtiene una lista con todas las preguntas de asesor.
+    lista_preguntas_asesor = models.PreguntaAsesor.objects.filter(
+        dni_pasaporte=dni_pasaporte, curso_academico=curso_academico,
+        id_entrevista_asesor=id_entrevista_asesor).order_by('enunciado')
+
+    # Se ha realizado una busqueda.
+    if busqueda != 'False':
+        lista_preguntas_asesor = lista_preguntas_asesor.filter(
+            enunciado__contains=busqueda)
+
+    return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
+        {'mylist': lista_preguntas_asesor,
+        'name': 'preguntas de asesor',})

@@ -25,7 +25,7 @@ urlpatterns = patterns(VISTAS + 'vistasPreguntaAsesor',
         'delPreguntaAsesor', name='delPreguntaAsesor'),
 
     url(r'^list/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/' +
-        '(?P<entrevista_asesor>[\s\w]+)/(?P<orden>[\s\w]+)/$',
+        '(?P<id_entrevista_asesor>\d+)/(?P<orden>[\s\w]+)/$',
 
         'listPreguntaAsesor', name='listPreguntaAsesor'),
 
@@ -43,4 +43,11 @@ urlpatterns = patterns(VISTAS + 'vistasPreguntaAsesor',
 
         'selectPlantillaEntrevistaAsesor',
         name='selectPEA_PreguntaAsesor'),
+
+    url(r'^generarPDF/(?P<dni_pasaporte>[\s\w]+)/' +
+    '(?P<curso_academico>\d+)/(?P<id_entrevista_asesor>\d+)/' +
+    '(?P<busqueda>[\s\w]+)/$',
+
+        'generarPDFListaPreguntasAsesor',
+        name='generarPDFListaPreguntasAsesor'),
 )
