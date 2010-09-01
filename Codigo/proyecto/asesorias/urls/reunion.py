@@ -22,13 +22,16 @@ urlpatterns = patterns(VISTAS + 'vistasReunion',
 
         'delReunion', name='delReunion'),
 
-    url(r'^list/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/$',
+    url(r'^list/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/' +
+        '(?P<orden>[\s\w]*)/$',
+
         'listReunion', name='listReunion'),
 
-    url(r'^selectAlumno/$',
+    url(r'^selectAlumno/(?P<tipo>[\s\w]+)/$',
         'selectAlumno', name='selectAlumno_Reunion'),
 
-    url(r'^(?P<dni_pasaporte>[\s\w]+)/selectAlumnoCursoAcademico/$',
+    url(r'^(?P<dni_pasaporte>[\s\w]+)/selectAlumnoCursoAcademico/' +
+        '(?P<tipo>[\s\w]+)/$',
 
         'selectAlumnoCursoAcademico',
         name='selectAlumnoCursoAcademico_Reunion'),

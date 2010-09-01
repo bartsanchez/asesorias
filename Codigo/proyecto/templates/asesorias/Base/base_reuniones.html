@@ -8,7 +8,7 @@
 
     {% block reuniones %}
                                     <ul>
-                                        <li><a href="{% url selectAlumno_Reunion %}">Reuniones</a></li>
+                                        <li><a href="{% url selectAlumno_Reunion 'list' %}">Reuniones</a></li>
                                         <li><a href="{% url listReunion_preguntaAsesor %}">Reuniones - Pregunta Asesor</a></li>
                                     </ul>
     {% endblock %}

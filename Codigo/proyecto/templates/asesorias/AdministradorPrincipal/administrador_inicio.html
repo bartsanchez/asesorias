@@ -110,8 +110,8 @@
 
                 <!-- Reuniones. -->
                 <tr>
-                    <th scope="row"><a href="{% url selectAlumno_Reunion %}">Reuniones</a></th>
-                    <td><a href="{# url addReunion #}" class="addlink">Añadir</a></td>
+                    <th scope="row"><a href="{% url selectAlumno_Reunion 'list' %}">Reuniones</a></th>
+                    <td><a href="{% url selectAlumno_Reunion 'add' %}" class="addlink">Añadir</a></td>
                 </tr>
 
                 <!-- Reuniones - Preguntas de asesor. -->

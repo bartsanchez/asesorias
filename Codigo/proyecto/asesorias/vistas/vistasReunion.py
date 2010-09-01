@@ -218,7 +218,7 @@ def delReunion(request, dni_pasaporte, curso_academico, id_reunion):
     return render_to_response(PATH + 'delReunion.html',
         {'user': request.user, 'error': error})
 
-def selectAlumno(request):
+def selectAlumno(request, tipo):
     # Se ha introducido un alumno.
     if request.method == 'POST':
 
@@ -231,26 +231,26 @@ def selectAlumno(request):
 
             return HttpResponseRedirect(
                 reverse('selectAlumnoCursoAcademico_Reunion',
-                kwargs={'dni_pasaporte': alumno}))
+                kwargs={'dni_pasaporte': alumno, 'tipo': tipo}))
 
         else:
             return HttpResponseRedirect(
-                reverse('selectAlumno_Reunion'))
+                reverse('selectAlumno_Reunion', kwargs={'tipo': tipo}))
 
     else:
         form = forms.AlumnoFormSelect()
 
     return render_to_response(PATH + 'selectAlumno.html',
-        {'user': request.user, 'form': form})
+        {'user': request.user, 'form': form, 'tipo': tipo})
 
-def selectAlumnoCursoAcademico(request, dni_pasaporte):
+def selectAlumnoCursoAcademico(request, dni_pasaporte, tipo):
     # Se obtiene el posible alumno.
     instancia_alumno = vistasAlumno.obtenerAlumno(dni_pasaporte)
 
     # Se comprueba que exista el alumno.
     if not instancia_alumno:
         return HttpResponseRedirect(
-            reverse('selectAlumno_Reunion'))
+            reverse('selectAlumno_Reunion'), kwargs={'tipo': tipo})
 
     # Se ha introducido un alumno curso academico.
     if request.method == 'POST':
@@ -269,12 +269,12 @@ def selectAlumnoCursoAcademico(request, dni_pasaporte):
             return HttpResponseRedirect(
                 reverse('listReunion',
                 kwargs={'dni_pasaporte': dni_pasaporte,
-                'curso_academico': curso_academico}))
+                'curso_academico': curso_academico, 'orden': 'fecha'}))
 
         else:
             return HttpResponseRedirect(
                 reverse('selectAlumnoCursoAcademico_Reunion',
-                kwargs={'dni_pasaporte': dni_pasaporte}))
+                kwargs={'dni_pasaporte': dni_pasaporte, 'tipo': tipo}))
 
     else:
         form = forms.AlumnoCursoAcademico2FormSelect(
@@ -282,9 +282,9 @@ def selectAlumnoCursoAcademico(request, dni_pasaporte):
 
     return render_to_response(PATH + 'selectAlumnoCursoAcademico.html',
         {'user': request.user, 'form': form,
-        'dni_pasaporte': dni_pasaporte})
+        'dni_pasaporte': dni_pasaporte, 'tipo': tipo})
 
-def listReunion(request, dni_pasaporte, curso_academico):
+def listReunion(request, dni_pasaporte, curso_academico, orden):
     # Se obtiene el posible alumno_curso_academico.
     instancia_alumno_curso_academico = \
         vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(
@@ -336,9 +336,13 @@ def listReunion(request, dni_pasaporte, curso_academico):
         form = forms.SearchForm()
         busqueda = False
 
+        if orden == '_fecha':
+            lista_reuniones = lista_reuniones.reverse()
+
     return render_to_response(PATH + 'listReunion.html',
         {'user': request.user, 'form': form,
         'lista_reuniones': lista_reuniones,
         'busqueda': busqueda,
         'dni_pasaporte': dni_pasaporte,
-        'curso_academico': curso_academico})
+        'curso_academico': curso_academico,
+        'orden': orden})
