@@ -209,12 +209,14 @@ def delReunion(request, dni_pasaporte, curso_academico, id_reunion):
     if instancia_reunion:
         instancia_reunion.delete()
         # Redirige a la pagina de listar reuniones.
-        return HttpResponseRedirect(reverse('listReunion'))
+        return HttpResponseRedirect(reverse('listReunion',
+                kwargs={'dni_pasaporte': dni_pasaporte,
+                'curso_academico': curso_academico}))
     # La reunion no existe.
     else:
         error = True
     return render_to_response(PATH + 'delReunion.html',
-        {'error': error})
+        {'user': request.user, 'error': error})
 
 def selectAlumno(request):
     # Se ha introducido un alumno.

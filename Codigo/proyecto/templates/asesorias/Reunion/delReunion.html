@@ -1,9 +1,15 @@
-<h1>Eliminar reunión.</h1>
+{% extends "asesorias/Base/base_reuniones.html" %}
 
-{% if error %}
+{% block content %}
 
-<p>No existe tal reunión.</p>
+    <h1>Eliminar reunión.</h1>
 
-<a href="../../../../list">Volver</a>
+    {% if error %}
 
-{% endif %}
+    <p>No existe tal reunión.</p>
+
+    <a href="{% url selectAlumno_Reunion %}">Lista de reuniones</a>
+
+    {% endif %}
+
+{% endblock %}
