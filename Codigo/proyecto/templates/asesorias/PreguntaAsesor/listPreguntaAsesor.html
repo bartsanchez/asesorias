@@ -1,19 +1,68 @@
-<h1>Lista de preguntas de asesor.</h1>
+{% extends "asesorias/Base/base_plantillas.html" %}
 
-<a href="../add">Crear nuevo</a>
+{% block content %}
 
-{% if not lista_preguntas_asesor %}
+    <h1>Lista de preguntas de asesor.</h1>
 
-<p>No existen actualmente preguntas de asesor en el sistema.</p>
+    <div class="form">
+        <div><p>Asesor: <b>{{ dni_pasaporte }}</b> <a href={% url selectAsesor_PreguntaAsesor 'list' %} class="updatelink"></a></p></div>
+        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAsesorCA_PreguntaAsesor dni_pasaporte 'list' %} class="updatelink"></a></p></div>
+        <div><p>Plantilla de entrevista de asesor: <b>{{ entrevista_asesor }}</b> <a href={% url selectPEA_PreguntaAsesor dni_pasaporte curso_academico 'list' %} class="updatelink"></a></p></div>
+    </div>
 
-{% else %}
+    <a href="{% url addPreguntaAsesor dni_pasaporte curso_academico entrevista_asesor %}" class="addlink">Crear nuevo</a>
+    <a href="{# url generarPDFListaPlantillasEntrevistaAsesor dni_pasaporte curso_academico busqueda #}" class="pdflink">Generar PDF</a>
 
-	{% for pregunta_asesor in lista_preguntas_asesor %}
-		<ul>
-			<li>{{ pregunta_asesor }}</li>
-			<a href="../{{ pregunta_asesor.dni_pasaporte }}/{{ pregunta_asesor.curso_academico }}/{{ pregunta_asesor.id_entrevista_asesor }}/{{ pregunta_asesor.id_pregunta_asesor }}/edit">Editar</a>
-			<a href="../{{ pregunta_asesor.dni_pasaporte }}/{{ pregunta_asesor.curso_academico }}/{{ pregunta_asesor.id_entrevista_asesor }}/{{ pregunta_asesor.id_pregunta_asesor }}/del">Eliminar</a>
-		</ul>
-	{% endfor %}
+    <div class="search">
 
-{% endif %}
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Realizar búsqueda.">
+                {% for field in form %}
+                <tr>
+                    <th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="module">
+        <table summary="Lista de preguntas de asesor.">
+        <caption><h2>Lista de preguntas de asesor{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
+
+        {% if not lista_preguntas_asesor %}
+
+        <tr><th scope="row"><p>No existen actualmente preguntas de asesor para esta plantilla de entrevista de asesor en el sistema.</p></th></tr>
+
+        {% else %}
+
+        {% if not busqueda %}
+        <tr>
+            {% ifequal orden '_descripcion' %}
+            <th colspan="3"><a href={% url listPreguntaAsesor dni_pasaporte curso_academico entrevista_asesor 'enunciado' #}>Enunciado &#11014;</a></th>
+            {% else %}
+            <th colspan="3"><a href={% url listPreguntaAsesor dni_pasaporte curso_academico entrevista_asesor '_enunciado' #}>Enunciado &#11015;</a></th>
+            {% endifequal %}
+        </tr>
+        {% endif %}
+
+        {% for pregunta in lista_preguntas_asesor %}
+        <tr>
+            <th scope="row"><a href="{# url editPlantillaEntrevistaAsesor dni_pasaporte curso_academico plantilla.id_entrevista_asesor #}">{{ pregunta }}</a></th>
+            <td><a href="{# url editPlantillaEntrevistaAsesor dni_pasaporte curso_academico plantilla.id_entrevista_asesor #}" class="editlink">Editar</a></td>
+            <td><a href="{# url delPlantillaEntrevistaAsesor dni_pasaporte curso_academico plantilla.id_entrevista_asesor #}" class="deletelink">Eliminar</a></td>
+        </tr>
+        {% endfor %}
+
+        {% endif %}
+
+        </table>
+    </div>
+
+{% endblock %}

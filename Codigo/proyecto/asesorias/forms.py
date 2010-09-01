@@ -125,9 +125,6 @@ class PlantillaEntrevistaAsesorFormSelect(forms.Form):
             'descripcion')
 
 class PreguntaAsesorForm(forms.ModelForm):
-    plantilla_entrevista_asesor = forms.ModelChoiceField(
-        models.PlantillaEntrevistaAsesor.objects.all())
-
     class Meta:
         model = models.PreguntaAsesor
 

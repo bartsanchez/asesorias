@@ -202,10 +202,7 @@ class PreguntaAsesor(models.Model):
             "id_entrevista_asesor", "id_pregunta_asesor")
 
     def __unicode__(self):
-        return (unicode(self.curso_academico) + ': ' +
-            unicode(self.dni_pasaporte) + ' -> ' +
-            unicode(self.id_entrevista_asesor) + ' -> ' +
-            unicode(self.id_pregunta_asesor))
+        return unicode(self.enunciado)
 
 class Alumno(models.Model):
     dni_pasaporte = models.CharField(primary_key=True, max_length=9)
