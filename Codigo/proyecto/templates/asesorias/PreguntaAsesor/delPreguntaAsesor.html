@@ -1,9 +1,15 @@
-<h1>Eliminar pregunta de asesor.</h1>
+{% extends "asesorias/Base/base_plantillas.html" %}
 
-{% if error %}
+{% block content %}
 
-<p>No existe tal pregunta de asesor.</p>
+    <h1>Eliminar pregunta de asesor.</h1>
 
-<a href="../../../../../list">Volver</a>
+    {% if error %}
 
-{% endif %}
+    <p>No existe tal pregunta de asesor.</p>
+
+    <a href="{% url selectAsesor_PreguntaAsesor 'list' %}">Lista de preguntas de asesor</a>
+
+    {% endif %}
+
+{% endblock %}

@@ -226,12 +226,16 @@ def delPreguntaAsesor(request, dni_pasaporte, curso_academico,
     if instancia_pregunta_asesor:
         instancia_pregunta_asesor.delete()
         # Redirige a la pagina de listar preguntas de asesor.
-        return HttpResponseRedirect(reverse('listPreguntaAsesor'))
+        return HttpResponseRedirect(reverse('listPreguntaAsesor',
+                kwargs={'dni_pasaporte': dni_pasaporte,
+                'curso_academico': curso_academico,
+                'entrevista_asesor': id_entrevista_asesor,
+                'orden': 'list'}))
     # La pregunta no existe.
     else:
         error = True
-    return render_to_response('delPreguntaAsesor.html',
-        {'error': error})
+    return render_to_response(PATH + 'delPreguntaAsesor.html',
+        {'user': request.user, 'error': error})
 
 def selectAsesor(request, tipo):
     # Se ha introducido un asesor.

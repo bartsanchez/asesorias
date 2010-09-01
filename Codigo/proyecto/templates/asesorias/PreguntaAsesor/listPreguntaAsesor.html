@@ -56,7 +56,7 @@
         <tr>
             <th scope="row"><a href="{# url editPlantillaEntrevistaAsesor dni_pasaporte curso_academico plantilla.id_entrevista_asesor #}">{{ pregunta }}</a></th>
             <td><a href="{# url editPlantillaEntrevistaAsesor dni_pasaporte curso_academico plantilla.id_entrevista_asesor #}" class="editlink">Editar</a></td>
-            <td><a href="{# url delPlantillaEntrevistaAsesor dni_pasaporte curso_academico plantilla.id_entrevista_asesor #}" class="deletelink">Eliminar</a></td>
+            <td><a href="{% url delPreguntaAsesor dni_pasaporte curso_academico entrevista_asesor pregunta.id_pregunta_asesor %}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}
 
