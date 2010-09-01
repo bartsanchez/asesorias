@@ -361,12 +361,65 @@ def selectPlantillaEntrevistaAsesor(request, dni_pasaporte,
 
 def listPreguntaAsesor(request, dni_pasaporte, curso_academico,
     entrevista_asesor, orden):
-    # Se obtiene una lista con todos las preguntas de asesor.
-    lista_preguntas_asesor = models.PreguntaAsesor.objects.all()
+    # Se comprueba que exista la plantilla de entrevista de asesor
+    # pasada por argumento.
+    instancia_entrevista_asesor = \
+        vistasPEA.obtenerPlantillaEntrevistaAsesor(dni_pasaporte,
+        curso_academico, entrevista_asesor)
+
+    # La plantilla de entrevista de asesor no existe, se redirige.
+    if not instancia_entrevista_asesor:
+        return HttpResponseRedirect(reverse('selectPEA_PreguntaAsesor',
+        kwargs={'dni_pasaporte': dni_pasaporte,
+        'curso_academico': curso_academico,
+        'tipo': 'list'}))
+
+    # Se obtiene una lista con todas las preguntas de asesor.
+    lista_preguntas_asesor = models.PreguntaAsesor.objects.filter(
+        dni_pasaporte=dni_pasaporte, curso_academico=curso_academico,
+        id_entrevista_asesor=entrevista_asesor).order_by('enunciado')
+
+    # Se ha realizado una busqueda.
+    if request.method == 'POST':
+        # Se obtienen los valores y se valida.
+        form = forms.SearchForm(request.POST)
+        # Si es valido se realiza la busqueda.
+        if form.is_valid():
+            busqueda = request.POST['busqueda']
+
+            # Se crea una lista auxiliar que albergara el resultado de
+            # la busqueda.
+            lista_aux = []
+
+            # Se recorren los elementos determinando si coinciden con
+            # la busqueda.
+            for pregunta in lista_preguntas_asesor:
+                # Se crea una cadena auxiliar para examinar si se
+                # encuentra el resultado de la busqueda.
+                cadena = unicode(pregunta.enunciado)
+
+                # Si se encuentra la busqueda el elemento se incluye en
+                # la lista auxiliar.
+                if cadena.find(busqueda) >= 0:
+                    lista_aux.append(pregunta)
+
+            # La lista final a devolver sera la lista auxiliar.
+            lista_preguntas_asesor = lista_aux
+
+        else:
+            busqueda = False
+    else:
+        # Formulario para una posible busqueda.
+        form = forms.SearchForm()
+        busqueda = False
+
+        if orden == '_enunciado':
+            lista_preguntas_asesor = lista_preguntas_asesor.reverse()
+
     return render_to_response(PATH + 'listPreguntaAsesor.html',
-        {'user': request.user, #'form': form,
+        {'user': request.user, 'form': form,
         'lista_preguntas_asesor': lista_preguntas_asesor,
-        #'busqueda': busqueda,
+        'busqueda': busqueda,
         'dni_pasaporte': dni_pasaporte,
         'curso_academico': curso_academico,
         'entrevista_asesor': entrevista_asesor,
