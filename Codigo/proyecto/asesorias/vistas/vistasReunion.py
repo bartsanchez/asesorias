@@ -305,34 +305,31 @@ def listReunion(request, dni_pasaporte, curso_academico):
     if request.method == 'POST':
         # Se obtienen los valores y se valida.
         form = forms.SearchForm(request.POST)
-        ## Si es valido se realiza la busqueda.
-        #if form.is_valid():
-            #busqueda = request.POST['busqueda']
+        # Si es valido se realiza la busqueda.
+        if form.is_valid():
+            busqueda = request.POST['busqueda']
 
-            ## Se crea una lista auxiliar que albergara el resultado de
-            ## la busqueda.
-            #lista_aux = []
+            # Se crea una lista auxiliar que albergara el resultado de
+            # la busqueda.
+            lista_aux = []
 
-            ## Se recorren los elementos determinando si coinciden con
-            ## la busqueda.
-            #for matricula in lista_matriculas:
-                ## Se crea una cadena auxiliar para examinar si se
-                ## encuentra el resultado de la busqueda.
-                #cadena = (unicode(matricula.determinarNombreCentro()) +
-                    #unicode(matricula.determinarNombreTitulacion()) +
-                    #unicode(matricula.determinarPlanEstudios()) +
-                    #unicode(matricula.determinarNombreAsignatura()))
+            # Se recorren los elementos determinando si coinciden con
+            # la busqueda.
+            for reunion in lista_reuniones:
+                # Se crea una cadena auxiliar para examinar si se
+                # encuentra el resultado de la busqueda.
+                cadena = unicode(reunion.fecha)
 
-                ## Si se encuentra la busqueda el elemento se incluye en
-                ## la lista auxiliar.
-                #if cadena.find(busqueda) >= 0:
-                    #lista_aux.append(matricula)
+                # Si se encuentra la busqueda el elemento se incluye en
+                # la lista auxiliar.
+                if cadena.find(busqueda) >= 0:
+                    lista_aux.append(reunion)
 
-            ## La lista final a devolver sera la lista auxiliar.
-            #lista_matriculas = lista_aux
+            # La lista final a devolver sera la lista auxiliar.
+            lista_reuniones = lista_aux
 
-        #else:
-            #busqueda = False
+        else:
+            busqueda = False
     ## No se ha realizado busqueda.
     else:
         # Formulario para una posible busqueda.
