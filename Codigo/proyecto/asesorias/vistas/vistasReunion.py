@@ -136,7 +136,8 @@ def addReunion(request, dni_pasaporte, curso_academico):
             # Redirige a la pagina de listar reuniones.
             return HttpResponseRedirect(reverse('listReunion',
                 kwargs={'dni_pasaporte': dni_pasaporte,
-                'curso_academico': curso_academico}))
+                'curso_academico': curso_academico,
+                'orden': 'fecha'}))
     # Si aun no se ha rellenado el formulario, se genera uno en blanco.
     else:
         form = forms.ReunionForm()
@@ -192,7 +193,8 @@ def editReunion(request, dni_pasaporte, curso_academico, id_reunion):
                 # Redirige a la pagina de listar reuniones.
                 return HttpResponseRedirect(reverse('listReunion',
                 kwargs={'dni_pasaporte': dni_pasaporte,
-                'curso_academico': curso_academico}))
+                'curso_academico': curso_academico,
+                'orden': 'fecha'}))
     # La reunion no existe.
     else:
         form = False
@@ -212,7 +214,8 @@ def delReunion(request, dni_pasaporte, curso_academico, id_reunion):
         # Redirige a la pagina de listar reuniones.
         return HttpResponseRedirect(reverse('listReunion',
                 kwargs={'dni_pasaporte': dni_pasaporte,
-                'curso_academico': curso_academico}))
+                'curso_academico': curso_academico,
+                'orden': 'fecha'}))
     # La reunion no existe.
     else:
         error = True
@@ -277,7 +280,8 @@ def selectAlumnoCursoAcademico(request, dni_pasaporte, tipo):
                 return HttpResponseRedirect(
                     reverse('listReunion',
                     kwargs={'dni_pasaporte': dni_pasaporte,
-                    'curso_academico': curso_academico, 'orden': 'fecha'}))
+                    'curso_academico': curso_academico,
+                    'orden': 'fecha'}))
 
         else:
             return HttpResponseRedirect(
