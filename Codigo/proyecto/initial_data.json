@@ -634,5 +634,83 @@
       "ultima_modificacion": "2010-09-01",
       "curso_academico": 2004
     }
+  },
+  {
+    "pk": 1,
+    "model": "asesorias.reunion",
+    "fields": {
+      "tipo": "GRU",
+      "fecha": "2008-01-01",
+      "comentario_asesor": "hola",
+      "id_reunion": 1,
+      "dni_pasaporte": "12312312O",
+      "comentario_alumno": "buenas",
+      "curso_academico": 2008
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asesorias.reunion",
+    "fields": {
+      "tipo": "GRU",
+      "fecha": "2001-01-01",
+      "comentario_asesor": "hola",
+      "id_reunion": 1,
+      "dni_pasaporte": "12312312O",
+      "comentario_alumno": "buenas",
+      "curso_academico": 2001
+    }
+  },
+  {
+    "pk": 3,
+    "model": "asesorias.reunion",
+    "fields": {
+      "tipo": "GRU",
+      "fecha": "2000-01-01",
+      "comentario_asesor": "hola",
+      "id_reunion": 1,
+      "dni_pasaporte": "88888888Z",
+      "comentario_alumno": "buenas",
+      "curso_academico": 2000
+    }
+  },
+  {
+    "pk": 4,
+    "model": "asesorias.reunion",
+    "fields": {
+      "tipo": "IND",
+      "fecha": "2000-12-12",
+      "comentario_asesor": "hola",
+      "id_reunion": 2,
+      "dni_pasaporte": "88888888Z",
+      "comentario_alumno": "hola",
+      "curso_academico": 2000
+    }
+  },
+  {
+    "pk": 5,
+    "model": "asesorias.reunion",
+    "fields": {
+      "tipo": "GRU",
+      "fecha": "2010-01-01",
+      "comentario_asesor": "hola",
+      "id_reunion": 1,
+      "dni_pasaporte": "88888888Z",
+      "comentario_alumno": "buenas",
+      "curso_academico": 2010
+    }
+  },
+  {
+    "pk": 6,
+    "model": "asesorias.reunion",
+    "fields": {
+      "tipo": "GRU",
+      "fecha": "2010-10-10",
+      "comentario_asesor": "hola",
+      "id_reunion": 2,
+      "dni_pasaporte": "88888888Z",
+      "comentario_alumno": "buenas",
+      "curso_academico": 2010
+    }
   }
 ]
