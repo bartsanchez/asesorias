@@ -22,7 +22,7 @@
 
             <div class="fieldWrapper">
                 {% for field in form %}
-                    <div><p>{{ field.label_tag }}: {{ field }}<a href="{% url selectAsesor_PlantillaEntrevistaAsesor 'add' %}" class="addlink" target="_new"></a></p></div>
+                    <div><p>{{ field.label_tag }}: {{ field }}<a href="{% url addAsesorCursoAcademico dni_pasaporte %}" class="addlink" target="_new"></a></p></div>
                     <div><input type="submit" value="OK"/></p></div>
                 {% endfor %}
             </div>
