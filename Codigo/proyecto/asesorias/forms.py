@@ -151,7 +151,8 @@ class AlumnoCursoAcademicoFormSelect(forms.Form):
             self).__init__(*args, **kwargs)
         self.fields['alumno'].queryset = \
             models.AlumnoCursoAcademico.objects.filter(
-            curso_academico=curso_academico).order_by('dni_pasaporte')
+            curso_academico=curso_academico).order_by(
+            'dni_pasaporte_alumno')
 
 class AlumnoCursoAcademico2FormSelect(forms.Form):
     alumno_curso_academico = forms.ModelChoiceField(
@@ -164,7 +165,8 @@ class AlumnoCursoAcademico2FormSelect(forms.Form):
             self).__init__(*args, **kwargs)
         self.fields['alumno_curso_academico'].queryset = \
             models.AlumnoCursoAcademico.objects.filter(
-            dni_pasaporte=dni_pasaporte).order_by('curso_academico')
+            dni_pasaporte_alumno=dni_pasaporte).order_by(
+            'curso_academico')
 
 class MatriculaForm(forms.ModelForm):
     class Meta:

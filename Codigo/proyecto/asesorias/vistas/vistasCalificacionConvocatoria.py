@@ -35,7 +35,8 @@ def obtenerCalificacionConvocatoria(nombre_centro, nombre_titulacion,
             id_titulacion=instancia_asignatura.id_titulacion,
             id_asignatura=instancia_asignatura.id_asignatura,
             curso_academico=instancia_alumnoCA.curso_academico,
-            dni_pasaporte=unicode(instancia_alumnoCA.dni_pasaporte),
+            dni_pasaporte=
+            unicode(instancia_alumnoCA.dni_pasaporte_alumno),
             convocatoria=convocatoria)
     except:
         resultado = False
@@ -440,7 +441,7 @@ def selectAlumno(request, nombre_centro, nombre_titulacion,
 
             # Se crea una instancia del alumno curso academico para
             # pasar los argumentos.
-            instancia_alumno_curso_academico = \
+            instancia_alumnoCA = \
                 models.AlumnoCursoAcademico.objects.get(
                 pk=alumno_curso_academico)
 
@@ -453,7 +454,7 @@ def selectAlumno(request, nombre_centro, nombre_titulacion,
                     'nombre_asignatura': nombre_asignatura,
                     'curso_academico': curso_academico,
                     'dni_pasaporte':
-                    instancia_alumno_curso_academico.dni_pasaporte}))
+                    instancia_alumnoCA.dni_pasaporte_alumno}))
 
             else:
                 return HttpResponseRedirect(
@@ -464,7 +465,7 @@ def selectAlumno(request, nombre_centro, nombre_titulacion,
                     'nombre_asignatura': nombre_asignatura,
                     'curso_academico': curso_academico,
                     'dni_pasaporte':
-                    instancia_alumno_curso_academico.dni_pasaporte,
+                    instancia_alumnoCA.dni_pasaporte_alumno,
                     'orden': 'convocatoria'}))
 
         else:
@@ -522,7 +523,7 @@ def listCalificacionConvocatoria(request, nombre_centro,
         id_centro=id_centro, id_titulacion=id_titulacion,
         id_asignatura=id_asignatura,
         curso_academico=curso_academico,
-        dni_pasaporte=dni_pasaporte).all()
+        dni_pasaporte_alumno=dni_pasaporte).all()
 
     # Se ha realizado una busqueda.
     if request.method == 'POST':

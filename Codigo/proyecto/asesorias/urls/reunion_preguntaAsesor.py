@@ -30,4 +30,13 @@ urlpatterns = patterns(VISTAS + 'vistasReunion_preguntaAsesor',
     url(r'^list/$',
         'listReunion_preguntaAsesor',
         name='listReunion_preguntaAsesor'),
+
+    url(r'^selectAsesor/(?P<tipo>[\s\w]+)/$',
+        'selectAsesor', name='selectAsesor_Reunion_preguntaAsesor'),
+
+    url(r'^(?P<dni_pasaporte>[\s\w]+)/selectAsesorCursoAcademico/' +
+        '(?P<tipo>[\s\w]+)/$',
+
+        'selectAsesorCursoAcademico',
+        name='selectAsesorCA_Reunion_preguntaAsesor'),
 )

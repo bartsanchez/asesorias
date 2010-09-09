@@ -7,7 +7,9 @@ VISTAS = 'asesorias.vistas.'
 # ------------------------------- #
 
 urlpatterns = patterns(VISTAS + 'vistasAlumnoCursoAcademico',
-    url(r'^add/(?P<dni_pasaporte>[\s\w]*)/$',
+    url(r'^add/(?P<dni_pasaporte_asesor>[\s\w]+)/' +
+        '(?P<curso_academico>\d+)/(?P<dni_pasaporte_alumno>[\s\w]*)/$',
+
         'addAlumnoCursoAcademico', name='addAlumnoCursoAcademico'),
 
     url(r'^(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/edit/$',
@@ -22,7 +24,18 @@ urlpatterns = patterns(VISTAS + 'vistasAlumnoCursoAcademico',
 
         'listAlumnoCursoAcademico', name='listAlumnoCursoAcademico'),
 
-    url(r'^selectAlumno/$',
+    url(r'^selectAsesor/(?P<tipo>[\s\w]+)/$',
+        'selectAsesor', name='selectAsesor_AlumnoCursoAcademico'),
+
+    url(r'^(?P<dni_pasaporte>[\s\w]+)/selectAsesorCursoAcademico/' +
+        '(?P<tipo>[\s\w]+)/$',
+
+        'selectAsesorCursoAcademico',
+        name='selectAsesorCA_AlumnoCursoAcademico'),
+
+    url(r'^(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/' +
+        'selectAlumno/(?P<tipo>[\s\w]+)/$',
+
         'selectAlumno', name='selectAlumno_AlumnoCursoAcademico'),
 
     url(r'^generarPDF/(?P<dni_pasaporte>[\s\w]+)/' +

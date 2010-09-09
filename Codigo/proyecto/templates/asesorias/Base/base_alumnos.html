@@ -9,7 +9,7 @@
     {% block alumnos %}
                                     <ul>
                                         <li><a href="{% url listAlumno 'dni_pasaporte' %}">Alumnos</a></li>
-                                        <li><a href="{% url selectAlumno_AlumnoCursoAcademico %}">Alumnos Curso Académico</a></li>
+                                        <li><a href="{% url selectAsesor_AlumnoCursoAcademico 'list' %}">Alumnos Curso Académico</a></li>
                                         <li><a href="{% url selectAsignaturaOAlumnoCursoAcademico %}">Matrículas</a></li>
                                         <li><a href="{% url selectCentro_CalificacionConvocatoria 'list' %}">Calificaciones Convocatoria</a></li>
                                     </ul>

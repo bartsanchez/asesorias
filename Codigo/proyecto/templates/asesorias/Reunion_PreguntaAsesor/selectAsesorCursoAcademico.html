@@ -1,0 +1,34 @@
+{% extends "asesorias/Base/base_plantillas.html" %}
+
+{% block content %}
+
+    {% ifequal tipo 'add' %}
+    <h1>Añadir reunión - pregunta de asesor.</h1>
+
+    {% else %}
+    <h1>Lista de reuniones - preguntas de asesor.</h1>
+
+    {% endifequal %}
+
+    <h2>Seleccionar curso académico.</h2>
+
+    <div class="form">
+        <div><p>Asesor: <b>{{ dni_pasaporte }}</b> <a href={% url selectAsesor_Reunion_preguntaAsesor tipo %} class="updatelink"></a></p></div>
+    </div>
+
+    <div class="form">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                {% for field in form %}
+                    <div><p>{{ field.label_tag }}: {{ field }}<a href="{% url addAsesorCursoAcademico dni_pasaporte %}" class="addlink" target="_new"></a></p></div>
+                    <div><input type="submit" value="OK"/></p></div>
+                {% endfor %}
+            </div>
+
+        </form>
+
+    </div>
+
+{% endblock %}

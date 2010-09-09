@@ -228,14 +228,16 @@ class Alumno(models.Model):
 
 class AlumnoCursoAcademico(models.Model):
     codigo_alumnoCursoAcademico = models.AutoField(primary_key=True)
-    dni_pasaporte = models.ForeignKey('Alumno',
+    dni_pasaporte_alumno = models.ForeignKey('Alumno',
         db_column='dni_pasaporte')
     curso_academico = models.IntegerField()
     observaciones = models.CharField(max_length=100)
+    dni_pasaporte_asesor = models.ForeignKey('AsesorCursoAcademico',
+        db_column='dni_pasaporte_asesor')
 
     class Meta:
         db_table = "AlumnosCursoAcademico"
-        unique_together = ("dni_pasaporte", "curso_academico")
+        unique_together = ("dni_pasaporte_alumno", "curso_academico")
 
     def __unicode__(self):
         return (unicode(self.dni_pasaporte) + ' (' +

@@ -85,8 +85,8 @@
 
                 <!-- Alumnos Curso Académico. -->
                 <tr>
-                    <th scope="row"><a href="{% url selectAlumno_AlumnoCursoAcademico %}">Alumnos Curso Académico</a></th>
-                    <td><a href="{% url addAlumnoCursoAcademico '' %}" class="addlink">Añadir</a></td>
+                    <th scope="row"><a href="{% url selectAsesor_AlumnoCursoAcademico 'list' %}">Alumnos Curso Académico</a></th>
+                    <td><a href="{% url selectAsesor_AlumnoCursoAcademico 'add' %}" class="addlink">Añadir</a></td>
                 </tr>
 
                 <!-- Matrículas. -->
@@ -116,8 +116,8 @@
 
                 <!-- Reuniones - Preguntas de asesor. -->
                 <tr>
-                    <th scope="row"><a href="{% url listReunion_preguntaAsesor %}">Reuniones - Preguntas de asesor</a></th>
-                    <td><a href="{% url addReunion_preguntaAsesor %}" class="addlink">Añadir</a></td>
+                    <th scope="row"><a href="{% url selectAsesor_Reunion_preguntaAsesor 'list' %}">Reuniones - Preguntas de asesor</a></th>
+                    <td><a href="{% url selectAsesor_Reunion_preguntaAsesor 'add' %}" class="addlink">Añadir</a></td>
                 </tr>
 
                 </table>
