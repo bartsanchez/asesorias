@@ -349,6 +349,48 @@
   },
   {
     "pk": 1,
+    "model": "asesorias.calificacionconvocatoria",
+    "fields": {
+      "id_asignatura": 1,
+      "id_titulacion": 1,
+      "convocatoria": "febrero",
+      "nota": 4.0,
+      "dni_pasaporte": "88888888Z",
+      "id_centro": 2,
+      "comentario": "suspenso",
+      "curso_academico": 2010
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asesorias.calificacionconvocatoria",
+    "fields": {
+      "id_asignatura": 1,
+      "id_titulacion": 1,
+      "convocatoria": "junio",
+      "nota": 6.0,
+      "dni_pasaporte": "88888888Z",
+      "id_centro": 2,
+      "comentario": "bien",
+      "curso_academico": 2010
+    }
+  },
+  {
+    "pk": 3,
+    "model": "asesorias.calificacionconvocatoria",
+    "fields": {
+      "id_asignatura": 1,
+      "id_titulacion": 1,
+      "convocatoria": "septiembre",
+      "nota": 9.0,
+      "dni_pasaporte": "88888888Z",
+      "id_centro": 2,
+      "comentario": "sobresaliente",
+      "curso_academico": 2010
+    }
+  },
+  {
+    "pk": 1,
     "model": "asesorias.centroadministradorcentro",
     "fields": {
       "id_adm_centro": 1,

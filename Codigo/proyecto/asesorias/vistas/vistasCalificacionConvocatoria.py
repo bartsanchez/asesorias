@@ -523,7 +523,7 @@ def listCalificacionConvocatoria(request, nombre_centro,
         id_centro=id_centro, id_titulacion=id_titulacion,
         id_asignatura=id_asignatura,
         curso_academico=curso_academico,
-        dni_pasaporte_alumno=dni_pasaporte).all()
+        dni_pasaporte=dni_pasaporte).all()
 
     # Se ha realizado una busqueda.
     if request.method == 'POST':
