@@ -10,7 +10,7 @@
     </div>
 
     <a href="{% url selectAlumno_AlumnoCursoAcademico dni_pasaporte_asesor curso_academico 'add' %}" class="addlink">Crear nuevo</a>
-    <a href="{# url generarPDFListaAlumnosCursoAcademico alumno busqueda #}" class="pdflink">Generar PDF</a>
+    <a href="{% url generarPDFListaAlumnosCursoAcademico dni_pasaporte_asesor curso_academico busqueda %}" class="pdflink">Generar PDF</a>
 
     <div class="search">
 
