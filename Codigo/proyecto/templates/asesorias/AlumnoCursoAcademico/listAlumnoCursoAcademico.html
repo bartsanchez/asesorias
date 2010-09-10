@@ -5,8 +5,8 @@
     <h1>Lista de alumnos curso académico.</h1>
 
     <div class="form">
-        <div><p>Asesor: <b>{{ dni_pasaporte_asesor }}</b> <a href={% url selectAsesor_AlumnoCursoAcademico 'add' %} class="updatelink"></a></p></div>
-        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAsesorCA_AlumnoCursoAcademico dni_pasaporte_asesor 'add' %} class="updatelink"></a></p></div>
+        <div><p>Asesor: <b>{{ dni_pasaporte_asesor }}</b> <a href={% url selectAsesor_AlumnoCursoAcademico 'list' %} class="updatelink"></a></p></div>
+        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAsesorCA_AlumnoCursoAcademico dni_pasaporte_asesor 'list' %} class="updatelink"></a></p></div>
     </div>
 
     <a href="{% url selectAlumno_AlumnoCursoAcademico dni_pasaporte_asesor curso_academico 'add' %}" class="addlink">Crear nuevo</a>
