@@ -32,47 +32,58 @@ def addAlumnoCursoAcademico(request, dni_pasaporte_asesor,
     if not (instancia_asesorCA):
         return HttpResponseRedirect(
             reverse('selectAsesorCA_AlumnoCursoAcademico',
-            kwargs={'dni_pasaporte': dni_pasaporte,
+            kwargs={'dni_pasaporte': dni_pasaporte_asesor,
             'tipo': 'add'}))
 
-    # Se comprueba que exista el alumno, en caso de introducirlo.
-    if (dni_pasaporte_alumno != ''):
-        # Se comprueba que exista el alumno.
-        instancia_alumno = vistasAlumno.obtenerAlumno(
-            dni_pasaporte_alumno)
+    # Se comprueba que exista el alumno.
+    instancia_alumno = vistasAlumno.obtenerAlumno(
+        dni_pasaporte_alumno)
 
-        # Si no existe, se redirige.
-        if not instancia_alumno:
-            return HttpResponseRedirect(
-                reverse('selectAlumno_AlumnoCursoAcademico',
-                kwargs={'dni_pasaporte': dni_pasaporte_asesor,
-                'curso_academico': curso_academico,
-                'tipo': 'add'}))
+    # Si no existe, se redirige.
+    if not instancia_alumno:
+        return HttpResponseRedirect(
+            reverse('selectAlumno_AlumnoCursoAcademico',
+            kwargs={'dni_pasaporte': dni_pasaporte_asesor,
+            'curso_academico': curso_academico,
+            'tipo': 'add'}))
 
     # Se ha rellenado el formulario.
     if request.method == 'POST':
+        # Se extraen los valores pasados por el metodo POST.
+        observaciones = request.POST['observaciones']
+
+        datos_alumno_curso_academico = {
+            'dni_pasaporte_alumno': dni_pasaporte_alumno,
+            'curso_academico': curso_academico,
+            'observaciones': observaciones,
+            'codigo_asesorCursoAcademico':
+            instancia_asesorCA.codigo_asesorCursoAcademico}
+
         # Se obtienen los valores y se valida.
-        form = forms.AlumnoCursoAcademicoForm(request.POST)
+        form = forms.AlumnoCursoAcademicoForm(
+            datos_alumno_curso_academico)
         if form.is_valid():
             # Se guarda la informacion del formulario en el sistema.
             form.save()
 
-            dni_pasaporte = request.POST['dni_pasaporte']
-
             # Redirige a la pagina de listar alumnos curso academico.
             return HttpResponseRedirect(
-                reverse('listAlumnoCursoAcademico',
-                kwargs={'dni_pasaporte': dni_pasaporte,
-                'orden': 'curso_academico'}))
+                reverse('listAlumnoCursoAcademico', kwargs={
+                    'dni_pasaporte_asesor': dni_pasaporte_asesor,
+                    'curso_academico': curso_academico,
+                    'orden': 'dni_pasaporte'}))
     # Si aun no se ha rellenado el formulario, se genera uno en blanco.
     else:
         form = forms.AlumnoCursoAcademicoForm(
-            initial={'dni_pasaporte_asesor':
+            initial={'codigo_asesorCursoAcademico':
             instancia_asesorCA.codigo_asesorCursoAcademico,
             'curso_academico': curso_academico,
             'dni_pasaporte_alumno': dni_pasaporte_alumno})
     return render_to_response(PATH + 'addAlumnoCursoAcademico.html',
-        {'user': request.user, 'form': form})
+        {'user': request.user, 'form': form,
+        'dni_pasaporte_asesor': dni_pasaporte_asesor,
+        'curso_academico': curso_academico,
+        'dni_pasaporte_alumno': dni_pasaporte_alumno})
 
 def editAlumnoCursoAcademico(request, dni_pasaporte, curso_academico):
     # Se obtiene la instancia del alumno curso academico.
@@ -97,7 +108,7 @@ def editAlumnoCursoAcademico(request, dni_pasaporte, curso_academico):
                     reverse('listAlumnoCursoAcademico',
                     kwargs={'dni_pasaporte':
                     instancia_alumno_curso_academico.dni_pasaporte,
-                    'orden': 'curso_academico'}))
+                    'orden': 'dni_pasaporte'}))
     # El alumno curso academico no existe.
     else:
         form = False
@@ -115,7 +126,7 @@ def delAlumnoCursoAcademico(request, dni_pasaporte, curso_academico):
         return HttpResponseRedirect(reverse('listAlumnoCursoAcademico',
             kwargs={'dni_pasaporte':
             instancia_alumno_curso_academico.dni_pasaporte,
-            'orden': 'curso_academico'}))
+            'orden': 'dni_pasaporte'}))
     # El alumno curso academico no existe.
     else:
         error = True
@@ -172,11 +183,20 @@ def selectAsesorCursoAcademico(request, dni_pasaporte, tipo):
             curso_academico = models.AsesorCursoAcademico.objects.get(
                 pk=asesor_curso_academico).curso_academico
 
-            return HttpResponseRedirect(
-                reverse('selectAlumno_AlumnoCursoAcademico',
-                kwargs={'dni_pasaporte': dni_pasaporte,
-                'curso_academico': curso_academico,
-                'tipo': tipo}))
+
+            if tipo == 'add':
+                return HttpResponseRedirect(
+                    reverse('selectAlumno_AlumnoCursoAcademico',
+                    kwargs={'dni_pasaporte': dni_pasaporte,
+                    'curso_academico': curso_academico,
+                    'tipo': tipo}))
+
+            else:
+                return HttpResponseRedirect(
+                    reverse('listAlumnoCursoAcademico',
+                    kwargs={'dni_pasaporte_asesor': dni_pasaporte,
+                    'curso_academico': curso_academico,
+                    'orden': 'dni_pasaporte'}))
 
         else:
             return HttpResponseRedirect(
@@ -207,15 +227,11 @@ def selectAlumno(request, dni_pasaporte, curso_academico, tipo):
             # alumno por argumento.
             instancia_alumno = models.Alumno.objects.get(pk=alumno)
 
-            if tipo == 'add':
-                return HttpResponseRedirect(
-                    reverse('addAlumnoCursoAcademico',
-                    kwargs={'dni_pasaporte_asesor': dni_pasaporte,
-                    'curso_academico': curso_academico,
-                    'dni_pasaporte_alumno': alumno}))
-
-            else:
-                return HttpResponseRedirect()
+            return HttpResponseRedirect(
+                reverse('addAlumnoCursoAcademico',
+                kwargs={'dni_pasaporte_asesor': dni_pasaporte,
+                'curso_academico': curso_academico,
+                'dni_pasaporte_alumno': alumno}))
 
         else:
             HttpResponseRedirect(
@@ -233,22 +249,27 @@ def selectAlumno(request, dni_pasaporte, curso_academico, tipo):
         'curso_academico': curso_academico,
         'tipo': tipo})
 
-def listAlumnoCursoAcademico(request, dni_pasaporte, orden):
-    # Se comprueba que exista el alumno pasado por argumento.
-    instancia_alumno = vistasAlumno.obtenerAlumno(dni_pasaporte)
+def listAlumnoCursoAcademico(request, dni_pasaporte_asesor,
+    curso_academico, orden):
+    # Se comprueba que exista el asesor curso academico pasado por
+    # argumento.
+    instancia_asesorCA = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+        dni_pasaporte_asesor, curso_academico)
 
-    # El alumno no existe, se redirige.
-    if not (instancia_alumno):
+    # El asesor curso academico no existe, se redirige.
+    if not (instancia_asesorCA):
         return HttpResponseRedirect(
-            reverse('selectAlumno_AlumnoCursoAcademico',
-                kwargs={'dni_pasaporte': dni_pasaporte,
-                'curso_academico': curso_academico,
-                'tipo': 'list'}))
+            reverse('selectAsesorCA_AlumnoCursoAcademico',
+            kwargs={'dni_pasaporte': dni_pasaporte_asesor,
+            'tipo': 'list'}))
 
     # Se obtiene una lista con todos los alumnos curso academico.
     lista_alumnos_curso_academico = \
         models.AlumnoCursoAcademico.objects.filter(
-        dni_pasaporte_alumno=dni_pasaporte).order_by('curso_academico')
+        codigo_asesorCursoAcademico=
+        instancia_asesorCA.codigo_asesorCursoAcademico).order_by(
+        'dni_pasaporte_alumno')
 
     # Se ha realizado una busqueda.
     if request.method == 'POST':
@@ -285,14 +306,17 @@ def listAlumnoCursoAcademico(request, dni_pasaporte, orden):
         form = forms.SearchForm()
         busqueda = False
 
-        if (orden == '_curso_academico'):
+        if (orden == '_dni_pasaporte'):
             lista_alumnos_curso_academico = \
                 reversed(lista_alumnos_curso_academico)
 
     return render_to_response(PATH + 'listAlumnoCursoAcademico.html',
         {'user': request.user, 'form': form,
         'lista_alumnos_curso_academico': lista_alumnos_curso_academico,
-        'busqueda': busqueda, 'alumno': dni_pasaporte, 'orden': orden})
+        'busqueda': busqueda,
+        'dni_pasaporte_asesor': dni_pasaporte_asesor,
+        'curso_academico': curso_academico,
+        'orden': orden})
 
 def generarPDFListaAlumnosCursoAcademico(request, dni_pasaporte,
     busqueda):

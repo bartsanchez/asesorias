@@ -19,7 +19,7 @@
 
             <div class="fieldWrapper">
                 {% for field in form %}
-                    <div><p>{{ field.label_tag }}: {{ field }}<a href="{% url addAlumnoCursoAcademico '' %}" class="addlink" target="_new"></a></p></div>
+                    <div><p>{{ field.label_tag }}: {{ field }}<a href="{% url selectAsesor_AlumnoCursoAcademico 'add' %}" class="addlink" target="_new"></a></p></div>
                     <div><input type="submit" value="OK"/></p></div>
                 {% endfor %}
             </div>

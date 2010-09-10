@@ -8,7 +8,7 @@ VISTAS = 'asesorias.vistas.'
 
 urlpatterns = patterns(VISTAS + 'vistasAlumnoCursoAcademico',
     url(r'^add/(?P<dni_pasaporte_asesor>[\s\w]+)/' +
-        '(?P<curso_academico>\d+)/(?P<dni_pasaporte_alumno>[\s\w]*)/$',
+        '(?P<curso_academico>\d+)/(?P<dni_pasaporte_alumno>[\s\w]+)/$',
 
         'addAlumnoCursoAcademico', name='addAlumnoCursoAcademico'),
 
@@ -20,7 +20,8 @@ urlpatterns = patterns(VISTAS + 'vistasAlumnoCursoAcademico',
 
         'delAlumnoCursoAcademico', name='delAlumnoCursoAcademico'),
 
-    url(r'^list/(?P<dni_pasaporte>[\s\w]+)/(?P<orden>[\s\w]*)/$',
+    url(r'^list/(?P<dni_pasaporte_asesor>[\s\w]+)/' +
+        '(?P<curso_academico>\d+)/(?P<orden>[\s\w]*)/$',
 
         'listAlumnoCursoAcademico', name='listAlumnoCursoAcademico'),
 

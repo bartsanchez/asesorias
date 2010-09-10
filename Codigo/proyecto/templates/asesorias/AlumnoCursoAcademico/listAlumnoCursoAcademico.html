@@ -5,11 +5,12 @@
     <h1>Lista de alumnos curso académico.</h1>
 
     <div class="form">
-        <div><p>Alumno: <b>{{ alumno }}</b> <a href={% url selectAlumno_AlumnoCursoAcademico %} class="updatelink"></a></p></div>
+        <div><p>Asesor: <b>{{ dni_pasaporte_asesor }}</b> <a href={% url selectAsesor_AlumnoCursoAcademico 'add' %} class="updatelink"></a></p></div>
+        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAsesorCA_AlumnoCursoAcademico dni_pasaporte_asesor 'add' %} class="updatelink"></a></p></div>
     </div>
 
-    <a href="{% url addAlumnoCursoAcademico alumno %}" class="addlink">Crear nuevo</a>
-    <a href="{% url generarPDFListaAlumnosCursoAcademico alumno busqueda %}" class="pdflink">Generar PDF</a>
+    <a href="{% url selectAsesor_AlumnoCursoAcademico 'add' %}" class="addlink">Crear nuevo</a>
+    <a href="{# url generarPDFListaAlumnosCursoAcademico alumno busqueda #}" class="pdflink">Generar PDF</a>
 
     <div class="search">
 
@@ -42,11 +43,11 @@
 
         {% if not busqueda %}
         <tr>
-            {% ifequal orden '_curso_academico' %}
-            <th colspan="3"><a href={% url listAlumnoCursoAcademico alumno 'curso_academico' %}>Curso académico &#11014;</a></th>
+            {% ifequal orden '_dni_pasaporte' %}
+            <th colspan="3"><a href={% url listAlumnoCursoAcademico dni_pasaporte_asesor curso_academico 'dni_pasaporte' %}>Alumno &#11014;</a></th>
 
             {% else %}
-            <th colspan="3"><a href={% url listAlumnoCursoAcademico alumno '_curso_academico' %}>Curso académico &#11015;</a></th>
+            <th colspan="3"><a href={% url listAlumnoCursoAcademico dni_pasaporte_asesor curso_academico '_dni_pasaporte' %}>Alumno &#11015;</a></th>
 
             {% endifequal %}
         </tr>
@@ -55,9 +56,9 @@
         <!-- Alumnos Curso Academico -->
         {% for alumno in lista_alumnos_curso_academico %}
         <tr>
-            <th scope="row"><a href="{% url editAlumnoCursoAcademico alumno.dni_pasaporte alumno.curso_academico %}">{{ alumno.curso_academico }}</a></th>
-            <td><a href="{% url editAlumnoCursoAcademico alumno.dni_pasaporte alumno.curso_academico %}" class="editlink">Editar</a></td>
-            <td><a href="{% url delAlumnoCursoAcademico alumno.dni_pasaporte alumno.curso_academico %}" class="deletelink">Eliminar</a></td>
+            <th scope="row"><a href="{# url editAlumnoCursoAcademico alumno.dni_pasaporte alumno.curso_academico #}">{{ alumno.dni_pasaporte_alumno }}</a></th>
+            <td><a href="{# url editAlumnoCursoAcademico alumno.dni_pasaporte alumno.curso_academico #}" class="editlink">Editar</a></td>
+            <td><a href="{# url delAlumnoCursoAcademico alumno.dni_pasaporte alumno.curso_academico #}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}
 
