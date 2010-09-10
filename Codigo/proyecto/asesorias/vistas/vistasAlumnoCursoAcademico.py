@@ -143,11 +143,19 @@ def delAlumnoCursoAcademico(request, dni_pasaporte, curso_academico):
         dni_pasaporte, curso_academico)
     # Si existe se elimina.
     if instancia_alumno_curso_academico:
+        # Se obtiene la instancia del asesor curso academico.
+        instancia_asesorCA = \
+            instancia_alumno_curso_academico.codigo_asesorCursoAcademico
+
+        # Determina el dni del asesor.
+        dni_pasaporte_asesor = instancia_asesorCA.dni_pasaporte
+
         instancia_alumno_curso_academico.delete()
         # Redirige a la pagina de listar alumnos curso academico.
         return HttpResponseRedirect(reverse('listAlumnoCursoAcademico',
-            kwargs={'dni_pasaporte':
-            instancia_alumno_curso_academico.dni_pasaporte,
+            kwargs={
+            'dni_pasaporte_asesor': dni_pasaporte_asesor,
+            'curso_academico': curso_academico,
             'orden': 'dni_pasaporte'}))
     # El alumno curso academico no existe.
     else:

@@ -2,14 +2,14 @@
 
 {% block content %}
 
-	<h1>Eliminar alumno curso académico.</h1>
+    <h1>Eliminar alumno curso académico.</h1>
 
-	{% if error %}
+    {% if error %}
 
-	<p>No existe tal alumno curso académico.</p>
+    <p>No existe tal alumno curso académico.</p>
 
-	<a href="{% url selectAlumno_AlumnoCursoAcademico %}">Lista de alumnos curso académico</a>
+    <a href="{% url selectAsesor_AlumnoCursoAcademico 'list' %}">Lista de alumnos curso académico</a>
 
-	{% endif %}
+    {% endif %}
 
 {% endblock %}

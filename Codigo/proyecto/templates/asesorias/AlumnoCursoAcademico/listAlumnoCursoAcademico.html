@@ -57,8 +57,8 @@
         {% for alumno in lista_alumnos_curso_academico %}
         <tr>
             <th scope="row"><a href="{% url editAlumnoCursoAcademico alumno.dni_pasaporte_alumno alumno.curso_academico %}">{{ alumno.dni_pasaporte_alumno }}</a></th>
-            <td><a href="{# url editAlumnoCursoAcademico alumno.dni_pasaporte alumno.curso_academico #}" class="editlink">Editar</a></td>
-            <td><a href="{# url delAlumnoCursoAcademico alumno.dni_pasaporte alumno.curso_academico #}" class="deletelink">Eliminar</a></td>
+            <td><a href="{% url editAlumnoCursoAcademico alumno.dni_pasaporte_alumno alumno.curso_academico %}" class="editlink">Editar</a></td>
+            <td><a href="{% url delAlumnoCursoAcademico alumno.dni_pasaporte_alumno alumno.curso_academico %}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}
 
