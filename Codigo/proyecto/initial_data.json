@@ -253,6 +253,66 @@
       "telefono_familiar": 900101010
     }
   },
+   {
+    "pk": 1,
+    "model": "asesorias.alumnocursoacademico",
+    "fields": {
+      "observaciones": "uno",
+      "codigo_asesorCursoAcademico": 3,
+      "curso_academico": 2004,
+      "dni_pasaporte_alumno": "12312312O"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asesorias.alumnocursoacademico",
+    "fields": {
+      "observaciones": "dos",
+      "codigo_asesorCursoAcademico": 3,
+      "curso_academico": 2004,
+      "dni_pasaporte_alumno": "88888888Z"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "asesorias.alumnocursoacademico",
+    "fields": {
+      "observaciones": "uno",
+      "codigo_asesorCursoAcademico": 2,
+      "curso_academico": 2008,
+      "dni_pasaporte_alumno": "12312312O"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "asesorias.alumnocursoacademico",
+    "fields": {
+      "observaciones": "dos",
+      "codigo_asesorCursoAcademico": 2,
+      "curso_academico": 2008,
+      "dni_pasaporte_alumno": "88888888Z"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "asesorias.alumnocursoacademico",
+    "fields": {
+      "observaciones": "uno",
+      "codigo_asesorCursoAcademico": 1,
+      "curso_academico": 2010,
+      "dni_pasaporte_alumno": "12312312O"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "asesorias.alumnocursoacademico",
+    "fields": {
+      "observaciones": "dos",
+      "codigo_asesorCursoAcademico": 1,
+      "curso_academico": 2010,
+      "dni_pasaporte_alumno": "88888888Z"
+    }
+  },
   {
     "pk": 1,
     "model": "asesorias.centroadministradorcentro",
