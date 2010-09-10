@@ -36,7 +36,8 @@ def obtenerMatricula(nombre_centro, nombre_titulacion, plan_estudios,
             curso_academico=
             instancia_alumno_curso_academico.curso_academico,
             dni_pasaporte=
-            unicode(instancia_alumno_curso_academico.dni_pasaporte))
+            unicode(
+            instancia_alumno_curso_academico.dni_pasaporte_alumno))
     except:
         resultado = False
     return resultado
@@ -176,6 +177,7 @@ def editMatricula2(request, nombre_centro, nombre_titulacion,
     instancia_matricula = obtenerMatricula(nombre_centro,
         nombre_titulacion, plan_estudios, nombre_asignatura,
         curso_academico, dni_pasaporte)
+
     # Si existe se edita.
     if instancia_matricula:
         # Se carga el formulario para la matricula existente.
@@ -536,7 +538,7 @@ def selectAlumno(request, nombre_centro, nombre_titulacion,
                 'nombre_asignatura': nombre_asignatura,
                 'curso_academico': curso_academico,
                 'dni_pasaporte':
-                instancia_alumno_curso_academico.dni_pasaporte}))
+                instancia_alumno_curso_academico.dni_pasaporte_alumno}))
 
         else:
             return HttpResponseRedirect(
@@ -667,7 +669,7 @@ def listMatricula(request, nombre_centro, nombre_titulacion,
             for matricula in lista_matriculas:
                 # Se crea una cadena auxiliar para examinar si se
                 # encuentra el resultado de la busqueda.
-                cadena = unicode(matricula.curso_academico)
+                cadena = unicode(matricula.dni_pasaporte)
 
                 # Si se encuentra la busqueda el elemento se incluye en
                 # la lista auxiliar.
