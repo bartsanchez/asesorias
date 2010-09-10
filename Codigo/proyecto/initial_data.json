@@ -140,6 +140,16 @@
     }
   },
   {
+    "pk": 5,
+    "model": "asesorias.asignaturacursoacademico",
+    "fields": {
+      "id_centro": 2,
+      "id_titulacion": 2,
+      "id_asignatura": 1,
+      "curso_academico": 2010
+    }
+  },
+  {
     "pk": 1,
     "model": "asesorias.departamento",
     "fields": {
@@ -311,6 +321,30 @@
       "codigo_asesorCursoAcademico": 1,
       "curso_academico": 2010,
       "dni_pasaporte_alumno": "88888888Z"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "asesorias.matricula",
+    "fields": {
+      "id_asignatura": 1,
+      "id_titulacion": 2,
+      "dni_pasaporte": "88888888Z",
+      "id_centro": 2,
+      "comentario": "hola",
+      "curso_academico": 2010
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asesorias.matricula",
+    "fields": {
+      "id_asignatura": 1,
+      "id_titulacion": 1,
+      "dni_pasaporte": "88888888Z",
+      "id_centro": 2,
+      "comentario": "buenas",
+      "curso_academico": 2010
     }
   },
   {
