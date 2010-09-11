@@ -136,6 +136,21 @@ class AlumnoFormSelect(forms.Form):
     alumno = forms.ModelChoiceField(models.Alumno.objects.order_by(
         'dni_pasaporte'))
 
+class AlumnosDeAsesorForm(forms.Form):
+    alumno = forms.ModelChoiceField(
+        models.AlumnoCursoAcademico.objects.all())
+
+    # Necesario para actualizar el queryset en tiempo de ejecucion, a
+    # traves del argumento codigo_asesorCursoAcademico.
+    def __init__(self, codigo_asesorCursoAcademico, *args, **kwargs):
+        super(AlumnosDeAsesorForm,
+            self).__init__(*args, **kwargs)
+        self.fields['alumno'].queryset = \
+            models.AlumnoCursoAcademico.objects.filter(
+            codigo_asesorCursoAcademico=
+            codigo_asesorCursoAcademico).order_by(
+            'dni_pasaporte_alumno')
+
 class AlumnoCursoAcademicoForm(forms.ModelForm):
     class Meta:
         model = models.AlumnoCursoAcademico
