@@ -243,6 +243,18 @@ def selectAsesorCursoAcademico(request, dni_pasaporte, tipo):
         'dni_pasaporte': dni_pasaporte, 'tipo': tipo})
 
 def selectAlumno(request, dni_pasaporte, curso_academico, tipo):
+    # Se obtiene el posible asesor curso academico.
+    instancia_asesorCA = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+        dni_pasaporte, curso_academico)
+
+    # Se comprueba que exista el asesor curso academico.
+    if not instancia_asesorCA:
+        return HttpResponseRedirect(
+            reverse('selectAsesorCA_AlumnoCursoAcademico',
+            kwargs={'dni_pasaporte': dni_pasaporte,
+            'tipo': tipo}))
+
     # Se ha introducido un alumno.
     if request.method == 'POST':
 
