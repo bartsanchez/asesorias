@@ -10,7 +10,7 @@
         <div><p>Alumno: <b>{{ dni_pasaporte_alumno }}</b> <a href={% url selectAlumno_Reunion dni_pasaporte_asesor curso_academico 'list' %} class="updatelink"></a></p></div>
     </div>
 
-    <a href="{# url addReunion dni_pasaporte_alumno curso_academico #}" class="addlink">Crear nuevo</a>
+    <a href="{% url addReunion dni_pasaporte_alumno curso_academico %}" class="addlink">Crear nuevo</a>
     <a href="{# url generarPDFListaReuniones dni_pasaporte_alumno curso_academico busqueda #}" class="pdflink">Generar PDF</a>
 
     <div class="search">

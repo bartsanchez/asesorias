@@ -5,8 +5,9 @@
     <h1>Añadir reunión.</h1>
 
     <div class="form">
-        <div><p>Alumno: <b>{{ dni_pasaporte }}</b> <a href={# url selectAlumno_Reunion 'add' #} class="updatelink"></a></p></div>
-        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={# url selectAlumnoCursoAcademico_Reunion dni_pasaporte 'add' #} class="updatelink"></a></p></div>
+        <div><p>Asesor: <b>{{ dni_pasaporte_asesor }}</b> <a href={% url selectAsesor_Reunion 'add' %} class="updatelink"></a></p></div>
+        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAsesorCA_Reunion dni_pasaporte_asesor 'add' %} class="updatelink"></a></p></div>
+        <div><p>Alumno: <b>{{ dni_pasaporte_alumno }}</b> <a href={% url selectAlumno_Reunion dni_pasaporte_asesor curso_academico 'add' %} class="updatelink"></a></p></div>
     </div>
 
     {% if form.errors %}

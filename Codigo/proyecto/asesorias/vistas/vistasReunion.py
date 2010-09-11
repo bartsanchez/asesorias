@@ -103,8 +103,14 @@ def addReunion(request, dni_pasaporte, curso_academico):
     # Se comprueba que exista el alumno curso academico.
     if not instancia_alumno_curso_academico:
         return HttpResponseRedirect(
-            reverse('selectAlumnoCursoAcademico_Reunion',
-            kwargs={'dni_pasaporte': dni_pasaporte}))
+            reverse('selectAsesorCA_Reunion',
+            kwargs={'dni_pasaporte': dni_pasaporte, 'tipo': 'add'}))
+
+    # Se crea una instancia del asesor curso academico.
+    instancia_asesorCA = \
+        instancia_alumno_curso_academico.codigo_asesorCursoAcademico
+
+    dni_pasaporte_asesor = instancia_asesorCA.dni_pasaporte
 
     # Se ha rellenado el formulario.
     if request.method == 'POST':
@@ -144,8 +150,9 @@ def addReunion(request, dni_pasaporte, curso_academico):
         form = forms.ReunionForm()
     return render_to_response(PATH + 'addReunion.html',
         {'user': request.user, 'form': form,
-        'dni_pasaporte': dni_pasaporte,
-        'curso_academico': curso_academico})
+        'dni_pasaporte_asesor': dni_pasaporte_asesor,
+        'curso_academico': curso_academico,
+        'dni_pasaporte_alumno': dni_pasaporte})
 
 def editReunion(request, dni_pasaporte, curso_academico, id_reunion):
     # Se obtiene la instancia de la reunion.
@@ -335,8 +342,9 @@ def selectAlumno(request, dni_pasaporte, curso_academico, tipo):
 
             if tipo == 'add':
                 return HttpResponseRedirect(
-                    reverse('addReunion',
-                    kwargs={'dni_pasaporte': dni_pasaporte,
+                    reverse('addReunion', kwargs={
+                    'dni_pasaporte':
+                    instancia_alumnoCA.dni_pasaporte_alumno,
                     'curso_academico': curso_academico}))
             else:
                 return HttpResponseRedirect(reverse('listReunion',
