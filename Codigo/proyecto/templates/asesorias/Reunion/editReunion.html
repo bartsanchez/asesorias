@@ -5,15 +5,16 @@
     <h1>Editar reunión.</h1>
 
     <div class="form">
-        <div><p>Alumno: <b>{{ dni_pasaporte }}</b></p></div>
+        <div><p>Asesor: <b>{{ dni_pasaporte_asesor }}</b></p></div>
         <div><p>Curso académico: <b>{{ curso_academico }}</b></p></div>
+        <div><p>Alumno: <b>{{ dni_pasaporte_alumno }}</b></p></div>
     </div>
 
     {% if not form %}
 
     <p>No existe tal reunión.</p>
 
-    <a href="{% url selectAlumno_Reunion 'list' %}">Volver</a>
+    <a href="{% url selectAsesor_Reunion 'list' %}">Volver</a>
 
     {% else %}
 

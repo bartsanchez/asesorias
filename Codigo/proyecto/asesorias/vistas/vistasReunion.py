@@ -153,6 +153,13 @@ def editReunion(request, dni_pasaporte, curso_academico, id_reunion):
         id_reunion)
     # Si existe se edita.
     if instancia_reunion:
+        # Se crea una instancia del asesor curso academico.
+        instancia_asesorCA = \
+            vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(
+            dni_pasaporte,curso_academico).codigo_asesorCursoAcademico
+
+        dni_pasaporte_asesor = instancia_asesorCA.dni_pasaporte
+
         # Se carga el formulario para la plantilla existente.
         form = forms.ReunionForm(instance=instancia_reunion)
         # Se ha modificado el formulario original.
@@ -199,10 +206,12 @@ def editReunion(request, dni_pasaporte, curso_academico, id_reunion):
     # La reunion no existe.
     else:
         form = False
+        dni_pasaporte_asesor = ''
     return render_to_response(PATH + 'editReunion.html',
         {'user': request.user, 'form': form,
-        'dni_pasaporte': dni_pasaporte,
+        'dni_pasaporte_asesor': dni_pasaporte_asesor,
         'curso_academico': curso_academico,
+        'dni_pasaporte_alumno': dni_pasaporte,
         'id_reunion': id_reunion})
 
 def delReunion(request, dni_pasaporte, curso_academico, id_reunion):
@@ -369,7 +378,8 @@ def listReunion(request, dni_pasaporte, curso_academico, orden):
             'tipo': 'list'}))
 
     # Se crea una instancia del asesor curso academico.
-    instancia_asesorCA = instancia_alumno_curso_academico.codigo_asesorCursoAcademico
+    instancia_asesorCA = \
+        instancia_alumno_curso_academico.codigo_asesorCursoAcademico
 
     # Se obtiene una lista con todos las reuniones.
     lista_reuniones = models.Reunion.objects.filter(
