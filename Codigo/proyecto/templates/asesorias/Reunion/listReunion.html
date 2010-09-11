@@ -56,7 +56,7 @@
         <tr>
             <th scope="row"><a href="{% url editReunion dni_pasaporte_alumno curso_academico reunion.id_reunion %}">{{ reunion }}</a></th>
             <td><a href="{% url editReunion dni_pasaporte_alumno curso_academico reunion.id_reunion %}" class="editlink">Editar</a></td>
-            <td><a href="{# url delReunion dni_pasaporte curso_academico reunion.id_reunion #}" class="deletelink">Eliminar</a></td>
+            <td><a href="{% url delReunion dni_pasaporte_alumno curso_academico reunion.id_reunion %}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}
 
