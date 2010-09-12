@@ -2,12 +2,15 @@
 
 {% block content %}
 
-    <h1>Añadir reunión.</h1>
+    <h1>Añadir reunión - pregunta de asesor.</h1>
 
     <div class="form">
         <div><p>Asesor: <b>{{ dni_pasaporte_asesor }}</b> <a href={# url selectAsesor_Reunion_preguntaAsesor 'add' #} class="updatelink"></a></p></div>
         <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={# url selectAsesorCA_Reunion_preguntaAsesor dni_pasaporte_asesor 'add' #} class="updatelink"></a></p></div>
         <div><p>Alumno: <b>{{ dni_pasaporte_alumno }}</b> <a href={# url selectAlumno_Reunion_preguntaAsesor dni_pasaporte_asesor curso_academico 'add' #} class="updatelink"></a></p></div>
+        <div><p>Reunión: <b>{{ id_reunion }}</b> <a href={# url selectReunion_Reunion_preguntaAsesor dni_pasaporte_asesor curso_academico 'add' #} class="updatelink"></a></p></div>
+        <div><p>Plantilla de entrevista de asesor: <b>{{ id_entrevista_asesor }}</b> <a href={# url selectEntrevistaAsesor_Reunion_preguntaAsesor dni_pasaporte_alumno curso_academico id_reunion #} class="updatelink"></a></p></div>
+        <div><p>Pregunta de asesor: <b>{{ id_pregunta_asesor }}</b> <a href={# url selectEntrevistaAsesor_Reunion_preguntaAsesor dni_pasaporte_alumno curso_academico id_reunion #} class="updatelink"></a></p></div>
     </div>
 
     {% if form.errors %}
@@ -33,13 +36,19 @@
                 {% for field in form %}
 
                 {# Excluye los campos que forman parte de la clave que se controlarán por software. #}
+                {% ifnotequal field.name 'dni_pasaporte_alumno' %}
                 {% ifnotequal field.name 'curso_academico' %}
-                {% ifnotequal field.name 'dni_pasaporte' %}
                 {% ifnotequal field.name 'id_reunion' %}
+                {% ifnotequal field.name 'dni_pasaporte_asesor' %}
+                {% ifnotequal field.name 'id_entrevista_asesor' %}
+                {% ifnotequal field.name 'id_pregunta_asesor' %}
                 <tr>
                     <th scope="row">{{ field.label_tag }}</th>
                     <td>{{ field }}</td>
                 </tr>
+                {% endifnotequal %}
+                {% endifnotequal %}
+                {% endifnotequal %}
                 {% endifnotequal %}
                 {% endifnotequal %}
                 {% endifnotequal %}

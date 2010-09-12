@@ -5,6 +5,9 @@ from asesorias import models, forms
 from asesorias.vistas import vistasAlumnoCursoAcademico
 from asesorias.vistas import vistasAsesor, vistasAsesorCursoAcademico
 from asesorias.vistas import vistasReunion, vistasPreguntaAsesor
+from asesorias.vistas import vistasPlantillaEntrevistaAsesor \
+    as vistasPEA
+from asesorias.vistas import vistasPreguntaAsesor
 
 PATH = 'asesorias/Reunion_PreguntaAsesor/'
 
@@ -26,49 +29,67 @@ def obtenerReunion_preguntaAsesor(dni_pasaporte_alumno, curso_academico,
         resultado = False
     return resultado
 
-def addReunion_preguntaAsesor(request):
+def addReunion_preguntaAsesor(request, dni_pasaporte, curso_academico,
+    id_reunion, id_entrevista_asesor, id_pregunta_asesor):
+    # Se obtiene el posible alumno_curso_academico.
+    instancia_alumnoCA = \
+        vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(
+        dni_pasaporte, curso_academico)
+
+    # Se comprueba que exista el alumno curso academico.
+    if not instancia_alumnoCA:
+        return HttpResponseRedirect(
+            reverse('selectAlumno_Reunion_preguntaAsesor',
+            kwargs={'dni_pasaporte': dni_pasaporte,
+            'curso_academico': curso_academico,
+            'tipo': 'list'}))
+
+    # Se obtiene la instancia de la reunion.
+    instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
+        curso_academico, id_reunion)
+
+    if not instancia_reunion:
+        return HttpResponseRedirect(
+            reverse('selectReunion_Reunion_preguntaAsesor',
+            kwargs={'dni_pasaporte': dni_pasaporte,
+            'curso_academico': curso_academico,
+            'tipo': 'list'}))
+
+    # Se obtiene la instancia de la pregunta de asesor.
+    instancia_pregunta_asesor = \
+        vistasPreguntaAsesor.obtenerPreguntaAsesor(
+            instancia_alumnoCA.codigo_asesorCursoAcademico.dni_pasaporte
+            , curso_academico, id_entrevista_asesor, id_pregunta_asesor)
+
+    if not instancia_pregunta_asesor:
+        return HttpResponseRedirect(
+            reverse('selectPreguntaAsesor_Reunion_preguntaAsesor',
+            kwargs={'dni_pasaporte': dni_pasaporte,
+            'curso_academico': curso_academico,
+            'id_reunion': id_reunion,
+            'id_entrevista_asesor': id_entrevista_asesor}))
+
+    # Se crea una instancia del asesor curso academico.
+    instancia_asesorCA = \
+        instancia_alumnoCA.codigo_asesorCursoAcademico
+
+    dni_pasaporte_asesor = instancia_asesorCA.dni_pasaporte
+
     # Se ha rellenado el formulario.
     if request.method == 'POST':
         #Se extraen los valores pasados por el metodo POST.
-        codigo_reunion = request.POST['reunion']
-        codigo_pregunta_asesor = request.POST['pregunta_asesor']
         respuesta = request.POST['respuesta']
-
-        # Se obtiene una instancia de la reunion a traves de su id.
-        instancia_reunion = models.Reunion.objects.get(
-            pk=codigo_reunion)
-
-        # Se determina dni_pasaporte_alumno, curso_academico e
-        # id_reunion para esa reunion.
-        dni_pasaporte_alumno = instancia_reunion.dni_pasaporte
-        curso_academico = instancia_reunion.curso_academico
-        id_reunion = instancia_reunion.id_reunion
-
-        # Se obtiene una instancia de la pregunta de asesor a traves de
-        # su id.
-        instancia_pregunta_asesor = models.PreguntaAsesor.objects.get(
-            pk=codigo_pregunta_asesor)
-
-        # Se determina el dni_pasaporte_asesor, id_entrevista_asesor,
-        # id_pregunta_asesor para esa pregunta de asesor.
-        dni_pasaporte_asesor = instancia_pregunta_asesor.dni_pasaporte
-        id_entrevista_asesor = \
-            instancia_pregunta_asesor.id_entrevista_asesor
-        id_pregunta_asesor = \
-            instancia_pregunta_asesor.id_pregunta_asesor
 
         # Datos necesarios para crear la nueva reunion - pregunta de
         # asesor.
         datos_reunion_preguntaAsesor = {
-            'dni_pasaporte_alumno': dni_pasaporte_alumno,
+            'dni_pasaporte_alumno': dni_pasaporte,
             'curso_academico': curso_academico,
             'id_reunion': id_reunion,
             'dni_pasaporte_asesor': dni_pasaporte_asesor,
             'id_entrevista_asesor': id_entrevista_asesor,
             'id_pregunta_asesor': id_pregunta_asesor,
-            'respuesta': respuesta,
-            'reunion': codigo_reunion,
-            'pregunta_asesor': codigo_pregunta_asesor}
+            'respuesta': respuesta}
 
         # Se obtienen los valores y se valida.
         form = forms.Reunion_PreguntaAsesorForm(
@@ -79,12 +100,22 @@ def addReunion_preguntaAsesor(request):
             # Redirige a la pagina de listar reuniones - preguntas de
             # asesor.
             return HttpResponseRedirect(
-                reverse('listReunion_preguntaAsesor'))
+                reverse('listReunion_preguntaAsesor',
+                    kwargs={'dni_pasaporte': dni_pasaporte,
+                    'curso_academico': curso_academico,
+                    'id_reunion': instancia_reunion.id_reunion,
+                    'orden': 'pregunta_asesor'}))
     # Si aun no se ha rellenado el formulario, se genera uno en blanco.
     else:
         form = forms.Reunion_PreguntaAsesorForm()
     return render_to_response(PATH + 'addReunion_preguntaAsesor.html',
-        {'form': form})
+        {'user': request.user, 'form': form,
+        'dni_pasaporte_asesor': dni_pasaporte_asesor,
+        'curso_academico': curso_academico,
+        'dni_pasaporte_alumno': dni_pasaporte,
+        'id_reunion': id_reunion,
+        'id_entrevista_asesor': id_entrevista_asesor,
+        'id_pregunta_asesor': id_pregunta_asesor})
 
 def editReunion_preguntaAsesor(request, dni_pasaporte_alumno,
     curso_academico, id_reunion, dni_pasaporte_asesor,
@@ -280,7 +311,7 @@ def selectAlumno(request, dni_pasaporte, curso_academico, tipo):
         # Se obtiene el alumno y se valida.
         form = forms.AlumnosDeAsesorForm(
             instancia_asesorCA.codigo_asesorCursoAcademico,
-            request.POST)
+            curso_academico, request.POST)
 
         # Si es valido se redirige a listar alumnos curso academico.
         if form.is_valid():
@@ -308,7 +339,8 @@ def selectAlumno(request, dni_pasaporte, curso_academico, tipo):
     else:
         form = forms.AlumnosDeAsesorForm(
             codigo_asesorCursoAcademico=
-            instancia_asesorCA.codigo_asesorCursoAcademico)
+            instancia_asesorCA.codigo_asesorCursoAcademico,
+            curso_academico=curso_academico)
 
     return render_to_response(PATH + 'selectAlumno.html',
         {'user': request.user, 'form': form,
@@ -337,7 +369,8 @@ def selectReunion(request, dni_pasaporte, curso_academico, tipo):
     # Se ha introducido un alumno.
     if request.method == 'POST':
         # Se obtiene el alumno y se valida.
-        form = forms.ReunionFormSelect(dni_pasaporte,request.POST)
+        form = forms.ReunionFormSelect(dni_pasaporte, curso_academico,
+            request.POST)
 
         # Si es valido se redirige.
         if form.is_valid():
@@ -348,7 +381,11 @@ def selectReunion(request, dni_pasaporte, curso_academico, tipo):
 
             if tipo == 'add':
                 return HttpResponseRedirect(
-                    reverse('addReunion_preguntaAsesor'))
+                    reverse(
+                    'selectEntrevistaAsesor_Reunion_preguntaAsesor',
+                    kwargs={'dni_pasaporte': dni_pasaporte,
+                    'curso_academico': curso_academico,
+                    'id_reunion': instancia_reunion.id_reunion}))
 
             else:
                 return HttpResponseRedirect(
@@ -359,7 +396,8 @@ def selectReunion(request, dni_pasaporte, curso_academico, tipo):
                     'orden': 'pregunta_asesor'}))
 
     else:
-        form = forms.ReunionFormSelect(dni_pasaporte=dni_pasaporte)
+        form = forms.ReunionFormSelect(dni_pasaporte=dni_pasaporte,
+            curso_academico=curso_academico)
 
     return render_to_response(PATH + 'selectReunion.html',
         {'user': request.user, 'form': form,
@@ -367,6 +405,158 @@ def selectReunion(request, dni_pasaporte, curso_academico, tipo):
         'curso_academico': curso_academico,
         'dni_pasaporte_alumno': dni_pasaporte,
         'tipo': tipo})
+
+def selectEntrevistaAsesor(request, dni_pasaporte, curso_academico,
+    id_reunion):
+    # Se obtiene el posible alumno_curso_academico.
+    instancia_alumno_curso_academico = \
+        vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(
+        dni_pasaporte, curso_academico)
+
+    # Se comprueba que exista el alumno curso academico.
+    if not instancia_alumno_curso_academico:
+        return HttpResponseRedirect(
+            reverse('selectAlumno_Reunion_preguntaAsesor',
+            kwargs={'dni_pasaporte': dni_pasaporte,
+            'curso_academico': curso_academico,
+            'tipo': 'list'}))
+
+    # Se obtiene la posible reunion.
+    instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
+        curso_academico, id_reunion)
+
+    # Se comprueba que exista la reunion.
+    if not instancia_reunion:
+        return HttpResponseRedirect(
+            reverse('selectReunion_Reunion_preguntaAsesor',
+            kwargs={'dni_pasaporte': dni_pasaporte,
+            'curso_academico': curso_academico,
+            'tipo': 'list'}))
+
+    # Se crea una instancia del asesor curso academico.
+    instancia_asesorCA = \
+        instancia_alumno_curso_academico.codigo_asesorCursoAcademico
+
+    dni_pasaporte_asesor = instancia_asesorCA.dni_pasaporte
+
+    # Se ha introducido un alumno.
+    if request.method == 'POST':
+        # Se obtiene el alumno y se valida.
+        form = forms.PlantillaEntrevistaAsesorFormSelect(
+            dni_pasaporte_asesor, curso_academico, request.POST)
+
+        # Si es valido se redirige.
+        if form.is_valid():
+            entrevista_asesor = request.POST['entrevista_asesor']
+
+            # Se crea una instancia de la entrevista de asesor.
+            instancia_entrevista_asesor = \
+                models.PlantillaEntrevistaAsesor.objects.get(
+                pk=entrevista_asesor)
+
+            return HttpResponseRedirect(
+                reverse('selectPreguntaAsesor_Reunion_preguntaAsesor',
+                kwargs={'dni_pasaporte': dni_pasaporte,
+                'curso_academico': curso_academico,
+                'id_reunion': id_reunion,
+                'id_entrevista_asesor':
+                instancia_entrevista_asesor.id_entrevista_asesor}))
+
+    else:
+        form = forms.PlantillaEntrevistaAsesorFormSelect(
+            dni_pasaporte=dni_pasaporte_asesor,
+            curso_academico=curso_academico)
+
+    return render_to_response(PATH + 'selectEntrevistaAsesor.html',
+        {'user': request.user, 'form': form,
+        'dni_pasaporte_asesor': instancia_asesorCA.dni_pasaporte,
+        'curso_academico': curso_academico,
+        'dni_pasaporte_alumno': dni_pasaporte,
+        'id_reunion': id_reunion})
+
+def selectPreguntaAsesor(request, dni_pasaporte, curso_academico,
+    id_reunion, id_entrevista_asesor):
+    # Se obtiene el posible alumno_curso_academico.
+    instancia_alumnoCA = \
+        vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(
+        dni_pasaporte, curso_academico)
+
+    # Se comprueba que exista el alumno curso academico.
+    if not instancia_alumnoCA:
+        return HttpResponseRedirect(
+            reverse('selectAlumno_Reunion_preguntaAsesor',
+            kwargs={'dni_pasaporte': dni_pasaporte,
+            'curso_academico': curso_academico,
+            'tipo': 'list'}))
+
+    # Se obtiene la instancia de la reunion.
+    instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
+        curso_academico, id_reunion)
+
+    if not instancia_reunion:
+        return HttpResponseRedirect(
+            reverse('selectReunion_Reunion_preguntaAsesor',
+            kwargs={'dni_pasaporte': dni_pasaporte,
+            'curso_academico': curso_academico,
+            'tipo': 'list'}))
+
+    # Se obtiene la instancia de la entrevista de asesor.
+    instancia_entrevista_asesor = \
+        vistasPEA.obtenerPlantillaEntrevistaAsesor(
+            instancia_alumnoCA.codigo_asesorCursoAcademico.dni_pasaporte
+            , curso_academico, id_entrevista_asesor)
+
+    if not instancia_entrevista_asesor:
+        return HttpResponseRedirect(
+            reverse('selectEntrevistaAsesor_Reunion_preguntaAsesor',
+            kwargs={'dni_pasaporte': dni_pasaporte,
+            'curso_academico': curso_academico,
+            'id_reunion': id_reunion}))
+
+    # Se crea una instancia del asesor curso academico.
+    instancia_asesorCA = \
+        instancia_alumnoCA.codigo_asesorCursoAcademico
+
+    dni_pasaporte_asesor = instancia_asesorCA.dni_pasaporte
+
+    # Se ha introducido un alumno.
+    if request.method == 'POST':
+        # Se obtiene el alumno y se valida.
+        form = forms.PreguntaAsesorFormSelect(
+            dni_pasaporte_asesor, curso_academico, id_entrevista_asesor,
+            request.POST)
+
+        # Si es valido se redirige.
+        if form.is_valid():
+            pregunta_asesor = request.POST['pregunta_asesor']
+
+            # Se crea una instancia de la pregunta de asesor.
+            instancia_pregunta_asesor = \
+                models.PreguntaAsesor.objects.get(
+                pk=pregunta_asesor)
+
+            return HttpResponseRedirect(
+                reverse('addReunion_preguntaAsesor',
+                kwargs={'dni_pasaporte': dni_pasaporte,
+                'curso_academico': curso_academico,
+                'id_reunion': id_reunion,
+                'id_entrevista_asesor': id_entrevista_asesor,
+                'id_pregunta_asesor':
+                instancia_pregunta_asesor.id_pregunta_asesor}))
+
+    else:
+        form = forms.PreguntaAsesorFormSelect(
+            dni_pasaporte=dni_pasaporte_asesor,
+            curso_academico=curso_academico,
+            id_entrevista_asesor=id_entrevista_asesor)
+
+    return render_to_response(PATH + 'selectPreguntaAsesor.html',
+        {'user': request.user, 'form': form,
+        'dni_pasaporte_asesor': instancia_asesorCA.dni_pasaporte,
+        'curso_academico': curso_academico,
+        'dni_pasaporte_alumno': dni_pasaporte,
+        'id_reunion': id_reunion,
+        'id_entrevista_asesor': id_entrevista_asesor})
 
 def listReunion_preguntaAsesor(request, dni_pasaporte, curso_academico,
     id_reunion, orden):
@@ -396,7 +586,7 @@ def listReunion_preguntaAsesor(request, dni_pasaporte, curso_academico,
         models.ReunionPreguntaAsesor.objects.filter(
         dni_pasaporte_alumno=dni_pasaporte,
         curso_academico=curso_academico,
-        id_reunion=id_reunion)
+        id_reunion=id_reunion).order_by('id_pregunta_asesor')
 
     # Se ha realizado una busqueda.
     if request.method == 'POST':
@@ -433,7 +623,7 @@ def listReunion_preguntaAsesor(request, dni_pasaporte, curso_academico,
         form = forms.SearchForm()
         busqueda = False
 
-        if orden == '_fecha':
+        if orden == '_pregunta_asesor':
             lista_reuniones_pregunta_de_asesor = \
                 lista_reuniones_pregunta_de_asesor.reverse()
 
@@ -445,5 +635,5 @@ def listReunion_preguntaAsesor(request, dni_pasaporte, curso_academico,
         'dni_pasaporte_asesor': instancia_asesorCA.dni_pasaporte,
         'curso_academico': curso_academico,
         'dni_pasaporte_alumno': dni_pasaporte,
-        'reunion': id_reunion,
+        'id_reunion': id_reunion,
         'orden': orden})

@@ -128,6 +128,24 @@ class PreguntaAsesorForm(forms.ModelForm):
     class Meta:
         model = models.PreguntaAsesor
 
+class PreguntaAsesorFormSelect(forms.Form):
+    pregunta_asesor = forms.ModelChoiceField(
+        queryset=models.PreguntaAsesor.objects.all())
+
+    # Necesario para actualizar el queryset en tiempo de ejecucion, a
+    # traves de los argumentos dni_pasaporte, curso_academico e
+    # id_entrevista_asesor.
+    def __init__(self, dni_pasaporte, curso_academico,
+        id_entrevista_asesor, *args, **kwargs):
+        super(PreguntaAsesorFormSelect,
+            self).__init__(*args, **kwargs)
+        self.fields['pregunta_asesor'].queryset = \
+            models.PreguntaAsesor.objects.filter(
+            dni_pasaporte=dni_pasaporte,
+            curso_academico=curso_academico,
+            id_entrevista_asesor=id_entrevista_asesor).order_by(
+            'enunciado')
+
 class AlumnoForm(forms.ModelForm):
     class Meta:
         model = models.Alumno
@@ -142,13 +160,15 @@ class AlumnosDeAsesorForm(forms.Form):
 
     # Necesario para actualizar el queryset en tiempo de ejecucion, a
     # traves del argumento codigo_asesorCursoAcademico.
-    def __init__(self, codigo_asesorCursoAcademico, *args, **kwargs):
+    def __init__(self, codigo_asesorCursoAcademico, curso_academico,
+        *args, **kwargs):
         super(AlumnosDeAsesorForm,
             self).__init__(*args, **kwargs)
         self.fields['alumno'].queryset = \
             models.AlumnoCursoAcademico.objects.filter(
             codigo_asesorCursoAcademico=
-            codigo_asesorCursoAcademico).order_by(
+            codigo_asesorCursoAcademico,
+            curso_academico=curso_academico).order_by(
             'dni_pasaporte_alumno')
 
 class AlumnoCursoAcademicoForm(forms.ModelForm):
@@ -214,22 +234,19 @@ class ReunionFormSelect(forms.Form):
 
     # Necesario para actualizar el queryset en tiempo de ejecucion, a
     # traves del argumento dni_pasaporte.
-    def __init__(self, dni_pasaporte, *args, **kwargs):
+    def __init__(self, dni_pasaporte, curso_academico, *args, **kwargs):
         super(ReunionFormSelect,
             self).__init__(*args, **kwargs)
         self.fields['reunion'].queryset = \
             models.Reunion.objects.filter(
-            dni_pasaporte=dni_pasaporte).order_by('fecha')
+            dni_pasaporte=dni_pasaporte,
+            curso_academico=curso_academico).order_by('fecha')
 
 class Centro_AdministradorCentroForm(forms.ModelForm):
     class Meta:
         model = models.CentroAdministradorCentro
 
 class Reunion_PreguntaAsesorForm(forms.ModelForm):
-    reunion = forms.ModelChoiceField(models.Reunion.objects.all())
-    pregunta_asesor = forms.ModelChoiceField(
-        models.PreguntaAsesor.objects.all())
-
     class Meta:
         model = models.ReunionPreguntaAsesor
 

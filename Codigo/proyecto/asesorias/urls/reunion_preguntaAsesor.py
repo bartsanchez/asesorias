@@ -7,7 +7,10 @@ VISTAS = 'asesorias.vistas.'
 # ------------------------------------- #
 
 urlpatterns = patterns(VISTAS + 'vistasReunion_preguntaAsesor',
-    url(r'^add/$',
+    url(r'^add/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/' +
+        '(?P<id_reunion>\d+)/(?P<id_entrevista_asesor>\d+)/' +
+        '(?P<id_pregunta_asesor>\d+)/$',
+
         'addReunion_preguntaAsesor',
         name='addReunion_preguntaAsesor'),
 
@@ -51,4 +54,17 @@ urlpatterns = patterns(VISTAS + 'vistasReunion_preguntaAsesor',
         'selectReunion/(?P<tipo>[\s\w]+)/$',
 
         'selectReunion', name='selectReunion_Reunion_preguntaAsesor'),
+
+    url(r'^(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/'+
+        '(?P<id_reunion>\d+)/selectEntrevistaAsesor/$',
+
+        'selectEntrevistaAsesor',
+        name='selectEntrevistaAsesor_Reunion_preguntaAsesor'),
+
+    url(r'^(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/'+
+        '(?P<id_reunion>\d+)/(?P<id_entrevista_asesor>\d+)/' +
+        'selectPreguntaAsesor/$',
+
+        'selectPreguntaAsesor',
+        name='selectPreguntaAsesor_Reunion_preguntaAsesor'),
 )

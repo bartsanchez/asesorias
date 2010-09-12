@@ -1,0 +1,31 @@
+{% extends "asesorias/Base/base_reuniones.html" %}
+
+{% block content %}
+
+    <h1>Añadir reunión - pregunta de asesor.</h1>
+
+    <h2>Seleccionar plantilla de entrevista de asesor.</h2>
+
+    <div class="form">
+        <div><p>Asesor: <b>{{ dni_pasaporte_asesor }}</b> <a href={% url selectAsesor_Reunion_preguntaAsesor 'add' %} class="updatelink"></a></p></div>
+        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAsesorCA_Reunion_preguntaAsesor dni_pasaporte_asesor 'add' %} class="updatelink"></a></p></div>
+        <div><p>Alumno: <b>{{ dni_pasaporte_alumno }}</b> <a href={% url selectAlumno_Reunion_preguntaAsesor dni_pasaporte_asesor curso_academico 'add' %} class="updatelink"></a></p></div>
+        <div><p>Reunión: <b>{{ id_reunion }}</b> <a href={% url selectReunion_Reunion_preguntaAsesor dni_pasaporte_alumno curso_academico 'add' %} class="updatelink"></a></p></div>
+    </div>
+
+    <div class="form">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                {% for field in form %}
+                    <div><p>{{ field.label_tag }}: {{ field }}<a href="{% url selectAsesor_PlantillaEntrevistaAsesor 'add' %}" class="addlink" target="_new"></a></p></div>
+                    <div><input type="submit" value="OK"/></p></div>
+                {% endfor %}
+            </div>
+
+        </form>
+
+    </div>
+
+{% endblock %}

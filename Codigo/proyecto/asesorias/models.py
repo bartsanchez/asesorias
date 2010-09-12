@@ -429,9 +429,4 @@ class ReunionPreguntaAsesor(models.Model):
             "id_entrevista_asesor", "id_pregunta_asesor")
 
     def __unicode__(self):
-        return (unicode(self.dni_pasaporte_alumno) + " : " +
-            unicode(self.curso_academico) + " : " +
-            unicode(self.id_reunion) + " : " +
-            unicode(self.dni_pasaporte_asesor)  + " : " +
-            unicode(self.id_entrevista_asesor) + " : " +
-            unicode(self.id_pregunta_asesor))
+        return unicode(self.id_pregunta_asesor)
