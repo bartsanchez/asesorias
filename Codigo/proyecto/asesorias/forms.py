@@ -208,6 +208,19 @@ class ReunionForm(forms.ModelForm):
     class Meta:
         model = models.Reunion
 
+class ReunionFormSelect(forms.Form):
+    reunion = forms.ModelChoiceField(
+        queryset=models.Reunion.objects.all())
+
+    # Necesario para actualizar el queryset en tiempo de ejecucion, a
+    # traves del argumento dni_pasaporte.
+    def __init__(self, dni_pasaporte, *args, **kwargs):
+        super(ReunionFormSelect,
+            self).__init__(*args, **kwargs)
+        self.fields['reunion'].queryset = \
+            models.Reunion.objects.filter(
+            dni_pasaporte=dni_pasaporte).order_by('fecha')
+
 class Centro_AdministradorCentroForm(forms.ModelForm):
     class Meta:
         model = models.CentroAdministradorCentro

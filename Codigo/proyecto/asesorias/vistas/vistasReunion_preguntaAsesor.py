@@ -330,21 +330,120 @@ def selectReunion(request, dni_pasaporte, curso_academico, tipo):
             'curso_academico': curso_academico,
             'tipo': 'list'}))
 
-    form = ''
-    dni_pasaporte_asesor = 'a'
-    dni_pasaporte_alumno = 'a'
+    # Se crea una instancia del asesor curso academico.
+    instancia_asesorCA = \
+        instancia_alumno_curso_academico.codigo_asesorCursoAcademico
+
+    # Se ha introducido un alumno.
+    if request.method == 'POST':
+        # Se obtiene el alumno y se valida.
+        form = forms.ReunionFormSelect(dni_pasaporte,request.POST)
+
+        # Si es valido se redirige.
+        if form.is_valid():
+            reunion = request.POST['reunion']
+
+            # Obtiene una instancia de la reunion.
+            instancia_reunion = models.Reunion.objects.get(pk=reunion)
+
+            if tipo == 'add':
+                return HttpResponseRedirect(
+                    reverse('addReunion_preguntaAsesor'))
+
+            else:
+                return HttpResponseRedirect(
+                    reverse('listReunion_preguntaAsesor',
+                    kwargs={'dni_pasaporte': dni_pasaporte,
+                    'curso_academico': curso_academico,
+                    'id_reunion': instancia_reunion.id_reunion,
+                    'orden': 'pregunta_asesor'}))
+
+    else:
+        form = forms.ReunionFormSelect(dni_pasaporte=dni_pasaporte)
 
     return render_to_response(PATH + 'selectReunion.html',
         {'user': request.user, 'form': form,
-        'dni_pasaporte_asesor': dni_pasaporte_asesor,
+        'dni_pasaporte_asesor': instancia_asesorCA.dni_pasaporte,
         'curso_academico': curso_academico,
-        'dni_pasaporte_alumno': dni_pasaporte_alumno,
+        'dni_pasaporte_alumno': dni_pasaporte,
         'tipo': tipo})
 
-def listReunion_preguntaAsesor(request):
+def listReunion_preguntaAsesor(request, dni_pasaporte, curso_academico,
+    id_reunion, orden):
+    # Se obtiene la posible reunion.
+    instancia_reunion = \
+        vistasReunion.obtenerReunion(dni_pasaporte, curso_academico,
+            id_reunion)
+
+    # Se comprueba que exista la reunion.
+    if not instancia_reunion:
+        return HttpResponseRedirect(
+            reverse('selectReunion_Reunion_preguntaAsesor',
+            kwargs={'dni_pasaporte': dni_pasaporte,
+            'curso_academico': curso_academico,
+            'tipo': 'list'}))
+
+    # Se crea una instancia del alumno curso academico.
+    instancia_alumnoCA = \
+        vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(
+        dni_pasaporte, curso_academico)
+
+    # Se crea una instancia del asesor curso academico.
+    instancia_asesorCA = instancia_alumnoCA.codigo_asesorCursoAcademico
+
     # Se obtiene una lista con todas las reuniones - pregunta de asesor.
     lista_reuniones_pregunta_de_asesor = \
-        models.ReunionPreguntaAsesor.objects.all()
+        models.ReunionPreguntaAsesor.objects.filter(
+        dni_pasaporte_alumno=dni_pasaporte,
+        curso_academico=curso_academico,
+        id_reunion=id_reunion)
+
+    # Se ha realizado una busqueda.
+    if request.method == 'POST':
+        # Se obtienen los valores y se valida.
+        form = forms.SearchForm(request.POST)
+        # Si es valido se realiza la busqueda.
+        if form.is_valid():
+            busqueda = request.POST['busqueda']
+
+            # Se crea una lista auxiliar que albergara el resultado de
+            # la busqueda.
+            lista_aux = []
+
+            # Se recorren los elementos determinando si coinciden con
+            # la busqueda.
+            for reunion_pregunta in lista_reuniones_pregunta_de_asesor:
+                # Se crea una cadena auxiliar para examinar si se
+                # encuentra el resultado de la busqueda.
+                cadena = unicode(reunion_pregunta.id_pregunta_asesor)
+
+                # Si se encuentra la busqueda el elemento se incluye en
+                # la lista auxiliar.
+                if cadena.find(busqueda) >= 0:
+                    lista_aux.append(reunion_pregunta)
+
+            # La lista final a devolver sera la lista auxiliar.
+            lista_reuniones_pregunta_de_asesor = lista_aux
+
+        else:
+            busqueda = False
+    ## No se ha realizado busqueda.
+    else:
+        # Formulario para una posible busqueda.
+        form = forms.SearchForm()
+        busqueda = False
+
+        if orden == '_fecha':
+            lista_reuniones_pregunta_de_asesor = \
+                lista_reuniones_pregunta_de_asesor.reverse()
+
     return render_to_response(PATH + 'listReunion_preguntaAsesor.html',
-        {'lista_reuniones_pregunta_de_asesor':
-        lista_reuniones_pregunta_de_asesor})
+        {'user': request.user, 'form': form,
+        'lista_reuniones_pregunta_de_asesor':
+        lista_reuniones_pregunta_de_asesor,
+        'busqueda': busqueda,
+        'dni_pasaporte_asesor': instancia_asesorCA.dni_pasaporte,
+        'curso_academico': curso_academico,
+        'dni_pasaporte_alumno': dni_pasaporte,
+        'reunion': id_reunion,
+        'orden': orden})
