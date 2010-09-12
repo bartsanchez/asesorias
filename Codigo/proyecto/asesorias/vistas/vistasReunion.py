@@ -354,7 +354,7 @@ def selectAlumno(request, dni_pasaporte, curso_academico, tipo):
                 'orden': 'fecha'}))
 
         else:
-            HttpResponseRedirect(
+            return HttpResponseRedirect(
                 reverse('selectAlumno_Reunion',
                 kwargs={'dni_pasaporte': dni_pasaporte,
                 'curso_academico': curso_academico,

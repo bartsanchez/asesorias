@@ -1,0 +1,36 @@
+{% extends "asesorias/Base/base_reuniones.html" %}
+
+{% block content %}
+
+    {% ifequal tipo 'add' %}
+    <h1>Añadir reunión - pregunta de asesor.</h1>
+
+    {% else %}
+    <h1>Lista de reunión - preguntas de asesor.</h1>
+
+    {% endifequal %}
+
+    <h2>Seleccionar reunión.</h2>
+
+    <div class="form">
+        <div><p>Asesor: <b>{{ dni_pasaporte_asesor }}</b> <a href={% url selectAsesor_Reunion_preguntaAsesor tipo %} class="updatelink"></a></p></div>
+        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAsesorCA_Reunion_preguntaAsesor dni_pasaporte_asesor tipo %} class="updatelink"></a></p></div>
+        <div><p>Alumno: <b>{{ dni_pasaporte_alumno }}</b> <a href={% url selectAlumno_Reunion_preguntaAsesor dni_pasaporte_asesor curso_academico tipo %} class="updatelink"></a></p></div>
+    </div>
+
+    <div class="form">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                {% for field in form %}
+                    <div><p>{{ field.label_tag }}: {{ field }}<a href="{% url addAlumno %}" class="addlink" target="_new"></a></p></div>
+                    <div><input type="submit" value="OK"/></p></div>
+                {% endfor %}
+            </div>
+
+        </form>
+
+    </div>
+
+{% endblock %}

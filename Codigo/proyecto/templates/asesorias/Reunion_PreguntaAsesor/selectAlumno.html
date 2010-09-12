@@ -11,10 +11,11 @@
     {% endifequal %}
 
 
-    <h2>Seleccionar curso académico.</h2>
+    <h2>Seleccionar alumno.</h2>
 
     <div class="form">
         <div><p>Asesor: <b>{{ dni_pasaporte }}</b> <a href={% url selectAsesor_Reunion_preguntaAsesor tipo %} class="updatelink"></a></p></div>
+        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAsesorCA_Reunion_preguntaAsesor dni_pasaporte tipo %} class="updatelink"></a></p></div>
     </div>
 
     <div class="form">
@@ -23,7 +24,7 @@
 
             <div class="fieldWrapper">
                 {% for field in form %}
-                    <div><p>{{ field.label_tag }}: {{ field }}<a href="{% url addAsesorCursoAcademico dni_pasaporte %}" class="addlink" target="_new"></a></p></div>
+                    <div><p>{{ field.label_tag }}: {{ field }}<a href="{% url addAlumno %}" class="addlink" target="_new"></a></p></div>
                     <div><input type="submit" value="OK"/></p></div>
                 {% endfor %}
             </div>
