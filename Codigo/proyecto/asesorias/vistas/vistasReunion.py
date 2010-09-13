@@ -328,7 +328,7 @@ def selectAlumno(request, dni_pasaporte, curso_academico, tipo):
         # Se obtiene el alumno y se valida.
         form = forms.AlumnosDeAsesorForm(
             instancia_asesorCA.codigo_asesorCursoAcademico,
-            request.POST)
+            curso_academico, request.POST)
 
         # Si es valido se redirige a listar alumnos curso academico.
         if form.is_valid():
@@ -363,7 +363,8 @@ def selectAlumno(request, dni_pasaporte, curso_academico, tipo):
     else:
         form = forms.AlumnosDeAsesorForm(
             codigo_asesorCursoAcademico=
-            instancia_asesorCA.codigo_asesorCursoAcademico)
+            instancia_asesorCA.codigo_asesorCursoAcademico,
+            curso_academico=curso_academico)
 
     return render_to_response(PATH + 'selectAlumno.html',
         {'user': request.user, 'form': form,
