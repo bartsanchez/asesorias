@@ -1,45 +1,34 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//ES"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
 <head>
-	<link type="text/css" rel="stylesheet" href="http://localhost/media/css/login.css" />
-	<title>Asesorías Académicas.</title>
+    <link type="text/css" rel="stylesheet" href="http://localhost/media/css/login.css" />
+    <title>Asesorías Académicas.</title>
 </head>
 
 <body class="login">
-	<!-- Container -->
-	<div id="container">
+    <!-- Container -->
+    <div id="container">
 
-		    <!-- Header -->
-			<div id="header">
-				<div id="branding">
-					<h1 id="site-name">Asesorías Académicas</h1>
-				</div>
-			</div>
+            <!-- Header -->
+            <div id="header">
+                <div id="branding">
+                    <h1 id="site-name">Asesorías Académicas</h1>
+                </div>
+            </div>
 
+        <div id="content">
+            <div id="content-main">
+                <form action="" method="post" id="login-form">
+                        {% for field in form %}
+                            <div class="form-row">{{ field.label_tag }} {{ field }}</div>
+                        {% endfor %}
+                        <div class="submit-row"><input type="submit" value="OK"/></div>
+                </form>
+            </div>
+        </div>
 
-
-
-		<div id="content">
-			<div id="content-main">
-
-				<form action="" method="post" id="login-form">
-					<div class="form-row">
-						<label for="id_username">Usuario:</label> <input type="text" name="username" id="id_username" />
-					</div>
-					<div class="form-row">
-						<label for="id_password">Contraseña:</label> <input type="password" name="password" id="id_password" />
-						<input type="hidden" name="this_is_the_login_form" value="1" />
-					</div>
-					<div class="submit-row">
-						<input type="submit" value="Acceder" />
-					</div>
-				</form>
-
-			</div>
-		</div>
-
-	</div>
+    </div>
 </body>
 </html>
 
