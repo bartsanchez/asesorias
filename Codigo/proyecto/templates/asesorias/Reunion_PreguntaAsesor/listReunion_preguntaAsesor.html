@@ -55,8 +55,8 @@
 
         {% for reunion_pregunta in lista_reuniones_pregunta_de_asesor %}
         <tr>
-            <th scope="row"><a href="{% url editReunion_preguntaAsesor dni_pasaporte_alumno curso_academico id_reunion dni_pasaporte_asesor id_reunion reunion_pregunta.id_pregunta_asesor %}">{{ reunion_pregunta.id_entrevista_asesor }} : {{ reunion_pregunta }} : {{ reunion_pregunta.respuesta }}</a></th>
-            <td><a href="{# url editReunion dni_pasaporte_alumno curso_academico reunion.id_reunion #}" class="editlink">Editar</a></td>
+            <th scope="row"><a href="{% url editReunion_preguntaAsesor dni_pasaporte_alumno curso_academico id_reunion dni_pasaporte_asesor reunion_pregunta.id_entrevista_asesor reunion_pregunta.id_pregunta_asesor %}">{{ reunion_pregunta.id_entrevista_asesor }} : {{ reunion_pregunta }} : {{ reunion_pregunta.respuesta }}</a></th>
+            <td><a href="{% url editReunion_preguntaAsesor dni_pasaporte_alumno curso_academico id_reunion dni_pasaporte_asesor reunion_pregunta.id_entrevista_asesor reunion_pregunta.id_pregunta_asesor %}" class="editlink">Editar</a></td>
             <td><a href="{# url delReunion dni_pasaporte_alumno curso_academico reunion.id_reunion #}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}

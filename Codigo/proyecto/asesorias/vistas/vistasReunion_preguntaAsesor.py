@@ -125,51 +125,17 @@ def editReunion_preguntaAsesor(request, dni_pasaporte_alumno,
         obtenerReunion_preguntaAsesor(
         dni_pasaporte_alumno, curso_academico, id_reunion,
         dni_pasaporte_asesor, id_entrevista_asesor, id_pregunta_asesor)
+
     # Si existe se edita.
     if instancia_reunion_preguntaAsesor:
         # Se carga el formulario para la reunion - pregunta de asesor
         # existente.
         form = forms.Reunion_PreguntaAsesorForm(
-            instance=instancia_reunion_preguntaAsesor,
-            initial={'reunion':
-            vistasReunion.obtenerReunion(dni_pasaporte_alumno,
-            curso_academico, id_reunion).codigo_reunion,
-            'pregunta_asesor':
-            vistasPreguntaAsesor.obtenerPreguntaAsesor(
-            dni_pasaporte_asesor, curso_academico, id_entrevista_asesor,
-            id_pregunta_asesor).codigo_preguntaAsesor})
+            instance=instancia_reunion_preguntaAsesor)
         # Se ha modificado el formulario original.
         if request.method == 'POST':
             #Se extraen los valores pasados por el metodo POST.
-            codigo_reunion = request.POST['reunion']
-            codigo_pregunta_asesor = request.POST['pregunta_asesor']
             respuesta = request.POST['respuesta']
-
-            # Se obtiene una instancia de la reunion a traves de su id.
-            instancia_reunion = models.Reunion.objects.get(
-                pk=codigo_reunion)
-
-            # Se determina dni_pasaporte_alumno, curso_academico e
-            # id_reunion para esa reunion.
-            dni_pasaporte_alumno = instancia_reunion.dni_pasaporte
-            curso_academico = instancia_reunion.curso_academico
-            id_reunion = instancia_reunion.id_reunion
-
-            # Se obtiene una instancia de la pregunta de asesor a traves
-            # de su id.
-            instancia_pregunta_asesor = \
-                models.PreguntaAsesor.objects.get(
-                pk=codigo_pregunta_asesor)
-
-            # Se determina el dni_pasaporte_asesor,
-            # id_entrevista_asesor, id_pregunta_asesor para esa pregunta
-            # de asesor.
-            dni_pasaporte_asesor = \
-                instancia_pregunta_asesor.dni_pasaporte
-            id_entrevista_asesor = \
-                instancia_pregunta_asesor.id_entrevista_asesor
-            id_pregunta_asesor = \
-                instancia_pregunta_asesor.id_pregunta_asesor
 
             # Datos necesarios para crear la nueva reunion - pregunta de
             # asesor.
@@ -180,9 +146,7 @@ def editReunion_preguntaAsesor(request, dni_pasaporte_alumno,
                 'dni_pasaporte_asesor': dni_pasaporte_asesor,
                 'id_entrevista_asesor': id_entrevista_asesor,
                 'id_pregunta_asesor': id_pregunta_asesor,
-                'respuesta': respuesta,
-                'reunion': codigo_reunion,
-                'pregunta_asesor': codigo_pregunta_asesor}
+                'respuesta': respuesta}
 
             # Se actualiza el formulario con la nueva informacion.
             form = forms.Reunion_PreguntaAsesorForm(
@@ -195,7 +159,11 @@ def editReunion_preguntaAsesor(request, dni_pasaporte_alumno,
                 # Redirige a la pagina de listar reuniones - preguntas
                 # de asesor.
                 return HttpResponseRedirect(
-                    reverse('listReunion_preguntaAsesor'))
+                    reverse('listReunion_preguntaAsesor',
+                    kwargs={'dni_pasaporte': dni_pasaporte_alumno,
+                    'curso_academico': curso_academico,
+                    'id_reunion': id_reunion,
+                    'orden': 'pregunta_asesor'}))
     # La matricula no existe
     else:
         form = False
