@@ -1,11 +1,20 @@
-<h1>Asesor: {{ asesor }}</h1>
+{% extends "asesorias/Base/base.html" %}
 
-<ul>
-	<li>dni_pasaporte: {{ asesor.dni_pasaporte }}</li>
-	<li>correo electrónico: {{ asesor.correo_electronico }}</li>
-	<li>nombre: {{ asesor.nombre }}</li>
-	<li>apellidos: {{ asesor.apellidos }}</li>
-	<li>teléfono: {{ asesor.telefono }}</li>
-</ul>
+    <!-- Establece el login del usuario. -->
+    {% block username %}{{ user }}{% endblock %}
 
-<a href="../logout">Salir</a>
+    <!-- Determina el elemento activo en el menú horizontal -->
+    {% block opcion_inicio %}class="active"{% endblock %}
+
+    {% block content %}
+    <h1>Asesor: {{ asesor }}</h1>
+
+    <ul>
+        <li>dni_pasaporte: {{ asesor.dni_pasaporte }}</li>
+        <li>correo electrónico: {{ asesor.correo_electronico }}</li>
+        <li>nombre: {{ asesor.nombre }}</li>
+        <li>apellidos: {{ asesor.apellidos }}</li>
+        <li>teléfono: {{ asesor.telefono }}</li>
+    </ul>
+
+    {% endblock %}

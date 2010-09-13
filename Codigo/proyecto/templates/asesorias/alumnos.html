@@ -1,20 +1,29 @@
-<h1>Alumno: {{ alumno }}</h1>
+{% extends "asesorias/Base/base.html" %}
 
-<ul>
-	<li>dni_pasaporte: {{ alumno.dni_pasaporte }}</li>
-	<li>correo electrónico: {{ alumno.correo_electronico }}</li>
-	<li>nombre: {{ alumno.nombre }}</li>
-	<li>apellidos: {{ alumno.apellidos }}</li>
-	<li>fecha nacimiento: {{ alumno.fecha_nacimiento }}</li>
-	<li>direccion cordoba: {{ alumno.direccion_cordoba }}</li>
-	<li>localidad familiar: {{ alumno.localidad_familiar }}</li>
-	<li>provincia familiar: {{ alumno.provincia_familiar }}</li>
-	<li>codigo postal: {{ alumno.codigo_postal }}</li>
-	<li>telefono familiar: {{ alumno.telefono_familiar }}</li>
-	<li>ingreso: {{ alumno.ingreso }}</li>
-	<li>otros estudios universitarios: {{ alumno.otros_estudios_universitarios }}</li>
-	<li>modalidad acceso universidad: {{ alumno.modalidad_acceso_universidad }}</li>
-	<li>calificacion acceso: {{ alumno.calificacion_acceso }}</li>
-</ul>
+    <!-- Establece el login del usuario. -->
+    {% block username %}{{ user }}{% endblock %}
 
-<a href="../logout">Salir</a>
+    <!-- Determina el elemento activo en el menú horizontal -->
+    {% block opcion_inicio %}class="active"{% endblock %}
+
+    {% block content %}
+    <h1>Alumno: {{ alumno }}</h1>
+
+    <ul>
+        <li>dni_pasaporte: {{ alumno.dni_pasaporte }}</li>
+        <li>correo electrónico: {{ alumno.correo_electronico }}</li>
+        <li>nombre: {{ alumno.nombre }}</li>
+        <li>apellidos: {{ alumno.apellidos }}</li>
+        <li>fecha nacimiento: {{ alumno.fecha_nacimiento }}</li>
+        <li>direccion cordoba: {{ alumno.direccion_cordoba }}</li>
+        <li>localidad familiar: {{ alumno.localidad_familiar }}</li>
+        <li>provincia familiar: {{ alumno.provincia_familiar }}</li>
+        <li>codigo postal: {{ alumno.codigo_postal }}</li>
+        <li>telefono familiar: {{ alumno.telefono_familiar }}</li>
+        <li>ingreso: {{ alumno.ingreso }}</li>
+        <li>otros estudios universitarios: {{ alumno.otros_estudios_universitarios }}</li>
+        <li>modalidad acceso universidad: {{ alumno.modalidad_acceso_universidad }}</li>
+        <li>calificacion acceso: {{ alumno.calificacion_acceso }}</li>
+    </ul>
+
+    {% endblock %}
