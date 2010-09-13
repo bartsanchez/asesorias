@@ -200,7 +200,13 @@ def editReunion_preguntaAsesor(request, dni_pasaporte_alumno,
     else:
         form = False
     return render_to_response(PATH + 'editReunion_preguntaAsesor.html',
-        {'form': form})
+        {'user': request.user, 'form': form,
+        'dni_pasaporte_asesor': dni_pasaporte_asesor,
+        'curso_academico': curso_academico,
+        'dni_pasaporte_alumno': dni_pasaporte_alumno,
+        'id_reunion': id_reunion,
+        'id_entrevista_asesor': id_entrevista_asesor,
+        'id_pregunta_asesor': id_pregunta_asesor})
 
 def delReunion_preguntaAsesor(request, dni_pasaporte_alumno,
     curso_academico, id_reunion, dni_pasaporte_asesor,
