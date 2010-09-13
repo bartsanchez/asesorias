@@ -8,6 +8,7 @@ from asesorias.vistas import vistasReunion, vistasPreguntaAsesor
 from asesorias.vistas import vistasPlantillaEntrevistaAsesor \
     as vistasPEA
 from asesorias.vistas import vistasPreguntaAsesor
+from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/Reunion_PreguntaAsesor/'
 
@@ -597,7 +598,7 @@ def listReunion_preguntaAsesor(request, dni_pasaporte, curso_academico,
 
         else:
             busqueda = False
-    ## No se ha realizado busqueda.
+    # No se ha realizado busqueda.
     else:
         # Formulario para una posible busqueda.
         form = forms.SearchForm()
@@ -617,3 +618,60 @@ def listReunion_preguntaAsesor(request, dni_pasaporte, curso_academico,
         'dni_pasaporte_alumno': dni_pasaporte,
         'id_reunion': id_reunion,
         'orden': orden})
+
+def generarPDFListaReuniones_preguntaAsesor(request, dni_pasaporte,
+    curso_academico, id_reunion, busqueda):
+    # Se obtiene la posible reunion.
+    instancia_reunion = \
+        vistasReunion.obtenerReunion(dni_pasaporte, curso_academico,
+            id_reunion)
+
+    # Se comprueba que exista la reunion.
+    if not instancia_reunion:
+        return HttpResponseRedirect(
+            reverse('selectReunion_Reunion_preguntaAsesor',
+            kwargs={'dni_pasaporte': dni_pasaporte,
+            'curso_academico': curso_academico,
+            'tipo': 'list'}))
+
+    # Se crea una instancia del alumno curso academico.
+    instancia_alumnoCA = \
+        vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(
+        dni_pasaporte, curso_academico)
+
+    # Se crea una instancia del asesor curso academico.
+    instancia_asesorCA = instancia_alumnoCA.codigo_asesorCursoAcademico
+
+    # Se obtiene una lista con todas las reuniones - pregunta de asesor.
+    lista_reuniones_pregunta_de_asesor = \
+        models.ReunionPreguntaAsesor.objects.filter(
+        dni_pasaporte_alumno=dni_pasaporte,
+        curso_academico=curso_academico,
+        id_reunion=id_reunion).order_by('id_pregunta_asesor')
+
+    # Se ha realizado una busqueda.
+    if busqueda != 'False':
+        # Se crea una lista auxiliar que albergara el resultado de
+            # la busqueda.
+            lista_aux = []
+
+            # Se recorren los elementos determinando si coinciden con
+            # la busqueda.
+            for reunion_pregunta in lista_reuniones_pregunta_de_asesor:
+                # Se crea una cadena auxiliar para examinar si se
+                # encuentra el resultado de la busqueda.
+                cadena = (unicode(reunion_pregunta.id_entrevista_asesor)
+                    + unicode(reunion_pregunta.id_pregunta_asesor) +
+                    unicode(reunion_pregunta.respuesta))
+
+                # Si se encuentra la busqueda el elemento se incluye en
+                # la lista auxiliar.
+                if cadena.find(busqueda) >= 0:
+                    lista_aux.append(reunion_pregunta)
+
+            # La lista final a devolver sera la lista auxiliar.
+            lista_reuniones_pregunta_de_asesor = lista_aux
+
+    return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
+        {'mylist': lista_reuniones_pregunta_de_asesor,
+        'name': 'reuniones - preguntas de asesor',})
