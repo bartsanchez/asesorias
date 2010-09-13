@@ -772,5 +772,44 @@
       "comentario_alumno": "buenas",
       "curso_academico": 2010
     }
+  },
+  {
+    "pk": 1,
+    "model": "asesorias.reunionpreguntaasesor",
+    "fields": {
+      "dni_pasaporte_alumno": "88888888Z",
+      "respuesta": "respuesta1",
+      "id_entrevista_asesor": 1,
+      "id_pregunta_asesor": 1,
+      "id_reunion": 2,
+      "dni_pasaporte_asesor": "30303030L",
+      "curso_academico": 2010
+    }
+  },
+  {
+    "pk": 2,
+    "model": "asesorias.reunionpreguntaasesor",
+    "fields": {
+      "dni_pasaporte_alumno": "88888888Z",
+      "respuesta": "respuesta2",
+      "id_entrevista_asesor": 1,
+      "id_pregunta_asesor": 2,
+      "id_reunion": 2,
+      "dni_pasaporte_asesor": "30303030L",
+      "curso_academico": 2010
+    }
+  },
+  {
+    "pk": 3,
+    "model": "asesorias.reunionpreguntaasesor",
+    "fields": {
+      "dni_pasaporte_alumno": "88888888Z",
+      "respuesta": "otra respuesta3",
+      "id_entrevista_asesor": 2,
+      "id_pregunta_asesor": 3,
+      "id_reunion": 2,
+      "dni_pasaporte_asesor": "30303030L",
+      "curso_academico": 2010
+    }
   }
 ]
