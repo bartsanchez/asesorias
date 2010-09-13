@@ -5,10 +5,10 @@
     <h1>Lista de reuniones - preguntas de asesor.</h1>
 
     <div class="form">
-        <div><p>Asesor: <b>{{ dni_pasaporte_asesor }}</b> <a href={# url selectAsesor_Reunion 'list' #} class="updatelink"></a></p></div>
-        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={# url selectAsesorCA_Reunion dni_pasaporte_asesor 'list' #} class="updatelink"></a></p></div>
-        <div><p>Alumno: <b>{{ dni_pasaporte_alumno }}</b> <a href={# url selectAlumno_Reunion dni_pasaporte_asesor curso_academico 'list' #} class="updatelink"></a></p></div>
-        <div><p>Reunion: <b>{{ id_reunion }}</b> <a href={# url selectReunion_Reunion dni_pasaporte_asesor curso_academico 'list' #} class="updatelink"></a></p></div>
+        <div><p>Asesor: <b>{{ dni_pasaporte_asesor }}</b> <a href={% url selectAsesor_Reunion_preguntaAsesor 'list' %} class="updatelink"></a></p></div>
+        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAsesorCA_Reunion_preguntaAsesor dni_pasaporte_asesor 'list' %} class="updatelink"></a></p></div>
+        <div><p>Alumno: <b>{{ dni_pasaporte_alumno }}</b> <a href={% url selectAlumno_Reunion_preguntaAsesor dni_pasaporte_asesor curso_academico 'list' %} class="updatelink"></a></p></div>
+        <div><p>Reunion: <b>{{ id_reunion }}</b> <a href={% url selectReunion_Reunion_preguntaAsesor dni_pasaporte_alumno curso_academico 'list' %} class="updatelink"></a></p></div>
     </div>
 
     <a href="{% url selectEntrevistaAsesor_Reunion_preguntaAsesor dni_pasaporte_alumno curso_academico id_reunion %}" class="addlink">Crear nuevo</a>

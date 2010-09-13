@@ -579,7 +579,9 @@ def listReunion_preguntaAsesor(request, dni_pasaporte, curso_academico,
             for reunion_pregunta in lista_reuniones_pregunta_de_asesor:
                 # Se crea una cadena auxiliar para examinar si se
                 # encuentra el resultado de la busqueda.
-                cadena = unicode(reunion_pregunta.id_pregunta_asesor)
+                cadena = (unicode(reunion_pregunta.id_entrevista_asesor)
+                    + unicode(reunion_pregunta.id_pregunta_asesor) +
+                    unicode(reunion_pregunta.respuesta))
 
                 # Si se encuentra la busqueda el elemento se incluye en
                 # la lista auxiliar.
