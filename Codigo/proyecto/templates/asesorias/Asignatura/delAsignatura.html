@@ -1,15 +1,15 @@
-{% extends "asesorias/Base/base_org_institucional.html" %}
+{% extends "asesorias/Base/AdministradorPrincipal/org_institucional.html" %}
 
 {% block content %}
 
-	<h1>Eliminar asignatura.</h1>
+    <h1>Eliminar asignatura.</h1>
 
-	{% if error %}
+    {% if error %}
 
-	<p>No existe tal asignatura.</p>
+    <p>No existe tal asignatura.</p>
 
-	<a href="{% url selectCentro_Asignatura 'list' %}">Volver</a>
+    <a href="{% url selectCentro_Asignatura 'list' %}">Volver</a>
 
-	{% endif %}
+    {% endif %}
 
 {% endblock %}

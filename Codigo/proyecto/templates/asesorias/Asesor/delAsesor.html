@@ -1,15 +1,15 @@
-{% extends "asesorias/Base/base_org_docente.html" %}
+{% extends "asesorias/Base/AdministradorPrincipal/org_docente.html" %}
 
 {% block content %}
 
-	<h1>Eliminar asesor.</h1>
+    <h1>Eliminar asesor.</h1>
 
-	{% if error %}
+    {% if error %}
 
-	<p>No existe tal asesor.</p>
+    <p>No existe tal asesor.</p>
 
-	<a href="{% url listAsesor 'nombre_asesor' %}">Lista de asesores</a>
+    <a href="{% url listAsesor 'nombre_asesor' %}">Lista de asesores</a>
 
-	{% endif %}
+    {% endif %}
 
 {% endblock %}

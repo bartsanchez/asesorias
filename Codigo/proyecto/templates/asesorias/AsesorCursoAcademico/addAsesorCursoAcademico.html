@@ -1,42 +1,42 @@
-{% extends "asesorias/Base/base_org_docente.html" %}
+{% extends "asesorias/Base/AdministradorPrincipal/org_docente.html" %}
 
 {% block content %}
 
-	<h1>Añadir asesor curso académico.</h1>
+    <h1>Añadir asesor curso académico.</h1>
 
-	{% if form.errors %}
-	<div id="form-error">
-		<p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
-		<ul>
-			{% for field in form %}
-				{% if field.errors %}<li>{{ field.errors|striptags }}</li>{% endif %}
-			{% endfor %}
-			{% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
-		</ul>
-	</div>
-	{% endif %}
+    {% if form.errors %}
+    <div id="form-error">
+        <p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}<li>{{ field.errors|striptags }}</li>{% endif %}
+            {% endfor %}
+            {% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
+        </ul>
+    </div>
+    {% endif %}
 
-	<div class="module">
+    <div class="module">
 
-		<form action="" method="post">
+        <form action="" method="post">
 
-			<div class="fieldWrapper">
-				<table summary="Añadir asesor curso académico.">
-				<caption><h2>Añadir asesor curso académico</h2></caption>
-				{% for field in form %}
+            <div class="fieldWrapper">
+                <table summary="Añadir asesor curso académico.">
+                <caption><h2>Añadir asesor curso académico</h2></caption>
+                {% for field in form %}
 
-				<tr>
-					<th scope="row">{{ field.label_tag }}</th>
-					<td>{{ field }}</td>
-				</tr>
+                <tr>
+                    <th scope="row">{{ field.label_tag }}</th>
+                    <td>{{ field }}</td>
+                </tr>
 
-				{% endfor %}
-				</table>
-			</div>
+                {% endfor %}
+                </table>
+            </div>
 
-			<p><input type="submit" value="Confirmar"/></p>
-		</form>
+            <p><input type="submit" value="Confirmar"/></p>
+        </form>
 
-	</div>
+    </div>
 
 {% endblock %}

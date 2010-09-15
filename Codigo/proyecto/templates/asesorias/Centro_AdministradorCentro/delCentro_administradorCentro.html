@@ -1,15 +1,15 @@
-{% extends "asesorias/Base/base_org_institucional.html" %}
+{% extends "asesorias/Base/AdministradorPrincipal/org_institucional.html" %}
 
 {% block content %}
 
-	<h1>Eliminar centro-administrador de centro.</h1>
+    <h1>Eliminar centro-administrador de centro.</h1>
 
-	{% if error %}
+    {% if error %}
 
-	<p>No existe tal centro-administrador de centro.</p>
+    <p>No existe tal centro-administrador de centro.</p>
 
-	<a href="{% url selectCentro_CentroAdministradorCentro %}">Lista de centros-administradores de centro</a>
+    <a href="{% url selectCentro_CentroAdministradorCentro %}">Lista de centros-administradores de centro</a>
 
-	{% endif %}
+    {% endif %}
 
 {% endblock %}

@@ -1,70 +1,70 @@
-{% extends "asesorias/Base/base_org_institucional.html" %}
+{% extends "asesorias/Base/AdministradorPrincipal/org_institucional.html" %}
 
 {% block content %}
 
-	<h1>Lista de asignaturas curso académico.</h1>
+    <h1>Lista de asignaturas curso académico.</h1>
 
-	<div class="form">
-		<div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_AsignaturaCursoAcademico 'list' %} class="updatelink"></a></p></div>
-		<div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_AsignaturaCursoAcademico nombre_centro 'list' %} class="updatelink"></a></p></div>
-		<div><p>Asignatura: <b>{{ nombre_asignatura }}</b> <a href={% url selectAsignatura_AsignaturaCursoAcademico nombre_centro nombre_titulacion plan_estudios 'list' %} class="updatelink"></a></p></div>
-	</div>
+    <div class="form">
+        <div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_AsignaturaCursoAcademico 'list' %} class="updatelink"></a></p></div>
+        <div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_AsignaturaCursoAcademico nombre_centro 'list' %} class="updatelink"></a></p></div>
+        <div><p>Asignatura: <b>{{ nombre_asignatura }}</b> <a href={% url selectAsignatura_AsignaturaCursoAcademico nombre_centro nombre_titulacion plan_estudios 'list' %} class="updatelink"></a></p></div>
+    </div>
 
-	<a href="{% url addAsignaturaCursoAcademico nombre_centro nombre_titulacion plan_estudios nombre_asignatura %}" class="addlink">Crear nuevo</a>
-	<a href="{% url generarPDFListaAsignaturasCursoAcademico nombre_centro nombre_titulacion plan_estudios nombre_asignatura busqueda %}" class="pdflink">Generar PDF</a>
+    <a href="{% url addAsignaturaCursoAcademico nombre_centro nombre_titulacion plan_estudios nombre_asignatura %}" class="addlink">Crear nuevo</a>
+    <a href="{% url generarPDFListaAsignaturasCursoAcademico nombre_centro nombre_titulacion plan_estudios nombre_asignatura busqueda %}" class="pdflink">Generar PDF</a>
 
-	<div class="search">
+    <div class="search">
 
-		<form action="" method="post">
+        <form action="" method="post">
 
-			<div class="fieldWrapper">
-				<table summary="Realizar búsqueda.">
-				{% for field in form %}
-				<tr>
-					<th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
-					<td>{{ field }}</td>
-				</tr>
-				{% endfor %}
-				</table>
-			</div>
+            <div class="fieldWrapper">
+                <table summary="Realizar búsqueda.">
+                {% for field in form %}
+                <tr>
+                    <th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
 
-		</form>
+        </form>
 
-	</div>
+    </div>
 
-	<div class="module">
-		<table summary="Lista de asignaturas curso académico.">
-		<caption><h2>Lista de asignaturas curso académico{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
+    <div class="module">
+        <table summary="Lista de asignaturas curso académico.">
+        <caption><h2>Lista de asignaturas curso académico{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
 
-		{% if not lista_asignaturas_curso_academico %}
+        {% if not lista_asignaturas_curso_academico %}
 
-		<tr><th scope="row"><p>No existen actualmente asignaturas curso académico para esta asignatura en el sistema.</p></th></tr>
+        <tr><th scope="row"><p>No existen actualmente asignaturas curso académico para esta asignatura en el sistema.</p></th></tr>
 
-		{% else %}
+        {% else %}
 
-		{% if not busqueda %}
-		<tr>
-			{% ifequal orden '_curso_academico' %}
-			<th colspan="3"><a href={% url listAsignaturaCursoAcademico nombre_centro nombre_titulacion plan_estudios nombre_asignatura 'curso_academico' %}>Curso académico &#11014;</a></th>
+        {% if not busqueda %}
+        <tr>
+            {% ifequal orden '_curso_academico' %}
+            <th colspan="3"><a href={% url listAsignaturaCursoAcademico nombre_centro nombre_titulacion plan_estudios nombre_asignatura 'curso_academico' %}>Curso académico &#11014;</a></th>
 
-			{% else %}
-			<th colspan="3"><a href={% url listAsignaturaCursoAcademico nombre_centro nombre_titulacion plan_estudios nombre_asignatura '_curso_academico' %}>Curso académico &#11015;</a></th>
+            {% else %}
+            <th colspan="3"><a href={% url listAsignaturaCursoAcademico nombre_centro nombre_titulacion plan_estudios nombre_asignatura '_curso_academico' %}>Curso académico &#11015;</a></th>
 
-			{% endifequal %}
-		</tr>
-		{% endif %}
+            {% endifequal %}
+        </tr>
+        {% endif %}
 
-		{% for asignatura_curso_academico in lista_asignaturas_curso_academico %}
-		<tr>
-			<th scope="row"><a href="{% url editAsignaturaCursoAcademico asignatura_curso_academico.determinarNombreCentro asignatura_curso_academico.determinarNombreTitulacion asignatura_curso_academico.determinarPlanEstudios asignatura_curso_academico.determinarNombreAsignatura asignatura_curso_academico.curso_academico %}">{{ asignatura_curso_academico }}</a></th>
-			<td><a href="{% url editAsignaturaCursoAcademico asignatura_curso_academico.determinarNombreCentro asignatura_curso_academico.determinarNombreTitulacion asignatura_curso_academico.determinarPlanEstudios asignatura_curso_academico.determinarNombreAsignatura asignatura_curso_academico.curso_academico %}" class="editlink">Editar</a></td>
-			<td><a href="{% url delAsignaturaCursoAcademico asignatura_curso_academico.determinarNombreCentro asignatura_curso_academico.determinarNombreTitulacion asignatura_curso_academico.determinarPlanEstudios asignatura_curso_academico.determinarNombreAsignatura asignatura_curso_academico.curso_academico %}" class="deletelink">Eliminar</a></td>
-		</tr>
-		{% endfor %}
+        {% for asignatura_curso_academico in lista_asignaturas_curso_academico %}
+        <tr>
+            <th scope="row"><a href="{% url editAsignaturaCursoAcademico asignatura_curso_academico.determinarNombreCentro asignatura_curso_academico.determinarNombreTitulacion asignatura_curso_academico.determinarPlanEstudios asignatura_curso_academico.determinarNombreAsignatura asignatura_curso_academico.curso_academico %}">{{ asignatura_curso_academico }}</a></th>
+            <td><a href="{% url editAsignaturaCursoAcademico asignatura_curso_academico.determinarNombreCentro asignatura_curso_academico.determinarNombreTitulacion asignatura_curso_academico.determinarPlanEstudios asignatura_curso_academico.determinarNombreAsignatura asignatura_curso_academico.curso_academico %}" class="editlink">Editar</a></td>
+            <td><a href="{% url delAsignaturaCursoAcademico asignatura_curso_academico.determinarNombreCentro asignatura_curso_academico.determinarNombreTitulacion asignatura_curso_academico.determinarPlanEstudios asignatura_curso_academico.determinarNombreAsignatura asignatura_curso_academico.curso_academico %}" class="deletelink">Eliminar</a></td>
+        </tr>
+        {% endfor %}
 
-		{% endif %}
+        {% endif %}
 
-		</table>
-	</div>
+        </table>
+    </div>
 
 {% endblock %}

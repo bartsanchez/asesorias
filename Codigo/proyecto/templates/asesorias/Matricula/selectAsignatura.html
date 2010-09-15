@@ -1,35 +1,35 @@
-{% extends "asesorias/Base/base_alumnos.html" %}
+{% extends "asesorias/Base/AdministradorPrincipal/alumnos.html" %}
 
 {% block content %}
 
-	{% ifequal tipo 'add' %}
-	<h1>Añadir matrícula.</h1>
+    {% ifequal tipo 'add' %}
+    <h1>Añadir matrícula.</h1>
 
-	{% else %}
-	<h1>Lista de matrículas.</h1>
+    {% else %}
+    <h1>Lista de matrículas.</h1>
 
-	{% endifequal %}
+    {% endifequal %}
 
-	<h2>Seleccionar asignatura.</h2>
+    <h2>Seleccionar asignatura.</h2>
 
-	<div class="form">
-		<div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_Matricula tipo %} class="updatelink"></a></p></div>
-		<div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_Matricula nombre_centro tipo %} class="updatelink"></a></p></div>
-	</div>
+    <div class="form">
+        <div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_Matricula tipo %} class="updatelink"></a></p></div>
+        <div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_Matricula nombre_centro tipo %} class="updatelink"></a></p></div>
+    </div>
 
-	<div class="form">
+    <div class="form">
 
-		<form action="" method="post">
+        <form action="" method="post">
 
-			<div class="fieldWrapper">
-				{% for field in form %}
-					<div><p>{{ field.label_tag }}: {{ field }}<a href="{% url addAsignatura nombre_centro nombre_titulacion plan_estudios %}" class="addlink" target="_new"></a></p></div>
-					<div><input type="submit" value="OK"/></p></div>
-				{% endfor %}
-			</div>
+            <div class="fieldWrapper">
+                {% for field in form %}
+                    <div><p>{{ field.label_tag }}: {{ field }}<a href="{% url addAsignatura nombre_centro nombre_titulacion plan_estudios %}" class="addlink" target="_new"></a></p></div>
+                    <div><input type="submit" value="OK"/></p></div>
+                {% endfor %}
+            </div>
 
-		</form>
+        </form>
 
-	</div>
+    </div>
 
 {% endblock %}

@@ -1,99 +1,80 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//ES"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
 <head>
-	<link type="text/css" rel="stylesheet" href="http://localhost/media/css/base.css" />
-	<title>{% block title %}Asesorías Académicas.{% endblock %}</title>
+    <link type="text/css" rel="stylesheet" href="http://localhost/media/css/base.css" />
+    <title>{% block title %}Asesorías Académicas.{% endblock %}</title>
 </head>
 
 <body>
-	<!-- Container -->
-	<div id="container">
+    <!-- Container -->
+    <div id="container">
 
-		<!-- Header -->
-		<div id="header">
-			{% block header %}
-			<div id="logo">
-				<img src="http://localhost/media/img/uco.gif" />
-			</div>
-			<h1>Asesorías Académicas</h1>
-			{% endblock %}
-		</div>
+        <!-- Header -->
+        <div id="header">
+            {% block header %}
+            <div id="logo">
+                <img src="http://localhost/media/img/uco.gif" />
+            </div>
+            <h1>Asesorías Académicas</h1>
+            {% endblock %}
+        </div>
 
-		<!-- Menú horizontal -->
-		<div id="hmenu">
-			<ul id="menu">
-				<li><a href="{% url administrador_inicio %}" {% block opcion_inicio %}{% endblock %}>Inicio</a></li>
-				<li><a href="{% url administrador_org_institucional %}" {% block opcion_org_institucional %}{% endblock %}>Organización institucional</a></li>
-				<li><a href="{% url administrador_org_docente %}" {% block opcion_org_docente %}{% endblock %}>Organización docente</a></li>
-				<li><a href="{% url administrador_alumnos %}" {% block opcion_alumnos %}{% endblock %}>Alumnos</a></li>
-				<li><a href="{% url administrador_reuniones %}" {% block opcion_reuniones %}{% endblock %}>Reuniones</a></li>
-				<li><a href="{% url administrador_plantillas %}" {% block opcion_plantillas %}{% endblock %}>Plantillas de entrevista</a></li>
-			</ul>
-		</div>
+        <!-- Menú horizontal -->
+        <div id="hmenu">
+            <ul id="menu">
+                {% block menu %}
+                {% endblock %}
+            </ul>
+        </div>
 
-		<!-- Content -->
-		<div id="content">
+        <!-- Content -->
+        <div id="content">
 
-			<!-- Sidebar -->
-			<div id="sidebar">
-				{% block sidebar %}
-				<div class="module">
-					<ul>
-						<li><h2>Sesión</h2>
-							<ul>
-								<li><h3>{% block username %}{% endblock %}</h3>
-									<ul>
-										<li><a href="{% url administrador_inicio %}">Inicio</a></li>
-										<li><a href="{% url logout %}">Salir</a></li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
+            <!-- Sidebar -->
+            <div id="sidebar">
+                {% block sidebar %}
+                <div class="module">
+                    <ul>
+                        <li><h2>Sesión</h2>
+                            <ul>
+                                <li><h3>{{ user }}</h3>
+                                    <ul>
+                                        {% block url_inicio %}{% endblock %}
+                                        <li><a href="{% url logout %}">Salir</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
 
-				<div class="module">
-					<ul>
-						<li><h2>Asesorías Académicas</h2>
-							<ul>
-								<li><h3><a href="{% url administrador_org_institucional %}">Organización institucional</a></h3>
-									{% block org_institucional %}{% endblock %}
-								</li>
-								<li><h3><a href="{% url administrador_org_docente %}">Organización docente</a></h3>
-									{% block org_docente %}{% endblock %}
-								</li>
-								<li><h3><a href="{% url administrador_alumnos %}">Alumnos</a></h3>
-									{% block alumnos %}{% endblock %}
-								</li>
-								<li><h3><a href="{% url administrador_reuniones %}">Reuniones</a></h3>
-									{% block reuniones %}{% endblock %}
-								</li>
-								<li><h3><a href="{% url administrador_plantillas %}">Plantillas de entrevista</a></h3>
-									{% block plantillas %}{% endblock %}
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-				{% endblock %}
-			</div>
+                <div class="module">
+                    <ul>
+                        <li><h2>Asesorías Académicas</h2>
+                            {% block elementos_sidebar %}
+                            {% endblock %}
+                        </li>
+                    </ul>
+                </div>
+                {% endblock %}
+            </div>
 
-			<!-- Content-main -->
-			<div id="content-main">
-				{% block content %}
-				{% endblock %}
-			</div>
+            <!-- Content-main -->
+            <div id="content-main">
+                {% block content %}
+                {% endblock %}
+            </div>
 
-		</div>
+        </div>
 
-		<!-- Footer -->
-		<div id="footer">
-			{% block footer %}
-			{% endblock %}
-		</div>
+        <!-- Footer -->
+        <div id="footer">
+            {% block footer %}
+            {% endblock %}
+        </div>
 
-	</div>
+    </div>
 </body>
 </html>
 

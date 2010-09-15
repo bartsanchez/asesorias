@@ -1,36 +1,36 @@
-{% extends "asesorias/Base/base_alumnos.html" %}
+{% extends "asesorias/Base/AdministradorPrincipal/alumnos.html" %}
 
 {% block content %}
 
-	{% ifequal tipo 'add' %}
-	<h1>Añadir matrícula.</h1>
+    {% ifequal tipo 'add' %}
+    <h1>Añadir matrícula.</h1>
 
-	{% else %}
-	<h1>Lista de matrículas.</h1>
+    {% else %}
+    <h1>Lista de matrículas.</h1>
 
-	{% endifequal %}
+    {% endifequal %}
 
-	<h2>Seleccionar asignatura curso académico.</h2>
+    <h2>Seleccionar asignatura curso académico.</h2>
 
-	<div class="form">
-		<div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_Matricula tipo %} class="updatelink"></a></p></div>
-		<div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_Matricula nombre_centro tipo %} class="updatelink"></a></p></div>
-		<div><p>Asignatura: <b>{{ nombre_asignatura }}</b> <a href={% url selectAsignatura_Matricula nombre_centro nombre_titulacion plan_estudios tipo %} class="updatelink"></a></p></div>
-	</div>
+    <div class="form">
+        <div><p>Centro: <b>{{ nombre_centro }}</b> <a href={% url selectCentro_Matricula tipo %} class="updatelink"></a></p></div>
+        <div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_Matricula nombre_centro tipo %} class="updatelink"></a></p></div>
+        <div><p>Asignatura: <b>{{ nombre_asignatura }}</b> <a href={% url selectAsignatura_Matricula nombre_centro nombre_titulacion plan_estudios tipo %} class="updatelink"></a></p></div>
+    </div>
 
-	<div class="form">
+    <div class="form">
 
-		<form action="" method="post">
+        <form action="" method="post">
 
-			<div class="fieldWrapper">
-				{% for field in form %}
-					<div><p>{{ field.label_tag }}: {{ field }}<a href="{% url addAsignaturaCursoAcademico nombre_centro nombre_titulacion plan_estudios nombre_asignatura %}" class="addlink" target="_new"></a></p></div>
-					<div><input type="submit" value="OK"/></p></div>
-				{% endfor %}
-			</div>
+            <div class="fieldWrapper">
+                {% for field in form %}
+                    <div><p>{{ field.label_tag }}: {{ field }}<a href="{% url addAsignaturaCursoAcademico nombre_centro nombre_titulacion plan_estudios nombre_asignatura %}" class="addlink" target="_new"></a></p></div>
+                    <div><input type="submit" value="OK"/></p></div>
+                {% endfor %}
+            </div>
 
-		</form>
+        </form>
 
-	</div>
+    </div>
 
 {% endblock %}

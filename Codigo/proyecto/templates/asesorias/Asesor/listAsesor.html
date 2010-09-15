@@ -1,64 +1,64 @@
-{% extends "asesorias/Base/base_org_docente.html" %}
+{% extends "asesorias/Base/AdministradorPrincipal/org_docente.html" %}
 
 {% block content %}
 
-	<h1>Lista de asesores.</h1>
+    <h1>Lista de asesores.</h1>
 
-	<a href="{% url addAsesor %}" class="addlink">Crear nuevo</a>
-	<a href="{% url generarPDFListaAsesores busqueda %}" class="pdflink">Generar PDF</a>
+    <a href="{% url addAsesor %}" class="addlink">Crear nuevo</a>
+    <a href="{% url generarPDFListaAsesores busqueda %}" class="pdflink">Generar PDF</a>
 
 
-	<div class="search">
+    <div class="search">
 
-		<form action="" method="post">
+        <form action="" method="post">
 
-			<div class="fieldWrapper">
-				<table summary="Realizar búsqueda.">
-				{% for field in form %}
-				<tr>
-					<th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
-					<td>{{ field }}</td>
-				</tr>
-				{% endfor %}
-				</table>
-			</div>
+            <div class="fieldWrapper">
+                <table summary="Realizar búsqueda.">
+                {% for field in form %}
+                <tr>
+                    <th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
 
-		</form>
+        </form>
 
-	</div>
+    </div>
 
-	<div class="module">
-		<table summary="Lista de asesores.">
-		<caption><h2>Lista de asesores{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
+    <div class="module">
+        <table summary="Lista de asesores.">
+        <caption><h2>Lista de asesores{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
 
-		{% if not lista_asesores %}
+        {% if not lista_asesores %}
 
-		<tr><th scope="row"><p>No existen actualmente asesores en el sistema.</p></th></tr>
+        <tr><th scope="row"><p>No existen actualmente asesores en el sistema.</p></th></tr>
 
-		{% else %}
+        {% else %}
 
-		{% if not busqueda %}
-		<tr>
-			{% ifequal orden '_nombre_asesor' %}
-			<th colspan="3"><a href={% url listAsesor 'nombre_asesor' %}>Asesor &#11014;</a></th>
-			{% else %}
-			<th colspan="3"><a href={% url listAsesor '_nombre_asesor' %}>Asesor &#11015;</a></th>
-			{% endifequal %}
-		</tr>
-		{% endif %}
+        {% if not busqueda %}
+        <tr>
+            {% ifequal orden '_nombre_asesor' %}
+            <th colspan="3"><a href={% url listAsesor 'nombre_asesor' %}>Asesor &#11014;</a></th>
+            {% else %}
+            <th colspan="3"><a href={% url listAsesor '_nombre_asesor' %}>Asesor &#11015;</a></th>
+            {% endifequal %}
+        </tr>
+        {% endif %}
 
-		<!-- Asesores -->
-		{% for asesor in lista_asesores %}
-		<tr>
-			<th scope="row"><a href="{% url editAsesor asesor %}">{{ asesor }}</a></th>
-			<td><a href="{% url editAsesor asesor %}" class="editlink">Editar</a></td>
-			<td><a href="{% url delAsesor asesor %}" class="deletelink">Eliminar</a></td>
-		</tr>
-		{% endfor %}
+        <!-- Asesores -->
+        {% for asesor in lista_asesores %}
+        <tr>
+            <th scope="row"><a href="{% url editAsesor asesor %}">{{ asesor }}</a></th>
+            <td><a href="{% url editAsesor asesor %}" class="editlink">Editar</a></td>
+            <td><a href="{% url delAsesor asesor %}" class="deletelink">Eliminar</a></td>
+        </tr>
+        {% endfor %}
 
-		{% endif %}
+        {% endif %}
 
-		</table>
-	</div>
+        </table>
+    </div>
 
 {% endblock %}

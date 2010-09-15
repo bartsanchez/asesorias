@@ -1,46 +1,46 @@
-{% extends "asesorias/Base/base_org_institucional.html" %}
+{% extends "asesorias/Base/AdministradorPrincipal/org_institucional.html" %}
 
 {% block content %}
 
-	<h1>Añadir titulación.</h1>
+    <h1>Añadir titulación.</h1>
 
-	{% if form.errors %}
-	<div id="form-error">
-		<p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
-		<ul>
-			{% for field in form %}
-				{% if field.errors %}<li>{{ field.errors|striptags }}</li>{% endif %}
-			{% endfor %}
-			{% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
-		</ul>
-	</div>
-	{% endif %}
+    {% if form.errors %}
+    <div id="form-error">
+        <p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}<li>{{ field.errors|striptags }}</li>{% endif %}
+            {% endfor %}
+            {% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
+        </ul>
+    </div>
+    {% endif %}
 
-	<div class="module">
+    <div class="module">
 
-		<form action="" method="post">
+        <form action="" method="post">
 
-			<div class="fieldWrapper">
-				<table summary="Añadir titulación.">
-				<caption><h2>Añadir titulación</h2></caption>
+            <div class="fieldWrapper">
+                <table summary="Añadir titulación.">
+                <caption><h2>Añadir titulación</h2></caption>
 
-				{% for field in form %}
+                {% for field in form %}
 
-				{# Excluye el campo id_titulacion que se controlará por software. #}
-				{% ifnotequal field.name 'id_titulacion' %}
-				<tr>
-					<th scope="row">{{ field.label_tag }}</th>
-					<td>{{ field }}</td>
-				</tr>
-				{% endifnotequal %}
+                {# Excluye el campo id_titulacion que se controlará por software. #}
+                {% ifnotequal field.name 'id_titulacion' %}
+                <tr>
+                    <th scope="row">{{ field.label_tag }}</th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endifnotequal %}
 
-				{% endfor %}
-				</table>
-			</div>
+                {% endfor %}
+                </table>
+            </div>
 
-			<p><input type="submit" value="Confirmar"/></p>
-		</form>
+            <p><input type="submit" value="Confirmar"/></p>
+        </form>
 
-	</div>
+    </div>
 
 {% endblock %}

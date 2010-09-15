@@ -1,15 +1,15 @@
-{% extends "asesorias/Base/base_org_docente.html" %}
+{% extends "asesorias/Base/AdministradorPrincipal/org_docente.html" %}
 
 {% block content %}
 
-	<h1>Eliminar asesor curso académico.</h1>
+    <h1>Eliminar asesor curso académico.</h1>
 
-	{% if error %}
+    {% if error %}
 
-	<p>No existe tal asesor curso académico.</p>
+    <p>No existe tal asesor curso académico.</p>
 
-	<a href="{% url selectDepartamentoOAsesor_AsesorCursoAcademico %}">Lista de asesores curso académico</a>
+    <a href="{% url selectAsesor_AsesorCursoAcademico %}">Lista de asesores curso académico</a>
 
-	{% endif %}
+    {% endif %}
 
 {% endblock %}

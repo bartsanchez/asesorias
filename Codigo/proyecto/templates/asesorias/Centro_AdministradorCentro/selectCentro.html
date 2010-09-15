@@ -1,24 +1,24 @@
-{% extends "asesorias/Base/base_org_institucional.html" %}
+{% extends "asesorias/Base/AdministradorPrincipal/org_institucional.html" %}
 
 {% block content %}
 
-	<h1>Lista de centros-administrador de centro.</h1>
+    <h1>Lista de centros-administrador de centro.</h1>
 
-	<h2>Seleccionar centro.</h2>
+    <h2>Seleccionar centro.</h2>
 
-	<div class="form">
+    <div class="form">
 
-		<form action="" method="post">
+        <form action="" method="post">
 
-			<div class="fieldWrapper">
-				{% for field in form %}
-					<div><p>{{ field.label_tag }}: {{ field }}<a href="{% url addCentro %}" class="addlink" target="_new"></a></p></div>
-					<div><p><input type="submit" value="OK"/></p></div>
-				{% endfor %}
-			</div>
+            <div class="fieldWrapper">
+                {% for field in form %}
+                    <div><p>{{ field.label_tag }}: {{ field }}<a href="{% url addCentro %}" class="addlink" target="_new"></a></p></div>
+                    <div><p><input type="submit" value="OK"/></p></div>
+                {% endfor %}
+            </div>
 
-		</form>
+        </form>
 
-	</div>
+    </div>
 
 {% endblock %}

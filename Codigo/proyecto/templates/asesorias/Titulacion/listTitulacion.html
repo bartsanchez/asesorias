@@ -1,81 +1,81 @@
-{% extends "asesorias/Base/base_org_institucional.html" %}
+{% extends "asesorias/Base/AdministradorPrincipal/org_institucional.html" %}
 
 {% block content %}
 
-	<h1>Lista de titulaciones.</h1>
+    <h1>Lista de titulaciones.</h1>
 
-	<div class="form">
-		<div><p>Centro: <b>{{ centro }}</b> <a href={% url selectCentro_Titulacion %} class="updatelink"></a></p></div>
-	</div>
+    <div class="form">
+        <div><p>Centro: <b>{{ centro }}</b> <a href={% url selectCentro_Titulacion %} class="updatelink"></a></p></div>
+    </div>
 
-	<a href="{% url addTitulacion centro %}" class="addlink">Crear nuevo</a>
-	<a href="{% url generarPDFListaTitulaciones centro busqueda %}" class="pdflink">Generar PDF</a>
+    <a href="{% url addTitulacion centro %}" class="addlink">Crear nuevo</a>
+    <a href="{% url generarPDFListaTitulaciones centro busqueda %}" class="pdflink">Generar PDF</a>
 
-	<div class="search">
+    <div class="search">
 
-		<form action="" method="post">
+        <form action="" method="post">
 
-			<div class="fieldWrapper">
-				<table summary="Realizar búsqueda.">
-				{% for field in form %}
-				<tr>
-					<th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
-					<td>{{ field }}</td>
-				</tr>
-				{% endfor %}
-				</table>
-			</div>
+            <div class="fieldWrapper">
+                <table summary="Realizar búsqueda.">
+                {% for field in form %}
+                <tr>
+                    <th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
 
-		</form>
+        </form>
 
-	</div>
+    </div>
 
-	<div class="module">
-		<table summary="Lista de titulaciones.">
-		<caption><h2>Lista de titulaciones{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
+    <div class="module">
+        <table summary="Lista de titulaciones.">
+        <caption><h2>Lista de titulaciones{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
 
-		{% if not lista_titulaciones %}
+        {% if not lista_titulaciones %}
 
-		<tr><th scope="row"><p>No existen actualmente titulaciones en el sistema.</p></th></tr>
+        <tr><th scope="row"><p>No existen actualmente titulaciones en el sistema.</p></th></tr>
 
-		{% else %}
+        {% else %}
 
-		{% if not busqueda %}
-		<tr>
-			{% ifequal orden '_nombre_titulacion' %}
-			<th colspan="3"><a href={% url listTitulacion centro 'nombre_titulacion' %}>Titulación &#11014;</a> : <a href={% url listTitulacion centro 'plan_estudios' %}>Plan estudios</a></th>
+        {% if not busqueda %}
+        <tr>
+            {% ifequal orden '_nombre_titulacion' %}
+            <th colspan="3"><a href={% url listTitulacion centro 'nombre_titulacion' %}>Titulación &#11014;</a> : <a href={% url listTitulacion centro 'plan_estudios' %}>Plan estudios</a></th>
 
-			{% else %}
+            {% else %}
 
-			{% ifequal orden 'plan_estudios' %}
-			<th colspan="3"><a href={% url listTitulacion centro 'nombre_titulacion' %}>Titulación</a> : <a href={% url listTitulacion centro '_plan_estudios' %}>Plan estudios &#11015;</a></th>
+            {% ifequal orden 'plan_estudios' %}
+            <th colspan="3"><a href={% url listTitulacion centro 'nombre_titulacion' %}>Titulación</a> : <a href={% url listTitulacion centro '_plan_estudios' %}>Plan estudios &#11015;</a></th>
 
-			{% else %}
+            {% else %}
 
-			{% ifequal orden '_plan_estudios' %}
-			<th colspan="3"><a href={% url listTitulacion centro 'nombre_titulacion' %}>Titulación</a> : <a href={% url listTitulacion centro 'plan_estudios' %}>Plan estudios &#11014;</a></th>
+            {% ifequal orden '_plan_estudios' %}
+            <th colspan="3"><a href={% url listTitulacion centro 'nombre_titulacion' %}>Titulación</a> : <a href={% url listTitulacion centro 'plan_estudios' %}>Plan estudios &#11014;</a></th>
 
-			{% else %}
-			<th colspan="3"><a href={% url listTitulacion centro '_nombre_titulacion' %}>Titulación &#11015;</a> : <a href={% url listTitulacion centro 'plan_estudios' %}>Plan estudios</a></th>
+            {% else %}
+            <th colspan="3"><a href={% url listTitulacion centro '_nombre_titulacion' %}>Titulación &#11015;</a> : <a href={% url listTitulacion centro 'plan_estudios' %}>Plan estudios</a></th>
 
-			{% endifequal %}
-			{% endifequal %}
-			{% endifequal %}
-		</tr>
-		{% endif %}
+            {% endifequal %}
+            {% endifequal %}
+            {% endifequal %}
+        </tr>
+        {% endif %}
 
-		<!-- Titulaciones -->
-		{% for titulacion in lista_titulaciones %}
-		<tr>
-			<th scope="row"><a href="{% url editTitulacion titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}">{{ titulacion.nombre_titulacion }} : {{ titulacion.plan_estudios }}</a></th>
-			<td><a href="{% url editTitulacion titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}" class="editlink">Editar</a></td>
-			<td><a href="{% url delTitulacion titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}" class="deletelink">Eliminar</a></td>
-		</tr>
-		{% endfor %}
+        <!-- Titulaciones -->
+        {% for titulacion in lista_titulaciones %}
+        <tr>
+            <th scope="row"><a href="{% url editTitulacion titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}">{{ titulacion.nombre_titulacion }} : {{ titulacion.plan_estudios }}</a></th>
+            <td><a href="{% url editTitulacion titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}" class="editlink">Editar</a></td>
+            <td><a href="{% url delTitulacion titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}" class="deletelink">Eliminar</a></td>
+        </tr>
+        {% endfor %}
 
-		{% endif %}
+        {% endif %}
 
-		</table>
-	</div>
+        </table>
+    </div>
 
 {% endblock %}

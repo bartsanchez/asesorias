@@ -1,15 +1,15 @@
-{% extends "asesorias/Base/base_org_institucional.html" %}
+{% extends "asesorias/Base/AdministradorPrincipal/org_institucional.html" %}
 
 {% block content %}
 
-	<h1>Eliminar titulación.</h1>
+    <h1>Eliminar titulación.</h1>
 
-	{% if error %}
+    {% if error %}
 
-	<p>No existe tal titulación.</p>
+    <p>No existe tal titulación.</p>
 
-	<a href="{% url selectCentro_Titulacion %}">Lista de titulaciones</a>
+    <a href="{% url selectCentro_Titulacion %}">Lista de titulaciones</a>
 
-	{% endif %}
+    {% endif %}
 
 {% endblock %}

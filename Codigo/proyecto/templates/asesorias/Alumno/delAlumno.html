@@ -1,15 +1,15 @@
-{% extends "asesorias/Base/base_alumnos.html" %}
+{% extends "asesorias/Base/AdministradorPrincipal/alumnos.html" %}
 
 {% block content %}
 
-	<h1>Eliminar alumno.</h1>
+    <h1>Eliminar alumno.</h1>
 
-	{% if error %}
+    {% if error %}
 
-	<p>No existe tal alumno.</p>
+    <p>No existe tal alumno.</p>
 
-	<a href="{% url listAlumno 'nombre_alumno' %}">Lista de alumnos</a>
+    <a href="{% url listAlumno 'nombre_alumno' %}">Lista de alumnos</a>
 
-	{% endif %}
+    {% endif %}
 
 {% endblock %}

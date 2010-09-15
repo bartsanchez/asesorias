@@ -1,10 +1,9 @@
 {% extends "asesorias/Base/base.html" %}
 
-    <!-- Establece el login del usuario. -->
-    {% block username %}{{ user }}{% endblock %}
-
     <!-- Determina el elemento activo en el menú horizontal -->
     {% block opcion_inicio %}class="active"{% endblock %}
+
+    {% block url_inicio %}<li><a href="{% url administrador_inicio %}">Inicio</a></li>{% endblock %}
 
     {% block content %}
     <h1>Asesor: {{ asesor }}</h1>
