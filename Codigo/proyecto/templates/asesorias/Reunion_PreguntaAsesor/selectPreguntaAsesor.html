@@ -10,7 +10,7 @@
         <div><p>Asesor: <b>{{ dni_pasaporte_asesor }}</b> <a href={% url selectAsesor_Reunion_preguntaAsesor 'add' %} class="updatelink"></a></p></div>
         <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAsesorCA_Reunion_preguntaAsesor dni_pasaporte_asesor 'add' %} class="updatelink"></a></p></div>
         <div><p>Alumno: <b>{{ dni_pasaporte_alumno }}</b> <a href={% url selectAlumno_Reunion_preguntaAsesor dni_pasaporte_asesor curso_academico 'add' %} class="updatelink"></a></p></div>
-        <div><p>Reunión: <b>{{ id_reunion }}</b> <a href={% url selectReunion_Reunion_preguntaAsesor dni_pasaporte_alumno curso_academico 'add' %} class="updatelink"></a></p></div>
+        <div><p>Reunión: <b>{{ fecha_reunion }}</b> <a href={% url selectReunion_Reunion_preguntaAsesor dni_pasaporte_alumno curso_academico 'add' %} class="updatelink"></a></p></div>
         <div><p>Plantilla de entrevista de asesor: <b>{{ id_entrevista_asesor }}</b> <a href={% url selectEntrevistaAsesor_Reunion_preguntaAsesor dni_pasaporte_alumno curso_academico id_reunion %} class="updatelink"></a></p></div>
     </div>
 

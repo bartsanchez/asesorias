@@ -115,6 +115,7 @@ def addReunion_preguntaAsesor(request, dni_pasaporte, curso_academico,
         'curso_academico': curso_academico,
         'dni_pasaporte_alumno': dni_pasaporte,
         'id_reunion': id_reunion,
+        'fecha_reunion': instancia_reunion.fecha,
         'id_entrevista_asesor': id_entrevista_asesor,
         'id_pregunta_asesor': id_pregunta_asesor})
 
@@ -129,6 +130,10 @@ def editReunion_preguntaAsesor(request, dni_pasaporte_alumno,
 
     # Si existe se edita.
     if instancia_reunion_preguntaAsesor:
+        # Se obtiene la instancia de la reunion.
+        fecha_reunion = vistasReunion.obtenerReunion(
+            dni_pasaporte_alumno, curso_academico, id_reunion).fecha
+
         # Se carga el formulario para la reunion - pregunta de asesor
         # existente.
         form = forms.Reunion_PreguntaAsesorForm(
@@ -168,12 +173,14 @@ def editReunion_preguntaAsesor(request, dni_pasaporte_alumno,
     # La matricula no existe
     else:
         form = False
+        fecha_reunion = ''
     return render_to_response(PATH + 'editReunion_preguntaAsesor.html',
         {'user': request.user, 'form': form,
         'dni_pasaporte_asesor': dni_pasaporte_asesor,
         'curso_academico': curso_academico,
         'dni_pasaporte_alumno': dni_pasaporte_alumno,
         'id_reunion': id_reunion,
+        'fecha_reunion': fecha_reunion,
         'id_entrevista_asesor': id_entrevista_asesor,
         'id_pregunta_asesor': id_pregunta_asesor})
 
@@ -451,7 +458,8 @@ def selectEntrevistaAsesor(request, dni_pasaporte, curso_academico,
         'dni_pasaporte_asesor': instancia_asesorCA.dni_pasaporte,
         'curso_academico': curso_academico,
         'dni_pasaporte_alumno': dni_pasaporte,
-        'id_reunion': id_reunion})
+        'id_reunion': id_reunion,
+        'fecha_reunion': instancia_reunion.fecha})
 
 def selectPreguntaAsesor(request, dni_pasaporte, curso_academico,
     id_reunion, id_entrevista_asesor):
@@ -535,6 +543,7 @@ def selectPreguntaAsesor(request, dni_pasaporte, curso_academico,
         'curso_academico': curso_academico,
         'dni_pasaporte_alumno': dni_pasaporte,
         'id_reunion': id_reunion,
+        'fecha_reunion': instancia_reunion.fecha,
         'id_entrevista_asesor': id_entrevista_asesor})
 
 def listReunion_preguntaAsesor(request, dni_pasaporte, curso_academico,
@@ -617,6 +626,7 @@ def listReunion_preguntaAsesor(request, dni_pasaporte, curso_academico,
         'curso_academico': curso_academico,
         'dni_pasaporte_alumno': dni_pasaporte,
         'id_reunion': id_reunion,
+        'fecha_reunion': instancia_reunion.fecha,
         'orden': orden})
 
 def generarPDFListaReuniones_preguntaAsesor(request, dni_pasaporte,
