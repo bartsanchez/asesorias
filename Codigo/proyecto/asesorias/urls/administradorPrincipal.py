@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 
 VISTAS = 'asesorias.vistas.'
-URLS = 'asesorias.urls.'
+URLS = 'asesorias.urls.AdministradorPrincipal.'
 
 # -------------------------------- #
 # Url's de administrador principal #
