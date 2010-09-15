@@ -21,64 +21,64 @@ urlpatterns = patterns('',
     url(r'^asesorias/alumno/$', 'asesorias.views.alumno',
         name='vista_alumno'),
 
-    (r'^asesorias/administrador/',
+    (r'^asesorias/administradorPrincipal/',
         include(URLS + 'administradorPrincipal')),
 
-    (r'^asesorias/centro/',
+    (r'^asesorias/administradorPrincipal/centro/',
         include(URLS + 'centro')),
 
-    (r'^asesorias/administradorCentro/',
+    (r'^asesorias/administradorPrincipal/administradorCentro/',
         include(URLS + 'administradorCentro')),
 
-    (r'^asesorias/titulacion/',
+    (r'^asesorias/administradorPrincipal/titulacion/',
         include(URLS + 'titulacion')),
 
-    (r'^asesorias/asignatura/',
+    (r'^asesorias/administradorPrincipal/asignatura/',
         include(URLS + 'asignatura')),
 
-    (r'^asesorias/asignaturaCursoAcademico/',
+    (r'^asesorias/administradorPrincipal/asignaturaCursoAcademico/',
         include(URLS + 'asignaturaCursoAcademico')),
 
-    (r'^asesorias/departamento/',
+    (r'^asesorias/administradorPrincipal/departamento/',
         include(URLS + 'departamento')),
 
-    (r'^asesorias/asesor/',
+    (r'^asesorias/administradorPrincipal/asesor/',
         include(URLS + 'asesor')),
 
-    (r'^asesorias/asesorCursoAcademico/',
+    (r'^asesorias/administradorPrincipal/asesorCursoAcademico/',
         include(URLS + 'asesorCursoAcademico')),
 
-    (r'^asesorias/plantillaEntrevistaAsesor/',
+    (r'^asesorias/administradorPrincipal/plantillaEntrevistaAsesor/',
         include(URLS + 'plantillaEntrevistaAsesor')),
 
-    (r'^asesorias/preguntaAsesor/',
+    (r'^asesorias/administradorPrincipal/preguntaAsesor/',
         include(URLS + 'preguntaAsesor')),
 
-    (r'^asesorias/alumno/',
+    (r'^asesorias/administradorPrincipal/alumno/',
         include(URLS + 'alumno')),
 
-    (r'^asesorias/alumnoCursoAcademico/',
+    (r'^asesorias/administradorPrincipal/alumnoCursoAcademico/',
         include(URLS + 'alumnoCursoAcademico')),
 
-    (r'^asesorias/matricula/',
+    (r'^asesorias/administradorPrincipal/matricula/',
         include(URLS + 'matricula')),
 
-    (r'^asesorias/calificacionConvocatoria/',
+    (r'^asesorias/administradorPrincipal/calificacionConvocatoria/',
         include(URLS + 'calificacionConvocatoria')),
 
-    (r'^asesorias/plantillaEntrevistaOficial/',
+    (r'^asesorias/administradorPrincipal/plantillaEntrevistaOficial/',
         include(URLS + 'plantillaEntrevistaOficial')),
 
-    (r'^asesorias/preguntaOficial/',
+    (r'^asesorias/administradorPrincipal/preguntaOficial/',
         include(URLS + 'preguntaOficial')),
 
-    (r'^asesorias/reunion/',
+    (r'^asesorias/administradorPrincipal/reunion/',
         include(URLS + 'reunion')),
 
-    (r'^asesorias/centro_administradorCentro/',
+    (r'^asesorias/administradorPrincipal/centro_administradorCentro/',
         include(URLS + 'centro_administradorCentro')),
 
-    (r'^asesorias/reunion_preguntaAsesor/',
+    (r'^asesorias/administradorPrincipal/reunion_preguntaAsesor/',
         include(URLS + 'reunion_preguntaAsesor')),
 )
 
