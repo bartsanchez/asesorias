@@ -34,8 +34,13 @@
                 {% for field in form %}
                 <tr>
                     <th scope="row">{{ field.label_tag }}</th>
-                    <td>{{ field }}</td>
+                    {% ifequal field.name 'dni_pasaporte' %}
+                        <td><p>{{ user }}</p></td>
+                    {% else %}
+                        <td>{{ field }}</td>
+                    {% endifequal %}
                 </tr>
+
                 {% endfor %}
                 </table>
             </div>

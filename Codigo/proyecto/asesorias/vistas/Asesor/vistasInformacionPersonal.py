@@ -16,8 +16,24 @@ def showInfo(request):
         form = forms.AsesorForm(instance=instancia_asesor)
         # Se ha modificado el formulario original.
         if request.method == 'POST':
+            dni_pasaporte = request.user
+
+            # Se obtienen el resto de valores necesarios a traves de
+            # POST.
+            correo_electronico = request.POST['correo_electronico']
+            nombre = request.POST['nombre']
+            apellidos = request.POST['apellidos']
+            telefono = request.POST['telefono']
+
+            # Datos necesarios para actualizar el asesor.
+            datos_asesor = {'dni_pasaporte': dni_pasaporte,
+                'correo_electronico': correo_electronico,
+                'nombre': nombre,
+                'apellidos': apellidos,
+                'telefono': telefono}
+
             # Se actualiza el formulario con la nueva informacion.
-            form = forms.AsesorForm(request.POST,
+            form = forms.AsesorForm(datos_asesor,
                 instance=instancia_asesor)
             # Si es valido se guarda.
             if form.is_valid():
