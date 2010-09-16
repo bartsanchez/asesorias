@@ -34,7 +34,7 @@ def authentication(request):
                         print 'hola'
                     elif rol == 'asesor':
                         return HttpResponseRedirect(
-                            reverse('vista_asesor'))
+                            reverse('asesor_inicio'))
                     elif rol == 'alumno':
                         return HttpResponseRedirect(
                             reverse('vista_alumno'))

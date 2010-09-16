@@ -15,14 +15,14 @@ URLS = 'asesorias.urls.'
 urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
 
-    url(r'^asesorias/asesor/$', 'asesorias.views.asesor',
-        name='vista_asesor'),
-
     url(r'^asesorias/alumno/$', 'asesorias.views.alumno',
         name='vista_alumno'),
 
     (r'^asesorias/administradorPrincipal/',
         include(URLS + 'administradorPrincipal')),
+
+    (r'^asesorias/asesor/',
+        include(URLS + 'asesor')),
 )
 
 # ------------------------- #
