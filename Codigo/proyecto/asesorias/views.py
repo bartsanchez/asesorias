@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
-from asesorias.vistas import vistasAsesor, vistasAlumno
+from asesorias.vistas.AdministradorPrincipal import vistasAsesor
+from asesorias.vistas.AdministradorPrincipal import vistasAlumno
 
 @login_required()
 def alumno(request):

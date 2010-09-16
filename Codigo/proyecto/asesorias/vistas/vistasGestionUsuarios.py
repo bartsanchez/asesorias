@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import forms, models
-from asesorias.vistas import vistasAdministradorCentro, vistasAsesor, vistasAlumno
+from asesorias.vistas.AdministradorPrincipal import vistasAdministradorCentro, vistasAsesor, vistasAlumno
 
 # Vista que controla la autentificacion en el sistema.
 def authentication(request):

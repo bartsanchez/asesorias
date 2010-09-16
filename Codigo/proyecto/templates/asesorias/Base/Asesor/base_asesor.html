@@ -1,0 +1,16 @@
+{% extends "asesorias/Base/base.html" %}
+
+    {% block menu %}
+                <li><a href="{% url asesor_inicio %}" {% block opcion_inicio %}{% endblock %}>Inicio</a></li>
+                <li><a href="{% url asesor_informacion_personal %}" {% block opcion_informacion_pesronal %}{% endblock %}>Información personal</a></li>
+    {% endblock %}
+
+    {% block elementos_sidebar %}
+                            <ul>
+                                <li><h3><a href="{% url asesor_informacion_personal %}">Información personal</a></h3>
+                                    {% block org_institucional %}{% endblock %}
+                                </li>
+                            </ul>
+    {% endblock %}
+
+    {% block url_inicio %}<li><a href="{% url asesor_inicio %}">Inicio</a></li>{% endblock %}

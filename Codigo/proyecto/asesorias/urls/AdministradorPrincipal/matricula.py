@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 
-VISTAS = 'asesorias.vistas.'
+VISTAS = 'asesorias.vistas.AdministradorPrincipal.'
 
 # ------------------ #
 # Url's de matricula #
