@@ -1,12 +1,12 @@
 from django.conf.urls.defaults import *
 
-VISTAS = 'asesorias.vistas.'
+VISTAS = 'asesorias.vistas.Asesor.'
 
 # ------------------------#
 # Url's de usuario asesor #
 # ------------------------#
 
-urlpatterns = patterns(VISTAS + 'vistasPrueba',
+urlpatterns = patterns(VISTAS + 'vistasInformacionPersonal',
     url(r'^show/$',
-        'show_info', name='show_info_asesor'),
+        'showInfo', name='showInfo_asesor'),
 )
