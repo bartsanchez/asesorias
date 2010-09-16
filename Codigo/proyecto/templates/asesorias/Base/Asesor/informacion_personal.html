@@ -1,14 +1,14 @@
 {% extends "asesorias/Base/Asesor/base_asesor.html" %}
 
     <!-- Determina el elemento activo en el menú horizontal -->
-    {% block opcion_org_docente %}class="active"{% endblock %}
+    {% block opcion_informacion_personal %}class="active"{% endblock %}
 
     {% block informacion_personal %}
-<!--
                                     <ul>
-                                        <li><a href="{% url listDepartamento 'nombre_departamento'  %}">Departamentos</a></li>
+                                        <li><a href="{% url showInfo_Asesor %}">Ver información personal</a></li>
+<!--
                                         <li><a href="{% url listAsesor 'nombre_asesor' %}">Asesores</a></li>
                                         <li><a href="{% url selectAsesor_AsesorCursoAcademico %}">Asesores Curso Académico</a></li>
-                                    </ul>
 -->
+                                    </ul>
     {% endblock %}

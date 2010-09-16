@@ -8,5 +8,5 @@ VISTAS = 'asesorias.vistas.Asesor.'
 
 urlpatterns = patterns(VISTAS + 'vistasInformacionPersonal',
     url(r'^show/$',
-        'showInfo', name='showInfo_asesor'),
+        'showInfo', name='showInfo_Asesor'),
 )
