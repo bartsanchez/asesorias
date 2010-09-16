@@ -7,7 +7,7 @@ URLS = 'asesorias.urls.Asesor.'
 # Url's de asesor #
 # --------------- #
 
-urlpatterns = patterns(VISTAS + 'vistasUsuarioAsesor',
+urlpatterns = patterns(VISTAS + 'vistasAsesor',
 
     ### URLS del menu horizontal. ###
 
