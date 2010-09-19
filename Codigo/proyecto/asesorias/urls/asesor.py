@@ -18,8 +18,13 @@ urlpatterns = patterns(VISTAS + 'vistasAsesor',
         'asesor_informacion_personal',
         name='asesor_informacion_personal'),
 
+    url(r'^alumnos/$', 'asesor_alumnos', name='asesor_alumnos'),
+
     ### Includes a cada entidad ###
 
     (r'^info/',
         include(URLS + 'informacionPersonal')),
+
+    (r'^alumnos/',
+        include(URLS + 'alumnos')),
 )

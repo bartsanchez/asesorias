@@ -3,12 +3,17 @@
     {% block menu %}
                 <li><a href="{% url asesor_inicio %}" {% block opcion_inicio %}{% endblock %}>Inicio</a></li>
                 <li><a href="{% url asesor_informacion_personal %}" {% block opcion_informacion_personal %}{% endblock %}>Información personal</a></li>
+                <li><a href="{% url asesor_alumnos %}" {% block opcion_alumnos %}{% endblock %}>Alumnos</a></li>
     {% endblock %}
 
     {% block elementos_sidebar %}
                             <ul>
                                 <li><h3><a href="{% url asesor_informacion_personal %}">Información personal</a></h3>
                                     {% block informacion_personal %}{% endblock %}
+                                </li>
+
+                                <li><h3><a href="{% url asesor_alumnos %}">Alumnos</a></h3>
+                                    {% block alumnos %}{% endblock %}
                                 </li>
                             </ul>
     {% endblock %}

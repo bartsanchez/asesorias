@@ -1,0 +1,18 @@
+{% extends "asesorias/Base/Asesor/alumnos.html" %}
+
+    {% block content %}
+            <h1>Asesor</h1>
+
+            <div class="module">
+                <table summary="Alumnos.">
+                <caption><h2>Alumnos</h2></caption>
+
+                <!-- Ver alumnos -->
+                <tr>
+                    <th scope="row"><a href="{% url showAlumnos_Asesor %}">Ver alumnos</a></th>
+                </tr>
+
+                </table>
+            </div>
+
+    {% endblock %}

@@ -1,0 +1,55 @@
+{% extends "asesorias/Base/Alumno/informacion_personal.html" %}
+
+{% block content %}
+
+    <h1>Información personal.</h1>
+
+    {% if not form %}
+
+    <p>No existe tal alumno.</p>
+
+    <a href="{% url alumno_inicio %}">Volver</a>
+
+    {% else %}
+
+    {% if form.errors %}
+    <div id="form-error">
+        <p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}<li>{{ field.errors|striptags }}</li>{% endif %}
+            {% endfor %}
+            {% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="module">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Información personal.">
+                <caption><h2>Información personal</h2></caption>
+                {% for field in form %}
+                <tr>
+                    <th scope="row">{{ field.label_tag }}</th>
+                    {% ifequal field.name 'dni_pasaporte' %}
+                        <td><p>{{ user }}</p></td>
+                    {% else %}
+                        <td>{{ field }}</td>
+                    {% endifequal %}
+                </tr>
+
+                {% endfor %}
+                </table>
+            </div>
+
+            <p><input type="submit" value="Confirmar"/></p>
+        </form>
+
+    </div>
+
+    {% endif %}
+
+{% endblock %}

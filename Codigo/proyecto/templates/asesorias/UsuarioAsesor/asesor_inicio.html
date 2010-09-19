@@ -3,7 +3,6 @@
     {% block content %}
             <h1>Asesor</h1>
 
-
             <div class="module">
                 <table summary="Información personal.">
                 <caption><h2>Información personal</h2></caption>
@@ -16,6 +15,18 @@
                 <!-- Modificar contraseña -->
                 <tr>
                     <th scope="row"><a href="{% url modificarClave_Asesor %}">Modificar contraseña</a></th>
+                </tr>
+
+                </table>
+            </div>
+
+            <div class="module">
+                <table summary="Alumnos.">
+                <caption><h2>Alumnos</h2></caption>
+
+                <!-- Ver alumnos -->
+                <tr>
+                    <th scope="row"><a href="{% url showAlumnos_Asesor %}">Ver alumnos</a></th>
                 </tr>
 
                 </table>

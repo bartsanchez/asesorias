@@ -1,0 +1,23 @@
+{% extends "asesorias/Base/Alumno/informacion_personal.html" %}
+
+    {% block content %}
+            <h1>Alumno</h1>
+
+            <div class="module">
+                <table summary="Información personal.">
+                <caption><h2>Información personal</h2></caption>
+
+                <!-- Ver información personal -->
+                <tr>
+                    <th scope="row"><a href="{% url showInfo_Alumno %}">Ver información personal</a></th>
+                </tr>
+
+                <!-- Modificar contraseña -->
+                <tr>
+                    <th scope="row"><a href="{% url modificarClave_Alumno %}">Modificar contraseña</a></th>
+                </tr>
+
+                </table>
+            </div>
+
+    {% endblock %}
