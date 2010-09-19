@@ -9,4 +9,7 @@ VISTAS = 'asesorias.vistas.Asesor.'
 urlpatterns = patterns(VISTAS + 'vistasInformacionPersonal',
     url(r'^show/$',
         'showInfo', name='showInfo_Asesor'),
+
+    url(r'^modificarClave/$',
+        'modificarClave', name='modificarClave_Asesor'),
 )

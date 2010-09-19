@@ -2,13 +2,13 @@
 
 {% block content %}
 
-    <h1>Información personal.</h1>
+    <h1>Modificar contraseña.</h1>
 
-    {% if not form %}
+    {% if error %}
 
-    <p>No existe tal asesor.</p>
+    <p>No se ha podido cambiar la contraseña.</p>
 
-    <a href="{% url asesor_inicio %}">Volver</a>
+    <a href="{% url modificarClave_Asesor %}">Volver</a>
 
     {% else %}
 
@@ -29,16 +29,12 @@
         <form action="" method="post">
 
             <div class="fieldWrapper">
-                <table summary="Información personal.">
-                <caption><h2>Información personal</h2></caption>
+                <table summary="Modificar contraseña.">
+                <caption><h2>Modificar contraseña</h2></caption>
                 {% for field in form %}
                 <tr>
                     <th scope="row">{{ field.label_tag }}</th>
-                    {% ifequal field.name 'dni_pasaporte' %}
-                        <td><p>{{ user }}</p></td>
-                    {% else %}
-                        <td>{{ field }}</td>
-                    {% endifequal %}
+                    <td>{{ field }}</td>
                 </tr>
 
                 {% endfor %}
