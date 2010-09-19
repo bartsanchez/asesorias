@@ -37,7 +37,7 @@ def authentication(request):
                             reverse('asesor_inicio'))
                     elif rol == 'alumno':
                         return HttpResponseRedirect(
-                            reverse('vista_alumno'))
+                            reverse('alumno_inicio'))
 
                 else:
                     error = 'Cuenta desactivada.'
