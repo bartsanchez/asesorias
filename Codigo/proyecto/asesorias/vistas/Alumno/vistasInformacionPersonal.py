@@ -8,15 +8,17 @@ from asesorias import models, forms
 PATH = 'asesorias/UsuarioAlumno/'
 
 def showInfo(request):
+    user = unicode(request.user)
+
     # Se obtiene la instancia del alumno.
-    instancia_alumno = vistasAlumno.obtenerAlumno(request.user)
+    instancia_alumno = vistasAlumno.obtenerAlumno(user)
     # Si existe se edita.
     if instancia_alumno:
         # Se carga el formulario para el alumno existente.
         form = forms.AlumnoForm(instance=instancia_alumno)
         # Se ha modificado el formulario original.
         if request.method == 'POST':
-            dni_pasaporte = request.user
+            dni_pasaporte = user
 
             # Se obtienen el resto de valores necesarios a traves de
             # POST.
