@@ -1,21 +1,23 @@
 {% extends "asesorias/Base/base.html" %}
 
     {% block menu %}
-                <li><a href="{% url asesor_inicio %}" {% block opcion_inicio %}{% endblock %}>Inicio</a></li>
-                <li><a href="{% url asesor_informacion_personal %}" {% block opcion_informacion_personal %}{% endblock %}>Información personal</a></li>
-                <li><a href="{% url asesor_alumnos %}" {% block opcion_alumnos %}{% endblock %}>Alumnos</a></li>
+                <li><a href="{% url asesor_inicio curso_academico %}" {% block opcion_inicio %}{% endblock %}>Inicio</a></li>
+                <li><a href="{% url asesor_informacion_personal curso_academico %}" {% block opcion_informacion_personal %}{% endblock %}>Información personal</a></li>
+                <li><a href="{% url asesor_alumnos curso_academico %}" {% block opcion_alumnos %}{% endblock %}>Alumnos</a></li>
     {% endblock %}
+
+    {% block curso_academico %}<h3><a href='#'>{{ curso_academico }}/{{ curso_academico2 }}</a></h3>{% endblock %}
 
     {% block elementos_sidebar %}
                             <ul>
-                                <li><h3><a href="{% url asesor_informacion_personal %}">Información personal</a></h3>
+                                <li><h3><a href="{% url asesor_informacion_personal curso_academico %}">Información personal</a></h3>
                                     {% block informacion_personal %}{% endblock %}
                                 </li>
 
-                                <li><h3><a href="{% url asesor_alumnos %}">Alumnos</a></h3>
+                                <li><h3><a href="{% url asesor_alumnos curso_academico %}">Alumnos</a></h3>
                                     {% block alumnos %}{% endblock %}
                                 </li>
                             </ul>
     {% endblock %}
 
-    {% block url_inicio %}<li><a href="{% url asesor_inicio %}">Inicio</a></li>{% endblock %}
+    {% block url_inicio %}<li><a href="{% url asesor_inicio curso_academico %}">Inicio</a></li>{% endblock %}

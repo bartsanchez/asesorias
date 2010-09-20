@@ -39,6 +39,7 @@
                         <li><h2>Sesión</h2>
                             <ul>
                                 <li><h3>{{ user }}</h3>
+                                    {% block curso_academico %}{% endblock %}
                                     <ul>
                                         {% block url_inicio %}{% endblock %}
                                         <li><a href="{% url logout %}">Salir</a></li>

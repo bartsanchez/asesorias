@@ -18,7 +18,7 @@ urlpatterns = patterns('',
     (r'^asesorias/administradorPrincipal/',
         include(URLS + 'administradorPrincipal')),
 
-    (r'^asesorias/asesor/',
+    (r'^asesorias/asesor/(?P<curso_academico>\d+)/',
         include(URLS + 'asesor')),
 
     (r'^asesorias/alumno/',

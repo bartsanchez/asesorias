@@ -8,11 +8,11 @@ from asesorias.vistas.AdministradorPrincipal import \
 
 PATH = 'asesorias/UsuarioAsesor/'
 
-def showAlumnos(request):
+def showAlumnos(request, curso_academico):
     # Se obtiene la instancia del asesor curso academico.
     instancia_asesorCA = \
         vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
-        unicode(request.user), '2010')
+        unicode(request.user), curso_academico)
 
     # El asesor presta asesoria durante el curso academico.
     if instancia_asesorCA:
@@ -63,4 +63,6 @@ def showAlumnos(request):
     return render_to_response(PATH + 'showAlumnos.html',
         {'user': request.user, 'form': form,
         'lista_alumnosCA': lista_alumnosCA,
-        'busqueda': busqueda})
+        'busqueda': busqueda,
+        'curso_academico': curso_academico,
+        'curso_academico2': unicode(int(curso_academico) + int(1))})

@@ -7,7 +7,7 @@ from asesorias import models, forms
 
 PATH = 'asesorias/UsuarioAsesor/'
 
-def showInfo(request):
+def showInfo(request, curso_academico):
     user = unicode(request.user)
 
     # Se obtiene la instancia del asesor.
@@ -47,9 +47,11 @@ def showInfo(request):
     else:
         form = False
     return render_to_response(PATH + 'showInfo.html',
-        {'user': request.user, 'form': form})
+        {'user': request.user, 'form': form,
+        'curso_academico': curso_academico,
+        'curso_academico2': unicode(int(curso_academico) + int(1))})
 
-def modificarClave(request):
+def modificarClave(request, curso_academico):
     error = False
     user = request.user
     # Se ha rellenado el formulario.
@@ -73,4 +75,6 @@ def modificarClave(request):
     else:
         form = forms.ModificarClaveForm()
     return render_to_response(PATH + 'modificarClave.html',
-        {'user': user, 'form': form, 'error': error})
+        {'user': user, 'form': form, 'error': error,
+        'curso_academico': curso_academico,
+        'curso_academico2': unicode(int(curso_academico) + int(1))})
