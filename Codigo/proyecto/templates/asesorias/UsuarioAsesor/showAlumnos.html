@@ -4,52 +4,57 @@
 
     <h1>Ver alumnos.</h1>
 
-    {% if not form %}
-
-    <p>No existe tal asesor.</p>
-
-    <a href="{% url asesor_inicio %}">Volver</a>
-
-    {% else %}
-
-    {% if form.errors %}
-    <div id="form-error">
-        <p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
-        <ul>
-            {% for field in form %}
-                {% if field.errors %}<li>{{ field.errors|striptags }}</li>{% endif %}
-            {% endfor %}
-            {% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
-        </ul>
-    </div>
-    {% endif %}
-
-    <div class="module">
+    <div class="search">
 
         <form action="" method="post">
 
             <div class="fieldWrapper">
-                <table summary="Información personal.">
-                <caption><h2>Información personal</h2></caption>
+                <table summary="Realizar búsqueda.">
                 {% for field in form %}
                 <tr>
-                    <th scope="row">{{ field.label_tag }}</th>
-                    {% ifequal field.name 'dni_pasaporte' %}
-                        <td><p>{{ user }}</p></td>
-                    {% else %}
-                        <td>{{ field }}</td>
-                    {% endifequal %}
+                    <th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
+                    <td>{{ field }}</td>
                 </tr>
-
                 {% endfor %}
                 </table>
             </div>
 
-            <p><input type="submit" value="Confirmar"/></p>
         </form>
 
     </div>
 
-    {% endif %}
+    <div class="module">
+        <table summary="Lista de alumnos.">
+        <caption><h2>Lista de alumnos{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
+
+        {% if not lista_alumnosCA %}
+
+        <tr><th scope="row"><p>No existen actualmente alumnos a los que preste asesoría en este curso académico.</p></th></tr>
+
+        {% else %}
+
+        {% if not busqueda %}
+        <tr>
+            {% ifequal orden '_nombre_alumno' %}
+            <th colspan="3"><a href={% url showAlumnos_Asesor %}>Nombre : Apellidos : DNI_Pasaporte &#11014;</a></th>
+            {% else %}
+            <th colspan="3"><a href={% url showAlumnos_Asesor %}>Nombre : Apellidos : DNI_Pasaporte &#11015;</a></th>
+            {% endifequal %}
+        </tr>
+        {% endif %}
+
+        <!-- Alumnos -->
+        {% for alumno in lista_alumnosCA %}
+        <tr>
+            <th scope="row">{{ alumno.dni_pasaporte_alumno.nombre }} : {{ alumno.dni_pasaporte_alumno.apellidos }} : {{ alumno.dni_pasaporte_alumno }}</th>
+            <td><a href='#'>Ver</a></td>
+            <td><a href='#'>Crear_reunión</td>
+        </tr>
+        {% endfor %}
+
+        {% endif %}
+
+        </table>
+    </div>
 
 {% endblock %}
