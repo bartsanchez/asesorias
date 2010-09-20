@@ -8,15 +8,17 @@ from asesorias import models, forms
 PATH = 'asesorias/UsuarioAsesor/'
 
 def showInfo(request):
+    user = unicode(request.user)
+
     # Se obtiene la instancia del asesor.
-    instancia_asesor = vistasAsesor.obtenerAsesor(request.user)
+    instancia_asesor = vistasAsesor.obtenerAsesor(user)
     # Si existe se edita.
     if instancia_asesor:
         # Se carga el formulario para el asesor existente.
         form = forms.AsesorForm(instance=instancia_asesor)
         # Se ha modificado el formulario original.
         if request.method == 'POST':
-            dni_pasaporte = request.user
+            dni_pasaporte = user
 
             # Se obtienen el resto de valores necesarios a traves de
             # POST.
