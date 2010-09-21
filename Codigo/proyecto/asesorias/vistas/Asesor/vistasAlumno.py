@@ -6,6 +6,7 @@ from asesorias import models, forms
 from asesorias.vistas.AdministradorPrincipal import vistasAlumno
 from asesorias.vistas.AdministradorPrincipal import \
     vistasAsesorCursoAcademico
+from asesorias.utils import vistasPDF
 
 
 PATH = 'asesorias/UsuarioAsesor/'
@@ -84,7 +85,26 @@ def showAlumnos(request, curso_academico, orden):
         'curso_academico2': unicode(int(curso_academico) + int(1))})
 
 def generarPDFListaAlumnos(request, curso_academico):
-    return 0
+    # Se obtiene la instancia del asesor curso academico.
+    instancia_asesorCA = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+        unicode(request.user), curso_academico)
+
+    # El asesor presta asesoria durante el curso academico.
+    if instancia_asesorCA:
+        # Se obtiene una lista con todos los alumnos.
+        lista_alumnosCA = models.AlumnoCursoAcademico.objects.filter(
+            codigo_asesorCursoAcademico =
+            instancia_asesorCA.codigo_asesorCursoAcademico).order_by(
+            'dni_pasaporte_alumno__nombre',
+            'dni_pasaporte_alumno__apellidos')
+
+    # El asesor aun no presta asesoria en este curso academico.
+    else:
+        lista_alumnosCA = ''
+    return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
+        {'mylist': lista_alumnosCA,
+        'name': 'alumnos asesorados',})
 
 def showAlumno(request, curso_academico, dni_pasaporte):
     # Se obtiene la instancia del alumno.
