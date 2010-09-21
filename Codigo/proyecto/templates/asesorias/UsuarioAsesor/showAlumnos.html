@@ -4,6 +4,8 @@
 
     <h1>Ver alumnos.</h1>
 
+    <a href="{# url prueba #}" class="pdflink">Generar PDF</a>
+
     <div class="search">
 
         <form action="" method="post">
@@ -36,9 +38,9 @@
         {% if not busqueda %}
         <tr>
             {% ifequal orden '_nombre_alumno' %}
-            <th colspan="3"><a href={% url showAlumnos_Asesor curso_academico %}>Nombre : Apellidos : DNI_Pasaporte &#11014;</a></th>
+            <th colspan="3"><a href={% url showAlumnos_Asesor curso_academico %}>Nombre : Apellidos &#11014;</a></th>
             {% else %}
-            <th colspan="3"><a href={% url showAlumnos_Asesor curso_academico %}>Nombre : Apellidos : DNI_Pasaporte &#11015;</a></th>
+            <th colspan="3"><a href={% url showAlumnos_Asesor curso_academico %}>Nombre : Apellidos &#11015;</a></th>
             {% endifequal %}
         </tr>
         {% endif %}
@@ -46,9 +48,9 @@
         <!-- Alumnos -->
         {% for alumno in lista_alumnosCA %}
         <tr>
-            <th scope="row">{{ alumno.dni_pasaporte_alumno.nombre }} : {{ alumno.dni_pasaporte_alumno.apellidos }} : {{ alumno.dni_pasaporte_alumno }}</th>
-            <td><a href='#'>Ver</a></td>
-            <td><a href='#'>Crear_reunión</td>
+            <th scope="row"><a href="">{{ alumno.dni_pasaporte_alumno.nombre }} : {{ alumno.dni_pasaporte_alumno.apellidos }}</th>
+            <td><a href="#" class="searchlink2">Ver</a></td>
+            <td><a href="#" class="addlink">Reunión</td>
         </tr>
         {% endfor %}
 
