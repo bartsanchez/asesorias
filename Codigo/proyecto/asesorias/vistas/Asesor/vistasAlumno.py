@@ -120,10 +120,16 @@ def showAlumno(request, curso_academico, dni_pasaporte):
     if instancia_alumno:
         # Se carga el formulario para el asesor existente.
         form = forms.AlumnoForm(instance=instancia_alumno)
+
+        # Se comprueba las matriculas del alumno.
+        lista_matriculas = models.Matricula.objects.filter(
+            dni_pasaporte=dni_pasaporte).order_by('curso_academico')
     # El alumno no existe.
     else:
         form = False
+        lista_matriculas = ''
     return render_to_response(PATH + 'showAlumno.html',
         {'user': request.user, 'form': form,
         'curso_academico': curso_academico,
-        'curso_academico2': unicode(int(curso_academico) + int(1))})
+        'curso_academico2': unicode(int(curso_academico) + int(1)),
+        'lista_matriculas': lista_matriculas})

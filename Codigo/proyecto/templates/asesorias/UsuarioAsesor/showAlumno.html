@@ -41,10 +41,43 @@
                 </table>
             </div>
 
-            <p><a href="{% url showAlumnos_Asesor curso_academico 'nombre' %}">Volver</a></p>
         </form>
 
     </div>
+
+    {% if lista_matriculas %}
+
+        {% for matricula in lista_matriculas %}
+
+        <div class="module">
+            <table summary="Asignatura: {{ matricula.determinarNombreAsignatura }}.">
+            <caption><h2>Asignatura: {{ matricula.determinarNombreAsignatura }}</h2></caption>
+                <tr>
+                    <th scope="row">Curso académico</th>
+                    <td>{{ matricula.curso_academico }}/{{ matricula.curso_academico|add:'1' }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Centro</th>
+                    <td>{{ matricula.determinarNombreCentro }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Titulacion</th>
+                    <td>{{ matricula.determinarNombreTitulacion }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Plan de estudios</th>
+                    <td>{{ matricula.determinarPlanEstudios }}</td>
+                </tr>
+            </table>
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+    {% endif %}
+
+    <p><a href="{% url showAlumnos_Asesor curso_academico 'nombre' %}">Volver</a></p>
 
     {% endif %}
 
