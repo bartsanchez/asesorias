@@ -61,7 +61,7 @@
         {% for alumno in lista_alumnosCA %}
         <tr>
             <th scope="row"><a href="{% url showAlumno_Asesor curso_academico alumno.dni_pasaporte_alumno %}">{{ alumno.dni_pasaporte_alumno.nombre }} : {{ alumno.dni_pasaporte_alumno.apellidos }}</th>
-            <td><a href="#" class="searchlink2">Ver</a></td>
+            <td><a href="{% url showAlumno_Asesor curso_academico alumno.dni_pasaporte_alumno %}" class="searchlink2">Ver</a></td>
             <td><a href="#" class="addlink">Reunión</td>
         </tr>
         {% endfor %}
