@@ -49,8 +49,7 @@ def showInfo(request, curso_academico):
         form = False
     return render_to_response(PATH + 'showInfo.html',
         {'user': request.user, 'form': form,
-        'curso_academico': curso_academico,
-        'curso_academico2': unicode(int(curso_academico) + int(1))})
+        'curso_academico': curso_academico})
 
 def modificarClave(request, curso_academico):
     error = False
@@ -78,5 +77,4 @@ def modificarClave(request, curso_academico):
         form = forms.ModificarClaveForm()
     return render_to_response(PATH + 'modificarClave.html',
         {'user': user, 'form': form, 'error': error,
-        'curso_academico': curso_academico,
-        'curso_academico2': unicode(int(curso_academico) + int(1))})
+        'curso_academico': curso_academico})

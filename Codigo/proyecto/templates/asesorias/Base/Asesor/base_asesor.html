@@ -6,7 +6,7 @@
                 <li><a href="{% url asesor_alumnos curso_academico %}" {% block opcion_alumnos %}{% endblock %}>Alumnos</a></li>
     {% endblock %}
 
-    {% block curso_academico %}<h3><a href='#'>{{ curso_academico }}/{{ curso_academico2 }}</a></h3>{% endblock %}
+    {% block curso_academico %}<h3><a href='#'>{{ curso_academico }}/{{ curso_academico|add:'1' }}</a></h3>{% endblock %}
 
     {% block elementos_sidebar %}
                             <ul>

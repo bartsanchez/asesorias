@@ -81,8 +81,7 @@ def showAlumnos(request, curso_academico, orden):
         'lista_alumnosCA': lista_alumnosCA,
         'busqueda': busqueda,
         'orden': orden,
-        'curso_academico': curso_academico,
-        'curso_academico2': unicode(int(curso_academico) + int(1))})
+        'curso_academico': curso_academico})
 
 def generarPDFListaAlumnos(request, curso_academico):
     # Se obtiene la instancia del asesor curso academico.
@@ -131,5 +130,4 @@ def showAlumno(request, curso_academico, dni_pasaporte):
     return render_to_response(PATH + 'showAlumno.html',
         {'user': request.user, 'form': form,
         'curso_academico': curso_academico,
-        'curso_academico2': unicode(int(curso_academico) + int(1)),
-        'lista_matriculas': lista_matriculas})
+        'curso_academico2': unicode(int(curso_academico) + int(1))})
