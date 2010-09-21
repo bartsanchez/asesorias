@@ -3,7 +3,9 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import forms, models
-from asesorias.vistas.AdministradorPrincipal import vistasAdministradorCentro, vistasAsesor, vistasAlumno
+from datetime import date
+from asesorias.vistas.AdministradorPrincipal import \
+    vistasAdministradorCentro, vistasAsesor, vistasAlumno
 
 # Vista que controla la autentificacion en el sistema.
 def authentication(request):
@@ -23,6 +25,8 @@ def authentication(request):
                 if user.is_active:
                     login(request, user)
 
+                    curso_academico = determinarCursoAcademico()
+
                     if rol == 'administradorPrincipal':
                         # Comprueba si el usuario es administrador
                         # principal.
@@ -35,7 +39,7 @@ def authentication(request):
                     elif rol == 'asesor':
                         return HttpResponseRedirect(
                             reverse('asesor_inicio',
-                            kwargs={'curso_academico': '2010'}))
+                            kwargs={'curso_academico':curso_academico}))
                     elif rol == 'alumno':
                         return HttpResponseRedirect(
                             reverse('alumno_inicio'))
@@ -50,7 +54,8 @@ def authentication(request):
     else:
         form = forms.LoginForm()
         error = ''
-    return render_to_response('asesorias/Login/login.html', {'form': form, 'error': error})
+    return render_to_response('asesorias/Login/login.html',
+        {'form': form, 'error': error})
 
 # Vista que controla la salida del sistema de un usuario.
 def logout_view(request):
@@ -58,6 +63,18 @@ def logout_view(request):
 
     # Redirige a la pagina inicial.
     return HttpResponseRedirect( reverse('authentication') )
+
+def determinarCursoAcademico():
+    today = date.today()
+
+    # Comprueba si ha llegado septiembre para devolver un curso
+    # academico o el siguiente.
+    if (today.month < 9):
+        curso_academico = today.year
+    else:
+        curso_academico = (today.year + 1)
+
+    return curso_academico
 
 # Determina el con el que participa un usuario de la aplicacion.
 def obtenerRol(username):
