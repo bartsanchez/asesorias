@@ -10,7 +10,7 @@ from asesorias.vistas.AdministradorPrincipal import \
 
 PATH = 'asesorias/UsuarioAsesor/'
 
-def showAlumnos(request, curso_academico):
+def showAlumnos(request, curso_academico, orden):
     # Se obtiene la instancia del asesor curso academico.
     instancia_asesorCA = \
         vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
@@ -18,11 +18,20 @@ def showAlumnos(request, curso_academico):
 
     # El asesor presta asesoria durante el curso academico.
     if instancia_asesorCA:
+        # Se establece el ordenamiento inicial.
+        if (orden == 'apellidos') or (orden == '_apellidos'):
+            orden_inicial = 'dni_pasaporte_alumno__apellidos'
+            orden_secundario = 'dni_pasaporte_alumno__nombre'
+        else:
+            orden_inicial = 'dni_pasaporte_alumno__nombre'
+            orden_secundario = 'dni_pasaporte_alumno__apellidos'
+
         # Se obtiene una lista con todos los alumnos.
         lista_alumnosCA = models.AlumnoCursoAcademico.objects.filter(
             codigo_asesorCursoAcademico =
             instancia_asesorCA.codigo_asesorCursoAcademico).order_by(
-            'dni_pasaporte_alumno')
+            orden_inicial, orden_secundario)
+
     # El asesor aun no presta asesoria en este curso academico.
     else:
         lista_alumnosCA = ''
@@ -62,12 +71,20 @@ def showAlumnos(request, curso_academico):
         form = forms.SearchForm()
         busqueda = False
 
+        if ((orden == '_nombre') or
+            (orden == '_apellidos')):
+            lista_alumnosCA = reversed(lista_alumnosCA)
+
     return render_to_response(PATH + 'showAlumnos.html',
         {'user': request.user, 'form': form,
         'lista_alumnosCA': lista_alumnosCA,
         'busqueda': busqueda,
+        'orden': orden,
         'curso_academico': curso_academico,
         'curso_academico2': unicode(int(curso_academico) + int(1))})
+
+def generarPDFListaAlumnos(request, curso_academico):
+    return 0
 
 def showAlumno(request, curso_academico, dni_pasaporte):
     # Se obtiene la instancia del alumno.
