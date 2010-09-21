@@ -42,7 +42,8 @@ def showInfo(request, curso_academico):
                 form.save()
                 # Redirige a la pagina de listar asesores.
                 return HttpResponseRedirect(
-                    reverse('asesor_informacion_personal'))
+                    reverse('asesor_informacion_personal',
+                    kwargs={'curso_academico': curso_academico}))
     # El asesor no existe.
     else:
         form = False
@@ -68,7 +69,8 @@ def modificarClave(request, curso_academico):
                 user.save()
 
                 return HttpResponseRedirect(
-                            reverse('asesor_inicio'))
+                            reverse('asesor_inicio',
+                    kwargs={'curso_academico': curso_academico}))
             else:
                 error = True
 

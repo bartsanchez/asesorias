@@ -3,8 +3,10 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias.vistas.AdministradorPrincipal import vistasAlumno
 from asesorias.vistas.AdministradorPrincipal import \
     vistasAsesorCursoAcademico
+
 
 PATH = 'asesorias/UsuarioAsesor/'
 
@@ -64,5 +66,20 @@ def showAlumnos(request, curso_academico):
         {'user': request.user, 'form': form,
         'lista_alumnosCA': lista_alumnosCA,
         'busqueda': busqueda,
+        'curso_academico': curso_academico,
+        'curso_academico2': unicode(int(curso_academico) + int(1))})
+
+def showAlumno(request, curso_academico, dni_pasaporte):
+    # Se obtiene la instancia del alumno.
+    instancia_alumno = vistasAlumno.obtenerAlumno(dni_pasaporte)
+    # Si existe se edita.
+    if instancia_alumno:
+        # Se carga el formulario para el asesor existente.
+        form = forms.AlumnoForm(instance=instancia_alumno)
+    # El alumno no existe.
+    else:
+        form = False
+    return render_to_response(PATH + 'showAlumno.html',
+        {'user': request.user, 'form': form,
         'curso_academico': curso_academico,
         'curso_academico2': unicode(int(curso_academico) + int(1))})

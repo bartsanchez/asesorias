@@ -1,0 +1,51 @@
+{% extends "asesorias/Base/Asesor/alumnos.html" %}
+
+{% block content %}
+
+    <h1>Información personal del alumno.</h1>
+
+    {% if not form %}
+
+    <p>No existe tal alumno.</p>
+
+    <a href="{% url showAlumno_Asesor curso_academico %}">Volver</a>
+
+    {% else %}
+
+    {% if form.errors %}
+    <div id="form-error">
+        <p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}<li>{{ field.errors|striptags }}</li>{% endif %}
+            {% endfor %}
+            {% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="module">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Información personal del alumno.">
+                <caption><h2>Información personal del alumno</h2></caption>
+                {% for field in form %}
+                <tr>
+                    <th scope="row">{{ field.label_tag }}</th>
+                    <td>{{ field }}</td>
+                </tr>
+
+                {% endfor %}
+                </table>
+            </div>
+
+            <p><a href="{% url showAlumnos_Asesor curso_academico %}">Volver</a></p>
+        </form>
+
+    </div>
+
+    {% endif %}
+
+{% endblock %}
