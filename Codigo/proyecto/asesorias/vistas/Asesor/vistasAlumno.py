@@ -92,12 +92,19 @@ def generarPDFListaAlumnos(request, curso_academico):
 
     # El asesor presta asesoria durante el curso academico.
     if instancia_asesorCA:
-        # Se obtiene una lista con todos los alumnos.
-        lista_alumnosCA = models.AlumnoCursoAcademico.objects.filter(
+        # Se obtiene una lista con todos los alumnos curso academico
+        # para ese asesor.
+        lista_aux = models.AlumnoCursoAcademico.objects.filter(
             codigo_asesorCursoAcademico =
             instancia_asesorCA.codigo_asesorCursoAcademico).order_by(
             'dni_pasaporte_alumno__nombre',
             'dni_pasaporte_alumno__apellidos')
+
+        # Se obtienen los nombres y los apellidos para los AlCA.
+        lista_alumnosCA = []
+        for alumno in lista_aux:
+            lista_alumnosCA.append(alumno.nombre() + ' ' +
+                alumno.apellidos())
 
     # El asesor aun no presta asesoria en este curso academico.
     else:

@@ -243,6 +243,12 @@ class AlumnoCursoAcademico(models.Model):
         return (unicode(self.dni_pasaporte_alumno) + ' (' +
             unicode(self.curso_academico)) + ') '
 
+    def nombre(self):
+        return (unicode(self.dni_pasaporte_alumno.nombre))
+
+    def apellidos(self):
+        return (unicode(self.dni_pasaporte_alumno.apellidos))
+
 class Matricula(models.Model):
     codigo_matricula = models.AutoField(primary_key=True)
     id_centro = models.IntegerField()
