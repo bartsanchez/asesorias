@@ -7,10 +7,10 @@ VISTAS = 'asesorias.vistas.Asesor.'
 # ------------------------#
 
 urlpatterns = patterns(VISTAS + 'vistasAlumno',
-    url(r'^show/(?P<orden>[\s\w]*)/$',
+    url(r'^showAlumnos/(?P<orden>[\s\w]*)/$',
         'showAlumnos', name='showAlumnos_Asesor'),
 
-    url(r'^show/(?P<dni_pasaporte>[\s\w]+)/$',
+    url(r'^showAlumno/(?P<dni_pasaporte>[\s\w]+)/$',
 
         'showAlumno', name='showAlumno_Asesor'),
 
