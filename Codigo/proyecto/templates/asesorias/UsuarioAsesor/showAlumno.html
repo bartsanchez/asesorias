@@ -47,6 +47,8 @@
 
     {% if lista_matriculas %}
 
+    <h1>Matriculación actual.</h1>
+
         {% for matricula in lista_matriculas %}
 
         <div class="module">
@@ -73,7 +75,37 @@
 
         {% endfor %}
 
-    {% else %}
+    {% endif %}
+
+    {% if lista_matriculas_historica %}
+
+    <h1>Historial de matriculación.</h1>
+
+        {% for matricula in lista_matriculas_historica %}
+
+        <div class="module">
+            <table summary="Asignatura: {{ matricula.determinarNombreAsignatura }}.">
+            <caption><h2>Asignatura: {{ matricula.determinarNombreAsignatura }}</h2></caption>
+                <tr>
+                    <th scope="row">Curso académico</th>
+                    <td>{{ matricula.curso_academico }}/{{ matricula.curso_academico|add:'1' }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Centro</th>
+                    <td>{{ matricula.determinarNombreCentro }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Titulacion</th>
+                    <td>{{ matricula.determinarNombreTitulacion }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Plan de estudios</th>
+                    <td>{{ matricula.determinarPlanEstudios }}</td>
+                </tr>
+            </table>
+        </div>
+
+        {% endfor %}
 
     {% endif %}
 
