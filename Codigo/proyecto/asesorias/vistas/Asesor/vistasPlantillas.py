@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/UsuarioAsesor/'
 
@@ -42,3 +43,19 @@ def listPlantillasOficiales(request, curso_academico, orden):
         'lista_plantillas_entrevista_oficial':
         lista_plantillas_entrevista_oficial,
         'busqueda': busqueda, 'orden': orden})
+
+def generarPDFListaPlantillasEntrevistaOficial(request, curso_academico,
+    busqueda):
+    lista_plantillas_entrevista_oficial = \
+        models.PlantillaEntrevistaOficial.objects.order_by(
+        'descripcion')
+
+    # Se ha realizado una busqueda.
+    if busqueda != 'False':
+        lista_plantillas_entrevista_oficial = \
+            lista_plantillas_entrevista_oficial.filter(
+            descripcion__contains=busqueda)
+
+    return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
+        {'mylist': lista_plantillas_entrevista_oficial,
+        'name': 'plantillas de entrevista oficial',})
