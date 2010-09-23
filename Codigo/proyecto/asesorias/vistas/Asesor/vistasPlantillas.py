@@ -126,3 +126,48 @@ def listPreguntaOficial(request, curso_academico, entrevista_oficial,
         'busqueda': busqueda,
         'entrevista_oficial': entrevista_oficial,
         'orden': orden})
+
+def generarPDFListaPreguntasOficiales(request, curso_academico,
+    entrevista_oficial, busqueda):
+    # Se comprueba que exista la entrevista pasada por argumento.
+    instancia_entrevista_oficial = \
+        vistasPEO.obtenerPlantillaEntrevistaOficial(entrevista_oficial)
+
+    # La plantilla no existe, se redirige.
+    if not instancia_entrevista_oficial:
+        return HttpResponseRedirect(
+            reverse('listPreguntaOficial_Asesor',
+            kwargs={'curso_academico': curso_academico,
+            'entrevista_oficial': entrevista_oficial,
+            'orden': enunciado}))
+
+    # Se obtiene una lista con todos las preguntas oficiales de la
+    # plantilla pasada por argumento.
+    lista_preguntas_oficiales = models.PreguntaOficial.objects.filter(
+        id_entrevista_oficial=entrevista_oficial).order_by(
+        'enunciado')
+
+    # Se ha realizado una busqueda.
+    if busqueda != 'False':
+        # Se crea una lista auxiliar que albergara el resultado de
+        # la busqueda.
+        lista_aux = []
+
+        # Se recorren los elementos determinando si coinciden con
+        # la busqueda.
+        for pregunta_oficial in lista_preguntas_oficiales:
+            # Se crea una cadena auxiliar para examinar si se
+            # encuentra el resultado de la busqueda.
+            cadena = unicode(pregunta_oficial.enunciado)
+
+            # Si se encuentra la busqueda el elemento se incluye en
+            # la lista auxiliar.
+            if cadena.find(busqueda) >= 0:
+                lista_aux.append(pregunta_oficial)
+
+        # La lista final a devolver sera la lista auxiliar.
+        lista_preguntas_oficiales = lista_aux
+
+    return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
+        {'mylist': lista_preguntas_oficiales,
+        'name': 'preguntas oficiales',})
