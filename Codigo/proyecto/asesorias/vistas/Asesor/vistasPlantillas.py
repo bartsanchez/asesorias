@@ -6,7 +6,7 @@ from asesorias import models, forms
 
 PATH = 'asesorias/UsuarioAsesor/'
 
-def listPlantillasOficiales(request, curso_academico):
+def listPlantillasOficiales(request, curso_academico, orden):
      # Se obtiene una lista con todos las plantillas de entrevista
     # oficiales.
     lista_plantillas_entrevista_oficial = \
@@ -31,9 +31,9 @@ def listPlantillasOficiales(request, curso_academico):
         form = forms.SearchForm()
         busqueda = False
 
-        #if orden == '_descripcion':
-            #lista_plantillas_entrevista_oficial = \
-                #lista_plantillas_entrevista_oficial.reverse()
+        if orden == '_descripcion':
+            lista_plantillas_entrevista_oficial = \
+                lista_plantillas_entrevista_oficial.reverse()
 
     return render_to_response(PATH +
         'listPlantillasOficiales.html',
@@ -41,4 +41,4 @@ def listPlantillasOficiales(request, curso_academico):
         'curso_academico': curso_academico,
         'lista_plantillas_entrevista_oficial':
         lista_plantillas_entrevista_oficial,
-        'busqueda': busqueda})
+        'busqueda': busqueda, 'orden': orden})
