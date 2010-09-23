@@ -48,7 +48,7 @@
          <!-- Plantillas de entrevista oficiales -->
         {% for plantilla_entrevista_oficial in lista_plantillas_entrevista_oficial %}
         <tr>
-            <th scope="row"><a href="{# url editPlantillaEntrevistaOficial plantilla_entrevista_oficial.id_entrevista_oficial #}">{{ plantilla_entrevista_oficial }}</a></th>
+            <th scope="row"><a href="{% url listPreguntaOficial_Asesor curso_academico plantilla_entrevista_oficial.id_entrevista_oficial 'enunciado' %}">{{ plantilla_entrevista_oficial }}</a></th>
             <td><a href="{# url editPlantillaEntrevistaOficial plantilla_entrevista_oficial.id_entrevista_oficial #}" class="searchlink2">Ver</a></td>
         </tr>
         {% endfor %}

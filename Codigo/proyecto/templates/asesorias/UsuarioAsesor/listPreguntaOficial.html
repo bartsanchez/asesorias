@@ -1,0 +1,66 @@
+{% extends "asesorias/Base/Asesor/plantillas.html" %}
+
+{% block content %}
+
+    <h1>Lista de preguntas oficiales.</h1>
+
+    <div class="form">
+        <div><p>Plantilla de entrevista oficial: <b>{{ entrevista_oficial }}</b> <a href={% url listPlantillasOficiales_Asesor curso_academico 'descripcion' %} class="updatelink"></a></p></div>
+    </div>
+
+    <a href="{# url generarPDFListaPlantillasEntrevistaOficial_Asesor curso_academico busqueda #}" class="pdflink">Generar PDF</a>
+
+    <div class="search">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Realizar búsqueda.">
+                {% for field in form %}
+                <tr>
+                    <th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="module">
+        <table summary="Lista de preguntas oficiales.">
+        <caption><h2>Lista de preguntas oficiales{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
+
+        {% if not lista_preguntas_oficiales %}
+
+        <tr><th scope="row"><p>No existen actualmente preguntas oficiales para esta plantilla en el sistema.</p></th></tr>
+
+        {% else %}
+
+        {% if not busqueda %}
+        <tr>
+            {% ifequal orden '_enunciado' %}
+            <th colspan="3"><a href={# url listPreguntaOficial entrevista_oficial 'enunciado' #}>Enunciado &#11014;</a></th>
+
+            {% else %}
+            <th colspan="3"><a href={# url listPreguntaOficial entrevista_oficial '_enunciado' #}>Enunciado &#11015;</a></th>
+
+            {% endifequal %}
+        </tr>
+        {% endif %}
+
+        <!-- Preguntas oficiales -->
+        {% for pregunta_oficial in lista_preguntas_oficiales %}
+        <tr>
+            <th scope="row"><a href="{# url editPreguntaOficial entrevista_oficial pregunta_oficial.id_pregunta_oficial #}">{{ pregunta_oficial }}</a></th>
+        </tr>
+        {% endfor %}
+
+        {% endif %}
+
+        </table>
+    </div>
+
+{% endblock %}
