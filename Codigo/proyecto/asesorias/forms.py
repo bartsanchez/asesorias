@@ -266,3 +266,5 @@ class ModificarClaveForm(forms.Form):
         widget=forms.PasswordInput)
     new_password = forms.CharField(label="Nueva contraseña",
         widget=forms.PasswordInput)
+    new_password2 = forms.CharField(label="Repetir nueva contraseña",
+        widget=forms.PasswordInput)
