@@ -14,6 +14,6 @@ urlpatterns = patterns(VISTAS + 'vistasAlumno',
 
         'showAlumno', name='showAlumno_Asesor'),
 
-    url(r'show/generarPDF/$',
+    url(r'generarPDF/(?P<busqueda>[\s\w]+)/$',
         'generarPDFListaAlumnos', name='generarPDFListaAlumnos_Asesor'),
 )

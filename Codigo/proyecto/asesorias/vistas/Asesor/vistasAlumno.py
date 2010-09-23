@@ -54,7 +54,8 @@ def showAlumnos(request, curso_academico, orden):
             for alumno in lista_alumnosCA:
                 # Se crea una cadena auxiliar para examinar si se
                 # encuentra el resultado de la busqueda.
-                cadena = unicode(alumno.dni_pasaporte_alumno)
+                cadena = (unicode(alumno.dni_pasaporte_alumno.nombre) +
+                    unicode(alumno.dni_pasaporte_alumno.apellidos))
 
                 # Si se encuentra la busqueda el elemento se incluye
                 # en la lista auxiliar.
@@ -83,7 +84,7 @@ def showAlumnos(request, curso_academico, orden):
         'orden': orden,
         'curso_academico': curso_academico})
 
-def generarPDFListaAlumnos(request, curso_academico):
+def generarPDFListaAlumnos(request, curso_academico, busqueda):
     # Se obtiene la instancia del asesor curso academico.
     instancia_asesorCA = \
         vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
@@ -98,6 +99,28 @@ def generarPDFListaAlumnos(request, curso_academico):
             instancia_asesorCA.codigo_asesorCursoAcademico).order_by(
             'dni_pasaporte_alumno__nombre',
             'dni_pasaporte_alumno__apellidos')
+
+        # Se ha realizado una busqueda.
+        if busqueda != 'False':
+            # Se crea una lista auxiliar que albergara el resultado
+            # de la busqueda.
+            lista_aux2 = []
+
+            # Se recorren los elementos determinando si coinciden
+            # con la busqueda.
+            for alumno in lista_aux:
+                # Se crea una cadena auxiliar para examinar si se
+                # encuentra el resultado de la busqueda.
+                cadena = (unicode(alumno.dni_pasaporte_alumno.nombre) +
+                    unicode(alumno.dni_pasaporte_alumno.apellidos))
+
+                # Si se encuentra la busqueda el elemento se incluye
+                # en la lista auxiliar.
+                if cadena.find(busqueda) >= 0:
+                    lista_aux2.append(alumno)
+
+            # La lista final a devolver sera la lista auxiliar.
+            lista_aux = lista_aux2
 
         # Se obtienen los nombres y los apellidos para los AlCA.
         lista_alumnosCA = []
