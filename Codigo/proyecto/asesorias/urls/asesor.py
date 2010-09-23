@@ -20,6 +20,9 @@ urlpatterns = patterns(VISTAS + 'vistasAsesor',
 
     url(r'^alumnos/$', 'asesor_alumnos', name='asesor_alumnos'),
 
+    url(r'^plantillas/$', 'asesor_plantillas',
+        name='asesor_plantillas'),
+
     ### Includes a cada entidad ###
 
     (r'^info/',
@@ -27,4 +30,7 @@ urlpatterns = patterns(VISTAS + 'vistasAsesor',
 
     (r'^alumnos/',
         include(URLS + 'alumnos')),
+
+    (r'^plantillas/',
+        include(URLS + 'plantillas')),
 )

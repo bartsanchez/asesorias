@@ -1,0 +1,10 @@
+{% extends "asesorias/Base/Asesor/base_asesor.html" %}
+
+    <!-- Determina el elemento activo en el menú horizontal -->
+    {% block opcion_plantillas %}class="active"{% endblock %}
+
+    {% block plantillas %}
+                                    <ul>
+                                        <li><a href="{% url showAlumnos_Asesor curso_academico 'nombre' %}">Ver alumnos</a></li>
+                                    </ul>
+    {% endblock %}

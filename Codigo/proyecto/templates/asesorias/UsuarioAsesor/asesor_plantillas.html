@@ -1,0 +1,18 @@
+{% extends "asesorias/Base/Asesor/plantillas.html" %}
+
+    {% block content %}
+            <h1>Asesor</h1>
+
+            <div class="module">
+                <table summary="Plantillas.">
+                <caption><h2>Plantillas</h2></caption>
+
+                <!-- Ver plantillas oficiales -->
+                <tr>
+                    <th scope="row"><a href="{% url listPlantillasOficiales_Asesor curso_academico %}">Ver plantillas oficiales</a></th>
+                </tr>
+
+                </table>
+            </div>
+
+    {% endblock %}

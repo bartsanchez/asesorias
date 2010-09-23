@@ -1,0 +1,61 @@
+{% extends "asesorias/Base/Asesor/plantillas.html" %}
+
+{% block content %}
+
+    <h1>Ver plantillas oficiales.</h1>
+
+    <a href="{# url generarPDFListaAlumnos_Asesor curso_academico #}" class="pdflink">Generar PDF</a>
+
+    <div class="search">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Realizar búsqueda.">
+                {% for field in form %}
+                <tr>
+                    <th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="module">
+        <table summary="Lista de plantillas oficiales.">
+        <caption><h2>Lista de plantillas oficiales{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
+
+        {% if not lista_plantillas_entrevista_oficial %}
+
+        <tr><th scope="row"><p>No existen actualmente plantillas oficiales en el sistema.</p></th></tr>
+
+        {% else %}
+
+        {% if not busqueda %}
+        <tr>
+            {% ifequal orden '_descripcion' %}
+            <th colspan="3"><a href={# url listPlantillaEntrevistaOficial 'descripcion' #}>Descripción &#11014;</a></th>
+            {% else %}
+            <th colspan="3"><a href={# url listPlantillaEntrevistaOficial '_descripcion' #}>Descripción &#11015;</a></th>
+            {% endifequal %}
+        </tr>
+        {% endif %}
+
+         <!-- Plantillas de entrevista oficiales -->
+        {% for plantilla_entrevista_oficial in lista_plantillas_entrevista_oficial %}
+        <tr>
+            <th scope="row"><a href="{# url editPlantillaEntrevistaOficial plantilla_entrevista_oficial.id_entrevista_oficial #}">{{ plantilla_entrevista_oficial }}</a></th>
+            <td><a href="{# url editPlantillaEntrevistaOficial plantilla_entrevista_oficial.id_entrevista_oficial #}" class="editlink">Editar</a></td>
+        </tr>
+        {% endfor %}
+
+        {% endif %}
+
+        </table>
+    </div>
+
+{% endblock %}

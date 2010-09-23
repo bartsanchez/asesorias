@@ -4,6 +4,7 @@
                 <li><a href="{% url asesor_inicio curso_academico %}" {% block opcion_inicio %}{% endblock %}>Inicio</a></li>
                 <li><a href="{% url asesor_informacion_personal curso_academico %}" {% block opcion_informacion_personal %}{% endblock %}>Información personal</a></li>
                 <li><a href="{% url asesor_alumnos curso_academico %}" {% block opcion_alumnos %}{% endblock %}>Alumnos</a></li>
+                <li><a href="{% url asesor_plantillas curso_academico %}" {% block opcion_plantillas %}{% endblock %}>Plantillas</a></li>
     {% endblock %}
 
     {% block curso_academico %}<h3><a href='#'>{{ curso_academico }}/{{ curso_academico|add:'1' }}</a></h3>{% endblock %}
@@ -16,6 +17,10 @@
 
                                 <li><h3><a href="{% url asesor_alumnos curso_academico %}">Alumnos</a></h3>
                                     {% block alumnos %}{% endblock %}
+                                </li>
+
+                                <li><h3><a href="{% url asesor_plantillas curso_academico %}">Plantillas</a></h3>
+                                    {% block plantillas %}{% endblock %}
                                 </li>
                             </ul>
     {% endblock %}
