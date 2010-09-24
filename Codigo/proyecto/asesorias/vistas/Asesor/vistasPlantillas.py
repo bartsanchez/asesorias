@@ -4,6 +4,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
 from asesorias.vistas.AdministradorPrincipal import \
+    vistasAsesorCursoAcademico
+from asesorias.vistas.AdministradorPrincipal import \
     vistasPlantillaEntrevistaOficial as vistasPEO
 from asesorias.vistas.AdministradorPrincipal import \
     vistasPlantillaEntrevistaAsesor as vistasPEA
@@ -174,6 +176,60 @@ def generarPDFListaPreguntasOficiales(request, curso_academico,
         {'mylist': lista_preguntas_oficiales,
         'name': 'preguntas oficiales',})
 
+def addPlantillaEntrevistaAsesor(request, curso_academico):
+    dni_pasaporte = unicode(request.user)
+
+    # Se comprueba que exista el asesor curso academico pasado por
+    # argumento.
+    instancia_asesor_curso_academico = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+        dni_pasaporte, curso_academico)
+
+    # El asesor curso academico no existe, se redirige.
+    if not (instancia_asesor_curso_academico):
+        return HttpResponseRedirect(
+            reverse('listPlantillasAsesor_Asesor',
+            kwargs={'curso_academico': curso_academico,
+            'orden': 'descripcion'}))
+
+    # Se ha rellenado el formulario.
+    if request.method == 'POST':
+        # Se extraen los valores pasados por el metodo POST.
+        descripcion = request.POST['descripcion']
+
+        # Se determina el siguiente id_entrevista_asesor para el asesor
+        # curso academico.
+        id_entrevista_asesor = vistasPEA.\
+            determinarSiguienteIdPlantillaDeAsesorCursoAcademico(
+            instancia_asesor_curso_academico)
+
+        # Datos necesarios para crear la nueva plantilla.
+        datos_plantilla_entrevista_asesor = {
+            'dni_pasaporte': dni_pasaporte,
+            'curso_academico': curso_academico,
+            'id_entrevista_asesor': id_entrevista_asesor,
+            'descripcion': descripcion}
+
+        # Se obtienen los valores y se valida.
+        form = forms.PlantillaEntrevistaAsesorForm(
+            datos_plantilla_entrevista_asesor)
+        if form.is_valid():
+            # Se guarda la informacion del formulario en el sistema.
+            form.save()
+            # Redirige a la pagina de listar plantillas de entrevista de
+            # asesor.
+            return HttpResponseRedirect(
+                reverse('listPlantillasAsesor_Asesor',
+                kwargs={'curso_academico': curso_academico,
+                'orden': 'descripcion'}))
+    # Si aun no se ha rellenado el formulario, se genera uno en blanco.
+    else:
+        form = forms.PlantillaEntrevistaAsesorForm()
+    return render_to_response(PATH +'addPlantillaEntrevistaAsesor.html',
+        {'user': request.user, 'form': form,
+        'dni_pasaporte': dni_pasaporte,
+        'curso_academico': curso_academico})
+
 def listPlantillasAsesor(request, curso_academico, orden):
     dni_pasaporte = unicode(request.user)
 
@@ -265,7 +321,7 @@ def listPreguntaAsesor(request, curso_academico, id_entrevista_asesor,
     # La plantilla de entrevista de asesor no existe, se redirige.
     if not instancia_entrevista_asesor:
         return HttpResponseRedirect(
-            reverse('listPlantillasOficiales_Asesor',
+            reverse('listPlantillasAsesor_Asesor',
             kwargs={'curso_academico': curso_academico,
             'tipo': 'descripcion'}))
 
