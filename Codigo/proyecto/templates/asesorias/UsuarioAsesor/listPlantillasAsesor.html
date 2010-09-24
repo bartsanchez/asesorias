@@ -51,6 +51,7 @@
         <tr>
             <th scope="row"><a href="{% url listPreguntaAsesor_Asesor curso_academico plantilla_entrevista_asesor.id_entrevista_asesor 'enunciado' %}">{{ plantilla_entrevista_asesor }}</a></th>
             <td><a href="{% url listPreguntaAsesor_Asesor curso_academico plantilla_entrevista_asesor.id_entrevista_asesor 'enunciado' %}" class="searchlink2">Ver</a></td>
+            <td><a href="{% url editPlantillaEntrevistaAsesor_Asesor curso_academico plantilla_entrevista_asesor.id_entrevista_asesor %}" class="editlink">Editar</a></td>
             <td><a href="{% url delPlantillaEntrevistaAsesor_Asesor curso_academico plantilla_entrevista_asesor.id_entrevista_asesor %}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}

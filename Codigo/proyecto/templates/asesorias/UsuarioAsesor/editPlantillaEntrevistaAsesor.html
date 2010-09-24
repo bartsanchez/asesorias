@@ -1,0 +1,60 @@
+{% extends "asesorias/Base/Asesor/alumnos.html" %}
+
+{% block content %}
+
+    <h1>Editar plantilla de entrevista de asesor.</h1>
+
+    {% if not form %}
+
+    <p>No existe tal plantilla de entrevista de asesor.</p>
+
+    <a href="{% url listPlantillasAsesor_Asesor curso_academico 'descripcion' %}">Volver</a>
+
+    {% else %}
+
+    {% if form.errors %}
+    <div id="form-error">
+        <p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}<li>{{ field.errors|striptags }}</li>{% endif %}
+            {% endfor %}
+            {% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="module">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Editar plantilla de entrevista de asesor.">
+                <caption><h2>Editar plantilla de entrevista de asesor</h2></caption>
+
+                {% for field in form %}
+
+                <!-- Excluye los campos que forman parte de la clave que se controlarán por software. -->
+                {% ifnotequal field.name 'dni_pasaporte' %}
+                {% ifnotequal field.name 'curso_academico' %}
+                {% ifnotequal field.name 'id_entrevista_asesor' %}
+                <tr>
+                    <th scope="row">{{ field.label_tag }}</th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endifnotequal %}
+                {% endifnotequal %}
+                {% endifnotequal %}
+
+                {% endfor %}
+                </table>
+            </div>
+
+            <p><input type="submit" value="Confirmar"/></p>
+        </form>
+
+    </div>
+
+    {% endif %}
+
+{% endblock %}
