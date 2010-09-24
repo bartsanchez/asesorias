@@ -38,9 +38,9 @@
         {% if not busqueda %}
         <tr>
             {% ifequal orden '_descripcion' %}
-            <th colspan="3"><a href={# url listPlantillasOficiales_Asesor curso_academico 'descripcion' #}>Descripción &#11014;</a></th>
-            {% else %
-            <th colspan="3"><a href={# url listPlantillasOficiales_Asesor curso_academico '_descripcion' #}>Descripción &#11015;</a></th>
+            <th colspan="3"><a href={% url listPlantillasAsesor_Asesor curso_academico 'descripcion' %}>Descripción &#11014;</a></th>
+            {% else %}
+            <th colspan="3"><a href={% url listPlantillasAsesor_Asesor curso_academico '_descripcion' %}>Descripción &#11015;</a></th>
             {% endifequal %}
         </tr>
         {% endif %}
