@@ -9,6 +9,7 @@ from asesorias.vistas.AdministradorPrincipal import \
     vistasPlantillaEntrevistaOficial as vistasPEO
 from asesorias.vistas.AdministradorPrincipal import \
     vistasPlantillaEntrevistaAsesor as vistasPEA
+from asesorias.vistas.AdministradorPrincipal import vistasPreguntaAsesor
 from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/UsuarioAsesor/'
@@ -393,6 +394,86 @@ def generarPDFListaPlantillasEntrevistaAsesor(request,
     return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
         {'mylist': lista_plantillas_entrevista_asesor,
         'name': 'plantillas de entrevista de asesor',})
+
+def addPreguntaAsesor(request, curso_academico, entrevista_asesor):
+    dni_pasaporte = unicode(request.user)
+
+    # Se comprueba que exista la plantilla de entrevista de asesor
+    # pasada por argumento.
+    instancia_entrevista_asesor = \
+        vistasPEA.obtenerPlantillaEntrevistaAsesor(dni_pasaporte,
+        curso_academico, entrevista_asesor)
+
+    # La plantilla de entrevista de asesor no existe, se redirige.
+    if not instancia_entrevista_asesor:
+        return HttpResponseRedirect(reverse('listPreguntaAsesor_Asesor',
+        kwargs={'curso_academico': curso_academico,
+        'id_entrevista_asesor': entrevista_asesor,
+        'orden': 'enunciado'}))
+
+    # Se ha rellenado el formulario.
+    if request.method == 'POST':
+        # Se extraen los valores pasados por el metodo POST.
+        enunciado = request.POST['enunciado']
+
+        # Se determina el siguiente id_pregunta_asesor para la plantilla
+        # de entrevista de asesor.
+        id_pregunta_asesor = vistasPreguntaAsesor.\
+            determinarSiguienteIdPreguntaDePlantillaDeAsesor(
+            instancia_entrevista_asesor)
+
+        # Datos necesarios para crear la nueva plantilla.
+        datos_pregunta_asesor = {'dni_pasaporte': dni_pasaporte,
+            'curso_academico': curso_academico,
+            'id_entrevista_asesor': entrevista_asesor,
+            'id_pregunta_asesor': id_pregunta_asesor,
+            'enunciado': enunciado}
+
+        # Se obtienen los valores y se valida.
+        form = forms.PreguntaAsesorForm(datos_pregunta_asesor)
+        if form.is_valid():
+            # Se guarda la informacion del formulario en el sistema.
+            form.save()
+            # Redirige a la pagina de listar preguntas de plantilla de
+            # asesor.
+            return HttpResponseRedirect(
+                reverse('listPreguntaAsesor_Asesor',
+                kwargs={'curso_academico': curso_academico,
+                'id_entrevista_asesor': entrevista_asesor,
+                'orden': 'enunciado'}))
+    # Si aun no se ha rellenado el formulario, se genera uno en blanco.
+    else:
+        form = forms.PreguntaAsesorForm()
+    return render_to_response(PATH + 'addPreguntaAsesor.html',
+        {'user': request.user, 'form': form,
+        'dni_pasaporte': dni_pasaporte,
+        'curso_academico': curso_academico,
+        'entrevista_asesor': entrevista_asesor})
+
+def delPreguntaAsesor(request, curso_academico, id_entrevista_asesor,
+    id_pregunta_asesor):
+    dni_pasaporte = unicode(request.user)
+
+    # Se obtiene la instancia de la pregunta de asesor.
+    instancia_pregunta_asesor = \
+        vistasPreguntaAsesor.obtenerPreguntaAsesor(
+        dni_pasaporte, curso_academico, id_entrevista_asesor,
+        id_pregunta_asesor)
+    # Si existe se elimina.
+    if instancia_pregunta_asesor:
+        instancia_pregunta_asesor.delete()
+        # Redirige a la pagina de listar preguntas de asesor.
+        return HttpResponseRedirect(reverse('listPreguntaAsesor_Asesor',
+                kwargs={'curso_academico': curso_academico,
+                'id_entrevista_asesor': id_entrevista_asesor,
+                'orden': 'enunciado'}))
+    # La pregunta no existe.
+    else:
+        error = True
+    return render_to_response(PATH + 'delPreguntaAsesor.html',
+        {'user': request.user, 'error': error,
+        'entrevista_asesor': id_entrevista_asesor,
+        'curso_academico': curso_academico})
 
 def listPreguntaAsesor(request, curso_academico, id_entrevista_asesor,
     orden):

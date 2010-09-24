@@ -8,6 +8,7 @@
         <div><p>Plantilla de entrevista de asesor: <b>{{ entrevista_asesor }}</b> <a href={% url listPlantillasAsesor_Asesor curso_academico 'descripcion' %} class="updatelink"></a></p></div>
     </div>
 
+    <a href="{% url addPreguntaAsesor_Asesor curso_academico entrevista_asesor %}" class="addlink">Crear nuevo</a>
     <a href="{% url generarPDFListaPreguntasAsesor_Asesor curso_academico entrevista_asesor busqueda %}" class="pdflink">Generar PDF</a>
 
     <div class="search">
@@ -55,6 +56,7 @@
         {% for pregunta_asesor in lista_preguntas_asesor %}
         <tr>
             <th scope="row"><a href="#">{{ pregunta_asesor }}</a></th>
+            <td><a href="{% url delPreguntaAsesor_Asesor curso_academico entrevista_asesor pregunta_asesor.id_pregunta_asesor %}" class="deletelink">Editar</a></td>
         </tr>
         {% endfor %}
 

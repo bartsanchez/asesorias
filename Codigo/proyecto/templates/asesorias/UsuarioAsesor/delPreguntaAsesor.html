@@ -1,0 +1,15 @@
+{% extends "asesorias/Base/Asesor/plantillas.html" %}
+
+{% block content %}
+
+    <h1>Eliminar pregunta de asesor.</h1>
+
+    {% if error %}
+
+    <p>No existe tal pregunta de asesor.</p>
+
+    <a href="{% url listPreguntaAsesor_Asesor curso_academico entrevista_asesor 'enunciado' %}">Lista de preguntas de asesor</a>
+
+    {% endif %}
+
+{% endblock %}
