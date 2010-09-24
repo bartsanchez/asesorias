@@ -1,0 +1,15 @@
+{% extends "asesorias/Base/Asesor/plantillas.html" %}
+
+{% block content %}
+
+    <h1>Eliminar plantilla de entrevista de asesor.</h1>
+
+    {% if error %}
+
+    <p>No existe tal plantilla de entrevista de asesor.</p>
+
+    <a href="{% url listPlantillasAsesor_Asesor curso_academico 'descripcion' %}">Lista de plantillas de entrevista de asesor</a>
+
+    {% endif %}
+
+{% endblock %}

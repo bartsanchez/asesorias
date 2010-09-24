@@ -230,6 +230,30 @@ def addPlantillaEntrevistaAsesor(request, curso_academico):
         'dni_pasaporte': dni_pasaporte,
         'curso_academico': curso_academico})
 
+def delPlantillaEntrevistaAsesor(request, curso_academico,
+    id_entrevista_asesor):
+    dni_pasaporte = unicode(request.user)
+
+    # Se obtiene la instancia de la asignatura curso academico.
+    instancia_plantilla_entrevista_asesor = \
+        vistasPEA.obtenerPlantillaEntrevistaAsesor(dni_pasaporte,
+        curso_academico, id_entrevista_asesor)
+    # Si existe se elimina.
+    if instancia_plantilla_entrevista_asesor:
+        instancia_plantilla_entrevista_asesor.delete()
+        # Redirige a la pagina de listar plantillas de entrevista de
+        # asesor.
+        return HttpResponseRedirect(
+            reverse('listPlantillasAsesor_Asesor',
+                kwargs={'curso_academico': curso_academico,
+                'orden': 'descripcion'}))
+    # La plantilla no existe.
+    else:
+        error = True
+    return render_to_response(PATH +'delPlantillaEntrevistaAsesor.html',
+        {'user': request.user, 'error': error,
+        'curso_academico': curso_academico})
+
 def listPlantillasAsesor(request, curso_academico, orden):
     dni_pasaporte = unicode(request.user)
 
