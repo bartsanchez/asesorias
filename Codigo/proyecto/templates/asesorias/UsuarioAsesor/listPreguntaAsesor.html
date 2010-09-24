@@ -1,0 +1,66 @@
+{% extends "asesorias/Base/Asesor/plantillas.html" %}
+
+{% block content %}
+
+    <h1>Lista de preguntas de asesor.</h1>
+
+    <div class="form">
+        <div><p>Plantilla de entrevista de asesor: <b>{{ entrevista_asesor }}</b> <a href={% url listPlantillasAsesor_Asesor curso_academico 'descripcion' %} class="updatelink"></a></p></div>
+    </div>
+
+    <a href="{# url generarPDFListaPreguntasOficiales_Asesor curso_academico entrevista_oficial busqueda #}" class="pdflink">Generar PDF</a>
+
+    <div class="search">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Realizar búsqueda.">
+                {% for field in form %}
+                <tr>
+                    <th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="module">
+        <table summary="Lista de preguntas de asesor.">
+        <caption><h2>Lista de preguntas de asesor{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
+
+        {% if not lista_preguntas_asesor %}
+
+        <tr><th scope="row"><p>No existen actualmente preguntas de asesor para esta plantilla en el sistema.</p></th></tr>
+
+        {% else %}
+
+        {% if not busqueda %}
+        <tr>
+            {% ifequal orden '_enunciado' %}
+            <th colspan="3"><a href={% url listPreguntaAsesor_Asesor curso_academico entrevista_asesor 'enunciado' %}>Enunciado &#11014;</a></th>
+
+            {% else %}
+            <th colspan="3"><a href={% url listPreguntaAsesor_Asesor curso_academico entrevista_asesor '_enunciado' %}>Enunciado &#11015;</a></th>
+
+            {% endifequal %}
+        </tr>
+        {% endif %}
+
+        <!-- Preguntas de asesor -->
+        {% for pregunta_asesor in lista_preguntas_asesor %}
+        <tr>
+            <th scope="row"><a href="#">{{ pregunta_asesor }}</a></th>
+        </tr>
+        {% endfor %}
+
+        {% endif %}
+
+        </table>
+    </div>
+
+{% endblock %}
