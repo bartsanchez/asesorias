@@ -48,8 +48,8 @@
          <!-- Plantillas de entrevista de asesor -->
         {% for plantilla_entrevista_asesor in lista_plantillas_entrevista_asesor %}
         <tr>
-            <th scope="row"><a href="{# url listPreguntaOficial_Asesor curso_academico plantilla_entrevista_oficial.id_entrevista_oficial 'enunciado' #}">{{ plantilla_entrevista_asesor }}</a></th>
-            <td><a href="{# url editPlantillaEntrevistaOficial plantilla_entrevista_oficial.id_entrevista_oficial #}" class="searchlink2">Ver</a></td>
+            <th scope="row"><a href="{% url listPreguntaAsesor_Asesor curso_academico plantilla_entrevista_asesor.id_entrevista_asesor 'enunciado' %}">{{ plantilla_entrevista_asesor }}</a></th>
+            <td><a href="{% url listPreguntaAsesor_Asesor curso_academico plantilla_entrevista_asesor.id_entrevista_asesor 'enunciado' %}" class="searchlink2">Ver</a></td>
         </tr>
         {% endfor %}
 

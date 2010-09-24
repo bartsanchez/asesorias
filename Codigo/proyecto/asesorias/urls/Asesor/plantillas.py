@@ -35,4 +35,9 @@ urlpatterns = patterns(VISTAS + 'vistasPlantillas',
 
         'generarPDFListaPlantillasEntrevistaAsesor',
         name='generarPDFListaPlantillasEntrevistaAsesor_Asesor'),
+
+    url(r'^listPreguntasAsesor/(?P<id_entrevista_asesor>\d+)/' +
+        '(?P<orden>[\s\w]+)/$',
+
+        'listPreguntaAsesor', name='listPreguntaAsesor_Asesor'),
 )
