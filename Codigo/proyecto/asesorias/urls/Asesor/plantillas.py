@@ -11,7 +11,8 @@ urlpatterns = patterns(VISTAS + 'vistasPlantillas',
         'listPlantillasOficiales',
         name='listPlantillasOficiales_Asesor'),
 
-    url(r'^generarPDF/(?P<busqueda>[\s\w]+)/$',
+    url(r'^generarPDF/plantillasOficiales/(?P<busqueda>[\s\w]+)/$',
+
         'generarPDFListaPlantillasEntrevistaOficial',
         name='generarPDFListaPlantillasEntrevistaOficial_Asesor'),
 
@@ -20,8 +21,8 @@ urlpatterns = patterns(VISTAS + 'vistasPlantillas',
 
         'listPreguntaOficial', name='listPreguntaOficial_Asesor'),
 
-    url(r'^generarPDF/preguntas/(?P<entrevista_oficial>[\s\w]+)/' +
-        '(?P<busqueda>[\s\w]+)/$',
+    url(r'^generarPDF/preguntasOficiales/' +
+        '(?P<entrevista_oficial>[\s\w]+)/(?P<busqueda>[\s\w]+)/$',
 
         'generarPDFListaPreguntasOficiales',
         name='generarPDFListaPreguntasOficiales_Asesor'),
@@ -29,4 +30,9 @@ urlpatterns = patterns(VISTAS + 'vistasPlantillas',
     url(r'^listPlantillasAsesor/(?P<orden>[\s\w]*)/$',
         'listPlantillasAsesor',
         name='listPlantillasAsesor_Asesor'),
+
+    url(r'^generarPDF/plantillasAsesor/(?P<busqueda>[\s\w]+)/$',
+
+        'generarPDFListaPlantillasEntrevistaAsesor',
+        name='generarPDFListaPlantillasEntrevistaAsesor_Asesor'),
 )

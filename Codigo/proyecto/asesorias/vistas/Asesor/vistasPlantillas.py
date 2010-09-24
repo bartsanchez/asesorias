@@ -228,3 +228,24 @@ def listPlantillasAsesor(request, curso_academico, orden):
         lista_plantillas_entrevista_asesor,
         'busqueda': busqueda,
         'orden': orden})
+
+def generarPDFListaPlantillasEntrevistaAsesor(request,
+    curso_academico,busqueda):
+    dni_pasaporte = unicode(request.user)
+
+    # Se obtiene una lista con todos las plantillas de entrevista de
+    # asesor.
+    lista_plantillas_entrevista_asesor = \
+        models.PlantillaEntrevistaAsesor.objects.filter(
+        dni_pasaporte=dni_pasaporte,
+        curso_academico=curso_academico).order_by('descripcion')
+
+    # Se ha realizado una busqueda.
+    if busqueda != 'False':
+        lista_plantillas_entrevista_asesor = \
+            lista_plantillas_entrevista_asesor.filter(
+            descripcion__contains=busqueda)
+
+    return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
+        {'mylist': lista_plantillas_entrevista_asesor,
+        'name': 'plantillas de entrevista de asesor',})
