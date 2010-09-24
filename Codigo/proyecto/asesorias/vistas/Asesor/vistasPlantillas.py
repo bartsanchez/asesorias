@@ -318,3 +318,34 @@ def listPreguntaAsesor(request, curso_academico, id_entrevista_asesor,
         'busqueda': busqueda,
         'entrevista_asesor': id_entrevista_asesor,
         'orden': orden})
+
+def generarPDFListaPreguntasAsesor(request, curso_academico,
+    id_entrevista_asesor, busqueda):
+    dni_pasaporte = unicode(request.user)
+
+    # Se comprueba que exista la plantilla de entrevista de asesor
+    # pasada por argumento.
+    instancia_entrevista_asesor = \
+        vistasPEA.obtenerPlantillaEntrevistaAsesor(dni_pasaporte,
+        curso_academico, id_entrevista_asesor)
+
+    # La plantilla de entrevista de asesor no existe, se redirige.
+    if not instancia_entrevista_asesor:
+        return HttpResponseRedirect(reverse('listPreguntaAsesor_Asesor',
+            kwargs={'curso_academico': curso_academico,
+            'entrevista_oficial': entrevista_oficial,
+            'orden': enunciado}))
+
+    # Se obtiene una lista con todas las preguntas de asesor.
+    lista_preguntas_asesor = models.PreguntaAsesor.objects.filter(
+        dni_pasaporte=dni_pasaporte, curso_academico=curso_academico,
+        id_entrevista_asesor=id_entrevista_asesor).order_by('enunciado')
+
+    # Se ha realizado una busqueda.
+    if busqueda != 'False':
+        lista_preguntas_asesor = lista_preguntas_asesor.filter(
+            enunciado__contains=busqueda)
+
+    return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
+        {'mylist': lista_preguntas_asesor,
+        'name': 'preguntas de asesor',})

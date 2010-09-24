@@ -8,7 +8,7 @@
         <div><p>Plantilla de entrevista de asesor: <b>{{ entrevista_asesor }}</b> <a href={% url listPlantillasAsesor_Asesor curso_academico 'descripcion' %} class="updatelink"></a></p></div>
     </div>
 
-    <a href="{# url generarPDFListaPreguntasOficiales_Asesor curso_academico entrevista_oficial busqueda #}" class="pdflink">Generar PDF</a>
+    <a href="{% url generarPDFListaPreguntasAsesor_Asesor curso_academico entrevista_asesor busqueda %}" class="pdflink">Generar PDF</a>
 
     <div class="search">
 
