@@ -55,8 +55,9 @@
         <!-- Preguntas de asesor -->
         {% for pregunta_asesor in lista_preguntas_asesor %}
         <tr>
-            <th scope="row"><a href="#">{{ pregunta_asesor }}</a></th>
-            <td><a href="{% url delPreguntaAsesor_Asesor curso_academico entrevista_asesor pregunta_asesor.id_pregunta_asesor %}" class="deletelink">Editar</a></td>
+            <th scope="row"><a href="{% url editPreguntaAsesor_Asesor curso_academico entrevista_asesor pregunta_asesor.id_pregunta_asesor %}">{{ pregunta_asesor }}</a></th>
+            <td><a href="{% url editPreguntaAsesor_Asesor curso_academico entrevista_asesor pregunta_asesor.id_pregunta_asesor %}" class="editlink">Editar</a></td>
+            <td><a href="{% url delPreguntaAsesor_Asesor curso_academico entrevista_asesor pregunta_asesor.id_pregunta_asesor %}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}
 

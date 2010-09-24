@@ -55,6 +55,11 @@ urlpatterns = patterns(VISTAS + 'vistasPlantillas',
         'addPreguntaAsesor', name='addPreguntaAsesor_Asesor'),
 
     url(r'^preguntasAsesor/(?P<id_entrevista_asesor>\d+)/' +
+        '(?P<id_pregunta_asesor>\d+)/edit/$',
+
+        'editPreguntaAsesor', name='editPreguntaAsesor_Asesor'),
+
+    url(r'^preguntasAsesor/(?P<id_entrevista_asesor>\d+)/' +
         '(?P<id_pregunta_asesor>\d+)/del/$',
 
         'delPreguntaAsesor', name='delPreguntaAsesor_Asesor'),

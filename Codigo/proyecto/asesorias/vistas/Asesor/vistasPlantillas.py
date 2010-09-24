@@ -450,6 +450,67 @@ def addPreguntaAsesor(request, curso_academico, entrevista_asesor):
         'curso_academico': curso_academico,
         'entrevista_asesor': entrevista_asesor})
 
+def editPreguntaAsesor(request, curso_academico, id_entrevista_asesor,
+    id_pregunta_asesor):
+    dni_pasaporte = unicode(request.user)
+
+    # Se obtiene la instancia de la pregunta de asesor.
+    instancia_pregunta_asesor = \
+        vistasPreguntaAsesor.obtenerPreguntaAsesor(dni_pasaporte,
+        curso_academico, id_entrevista_asesor, id_pregunta_asesor)
+    # Si existe se edita.
+    if instancia_pregunta_asesor:
+        # Se carga el formulario para la pregunta existente.
+        form = forms.PreguntaAsesorForm(
+            instance=instancia_pregunta_asesor)
+
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            # Se obtienen el resto de valores necesarios a traves de
+            # POST.
+            enunciado = request.POST['enunciado']
+
+            # Se obtiene una instancia de la plantilla de asesor a
+            # traves de su id.
+            instancia_entrevista_asesor = \
+                vistasPEA.obtenerPlantillaEntrevistaAsesor(
+                dni_pasaporte, curso_academico, id_entrevista_asesor)
+
+            # Se determina el siguiente id_pregunta_asesor para la
+            # plantilla de entrevista de asesor.
+            id_pregunta_asesor = vistasPreguntaAsesor.\
+                determinarSiguienteIdPreguntaDePlantillaDeAsesor(
+                instancia_entrevista_asesor)
+
+            # Datos necesarios para crear la nueva plantilla.
+            datos_pregunta_asesor = {'dni_pasaporte': dni_pasaporte,
+                'curso_academico': curso_academico,
+                'id_entrevista_asesor': id_entrevista_asesor,
+                'id_pregunta_asesor': id_pregunta_asesor,
+                'enunciado': enunciado}
+
+            # Se actualiza el formulario con la nueva informacion.
+            form = forms.PreguntaAsesorForm(datos_pregunta_asesor,
+                instance=instancia_pregunta_asesor)
+
+            # Si es valido se guarda.
+            if form.is_valid():
+                form.save()
+                # Redirige a la pagina de listar preguntas de asesor.
+                return HttpResponseRedirect(
+                    reverse('listPreguntaAsesor_Asesor',
+                    kwargs={'curso_academico': curso_academico,
+                    'id_entrevista_asesor': id_entrevista_asesor,
+                    'orden': 'enunciado'}))
+    # La pregunta de asesor no existe.
+    else:
+        form = False
+    return render_to_response(PATH + 'editPreguntaAsesor.html',
+        {'user': request.user, 'form': form,
+        'dni_pasaporte': dni_pasaporte,
+        'curso_academico': curso_academico,
+        'entrevista_asesor': id_entrevista_asesor})
+
 def delPreguntaAsesor(request, curso_academico, id_entrevista_asesor,
     id_pregunta_asesor):
     dni_pasaporte = unicode(request.user)
