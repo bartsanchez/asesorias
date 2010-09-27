@@ -176,6 +176,12 @@ def editPlantillaEntrevistaAsesor(request, dni_pasaporte,
                 vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
                 dni_pasaporte, curso_academico)
 
+            # Se obtienen todas las preguntas de asesor de esta
+            # plantilla.
+            preguntas_de_plantilla = \
+                models.PreguntaAsesor.objects.filter(
+                id_entrevista_asesor=id_entrevista_asesor)
+
             # Se determina el siguiente id_entrevista_asesor para el
             # asesor curso academico.
             id_entrevista_asesor = \
@@ -196,6 +202,14 @@ def editPlantillaEntrevistaAsesor(request, dni_pasaporte,
 
             # Si es valido se guarda.
             if form.is_valid():
+
+                # Si la entrevista tenia preguntas se modifica el id.
+                if (preguntas_de_plantilla):
+                    for pregunta in preguntas_de_plantilla:
+                        pregunta.id_entrevista_asesor = \
+                        id_entrevista_asesor
+                        pregunta.save()
+
                 form.save()
                 # Redirige a la pagina de listar plantillas de
                 # entrevista de asesor.
