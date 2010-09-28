@@ -317,19 +317,8 @@ def delPlantillaEntrevistaAsesor(request, curso_academico,
         curso_academico, id_entrevista_asesor)
     # Si existe se elimina.
     if instancia_plantilla_entrevista_asesor:
-
-        # Se obtienen todas las preguntas de asesor de esta
-        # plantilla.
-        preguntas_de_plantilla = \
-            models.PreguntaAsesor.objects.filter(
-            id_entrevista_asesor=id_entrevista_asesor)
-
-        # Si la entrevista tenia preguntas se modifica el id.
-        if (preguntas_de_plantilla):
-            for pregunta in preguntas_de_plantilla:
-                pregunta.delete()
-
-        instancia_plantilla_entrevista_asesor.delete()
+        instancia_plantilla_entrevista_asesor.borrar(dni_pasaporte,
+            curso_academico, id_entrevista_asesor)
         # Redirige a la pagina de listar plantillas de entrevista de
         # asesor.
         return HttpResponseRedirect(

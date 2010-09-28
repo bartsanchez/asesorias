@@ -184,6 +184,22 @@ class PlantillaEntrevistaAsesor(models.Model):
         unique_together = ("dni_pasaporte", "curso_academico",
             "id_entrevista_asesor")
 
+    def borrar(self, dni_pasaporte, curso_academico,
+        id_entrevista_asesor):
+        # Se obtienen todas las preguntas de asesor de esta plantilla.
+        preguntas_de_plantilla = PreguntaAsesor.objects.filter(
+            dni_pasaporte=dni_pasaporte,
+            curso_academico=curso_academico,
+            id_entrevista_asesor=id_entrevista_asesor)
+
+        # Si la entrevista tenia preguntas se modifica el id.
+        if (preguntas_de_plantilla):
+            for pregunta in preguntas_de_plantilla:
+                pregunta.delete()
+
+        # Se borra la plantilla.
+        self.delete()
+
     def __unicode__(self):
         return unicode(self.descripcion)
 
