@@ -235,8 +235,7 @@ def delPlantillaEntrevistaAsesor(request, dni_pasaporte,
         id_entrevista_asesor)
     # Si existe se elimina.
     if instancia_plantilla_entrevista_asesor:
-        instancia_plantilla_entrevista_asesor.borrar(dni_pasaporte,
-            curso_academico, id_entrevista_asesor)
+        instancia_plantilla_entrevista_asesor.borrar()
 
         # Redirige a la pagina de listar plantillas de entrevista de
         # asesor.
