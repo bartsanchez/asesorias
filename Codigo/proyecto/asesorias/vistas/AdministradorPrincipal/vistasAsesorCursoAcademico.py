@@ -100,7 +100,7 @@ def delAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
         nombre_departamento = \
             instancia_asesor_curso_academico.id_departamento
 
-        instancia_asesor_curso_academico.delete()
+        instancia_asesor_curso_academico.borrar()
         # Redirige a la pagina de listar asesores curso academico.
         return HttpResponseRedirect(
             reverse('listAsesorCursoAcademico',
@@ -140,12 +140,11 @@ def selectAsesor(request):
 
 def listAsesorCursoAcademico(request, dni_pasaporte, orden):
     # Se comprueba que exista el asesor pasado por argumento.
-    existe_asesor_curso_academico = \
-        models.AsesorCursoAcademico.objects.filter(
+    existe_asesor = models.Asesor.objects.filter(
         dni_pasaporte=dni_pasaporte)
 
     # El asesor no existe, se redirige.
-    if not (existe_asesor_curso_academico):
+    if not (existe_asesor):
         return HttpResponseRedirect(
             reverse('selectAsesor_AsesorCursoAcademico'))
 

@@ -166,6 +166,21 @@ class AsesorCursoAcademico(models.Model):
         db_table = "AsesoresCursoAcademico"
         unique_together = ("dni_pasaporte", "curso_academico")
 
+    def borrar(self):
+        # Se obtienen todas las plantillas del asesor para borrarlas.
+        plantillas_asesor = PlantillaEntrevistaAsesor.objects.filter(
+            dni_pasaporte=self.dni_pasaporte,
+            curso_academico=self.curso_academico)
+
+        # Si el asesor tenia plantillas se borran.
+        if (plantillas_asesor):
+            for plantilla in plantillas_asesor:
+                plantilla.borrar()
+
+        # Se borra el asesor.
+        self.delete()
+        return
+
     def __unicode__(self):
         return (unicode(self.curso_academico) +
             " (" + unicode(self.id_departamento) + ")")
