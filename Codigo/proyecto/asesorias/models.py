@@ -166,6 +166,23 @@ class AsesorCursoAcademico(models.Model):
         db_table = "AsesoresCursoAcademico"
         unique_together = ("dni_pasaporte", "curso_academico")
 
+    def editar(self, dni_pasaporte_antiguo, curso_academico_antiguo):
+        # Se obtienen todas las plantillas de asesor curso academico.
+        plantillas_asesor = PlantillaEntrevistaAsesor.objects.filter(
+            dni_pasaporte=dni_pasaporte_antiguo,
+            curso_academico=curso_academico_antiguo).update(
+            dni_pasaporte=self.dni_pasaporte,
+            curso_academico=self.curso_academico)
+
+        # Se obtienen todas las preguntas de asesor curso academico.
+        preguntas_asesor = PreguntaAsesor.objects.filter(
+            dni_pasaporte=dni_pasaporte_antiguo,
+            curso_academico=curso_academico_antiguo).update(
+            dni_pasaporte=self.dni_pasaporte,
+            curso_academico=self.curso_academico)
+
+        return
+
     def borrar(self):
         # Se obtienen todas las plantillas del asesor para borrarlas.
         plantillas_asesor = PlantillaEntrevistaAsesor.objects.filter(

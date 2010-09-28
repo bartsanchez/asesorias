@@ -61,6 +61,10 @@ def editAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
         dni_pasaporte, curso_academico)
     # Si existe se edita.
     if instancia_asesor_curso_academico:
+        # Se guarda el anterior dni_pasaporte y curso academico.
+        dni_pasaporte_antiguo = dni_pasaporte
+        curso_academico_antiguo = curso_academico
+
         # Se carga el formulario para la asignatura existente.
         form = forms.AsesorCursoAcademicoForm(
             instance=instancia_asesor_curso_academico)
@@ -71,6 +75,8 @@ def editAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
                 instance=instancia_asesor_curso_academico)
             # Si es valido se guarda.
             if form.is_valid():
+                instancia_asesor_curso_academico.editar(
+                    dni_pasaporte_antiguo, curso_academico_antiguo)
                 form.save()
 
                 # Se obtiene el departamento y el asesor para redirigir.
