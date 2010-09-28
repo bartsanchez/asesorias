@@ -811,5 +811,23 @@
       "dni_pasaporte_asesor": "30303030L",
       "curso_academico": 2010
     }
+  },
+  {
+    "pk": 2,
+    "model": "auth.user",
+    "fields": {
+      "username": "30303030L",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2010-09-28 02:52:04",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$1156f$649b2c2e9ef99f6ab7e62f6df5b970297737979a",
+      "email": "hola@holahola.com",
+      "date_joined": "2010-09-28 02:51:41"
+    }
   }
 ]
