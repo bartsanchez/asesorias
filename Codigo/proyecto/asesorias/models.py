@@ -150,6 +150,20 @@ class Asesor(models.Model):
     class Meta:
         db_table = "Asesores"
 
+    def borrar(self):
+        # Se obtienen todos los asesores curso academico para borrarlos.
+        asesores = AsesorCursoAcademico.objects.filter(
+            dni_pasaporte=self.dni_pasaporte)
+
+        # Si el asesor tenia plantillas se borran.
+        if (asesores):
+            for asesor in asesores:
+                asesor.borrar()
+
+        # Se borra el asesor.
+        self.delete()
+        return
+
     def __unicode__(self):
         return self.dni_pasaporte
 

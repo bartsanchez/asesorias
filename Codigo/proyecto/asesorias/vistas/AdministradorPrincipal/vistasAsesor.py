@@ -69,7 +69,7 @@ def delAsesor(request, dni_pasaporte):
     instancia_asesor = obtenerAsesor(dni_pasaporte)
     # Si existe se elimina.
     if instancia_asesor:
-        instancia_asesor.delete()
+        instancia_asesor.borrar()
         # Redirige a la pagina de listar asesores.
         return HttpResponseRedirect(reverse('listAsesor',
             kwargs={'orden': 'nombre_asesor'}))
