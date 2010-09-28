@@ -184,19 +184,18 @@ class PlantillaEntrevistaAsesor(models.Model):
         unique_together = ("dni_pasaporte", "curso_academico",
             "id_entrevista_asesor")
 
-    def editar(self, dni_pasaporte, curso_academico,
-        id_entrevista_asesor_anterior, id_entrevista_asesor_nuevo):
+    def editar(self, id_entrevista_asesor_antigua):
         # Se obtienen todas las preguntas de asesor de esta plantilla.
         preguntas_de_plantilla = PreguntaAsesor.objects.filter(
-            dni_pasaporte=dni_pasaporte,
-            curso_academico=curso_academico,
-            id_entrevista_asesor=id_entrevista_asesor_anterior)
+            dni_pasaporte=self.dni_pasaporte,
+            curso_academico=self.curso_academico,
+            id_entrevista_asesor=id_entrevista_asesor_antigua)
 
         # Si la entrevista tenia preguntas se modifica el id.
         if (preguntas_de_plantilla):
             for pregunta in preguntas_de_plantilla:
                 pregunta.id_entrevista_asesor = \
-                id_entrevista_asesor_nuevo
+                self.id_entrevista_asesor
                 pregunta.save()
         return
 

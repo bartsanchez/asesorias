@@ -257,6 +257,9 @@ def editPlantillaEntrevistaAsesor(request, curso_academico,
                 vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
                 dni_pasaporte, curso_academico)
 
+            # Se guarda la anterior id.
+            id_entrevista_asesor_antigua = id_entrevista_asesor
+
             # Se determina el siguiente id_entrevista_asesor para el
             # asesor curso academico.
             id_entrevista_asesor = vistasPEA.\
@@ -277,6 +280,8 @@ def editPlantillaEntrevistaAsesor(request, curso_academico,
 
             # Si es valido se guarda.
             if form.is_valid():
+                instancia_plantilla_entrevista_asesor.editar(
+                    id_entrevista_asesor_antigua)
                 form.save()
                 # Redirige a la pagina de listar plantillas de
                 # entrevista de asesor.
