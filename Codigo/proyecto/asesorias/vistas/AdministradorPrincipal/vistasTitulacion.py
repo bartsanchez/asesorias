@@ -196,7 +196,7 @@ def delTitulacion(request, nombre_centro, nombre_titulacion,
         nombre_titulacion, plan_estudios)
     # Si existe se elimina.
     if instancia_titulacion:
-        instancia_titulacion.delete()
+        instancia_titulacion.borrar()
         # Redirige a la pagina de listar titulaciones.
         return HttpResponseRedirect(reverse('listTitulacion',
             kwargs={'nombre_centro': nombre_centro,

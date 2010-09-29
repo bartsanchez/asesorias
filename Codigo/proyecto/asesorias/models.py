@@ -33,6 +33,22 @@ class Titulacion(models.Model):
         unique_together = (("id_centro", "id_titulacion"),
             ("id_centro", "nombre_titulacion", "plan_estudios"))
 
+    def borrar(self):
+        # Se obtienen todas las asignaturas de la titulacion para
+        # borrarlas.
+        asignaturas = Asignatura.objects.filter(
+            id_centro=self.id_centro_id,
+            id_titulacion=self.id_titulacion)
+
+        # Si la titulacion tenia asignaturas curso academico se borran.
+        if (asignaturas):
+            for asignatura in asignaturas:
+                asignatura.borrar()
+
+        # Se borra el asesor.
+        self.delete()
+        return
+
     def determinarNombreCentro(self):
         centro = Centro.objects.get(id_centro=self.id_centro_id)
 
