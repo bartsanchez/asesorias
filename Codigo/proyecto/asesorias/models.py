@@ -326,6 +326,16 @@ class AlumnoCursoAcademico(models.Model):
             dni_pasaporte=self.dni_pasaporte_alumno,
             curso_academico=self.curso_academico).delete()
 
+        # Se obtienen todas las matriculas del alumno para borrarlas.
+        matriculas = Matricula.objects.filter(
+            dni_pasaporte=self.dni_pasaporte_alumno,
+            curso_academico=self.curso_academico)
+
+        # Si el alumno tenia matriculas se borran.
+        if (matriculas):
+            for matricula in matriculas:
+                matricula.borrar()
+
         # Se borra el asesor.
         self.delete()
         return
@@ -353,6 +363,16 @@ class Matricula(models.Model):
         db_table = "Matriculas"
         unique_together = ("id_centro", "id_titulacion",
             "id_asignatura", "curso_academico", "dni_pasaporte")
+
+    def borrar(self):
+        # Se obtienen todas las calificaciones para borrarlas.
+        calificaciones = CalificacionConvocatoria.objects.filter(
+            dni_pasaporte=self.dni_pasaporte,
+            curso_academico=self.curso_academico).delete()
+
+        # Se borra el asesor.
+        self.delete()
+        return
 
     def determinarNombreCentro(self):
         asignatura = Asignatura.objects.get(id_centro=self.id_centro,

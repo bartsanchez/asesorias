@@ -230,7 +230,7 @@ def delMatricula(request, nombre_centro, nombre_titulacion,
 
     # Si existe se elimina.
     if instancia_matricula:
-        instancia_matricula.delete()
+        instancia_matricula.borrar()
         # Redirige a la pagina de listar matriculas.
         return HttpResponseRedirect(reverse('listMatricula',
                 kwargs={'nombre_centro':
@@ -258,7 +258,7 @@ def delMatricula2(request, nombre_centro, nombre_titulacion,
 
     # Si existe se elimina.
     if instancia_matricula:
-        instancia_matricula.delete()
+        instancia_matricula.borrar()
         # Redirige a la pagina de listar matriculas.
         return HttpResponseRedirect(reverse('listMatricula2',
                 kwargs={'dni_pasaporte': dni_pasaporte,
