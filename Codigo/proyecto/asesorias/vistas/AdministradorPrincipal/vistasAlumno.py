@@ -49,8 +49,43 @@ def editAlumno(request, dni_pasaporte):
         form = forms.AlumnoForm(instance=instancia_alumno)
         # Se ha modificado el formulario original.
         if request.method == 'POST':
+            # Se extraen los valores pasados por el metodo POST.
+            correo_electronico = request.POST['correo_electronico']
+            nombre =  request.POST['nombre']
+            apellidos = request.POST['apellidos']
+            fecha_nacimiento =  request.POST['fecha_nacimiento']
+            direccion_cordoba =  request.POST['direccion_cordoba']
+            localidad_familiar =  request.POST['localidad_familiar']
+            provincia_familiar =  request.POST['provincia_familiar']
+            codigo_postal =  request.POST['codigo_postal']
+            telefono_familiar =  request.POST['telefono_familiar']
+            ingreso =  request.POST['ingreso']
+            otros_estudios_universitarios =  \
+                request.POST['otros_estudios_universitarios']
+            modalidad_acceso_universidad =  \
+                request.POST['modalidad_acceso_universidad']
+            calificacion_acceso =  request.POST['calificacion_acceso']
+
+            # Datos necesarios para crear el nuevo alumno.
+            datos_alumno = {'dni_pasaporte': dni_pasaporte,
+                'correo_electronico': correo_electronico,
+                'nombre': nombre,
+                'apellidos': apellidos,
+                'fecha_nacimiento': fecha_nacimiento,
+                'direccion_cordoba': direccion_cordoba,
+                'localidad_familiar': localidad_familiar,
+                'provincia_familiar': provincia_familiar,
+                'codigo_postal': codigo_postal,
+                'telefono_familiar': telefono_familiar,
+                'ingreso': ingreso,
+                'otros_estudios_universitarios':
+                otros_estudios_universitarios,
+                'modalidad_acceso_universidad':
+                modalidad_acceso_universidad,
+                'calificacion_acceso': calificacion_acceso}
+
             # Se actualiza el formulario con la nueva informacion.
-            form = forms.AlumnoForm(request.POST,
+            form = forms.AlumnoForm(datos_alumno,
                 instance=instancia_alumno)
             # Si es valido se guarda.
             if form.is_valid():
@@ -62,7 +97,8 @@ def editAlumno(request, dni_pasaporte):
     else:
         form = False
     return render_to_response('asesorias/Alumno/editAlumno.html',
-        {'user': request.user, 'form': form})
+        {'user': request.user, 'form': form,
+        'dni_pasaporte': dni_pasaporte})
 
 def delAlumno(request, dni_pasaporte):
     # Se obtiene la instancia del alumno.
