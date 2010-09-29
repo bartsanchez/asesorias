@@ -108,6 +108,9 @@ def editAsignaturaCursoAcademico(request, nombre_centro,
         curso_academico)
     # Si existe se edita.
     if instancia_asignatura_curso_academico:
+        # Se guarda el anterior curso academico.
+        curso_academico_antiguo = curso_academico
+
         # Se carga el formulario para la asignatura existente.
         form = forms.AsignaturaCursoAcademicoForm(
             instance=instancia_asignatura_curso_academico,
@@ -150,6 +153,8 @@ def editAsignaturaCursoAcademico(request, nombre_centro,
 
             # Si es valido se guarda.
             if form.is_valid():
+                instancia_asignatura_curso_academico.editar(
+                    curso_academico_antiguo)
                 form.save()
                 # Redirige a la pagina de listar asignaturas
                 # curso academico.
