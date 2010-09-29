@@ -163,6 +163,9 @@ def editAsignatura(request, nombre_centro, nombre_titulacion,
         nombre_titulacion, plan_estudios, nombre_asignatura)
     # Si existe se edita.
     if instancia_asignatura:
+        # Se guarda el anterior id_asignatura.
+        id_asignatura_antiguo = instancia_asignatura.id_asignatura
+
         # Se carga el formulario para la asignatura existente.
         form = forms.AsignaturaForm(instance=instancia_asignatura,
             initial={'titulacion': vistasTitulacion.obtenerTitulacion(
@@ -211,6 +214,7 @@ def editAsignatura(request, nombre_centro, nombre_titulacion,
 
             # Si es valido se guarda.
             if form.is_valid():
+                instancia_asignatura.editar(id_asignatura_antiguo)
                 form.save()
                 # Redirige a la pagina de listar asignaturas.
                 return HttpResponseRedirect(reverse('listAsignatura',

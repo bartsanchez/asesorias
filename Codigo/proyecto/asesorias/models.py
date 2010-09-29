@@ -65,6 +65,33 @@ class Asignatura(models.Model):
         unique_together = ("id_centro", "id_titulacion",
             "id_asignatura")
 
+    def editar(self, id_asignatura_antiguo):
+        # Se obtienen todas las asignaturas curso academico de la
+        # asignatura para editarlas.
+        asignaturas = AsignaturaCursoAcademico.objects.filter(
+            id_centro=self.id_centro,
+            id_titulacion=self.id_titulacion,
+            id_asignatura=id_asignatura_antiguo).update(
+            id_asignatura=self.id_asignatura)
+
+        # Se obtienen todas las matriculas de la asignatura para
+        # editarlas.
+        matriculas = Matricula.objects.filter(
+            id_centro=self.id_centro,
+            id_titulacion=self.id_titulacion,
+            id_asignatura=id_asignatura_antiguo).update(
+            id_asignatura=self.id_asignatura)
+
+        # Se obtienen todas las calificaciones de la asignatura para
+        # editarlas.
+        calificaciones = CalificacionConvocatoria.objects.filter(
+            id_centro=self.id_centro,
+            id_titulacion=self.id_titulacion,
+            id_asignatura=id_asignatura_antiguo).update(
+            id_asignatura=self.id_asignatura)
+
+        return
+
     def borrar(self):
         # Se obtienen todas las asignaturas curso academico de la
         # asignatura para borrarlas.
