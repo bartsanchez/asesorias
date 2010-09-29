@@ -147,7 +147,7 @@ def editTitulacion(request, nombre_centro, nombre_titulacion,
         nombre_titulacion, plan_estudios)
     # Si existe se edita.
     if instancia_titulacion:
-        # Se guarda el anterior dni_pasaporte y curso academico.
+        # Se guarda el anterior id_centro e id_titulacion.
         id_centro_antigua = instancia_titulacion.id_centro_id
         id_titulacion_antigua = instancia_titulacion.id_titulacion
 
