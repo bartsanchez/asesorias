@@ -236,7 +236,7 @@ def delAsignatura(request, nombre_centro, nombre_titulacion,
         nombre_titulacion, plan_estudios, nombre_asignatura)
     # Si existe se elimina.
     if instancia_asignatura:
-        instancia_asignatura.delete()
+        instancia_asignatura.borrar()
         # Redirige a la pagina de listar asignaturas.
         return HttpResponseRedirect(reverse('listAsignatura',
             kwargs={'nombre_centro': nombre_centro,
