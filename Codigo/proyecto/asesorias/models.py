@@ -208,6 +208,18 @@ class AsesorCursoAcademico(models.Model):
             for plantilla in plantillas_asesor:
                 plantilla.borrar()
 
+        # Se obtienen todos los alumnos curso academico del asesor para
+        # borrarlos.
+        alumnos_curso_academico = AlumnoCursoAcademico.objects.filter(
+            codigo_asesorCursoAcademico=
+            self.codigo_asesorCursoAcademico,
+            curso_academico=self.curso_academico)
+
+        # Si el asesor tenia alumnos curso academico se borran.
+        if (alumnos_curso_academico):
+            for alumno in alumnos_curso_academico:
+                alumno.borrar()
+
         # Se borra el asesor.
         self.delete()
         return
