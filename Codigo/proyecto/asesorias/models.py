@@ -375,7 +375,12 @@ class AlumnoCursoAcademico(models.Model):
         # Se obtienen todas las reuniones del alumno para borrarlas.
         reuniones = Reunion.objects.filter(
             dni_pasaporte=self.dni_pasaporte_alumno,
-            curso_academico=self.curso_academico).delete()
+            curso_academico=self.curso_academico)
+
+        # Si el alumno tenia reuniones se borran.
+        if (reuniones):
+            for reunion in reuniones:
+                reunion.borrar()
 
         # Se obtienen todas las matriculas del alumno para borrarlas.
         matriculas = Matricula.objects.filter(
