@@ -229,7 +229,7 @@ def delReunion(request, dni_pasaporte, curso_academico, id_reunion):
         id_reunion)
     # Si existe se elimina.
     if instancia_reunion:
-        instancia_reunion.delete()
+        instancia_reunion.borrar()
         # Redirige a la pagina de listar reuniones.
         return HttpResponseRedirect(reverse('listReunion',
                 kwargs={'dni_pasaporte': dni_pasaporte,

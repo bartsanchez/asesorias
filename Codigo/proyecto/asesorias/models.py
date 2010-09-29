@@ -552,6 +552,16 @@ class Reunion(models.Model):
         unique_together = ("dni_pasaporte", "curso_academico",
             "id_reunion")
 
+    def borrar(self):
+        # Se obtienen todas las reuniones del alumno para borrarlas.
+        reuniones = ReunionPreguntaAsesor.objects.filter(
+            dni_pasaporte_alumno=self.dni_pasaporte,
+            curso_academico=self.curso_academico).delete()
+
+        # Se borra el asesor.
+        self.delete()
+        return
+
     def __unicode__(self):
         return unicode(self.fecha)
 
