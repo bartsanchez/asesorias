@@ -152,7 +152,7 @@ def delAlumnoCursoAcademico(request, dni_pasaporte, curso_academico):
         # Determina el dni del asesor.
         dni_pasaporte_asesor = instancia_asesorCA.dni_pasaporte
 
-        instancia_alumno_curso_academico.delete()
+        instancia_alumno_curso_academico.borrar()
         # Redirige a la pagina de listar alumnos curso academico.
         return HttpResponseRedirect(reverse('listAlumnoCursoAcademico',
             kwargs={

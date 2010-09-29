@@ -306,15 +306,30 @@ class AlumnoCursoAcademico(models.Model):
         db_table = "AlumnosCursoAcademico"
         unique_together = ("dni_pasaporte_alumno", "curso_academico")
 
-    def __unicode__(self):
-        return (unicode(self.dni_pasaporte_alumno) + ' (' +
-            unicode(self.curso_academico)) + ') '
+    def borrar(self):
+        # Se obtienen todas las reuniones del alumno para borrarlas.
+        reuniones = Reunion.objects.filter(
+            dni_pasaporte=self.dni_pasaporte_alumno,
+            curso_academico=self.curso_academico)
+
+        # Si el alumno tenia reuniones se borran.
+        if (reuniones):
+            for reunion in reuniones:
+                reunion.delete()
+
+        # Se borra el asesor.
+        self.delete()
+        return
 
     def nombre(self):
         return (unicode(self.dni_pasaporte_alumno.nombre))
 
     def apellidos(self):
         return (unicode(self.dni_pasaporte_alumno.apellidos))
+
+    def __unicode__(self):
+        return (unicode(self.dni_pasaporte_alumno) + ' (' +
+            unicode(self.curso_academico)) + ') '
 
 class Matricula(models.Model):
     codigo_matricula = models.AutoField(primary_key=True)
