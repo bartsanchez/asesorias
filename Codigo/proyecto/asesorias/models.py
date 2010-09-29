@@ -8,6 +8,21 @@ class Centro(models.Model):
     class Meta:
         db_table = "Centros"
 
+    def borrar(self):
+        # Se obtienen todas las titulaciones del centro para
+        # borrarlas.
+        titulaciones = Titulacion.objects.filter(
+            id_centro=self.id_centro)
+
+        # Si el centro tenia titulaciones se borran.
+        if (titulaciones):
+            for titulacion in titulaciones:
+                titulacion.borrar()
+
+        # Se borra el asesor.
+        self.delete()
+        return
+
     def __unicode__(self):
         return self.nombre_centro
 

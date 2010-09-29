@@ -60,7 +60,7 @@ def delCentro(request, centro):
     instancia_centro = obtenerCentro(centro)
     # Si existe se elimina.
     if instancia_centro:
-        instancia_centro.delete()
+        instancia_centro.borrar()
         # Redirige a la pagina de listar centros.
         return HttpResponseRedirect(reverse('listCentro',
             kwargs={'orden': 'nombre_centro'}))
