@@ -49,8 +49,21 @@ def editAsesor(request, dni_pasaporte):
         form = forms.AsesorForm(instance=instancia_asesor)
         # Se ha modificado el formulario original.
         if request.method == 'POST':
+            # Se extraen los valores pasados por el metodo POST.
+            correo_electronico= request.POST['correo_electronico']
+            nombre = request.POST['nombre']
+            apellidos = request.POST['apellidos']
+            telefono = request.POST['telefono']
+
+            # Datos necesarios para crear el nuevo asesor.
+            datos_asesor = {'dni_pasaporte': dni_pasaporte,
+                'correo_electronico': correo_electronico,
+                'nombre': nombre,
+                'apellidos': apellidos,
+                'telefono': telefono}
+
             # Se actualiza el formulario con la nueva informacion.
-            form = forms.AsesorForm(request.POST,
+            form = forms.AsesorForm(datos_asesor,
                 instance=instancia_asesor)
             # Si es valido se guarda.
             if form.is_valid():
@@ -62,7 +75,8 @@ def editAsesor(request, dni_pasaporte):
     else:
         form = False
     return render_to_response('asesorias/Asesor/editAsesor.html',
-        {'user': request.user, 'form': form})
+        {'user': request.user, 'form': form,
+        'dni_pasaporte': dni_pasaporte})
 
 def delAsesor(request, dni_pasaporte):
     # Se obtiene la instancia del asesor.
