@@ -155,7 +155,7 @@ class Asesor(models.Model):
         asesores = AsesorCursoAcademico.objects.filter(
             dni_pasaporte=self.dni_pasaporte)
 
-        # Si el asesor tenia plantillas se borran.
+        # Si el asesor estaba matriculado se borra.
         if (asesores):
             for asesor in asesores:
                 asesor.borrar()
@@ -290,6 +290,20 @@ class Alumno(models.Model):
     class Meta:
         db_table = "Alumnos"
 
+    def borrar(self):
+        # Se obtienen todos los alumnos curso academico para borrarlos.
+        alumnos = AlumnoCursoAcademico.objects.filter(
+            dni_pasaporte_alumno=self.dni_pasaporte)
+
+        # Si el alumno estaba matriculado se borra.
+        if (alumnos):
+            for alumno in alumnos:
+                alumno.borrar()
+
+        # Se borra el asesor.
+        self.delete()
+        return
+
     def __unicode__(self):
         return self.dni_pasaporte
 
@@ -310,12 +324,7 @@ class AlumnoCursoAcademico(models.Model):
         # Se obtienen todas las reuniones del alumno para borrarlas.
         reuniones = Reunion.objects.filter(
             dni_pasaporte=self.dni_pasaporte_alumno,
-            curso_academico=self.curso_academico)
-
-        # Si el alumno tenia reuniones se borran.
-        if (reuniones):
-            for reunion in reuniones:
-                reunion.delete()
+            curso_academico=self.curso_academico).delete()
 
         # Se borra el asesor.
         self.delete()

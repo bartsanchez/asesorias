@@ -105,7 +105,7 @@ def delAlumno(request, dni_pasaporte):
     instancia_alumno = obtenerAlumno(dni_pasaporte)
     # Si existe se elimina.
     if instancia_alumno:
-        instancia_alumno.delete()
+        instancia_alumno.borrar()
         # Redirige a la pagina de listar alumnos.
         return HttpResponseRedirect(reverse('listAlumno',
             kwargs={'orden': 'nombre_asesor'}))
