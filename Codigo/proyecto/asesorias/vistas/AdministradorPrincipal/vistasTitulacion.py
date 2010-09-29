@@ -147,6 +147,10 @@ def editTitulacion(request, nombre_centro, nombre_titulacion,
         nombre_titulacion, plan_estudios)
     # Si existe se edita.
     if instancia_titulacion:
+        # Se guarda el anterior dni_pasaporte y curso academico.
+        id_centro_antigua = instancia_titulacion.id_centro_id
+        id_titulacion_antigua = instancia_titulacion.id_titulacion
+
         # Se carga el formulario para la titulacion existente.
         form = forms.TitulacionForm(instance=instancia_titulacion)
         # Se ha modificado el formulario original.
@@ -176,6 +180,8 @@ def editTitulacion(request, nombre_centro, nombre_titulacion,
 
             # Si es valido se guarda.
             if form.is_valid():
+                instancia_titulacion.editar(id_centro_antigua,
+                    id_titulacion_antigua)
                 form.save()
 
                 # Redirige a la pagina de listar titulaciones.

@@ -33,6 +33,41 @@ class Titulacion(models.Model):
         unique_together = (("id_centro", "id_titulacion"),
             ("id_centro", "nombre_titulacion", "plan_estudios"))
 
+    def editar(self, id_centro_antigua, id_titulacion_antigua):
+        # Se obtienen todas las asignaturas de la titulacion para
+        # editarlas.
+        asignaturas = Asignatura.objects.filter(
+            id_centro=id_centro_antigua,
+            id_titulacion=id_titulacion_antigua).update(
+            id_centro=self.id_centro_id,
+            id_titulacion=self.id_titulacion)
+
+        # Se obtienen todas las asignaturasCA de la titulacion para
+        # editarlas.
+        asignaturasCA = AsignaturaCursoAcademico.objects.filter(
+            id_centro=id_centro_antigua,
+            id_titulacion=id_titulacion_antigua).update(
+            id_centro=self.id_centro_id,
+            id_titulacion=self.id_titulacion)
+
+        # Se obtienen todas las matriculas de la titulacion para
+        # editarlas.
+        matriculas = Matricula.objects.filter(
+            id_centro=id_centro_antigua,
+            id_titulacion=id_titulacion_antigua).update(
+            id_centro=self.id_centro_id,
+            id_titulacion=self.id_titulacion)
+
+        # Se obtienen todas las calificaciones de la titulacion para
+        # editarlas.
+        calificaciones = CalificacionConvocatoria.objects.filter(
+            id_centro=id_centro_antigua,
+            id_titulacion=id_titulacion_antigua).update(
+            id_centro=self.id_centro_id,
+            id_titulacion=self.id_titulacion)
+
+        return
+
     def borrar(self):
         # Se obtienen todas las asignaturas de la titulacion para
         # borrarlas.
