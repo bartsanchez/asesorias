@@ -185,7 +185,7 @@ def delAsignaturaCursoAcademico(request, nombre_centro,
         curso_academico)
     # Si existe se elimina.
     if instancia_asignatura_curso_academico:
-        instancia_asignatura_curso_academico.delete()
+        instancia_asignatura_curso_academico.borrar()
         # Redirige a la pagina de listar asignaturas curso academico.
         return HttpResponseRedirect(
             reverse('listAsignaturaCursoAcademico',
