@@ -392,7 +392,7 @@ def selectReunion(request, dni_pasaporte, curso_academico, tipo):
         'dni_pasaporte_alumno': dni_pasaporte,
         'tipo': tipo})
 
-def selectEntrevistaAsesor(request, dni_pasaporte, curso_academico,
+def selectEntrevistaOficial(request, dni_pasaporte, curso_academico,
     id_reunion):
     # Se obtiene el posible alumno_curso_academico.
     instancia_alumno_curso_academico = \
@@ -428,25 +428,24 @@ def selectEntrevistaAsesor(request, dni_pasaporte, curso_academico,
     # Se ha introducido un alumno.
     if request.method == 'POST':
         # Se obtiene el alumno y se valida.
-        form = forms.PlantillaEntrevistaAsesorFormSelect(
-            dni_pasaporte_asesor, curso_academico, request.POST)
+        form = forms.PlantillaEntrevistaOficialFormSelect(request.POST)
 
         # Si es valido se redirige.
         if form.is_valid():
-            entrevista_asesor = request.POST['entrevista_asesor']
+            entrevista_oficial = request.POST['entrevista_oficial']
 
-            # Se crea una instancia de la entrevista de asesor.
-            instancia_entrevista_asesor = \
-                models.PlantillaEntrevistaAsesor.objects.get(
-                pk=entrevista_asesor)
+            # Se crea una instancia de la entrevista oficial.
+            instancia_entrevista_oficial = \
+                models.PlantillaEntrevistaOficial.objects.get(
+                pk=entrevista_oficial)
 
             return HttpResponseRedirect(
-                reverse('selectPreguntaAsesor_Reunion_preguntaAsesor',
+                reverse('selectPreguntaOficial_Reunion_preguntaOficial',
                 kwargs={'dni_pasaporte': dni_pasaporte,
                 'curso_academico': curso_academico,
                 'id_reunion': id_reunion,
-                'id_entrevista_asesor':
-                instancia_entrevista_asesor.id_entrevista_asesor}))
+                'id_entrevista_oficial':
+                instancia_entrevista_oficial.id_entrevista_oficial}))
 
     else:
         form = forms.PlantillaEntrevistaOficialFormSelect()
