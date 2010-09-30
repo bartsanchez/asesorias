@@ -2,6 +2,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias.vistas.AdministradorPrincipal import \
+    vistasAsesor, vistasAsesorCursoAcademico
 from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/Reunion_PreguntaOficial/'
@@ -214,12 +216,12 @@ def selectAsesor(request, tipo):
             asesor = request.POST['asesor']
 
             return HttpResponseRedirect(
-                reverse('selectAsesorCA_Reunion_preguntaAsesor',
+                reverse('selectAsesorCA_Reunion_preguntaOficial',
                 kwargs={'dni_pasaporte': asesor, 'tipo': tipo}))
 
         else:
             return HttpResponseRedirect(
-                reverse('selectAsesor_Reunion_preguntaAsesor',
+                reverse('selectAsesor_Reunion_preguntaOficial',
                 kwargs={'tipo': tipo}))
 
     else:
@@ -228,49 +230,49 @@ def selectAsesor(request, tipo):
     return render_to_response(PATH + 'selectAsesor.html',
         {'user': request.user, 'form': form, 'tipo': tipo})
 
-#def selectAsesorCursoAcademico(request, dni_pasaporte, tipo):
-    ## Se obtiene el posible asesor.
-    #instancia_asesor = vistasAsesor.obtenerAsesor(dni_pasaporte)
+def selectAsesorCursoAcademico(request, dni_pasaporte, tipo):
+    # Se obtiene el posible asesor.
+    instancia_asesor = vistasAsesor.obtenerAsesor(dni_pasaporte)
 
-    ## Se comprueba que exista el asesor.
-    #if not instancia_asesor:
-        #return HttpResponseRedirect(
-            #reverse('selectAsesor_Reunion_preguntaAsesor',
-            #kwargs={'tipo': tipo}))
+    # Se comprueba que exista el asesor.
+    if not instancia_asesor:
+        return HttpResponseRedirect(
+            reverse('selectAsesor_Reunion_preguntaOficial',
+            kwargs={'tipo': tipo}))
 
-    ## Se ha introducido un asesor curso academico.
-    #if request.method == 'POST':
-        ## Se obtiene el alumno curso academico y se valida.
-        #form = forms.AsesorCursoAcademicoFormSelect(dni_pasaporte,
-            #request.POST)
+    # Se ha introducido un asesor curso academico.
+    if request.method == 'POST':
+        # Se obtiene el alumno curso academico y se valida.
+        form = forms.AsesorCursoAcademicoFormSelect(dni_pasaporte,
+            request.POST)
 
-        ## Si es valido se redirige a listar plantillas.
-        #if form.is_valid():
-            #asesor_curso_academico = \
-                #request.POST['asesor_curso_academico']
+        # Si es valido se redirige a listar plantillas.
+        if form.is_valid():
+            asesor_curso_academico = \
+                request.POST['asesor_curso_academico']
 
-            #curso_academico = models.AsesorCursoAcademico.objects.get(
-                #pk=asesor_curso_academico).curso_academico
+            curso_academico = models.AsesorCursoAcademico.objects.get(
+                pk=asesor_curso_academico).curso_academico
 
-            #return HttpResponseRedirect(
-                #reverse('selectAlumno_Reunion_preguntaAsesor',
-                #kwargs={'dni_pasaporte': dni_pasaporte,
-                #'curso_academico': curso_academico,
-                #'tipo': tipo}))
+            return HttpResponseRedirect(
+                reverse('selectAlumno_Reunion_preguntaOficial',
+                kwargs={'dni_pasaporte': dni_pasaporte,
+                'curso_academico': curso_academico,
+                'tipo': tipo}))
 
-        #else:
-            #return HttpResponseRedirect(
-                #reverse('selectAsesorCA_Reunion_preguntaAsesor',
-                #kwargs={'dni_pasaporte': dni_pasaporte,
-                #'tipo': tipo}))
+        else:
+            return HttpResponseRedirect(
+                reverse('selectAsesorCA_Reunion_preguntaOficial',
+                kwargs={'dni_pasaporte': dni_pasaporte,
+                'tipo': tipo}))
 
-    #else:
-        #form = forms.AsesorCursoAcademicoFormSelect(
-            #dni_pasaporte=dni_pasaporte)
+    else:
+        form = forms.AsesorCursoAcademicoFormSelect(
+            dni_pasaporte=dni_pasaporte)
 
-    #return render_to_response(PATH + 'selectAsesorCursoAcademico.html',
-        #{'user': request.user, 'form': form,
-        #'dni_pasaporte': dni_pasaporte, 'tipo': tipo})
+    return render_to_response(PATH + 'selectAsesorCursoAcademico.html',
+        {'user': request.user, 'form': form,
+        'dni_pasaporte': dni_pasaporte, 'tipo': tipo})
 
 #def selectAlumno(request, dni_pasaporte, curso_academico, tipo):
     ## Se obtiene el posible asesor curso academico.
