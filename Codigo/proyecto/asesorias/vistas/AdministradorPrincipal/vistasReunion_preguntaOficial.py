@@ -15,23 +15,21 @@ from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/Reunion_PreguntaOficial/'
 
-## Comprueba si existe una reunion - pregunta de asesor y, de ser asi, la
-## devuelve.
-#def obtenerReunion_preguntaAsesor(dni_pasaporte_alumno, curso_academico,
-    #id_reunion, dni_pasaporte_asesor, id_entrevista_asesor,
-    #id_pregunta_asesor):
-    #try:
-        ## Obtiene la instancia de reunion - pregunta de asesor.
-        #resultado = models.ReunionPreguntaAsesor.objects.get(
-            #dni_pasaporte_alumno=dni_pasaporte_alumno,
-            #curso_academico=curso_academico,
-            #id_reunion=id_reunion,
-            #dni_pasaporte_asesor=dni_pasaporte_asesor,
-            #id_entrevista_asesor=id_entrevista_asesor,
-            #id_pregunta_asesor=id_pregunta_asesor)
-    #except:
-        #resultado = False
-    #return resultado
+# Comprueba si existe una reunion - pregunta oficial y, de ser asi, la
+# devuelve.
+def obtenerReunion_preguntaOficial(dni_pasaporte, curso_academico,
+    id_reunion, id_entrevista_oficial, id_pregunta_oficial):
+    try:
+        # Obtiene la instancia de reunion - pregunta oficial.
+        resultado = models.ReunionPreguntaOficial.objects.get(
+            dni_pasaporte=dni_pasaporte,
+            curso_academico=curso_academico,
+            id_reunion=id_reunion,
+            id_entrevista_oficial=id_entrevista_oficial,
+            id_pregunta_oficial=id_pregunta_oficial)
+    except:
+        resultado = False
+    return resultado
 
 def addReunion_preguntaOficial(request, dni_pasaporte, curso_academico,
     id_reunion, id_entrevista_oficial, id_pregunta_oficial):
@@ -185,29 +183,29 @@ def addReunion_preguntaOficial(request, dni_pasaporte, curso_academico,
         #'id_entrevista_asesor': id_entrevista_asesor,
         #'id_pregunta_asesor': id_pregunta_asesor})
 
-#def delReunion_preguntaAsesor(request, dni_pasaporte_alumno,
-    #curso_academico, id_reunion, dni_pasaporte_asesor,
-    #id_entrevista_asesor, id_pregunta_asesor):
-    ## Se obtiene la instancia de la reunion - pregunta de asesor.
-    #instancia_reunion_preguntaAsesor = obtenerReunion_preguntaAsesor(
-        #dni_pasaporte_alumno, curso_academico, id_reunion,
-        #dni_pasaporte_asesor, id_entrevista_asesor, id_pregunta_asesor)
+def delReunion_preguntaOficial(request, dni_pasaporte_alumno,
+    curso_academico, id_reunion, dni_pasaporte_asesor,
+    id_entrevista_oficial, id_pregunta_oficial):
+    # Se obtiene la instancia de la reunion - pregunta oficial.
+    instancia_reunion_preguntaOficial = obtenerReunion_preguntaOficial(
+        dni_pasaporte_alumno, curso_academico, id_reunion,
+        id_entrevista_oficial, id_pregunta_oficial)
 
-    ## Si existe se elimina.
-    #if instancia_reunion_preguntaAsesor:
-        #instancia_reunion_preguntaAsesor.delete()
-        ## Redirige a la pagina de listar reuniones - preguntas de asesor.
-        #return HttpResponseRedirect(
-            #reverse('listReunion_preguntaAsesor',
-                    #kwargs={'dni_pasaporte': dni_pasaporte_alumno,
-                    #'curso_academico': curso_academico,
-                    #'id_reunion': id_reunion,
-                    #'orden': 'pregunta_asesor'}))
-    ## La reunion - pregunta de asesor no existe.
-    #else:
-        #error = True
-    #return render_to_response(PATH + 'delReunion_preguntaAsesor.html',
-        #{'user': request.user, 'error': error})
+    # Si existe se elimina.
+    if instancia_reunion_preguntaOficial:
+        instancia_reunion_preguntaOficial.delete()
+        # Redirige a la pagina de listar reuniones-preguntas oficiales.
+        return HttpResponseRedirect(
+            reverse('listReunion_preguntaOficial',
+                    kwargs={'dni_pasaporte': dni_pasaporte_alumno,
+                    'curso_academico': curso_academico,
+                    'id_reunion': id_reunion,
+                    'orden': 'pregunta_oficial'}))
+    # La reunion - pregunta oficial no existe.
+    else:
+        error = True
+    return render_to_response(PATH + 'delReunion_preguntaOficial.html',
+        {'user': request.user, 'error': error})
 
 def selectAsesor(request, tipo):
     # Se ha introducido un asesor.

@@ -1,0 +1,15 @@
+{% extends "asesorias/Base/AdministradorPrincipal/reuniones.html" %}
+
+{% block content %}
+
+    <h1>Eliminar reunión - pregunta oficial.</h1>
+
+    {% if error %}
+
+    <p>No existe tal reunión - pregunta oficial.</p>
+
+    <a href="{% url selectAsesor_Reunion_preguntaOficial 'list' %}">Lista de reuniones - preguntas oficiales</a>
+
+    {% endif %}
+
+{% endblock %}
