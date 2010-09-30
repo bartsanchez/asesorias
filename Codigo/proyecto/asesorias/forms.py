@@ -232,6 +232,19 @@ class PreguntaOficialForm(forms.ModelForm):
     class Meta:
         model = models.PreguntaOficial
 
+class PreguntaOficialFormSelect(forms.Form):
+    pregunta_oficial = forms.ModelChoiceField(
+        queryset=models.PreguntaOficial.objects.all())
+
+    # Necesario para actualizar el queryset en tiempo de ejecucion, a
+    # traves del argumento id_entrevista_oficial.
+    def __init__(self, id_entrevista_oficial, *args, **kwargs):
+        super(PreguntaOficialFormSelect, self).__init__(*args, **kwargs)
+        self.fields['pregunta_oficial'].queryset = \
+            models.PreguntaOficial.objects.filter(
+            id_entrevista_oficial=id_entrevista_oficial).order_by(
+            'enunciado')
+
 class ReunionForm(forms.ModelForm):
     class Meta:
         model = models.Reunion
