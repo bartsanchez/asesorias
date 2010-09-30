@@ -17,6 +17,14 @@ urlpatterns = patterns(VISTAS + 'vistasReunion_preguntaOficial',
     url(r'^(?P<dni_pasaporte_alumno>[\s\w]+)/(?P<curso_academico>\d+)/'+
         '(?P<id_reunion>\d+)/(?P<dni_pasaporte_asesor>[\s\w]+)/' +
         '(?P<id_entrevista_oficial>\d+)/(?P<id_pregunta_oficial>\d+)/' +
+        'edit/$',
+
+        'editReunion_preguntaOficial',
+        name='editReunion_preguntaOficial'),
+
+    url(r'^(?P<dni_pasaporte_alumno>[\s\w]+)/(?P<curso_academico>\d+)/'+
+        '(?P<id_reunion>\d+)/(?P<dni_pasaporte_asesor>[\s\w]+)/' +
+        '(?P<id_entrevista_oficial>\d+)/(?P<id_pregunta_oficial>\d+)/' +
         'del/$',
 
         'delReunion_preguntaOficial',
