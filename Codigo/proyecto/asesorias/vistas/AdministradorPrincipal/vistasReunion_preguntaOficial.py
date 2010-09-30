@@ -274,61 +274,61 @@ def selectAsesorCursoAcademico(request, dni_pasaporte, tipo):
         {'user': request.user, 'form': form,
         'dni_pasaporte': dni_pasaporte, 'tipo': tipo})
 
-#def selectAlumno(request, dni_pasaporte, curso_academico, tipo):
-    ## Se obtiene el posible asesor curso academico.
-    #instancia_asesorCA = \
-        #vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
-        #dni_pasaporte, curso_academico)
+def selectAlumno(request, dni_pasaporte, curso_academico, tipo):
+    # Se obtiene el posible asesor curso academico.
+    instancia_asesorCA = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+        dni_pasaporte, curso_academico)
 
-    ## Se comprueba que exista el asesor curso academico.
-    #if not instancia_asesorCA:
-        #return HttpResponseRedirect(
-            #reverse('selectAsesorCA_Reunion_preguntaAsesor',
-            #kwargs={'dni_pasaporte': dni_pasaporte,
-            #'tipo': tipo}))
+    # Se comprueba que exista el asesor curso academico.
+    if not instancia_asesorCA:
+        return HttpResponseRedirect(
+            reverse('selectAsesorCA_Reunion_preguntaOficial',
+            kwargs={'dni_pasaporte': dni_pasaporte,
+            'tipo': tipo}))
 
-    ## Se ha introducido un alumno.
-    #if request.method == 'POST':
+    # Se ha introducido un alumno.
+    if request.method == 'POST':
 
-        ## Se obtiene el alumno y se valida.
-        #form = forms.AlumnosDeAsesorForm(
-            #instancia_asesorCA.codigo_asesorCursoAcademico,
-            #curso_academico, request.POST)
+        # Se obtiene el alumno y se valida.
+        form = forms.AlumnosDeAsesorForm(
+            instancia_asesorCA.codigo_asesorCursoAcademico,
+            curso_academico, request.POST)
 
-        ## Si es valido se redirige a listar alumnos curso academico.
-        #if form.is_valid():
-            #alumno = request.POST['alumno']
+        # Si es valido se redirige a listar alumnos curso academico.
+        if form.is_valid():
+            alumno = request.POST['alumno']
 
-            ## Se crea una instancia del alumno para pasar el nombre de
-            ## alumno por argumento.
-            #instancia_alumnoCA = \
-                #models.AlumnoCursoAcademico.objects.get(pk=alumno)
+            # Se crea una instancia del alumno para pasar el nombre de
+            # alumno por argumento.
+            instancia_alumnoCA = \
+                models.AlumnoCursoAcademico.objects.get(pk=alumno)
 
-            #return HttpResponseRedirect(
-                #reverse('selectReunion_Reunion_preguntaAsesor',
-                #kwargs={'dni_pasaporte':
-                #instancia_alumnoCA.dni_pasaporte_alumno,
-                #'curso_academico': curso_academico,
-                #'tipo': tipo}))
+            return HttpResponseRedirect(
+                reverse('selectReunion_Reunion_preguntaOficial',
+                kwargs={'dni_pasaporte':
+                instancia_alumnoCA.dni_pasaporte_alumno,
+                'curso_academico': curso_academico,
+                'tipo': tipo}))
 
-        #else:
-            #return HttpResponseRedirect(
-                #reverse('selectAlumno_Reunion_preguntaAsesor',
-                #kwargs={'dni_pasaporte': dni_pasaporte,
-                #'curso_academico': curso_academico,
-                #'tipo': tipo}))
+        else:
+            return HttpResponseRedirect(
+                reverse('selectAlumno_Reunion_preguntaOficial',
+                kwargs={'dni_pasaporte': dni_pasaporte,
+                'curso_academico': curso_academico,
+                'tipo': tipo}))
 
-    #else:
-        #form = forms.AlumnosDeAsesorForm(
-            #codigo_asesorCursoAcademico=
-            #instancia_asesorCA.codigo_asesorCursoAcademico,
-            #curso_academico=curso_academico)
+    else:
+        form = forms.AlumnosDeAsesorForm(
+            codigo_asesorCursoAcademico=
+            instancia_asesorCA.codigo_asesorCursoAcademico,
+            curso_academico=curso_academico)
 
-    #return render_to_response(PATH + 'selectAlumno.html',
-        #{'user': request.user, 'form': form,
-        #'dni_pasaporte': dni_pasaporte,
-        #'curso_academico': curso_academico,
-        #'tipo': tipo})
+    return render_to_response(PATH + 'selectAlumno.html',
+        {'user': request.user, 'form': form,
+        'dni_pasaporte': dni_pasaporte,
+        'curso_academico': curso_academico,
+        'tipo': tipo})
 
 #def selectReunion(request, dni_pasaporte, curso_academico, tipo):
     ## Se obtiene el posible alumno_curso_academico.
