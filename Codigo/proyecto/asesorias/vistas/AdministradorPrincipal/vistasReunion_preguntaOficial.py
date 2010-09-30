@@ -513,21 +513,21 @@ def selectPreguntaOficial(request, dni_pasaporte, curso_academico,
 
         # Si es valido se redirige.
         if form.is_valid():
-            pregunta_asesor = request.POST['pregunta_asesor']
+            pregunta_oficial = request.POST['pregunta_oficial']
 
-            # Se crea una instancia de la pregunta de asesor.
-            instancia_pregunta_asesor = \
-                models.PreguntaAsesor.objects.get(
-                pk=pregunta_asesor)
+            # Se crea una instancia de la pregunta oficial.
+            instancia_pregunta_oficial = \
+                models.PreguntaOficial.objects.get(
+                pk=pregunta_oficial)
 
             return HttpResponseRedirect(
-                reverse('addReunion_preguntaAsesor',
+                reverse('addReunion_preguntaOficial',
                 kwargs={'dni_pasaporte': dni_pasaporte,
                 'curso_academico': curso_academico,
                 'id_reunion': id_reunion,
-                'id_entrevista_asesor': id_entrevista_asesor,
-                'id_pregunta_asesor':
-                instancia_pregunta_asesor.id_pregunta_asesor}))
+                'id_entrevista_oficial': id_entrevista_oficial,
+                'id_pregunta_oficial':
+                instancia_pregunta_oficial.id_pregunta_oficial}))
 
     else:
         form = forms.PreguntaOficialFormSelect(
