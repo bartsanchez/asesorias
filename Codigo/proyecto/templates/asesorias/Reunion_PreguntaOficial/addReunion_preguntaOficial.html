@@ -1,0 +1,63 @@
+{% extends "asesorias/Base/AdministradorPrincipal/reuniones.html" %}
+
+{% block content %}
+
+    <h1>Añadir reunión - pregunta oficial.</h1>
+
+    <div class="form">
+        <div><p>Asesor: <b>{{ dni_pasaporte_asesor }}</b> <a href={# url selectAsesor_Reunion_preguntaOficial 'add' #} class="updatelink"></a></p></div>
+        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={# url selectAsesorCA_Reunion_preguntaOficial dni_pasaporte_asesor 'add' #} class="updatelink"></a></p></div>
+        <div><p>Alumno: <b>{{ dni_pasaporte_alumno }}</b> <a href={# url selectAlumno_Reunion_preguntaOficial dni_pasaporte_asesor curso_academico 'add' #} class="updatelink"></a></p></div>
+        <div><p>Reunión: <b>{{ fecha_reunion }}</b> <a href={# url selectReunion_Reunion_preguntaOficial dni_pasaporte_asesor curso_academico 'add' #} class="updatelink"></a></p></div>
+        <div><p>Plantilla de entrevista oficial: <b>{{ id_entrevista_oficial }}</b> <a href={# url selectEntrevistaOficial_Reunion_preguntaOficial dni_pasaporte_alumno curso_academico id_reunion #} class="updatelink"></a></p></div>
+        <div><p>Pregunta oficial: <b>{{ id_pregunta_oficial }}</b> <a href={# url selectEntrevistaOficial_Reunion_preguntaOficial dni_pasaporte_alumno curso_academico id_reunion #} class="updatelink"></a></p></div>
+    </div>
+
+    {% if form.errors %}
+    <div id="form-error">
+        <p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}<li>{{ field.errors|striptags }}</li>{% endif %}
+            {% endfor %}
+            {% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="module">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Añadir reunión.">
+                <caption><h2>Añadir reunión</h2></caption>
+
+                {% for field in form %}
+
+                {# Excluye los campos que forman parte de la clave que se controlarán por software. #}
+                {% ifnotequal field.name 'dni_pasaporte' %}
+                {% ifnotequal field.name 'curso_academico' %}
+                {% ifnotequal field.name 'id_reunion' %}
+                {% ifnotequal field.name 'id_entrevista_oficial' %}
+                {% ifnotequal field.name 'id_pregunta_oficial' %}
+                <tr>
+                    <th scope="row">{{ field.label_tag }}</th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endifnotequal %}
+                {% endifnotequal %}
+                {% endifnotequal %}
+                {% endifnotequal %}
+                {% endifnotequal %}
+
+                {% endfor %}
+                </table>
+            </div>
+
+            <p><input type="submit" value="Confirmar"/></p>
+        </form>
+
+    </div>
+
+{% endblock %}

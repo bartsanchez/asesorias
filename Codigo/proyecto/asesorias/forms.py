@@ -271,6 +271,10 @@ class Reunion_PreguntaAsesorForm(forms.ModelForm):
     class Meta:
         model = models.ReunionPreguntaAsesor
 
+class Reunion_PreguntaOficialForm(forms.ModelForm):
+    class Meta:
+        model = models.ReunionPreguntaOficial
+
 class SearchForm(forms.Form):
     busqueda = forms.CharField(label="Busqueda", max_length=50)
 

@@ -723,3 +723,22 @@ class ReunionPreguntaAsesor(models.Model):
 
     def __unicode__(self):
         return unicode(self.id_pregunta_asesor)
+
+class ReunionPreguntaOficial(models.Model):
+    codigo_reunion_preguntasOficiales = \
+        models.AutoField(primary_key=True)
+    dni_pasaporte = models.CharField(max_length=9)
+    curso_academico = models.IntegerField()
+    id_reunion = models.IntegerField()
+    id_entrevista_oficial = models.IntegerField()
+    id_pregunta_oficial = models.IntegerField()
+    respuesta = models.CharField(max_length=150)
+
+    class Meta:
+        db_table = "ReunionPreguntaOficial"
+        unique_together = ("dni_pasaporte", "curso_academico",
+            "id_reunion", "id_entrevista_oficial",
+            "id_pregunta_oficial")
+
+    def __unicode__(self):
+        return unicode(self.id_pregunta_oficial)

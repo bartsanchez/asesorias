@@ -7,6 +7,13 @@ VISTAS = 'asesorias.vistas.AdministradorPrincipal.'
 # ----------------------------------- #
 
 urlpatterns = patterns(VISTAS + 'vistasReunion_preguntaOficial',
+    url(r'^add/(?P<dni_pasaporte>[\s\w]+)/(?P<curso_academico>\d+)/' +
+        '(?P<id_reunion>\d+)/(?P<id_entrevista_oficial>\d+)/' +
+        '(?P<id_pregunta_oficial>\d+)/$',
+
+        'addReunion_preguntaOficial',
+        name='addReunion_preguntaOficial'),
+
     url(r'^selectAsesor/(?P<tipo>[\s\w]+)/$',
         'selectAsesor', name='selectAsesor_Reunion_preguntaOficial'),
 
