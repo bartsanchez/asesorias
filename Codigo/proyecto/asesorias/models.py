@@ -673,6 +673,10 @@ class Reunion(models.Model):
             dni_pasaporte_alumno=self.dni_pasaporte,
             curso_academico=self.curso_academico).delete()
 
+        reuniones = ReunionPreguntaOficial.objects.filter(
+            dni_pasaporte=self.dni_pasaporte,
+            curso_academico=self.curso_academico).delete()
+
         # Se borra el asesor.
         self.delete()
         return
