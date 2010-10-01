@@ -480,7 +480,7 @@ class AlumnoCursoAcademico(models.Model):
     codigo_alumnoCursoAcademico = models.AutoField(primary_key=True)
     dni_pasaporte_alumno = models.ForeignKey('Alumno',
         db_column='dni_pasaporte')
-    curso_academico = models.IntegerField()
+    curso_academico = models.IntegerField("Curso académico")
     observaciones = models.CharField(max_length=100)
     codigo_asesorCursoAcademico = models.ForeignKey(
         'AsesorCursoAcademico', db_column='dni_pasaporte_asesor')
