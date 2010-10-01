@@ -731,12 +731,14 @@ class CentroAdministradorCentro(models.Model):
 class ReunionPreguntaAsesor(models.Model):
     codigo_reunion_preguntasAsesores = \
         models.AutoField(primary_key=True)
-    dni_pasaporte_alumno = models.CharField(max_length=9)
-    curso_academico = models.IntegerField()
+    dni_pasaporte_alumno = models.CharField("DNI/Pasaporte",
+        max_length=9)
+    curso_academico = models.IntegerField("Curso académico")
     id_reunion = models.IntegerField()
-    dni_pasaporte_asesor = models.CharField(max_length=9)
-    id_entrevista_asesor = models.IntegerField()
-    id_pregunta_asesor = models.IntegerField()
+    dni_pasaporte_asesor = models.CharField("DNI/Pasaporte Asesor",
+        max_length=9)
+    id_entrevista_asesor = models.IntegerField("Entrevista asesor")
+    id_pregunta_asesor = models.IntegerField("Pregunta asesor")
     respuesta = models.CharField(max_length=150)
 
     class Meta:
