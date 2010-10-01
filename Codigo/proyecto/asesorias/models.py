@@ -285,8 +285,9 @@ class AsignaturaCursoAcademico(models.Model):
 
 class Departamento(models.Model):
     id_departamento = models.AutoField(primary_key=True)
-    nombre_departamento = models.CharField(max_length=25, unique=True)
-    telefono = models.IntegerField()
+    nombre_departamento = models.CharField("Departamento",
+        max_length=25, unique=True)
+    telefono = models.IntegerField("Teléfono")
 
     class Meta:
         db_table = "Departamentos"
