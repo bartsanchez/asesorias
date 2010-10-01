@@ -7,7 +7,7 @@
                 <li><a href="{% url asesor_plantillas curso_academico %}" {% block opcion_plantillas %}{% endblock %}>Plantillas</a></li>
     {% endblock %}
 
-    {% block curso_academico %}<h3><a href='#'>{{ curso_academico }}/{{ curso_academico|add:'1' }}</a></h3>{% endblock %}
+    {% block curso_academico %}<h3><a href="{% url setCursoAcademico_Asesor curso_academico %}">{{ curso_academico }}/{{ curso_academico|add:'1' }}</a></h3>{% endblock %}
 
     {% block elementos_sidebar %}
                             <ul>

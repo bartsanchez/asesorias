@@ -3,6 +3,7 @@
 
 from django import forms
 from asesorias import models
+from datetime import date
 
 CHOICES = [('administradorPrincipal', 'Administrador principal'),
     ('administradorCentro','Administrador de centro'),
@@ -277,6 +278,10 @@ class Reunion_PreguntaOficialForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     busqueda = forms.CharField(label="Busqueda", max_length=50)
+
+class CursoAcademicoFormSelect(forms.Form):
+    curso_academico = forms.IntegerField(min_value=1900,
+        max_value=date.today().year)
 
 class ModificarClaveForm(forms.Form):
     old_password = forms.CharField(label="Antigua contraseña",
