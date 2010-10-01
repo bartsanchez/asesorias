@@ -43,10 +43,11 @@ class AdministradorCentro(models.Model):
 
 class Titulacion(models.Model):
     codigo_titulacion = models.AutoField(primary_key=True)
-    id_centro = models.ForeignKey('Centro', db_column='id_centro')
+    id_centro = models.ForeignKey('Centro', db_column='id_centro',
+        verbose_name="Centro")
     id_titulacion = models.IntegerField()
-    nombre_titulacion = models.CharField(max_length=100)
-    plan_estudios = models.IntegerField()
+    nombre_titulacion = models.CharField("Titulación", max_length=100)
+    plan_estudios = models.IntegerField("Plan de estudios")
 
     class Meta:
         db_table = "Titulaciones"
