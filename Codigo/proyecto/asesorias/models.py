@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from django.db import models
 
 # Create your models here.
@@ -434,20 +437,24 @@ class PreguntaAsesor(models.Model):
         return unicode(self.enunciado)
 
 class Alumno(models.Model):
-    dni_pasaporte = models.CharField(primary_key=True, max_length=9)
-    correo_electronico = models.EmailField(unique=True)
+    dni_pasaporte = models.CharField("DNI/Pasaporte", primary_key=True,
+        max_length=9)
+    correo_electronico = models.EmailField("Correo electrónico",
+        unique=True)
     nombre = models.CharField(max_length=50)
     apellidos = models.CharField(max_length=100)
-    fecha_nacimiento = models.DateField()
-    direccion_cordoba = models.CharField(max_length=100)
+    fecha_nacimiento = models.DateField("Fecha de nacimiento")
+    direccion_cordoba = models.CharField("Dirección en Córdoba",
+        max_length=100)
     localidad_familiar = models.CharField(max_length=50)
     provincia_familiar = models.CharField(max_length=50)
-    codigo_postal = models.CharField(max_length=7)
-    telefono_familiar = models.IntegerField()
+    codigo_postal = models.CharField("Código postal", max_length=7)
+    telefono_familiar = models.IntegerField("Teléfono familiar")
     ingreso = models.IntegerField()
     otros_estudios_universitarios = models.CharField(max_length=50)
-    modalidad_acceso_universidad = models.CharField(max_length=50)
-    calificacion_acceso = models.FloatField()
+    modalidad_acceso_universidad = models.CharField(
+        "Modalidad de acceso a la universidad", max_length=50)
+    calificacion_acceso = models.FloatField("Calificación de acceso")
 
     class Meta:
         db_table = "Alumnos"
