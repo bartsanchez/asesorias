@@ -294,11 +294,13 @@ class Departamento(models.Model):
         return self.nombre_departamento
 
 class Asesor(models.Model):
-    dni_pasaporte = models.CharField(primary_key=True, max_length=9)
-    correo_electronico = models.EmailField(unique=True)
+    dni_pasaporte = models.CharField("DNI/Pasaporte", primary_key=True,
+        max_length=9)
+    correo_electronico = models.EmailField("Correo electrónico",
+        unique=True)
     nombre = models.CharField(max_length=50)
     apellidos = models.CharField(max_length=100)
-    telefono = models.IntegerField()
+    telefono = models.IntegerField("Teléfono")
 
     class Meta:
         db_table = "Asesores"
