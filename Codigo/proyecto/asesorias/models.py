@@ -124,11 +124,11 @@ class Asignatura(models.Model):
     id_centro = models.IntegerField()
     id_titulacion = models.IntegerField()
     id_asignatura = models.IntegerField()
-    nombre_asignatura = models.CharField(max_length=50)
+    nombre_asignatura = models.CharField("Asignatura", max_length=50)
     curso = models.IntegerField()
     tipo = models.CharField(max_length=3, choices=TIPOS_ASIGNATURAS)
-    nCreditosTeoricos = models.FloatField()
-    nCreditosPracticos = models.FloatField()
+    nCreditosTeoricos = models.FloatField("Nº de créditos teóricos")
+    nCreditosPracticos = models.FloatField("Nº de créditos prácticos")
 
     class Meta:
         db_table = "Asignaturas"
