@@ -426,12 +426,13 @@ class PlantillaEntrevistaAsesor(models.Model):
 
 class PreguntaAsesor(models.Model):
     codigo_preguntaAsesor = models.AutoField(primary_key=True)
-    dni_pasaporte = models.CharField(max_length=9)
-    curso_academico = models.IntegerField()
-    id_entrevista_asesor = models.IntegerField()
-    id_pregunta_asesor = models.IntegerField()
+    dni_pasaporte = models.CharField("DNI/Pasaporte", max_length=9)
+    curso_academico = models.IntegerField("Curso académico")
+    id_entrevista_asesor = models.IntegerField("Entrevista asesor")
+    id_pregunta_asesor = models.IntegerField("Pregunta asesor")
     enunciado = models.CharField(max_length=150)
-    ultima_modificacion = models.DateField(auto_now=True)
+    ultima_modificacion = models.DateField("Última modificación",
+        auto_now=True)
 
     class Meta:
         db_table = "PreguntasAsesores"
