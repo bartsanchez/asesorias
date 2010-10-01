@@ -205,7 +205,7 @@ class AsignaturaCursoAcademico(models.Model):
     id_centro = models.IntegerField()
     id_titulacion = models.IntegerField()
     id_asignatura = models.IntegerField()
-    curso_academico = models.IntegerField()
+    curso_academico = models.IntegerField("Curso académico")
 
     class Meta:
         db_table = "AsignaturasCursoAcademico"
