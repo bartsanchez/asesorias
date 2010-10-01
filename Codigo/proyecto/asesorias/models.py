@@ -672,8 +672,8 @@ class Reunion(models.Model):
     )
 
     codigo_reunion = models.AutoField(primary_key=True)
-    dni_pasaporte = models.CharField(max_length=9)
-    curso_academico = models.IntegerField()
+    dni_pasaporte = models.CharField("DNI/Pasaporte", max_length=9)
+    curso_academico = models.IntegerField("Curso académico")
     id_reunion = models.IntegerField()
     fecha = models.DateField()
     tipo = models.CharField(max_length=3, choices=TIPOS_REUNION)
