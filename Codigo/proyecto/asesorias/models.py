@@ -699,9 +699,11 @@ class Reunion(models.Model):
 class CentroAdministradorCentro(models.Model):
     codigo_centro_administradorCentro = \
         models.AutoField(primary_key=True)
-    id_centro = models.ForeignKey('Centro', db_column='id_centro')
+    id_centro = models.ForeignKey('Centro', db_column='id_centro',
+        verbose_name="Centro")
     id_adm_centro = models.ForeignKey('AdministradorCentro',
-        db_column='id_adm_centro')
+        db_column='id_adm_centro',
+        verbose_name="Administrador de centro")
 
     class Meta:
         db_table = "CentroAdministradorCentro"
