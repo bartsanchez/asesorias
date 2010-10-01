@@ -731,7 +731,7 @@ class CentroAdministradorCentro(models.Model):
 class ReunionPreguntaAsesor(models.Model):
     codigo_reunion_preguntasAsesores = \
         models.AutoField(primary_key=True)
-    dni_pasaporte_alumno = models.CharField("DNI/Pasaporte",
+    dni_pasaporte_alumno = models.CharField("DNI/Pasaporte Alumno",
         max_length=9)
     curso_academico = models.IntegerField("Curso académico")
     id_reunion = models.IntegerField()
@@ -753,11 +753,11 @@ class ReunionPreguntaAsesor(models.Model):
 class ReunionPreguntaOficial(models.Model):
     codigo_reunion_preguntasOficiales = \
         models.AutoField(primary_key=True)
-    dni_pasaporte = models.CharField(max_length=9)
-    curso_academico = models.IntegerField()
+    dni_pasaporte = models.CharField("DNI/Pasaporte", max_length=9)
+    curso_academico = models.IntegerField("Curso académico")
     id_reunion = models.IntegerField()
-    id_entrevista_oficial = models.IntegerField()
-    id_pregunta_oficial = models.IntegerField()
+    id_entrevista_oficial = models.IntegerField("Entrevista oficial")
+    id_pregunta_oficial = models.IntegerField("Pregunta oficial")
     respuesta = models.CharField(max_length=150)
 
     class Meta:
