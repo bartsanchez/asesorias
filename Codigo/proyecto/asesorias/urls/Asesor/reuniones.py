@@ -7,5 +7,6 @@ VISTAS = 'asesorias.vistas.Asesor.'
 # ------------------------#
 
 urlpatterns = patterns(VISTAS + 'vistasReuniones',
-
+    url(r'^listReunion/(?P<orden>[\s\w]*)/$',
+        'listReunion', name='listReunion_Asesor'),
 )

@@ -39,4 +39,7 @@ urlpatterns = patterns(VISTAS + 'vistasAsesor',
 
     (r'^plantillas/',
         include(URLS + 'plantillas')),
+
+    (r'^reuniones/',
+        include(URLS + 'reuniones')),
 )
