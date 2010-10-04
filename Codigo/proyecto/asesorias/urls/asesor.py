@@ -23,6 +23,9 @@ urlpatterns = patterns(VISTAS + 'vistasAsesor',
     url(r'^plantillas/$', 'asesor_plantillas',
         name='asesor_plantillas'),
 
+    url(r'^reuniones/$', 'asesor_reuniones',
+        name='asesor_reuniones'),
+
     url(r'^establecerCursoAcademico/$', 'setCursoAcademico',
         name='setCursoAcademico_Asesor'),
 

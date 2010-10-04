@@ -30,6 +30,12 @@ def asesor_plantillas(request, curso_academico):
         {'user': request.user, 'curso_academico': curso_academico})
 
 @login_required()
+def asesor_reuniones(request, curso_academico):
+    return render_to_response(
+        PATH + 'asesor_reuniones.html',
+        {'user': request.user, 'curso_academico': curso_academico})
+
+@login_required()
 def setCursoAcademico(request, curso_academico):
     # Se ha modificado el formulario original.
     if request.method == 'POST':

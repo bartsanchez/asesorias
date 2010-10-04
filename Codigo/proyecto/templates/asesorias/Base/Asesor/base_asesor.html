@@ -5,6 +5,7 @@
                 <li><a href="{% url asesor_informacion_personal curso_academico %}" {% block opcion_informacion_personal %}{% endblock %}>Información personal</a></li>
                 <li><a href="{% url asesor_alumnos curso_academico %}" {% block opcion_alumnos %}{% endblock %}>Alumnos</a></li>
                 <li><a href="{% url asesor_plantillas curso_academico %}" {% block opcion_plantillas %}{% endblock %}>Plantillas</a></li>
+                <li><a href="{% url asesor_reuniones curso_academico %}" {% block opcion_reuniones %}{% endblock %}>Reuniones</a></li>
     {% endblock %}
 
     {% block curso_academico %}<h3><a href="{% url setCursoAcademico_Asesor curso_academico %}">{{ curso_academico }}/{{ curso_academico|add:'1' }}</a></h3>{% endblock %}
@@ -21,6 +22,10 @@
 
                                 <li><h3><a href="{% url asesor_plantillas curso_academico %}">Plantillas</a></h3>
                                     {% block plantillas %}{% endblock %}
+                                </li>
+
+                                <li><h3><a href="{% url asesor_reuniones curso_academico %}">Reuniones</a></h3>
+                                    {% block reuniones %}{% endblock %}
                                 </li>
                             </ul>
     {% endblock %}
