@@ -47,19 +47,18 @@ def listReunion(request, curso_academico, orden):
 
             # Se recorren los elementos determinando si coinciden
             # con la busqueda.
-            for alumno in lista_alumnosCA:
+            for reunion in lista_reuniones:
                 # Se crea una cadena auxiliar para examinar si se
                 # encuentra el resultado de la busqueda.
-                cadena = (unicode(alumno.dni_pasaporte_alumno.nombre) +
-                    unicode(alumno.dni_pasaporte_alumno.apellidos))
+                cadena = unicode(reunion.fecha)
 
                 # Si se encuentra la busqueda el elemento se incluye
                 # en la lista auxiliar.
                 if cadena.find(busqueda) >= 0:
-                    lista_aux.append(alumno)
+                    lista_aux.append(reunion)
 
             # La lista final a devolver sera la lista auxiliar.
-            lista_alumnosCA = lista_aux
+            lista_reuniones = lista_aux
 
         else:
             busqueda = False
