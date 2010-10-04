@@ -68,11 +68,11 @@ def determinarCursoAcademico():
     today = date.today()
 
     # Comprueba si ha llegado septiembre para devolver un curso
-    # academico o el siguiente.
-    if (today.month < 9):
+    # academico o el anterior.
+    if (today.month > 8):
         curso_academico = today.year
     else:
-        curso_academico = (today.year + 1)
+        curso_academico = (today.year - 1)
 
     return curso_academico
 
