@@ -153,7 +153,8 @@ def showAlumno(request, curso_academico, dni_pasaporte):
         # alumno.
         lista_matriculas_historica = models.Matricula.objects.filter(
             dni_pasaporte=dni_pasaporte,
-            curso_academico__lt=curso_academico).order_by('curso_academico')
+            curso_academico__lt=curso_academico).order_by(
+            'curso_academico')
     # El alumno no existe.
     else:
         form = False
