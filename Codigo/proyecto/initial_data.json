@@ -846,5 +846,22 @@
       "password": "sha1$72a28$05e5d9318fda352f64533e5fc6803f8ac563ea99",
       "email": "alumno@alumno.com",
       "date_joined": "2010-10-05 12:33:29"
+    },
+    {
+    "pk": 4,
+    "model": "auth.user",
+    "fields": {
+      "username": "nicolas",
+      "first_name": "",
+      "last_name": "",
+      "is_active": true,
+      "is_superuser": false,
+      "is_staff": false,
+      "last_login": "2010-10-05 23:07:38",
+      "groups": [],
+      "user_permissions": [],
+      "password": "sha1$746f4$3824ea6afa518ef499c7f813791de006df99cc5b",
+      "email": "",
+      "date_joined": "2010-10-05 23:07:38"
     }
 ]
