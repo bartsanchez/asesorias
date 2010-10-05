@@ -2,11 +2,11 @@
 
     {% block menu %}
                 <li><a href="{% url administradorCentro_inicio %}" {% block opcion_inicio %}{% endblock %}>Inicio</a></li>
-                <li><a href="{% url administrador_org_institucional %}" {% block opcion_org_institucional %}{% endblock %}>Organización institucional</a></li>
-                <li><a href="{% url administrador_org_docente %}" {% block opcion_org_docente %}{% endblock %}>Organización docente</a></li>
-                <li><a href="{% url administrador_alumnos %}" {% block opcion_alumnos %}{% endblock %}>Alumnos</a></li>
-                <li><a href="{% url administrador_reuniones %}" {% block opcion_reuniones %}{% endblock %}>Reuniones</a></li>
-                <li><a href="{% url administrador_plantillas %}" {% block opcion_plantillas %}{% endblock %}>Plantillas de entrevista</a></li>
+                <li><a href="{% url administradorCentro_org_institucional %}" {% block opcion_org_institucional %}{% endblock %}>Organización institucional</a></li>
+                <li><a href="{% url administradorCentro_org_docente %}" {% block opcion_org_docente %}{% endblock %}>Organización docente</a></li>
+                <li><a href="{% url administradorCentro_alumnos %}" {% block opcion_alumnos %}{% endblock %}>Alumnos</a></li>
+                <li><a href="{% url administradorCentro_reuniones %}" {% block opcion_reuniones %}{% endblock %}>Reuniones</a></li>
+                <li><a href="{% url administradorCentro_plantillas %}" {% block opcion_plantillas %}{% endblock %}>Plantillas de entrevista</a></li>
     {% endblock %}
 
     {% block elementos_sidebar %}

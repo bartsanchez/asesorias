@@ -1,0 +1,31 @@
+{% extends "asesorias/Base/AdministradorCentro/reuniones.html" %}
+
+    {% block content %}
+            <h1>Administrador de centro</h1>
+
+            <div class="module">
+                <table summary="Administración de reuniones.">
+                <caption><h2>Reuniones</h2></caption>
+
+                <!-- Reuniones. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsesor_Reunion 'list' %}">Reuniones</a></th>
+                    <td><a href="{% url selectAsesor_Reunion 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Reuniones - Preguntas de asesor. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsesor_Reunion_preguntaAsesor 'list' %}">Reuniones - Preguntas de asesor</a></th>
+                    <td><a href="{% url selectAsesor_Reunion_preguntaAsesor 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Reuniones - Preguntas oficiales. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsesor_Reunion_preguntaOficial 'list' %}">Reuniones - Preguntas oficiales</a></th>
+                    <td><a href="{% url selectAsesor_Reunion_preguntaOficial 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                </table>
+            </div>
+
+    {% endblock %}

@@ -1,0 +1,13 @@
+{% extends "asesorias/Base/AdministradorCentro/base_administrador_centro.html" %}
+
+    <!-- Determina el elemento activo en el menú horizontal -->
+    {% block opcion_plantillas %}class="active"{% endblock %}
+
+    {% block plantillas %}
+                                    <ul>
+                                        <li><a href="{% url listPlantillaEntrevistaOficial 'descripcion' %}">Plantillas de entrevista oficiales</a></li>
+                                        <li><a href="{% url selectEntrevistaOficial_PreguntaOficial %}">Preguntas oficiales</a></li>
+                                        <li><a href="{% url selectAsesor_PlantillaEntrevistaAsesor 'list' %}">Plantillas de entrevista de asesor</a></li>
+                                        <li><a href="{% url selectAsesor_PreguntaAsesor 'list' %}">Preguntas de asesor</a></li>
+                                    </ul>
+    {% endblock %}

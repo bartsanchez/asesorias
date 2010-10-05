@@ -1,0 +1,37 @@
+{% extends "asesorias/Base/AdministradorCentro/alumnos.html" %}
+
+    {% block content %}
+            <h1>Administrador de centro</h1>
+
+            <div class="module">
+                <table summary="Administración de alumnos.">
+                <caption><h2>Alumnos</h2></caption>
+
+                <!-- Alumnos. -->
+                <tr>
+                    <th scope="row"><a href="{% url listAlumno 'dni_pasaporte' %}">Alumnos</a></th>
+                    <td><a href="{% url addAlumno %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Alumnos Curso Académico. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsesor_AlumnoCursoAcademico 'list' %}">Alumnos Curso Académico</a></th>
+                    <td><a href="{% url selectAsesor_AlumnoCursoAcademico 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Matrículas. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsignaturaOAlumnoCursoAcademico %}">Matrículas</a></th>
+                    <td><a href="{% url selectCentro_Matricula 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Calificaciones Convocatoria. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectCentro_CalificacionConvocatoria 'list' %}">Calificaciones Convocatoria</a></th>
+                    <td><a href="{% url selectCentro_CalificacionConvocatoria 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                </table>
+            </div>
+
+    {% endblock %}

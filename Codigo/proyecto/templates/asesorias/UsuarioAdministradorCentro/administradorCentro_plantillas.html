@@ -1,0 +1,37 @@
+{% extends "asesorias/Base/AdministradorCentro/plantillas.html" %}
+
+    {% block content %}
+            <h1>Administrador de centro</h1>
+
+            <div class="module">
+                <table summary="Administración de plantillas.">
+                <caption><h2>Plantillas de entrevista</h2></caption>
+
+                <!-- Plantillas de entrevista oficiales. -->
+                <tr>
+                    <th scope="row"><a href="{% url listPlantillaEntrevistaOficial 'descripcion' %}">Plantillas de entrevista oficiales</a></th>
+                    <td><a href="{% url addPlantillaEntrevistaOficial %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Preguntas oficiales. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectEntrevistaOficial_PreguntaOficial %}">Preguntas oficiales</a></th>
+                    <td><a href="{% url addPreguntaOficial '' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Plantillas de entrevista de asesor. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsesor_PlantillaEntrevistaAsesor 'list' %}">Plantillas de entrevista de asesor</a></th>
+                    <td><a href="{% url selectAsesor_PlantillaEntrevistaAsesor 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Preguntas de asesor. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsesor_PreguntaAsesor 'list' %}">Preguntas de asesor</a></th>
+                    <td><a href="{% url selectAsesor_PreguntaAsesor 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                </table>
+            </div>
+
+    {% endblock %}
