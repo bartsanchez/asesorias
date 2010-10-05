@@ -13,19 +13,19 @@
 
     {% block elementos_sidebar %}
                             <ul>
-                                <li><h3><a href="{% url administrador_org_institucional %}">Organización institucional</a></h3>
+                                <li><h3><a href="{% url administradorCentro_org_institucional centro %}">Organización institucional</a></h3>
                                     {% block org_institucional %}{% endblock %}
                                 </li>
-                                <li><h3><a href="{% url administrador_org_docente %}">Organización docente</a></h3>
+                                <li><h3><a href="{% url administradorCentro_org_docente centro %}">Organización docente</a></h3>
                                     {% block org_docente %}{% endblock %}
                                 </li>
-                                <li><h3><a href="{% url administrador_alumnos %}">Alumnos</a></h3>
+                                <li><h3><a href="{% url administradorCentro_alumnos centro %}">Alumnos</a></h3>
                                     {% block alumnos %}{% endblock %}
                                 </li>
-                                <li><h3><a href="{% url administrador_reuniones %}">Reuniones</a></h3>
+                                <li><h3><a href="{% url administradorCentro_reuniones centro %}">Reuniones</a></h3>
                                     {% block reuniones %}{% endblock %}
                                 </li>
-                                <li><h3><a href="{% url administrador_plantillas %}">Plantillas de entrevista</a></h3>
+                                <li><h3><a href="{% url administradorCentro_plantillas centro %}">Plantillas de entrevista</a></h3>
                                     {% block plantillas %}{% endblock %}
                                 </li>
                             </ul>

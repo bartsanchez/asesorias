@@ -10,8 +10,8 @@
 
                 <!-- Titulaciones. -->
                 <tr>
-                    <th scope="row"><a href="{% url selectCentro_Titulacion %}">Titulaciones</a></th>
-                    <td><a href="{% url addTitulacion '' %}" class="addlink">Añadir</a></td>
+                    <th scope="row"><a href="{% url listTitulacion_administradorCentro centro 'nombre_centro' %}">Titulaciones</a></th>
+                    <td><a href="{% url addTitulacion_administradorCentro centro %}" class="addlink">Añadir</a></td>
                 </tr>
 
                 <!-- Asignaturas. -->

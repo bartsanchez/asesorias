@@ -97,7 +97,8 @@ def addTitulacion(request, centro):
         # El centro no existe, se redirige.
         if not (instancia_centro):
             return HttpResponseRedirect(
-                reverse('selectCentro_Titulacion'))
+                reverse('administradorCentro_inicio',
+                kwargs={'centro': centro}))
 
         id_centro = instancia_centro.id_centro
     # No se ha introducido un centro para la titulacion.
@@ -107,7 +108,6 @@ def addTitulacion(request, centro):
     # Se ha rellenado el formulario.
     if request.method == 'POST':
         # Se extraen los valores pasados por el metodo POST.
-        id_centro = request.POST['id_centro']
         nombre_titulacion = request.POST['nombre_titulacion']
         plan_estudios = request.POST['plan_estudios']
 
@@ -131,14 +131,15 @@ def addTitulacion(request, centro):
             form.save()
 
             # Redirige a la pagina de listar titulaciones.
-            return HttpResponseRedirect(reverse('listTitulacion',
+            return HttpResponseRedirect(reverse(
+                'listTitulacion_administradorCentro',
                 kwargs={'centro': instancia_centro.nombre_centro,
                 'orden': 'nombre_titulacion' }) )
     # Si aun no se ha rellenado el formulario, se genera uno en blanco.
     else:
-        form = forms.TitulacionForm(initial={'id_centro': id_centro})
+        form = forms.TitulacionForm()
     return render_to_response(PATH + 'addTitulacion.html',
-        {'user': request.user, 'form': form})
+        {'user': request.user, 'form': form, 'centro': centro})
 
 def editTitulacion(request, centro, nombre_titulacion,
     plan_estudios):
@@ -185,7 +186,8 @@ def editTitulacion(request, centro, nombre_titulacion,
                 form.save()
 
                 # Redirige a la pagina de listar titulaciones.
-                return HttpResponseRedirect(reverse('listTitulacion',
+                return HttpResponseRedirect(reverse(
+                    'listTitulacion_administradorCentro',
                     kwargs={'centro':
                     instancia_centro.nombre_centro,
                     'orden': 'nombre_centro'}))
@@ -193,7 +195,7 @@ def editTitulacion(request, centro, nombre_titulacion,
     else:
         form = False
     return render_to_response(PATH + 'editTitulacion.html',
-        {'user': request.user, 'form': form})
+        {'user': request.user, 'form': form, 'centro': centro})
 
 def delTitulacion(request, centro, nombre_titulacion,
     plan_estudios):
@@ -204,14 +206,15 @@ def delTitulacion(request, centro, nombre_titulacion,
     if instancia_titulacion:
         instancia_titulacion.borrar()
         # Redirige a la pagina de listar titulaciones.
-        return HttpResponseRedirect(reverse('listTitulacion',
+        return HttpResponseRedirect(reverse(
+            'listTitulacion_administradorCentro',
             kwargs={'centro': centro,
             'orden': 'nombre_centro'}))
     # La titulacion no existe.
     else:
         error = True
     return render_to_response(PATH + 'delTitulacion.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'error': error, 'centro': centro})
 
 def listTitulacion(request, centro, orden):
     # Se comprueba que exista el centro pasado por argumento.
@@ -219,7 +222,9 @@ def listTitulacion(request, centro, orden):
 
     # El centro no existe, se redirige.
     if not (instancia_centro):
-        return HttpResponseRedirect(reverse('selectCentro_Titulacion'))
+        return HttpResponseRedirect(
+            reverse('administradorCentro_inicio',
+            kwargs={'centro': centro}))
 
     # Se establece el ordenamiento inicial.
     if (orden == 'plan_estudios') or (orden == '_plan_estudios'):
@@ -285,8 +290,9 @@ def generarPDFListaTitulaciones(request, centro, busqueda):
 
     # El centro no existe, se redirige.
     if not (instancia_centro):
-        return HttpResponseRedirect(reverse('selectCentro_Titulacion'))
-
+        return HttpResponseRedirect(
+            reverse('administradorCentro_inicio',
+            kwargs={'centro': centro}))
     # Se obtiene una lista con todos las titulaciones.
     lista_titulaciones = models.Titulacion.objects.filter(
         id_centro=instancia_centro.id_centro).order_by(
