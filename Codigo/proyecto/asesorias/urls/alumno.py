@@ -18,6 +18,9 @@ urlpatterns = patterns(VISTAS + 'vistasAlumno',
         'alumno_informacion_personal',
         name='alumno_informacion_personal'),
 
+    url(r'^establecerCursoAcademico/$', 'setCursoAcademico',
+        name='setCursoAcademico_Alumno'),
+
     ### Includes a cada entidad ###
 
     (r'^info/',
