@@ -701,7 +701,7 @@ class Reunion(models.Model):
         return
 
     def __unicode__(self):
-        return unicode(self.fecha)
+        return unicode(self.fecha.strftime('%d/%m/%Y'))
 
 class CentroAdministradorCentro(models.Model):
     codigo_centro_administradorCentro = \
