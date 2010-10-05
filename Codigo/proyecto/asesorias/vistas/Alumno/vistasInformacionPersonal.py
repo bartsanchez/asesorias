@@ -64,7 +64,8 @@ def showInfo(request, curso_academico):
                 form.save()
                 # Redirige a la pagina de listar alumnos.
                 return HttpResponseRedirect(
-                    reverse('alumno_informacion_personal'))
+                    reverse('alumno_informacion_personal',
+                    kwargs={'curso_academico': curso_academico}))
     # El alumno no existe.
     else:
         form = False
@@ -82,14 +83,22 @@ def modificarClave(request, curso_academico):
         if form.is_valid():
             antigua_clave = request.POST['old_password']
             nueva_clave = request.POST['new_password']
+            nueva_clave2 = request.POST['new_password2']
 
             # Se comprueba que la clave actual sea correcta.
             if (user.check_password(antigua_clave)):
-                user.set_password(nueva_clave)
-                user.save()
 
-                return HttpResponseRedirect(
-                            reverse('asesor_inicio'))
+                # Comprueba que haya insertado dos veces la misma nueva
+                # clave.
+                if (nueva_clave == nueva_clave2):
+                    user.set_password(nueva_clave)
+                    user.save()
+
+                    return HttpResponseRedirect(
+                        reverse('alumno_inicio',
+                        kwargs={'curso_academico': curso_academico}))
+                else:
+                    error = True
             else:
                 error = True
 
