@@ -5,7 +5,7 @@
 
     {% block org_institucional %}
                                     <ul>
-                                        <li><a href="{% url selectCentro_Titulacion %}">Titulaciones</a></li>
+                                        <li><a href="{% url listTitulacion_administradorCentro centro 'nombre_centro' %}">Titulaciones</a></li>
                                         <li><a href="{% url selectCentro_Asignatura 'list' %}">Asignaturas</a></li>
                                         <li><a href="{% url selectCentro_AsignaturaCursoAcademico 'list' %}">Asignaturas Curso Académico</a></li>
                                     </ul>
