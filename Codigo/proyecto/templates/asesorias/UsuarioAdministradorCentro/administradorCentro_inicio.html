@@ -1,0 +1,163 @@
+{% extends "asesorias/Base/AdministradorCentro/inicio.html" %}
+
+    {% block content %}
+            <h1>Administrador de centro</h1>
+
+
+            <div class="module">
+                <table summary="Administración de centros.">
+                <caption><h2>Organización institucional</h2></caption>
+
+
+                <!-- Centros -->
+                <tr>
+                    <th scope="row"><a href="{% url listCentro 'nombre_centro' %}">Centros</a></th>
+                    <td><a href="{% url addCentro %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Administradores de centro. -->
+                <tr>
+                    <th scope="row"><a href="{% url listAdministradorCentro 'nombre_adm_centro' %}">Administradores de centro</a></th>
+                    <td><a href="{% url addAdministradorCentro %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Centros - Administradores de centro. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectCentro_CentroAdministradorCentro %}">Centros - Administradores de centro</a></th>
+                    <td><a href="{% url addCentro_administradorCentro '' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Titulaciones. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectCentro_Titulacion %}">Titulaciones</a></th>
+                    <td><a href="{% url addTitulacion '' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Asignaturas. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectCentro_Asignatura 'list' %}">Asignaturas</a></th>
+                    <td><a href="{% url selectCentro_Asignatura 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+
+                <!-- Asignaturas Curso Académico. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectCentro_AsignaturaCursoAcademico 'list' %}">Asignaturas Curso Académico</a></th>
+                    <td><a href="{% url selectCentro_AsignaturaCursoAcademico 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+                </table>
+            </div>
+
+            <div class="module">
+                <table summary="Organización docente.">
+                <caption><h2>Organización docente</h2></caption>
+
+                <!-- Departamentos. -->
+                <tr>
+                    <th scope="row"><a href="{% url listDepartamento 'nombre_departamento' %}">Departamentos</a></th>
+                    <td><a href="{% url addDepartamento %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Asesores. -->
+                <tr>
+                    <th scope="row"><a href="{% url listAsesor 'nombre_asesor' %}">Asesores</a></th>
+                    <td><a href="{% url addAsesor %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Asesores Curso Académico. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsesor_AsesorCursoAcademico %}">Asesores Curso Académico</a></th>
+                    <td><a href="{% url addAsesorCursoAcademico '' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                </table>
+            </div>
+
+            <div class="module">
+                <table summary="Administración de alumnos.">
+                <caption><h2>Alumnos</h2></caption>
+
+                <!-- Alumnos. -->
+                <tr>
+                    <th scope="row"><a href="{% url listAlumno 'dni_pasaporte' %}">Alumnos</a></th>
+                    <td><a href="{% url addAlumno %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Alumnos Curso Académico. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsesor_AlumnoCursoAcademico 'list' %}">Alumnos Curso Académico</a></th>
+                    <td><a href="{% url selectAsesor_AlumnoCursoAcademico 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Matrículas. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsignaturaOAlumnoCursoAcademico %}">Matrículas</a></th>
+                    <td><a href="{% url selectCentro_Matricula 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Calificaciones Convocatoria. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectCentro_CalificacionConvocatoria 'list' %}">Calificaciones Convocatoria</a></th>
+                    <td><a href="{% url selectCentro_CalificacionConvocatoria 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                </table>
+            </div>
+
+            <div class="module">
+                <table summary="Administración de reuniones.">
+                <caption><h2>Reuniones</h2></caption>
+
+                <!-- Reuniones. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsesor_Reunion 'list' %}">Reuniones</a></th>
+                    <td><a href="{% url selectAsesor_Reunion 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Reuniones - Preguntas de asesor. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsesor_Reunion_preguntaAsesor 'list' %}">Reuniones - Preguntas de asesor</a></th>
+                    <td><a href="{% url selectAsesor_Reunion_preguntaAsesor 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Reuniones - Preguntas oficiales. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsesor_Reunion_preguntaOficial 'list' %}">Reuniones - Preguntas oficiales</a></th>
+                    <td><a href="{% url selectAsesor_Reunion_preguntaOficial 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                </table>
+            </div>
+
+            <div class="module">
+                <table summary="Administración de plantillas.">
+                <caption><h2>Plantillas de entrevista</h2></caption>
+
+                <!-- Plantillas de entrevista oficiales. -->
+                <tr>
+                    <th scope="row"><a href="{% url listPlantillaEntrevistaOficial 'descripcion' %}">Plantillas de entrevista oficiales</a></th>
+                    <td><a href="{% url addPlantillaEntrevistaOficial %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Preguntas oficiales. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectEntrevistaOficial_PreguntaOficial %}">Preguntas oficiales</a></th>
+                    <td><a href="{% url addPreguntaOficial '' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Plantillas de entrevista de asesor. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsesor_PlantillaEntrevistaAsesor 'list' %}">Plantillas de entrevista de asesor</a></th>
+                    <td><a href="{% url selectAsesor_PlantillaEntrevistaAsesor 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Preguntas de asesor. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsesor_PreguntaAsesor 'list' %}">Preguntas de asesor</a></th>
+                    <td><a href="{% url selectAsesor_PreguntaAsesor 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                </table>
+            </div>
+
+    {% endblock %}
