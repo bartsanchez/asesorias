@@ -35,7 +35,4 @@ urlpatterns = patterns(VISTAS + 'vistasAdministradorCentro',
         name='administradorCentro_plantillas'),
 
     ### Includes a cada entidad ###
-
-    (r'^centro/',
-        include(URLS + 'centro')),
 )
