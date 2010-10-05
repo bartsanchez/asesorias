@@ -36,7 +36,8 @@ def authentication(request):
 
                     elif rol == 'administradorCentro':
                         return HttpResponseRedirect(
-                            reverse('administradorCentro_inicio'))
+                            reverse('administradorCentro_inicio',
+                            kwargs={'centro': 'eps'}))
                     elif rol == 'asesor':
                         return HttpResponseRedirect(
                             reverse('asesor_inicio',

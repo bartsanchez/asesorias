@@ -1,13 +1,15 @@
 {% extends "asesorias/Base/base.html" %}
 
     {% block menu %}
-                <li><a href="{% url administradorCentro_inicio %}" {% block opcion_inicio %}{% endblock %}>Inicio</a></li>
-                <li><a href="{% url administradorCentro_org_institucional %}" {% block opcion_org_institucional %}{% endblock %}>Organización institucional</a></li>
-                <li><a href="{% url administradorCentro_org_docente %}" {% block opcion_org_docente %}{% endblock %}>Organización docente</a></li>
-                <li><a href="{% url administradorCentro_alumnos %}" {% block opcion_alumnos %}{% endblock %}>Alumnos</a></li>
-                <li><a href="{% url administradorCentro_reuniones %}" {% block opcion_reuniones %}{% endblock %}>Reuniones</a></li>
-                <li><a href="{% url administradorCentro_plantillas %}" {% block opcion_plantillas %}{% endblock %}>Plantillas de entrevista</a></li>
+                <li><a href="{% url administradorCentro_inicio centro %}" {% block opcion_inicio %}{% endblock %}>Inicio</a></li>
+                <li><a href="{% url administradorCentro_org_institucional centro %}" {% block opcion_org_institucional %}{% endblock %}>Organización institucional</a></li>
+                <li><a href="{% url administradorCentro_org_docente centro %}" {% block opcion_org_docente %}{% endblock %}>Organización docente</a></li>
+                <li><a href="{% url administradorCentro_alumnos centro %}" {% block opcion_alumnos %}{% endblock %}>Alumnos</a></li>
+                <li><a href="{% url administradorCentro_reuniones centro %}" {% block opcion_reuniones %}{% endblock %}>Reuniones</a></li>
+                <li><a href="{% url administradorCentro_plantillas centro %}" {% block opcion_plantillas %}{% endblock %}>Plantillas de entrevista</a></li>
     {% endblock %}
+
+    {% block centro %}<h3><a href="">{{ centro }}</a></h3>{% endblock %}
 
     {% block elementos_sidebar %}
                             <ul>
@@ -29,4 +31,4 @@
                             </ul>
     {% endblock %}
 
-    {% block url_inicio %}<li><a href="{% url administradorCentro_inicio %}">Inicio</a></li>{% endblock %}
+    {% block url_inicio %}<li><a href="{% url administradorCentro_inicio centro %}">Inicio</a></li>{% endblock %}
