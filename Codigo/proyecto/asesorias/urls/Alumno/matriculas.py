@@ -11,4 +11,9 @@ urlpatterns = patterns(VISTAS + 'vistasMatriculas',
 
         'showMatriculacionActual',
         name='showMatriculacionActual_Alumno'),
+
+    url(r'^showMatriculacionHistorica/$',
+
+        'showMatriculacionHistorica',
+        name='showMatriculacionHistorica_Alumno'),
 )

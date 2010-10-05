@@ -6,6 +6,6 @@
     {% block matriculas %}
                                     <ul>
                                         <li><a href="{% url showMatriculacionActual_Alumno curso_academico %}">Ver matriculación actual</a></li>
-                                        <li><a href="{# url modificarClave_Alumno curso_academico #}">Ver matriculación histórica</a></li>
+                                        <li><a href="{% url showMatriculacionHistorica_Alumno curso_academico %}">Ver matriculación histórica</a></li>
                                     </ul>
     {% endblock %}

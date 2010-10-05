@@ -1,0 +1,43 @@
+{% extends "asesorias/Base/Alumno/matriculas.html" %}
+
+{% block content %}
+
+    <h1>Matriculación histórica.</h1>
+
+    {% if not lista_matriculas %}
+
+    <p>No existen antiguas matrículas para este alumno.</p>
+
+    <a href="{% url alumno_matriculas curso_academico %}">Volver</a>
+
+    {% else %}
+
+        {% for matricula in lista_matriculas %}
+
+        <div class="module">
+            <table summary="Asignatura: {{ matricula.determinarNombreAsignatura }}.">
+            <caption><h2>Asignatura: {{ matricula.determinarNombreAsignatura }}</h2></caption>
+                <tr>
+                    <th scope="row">Curso académico</th>
+                    <td>{{ matricula.curso_academico }}/{{ matricula.curso_academico|add:'1' }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Centro</th>
+                    <td>{{ matricula.determinarNombreCentro }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Titulacion</th>
+                    <td>{{ matricula.determinarNombreTitulacion }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Plan de estudios</th>
+                    <td>{{ matricula.determinarPlanEstudios }}</td>
+                </tr>
+            </table>
+        </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}
