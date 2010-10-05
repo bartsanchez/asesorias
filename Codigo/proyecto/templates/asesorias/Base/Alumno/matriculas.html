@@ -1,0 +1,11 @@
+{% extends "asesorias/Base/Alumno/base_alumno.html" %}
+
+    <!-- Determina el elemento activo en el menú horizontal -->
+    {% block opcion_matriculas %}class="active"{% endblock %}
+
+    {% block matriculas %}
+                                    <ul>
+                                        <li><a href="{# url showInfo_Alumno curso_academico #}">Ver matriculación actual</a></li>
+                                        <li><a href="{# url modificarClave_Alumno curso_academico #}">Ver matriculación histórica</a></li>
+                                    </ul>
+    {% endblock %}

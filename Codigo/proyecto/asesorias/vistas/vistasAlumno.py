@@ -18,6 +18,12 @@ def alumno_informacion_personal(request, curso_academico):
         {'user': request.user, 'curso_academico': curso_academico})
 
 @login_required()
+def alumno_matriculas(request, curso_academico):
+    return render_to_response(
+        PATH + 'alumno_matriculas.html',
+        {'user': request.user, 'curso_academico': curso_academico})
+
+@login_required()
 def setCursoAcademico(request, curso_academico):
     # Se ha modificado el formulario original.
     if request.method == 'POST':

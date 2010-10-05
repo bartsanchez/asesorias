@@ -3,6 +3,7 @@
     {% block menu %}
                 <li><a href="{% url alumno_inicio curso_academico %}" {% block opcion_inicio %}{% endblock %}>Inicio</a></li>
                 <li><a href="{% url alumno_informacion_personal curso_academico %}" {% block opcion_informacion_personal %}{% endblock %}>Información personal</a></li>
+                <li><a href="{% url alumno_matriculas curso_academico %}" {% block opcion_matriculas %}{% endblock %}>Matrículas</a></li>
     {% endblock %}
 
     {% block curso_academico %}<h3><a href="{% url setCursoAcademico_Alumno curso_academico %}">{{ curso_academico }}/{{ curso_academico|add:'1' }}</a></h3>{% endblock %}
@@ -11,6 +12,9 @@
                             <ul>
                                 <li><h3><a href="{% url alumno_informacion_personal curso_academico %}">Información personal</a></h3>
                                     {% block informacion_personal %}{% endblock %}
+                                </li>
+                                <li><h3><a href="{% url alumno_matriculas curso_academico %}">Matrículas</a></h3>
+                                    {% block matriculas %}{% endblock %}
                                 </li>
                             </ul>
     {% endblock %}
