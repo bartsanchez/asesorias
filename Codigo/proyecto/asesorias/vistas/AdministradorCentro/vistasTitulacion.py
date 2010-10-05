@@ -149,7 +149,7 @@ def editTitulacion(request, centro, nombre_titulacion,
     # Si existe se edita.
     if instancia_titulacion:
         # Se guarda el anterior id_centro e id_titulacion.
-        id_centro_antigua = instancia_titulacion.id_centro_id
+        id_centro = instancia_titulacion.id_centro_id
         id_titulacion_antigua = instancia_titulacion.id_titulacion
 
         # Se carga el formulario para la titulacion existente.
@@ -158,7 +158,6 @@ def editTitulacion(request, centro, nombre_titulacion,
         if request.method == 'POST':
             # Se obtienen el resto de valores necesarios a traves
             # de POST.
-            id_centro = request.POST['id_centro']
             nombre_titulacion = request.POST['nombre_titulacion']
             plan_estudios = request.POST['plan_estudios']
 
@@ -181,7 +180,7 @@ def editTitulacion(request, centro, nombre_titulacion,
 
             # Si es valido se guarda.
             if form.is_valid():
-                instancia_titulacion.editar(id_centro_antigua,
+                instancia_titulacion.editar(id_centro,
                     id_titulacion_antigua)
                 form.save()
 

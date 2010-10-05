@@ -63,8 +63,8 @@
         <!-- Titulaciones -->
         {% for titulacion in lista_titulaciones %}
         <tr>
-            <th scope="row"><a href="{% url editTitulacion titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}">{{ titulacion.nombre_titulacion }} : {{ titulacion.plan_estudios }}</a></th>
-            <td><a href="{% url editTitulacion titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}" class="editlink">Editar</a></td>
+            <th scope="row"><a href="{% url editTitulacion_administradorCentro titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}">{{ titulacion.nombre_titulacion }} : {{ titulacion.plan_estudios }}</a></th>
+            <td><a href="{% url editTitulacion_administradorCentro titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}" class="editlink">Editar</a></td>
             <td><a href="{% url delTitulacion_administradorCentro titulacion.id_centro titulacion.nombre_titulacion titulacion.plan_estudios %}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}

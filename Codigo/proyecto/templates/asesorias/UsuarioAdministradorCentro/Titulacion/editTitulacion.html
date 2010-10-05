@@ -8,7 +8,7 @@
 
     <p>No existe tal titulación.</p>
 
-    <a href="{% url selectCentro_Titulacion %}">Lista de titulaciones</a>
+    <a href="{% url listTitulacion_administradorCentro centro 'nombre_centro' %}">Lista de titulaciones</a>
 
     {% else %}
 
@@ -35,10 +35,12 @@
 
                 {# Excluye el campo id_titulacion que se controlará por software. #}
                 {% ifnotequal field.name 'id_titulacion' %}
+                {% ifnotequal field.name 'id_centro' %}
                 <tr>
                     <th scope="row">{{ field.label_tag }}</th>
                     <td>{{ field }}</td>
                 </tr>
+                {% endifnotequal %}
                 {% endifnotequal %}
 
                 {% endfor %}
