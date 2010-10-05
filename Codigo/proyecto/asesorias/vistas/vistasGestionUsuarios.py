@@ -42,7 +42,8 @@ def authentication(request):
                             kwargs={'curso_academico':curso_academico}))
                     elif rol == 'alumno':
                         return HttpResponseRedirect(
-                            reverse('alumno_inicio'))
+                            reverse('alumno_inicio',
+                            kwargs={'curso_academico':curso_academico}))
 
                 else:
                     error = 'Cuenta desactivada.'

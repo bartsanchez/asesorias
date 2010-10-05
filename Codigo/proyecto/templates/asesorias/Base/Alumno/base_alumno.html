@@ -1,16 +1,16 @@
 {% extends "asesorias/Base/base.html" %}
 
     {% block menu %}
-                <li><a href="{% url alumno_inicio %}" {% block opcion_inicio %}{% endblock %}>Inicio</a></li>
-                <li><a href="{% url alumno_informacion_personal %}" {% block opcion_informacion_personal %}{% endblock %}>Información personal</a></li>
+                <li><a href="{% url alumno_inicio curso_academico %}" {% block opcion_inicio %}{% endblock %}>Inicio</a></li>
+                <li><a href="{% url alumno_informacion_personal curso_academico %}" {% block opcion_informacion_personal %}{% endblock %}>Información personal</a></li>
     {% endblock %}
 
     {% block elementos_sidebar %}
                             <ul>
-                                <li><h3><a href="{% url alumno_informacion_personal %}">Información personal</a></h3>
+                                <li><h3><a href="{% url alumno_informacion_personal curso_academico %}">Información personal</a></h3>
                                     {% block informacion_personal %}{% endblock %}
                                 </li>
                             </ul>
     {% endblock %}
 
-    {% block url_inicio %}<li><a href="{% url alumno_inicio %}">Inicio</a></li>{% endblock %}
+    {% block url_inicio %}<li><a href="{% url alumno_inicio curso_academico %}">Inicio</a></li>{% endblock %}
