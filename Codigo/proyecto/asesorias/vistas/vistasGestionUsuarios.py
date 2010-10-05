@@ -35,7 +35,8 @@ def authentication(request):
                                 reverse('administrador_inicio'))
 
                     elif rol == 'administradorCentro':
-                        print 'hola'
+                        return HttpResponseRedirect(
+                            reverse('administradorCentro_inicio'))
                     elif rol == 'asesor':
                         return HttpResponseRedirect(
                             reverse('asesor_inicio',
