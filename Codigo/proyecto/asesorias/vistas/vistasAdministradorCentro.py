@@ -1,4 +1,6 @@
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 
 PATH = 'asesorias/UsuarioAdministradorCentro/'
@@ -36,3 +38,12 @@ def administradorCentro_plantillas(request, centro):
     return render_to_response(PATH +
         'administradorCentro_plantillas.html',
         {'user': request.user, 'centro': centro})
+
+# Funcion decoradora para comprobar el centro.
+def checkCentro(funcion):
+    def inner(request, centro, *args, **kwargs):
+        if centro == 'eps':
+            return funcion(request, centro, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('logout'))
+    return inner

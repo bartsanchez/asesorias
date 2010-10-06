@@ -1,13 +1,16 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
 from asesorias.vistas.AdministradorPrincipal import vistasCentro
+from asesorias.vistas.vistasAdministradorCentro import checkCentro
 from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/UsuarioAdministradorCentro/Titulacion/'
 
 # Comprueba si existe una titulacion y, de ser asi, la devuelve.
+@login_required
 def obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios):
     try:
         # Obtiene la instancia de centro para posteriormente obtener
@@ -24,6 +27,7 @@ def obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios):
     return resultado
 
 # Obtiene una lista con las titulaciones de un determinado centro.
+@login_required
 def obtenerTitulacionesDeCentro(centro):
     try:
         instancia_centro = vistasCentro.obtenerCentro(centro)
@@ -37,6 +41,7 @@ def obtenerTitulacionesDeCentro(centro):
 
 # Obtiene una lista ordenada con los ids de las titulaciones de un
 # determinado centro.
+@login_required
 def obtenerListaDeIdsTitulacionesDeCentro(centro):
     # Se comprueba si existe el centro.
     existe_centro = vistasCentro.obtenerCentro(centro)
@@ -68,6 +73,7 @@ def obtenerListaDeIdsTitulacionesDeCentro(centro):
 
 # Determina el primer id_titulacion disponible para un determinado
 # centro.
+@login_required
 def determinarSiguienteIdTitulacionEnCentro(instancia_centro):
     # Se obtiene una lista ordenada con los ids de las titulaciones
     # existentes en el centro.
@@ -88,6 +94,8 @@ def determinarSiguienteIdTitulacionEnCentro(instancia_centro):
             break
     return contador
 
+@checkCentro
+@login_required
 def addTitulacion(request, centro):
     # Se comprueba que exista el centro en caso de introducir uno.
     if centro != '':
@@ -134,13 +142,15 @@ def addTitulacion(request, centro):
             return HttpResponseRedirect(reverse(
                 'listTitulacion_administradorCentro',
                 kwargs={'centro': instancia_centro.nombre_centro,
-                'orden': 'nombre_titulacion' }) )
+                'orden': 'nombre_titulacion' }))
     # Si aun no se ha rellenado el formulario, se genera uno en blanco.
     else:
         form = forms.TitulacionForm()
     return render_to_response(PATH + 'addTitulacion.html',
         {'user': request.user, 'form': form, 'centro': centro})
 
+@checkCentro
+@login_required
 def editTitulacion(request, centro, nombre_titulacion,
     plan_estudios):
     # Se obtiene la instancia de la titulacion.
@@ -196,6 +206,8 @@ def editTitulacion(request, centro, nombre_titulacion,
     return render_to_response(PATH + 'editTitulacion.html',
         {'user': request.user, 'form': form, 'centro': centro})
 
+@checkCentro
+@login_required
 def delTitulacion(request, centro, nombre_titulacion,
     plan_estudios):
     # Se obtiene la instancia de la titulacion.
@@ -215,6 +227,8 @@ def delTitulacion(request, centro, nombre_titulacion,
     return render_to_response(PATH + 'delTitulacion.html',
         {'user': request.user, 'error': error, 'centro': centro})
 
+@checkCentro
+@login_required
 def listTitulacion(request, centro, orden):
     # Se comprueba que exista el centro pasado por argumento.
     instancia_centro = vistasCentro.obtenerCentro(centro)
@@ -283,6 +297,8 @@ def listTitulacion(request, centro, orden):
         'lista_titulaciones': lista_titulaciones,
         'busqueda': busqueda, 'centro': centro, 'orden': orden})
 
+@checkCentro
+@login_required
 def generarPDFListaTitulaciones(request, centro, busqueda):
     # Se comprueba que exista el centro pasado por argumento.
     instancia_centro = vistasCentro.obtenerCentro(centro)
