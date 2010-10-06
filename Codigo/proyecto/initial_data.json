@@ -846,8 +846,8 @@
       "password": "sha1$72a28$05e5d9318fda352f64533e5fc6803f8ac563ea99",
       "email": "alumno@alumno.com",
       "date_joined": "2010-10-05 12:33:29"
-    },
-    {
+  },
+  {
     "pk": 4,
     "model": "auth.user",
     "fields": {
@@ -864,4 +864,5 @@
       "email": "",
       "date_joined": "2010-10-05 23:07:38"
     }
+  }
 ]
