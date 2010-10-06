@@ -10,7 +10,6 @@ from asesorias.utils import vistasPDF
 PATH = 'asesorias/UsuarioAdministradorCentro/Titulacion/'
 
 # Comprueba si existe una titulacion y, de ser asi, la devuelve.
-@login_required
 def obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios):
     try:
         # Obtiene la instancia de centro para posteriormente obtener
@@ -27,7 +26,6 @@ def obtenerTitulacion(nombre_centro, nombre_titulacion, plan_estudios):
     return resultado
 
 # Obtiene una lista con las titulaciones de un determinado centro.
-@login_required
 def obtenerTitulacionesDeCentro(centro):
     try:
         instancia_centro = vistasCentro.obtenerCentro(centro)
@@ -41,7 +39,6 @@ def obtenerTitulacionesDeCentro(centro):
 
 # Obtiene una lista ordenada con los ids de las titulaciones de un
 # determinado centro.
-@login_required
 def obtenerListaDeIdsTitulacionesDeCentro(centro):
     # Se comprueba si existe el centro.
     existe_centro = vistasCentro.obtenerCentro(centro)
@@ -73,7 +70,6 @@ def obtenerListaDeIdsTitulacionesDeCentro(centro):
 
 # Determina el primer id_titulacion disponible para un determinado
 # centro.
-@login_required
 def determinarSiguienteIdTitulacionEnCentro(instancia_centro):
     # Se obtiene una lista ordenada con los ids de las titulaciones
     # existentes en el centro.
