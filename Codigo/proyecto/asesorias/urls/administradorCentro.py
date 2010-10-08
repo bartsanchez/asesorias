@@ -38,4 +38,7 @@ urlpatterns = patterns(VISTAS + 'vistasAdministradorCentro',
 
     (r'^titulacion/',
         include(URLS + 'titulacion')),
+
+    (r'^asignatura/',
+        include(URLS + 'asignatura')),
 )
