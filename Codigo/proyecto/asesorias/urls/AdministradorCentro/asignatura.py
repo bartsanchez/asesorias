@@ -24,11 +24,10 @@ urlpatterns = patterns(VISTAS + 'vistasAsignatura',
 
         'delAsignatura', name='delAsignatura'),
 
-    url(r'^list/(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
+    url(r'^list/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/'+
         '(?P<orden>[\s\w]*)/$',
 
-        'listAsignatura', name='listAsignatura'),
+        'listAsignatura', name='listAsignatura_administradorCentro'),
 
     url(r'^selectTitulacion/(?P<tipo>[\s\w]+)/$',
 

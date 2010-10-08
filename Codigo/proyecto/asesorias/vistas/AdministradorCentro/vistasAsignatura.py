@@ -281,15 +281,16 @@ def selectTitulacion(request, centro, tipo):
 
             if tipo == 'add':
                 return HttpResponseRedirect(
-                    reverse('addAsignatura',
-                    kwargs={'nombre_centro': nombre_centro,
+                    reverse('addAsignatura_administradorCentro',
+                    kwargs={'centro': centro,
                     'nombre_titulacion':
                     instancia_titulacion.nombre_titulacion,
                     'plan_estudios':
                     instancia_titulacion.plan_estudios}))
             else:
-                return HttpResponseRedirect(reverse('listAsignatura',
-                    kwargs={'nombre_centro': nombre_centro,
+                return HttpResponseRedirect(
+                    reverse('listAsignatura_administradorCentro',
+                    kwargs={'centro': centro,
                     'nombre_titulacion':
                     instancia_titulacion.nombre_titulacion,
                     'plan_estudios': instancia_titulacion.plan_estudios,
@@ -297,8 +298,9 @@ def selectTitulacion(request, centro, tipo):
 
         else:
             return HttpResponseRedirect(
-                reverse('selectTitulacion_Asignatura',
-                kwargs={'nombre_centro': nombre_centro}))
+                reverse(
+                'selectTitulacion_Asignatura_administradorCentro',
+                kwargs={'centro': centro, 'tipo': tipo}))
 
     else:
         form = forms.TitulacionFormSelect(id_centro=id_centro)
@@ -307,16 +309,17 @@ def selectTitulacion(request, centro, tipo):
         {'user': request.user, 'form': form,
         'centro': centro, 'tipo': tipo})
 
-def listAsignatura(request, nombre_centro, nombre_titulacion,
+def listAsignatura(request, centro, nombre_titulacion,
     plan_estudios, orden):
     # Se obtiene la posible titulacion.
     instancia_titulacion = vistasTitulacion.obtenerTitulacion(
-        nombre_centro, nombre_titulacion, plan_estudios)
+        centro, nombre_titulacion, plan_estudios)
 
     # Se comprueba que exista la titulacion.
     if not instancia_titulacion:
-        return HttpResponseRedirect(reverse('selectCentro_Asignatura',
-            kwargs={'tipo': 'list'}))
+        return HttpResponseRedirect(
+            reverse('selectTitulacion_Asignatura_administradorCentro',
+            kwargs={'centro': centro, 'tipo': 'list'}))
     else:
         id_centro = instancia_titulacion.id_centro_id
         id_titulacion = instancia_titulacion.id_titulacion
@@ -368,7 +371,7 @@ def listAsignatura(request, nombre_centro, nombre_titulacion,
     return render_to_response(PATH + 'listAsignatura.html',
         {'user': request.user, 'form': form,
         'lista_asignaturas': lista_asignaturas,
-        'busqueda': busqueda, 'nombre_centro': nombre_centro,
+        'busqueda': busqueda, 'centro': centro,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios, 'orden': orden})
 
