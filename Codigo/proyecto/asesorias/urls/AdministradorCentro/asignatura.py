@@ -34,10 +34,9 @@ urlpatterns = patterns(VISTAS + 'vistasAsignatura',
         'selectTitulacion',
         name='selectTitulacion_Asignatura_administradorCentro'),
 
-    url(r'^generarPDF/' +
-        '(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/' +
+    url(r'^generarPDF/(?P<nombre_titulacion>[\s\w]+)/' +
         '(?P<plan_estudios>\d+)/(?P<busqueda>[\s\w]+)/$',
 
         'generarPDFListaAsignaturas',
-        name='generarPDFListaAsignaturas'),
+        name='generarPDFListaAsignaturas_administradorCentro'),
 )

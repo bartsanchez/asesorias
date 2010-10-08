@@ -375,16 +375,17 @@ def listAsignatura(request, centro, nombre_titulacion,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios, 'orden': orden})
 
-def generarPDFListaAsignaturas(request, nombre_centro,
+def generarPDFListaAsignaturas(request, centro,
     nombre_titulacion, plan_estudios, busqueda):
     # Se obtiene la posible titulacion.
     instancia_titulacion = vistasTitulacion.obtenerTitulacion(
-        nombre_centro, nombre_titulacion, plan_estudios)
+        centro, nombre_titulacion, plan_estudios)
 
     # Se comprueba que exista la titulacion.
     if not instancia_titulacion:
         return HttpResponseRedirect(
-            reverse('selectCentro_Asignatura'))
+            reverse('selectTitulacion_Asignatura_administradorCentro',
+            kwargs={'centro': centro, 'tipo': 'list'}))
     else:
         id_centro = instancia_titulacion.id_centro_id
         id_titulacion = instancia_titulacion.id_titulacion
