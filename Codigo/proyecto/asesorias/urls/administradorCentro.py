@@ -41,4 +41,52 @@ urlpatterns = patterns(VISTAS + 'vistasAdministradorCentro',
 
     (r'^asignatura/',
         include(URLS + 'asignatura')),
+
+    (r'^asignaturaCursoAcademico/',
+        include(URLS + 'asignaturaCursoAcademico')),
+
+    #(r'^departamento/',
+        #include(URLS + 'departamento')),
+
+    #(r'^asesor/',
+        #include(URLS + 'asesor')),
+
+    #(r'^asesorCursoAcademico/',
+        #include(URLS + 'asesorCursoAcademico')),
+
+    #(r'^plantillaEntrevistaAsesor/',
+        #include(URLS + 'plantillaEntrevistaAsesor')),
+
+    #(r'^preguntaAsesor/',
+        #include(URLS + 'preguntaAsesor')),
+
+    #(r'^alumno/',
+        #include(URLS + 'alumno')),
+
+    #(r'^alumnoCursoAcademico/',
+        #include(URLS + 'alumnoCursoAcademico')),
+
+    #(r'^matricula/',
+        #include(URLS + 'matricula')),
+
+    #(r'^calificacionConvocatoria/',
+        #include(URLS + 'calificacionConvocatoria')),
+
+    #(r'^plantillaEntrevistaOficial/',
+        #include(URLS + 'plantillaEntrevistaOficial')),
+
+    #(r'^preguntaOficial/',
+        #include(URLS + 'preguntaOficial')),
+
+    #(r'^reunion/',
+        #include(URLS + 'reunion')),
+
+    #(r'^centro_administradorCentro/',
+        #include(URLS + 'centro_administradorCentro')),
+
+    #(r'^reunion_preguntaAsesor/',
+        #include(URLS + 'reunion_preguntaAsesor')),
+
+    #(r'^reunion_preguntaOficial/',
+        #include(URLS + 'reunion_preguntaOficial')),
 )
