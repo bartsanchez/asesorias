@@ -326,11 +326,11 @@ def selectAsignatura(request, centro, nombre_titulacion,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios, 'tipo': tipo})
 
-def listAsignaturaCursoAcademico(request, nombre_centro,
+def listAsignaturaCursoAcademico(request, centro,
     nombre_titulacion, plan_estudios, nombre_asignatura, orden):
     # Se obtiene la posible asignatura.
     instancia_asignatura = vistasAsignatura.obtenerAsignatura(
-        nombre_centro, nombre_titulacion, plan_estudios,
+        centro, nombre_titulacion, plan_estudios,
         nombre_asignatura)
 
     # Se comprueba que exista la asignatura.
@@ -395,7 +395,7 @@ def listAsignaturaCursoAcademico(request, nombre_centro,
         'lista_asignaturas_curso_academico':
         lista_asignaturas_curso_academico,
         'busqueda': busqueda,
-        'nombre_centro': nombre_centro,
+        'centro': centro,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios,
         'nombre_asignatura': nombre_asignatura, 'orden': orden})
