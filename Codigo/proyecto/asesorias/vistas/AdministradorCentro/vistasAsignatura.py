@@ -1,9 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
 from asesorias.vistas.AdministradorPrincipal import vistasCentro
 from asesorias.vistas.AdministradorPrincipal import vistasTitulacion
+from asesorias.vistas.vistasAdministradorCentro import checkCentro
 from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/UsuarioAdministradorCentro/Asignatura/'
@@ -87,6 +89,8 @@ def determinarSiguienteIdAsignaturaEnTitulacion(instancia_titulacion):
             break
     return contador
 
+@checkCentro
+@login_required
 def addAsignatura(request, centro, nombre_titulacion,
     plan_estudios):
     # Se obtiene la posible titulacion.
@@ -157,6 +161,8 @@ def addAsignatura(request, centro, nombre_titulacion,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios})
 
+@checkCentro
+@login_required
 def editAsignatura(request, centro, nombre_titulacion,
     plan_estudios, nombre_asignatura):
     # Se obtiene la instancia de la asignatura.
@@ -235,6 +241,8 @@ def editAsignatura(request, centro, nombre_titulacion,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios})
 
+@checkCentro
+@login_required
 def delAsignatura(request, centro, nombre_titulacion, plan_estudios,
     nombre_asignatura):
     # Se obtiene la instancia de la asignatura.
@@ -256,6 +264,8 @@ def delAsignatura(request, centro, nombre_titulacion, plan_estudios,
         {'user': request.user, 'error': error,
         'centro': centro})
 
+@checkCentro
+@login_required
 def selectTitulacion(request, centro, tipo):
     # Se obtiene el posible centro.
     instancia_centro = vistasCentro.obtenerCentro(centro)
@@ -313,6 +323,8 @@ def selectTitulacion(request, centro, tipo):
         {'user': request.user, 'form': form,
         'centro': centro, 'tipo': tipo})
 
+@checkCentro
+@login_required
 def listAsignatura(request, centro, nombre_titulacion,
     plan_estudios, orden):
     # Se obtiene la posible titulacion.
@@ -379,6 +391,8 @@ def listAsignatura(request, centro, nombre_titulacion,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios, 'orden': orden})
 
+@checkCentro
+@login_required
 def generarPDFListaAsignaturas(request, centro,
     nombre_titulacion, plan_estudios, busqueda):
     # Se obtiene la posible titulacion.
