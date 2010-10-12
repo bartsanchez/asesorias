@@ -87,23 +87,23 @@ def determinarSiguienteIdAsignaturaEnTitulacion(instancia_titulacion):
             break
     return contador
 
-def addAsignatura(request, nombre_centro, nombre_titulacion,
+def addAsignatura(request, centro, nombre_titulacion,
     plan_estudios):
     # Se obtiene la posible titulacion.
     instancia_titulacion = vistasTitulacion.obtenerTitulacion(
-        nombre_centro, nombre_titulacion, plan_estudios)
+        centro, nombre_titulacion, plan_estudios)
 
     # Se comprueba que exista la titulacion.
     if not instancia_titulacion:
-        return HttpResponseRedirect(reverse('selectCentro_Asignatura',
-            kwargs={'tipo': 'add'}))
+        return HttpResponseRedirect(
+            reverse('selectTitulacion_Asignatura_administradorCentro',
+            kwargs={'centro': centro, 'tipo': 'list'}))
 
     # Se ha rellenado el formulario.
     if request.method == 'POST':
         # Se extraen los valores pasados por el metodo POST.
         codigo_titulacion = vistasTitulacion.obtenerTitulacion(
-            nombre_centro, nombre_titulacion,
-            plan_estudios).codigo_titulacion
+            centro, nombre_titulacion, plan_estudios).codigo_titulacion
 
         nombre_asignatura= request.POST['nombre_asignatura']
         curso = request.POST['curso']
@@ -140,8 +140,9 @@ def addAsignatura(request, nombre_centro, nombre_titulacion,
             form.save()
 
             # Redirige a la pagina de listar asignaturas.
-            return HttpResponseRedirect(reverse('listAsignatura',
-                kwargs={'nombre_centro':
+            return HttpResponseRedirect(
+                reverse('listAsignatura_administradorCentro',
+                kwargs={'centro':
                 instancia_titulacion.determinarNombreCentro(),
                 'nombre_titulacion':
                 instancia_titulacion.nombre_titulacion,
@@ -152,7 +153,7 @@ def addAsignatura(request, nombre_centro, nombre_titulacion,
         form = forms.AsignaturaForm()
     return render_to_response(PATH + 'addAsignatura.html',
         {'user': request.user, 'form': form,
-        'nombre_centro': nombre_centro,
+        'centro': centro,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios})
 
