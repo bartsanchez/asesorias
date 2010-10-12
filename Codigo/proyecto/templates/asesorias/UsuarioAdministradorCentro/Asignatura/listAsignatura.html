@@ -57,7 +57,7 @@
         <tr>
             <th scope="row"><a href="{# url editAsignatura asignatura.determinarNombreCentro asignatura.determinarNombreTitulacion asignatura.determinarPlanEstudios asignatura.nombre_asignatura #}">{{ asignatura }}</a></th>
             <td><a href="{# url editAsignatura asignatura.determinarNombreCentro asignatura.determinarNombreTitulacion asignatura.determinarPlanEstudios asignatura.nombre_asignatura #}" class="editlink">Editar</a></td>
-            <td><a href="{# url delAsignatura asignatura.determinarNombreCentro asignatura.determinarNombreTitulacion asignatura.determinarPlanEstudios asignatura.nombre_asignatura #}" class="deletelink">Eliminar</a></td>
+            <td><a href="{% url delAsignatura_administradorCentro asignatura.determinarNombreCentro asignatura.determinarNombreTitulacion asignatura.determinarPlanEstudios asignatura.nombre_asignatura %}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}
 

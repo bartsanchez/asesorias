@@ -234,24 +234,26 @@ def editAsignatura(request, nombre_centro, nombre_titulacion,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios})
 
-def delAsignatura(request, nombre_centro, nombre_titulacion,
-    plan_estudios, nombre_asignatura):
+def delAsignatura(request, centro, nombre_titulacion, plan_estudios,
+    nombre_asignatura):
     # Se obtiene la instancia de la asignatura.
-    instancia_asignatura= obtenerAsignatura(nombre_centro,
-        nombre_titulacion, plan_estudios, nombre_asignatura)
+    instancia_asignatura= obtenerAsignatura(centro, nombre_titulacion,
+        plan_estudios, nombre_asignatura)
     # Si existe se elimina.
     if instancia_asignatura:
         instancia_asignatura.borrar()
         # Redirige a la pagina de listar asignaturas.
-        return HttpResponseRedirect(reverse('listAsignatura',
-            kwargs={'nombre_centro': nombre_centro,
+        return HttpResponseRedirect(
+            reverse('listAsignatura_administradorCentro',
+            kwargs={'centro': centro,
             'nombre_titulacion': nombre_titulacion,
             'plan_estudios': plan_estudios, 'orden': 'nombre_centro'}))
     # La asignatura no existe.
     else:
         error = True
     return render_to_response(PATH + 'delAsignatura.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'error': error,
+        'centro': centro})
 
 def selectTitulacion(request, centro, tipo):
     # Se obtiene el posible centro.
