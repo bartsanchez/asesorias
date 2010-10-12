@@ -1,0 +1,30 @@
+{% extends "asesorias/Base/AdministradorCentro/org_institucional.html" %}
+
+{% block content %}
+
+    {% ifequal tipo 'add' %}
+    <h1>Añadir asignatura curso académico.</h1>
+
+    {% else %}
+    <h1>Lista de asignaturas curso académico.</h1>
+
+    {% endifequal %}
+
+    <h2>Seleccionar titulación.</h2>
+
+    <div class="form">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                {% for field in form %}
+                    <div><p>{{ field.label_tag }} (Plan de estudios): {{ field }}<a href="{% url addTitulacion_administradorCentro centro %}" class="addlink" target="_new"></a></p></div>
+                    <div><p><input type="submit" value="OK"/></p></div>
+                {% endfor %}
+            </div>
+
+        </form>
+
+    </div>
+
+{% endblock %}
