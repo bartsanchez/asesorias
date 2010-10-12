@@ -157,10 +157,10 @@ def addAsignatura(request, centro, nombre_titulacion,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios})
 
-def editAsignatura(request, nombre_centro, nombre_titulacion,
+def editAsignatura(request, centro, nombre_titulacion,
     plan_estudios, nombre_asignatura):
     # Se obtiene la instancia de la asignatura.
-    instancia_asignatura= obtenerAsignatura(nombre_centro,
+    instancia_asignatura= obtenerAsignatura(centro,
         nombre_titulacion, plan_estudios, nombre_asignatura)
     # Si existe se edita.
     if instancia_asignatura:
@@ -170,14 +170,14 @@ def editAsignatura(request, nombre_centro, nombre_titulacion,
         # Se carga el formulario para la asignatura existente.
         form = forms.AsignaturaForm(instance=instancia_asignatura,
             initial={'titulacion': vistasTitulacion.obtenerTitulacion(
-                nombre_centro, nombre_titulacion,
+                centro, nombre_titulacion,
                 plan_estudios).codigo_titulacion})
         # Se ha modificado el formulario original.
         if request.method == 'POST':
             # Se obtienen el resto de valores necesarios a traves de
             # POST.
             codigo_titulacion = vistasTitulacion.obtenerTitulacion(
-                nombre_centro, nombre_titulacion,
+                centro, nombre_titulacion,
                 plan_estudios).codigo_titulacion
 
             nombre_asignatura= request.POST['nombre_asignatura']
@@ -218,8 +218,9 @@ def editAsignatura(request, nombre_centro, nombre_titulacion,
                 instancia_asignatura.editar(id_asignatura_antiguo)
                 form.save()
                 # Redirige a la pagina de listar asignaturas.
-                return HttpResponseRedirect(reverse('listAsignatura',
-                    kwargs={'nombre_centro':
+                return HttpResponseRedirect(
+                    reverse('listAsignatura_administradorCentro',
+                    kwargs={'centro':
                     instancia_titulacion.determinarNombreCentro(),
                     'nombre_titulacion':
                     instancia_titulacion.nombre_titulacion,
@@ -230,7 +231,7 @@ def editAsignatura(request, nombre_centro, nombre_titulacion,
         form = False
     return render_to_response(PATH + 'editAsignatura.html',
         {'user': request.user, 'form': form,
-        'nombre_centro': nombre_centro,
+        'centro': centro,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios})
 
