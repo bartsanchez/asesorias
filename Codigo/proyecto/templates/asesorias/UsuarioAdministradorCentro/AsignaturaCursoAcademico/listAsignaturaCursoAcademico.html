@@ -10,7 +10,7 @@
     </div>
 
     <a href="{% url addAsignaturaCursoAcademico_administradorCentro centro nombre_titulacion plan_estudios nombre_asignatura %}" class="addlink">Crear nuevo</a>
-    <a href="{# url generarPDFListaAsignaturasCursoAcademico nombre_centro nombre_titulacion plan_estudios nombre_asignatura busqueda #}" class="pdflink">Generar PDF</a>
+    <a href="{% url generarPDFListaAsignaturasCursoAcademico_administradorCentro centro nombre_titulacion plan_estudios nombre_asignatura busqueda %}" class="pdflink">Generar PDF</a>
 
     <div class="search">
 
@@ -55,8 +55,8 @@
 
         {% for asignatura_curso_academico in lista_asignaturas_curso_academico %}
         <tr>
-            <th scope="row"><a href="{# url editAsignaturaCursoAcademico asignatura_curso_academico.determinarNombreCentro asignatura_curso_academico.determinarNombreTitulacion asignatura_curso_academico.determinarPlanEstudios asignatura_curso_academico.determinarNombreAsignatura asignatura_curso_academico.curso_academico #}">{{ asignatura_curso_academico }}</a></th>
-            <td><a href="{# url editAsignaturaCursoAcademico asignatura_curso_academico.determinarNombreCentro asignatura_curso_academico.determinarNombreTitulacion asignatura_curso_academico.determinarPlanEstudios asignatura_curso_academico.determinarNombreAsignatura asignatura_curso_academico.curso_academico #}" class="editlink">Editar</a></td>
+            <th scope="row"><a href="{% url editAsignaturaCursoAcademico_administradorCentro asignatura_curso_academico.determinarNombreCentro asignatura_curso_academico.determinarNombreTitulacion asignatura_curso_academico.determinarPlanEstudios asignatura_curso_academico.determinarNombreAsignatura asignatura_curso_academico.curso_academico %}">{{ asignatura_curso_academico }}</a></th>
+            <td><a href="{% url editAsignaturaCursoAcademico_administradorCentro asignatura_curso_academico.determinarNombreCentro asignatura_curso_academico.determinarNombreTitulacion asignatura_curso_academico.determinarPlanEstudios asignatura_curso_academico.determinarNombreAsignatura asignatura_curso_academico.curso_academico %}" class="editlink">Editar</a></td>
             <td><a href="{% url delAsignaturaCursoAcademico_administradorCentro asignatura_curso_academico.determinarNombreCentro asignatura_curso_academico.determinarNombreTitulacion asignatura_curso_academico.determinarPlanEstudios asignatura_curso_academico.determinarNombreAsignatura asignatura_curso_academico.curso_academico %}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}

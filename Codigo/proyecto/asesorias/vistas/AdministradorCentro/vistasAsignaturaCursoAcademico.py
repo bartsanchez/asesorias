@@ -100,12 +100,12 @@ def addAsignaturaCursoAcademico(request, centro, nombre_titulacion,
         'plan_estudios': plan_estudios,
         'nombre_asignatura': nombre_asignatura})
 
-def editAsignaturaCursoAcademico(request, nombre_centro,
+def editAsignaturaCursoAcademico(request, centro,
     nombre_titulacion, plan_estudios, nombre_asignatura,
     curso_academico):
     # Se obtiene la instancia de la asignatura curso academico.
     instancia_asignatura_curso_academico= \
-        obtenerAsignaturaCursoAcademico(nombre_centro,
+        obtenerAsignaturaCursoAcademico(centro,
         nombre_titulacion, plan_estudios, nombre_asignatura,
         curso_academico)
     # Si existe se edita.
@@ -117,7 +117,7 @@ def editAsignaturaCursoAcademico(request, nombre_centro,
         form = forms.AsignaturaCursoAcademicoForm(
             instance=instancia_asignatura_curso_academico,
             initial={'asignatura':
-            vistasAsignatura.obtenerAsignatura(nombre_centro,
+            vistasAsignatura.obtenerAsignatura(centro,
             nombre_titulacion, plan_estudios,
             nombre_asignatura).codigo_asignatura})
         # Se ha modificado el formulario original.
@@ -125,7 +125,7 @@ def editAsignaturaCursoAcademico(request, nombre_centro,
             # Se obtienen el resto de valores necesarios a traves
             # de POST.
             codigo_asignatura = vistasAsignatura.obtenerAsignatura(
-                nombre_centro, nombre_titulacion, plan_estudios,
+                centro, nombre_titulacion, plan_estudios,
                 nombre_asignatura).codigo_asignatura
             curso_academico = request.POST['curso_academico']
 
@@ -161,8 +161,9 @@ def editAsignaturaCursoAcademico(request, nombre_centro,
                 # Redirige a la pagina de listar asignaturas
                 # curso academico.
                 return HttpResponseRedirect(
-                    reverse('listAsignaturaCursoAcademico',
-                    kwargs={'nombre_centro':
+                    reverse(
+                    'listAsignaturaCursoAcademico_administradorCentro',
+                    kwargs={'centro':
                     instancia_asignatura.determinarNombreCentro(),
                     'nombre_titulacion':
                     instancia_asignatura.determinarNombreTitulacion(),
@@ -177,7 +178,7 @@ def editAsignaturaCursoAcademico(request, nombre_centro,
     return render_to_response(
         PATH + 'editAsignaturaCursoAcademico.html',
         {'user': request.user, 'form': form,
-        'nombre_centro': nombre_centro,
+        'centro': centro,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios,
         'nombre_asignatura': nombre_asignatura})
@@ -403,17 +404,19 @@ def listAsignaturaCursoAcademico(request, centro,
         'plan_estudios': plan_estudios,
         'nombre_asignatura': nombre_asignatura, 'orden': orden})
 
-def generarPDFListaAsignaturasCursoAcademico(request, nombre_centro,
+def generarPDFListaAsignaturasCursoAcademico(request, centro,
     nombre_titulacion, plan_estudios, nombre_asignatura, busqueda):
     # Se obtiene la posible asignatura.
     instancia_asignatura = vistasAsignatura.obtenerAsignatura(
-        nombre_centro, nombre_titulacion, plan_estudios,
+        centro, nombre_titulacion, plan_estudios,
         nombre_asignatura)
 
     # Se comprueba que exista la asignatura.
     if not instancia_asignatura:
         return HttpResponseRedirect(
-            reverse('selectCentro_AsignaturaCursoAcademico'))
+            reverse('selectTitulacion_AsignaturaCursoAcademico' +
+            '_administradorCentro',
+            kwargs={'centro': centro, 'tipo': 'list'}))
     else:
         id_centro = instancia_asignatura.id_centro
         id_titulacion = instancia_asignatura.id_titulacion

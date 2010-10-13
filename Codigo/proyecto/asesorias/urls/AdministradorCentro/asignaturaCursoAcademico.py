@@ -13,13 +13,12 @@ urlpatterns = patterns(VISTAS + 'vistasAsignaturaCursoAcademico',
         'addAsignaturaCursoAcademico',
         name='addAsignaturaCursoAcademico_administradorCentro'),
 
-    url(r'^' +
-        '(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/' +
+    url(r'^(?P<nombre_titulacion>[\s\w]+)/' +
         '(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/' +
         '(?P<curso_academico>\d+)/edit/$',
 
         'editAsignaturaCursoAcademico',
-        name='editAsignaturaCursoAcademico'),
+        name='editAsignaturaCursoAcademico_administradorCentro'),
 
     url(r'^(?P<nombre_titulacion>[\s\w]+)/' +
         '(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/' +
@@ -38,7 +37,8 @@ urlpatterns = patterns(VISTAS + 'vistasAsignaturaCursoAcademico',
     url(r'^selectTitulacion/(?P<tipo>[\s\w]+)/$',
 
         'selectTitulacion',
-        name='selectTitulacion_AsignaturaCursoAcademico_administradorCentro'),
+        name='selectTitulacion_AsignaturaCursoAcademico' +
+        '_administradorCentro'),
 
     url(r'^(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
         'selectAsignatura/(?P<tipo>[\s\w]+)/$',
@@ -47,11 +47,11 @@ urlpatterns = patterns(VISTAS + 'vistasAsignaturaCursoAcademico',
         name='selectAsignatura_AsignaturaCursoAcademico' +
         '_administradorCentro'),
 
-    url(r'generarPDF/' +
-        '(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/' +
+    url(r'generarPDF/(?P<nombre_titulacion>[\s\w]+)/' +
         '(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/' +
         '(?P<busqueda>[\s\w]+)/$',
 
         'generarPDFListaAsignaturasCursoAcademico',
-        name='generarPDFListaAsignaturasCursoAcademico'),
+        name='generarPDFListaAsignaturasCursoAcademico' +
+        '_administradorCentro'),
 )
