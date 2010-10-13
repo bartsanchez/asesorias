@@ -1,0 +1,15 @@
+{% extends "asesorias/Base/AdministradorCentro/org_institucional.html" %}
+
+{% block content %}
+
+    <h1>Eliminar asignatura curso académico.</h1>
+
+    {% if error %}
+
+    <p>No existe tal asignatura curso académico.</p>
+
+    <a href="{% url selectTitulacion_AsignaturaCursoAcademico_administradorCentro centro 'list' %}">Volver</a>
+
+    {% endif %}
+
+{% endblock %}

@@ -182,12 +182,12 @@ def editAsignaturaCursoAcademico(request, nombre_centro,
         'plan_estudios': plan_estudios,
         'nombre_asignatura': nombre_asignatura})
 
-def delAsignaturaCursoAcademico(request, nombre_centro,
+def delAsignaturaCursoAcademico(request, centro,
     nombre_titulacion, plan_estudios, nombre_asignatura,
     curso_academico):
     # Se obtiene la instancia de la asignatura curso academico.
     instancia_asignatura_curso_academico= \
-        obtenerAsignaturaCursoAcademico(nombre_centro,
+        obtenerAsignaturaCursoAcademico(centro,
         nombre_titulacion, plan_estudios, nombre_asignatura,
         curso_academico)
     # Si existe se elimina.
@@ -195,8 +195,8 @@ def delAsignaturaCursoAcademico(request, nombre_centro,
         instancia_asignatura_curso_academico.borrar()
         # Redirige a la pagina de listar asignaturas curso academico.
         return HttpResponseRedirect(
-            reverse('listAsignaturaCursoAcademico',
-            kwargs={'nombre_centro': nombre_centro,
+            reverse('listAsignaturaCursoAcademico_administradorCentro',
+            kwargs={'centro': centro,
             'nombre_titulacion': nombre_titulacion,
             'plan_estudios': plan_estudios,
             'nombre_asignatura': nombre_asignatura,
@@ -205,7 +205,8 @@ def delAsignaturaCursoAcademico(request, nombre_centro,
     else:
         error = True
     return render_to_response(PATH + 'delAsignaturaCursoAcademico.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'error': error,
+        'centro': centro})
 
 def selectTitulacion(request, centro, tipo):
     # Se obtiene el posible centro.

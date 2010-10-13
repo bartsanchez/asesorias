@@ -21,13 +21,12 @@ urlpatterns = patterns(VISTAS + 'vistasAsignaturaCursoAcademico',
         'editAsignaturaCursoAcademico',
         name='editAsignaturaCursoAcademico'),
 
-    url(r'^' +
-        '(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/' +
+    url(r'^(?P<nombre_titulacion>[\s\w]+)/' +
         '(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/' +
         '(?P<curso_academico>\d+)/del/$',
 
         'delAsignaturaCursoAcademico',
-        name='delAsignaturaCursoAcademico'),
+        name='delAsignaturaCursoAcademico_administradorCentro'),
 
     url(r'^list/(?P<nombre_titulacion>[\s\w]+)/' +
         '(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/' +
