@@ -1,0 +1,55 @@
+{% extends "asesorias/Base/AdministradorCentro/org_institucional.html" %}
+
+{% block content %}
+
+    <h1>Añadir asignatura curso académico.</h1>
+
+    <div class="form">
+        <div><p>Titulación (Plan de estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_AsignaturaCursoAcademico_administradorCentro centro 'add' %} class="updatelink"></a></p></div>
+        <div><p>Asignatura: <b>{{ nombre_asignatura }}</b> <a href={% url selectAsignatura_AsignaturaCursoAcademico_administradorCentro centro nombre_titulacion plan_estudios 'add' %} class="updatelink"></a></p></div>
+    </div>
+
+    {% if form.errors %}
+    <div id="form-error">
+        <p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}<li><em>{{ field.label_tag }}</em>: {{ field.errors|striptags }}</li>{% endif %}
+            {% endfor %}
+            {% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="module">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Añadir asignatura curso académico.">
+                <caption><h2>Añadir asignatura curso académico</h2></caption>
+
+                {% for field in form %}
+
+                {# Excluye los campos que forman parte de la clave que se controlarán por software. #}
+                {% ifnotequal field.name 'id_centro' %}
+                {% ifnotequal field.name 'id_titulacion' %}
+                {% ifnotequal field.name 'id_asignatura' %}
+                <tr>
+                    <th scope="row">{{ field.label_tag }}</th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endifnotequal %}
+                {% endifnotequal %}
+                {% endifnotequal %}
+
+                {% endfor %}
+                </table>
+            </div>
+
+            <p><input type="submit" value="Confirmar"/></p>
+        </form>
+
+    </div>
+
+{% endblock %}

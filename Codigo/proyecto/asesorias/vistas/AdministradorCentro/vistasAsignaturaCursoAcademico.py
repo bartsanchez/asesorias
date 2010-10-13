@@ -30,24 +30,25 @@ def obtenerAsignaturaCursoAcademico(nombre_centro, nombre_titulacion,
         resultado = False
     return resultado
 
-def addAsignaturaCursoAcademico(request, nombre_centro,
-    nombre_titulacion, plan_estudios, nombre_asignatura):
+def addAsignaturaCursoAcademico(request, centro, nombre_titulacion,
+    plan_estudios, nombre_asignatura):
     # Se obtiene la posible asignatura.
     instancia_asignatura = vistasAsignatura.obtenerAsignatura(
-        nombre_centro, nombre_titulacion, plan_estudios,
+        centro, nombre_titulacion, plan_estudios,
         nombre_asignatura)
 
     # Se comprueba que exista la asignatura.
     if not instancia_asignatura:
         return HttpResponseRedirect(
-            reverse('selectCentro_AsignaturaCursoAcademico',
-            kwargs={'tipo': 'list'}))
+            reverse('selectTitulacion_AsignaturaCursoAcademico' +
+            '_administradorCentro',
+            kwargs={'centro': centro, 'tipo': 'list'}))
 
     # Se ha rellenado el formulario.
     if request.method == 'POST':
         # Se extraen los valores pasados por el metodo POST.
         codigo_asignatura = vistasAsignatura.obtenerAsignatura(
-            nombre_centro, nombre_titulacion, plan_estudios,
+            centro, nombre_titulacion, plan_estudios,
             nombre_asignatura).codigo_asignatura
         curso_academico = request.POST['curso_academico']
 
@@ -78,8 +79,9 @@ def addAsignaturaCursoAcademico(request, nombre_centro,
             # Redirige a la pagina de listar asignaturas curso
             # academico.
             return HttpResponseRedirect(
-                reverse('listAsignaturaCursoAcademico',
-                kwargs={'nombre_centro':
+                reverse(
+                'listAsignaturaCursoAcademico_administradorCentro',
+                kwargs={'centro':
                 instancia_asignatura.determinarNombreCentro(),
                 'nombre_titulacion':
                 instancia_asignatura.determinarNombreTitulacion(),
@@ -93,7 +95,7 @@ def addAsignaturaCursoAcademico(request, nombre_centro,
         form = forms.AsignaturaCursoAcademicoForm()
     return render_to_response(PATH + 'addAsignaturaCursoAcademico.html',
         {'user': request.user, 'form': form,
-        'nombre_centro': nombre_centro,
+        'centro': centro,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios,
         'nombre_asignatura': nombre_asignatura})

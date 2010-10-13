@@ -9,7 +9,7 @@
         <div><p>Asignatura: <b>{{ nombre_asignatura }}</b> <a href={% url selectAsignatura_AsignaturaCursoAcademico_administradorCentro centro nombre_titulacion plan_estudios 'list' %} class="updatelink"></a></p></div>
     </div>
 
-    <a href="{# url addAsignaturaCursoAcademico nombre_centro nombre_titulacion plan_estudios nombre_asignatura #}" class="addlink">Crear nuevo</a>
+    <a href="{% url addAsignaturaCursoAcademico_administradorCentro centro nombre_titulacion plan_estudios nombre_asignatura %}" class="addlink">Crear nuevo</a>
     <a href="{# url generarPDFListaAsignaturasCursoAcademico nombre_centro nombre_titulacion plan_estudios nombre_asignatura busqueda #}" class="pdflink">Generar PDF</a>
 
     <div class="search">
