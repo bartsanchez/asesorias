@@ -22,10 +22,6 @@ urlpatterns = patterns(VISTAS + 'vistasAdministradorCentro',
         'administradorCentro_org_docente',
         name='administradorCentro_org_docente'),
 
-    url(r'^alumnos/$',
-        'administradorCentro_alumnos',
-        name='administradorCentro_alumnos'),
-
     ### Includes a cada entidad ###
 
     (r'^titulacion/',
@@ -37,23 +33,8 @@ urlpatterns = patterns(VISTAS + 'vistasAdministradorCentro',
     (r'^asignaturaCursoAcademico/',
         include(URLS + 'asignaturaCursoAcademico')),
 
-    #(r'^departamento/',
-        #include(URLS + 'departamento')),
-
-    #(r'^asesor/',
-        #include(URLS + 'asesor')),
-
     #(r'^asesorCursoAcademico/',
         #include(URLS + 'asesorCursoAcademico')),
-
-    #(r'^plantillaEntrevistaAsesor/',
-        #include(URLS + 'plantillaEntrevistaAsesor')),
-
-    #(r'^preguntaAsesor/',
-        #include(URLS + 'preguntaAsesor')),
-
-    #(r'^alumno/',
-        #include(URLS + 'alumno')),
 
     #(r'^alumnoCursoAcademico/',
         #include(URLS + 'alumnoCursoAcademico')),
@@ -63,22 +44,4 @@ urlpatterns = patterns(VISTAS + 'vistasAdministradorCentro',
 
     #(r'^calificacionConvocatoria/',
         #include(URLS + 'calificacionConvocatoria')),
-
-    #(r'^plantillaEntrevistaOficial/',
-        #include(URLS + 'plantillaEntrevistaOficial')),
-
-    #(r'^preguntaOficial/',
-        #include(URLS + 'preguntaOficial')),
-
-    #(r'^reunion/',
-        #include(URLS + 'reunion')),
-
-    #(r'^centro_administradorCentro/',
-        #include(URLS + 'centro_administradorCentro')),
-
-    #(r'^reunion_preguntaAsesor/',
-        #include(URLS + 'reunion_preguntaAsesor')),
-
-    #(r'^reunion_preguntaOficial/',
-        #include(URLS + 'reunion_preguntaOficial')),
 )

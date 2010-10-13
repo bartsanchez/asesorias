@@ -5,8 +5,9 @@
 
     {% block org_docente %}
                                     <ul>
-                                        <li><a href="{% url listDepartamento 'nombre_departamento'  %}">Departamentos</a></li>
-                                        <li><a href="{% url listAsesor 'nombre_asesor' %}">Asesores</a></li>
                                         <li><a href="{% url selectAsesor_AsesorCursoAcademico %}">Asesores Curso Académico</a></li>
+                                        <li><a href="{% url selectAsesor_AlumnoCursoAcademico 'list' %}">Alumnos Curso Académico</a></li>
+                                        <li><a href="{% url selectAsignaturaOAlumnoCursoAcademico %}">Matrículas</a></li>
+                                        <li><a href="{% url selectCentro_CalificacionConvocatoria 'list' %}">Calificaciones Convocatoria</a></li>
                                     </ul>
     {% endblock %}

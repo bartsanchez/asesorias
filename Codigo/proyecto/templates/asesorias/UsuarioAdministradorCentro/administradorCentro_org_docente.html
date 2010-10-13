@@ -7,22 +7,28 @@
                 <table summary="Organización docente.">
                 <caption><h2>Organización docente</h2></caption>
 
-                <!-- Departamentos. -->
-                <tr>
-                    <th scope="row"><a href="{% url listDepartamento 'nombre_departamento' %}">Departamentos</a></th>
-                    <td><a href="{% url addDepartamento %}" class="addlink">Añadir</a></td>
-                </tr>
-
-                <!-- Asesores. -->
-                <tr>
-                    <th scope="row"><a href="{% url listAsesor 'nombre_asesor' %}">Asesores</a></th>
-                    <td><a href="{% url addAsesor %}" class="addlink">Añadir</a></td>
-                </tr>
-
                 <!-- Asesores Curso Académico. -->
                 <tr>
                     <th scope="row"><a href="{% url selectAsesor_AsesorCursoAcademico %}">Asesores Curso Académico</a></th>
                     <td><a href="{% url addAsesorCursoAcademico '' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Alumnos Curso Académico. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsesor_AlumnoCursoAcademico 'list' %}">Alumnos Curso Académico</a></th>
+                    <td><a href="{% url selectAsesor_AlumnoCursoAcademico 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Matrículas. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectAsignaturaOAlumnoCursoAcademico %}">Matrículas</a></th>
+                    <td><a href="{% url selectCentro_Matricula 'add' %}" class="addlink">Añadir</a></td>
+                </tr>
+
+                <!-- Calificaciones Convocatoria. -->
+                <tr>
+                    <th scope="row"><a href="{% url selectCentro_CalificacionConvocatoria 'list' %}">Calificaciones Convocatoria</a></th>
+                    <td><a href="{% url selectCentro_CalificacionConvocatoria 'add' %}" class="addlink">Añadir</a></td>
                 </tr>
 
                 </table>

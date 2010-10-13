@@ -4,7 +4,6 @@
                 <li><a href="{% url administradorCentro_inicio centro %}" {% block opcion_inicio %}{% endblock %}>Inicio</a></li>
                 <li><a href="{% url administradorCentro_org_institucional centro %}" {% block opcion_org_institucional %}{% endblock %}>Organización institucional</a></li>
                 <li><a href="{% url administradorCentro_org_docente centro %}" {% block opcion_org_docente %}{% endblock %}>Organización docente</a></li>
-                <li><a href="{% url administradorCentro_alumnos centro %}" {% block opcion_alumnos %}{% endblock %}>Alumnos</a></li>
     {% endblock %}
 
     {% block centro %}<h3><a href="">{{ centro }}</a></h3>{% endblock %}
@@ -16,9 +15,6 @@
                                 </li>
                                 <li><h3><a href="{% url administradorCentro_org_docente centro %}">Organización docente</a></h3>
                                     {% block org_docente %}{% endblock %}
-                                </li>
-                                <li><h3><a href="{% url administradorCentro_alumnos centro %}">Alumnos</a></h3>
-                                    {% block alumnos %}{% endblock %}
                                 </li>
                             </ul>
     {% endblock %}
