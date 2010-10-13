@@ -27,18 +27,6 @@ def administradorCentro_alumnos(request, centro):
     return render_to_response(PATH + 'administradorCentro_alumnos.html',
         {'user': request.user, 'centro': centro})
 
-@login_required()
-def administradorCentro_reuniones(request, centro):
-    return render_to_response(PATH +
-        'administradorCentro_reuniones.html',
-        {'user': request.user, 'centro': centro})
-
-@login_required()
-def administradorCentro_plantillas(request, centro):
-    return render_to_response(PATH +
-        'administradorCentro_plantillas.html',
-        {'user': request.user, 'centro': centro})
-
 # Funcion decoradora para comprobar el centro.
 def checkCentro(funcion):
     def inner(request, centro, *args, **kwargs):

@@ -5,8 +5,6 @@
                 <li><a href="{% url administradorCentro_org_institucional centro %}" {% block opcion_org_institucional %}{% endblock %}>Organización institucional</a></li>
                 <li><a href="{% url administradorCentro_org_docente centro %}" {% block opcion_org_docente %}{% endblock %}>Organización docente</a></li>
                 <li><a href="{% url administradorCentro_alumnos centro %}" {% block opcion_alumnos %}{% endblock %}>Alumnos</a></li>
-                <li><a href="{% url administradorCentro_reuniones centro %}" {% block opcion_reuniones %}{% endblock %}>Reuniones</a></li>
-                <li><a href="{% url administradorCentro_plantillas centro %}" {% block opcion_plantillas %}{% endblock %}>Plantillas de entrevista</a></li>
     {% endblock %}
 
     {% block centro %}<h3><a href="">{{ centro }}</a></h3>{% endblock %}
@@ -21,12 +19,6 @@
                                 </li>
                                 <li><h3><a href="{% url administradorCentro_alumnos centro %}">Alumnos</a></h3>
                                     {% block alumnos %}{% endblock %}
-                                </li>
-                                <li><h3><a href="{% url administradorCentro_reuniones centro %}">Reuniones</a></h3>
-                                    {% block reuniones %}{% endblock %}
-                                </li>
-                                <li><h3><a href="{% url administradorCentro_plantillas centro %}">Plantillas de entrevista</a></h3>
-                                    {% block plantillas %}{% endblock %}
                                 </li>
                             </ul>
     {% endblock %}
