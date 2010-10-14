@@ -210,7 +210,7 @@ def listAsesorCursoAcademico(request, centro, curso_academico, orden):
         'lista_asesores_curso_academico':
         lista_asesores_curso_academico,
         'busqueda': busqueda, 'orden': orden,
-        'centro': centro})
+        'centro': centro, 'curso_academico': curso_academico})
 
 def generarPDFListaAsesoresCursoAcademico(request, dni_pasaporte,
     busqueda):
