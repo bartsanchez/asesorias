@@ -33,8 +33,8 @@ urlpatterns = patterns(VISTAS + 'vistasAdministradorCentro',
     (r'^asignaturaCursoAcademico/',
         include(URLS + 'asignaturaCursoAcademico')),
 
-    #(r'^asesorCursoAcademico/',
-        #include(URLS + 'asesorCursoAcademico')),
+    (r'^asesorCursoAcademico/',
+        include(URLS + 'asesorCursoAcademico')),
 
     #(r'^alumnoCursoAcademico/',
         #include(URLS + 'alumnoCursoAcademico')),

@@ -32,7 +32,7 @@ class TitulacionForm(forms.ModelForm):
         model = models.Titulacion
 
 class TitulacionFormSelect(forms.Form):
-    titulacion = forms.ModelChoiceField(
+    titulacion = forms.ModelChoiceField(label='Titulación',
         queryset=models.Titulacion.objects.all())
 
     # Necesario para actualizar el queryset en tiempo de ejecucion, a
@@ -280,8 +280,8 @@ class SearchForm(forms.Form):
     busqueda = forms.CharField(label="Busqueda", max_length=50)
 
 class CursoAcademicoFormSelect(forms.Form):
-    curso_academico = forms.IntegerField(min_value=1900,
-        max_value=date.today().year)
+    curso_academico = forms.IntegerField(label='Curso académico',
+        min_value=1900, max_value=date.today().year)
 
 class ModificarClaveForm(forms.Form):
     old_password = forms.CharField(label="Antigua contraseña",
