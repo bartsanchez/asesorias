@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -7,6 +8,7 @@ from asesorias.vistas.AdministradorPrincipal import vistasAsesor
 from asesorias.vistas.AdministradorPrincipal import vistasCentro
 from asesorias.vistas.AdministradorPrincipal import \
     vistasAsesorCursoAcademico
+from asesorias.vistas.vistasAdministradorCentro import checkCentro
 from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/UsuarioAdministradorCentro/AlumnoCursoAcademico/'
@@ -23,6 +25,8 @@ def obtenerAlumnoCursoAcademico(dni_pasaporte, curso_academico):
         resultado = False
     return resultado
 
+@checkCentro
+@login_required
 def selectCursoAcademico(request, centro):
     # Se ha introducido un asesor.
     if request.method == 'POST':
@@ -46,6 +50,8 @@ def selectCursoAcademico(request, centro):
         {'user': request.user, 'form': form,
         'centro': centro})
 
+@checkCentro
+@login_required
 def listAlumnoCursoAcademico(request, centro, curso_academico, orden):
     # Se obtiene el posible centro.
     instancia_centro = vistasCentro.obtenerCentro(centro)
@@ -131,6 +137,8 @@ def listAlumnoCursoAcademico(request, centro, curso_academico, orden):
         'curso_academico': curso_academico,
         'orden': orden, 'centro': centro})
 
+@checkCentro
+@login_required
 def generarPDFListaAlumnosCursoAcademico(request, centro,
     curso_academico, busqueda):
     # Se obtiene el posible centro.
