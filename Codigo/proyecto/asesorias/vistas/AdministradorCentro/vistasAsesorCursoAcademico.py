@@ -186,7 +186,7 @@ def generarPDFListaAsesoresCursoAcademico(request, centro,
     lista_asesores_curso_academico = \
         models.AsesorCursoAcademico.objects.filter(
         dni_pasaporte__in=lista_asesores_aux,
-        curso_academico=curso_academico)
+        curso_academico=curso_academico).order_by('dni_pasaporte')
 
     # Se ha realizado una busqueda.
     if busqueda != 'False':
