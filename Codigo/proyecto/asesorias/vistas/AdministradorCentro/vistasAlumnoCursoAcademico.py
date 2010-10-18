@@ -164,6 +164,15 @@ def generarPDFListaAlumnosCursoAcademico(request, centro,
         curso_academico=curso_academico).order_by(
         'dni_pasaporte_alumno')
 
+    lista_aux = ['DNI/Pasaporte' + ' - ' + 'Nombre' + ' - ' +
+        'Apellidos']
+    for alumno in lista_alumnos_curso_academico:
+        lista_aux.append(alumno.dni_pasaporte_alumno_id + ' - ' +
+            alumno.dni_pasaporte_alumno.nombre + ' - ' +
+            alumno.dni_pasaporte_alumno.apellidos)
+
+    lista_alumnos_curso_academico = lista_aux
+
     # Se ha realizado una busqueda.
     if busqueda != 'False':
         # Se crea una lista auxiliar que albergara el resultado de la
