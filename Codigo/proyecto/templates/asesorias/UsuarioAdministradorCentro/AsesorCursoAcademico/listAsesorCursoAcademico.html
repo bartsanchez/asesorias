@@ -42,22 +42,34 @@
 
         {% if not busqueda %}
         <tr>
-            {% ifequal orden '_curso_academico' %}
-            <th colspan="3"><a href={# url listAsesorCursoAcademico asesor 'curso_academico' #}>Curso académico &#11014;</a> : <a href={# url listAsesorCursoAcademico asesor 'nombre_departamento' #}>Departamento</a></th>
+            {% ifequal orden '_dni_pasaporte' %}
+            <th colspan="3"><a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico 'dni_pasaporte' %}>DNI/Pasaporte &#11014;</a> : <a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico 'nombre' %}>Nombre</a> : <a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico 'apellidos' %}>Apellidos</a></th>
 
             {% else %}
 
-            {% ifequal orden 'nombre_departamento' %}
-            <th colspan="3"><a href={# url listAsesorCursoAcademico asesor 'curso_academico' #}>Curso académico</a> : <a href={# url listAsesorCursoAcademico asesor '_nombre_departamento' #}>Departamento &#11015;</a></th>
+            {% ifequal orden 'nombre' %}
+            <th colspan="3"><a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico 'dni_pasaporte' %}>DNI/Pasaporte</a> : <a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico '_nombre' %}>Nombre &#11015;</a> : <a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico 'apellidos' %}>Apellidos</a></th>
 
             {% else %}
 
-            {% ifequal orden '_nombre_departamento' %}
-            <th colspan="3"><a href={# url listAsesorCursoAcademico asesor 'curso_academico' #}>Curso académico</a> : <a href={# url listAsesorCursoAcademico asesor 'nombre_departamento' #}>Departamento  &#11014;</a></th>
+            {% ifequal orden '_nombre' %}
+            <th colspan="3"><a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico 'dni_pasaporte' %}>DNI/Pasaporte</a> : <a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico 'nombre' %}>Nombre &#11014;</a> : <a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico 'apellidos' %}>Apellidos</a></th>
 
             {% else %}
-            <th colspan="3"><a href={# url listAsesorCursoAcademico asesor '_curso_academico' #}>Curso académico &#11015;</a> : <a href={# url listAsesorCursoAcademico asesor 'nombre_departamento' #}>Departamento</a></th>
 
+            {% ifequal orden 'apellidos' %}
+            <th colspan="3"><a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico 'dni_pasaporte' %}>DNI/Pasaporte</a> : <a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico 'nombre' %}>Nombre</a> : <a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico '_apellidos' %}>Apellidos &#11015;</a></th>
+
+            {% else %}
+
+            {% ifequal orden '_apellidos' %}
+            <th colspan="3"><a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico 'dni_pasaporte' %}>DNI/Pasaporte</a> : <a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico 'nombre' %}>Nombre</a> : <a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico 'apellidos' %}>Apellidos &#11014;</a></th>
+
+            {% else %}
+            <th colspan="3"><a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico '_dni_pasaporte' %}>DNI/Pasaporte &#11015;</a> : <a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico 'nombre' %}>Nombre</a> : <a href={% url listAsesorCursoAcademico_administradorCentro centro curso_academico 'apellidos' %}>Apellidos</a></th>
+
+            {% endifequal %}
+            {% endifequal %}
             {% endifequal %}
             {% endifequal %}
             {% endifequal %}
@@ -67,7 +79,7 @@
         <!-- Asesores Curso Academico -->
         {% for asesor in lista_asesores_curso_academico %}
         <tr>
-            <th scope="row"><a href="{# url editAsesorCursoAcademico asesor.dni_pasaporte asesor.curso_academico #}">{{ asesor.curso_academico }} : {{ asesor }}</a></th>
+            <th scope="row"><a href="{# url editAsesorCursoAcademico asesor.dni_pasaporte asesor.curso_academico #}">{{ asesor.dni_pasaporte }} : {{ asesor.dni_pasaporte.nombre }} : {{ asesor.dni_pasaporte.apellidos }}</a></th>
             <td><a href="{# url editAsesorCursoAcademico asesor.dni_pasaporte asesor.curso_academico #}" class="editlink">Editar</a></td>
             <td><a href="{# url delAsesorCursoAcademico asesor.dni_pasaporte asesor.curso_academico #}" class="deletelink">Eliminar</a></td>
         </tr>

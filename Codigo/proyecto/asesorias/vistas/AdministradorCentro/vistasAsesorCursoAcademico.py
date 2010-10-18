@@ -134,7 +134,7 @@ def selectCursoAcademico(request, centro):
                 reverse('listAsesorCursoAcademico_administradorCentro',
                 kwargs={'centro': centro,
                 'curso_academico': curso_academico,
-                'orden': 'curso_academico'}))
+                'orden': 'dni_pasaporte'}))
     else:
         form = forms.CursoAcademicoFormSelect()
 
@@ -159,10 +159,22 @@ def listAsesorCursoAcademico(request, centro, curso_academico, orden):
         curso_academico=curso_academico).values_list(
         'dni_pasaporte', flat=True).distinct()
 
+    # Se obtiene una lista con todos los alumnos curso academico.
+    lista_alumnos_curso_academico = \
+        models.AlumnoCursoAcademico.objects.filter(
+        dni_pasaporte_alumno__in=lista_matriculas,
+        curso_academico=curso_academico)
+
+    # Lista auxiliar que albergara los dni's de los asesores.
+    lista_asesores_aux = []
+    for alumno in lista_alumnos_curso_academico:
+        lista_asesores_aux.append(
+            alumno.codigo_asesorCursoAcademico.dni_pasaporte)
+
     # Se obtiene una lista con todos los asesores curso academico.
     lista_asesores_curso_academico = \
-        models.AlumnoCursoAcademico.objects.filter(
-        dni_pasaporte_alumno__in=lista_matriculas)
+        models.AsesorCursoAcademico.objects.filter(
+        dni_pasaporte__in=lista_asesores_aux)
 
     # Se ha realizado una busqueda.
     if request.method == 'POST':
@@ -200,8 +212,8 @@ def listAsesorCursoAcademico(request, centro, curso_academico, orden):
         form = forms.SearchForm()
         busqueda = False
 
-        if ((orden == '_curso_academico') or
-            (orden == '_nombre_departamento')):
+        if ((orden == '_dni_pasaporte') or
+            (orden == '_nombre') or (orden == '_apellidos')):
             lista_asesores_curso_academico = \
                 reversed(lista_asesores_curso_academico)
 
