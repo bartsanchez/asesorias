@@ -171,8 +171,6 @@ def generarPDFListaAlumnosCursoAcademico(request, centro,
             alumno.dni_pasaporte_alumno.nombre + ' - ' +
             alumno.dni_pasaporte_alumno.apellidos)
 
-    lista_alumnos_curso_academico = lista_aux
-
     # Se ha realizado una busqueda.
     if busqueda != 'False':
         # Se crea una lista auxiliar que albergara el resultado de la
