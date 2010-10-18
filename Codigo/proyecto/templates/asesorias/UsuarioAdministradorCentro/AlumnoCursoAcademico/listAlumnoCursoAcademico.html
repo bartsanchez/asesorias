@@ -1,0 +1,90 @@
+{% extends "asesorias/Base/AdministradorCentro/org_docente.html" %}
+
+{% block content %}
+
+    <h1>Lista de alumnos curso académico.</h1>
+
+    <div class="form">
+        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectCursoAcademico_AlumnoCursoAcademico_administradorCentro centro %} class="updatelink"></a></p></div>
+    </div>
+
+    <a href="{# url generarPDFListaAsesoresCursoAcademico_administradorCentro centro curso_academico busqueda #}" class="pdflink">Generar PDF</a>
+
+    <div class="search">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Realizar búsqueda.">
+                {% for field in form %}
+                <tr>
+                    <th scope="row"><input type="submit" value="Búsqueda" class="searchlink"/></th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="module">
+        <table summary="Lista de alumnos curso académico.">
+        <caption><h2>Lista de alumnos curso académico{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
+
+        {% if not lista_alumnos_curso_academico %}
+
+        <tr><th scope="row"><p>No existen actualmente asesores curso académico para este centro en el sistema.</p></th></tr>
+
+        {% else %}
+
+        {% if not busqueda %}
+        <tr>
+            {% ifequal orden '_dni_pasaporte' %}
+            <th colspan="3"><a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico 'dni_pasaporte' %}>DNI/Pasaporte &#11014;</a> : <a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico 'nombre' %}>Nombre</a> : <a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico 'apellidos' %}>Apellidos</a></th>
+
+            {% else %}
+
+            {% ifequal orden 'nombre' %}
+            <th colspan="3"><a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico 'dni_pasaporte' %}>DNI/Pasaporte</a> : <a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico '_nombre' %}>Nombre &#11015;</a> : <a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico 'apellidos' %}>Apellidos</a></th>
+
+            {% else %}
+
+            {% ifequal orden '_nombre' %}
+            <th colspan="3"><a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico 'dni_pasaporte' %}>DNI/Pasaporte</a> : <a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico 'nombre' %}>Nombre &#11014;</a> : <a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico 'apellidos' %}>Apellidos</a></th>
+
+            {% else %}
+
+            {% ifequal orden 'apellidos' %}
+            <th colspan="3"><a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico 'dni_pasaporte' %}>DNI/Pasaporte</a> : <a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico 'nombre' %}>Nombre</a> : <a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico '_apellidos' %}>Apellidos &#11015;</a></th>
+
+            {% else %}
+
+            {% ifequal orden '_apellidos' %}
+            <th colspan="3"><a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico 'dni_pasaporte' %}>DNI/Pasaporte</a> : <a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico 'nombre' %}>Nombre</a> : <a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico 'apellidos' %}>Apellidos &#11014;</a></th>
+
+            {% else %}
+            <th colspan="3"><a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico '_dni_pasaporte' %}>DNI/Pasaporte &#11015;</a> : <a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico 'nombre' %}>Nombre</a> : <a href={% url listAlumnoCursoAcademico_administradorCentro centro curso_academico 'apellidos' %}>Apellidos</a></th>
+
+            {% endifequal %}
+            {% endifequal %}
+            {% endifequal %}
+            {% endifequal %}
+            {% endifequal %}
+        </tr>
+        {% endif %}
+
+        <!-- Alumnos Curso Academico -->
+        {% for alumno in lista_alumnos_curso_academico %}
+        <tr>
+            <th scope="row"><a href='#'>{{ alumno.dni_pasaporte_alumno.dni_pasaporte }} : {{ alumno.dni_pasaporte_alumno.nombre }} : {{ alumno.dni_pasaporte_alumno.apellidos }}</a></th>
+        </tr>
+        {% endfor %}
+
+        {% endif %}
+
+        </table>
+    </div>
+
+{% endblock %}
