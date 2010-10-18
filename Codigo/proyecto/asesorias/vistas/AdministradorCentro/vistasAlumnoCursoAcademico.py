@@ -98,7 +98,10 @@ def listAlumnoCursoAcademico(request, centro, curso_academico, orden):
             for alumno in lista_alumnos_curso_academico:
                 # Se crea una cadena auxiliar para examinar si se
                 # encuentra el resultado de la busqueda.
-                cadena = unicode(alumno.dni_pasaporte_alumno)
+                cadena = (
+                    unicode(alumno.dni_pasaporte_alumno.dni_pasaporte) +
+                    unicode(alumno.dni_pasaporte_alumno.nombre) +
+                    unicode(alumno.dni_pasaporte_alumno.apellidos))
 
                 # Si se encuentra la busqueda el elemento se incluye en
                 # la lista auxiliar.
