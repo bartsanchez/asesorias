@@ -188,6 +188,16 @@ def generarPDFListaAsesoresCursoAcademico(request, centro,
         dni_pasaporte__in=lista_asesores_aux,
         curso_academico=curso_academico).order_by('dni_pasaporte')
 
+    lista_aux = ['DNI/Pasaporte' + ' - ' + 'Nombre' + ' - ' +
+        'Apellidos' + ' - ' + 'Departamento']
+    for asesor in lista_asesores_curso_academico:
+        lista_aux.append(asesor.dni_pasaporte_id + ' - ' +
+            asesor.dni_pasaporte.nombre + ' - ' +
+            asesor.dni_pasaporte.apellidos + ' - ' +
+            asesor.id_departamento.nombre_departamento)
+
+    lista_asesores_curso_academico = lista_aux
+
     # Se ha realizado una busqueda.
     if busqueda != 'False':
         # Se crea una lista auxiliar que albergara el resultado de la
