@@ -131,26 +131,29 @@ def listAlumnoCursoAcademico(request, centro, curso_academico, orden):
         'curso_academico': curso_academico,
         'orden': orden, 'centro': centro})
 
-def generarPDFListaAlumnosCursoAcademico(request, dni_pasaporte,
+def generarPDFListaAlumnosCursoAcademico(request, centro,
     curso_academico, busqueda):
-    # Se comprueba que exista el asesor curso academico pasado por
-    # argumento.
-    instancia_asesorCA = \
-        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
-        dni_pasaporte, curso_academico)
+    # Se obtiene el posible centro.
+    instancia_centro = vistasCentro.obtenerCentro(centro)
 
-    # El asesor curso academico no existe, se redirige.
-    if not (instancia_asesorCA):
+    # Se comprueba que exista el centro.
+    if not instancia_centro:
         return HttpResponseRedirect(
-            reverse('selectAsesorCA_AlumnoCursoAcademico',
-            kwargs={'dni_pasaporte': dni_pasaporte,
-            'tipo': 'list'}))
+            reverse('administradorCentro_inicio',
+            kwargs={'centro': centro}))
+
+    # Se obtiene una lista con todas las matriculas de ese centro
+    # en el curso academico pasado por argumento.
+    lista_matriculas = models.Matricula.objects.filter(
+        id_centro=instancia_centro.id_centro,
+        curso_academico=curso_academico).values_list(
+        'dni_pasaporte', flat=True).distinct()
 
     # Se obtiene una lista con todos los alumnos curso academico.
     lista_alumnos_curso_academico = \
         models.AlumnoCursoAcademico.objects.filter(
-        codigo_asesorCursoAcademico=
-        instancia_asesorCA.codigo_asesorCursoAcademico).order_by(
+        dni_pasaporte_alumno__in=lista_matriculas,
+        curso_academico=curso_academico).order_by(
         'dni_pasaporte_alumno')
 
     # Se ha realizado una busqueda.
@@ -164,7 +167,10 @@ def generarPDFListaAlumnosCursoAcademico(request, dni_pasaporte,
         for alumno in lista_alumnos_curso_academico:
             # Se crea una cadena auxiliar para examinar si se encuentra
             # el resultado de la busqueda.
-            cadena = unicode(alumno.dni_pasaporte_alumno)
+            cadena = (
+                    unicode(alumno.dni_pasaporte_alumno.dni_pasaporte) +
+                    unicode(alumno.dni_pasaporte_alumno.nombre) +
+                    unicode(alumno.dni_pasaporte_alumno.apellidos))
 
             # Si se encuentra la busqueda el elemento se incluye en la
             # lista auxiliar.

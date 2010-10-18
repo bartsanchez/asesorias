@@ -8,7 +8,7 @@
         <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectCursoAcademico_AlumnoCursoAcademico_administradorCentro centro %} class="updatelink"></a></p></div>
     </div>
 
-    <a href="{# url generarPDFListaAsesoresCursoAcademico_administradorCentro centro curso_academico busqueda #}" class="pdflink">Generar PDF</a>
+    <a href="{% url generarPDFListaAlumnosCursoAcademico_administradorCentro centro curso_academico busqueda %}" class="pdflink">Generar PDF</a>
 
     <div class="search">
 
