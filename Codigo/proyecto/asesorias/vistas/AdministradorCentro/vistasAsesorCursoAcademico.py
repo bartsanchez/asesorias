@@ -129,22 +129,41 @@ def listAsesorCursoAcademico(request, centro, curso_academico, orden):
         'busqueda': busqueda, 'orden': orden,
         'centro': centro, 'curso_academico': curso_academico})
 
-def generarPDFListaAsesoresCursoAcademico(request, dni_pasaporte,
-    busqueda):
-    # Se comprueba que exista el asesor pasado por argumento.
-    existe_asesor_curso_academico = \
-        models.AsesorCursoAcademico.objects.filter(
-        dni_pasaporte=dni_pasaporte)
+def generarPDFListaAsesoresCursoAcademico(request, centro,
+    curso_academico, busqueda):
+    # Se obtiene el posible centro.
+    instancia_centro = vistasCentro.obtenerCentro(centro)
 
-    # El asesor no existe, se redirige.
-    if not (existe_asesor_curso_academico):
+    # Se comprueba que exista el centro.
+    if not instancia_centro:
         return HttpResponseRedirect(
-            reverse('selectAsesor_AsesorCursoAcademico'))
+            reverse('administradorCentro_inicio',
+            kwargs={'centro': centro}))
+
+    # Se obtiene una lista con todas las matriculas de ese centro
+    # en el curso academico pasado por argumento.
+    lista_matriculas = models.Matricula.objects.filter(
+        id_centro=instancia_centro.id_centro,
+        curso_academico=curso_academico).values_list(
+        'dni_pasaporte', flat=True).distinct()
+
+    # Se obtiene una lista con todos los alumnos curso academico.
+    lista_alumnos_curso_academico = \
+        models.AlumnoCursoAcademico.objects.filter(
+        dni_pasaporte_alumno__in=lista_matriculas,
+        curso_academico=curso_academico)
+
+    # Lista auxiliar que albergara los dni's de los asesores.
+    lista_asesores_aux = []
+    for alumno in lista_alumnos_curso_academico:
+        lista_asesores_aux.append(
+            alumno.codigo_asesorCursoAcademico.dni_pasaporte)
 
     # Se obtiene una lista con todos los asesores curso academico.
     lista_asesores_curso_academico = \
         models.AsesorCursoAcademico.objects.filter(
-        dni_pasaporte=dni_pasaporte).order_by('curso_academico')
+        dni_pasaporte__in=lista_asesores_aux,
+        curso_academico=curso_academico)
 
     # Se ha realizado una busqueda.
     if busqueda != 'False':
@@ -157,8 +176,10 @@ def generarPDFListaAsesoresCursoAcademico(request, dni_pasaporte,
         for asesor in lista_asesores_curso_academico:
             # Se crea una cadena auxiliar para examinar si se encuentra
             # el resultado de la busqueda.
-            cadena = (unicode(asesor.curso_academico) +
-                unicode(asesor.id_departamento))
+            cadena = (unicode(asesor.dni_pasaporte) +
+                    unicode(asesor.dni_pasaporte.nombre) +
+                    unicode(asesor.dni_pasaporte.apellidos) +
+                    unicode(asesor.id_departamento.nombre_departamento))
 
             # Si se encuentra la busqueda el elemento se incluye en la
             # lista auxiliar.
