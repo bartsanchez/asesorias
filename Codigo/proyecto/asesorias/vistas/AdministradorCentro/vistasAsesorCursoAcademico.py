@@ -60,6 +60,20 @@ def listAsesorCursoAcademico(request, centro, curso_academico, orden):
             reverse('administradorCentro_inicio',
             kwargs={'centro': centro}))
 
+    # Se establece el ordenamiento inicial.
+    if ((orden == 'nombre') or (orden == '_nombre')):
+        orden_inicial = 'dni_pasaporte__nombre'
+        orden_secundario = 'dni_pasaporte__apellidos'
+    elif ((orden == 'apellidos') or (orden == '_apellidos')):
+        orden_inicial = 'dni_pasaporte__apellidos'
+        orden_secundario = 'dni_pasaporte__nombre'
+    elif ((orden == 'departamento') or (orden == '_departamento')):
+        orden_inicial = 'id_departamento'
+        orden_secundario = 'dni_pasaporte__nombre'
+    else:
+        orden_inicial = 'dni_pasaporte'
+        orden_secundario = 'dni_pasaporte__nombre'
+
     # Se obtiene una lista con todas las matriculas de ese centro
     # en el curso academico pasado por argumento.
     lista_matriculas = models.Matricula.objects.filter(
@@ -83,7 +97,8 @@ def listAsesorCursoAcademico(request, centro, curso_academico, orden):
     lista_asesores_curso_academico = \
         models.AsesorCursoAcademico.objects.filter(
         dni_pasaporte__in=lista_asesores_aux,
-        curso_academico=curso_academico)
+        curso_academico=curso_academico).order_by(orden_inicial,
+        orden_secundario)
 
     # Se ha realizado una busqueda.
     if request.method == 'POST':
