@@ -45,21 +45,21 @@ def obtenerCalificacionConvocatoria(nombre_centro, nombre_titulacion,
         resultado = False
     return resultado
 
-def addCalificacionConvocatoria(request, nombre_centro,
-    nombre_titulacion, plan_estudios, nombre_asignatura,
-    curso_academico, dni_pasaporte):
+def addCalificacionConvocatoria(request, centro, nombre_titulacion,
+    plan_estudios, nombre_asignatura, curso_academico, dni_pasaporte):
 
     # Se obtiene la posible matricula.
     instancia_matricula = \
-        vistasMatricula.obtenerMatricula(nombre_centro,
+        vistasMatricula.obtenerMatricula(centro,
         nombre_titulacion, plan_estudios, nombre_asignatura,
         curso_academico, dni_pasaporte)
 
     # Se comprueba que exista la matricula.
     if not instancia_matricula:
         return HttpResponseRedirect(
-            reverse('selectCentro_CalificacionConvocatoria',
-            kwargs={'tipo': 'add'}))
+            reverse('selectTitulacion_CalificacionConvocatoria' +
+            '_administradorCentro',
+            kwargs={'centro': centro, 'tipo': tipo}))
 
     # Se ha rellenado el formulario.
     if request.method == 'POST':
@@ -91,8 +91,9 @@ def addCalificacionConvocatoria(request, nombre_centro,
             form.save()
             # Redirige a la pagina de listar matriculas.
             return HttpResponseRedirect(
-                reverse('listCalificacionConvocatoria',
-                kwargs={'nombre_centro': nombre_centro,
+                reverse(
+                'listCalificacionConvocatoria_administradorCentro',
+                kwargs={'centro': centro,
                 'nombre_titulacion': nombre_titulacion,
                 'plan_estudios': plan_estudios,
                 'nombre_asignatura': nombre_asignatura,
@@ -104,7 +105,7 @@ def addCalificacionConvocatoria(request, nombre_centro,
         form = forms.CalificacionConvocatoriaForm()
     return render_to_response(PATH + 'addCalificacionConvocatoria.html',
         {'user': request.user, 'form': form,
-        'nombre_centro': nombre_centro,
+        'centro': centro,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios,
         'nombre_asignatura': nombre_asignatura,

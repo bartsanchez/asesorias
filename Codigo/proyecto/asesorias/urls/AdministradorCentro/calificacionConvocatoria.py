@@ -7,13 +7,12 @@ VISTAS = 'asesorias.vistas.AdministradorCentro.'
 # ---------------------------------- #
 
 urlpatterns = patterns(VISTAS + 'vistasCalificacionConvocatoria',
-    url(r'^add/(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
+    url(r'^add/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
         '(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/' +
         '(?P<dni_pasaporte>[\s\w]+)$',
 
         'addCalificacionConvocatoria',
-        name='addCalificacionConvocatoria'),
+        name='addCalificacionConvocatoria_administradorCentro'),
 
     url(r'^(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/' +
         '(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/' +
