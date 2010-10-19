@@ -1,0 +1,36 @@
+{% extends "asesorias/Base/AdministradorCentro/org_docente.html" %}
+
+{% block content %}
+
+    {% ifequal tipo 'add' %}
+    <h1>Añadir calificación convocatoria.</h1>
+
+    {% else %}
+    <h1>Lista de calificaciones convocatoria.</h1>
+
+    {% endifequal %}
+
+    <h2>Seleccionar alumno.</h2>
+
+    <div class="form">
+        <div><p>Titulación (Plan_estudios): <b>{{ nombre_titulacion }} ({{ plan_estudios }})</b> <a href={% url selectTitulacion_CalificacionConvocatoria_administradorCentro centro 'add' %} class="updatelink"></a></p></div>
+        <div><p>Asignatura: <b>{{ nombre_asignatura }}</b> <a href={% url selectAsignatura_CalificacionConvocatoria_administradorCentro centro nombre_titulacion plan_estudios 'add' %} class="updatelink"></a></p></div>
+        <div><p>Curso académico: <b>{{ curso_academico }}</b> <a href={% url selectAsignaturaCA_CalificacionConvocatoria_administradorCentro centro nombre_titulacion plan_estudios nombre_asignatura 'add' %} class="updatelink"></a></p></div>
+    </div>
+
+    <div class="form">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                {% for field in form %}
+                    <div><p>{{ field.label_tag }}: {{ field }}</p></div>
+                    <div><input type="submit" value="OK"/></p></div>
+                {% endfor %}
+            </div>
+
+        </form>
+
+    </div>
+
+{% endblock %}

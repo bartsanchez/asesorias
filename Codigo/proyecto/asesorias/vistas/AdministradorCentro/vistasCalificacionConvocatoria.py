@@ -283,8 +283,9 @@ def selectAsignatura(request, centro, nombre_titulacion,
                 pk=asignatura)
 
             return HttpResponseRedirect(
-                reverse('selectAsignaturaCA_CalificacionConvocatoria',
-                kwargs={'nombre_centro': nombre_centro,
+                reverse('selectAsignaturaCA_CalificacionConvocatoria' +
+                '_administradorCentro',
+                kwargs={'centro': centro,
                 'nombre_titulacion': nombre_titulacion,
                 'plan_estudios': instancia_titulacion.plan_estudios,
                 'nombre_asignatura':
@@ -293,8 +294,9 @@ def selectAsignatura(request, centro, nombre_titulacion,
 
         else:
             return HttpResponseRedirect(
-                reverse('selectAsignatura_CalificacionConvocatoria',
-                kwargs={'nombre_centro': nombre_centro,
+                reverse('selectAsignatura_CalificacionConvocatoria' +
+                '_administradorCentro',
+                kwargs={'centro': centro,
                 'nombre_titulacion': nombre_titulacion,
                 'plan_estudios': plan_estudios, 'tipo': tipo}))
 
@@ -308,18 +310,19 @@ def selectAsignatura(request, centro, nombre_titulacion,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios, 'tipo': tipo})
 
-def selectAsignaturaCursoAcademico(request, nombre_centro,
+def selectAsignaturaCursoAcademico(request, centro,
     nombre_titulacion, plan_estudios, nombre_asignatura, tipo):
     # Se obtiene la posible asignatura.
     instancia_asignatura = vistasAsignatura.obtenerAsignatura(
-        nombre_centro, nombre_titulacion, plan_estudios,
+        centro, nombre_titulacion, plan_estudios,
         nombre_asignatura)
 
     # Se comprueba que exista la asignatura.
     if not instancia_asignatura:
         return HttpResponseRedirect(
-            reverse('selectAsignatura_CalificacionConvocatoria',
-            kwargs={'nombre_centro': nombre_centro,
+            reverse('selectAsignatura_CalificacionConvocatoria' +
+            '_administradorCentro',
+            kwargs={'centro': centro,
             'nombre_titulacion': nombre_titulacion,
             'plan_estudios': plan_estudios, 'tipo': tipo}))
     else:
@@ -349,8 +352,9 @@ def selectAsignaturaCursoAcademico(request, nombre_centro,
                 instancia_asignatura_curso_academico.curso_academico
 
             return HttpResponseRedirect(
-                reverse('selectAlumno_CalificacionConvocatoria',
-                kwargs={'nombre_centro': nombre_centro,
+                reverse('selectAlumno_CalificacionConvocatoria' +
+                '_administradorCentro',
+                kwargs={'centro': centro,
                 'nombre_titulacion': nombre_titulacion,
                 'plan_estudios': plan_estudios,
                 'nombre_asignatura': nombre_asignatura,
@@ -359,8 +363,9 @@ def selectAsignaturaCursoAcademico(request, nombre_centro,
 
         else:
             return HttpResponseRedirect(
-                reverse('selectAsignaturaCA_CalificacionConvocatoria',
-                kwargs={'nombre_centro': nombre_centro,
+                reverse('selectAsignaturaCA_CalificacionConvocatoria' +
+                '_administradorCentro',
+                kwargs={'centro': centro,
                 'nombre_titulacion': nombre_titulacion,
                 'plan_estudios': plan_estudios,
                 'tipo': tipo}))
@@ -373,25 +378,26 @@ def selectAsignaturaCursoAcademico(request, nombre_centro,
     return render_to_response(PATH +
         'selectAsignaturaCursoAcademico.html',
         {'user': request.user, 'form': form,
-        'nombre_centro': nombre_centro,
+        'centro': centro,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios,
         'nombre_asignatura': nombre_asignatura,
         'tipo': tipo})
 
-def selectAlumno(request, nombre_centro, nombre_titulacion,
+def selectAlumno(request, centro, nombre_titulacion,
     plan_estudios, nombre_asignatura, curso_academico, tipo):
     # Se obtiene la posible asignatura curso academico.
     instancia_asignatura_curso_academico = \
         vistasAsignaturaCA.obtenerAsignaturaCursoAcademico(
-        nombre_centro, nombre_titulacion, plan_estudios,
+        centro, nombre_titulacion, plan_estudios,
         nombre_asignatura, curso_academico)
 
     # Se comprueba que exista la asignatura.
     if not instancia_asignatura_curso_academico:
         return HttpResponseRedirect(
-            reverse('selectAsignaturaCA_CalificacionConvocatoria',
-            kwargs={'nombre_centro': nombre_centro,
+            reverse('selectAsignaturaCA_CalificacionConvocatoria' +
+            '_administradorCentro',
+            kwargs={'centro': centro,
             'nombre_titulacion': nombre_titulacion,
             'plan_estudios': plan_estudios,
             'nombre_asignatura': nombre_asignatura,
@@ -422,8 +428,9 @@ def selectAlumno(request, nombre_centro, nombre_titulacion,
 
             if tipo == 'add':
                 return HttpResponseRedirect(
-                    reverse('addCalificacionConvocatoria',
-                    kwargs={'nombre_centro': nombre_centro,
+                    reverse(
+                    'addCalificacionConvocatoria_administradorCentro',
+                    kwargs={'centro': centro,
                     'nombre_titulacion': nombre_titulacion,
                     'plan_estudios': plan_estudios,
                     'nombre_asignatura': nombre_asignatura,
@@ -433,8 +440,9 @@ def selectAlumno(request, nombre_centro, nombre_titulacion,
 
             else:
                 return HttpResponseRedirect(
-                    reverse('listCalificacionConvocatoria',
-                    kwargs={'nombre_centro': nombre_centro,
+                    reverse(
+                    'listCalificacionConvocatoria_administradorCentro',
+                    kwargs={'centro': centro,
                     'nombre_titulacion': nombre_titulacion,
                     'plan_estudios': plan_estudios,
                     'nombre_asignatura': nombre_asignatura,
@@ -445,8 +453,9 @@ def selectAlumno(request, nombre_centro, nombre_titulacion,
 
         else:
             return HttpResponseRedirect(
-                reverse('selectAlumno_CalificacionConvocatoria',
-                kwargs={'nombre_centro': nombre_centro,
+                reverse('selectAlumno_CalificacionConvocatoria' +
+                '_administradorCentro',
+                kwargs={'centro': centro,
                 'nombre_titulacion': nombre_titulacion,
                 'plan_estudios': plan_estudios,
                 'nombre_asignatura': nombre_asignatura,
@@ -459,27 +468,27 @@ def selectAlumno(request, nombre_centro, nombre_titulacion,
 
     return render_to_response(PATH + 'selectAlumno.html',
         {'user': request.user, 'form': form,
-        'nombre_centro': nombre_centro,
+        'centro': centro,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios,
         'nombre_asignatura': nombre_asignatura,
         'curso_academico': curso_academico,
         'tipo': tipo})
 
-def listCalificacionConvocatoria(request, nombre_centro,
+def listCalificacionConvocatoria(request, centro,
     nombre_titulacion, plan_estudios, nombre_asignatura,
     curso_academico, dni_pasaporte, orden):
     # Se obtiene la posible matricula.
     instancia_matricula = \
         vistasMatricula.obtenerMatricula(
-        nombre_centro, nombre_titulacion, plan_estudios,
+        centro, nombre_titulacion, plan_estudios,
         nombre_asignatura, curso_academico, dni_pasaporte)
 
     # Se comprueba que exista la matricula.
     if not instancia_matricula:
         return HttpResponseRedirect(reverse(
-            'selectAlumno_CalificacionConvocatoria',
-            kwargs={'nombre_centro': nombre_centro,
+            'selectAlumno_CalificacionConvocatoria_administradorCentro',
+            kwargs={'centro': centro,
             'nombre_titulacion': nombre_titulacion,
             'plan_estudios': plan_estudios,
             'nombre_asignatura': nombre_asignatura,
@@ -544,7 +553,7 @@ def listCalificacionConvocatoria(request, nombre_centro,
         {'user': request.user, 'form': form,
         'lista_calificaciones': lista_calificaciones,
         'busqueda': busqueda,
-        'nombre_centro': nombre_centro,
+        'centro': centro,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios,
         'nombre_asignatura': nombre_asignatura,

@@ -31,13 +31,12 @@ urlpatterns = patterns(VISTAS + 'vistasCalificacionConvocatoria',
         'delCalificacionConvocatoria',
         name='delCalificacionConvocatoria'),
 
-    url(r'^list/(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
+    url(r'^list/(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/'+
         '(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/' +
         '(?P<dni_pasaporte>[\s\w]+)/(?P<orden>[\s\w]*)/$',
 
         'listCalificacionConvocatoria',
-        name='listCalificacionConvocatoria'),
+        name='listCalificacionConvocatoria_administradorCentro'),
 
     url(r'^selectTitulacion/(?P<tipo>[\s\w]+)/$',
 
@@ -52,20 +51,20 @@ urlpatterns = patterns(VISTAS + 'vistasCalificacionConvocatoria',
         name='selectAsignatura_CalificacionConvocatoria' +
         '_administradorCentro'),
 
-    url(r'^(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
+    url(r'^(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
         '(?P<nombre_asignatura>[\s\w]+)/' +
         'selectAsignaturaCursoAcademico/(?P<tipo>[\s\w]+)/$',
 
         'selectAsignaturaCursoAcademico',
-        name='selectAsignaturaCA_CalificacionConvocatoria'),
+        name='selectAsignaturaCA_CalificacionConvocatoria' +
+        '_administradorCentro'),
 
-    url(r'^(?P<nombre_centro>[\s\w]+)/' +
-        '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
+    url(r'^(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
         '(?P<nombre_asignatura>[\s\w]+)/(?P<curso_academico>\d+)/' +
         'selectAlumno/(?P<tipo>[\s\w]+)/$',
 
-        'selectAlumno', name='selectAlumno_CalificacionConvocatoria'),
+        'selectAlumno', name='selectAlumno_CalificacionConvocatoria' +
+        '_administradorCentro'),
 
     url(r'^generarPDF/(?P<nombre_centro>[\s\w]+)/' +
         '(?P<nombre_titulacion>[\s\w]+)/(?P<plan_estudios>\d+)/' +
