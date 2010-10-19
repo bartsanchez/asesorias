@@ -563,20 +563,20 @@ def listCalificacionConvocatoria(request, centro,
         'dni_pasaporte': dni_pasaporte,
         'orden': orden})
 
-def generarPDFListaCalificacionesConvocatoria(request, nombre_centro,
+def generarPDFListaCalificacionesConvocatoria(request, centro,
     nombre_titulacion, plan_estudios, nombre_asignatura,
     curso_academico, dni_pasaporte, busqueda):
     # Se obtiene la posible matricula.
     instancia_matricula = \
         vistasMatricula.obtenerMatricula(
-        nombre_centro, nombre_titulacion, plan_estudios,
+        centro, nombre_titulacion, plan_estudios,
         nombre_asignatura, curso_academico, dni_pasaporte)
 
     # Se comprueba que exista la matricula.
     if not instancia_matricula:
         return HttpResponseRedirect(reverse(
-            'selectAlumno_CalificacionConvocatoria',
-            kwargs={'nombre_centro': nombre_centro,
+            'selectAlumno_CalificacionConvocatoria_administradorCentro',
+            kwargs={'centro': centro,
             'nombre_titulacion': nombre_titulacion,
             'plan_estudios': plan_estudios,
             'nombre_asignatura': nombre_asignatura,
