@@ -56,8 +56,8 @@
 
         {% for matricula in lista_matriculas %}
         <tr>
-            <th scope="row"><a href="{# url editMatricula matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula.dni_pasaporte #}">{{ matricula.dni_pasaporte }}</a></th>
-            <td><a href="{# url editMatricula matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula.dni_pasaporte #}" class="editlink">Editar</a></td>
+            <th scope="row"><a href="{% url editMatricula_administradorCentro matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula.dni_pasaporte %}">{{ matricula.dni_pasaporte }}</a></th>
+            <td><a href="{% url editMatricula_administradorCentro matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula.dni_pasaporte %}" class="editlink">Editar</a></td>
             <td><a href="{% url delMatricula_administradorCentro matricula.determinarNombreCentro matricula.determinarNombreTitulacion matricula.determinarPlanEstudios matricula.determinarNombreAsignatura matricula.curso_academico matricula.dni_pasaporte %}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}

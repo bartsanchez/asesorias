@@ -122,10 +122,10 @@ def addMatricula(request, centro, nombre_titulacion,
         'curso_academico': curso_academico,
         'dni_pasaporte': dni_pasaporte})
 
-def editMatricula(request, nombre_centro, nombre_titulacion,
+def editMatricula(request, centro, nombre_titulacion,
     plan_estudios, nombre_asignatura, curso_academico, dni_pasaporte):
     # Se obtiene la instancia de la matricula.
-    instancia_matricula = obtenerMatricula(nombre_centro,
+    instancia_matricula = obtenerMatricula(centro,
         nombre_titulacion, plan_estudios, nombre_asignatura,
         curso_academico, dni_pasaporte)
     # Si existe se edita.
@@ -155,23 +155,24 @@ def editMatricula(request, nombre_centro, nombre_titulacion,
             if form.is_valid():
                 form.save()
                 # Redirige a la pagina de listar matriculas.
-                return HttpResponseRedirect(reverse('listMatricula',
-                kwargs={'nombre_centro':
-                instancia_matricula.determinarNombreCentro(),
-                'nombre_titulacion':
-                instancia_matricula.determinarNombreTitulacion(),
-                'plan_estudios':
-                instancia_matricula.determinarPlanEstudios(),
-                'nombre_asignatura':
-                instancia_matricula.determinarNombreAsignatura(),
-                'curso_academico': curso_academico,
-                'orden': 'curso_academico'}))
+                return HttpResponseRedirect(
+                    reverse('listMatricula_administradorCentro',
+                    kwargs={'centro':
+                    instancia_matricula.determinarNombreCentro(),
+                    'nombre_titulacion':
+                    instancia_matricula.determinarNombreTitulacion(),
+                    'plan_estudios':
+                    instancia_matricula.determinarPlanEstudios(),
+                    'nombre_asignatura':
+                    instancia_matricula.determinarNombreAsignatura(),
+                    'curso_academico': curso_academico,
+                    'orden': 'curso_academico'}))
     # La matricula no existe
     else:
         form = False
     return render_to_response(PATH + 'editMatricula.html',
         {'user': request.user, 'form': form,
-        'nombre_centro': nombre_centro,
+        'centro': centro,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios,
         'nombre_asignatura': nombre_asignatura,
