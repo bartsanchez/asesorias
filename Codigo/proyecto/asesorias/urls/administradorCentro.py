@@ -42,6 +42,6 @@ urlpatterns = patterns(VISTAS + 'vistasAdministradorCentro',
     (r'^matricula/',
         include(URLS + 'matricula')),
 
-    #(r'^calificacionConvocatoria/',
-        #include(URLS + 'calificacionConvocatoria')),
+    (r'^calificacionConvocatoria/',
+        include(URLS + 'calificacionConvocatoria')),
 )
