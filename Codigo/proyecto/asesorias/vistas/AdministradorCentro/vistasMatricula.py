@@ -554,18 +554,23 @@ def listMatricula(request, centro, nombre_titulacion,
         'curso_academico': curso_academico,
         'orden': orden})
 
-def generarPDFListaMatriculas(request, nombre_centro, nombre_titulacion,
+def generarPDFListaMatriculas(request, centro, nombre_titulacion,
     plan_estudios, nombre_asignatura, curso_academico, busqueda):
-    # Se obtiene la posible asignatura curso academico.
+    # Se obtiene la posible asignatura_curso_academico.
     instancia_asignatura_curso_academico = \
         vistasAsignaturaCA.obtenerAsignaturaCursoAcademico(
-        nombre_centro, nombre_titulacion, plan_estudios,
+        centro, nombre_titulacion, plan_estudios,
         nombre_asignatura, curso_academico)
 
     # Se comprueba que exista la asignatura curso academico.
     if not instancia_asignatura_curso_academico:
-        return HttpResponseRedirect(
-            reverse('selectAsignaturaOAlumnoCursoAcademico'))
+        reverse('selectAsignaturaCursoAcademico_Matricula' +
+                '_administradorCentro',
+                kwargs={'centro': centro,
+                'nombre_titulacion': nombre_titulacion,
+                'plan_estudios': plan_estudios,
+                'nombre_asignatura': nombre_asignatura,
+                'tipo': tipo})
     else:
         id_centro = instancia_asignatura_curso_academico.id_centro
         id_titulacion = \

@@ -11,7 +11,7 @@
     </div>
 
     <a href="{% url selectAlumno_Matricula_administradorCentro centro nombre_titulacion plan_estudios nombre_asignatura curso_academico %}" class="addlink">Crear nuevo</a>
-    <a href="{# url generarPDFListaMatriculas nombre_centro nombre_titulacion plan_estudios nombre_asignatura curso_academico busqueda #}" class="pdflink">Generar PDF</a>
+    <a href="{% url generarPDFListaMatriculas_administradorCentro centro nombre_titulacion plan_estudios nombre_asignatura curso_academico busqueda %}" class="pdflink">Generar PDF</a>
 
     <div class="search">
 
