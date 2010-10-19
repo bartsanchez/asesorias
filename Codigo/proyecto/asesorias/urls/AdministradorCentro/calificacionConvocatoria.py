@@ -14,13 +14,13 @@ urlpatterns = patterns(VISTAS + 'vistasCalificacionConvocatoria',
         'addCalificacionConvocatoria',
         name='addCalificacionConvocatoria_administradorCentro'),
 
-    url(r'^(?P<nombre_centro>[\s\w]+)/(?P<nombre_titulacion>[\s\w]+)/' +
+    url(r'^(?P<nombre_titulacion>[\s\w]+)/' +
         '(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/' +
         '(?P<curso_academico>\d+)/(?P<dni_pasaporte>[\s\w]+)/' +
         '(?P<convocatoria>[\s\w]+)/edit/$',
 
         'editCalificacionConvocatoria',
-        name='editCalificacionConvocatoria'),
+        name='editCalificacionConvocatoria_administradorCentro'),
 
     url(r'^(?P<nombre_titulacion>[\s\w]+)/' +
         '(?P<plan_estudios>\d+)/(?P<nombre_asignatura>[\s\w]+)/' +

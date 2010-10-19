@@ -112,12 +112,12 @@ def addCalificacionConvocatoria(request, centro, nombre_titulacion,
         'curso_academico': curso_academico,
         'dni_pasaporte': dni_pasaporte})
 
-def editCalificacionConvocatoria(request, nombre_centro,
+def editCalificacionConvocatoria(request, centro,
     nombre_titulacion, plan_estudios, nombre_asignatura,
     curso_academico, dni_pasaporte, convocatoria):
     # Se obtiene la instancia de la calificacion convocatoria.
     instancia_calificacion = obtenerCalificacionConvocatoria(
-        nombre_centro, nombre_titulacion, plan_estudios,
+        centro, nombre_titulacion, plan_estudios,
         nombre_asignatura, curso_academico, dni_pasaporte, convocatoria)
     # Si existe se edita.
     if instancia_calificacion:
@@ -153,8 +153,9 @@ def editCalificacionConvocatoria(request, nombre_centro,
                 form.save()
                 # Redirige a la pagina de listar calificaciones.
                 return HttpResponseRedirect(
-                    reverse('listCalificacionConvocatoria',
-                    kwargs={'nombre_centro': nombre_centro,
+                    reverse('listCalificacionConvocatoria' +
+                    '_administradorCentro',
+                    kwargs={'centro': centro,
                     'nombre_titulacion': nombre_titulacion,
                     'plan_estudios': plan_estudios,
                     'nombre_asignatura': nombre_asignatura,
@@ -167,7 +168,7 @@ def editCalificacionConvocatoria(request, nombre_centro,
     return render_to_response(PATH +
         'editCalificacionConvocatoria.html',
         {'user': request.user, 'form': form,
-        'nombre_centro': nombre_centro,
+        'centro': centro,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios,
         'nombre_asignatura': nombre_asignatura,

@@ -57,8 +57,8 @@
 
         {% for calificacion in lista_calificaciones %}
         <tr>
-            <th scope="row"><a href="{# url editCalificacionConvocatoria calificacion.determinarNombreCentro calificacion.determinarNombreTitulacion calificacion.determinarPlanEstudios calificacion.determinarNombreAsignatura calificacion.curso_academico calificacion.dni_pasaporte calificacion.convocatoria #}">{{ calificacion }}</a></th>
-            <td><a href="{# url editCalificacionConvocatoria calificacion.determinarNombreCentro calificacion.determinarNombreTitulacion calificacion.determinarPlanEstudios calificacion.determinarNombreAsignatura calificacion.curso_academico calificacion.dni_pasaporte calificacion.convocatoria #}" class="editlink">Editar</a></td>
+            <th scope="row"><a href="{% url editCalificacionConvocatoria_administradorCentro calificacion.determinarNombreCentro calificacion.determinarNombreTitulacion calificacion.determinarPlanEstudios calificacion.determinarNombreAsignatura calificacion.curso_academico calificacion.dni_pasaporte calificacion.convocatoria %}">{{ calificacion }}</a></th>
+            <td><a href="{% url editCalificacionConvocatoria_administradorCentro calificacion.determinarNombreCentro calificacion.determinarNombreTitulacion calificacion.determinarPlanEstudios calificacion.determinarNombreAsignatura calificacion.curso_academico calificacion.dni_pasaporte calificacion.convocatoria %}" class="editlink">Editar</a></td>
             <td><a href="{% url delCalificacionConvocatoria_administradorCentro calificacion.determinarNombreCentro calificacion.determinarNombreTitulacion calificacion.determinarPlanEstudios calificacion.determinarNombreAsignatura calificacion.curso_academico calificacion.dni_pasaporte calificacion.convocatoria %}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}
