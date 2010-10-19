@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -9,6 +10,7 @@ from asesorias.vistas.AdministradorPrincipal import vistasAlumno
 from asesorias.vistas.AdministradorPrincipal import \
     vistasAlumnoCursoAcademico, vistasCentro
 from asesorias.vistas.AdministradorPrincipal import vistasTitulacion
+from asesorias.vistas.vistasAdministradorCentro import checkCentro
 from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/UsuarioAdministradorCentro/Matricula/'
@@ -43,6 +45,8 @@ def obtenerMatricula(nombre_centro, nombre_titulacion, plan_estudios,
         resultado = False
     return resultado
 
+@checkCentro
+@login_required
 def addMatricula(request, centro, nombre_titulacion,
     plan_estudios, nombre_asignatura, curso_academico, dni_pasaporte):
     # Se obtiene la posible asignatura curso academico.
@@ -122,6 +126,8 @@ def addMatricula(request, centro, nombre_titulacion,
         'curso_academico': curso_academico,
         'dni_pasaporte': dni_pasaporte})
 
+@checkCentro
+@login_required
 def editMatricula(request, centro, nombre_titulacion,
     plan_estudios, nombre_asignatura, curso_academico, dni_pasaporte):
     # Se obtiene la instancia de la matricula.
@@ -179,6 +185,8 @@ def editMatricula(request, centro, nombre_titulacion,
         'curso_academico': curso_academico,
         'dni_pasaporte': dni_pasaporte})
 
+@checkCentro
+@login_required
 def delMatricula(request, centro, nombre_titulacion,
     plan_estudios, nombre_asignatura, curso_academico, dni_pasaporte):
     # Se obtiene la instancia de la matricula.
@@ -208,6 +216,8 @@ def delMatricula(request, centro, nombre_titulacion,
     return render_to_response(PATH + 'delMatricula.html',
         {'user': request.user, 'error': error, 'centro': centro})
 
+@checkCentro
+@login_required
 def selectTitulacion(request, centro, tipo):
     # Se obtiene el posible centro.
     instancia_centro = vistasCentro.obtenerCentro(centro)
@@ -257,6 +267,8 @@ def selectTitulacion(request, centro, tipo):
         {'user': request.user, 'form': form,
         'centro': centro, 'tipo': tipo})
 
+@checkCentro
+@login_required
 def selectAsignatura(request, centro, nombre_titulacion,
     plan_estudios, tipo):
     # Se obtiene la posible titulacion.
@@ -317,6 +329,8 @@ def selectAsignatura(request, centro, nombre_titulacion,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios, 'tipo': tipo})
 
+@checkCentro
+@login_required
 def selectAsignaturaCursoAcademico(request, centro,
     nombre_titulacion, plan_estudios, nombre_asignatura, tipo):
     # Se obtiene la posible asignatura.
@@ -401,6 +415,8 @@ def selectAsignaturaCursoAcademico(request, centro,
         'nombre_asignatura': nombre_asignatura,
         'tipo': tipo})
 
+@checkCentro
+@login_required
 def selectAlumno(request, centro, nombre_titulacion,
     plan_estudios, nombre_asignatura, curso_academico):
     # Se obtiene la posible asignatura curso academico.
@@ -474,6 +490,8 @@ def selectAlumno(request, centro, nombre_titulacion,
         'nombre_asignatura': nombre_asignatura,
         'curso_academico': curso_academico})
 
+@checkCentro
+@login_required
 def listMatricula(request, centro, nombre_titulacion,
     plan_estudios, nombre_asignatura, curso_academico, orden):
     # Se obtiene la posible asignatura_curso_academico.
@@ -554,6 +572,8 @@ def listMatricula(request, centro, nombre_titulacion,
         'curso_academico': curso_academico,
         'orden': orden})
 
+@checkCentro
+@login_required
 def generarPDFListaMatriculas(request, centro, nombre_titulacion,
     plan_estudios, nombre_asignatura, curso_academico, busqueda):
     # Se obtiene la posible asignatura_curso_academico.
