@@ -174,12 +174,12 @@ def editCalificacionConvocatoria(request, nombre_centro,
         'curso_academico': curso_academico,
         'dni_pasaporte': dni_pasaporte})
 
-def delCalificacionConvocatoria(request, nombre_centro,
+def delCalificacionConvocatoria(request, centro,
     nombre_titulacion, plan_estudios, nombre_asignatura,
     curso_academico, dni_pasaporte, convocatoria):
     # Se obtiene la instancia de la calificacion convocatoria.
     instancia_calificacion = obtenerCalificacionConvocatoria(
-        nombre_centro, nombre_titulacion, plan_estudios,
+        centro, nombre_titulacion, plan_estudios,
         nombre_asignatura, curso_academico, dni_pasaporte, convocatoria)
 
     # Si existe se elimina.
@@ -187,8 +187,8 @@ def delCalificacionConvocatoria(request, nombre_centro,
         instancia_calificacion.delete()
         # Redirige a la pagina de listar calificaciones.
         return HttpResponseRedirect(
-            reverse('listCalificacionConvocatoria',
-                    kwargs={'nombre_centro': nombre_centro,
+            reverse('listCalificacionConvocatoria_administradorCentro',
+                    kwargs={'centro': centro,
                     'nombre_titulacion': nombre_titulacion,
                     'plan_estudios': plan_estudios,
                     'nombre_asignatura': nombre_asignatura,
@@ -199,7 +199,7 @@ def delCalificacionConvocatoria(request, nombre_centro,
     else:
         error = True
     return render_to_response(PATH + 'delCalificacionConvocatoria.html',
-       {'user': request.user, 'error': error})
+       {'user': request.user, 'error': error, 'centro': centro})
 
 def selectTitulacion(request, centro, tipo):
     # Se obtiene el posible centro.

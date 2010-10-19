@@ -1,0 +1,15 @@
+{% extends "asesorias/Base/AdministradorCentro/org_docente.html" %}
+
+{% block content %}
+
+    <h1>Eliminar calificación convocatoria.</h1>
+
+    {% if error %}
+
+    <p>No existe tal calificación convocatoria.</p>
+
+    <a href="{% url selectTitulacion_CalificacionConvocatoria_administradorCentro centro 'list'  %}">Volver</a>
+
+    {% endif %}
+
+{% endblock %}
