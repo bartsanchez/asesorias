@@ -1,0 +1,15 @@
+{% extends "asesorias/Base/AdministradorCentro/org_docente.html" %}
+
+{% block content %}
+
+    <h1>Eliminar matrícula.</h1>
+
+    {% if error %}
+
+    <p>No existe tal matrícula.</p>
+
+    <a href="{% url selectTitulacion_Matricula_administradorCentro centro 'list' %}">Volver</a>
+
+    {% endif %}
+
+{% endblock %}

@@ -178,10 +178,10 @@ def editMatricula(request, nombre_centro, nombre_titulacion,
         'curso_academico': curso_academico,
         'dni_pasaporte': dni_pasaporte})
 
-def delMatricula(request, nombre_centro, nombre_titulacion,
+def delMatricula(request, centro, nombre_titulacion,
     plan_estudios, nombre_asignatura, curso_academico, dni_pasaporte):
     # Se obtiene la instancia de la matricula.
-    instancia_matricula = obtenerMatricula(nombre_centro,
+    instancia_matricula = obtenerMatricula(centro,
     nombre_titulacion, plan_estudios, nombre_asignatura,
     curso_academico, dni_pasaporte)
 
@@ -189,8 +189,9 @@ def delMatricula(request, nombre_centro, nombre_titulacion,
     if instancia_matricula:
         instancia_matricula.borrar()
         # Redirige a la pagina de listar matriculas.
-        return HttpResponseRedirect(reverse('listMatricula',
-                kwargs={'nombre_centro':
+        return HttpResponseRedirect(
+            reverse('listMatricula_administradorCentro',
+                kwargs={'centro':
                 instancia_matricula.determinarNombreCentro(),
                 'nombre_titulacion':
                 instancia_matricula.determinarNombreTitulacion(),
@@ -204,7 +205,7 @@ def delMatricula(request, nombre_centro, nombre_titulacion,
     else:
         error = True
     return render_to_response(PATH + 'delMatricula.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'error': error, 'centro': centro})
 
 def selectTitulacion(request, centro, tipo):
     # Se obtiene el posible centro.
