@@ -84,8 +84,6 @@ def delAdministradorCentro(request, administrador_centro):
         username = ('AdminCentro' +
             unicode(instancia_admin_centro.id_adm_centro))
 
-        print username
-
         instancia_admin_centro.delete()
 
         user = User.objects.get(username__exact=username)
