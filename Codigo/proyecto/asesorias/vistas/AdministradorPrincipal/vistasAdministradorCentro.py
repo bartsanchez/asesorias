@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -23,7 +24,16 @@ def addAdministradorCentro(request):
         form = forms.AdministradorCentroForm(request.POST)
         if form.is_valid():
             # Se guarda la informacion del formulario en el sistema.
-            form.save()
+            instancia_admin_centro = form.save()
+
+            # Se crea un usuario django.
+            username = instancia_admin_centro.id_adm_centro
+            password = instancia_admin_centro.id_adm_centro
+
+            user = User.objects.create_user('AdminCentro' +
+                unicode(username), '', password)
+            user.save()
+
             # Redirige a la pagina de listar administradores de centro.
             return HttpResponseRedirect(
                 reverse('listAdministradorCentro',
@@ -71,7 +81,16 @@ def delAdministradorCentro(request, administrador_centro):
         administrador_centro)
     # Si existe se elimina.
     if instancia_admin_centro:
+        username = ('AdminCentro' +
+            unicode(instancia_admin_centro.id_adm_centro))
+
+        print username
+
         instancia_admin_centro.delete()
+
+        user = User.objects.get(username__exact=username)
+        user.delete()
+
         # Redirige a la pagina de listar administradores de centro.
         return HttpResponseRedirect(
             reverse('listAdministradorCentro',
