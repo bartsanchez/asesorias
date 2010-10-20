@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
+<head>
+    <link type="text/css" rel="stylesheet" href="http://localhost/media/css/login.css" />
+    <title>Asesorías Académicas.</title>
+</head>
+
+<body class="login">
+    <!-- Container -->
+    <div id="container">
+
+            <!-- Header -->
+            <div id="header">
+                <div id="branding">
+                    <h1 id="site-name">Asesorías Académicas</h1>
+                </div>
+            </div>
+
+        <div id="content">
+            <div id="content-main">
+                <p>{{ user }}</p>
+                <form action="" method="post" id="login-form">
+                        {% for field in form %}
+                            <div class="form-row">{{ field.label_tag }} {{ field }}</div>
+                        {% endfor %}
+                        <div class="submit-row"><input type="submit" value="OK"/></div>
+                </form>
+            </div>
+        </div>
+        {% if error %}
+        <p>{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+

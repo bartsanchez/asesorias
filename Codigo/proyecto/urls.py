@@ -35,5 +35,9 @@ urlpatterns = patterns('',
 urlpatterns += patterns(VISTAS + 'vistasGestionUsuarios',
     url(r'^asesorias/$', 'authentication', name='authentication'),
 
+    url(r'^asesorias/determinarCentro/$',
+        'determinarCentro_AdministradorCentro',
+        name='determinarCentro_AdministradorCentro'),
+
     url(r'^asesorias/logout/$', 'logout_view', name='logout'),
 )

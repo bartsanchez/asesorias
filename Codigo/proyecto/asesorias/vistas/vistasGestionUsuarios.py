@@ -36,8 +36,8 @@ def authentication(request):
 
                     elif rol == 'administradorCentro':
                         return HttpResponseRedirect(
-                            reverse('administradorCentro_inicio',
-                            kwargs={'centro': 'eps'}))
+                            reverse(
+                            'determinarCentro_AdministradorCentro'))
                     elif rol == 'asesor':
                         return HttpResponseRedirect(
                             reverse('asesor_inicio',
@@ -59,6 +59,44 @@ def authentication(request):
         error = ''
     return render_to_response('asesorias/Login/login.html',
         {'form': form, 'error': error})
+
+def determinarCentro_AdministradorCentro(request):
+    # Se ha introducido un centro.
+    if request.method == 'POST':
+
+        # Se obtiene el centro y se valida.
+        form = forms.CentroFormSelect(request.POST)
+
+        # Si es valido se redirige a listar centros.
+        if form.is_valid():
+            centro = request.POST['centro']
+
+            # Se crea una instancia del centro para pasar el nombre de
+            # centro por argumento.
+            instancia_centro = models.Centro.objects.get(pk=centro)
+
+            # Determina el id del administrador de centro, quitando
+            # los 10 primeros caracteres que son: 'AdminCentro'.
+            user = unicode(request.user)[11:]
+
+            try:
+                models.CentroAdministradorCentro.objects.get(
+                    id_centro=instancia_centro.id_centro,
+                    id_adm_centro=user)
+            except:
+                return HttpResponseRedirect(
+                    reverse('determinarCentro_AdministradorCentro'))
+            return HttpResponseRedirect(
+                reverse('administradorCentro_inicio',
+                kwargs={'centro': instancia_centro.nombre_centro}))
+        else:
+            HttpResponseRedirect(
+                reverse('determinarCentro_AdministradorCentro'))
+
+    else:
+        form = forms.CentroFormSelect()
+    return render_to_response('asesorias/Login/login_admin_centro.html',
+        {'user': request.user, 'form': form})
 
 # Vista que controla la salida del sistema de un usuario.
 def logout_view(request):
