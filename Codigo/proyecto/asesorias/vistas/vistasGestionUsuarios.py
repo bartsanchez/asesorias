@@ -1,5 +1,9 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
+from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import forms, models
@@ -128,3 +132,21 @@ def obtenerRol(username):
     else:
         rol = 'inactivo'
     return rol
+
+# Funcion para enviar correos electronicos.
+def enviar_mail_creacion_usuario(request, correo_destino,
+    username, password):
+    try:
+        tema = 'Asesorías académicas: Registro de usuario'
+        contenido = ('Un usuario ha sido creado para este correo ' +
+            'electrónico con los siguientes datos:\n\n' +
+            'Tipo: Administrador de centro\n' +
+            'Usuario: ' + str(username) + '\n' +
+            'Contraseña: ' + str(password) + '\n')
+
+        send_mail(tema, contenido, request.user.email, [correo_destino])
+
+        enviado = True
+    except:
+        enviado = False
+    return enviado

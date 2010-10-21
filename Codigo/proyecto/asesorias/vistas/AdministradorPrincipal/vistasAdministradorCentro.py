@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias import vistas
 from asesorias.utils import vistasPDF
 
 # Comprueba si existe un administrador de centro y, de ser asi,
@@ -27,12 +28,16 @@ def addAdministradorCentro(request):
             instancia_admin_centro = form.save()
 
             # Se crea un usuario django.
-            username = instancia_admin_centro.id_adm_centro
-            password = instancia_admin_centro.id_adm_centro
+            username = ('AdminCentro' +
+                unicode(instancia_admin_centro.id_adm_centro))
+            password = unicode(instancia_admin_centro.id_adm_centro)
+            email = "aliaselbarto@gmail.com"
 
-            user = User.objects.create_user('AdminCentro' +
-                unicode(username), '', password)
+            user = User.objects.create_user(username, '', password)
             user.save()
+
+            vistas.vistasGestionUsuarios.enviar_mail_creacion_usuario(
+                request, email, username, password)
 
             # Redirige a la pagina de listar administradores de centro.
             return HttpResponseRedirect(
