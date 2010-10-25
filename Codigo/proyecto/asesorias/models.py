@@ -32,6 +32,8 @@ class Centro(models.Model):
 
 class AdministradorCentro(models.Model):
     id_adm_centro = models.AutoField(primary_key=True)
+    correo_electronico = models.EmailField("Correo electrónico",
+        unique=True)
     nombre_adm_centro = models.CharField(
         "Nombre administrador de centro", max_length=25, unique=True)
 

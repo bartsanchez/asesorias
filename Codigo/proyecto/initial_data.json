@@ -15,20 +15,6 @@
   },
   {
     "pk": 1,
-    "model": "asesorias.administradorcentro",
-    "fields": {
-      "nombre_adm_centro": "nicolas"
-    }
-  },
-  {
-    "pk": 2,
-    "model": "asesorias.administradorcentro",
-    "fields": {
-      "nombre_adm_centro": "luis"
-    }
-  },
-  {
-    "pk": 1,
     "model": "asesorias.titulacion",
     "fields": {
       "nombre_titulacion": "gestion",
@@ -759,22 +745,6 @@
   },
   {
     "pk": 1,
-    "model": "asesorias.centroadministradorcentro",
-    "fields": {
-      "id_adm_centro": 1,
-      "id_centro": 2
-    }
-  },
-  {
-    "pk": 2,
-    "model": "asesorias.centroadministradorcentro",
-    "fields": {
-      "id_adm_centro": 2,
-      "id_centro": 1
-    }
-  },
-  {
-    "pk": 1,
     "model": "asesorias.reunionpreguntaasesor",
     "fields": {
       "dni_pasaporte_alumno": "88888888Z",
@@ -846,42 +816,6 @@
       "password": "sha1$72a28$05e5d9318fda352f64533e5fc6803f8ac563ea99",
       "email": "alumno@alumno.com",
       "date_joined": "2010-10-05 12:33:29"
-    }
-  },
-  {
-    "pk": 4,
-    "model": "auth.user",
-    "fields": {
-      "username": "AdminCentro1",
-      "first_name": "",
-      "last_name": "",
-      "is_active": true,
-      "is_superuser": false,
-      "is_staff": false,
-      "last_login": "2010-10-20 03:00:01",
-      "groups": [],
-      "user_permissions": [],
-      "password": "sha1$a5539$ef8bbc272b3e3314adb8b06a7cb8f87ab70af4d1",
-      "email": "",
-      "date_joined": "2010-10-20 03:00:01"
-    }
-  },
-  {
-    "pk": 5,
-    "model": "auth.user",
-    "fields": {
-      "username": "AdminCentro2",
-      "first_name": "",
-      "last_name": "",
-      "is_active": true,
-      "is_superuser": false,
-      "is_staff": false,
-      "last_login": "2010-10-20 03:00:05",
-      "groups": [],
-      "user_permissions": [],
-      "password": "sha1$06364$225a6e9666b90abefe9e177e512955db28c742f4",
-      "email": "",
-      "date_joined": "2010-10-20 03:00:05"
     }
   }
 ]

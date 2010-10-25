@@ -28,10 +28,10 @@ def addAdministradorCentro(request):
             instancia_admin_centro = form.save()
 
             # Se crea un usuario django.
-            username = ('AdminCentro' +
-                unicode(instancia_admin_centro.id_adm_centro))
-            password = unicode(instancia_admin_centro.id_adm_centro)
-            email = "aliaselbarto@gmail.com"
+            username = \
+                unicode(instancia_admin_centro.correo_electronico)
+            password = User.objects.make_random_password()
+            email = unicode(instancia_admin_centro.correo_electronico)
 
             user = User.objects.create_user(username, '', password)
             user.save()
