@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
@@ -79,9 +80,7 @@ def determinarCentro_AdministradorCentro(request):
             # centro por argumento.
             instancia_centro = models.Centro.objects.get(pk=centro)
 
-            # Determina el id del administrador de centro, quitando
-            # los 10 primeros caracteres que son: 'AdminCentro'.
-            user = unicode(request.user)[11:]
+            user = unicode(request.user)
 
             try:
                 models.CentroAdministradorCentro.objects.get(
@@ -153,11 +152,32 @@ def enviar_mail_creacion_usuario(request, correo_destino,
 
 # Funcion para generar una nueva clave para passwords olvidados.
 def recordar_password(request):
+    error = ''
     # Se ha rellenado el formulario.
     if request.method == 'POST':
-        print 'hola'
+        # Se obtienen los valores y se valida.
+        form = forms.CorreoElectronicoForm(request.POST)
+        if form.is_valid():
+            # Se verifica que el correo electronico pertenezca a un
+            # usuario.
+            correo_electronico = request.POST['correo_electronico']
+
+            user = User.objects.get(email__exact=correo_electronico)
+
+            # Si existe el correo electronico se crea un nuevo
+            # password para el usuario y se le envia por correo.
+            if (user):
+                nuevo_password = User.objects.make_random_password()
+                user.set_password(nuevo_password)
+                user.save()
+                enviar_mail_creacion_usuario(request,
+                    correo_electronico, user.username, nuevo_password)
+            else:
+                error = 'No existe ningún usuario con tal correo' + \
+                    'electrónico'
     # Si aun no se ha rellenado el formulario, se genera uno en blanco.
     else:
         form = forms.CorreoElectronicoForm()
+        error = ''
     return render_to_response('asesorias/Login/recordar_password.html',
-        {'form': form})
+        {'form': form, 'error': error})
