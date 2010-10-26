@@ -153,6 +153,7 @@ def enviar_mail_creacion_usuario(request, correo_destino,
 # Funcion para generar una nueva clave para passwords olvidados.
 def recordar_password(request):
     error = ''
+    enviado = False
     # Se ha rellenado el formulario.
     if request.method == 'POST':
         # Se obtienen los valores y se valida.
@@ -162,22 +163,27 @@ def recordar_password(request):
             # usuario.
             correo_electronico = request.POST['correo_electronico']
 
-            user = User.objects.get(email__exact=correo_electronico)
+            try:
+                user = User.objects.get(email__exact=correo_electronico)
 
-            # Si existe el correo electronico se crea un nuevo
-            # password para el usuario y se le envia por correo.
-            if (user):
-                nuevo_password = User.objects.make_random_password()
-                user.set_password(nuevo_password)
-                user.save()
-                enviar_mail_creacion_usuario(request,
-                    correo_electronico, user.username, nuevo_password)
-            else:
-                error = 'No existe ningún usuario con tal correo' + \
-                    'electrónico'
+                # Si existe el correo electronico se crea un nuevo
+                # password para el usuario y se le envia por correo.
+                if (user):
+                    nuevo_password = User.objects.make_random_password()
+                    user.set_password(nuevo_password)
+                    user.save()
+                    enviar_mail_creacion_usuario(request,
+                        correo_electronico, user.username,
+                        nuevo_password)
+
+                enviado = True
+            except:
+                error = 'No existe ningún usuario en el sistema para' +\
+                    ' tal correo electrónico.'
+        else:
+            error = 'No ha introducido una dirección de correo válida.'
     # Si aun no se ha rellenado el formulario, se genera uno en blanco.
     else:
         form = forms.CorreoElectronicoForm()
-        error = ''
     return render_to_response('asesorias/Login/recordar_password.html',
-        {'form': form, 'error': error})
+        {'form': form, 'error': error, 'enviado': enviado})
