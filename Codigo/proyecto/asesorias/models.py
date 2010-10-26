@@ -23,6 +23,16 @@ class Centro(models.Model):
             for titulacion in titulaciones:
                 titulacion.borrar()
 
+        # Se obtienen todos los centros-administrador de centro para
+        # este centro para borrarlos.
+        centros_adminCentro = CentroAdministradorCentro.objects.filter(
+            id_centro=self.id_centro)
+
+        # Si el centro tenia centro-administrador de centro se borran.
+        if (centros_adminCentro):
+            for centro in centros_adminCentro:
+                centro.delete()
+
         # Se borra el asesor.
         self.delete()
         return
@@ -39,6 +49,22 @@ class AdministradorCentro(models.Model):
 
     class Meta:
         db_table = "AdministradoresCentro"
+
+    def borrar(self):
+        # Se obtienen todos los centros-administrador de centro para
+        # este administrador de centro para borrarlos.
+        centros_adminCentro = CentroAdministradorCentro.objects.filter(
+            id_adm_centro=self.id_adm_centro)
+
+        # Si el administrador de centro tenia centro-administrador de
+        # centro se borran.
+        if (centros_adminCentro):
+            for centro in centros_adminCentro:
+                centro.delete()
+
+        # Se borra el asesor.
+        self.delete()
+        return
 
     def __unicode__(self):
         return self.correo_electronico

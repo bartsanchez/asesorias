@@ -88,7 +88,7 @@ def delAdministradorCentro(request, administrador_centro):
     if instancia_admin_centro:
         username = unicode(instancia_admin_centro.correo_electronico)
 
-        instancia_admin_centro.delete()
+        instancia_admin_centro.borrar()
 
         user = User.objects.get(username__exact=username)
         user.delete()
