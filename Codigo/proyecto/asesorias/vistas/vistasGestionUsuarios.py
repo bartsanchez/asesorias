@@ -150,3 +150,14 @@ def enviar_mail_creacion_usuario(request, correo_destino,
     except:
         enviado = False
     return enviado
+
+# Funcion para generar una nueva clave para passwords olvidados.
+def recordar_password(request):
+    # Se ha rellenado el formulario.
+    if request.method == 'POST':
+        print 'hola'
+    # Si aun no se ha rellenado el formulario, se genera uno en blanco.
+    else:
+        form = forms.CorreoElectronicoForm()
+    return render_to_response('asesorias/Login/recordar_password.html',
+        {'form': form})

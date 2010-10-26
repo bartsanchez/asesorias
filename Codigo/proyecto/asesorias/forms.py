@@ -283,6 +283,9 @@ class CursoAcademicoFormSelect(forms.Form):
     curso_academico = forms.IntegerField(label='Curso académico',
         min_value=1900, max_value=date.today().year)
 
+class CorreoElectronicoForm(forms.Form):
+    correo_electronico = forms.EmailField(label="Correo electrónico")
+
 class ModificarClaveForm(forms.Form):
     old_password = forms.CharField(label="Antigua contraseña",
         widget=forms.PasswordInput)

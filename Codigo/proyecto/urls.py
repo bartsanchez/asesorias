@@ -35,6 +35,9 @@ urlpatterns = patterns('',
 urlpatterns += patterns(VISTAS + 'vistasGestionUsuarios',
     url(r'^asesorias/$', 'authentication', name='authentication'),
 
+    url(r'^asesorias/recordarPassword/$',
+        'recordar_password', name='recordar_password'),
+
     url(r'^asesorias/determinarCentro/$',
         'determinarCentro_AdministradorCentro',
         name='determinarCentro_AdministradorCentro'),
