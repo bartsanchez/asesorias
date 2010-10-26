@@ -20,12 +20,15 @@
 
         <div id="content">
             <div id="content-main">
-                <p>{{ user }}</p>
+                <p>Asesor: {{ user }}</p>
                 <form action="" method="post" id="login-form">
                         {% for field in form %}
                             <div class="form-row">{{ field.label_tag }} {{ field }}</div>
                         {% endfor %}
-                        <div class="submit-row"><input type="submit" value="OK"/></div>
+                        <div class="submit-row">
+                            <input type="submit" value="OK"/>
+                            <a href="{% url authentication %}">Volver</a>
+                        </div>
                 </form>
             </div>
         </div>
