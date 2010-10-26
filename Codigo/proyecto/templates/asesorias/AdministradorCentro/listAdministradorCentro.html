@@ -38,10 +38,22 @@
 
         {% if not busqueda %}
         <tr>
-            {% ifequal orden '_nombre_adm_centro' %}
-            <th colspan="3"><a href={% url listAdministradorCentro 'nombre_adm_centro' %}>Administrador de centro &#11014;</a></th>
+            {% ifequal orden '_correo_electronico' %}
+            <th colspan="3"><a href={% url listAdministradorCentro 'correo_electronico' %}>Correo electrónico &#11014;</a> : <a href={% url listAdministradorCentro 'nombre_adm_centro' %}>Nombre</a></th>
+
             {% else %}
-            <th colspan="3"><a href={% url listAdministradorCentro '_nombre_adm_centro' %}>Administrador de centro &#11015;</a></th>
+            {% ifequal orden 'nombre_adm_centro' %}
+            <th colspan="3"><a href={% url listAdministradorCentro 'correo_electronico' %}>Correo electrónico</a> : <a href={% url listAdministradorCentro '_nombre_adm_centro' %}>Nombre &#11015;</a></th>
+
+            {% else %}
+            {% ifequal orden '_nombre_adm_centro' %}
+            <th colspan="3"><a href={% url listAdministradorCentro 'correo_electronico' %}>Correo electrónico</a> : <a href={% url listAdministradorCentro 'nombre_adm_centro' %}>Nombre &#11014;</a></th>
+
+            {% else %}
+            <th colspan="3"><a href={% url listAdministradorCentro '_correo_electronico' %}>Correo electrónico &#11015;</a> : <a href={% url listAdministradorCentro 'nombre_adm_centro' %}>Nombre</a></th>
+
+            {% endifequal %}
+            {% endifequal %}
             {% endifequal %}
         </tr>
         {% endif %}
@@ -49,7 +61,7 @@
         <!-- Administradores de centro -->
         {% for administrador_centro in lista_administradores_centro %}
         <tr>
-            <th scope="row"><a href="{% url editAdministradorCentro administrador_centro.id_adm_centro %}">{{ administrador_centro }}</a></th>
+            <th scope="row"><a href="{% url editAdministradorCentro administrador_centro.id_adm_centro %}">{{ administrador_centro.correo_electronico }} : {{ administrador_centro.nombre_adm_centro }}</a></th>
             <td><a href="{% url editAdministradorCentro administrador_centro.id_adm_centro %}" class="editlink">Editar</a></td>
             <td><a href="{% url delAdministradorCentro administrador_centro.id_adm_centro %}" class="deletelink">Eliminar</a></td>
         </tr>

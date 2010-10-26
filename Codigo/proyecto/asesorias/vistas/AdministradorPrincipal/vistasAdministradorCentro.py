@@ -105,9 +105,19 @@ def delAdministradorCentro(request, administrador_centro):
         {'user': request.user, 'error': error})
 
 def listAdministradorCentro(request, orden):
+    # Se establece el ordenamiento inicial.
+    if ((orden == 'nombre_adm_centro') or
+        (orden == '_nombre_adm_centro')):
+        orden_inicial = 'nombre_adm_centro'
+        orden_secundario = 'correo_electronico'
+    else:
+        orden_inicial = 'correo_electronico'
+        orden_secundario = 'nombre_adm_centro'
+
     # Se obtiene una lista con todos los centros.
     lista_administradores_centro = \
-        models.AdministradorCentro.objects.order_by('nombre_adm_centro')
+        models.AdministradorCentro.objects.order_by(orden_inicial,
+        orden_secundario)
 
     # Se ha realizado una busqueda.
     if request.method == 'POST':
@@ -127,7 +137,8 @@ def listAdministradorCentro(request, orden):
         form = forms.SearchForm()
         busqueda = False
 
-        if orden == '_nombre_adm_centro':
+        if ((orden == '_nombre_adm_centro') or
+            (orden == '_correo_electronico')):
             lista_administradores_centro = \
                 lista_administradores_centro.reverse()
 
