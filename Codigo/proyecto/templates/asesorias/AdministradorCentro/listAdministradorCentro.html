@@ -49,9 +49,9 @@
         <!-- Administradores de centro -->
         {% for administrador_centro in lista_administradores_centro %}
         <tr>
-            <th scope="row"><a href="{% url editAdministradorCentro administrador_centro.nombre_adm_centro %}">{{ administrador_centro }}</a></th>
-            <td><a href="{% url editAdministradorCentro administrador_centro.nombre_adm_centro %}" class="editlink">Editar</a></td>
-            <td><a href="{% url delAdministradorCentro administrador_centro.nombre_adm_centro %}" class="deletelink">Eliminar</a></td>
+            <th scope="row"><a href="{% url editAdministradorCentro administrador_centro.id_adm_centro %}">{{ administrador_centro }}</a></th>
+            <td><a href="{% url editAdministradorCentro administrador_centro.id_adm_centro %}" class="editlink">Editar</a></td>
+            <td><a href="{% url delAdministradorCentro administrador_centro.id_adm_centro %}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}
 

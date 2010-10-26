@@ -41,7 +41,7 @@ class AdministradorCentro(models.Model):
         db_table = "AdministradoresCentro"
 
     def __unicode__(self):
-        return self.nombre_adm_centro
+        return self.correo_electronico
 
 class Titulacion(models.Model):
     codigo_titulacion = models.AutoField(primary_key=True)

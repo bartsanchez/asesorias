@@ -13,7 +13,7 @@ def obtenerAdministradorCentro(administrador_centro):
         # Obtiene el administrador centro cuyo nombre es
         # administrador_centro.
         resultado = models.AdministradorCentro.objects.get(
-            nombre_adm_centro=administrador_centro)
+            id_adm_centro=administrador_centro)
     except:
         resultado = False
     return resultado
