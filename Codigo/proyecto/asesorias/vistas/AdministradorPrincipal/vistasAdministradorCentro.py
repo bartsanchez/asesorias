@@ -33,7 +33,7 @@ def addAdministradorCentro(request):
             password = User.objects.make_random_password()
             email = unicode(instancia_admin_centro.correo_electronico)
 
-            user = User.objects.create_user(username, '', password)
+            user = User.objects.create_user(username, email, password)
             user.save()
 
             vistas.vistasGestionUsuarios.enviar_mail_creacion_usuario(
@@ -86,8 +86,7 @@ def delAdministradorCentro(request, administrador_centro):
         administrador_centro)
     # Si existe se elimina.
     if instancia_admin_centro:
-        username = ('AdminCentro' +
-            unicode(instancia_admin_centro.id_adm_centro))
+        username = unicode(instancia_admin_centro.correo_electronico)
 
         instancia_admin_centro.delete()
 
