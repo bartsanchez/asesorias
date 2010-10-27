@@ -68,9 +68,11 @@ def authentication(request):
 
 @login_required
 def determinarCentro_AdministradorCentro(request):
+    user = unicode(request.user)
+
     # Se obtiene una instancia del administrador de centro.
     instancia_admin_centro = models.AdministradorCentro.objects.get(
-        correo_electronico=request.user)
+        correo_electronico=user)
 
     id_adm_centro = instancia_admin_centro.id_adm_centro
 
@@ -88,8 +90,6 @@ def determinarCentro_AdministradorCentro(request):
             # Se crea una instancia del centro para pasar el nombre de
             # centro por argumento.
             instancia_centro = models.Centro.objects.get(pk=centro)
-
-            user = unicode(request.user)
 
             try:
                 models.CentroAdministradorCentro.objects.get(
