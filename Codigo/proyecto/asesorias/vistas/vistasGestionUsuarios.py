@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
@@ -65,6 +66,7 @@ def authentication(request):
     return render_to_response('asesorias/Login/login.html',
         {'form': form, 'error': error})
 
+@login_required
 def determinarCentro_AdministradorCentro(request):
     # Se obtiene una instancia del administrador de centro.
     instancia_admin_centro = models.AdministradorCentro.objects.get(
