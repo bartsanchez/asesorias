@@ -23,6 +23,21 @@ class CentroFormSelect(forms.Form):
     centro = forms.ModelChoiceField(models.Centro.objects.order_by(
         'nombre_centro'))
 
+class CentroDeAdministradorCentroFormSelect(forms.Form):
+    centro = forms.ModelChoiceField(models.Centro.objects.order_by(
+        'nombre_centro'))
+
+    # Necesario para actualizar el queryset en tiempo de ejecucion, a
+    # traves del argumento id_adm_centro.
+    def __init__(self, id_adm_centro, *args, **kwargs):
+        super(CentroDeAdministradorCentroFormSelect,
+            self).__init__(*args, **kwargs)
+        self.fields['centro'].queryset = \
+            models.Centro.objects.filter(id_centro__in=
+            models.CentroAdministradorCentro.objects.filter(
+            id_adm_centro=id_adm_centro).values_list(
+            'id_centro',flat=True))
+
 class AdministradorCentroForm(forms.ModelForm):
     class Meta:
         model = models.AdministradorCentro

@@ -66,11 +66,18 @@ def authentication(request):
         {'form': form, 'error': error})
 
 def determinarCentro_AdministradorCentro(request):
+    # Se obtiene una instancia del administrador de centro.
+    instancia_admin_centro = models.AdministradorCentro.objects.get(
+        correo_electronico=request.user)
+
+    id_adm_centro = instancia_admin_centro.id_adm_centro
+
     # Se ha introducido un centro.
     if request.method == 'POST':
 
         # Se obtiene el centro y se valida.
-        form = forms.CentroFormSelect(request.POST)
+        form = forms.CentroDeAdministradorCentroFormSelect(
+            id_adm_centro, request.POST)
 
         # Si es valido se redirige a listar centros.
         if form.is_valid():
@@ -97,7 +104,8 @@ def determinarCentro_AdministradorCentro(request):
                 reverse('determinarCentro_AdministradorCentro'))
 
     else:
-        form = forms.CentroFormSelect()
+        form = forms.CentroDeAdministradorCentroFormSelect(
+            id_adm_centro=id_adm_centro)
     return render_to_response('asesorias/Login/login_admin_centro.html',
         {'user': request.user, 'form': form})
 
