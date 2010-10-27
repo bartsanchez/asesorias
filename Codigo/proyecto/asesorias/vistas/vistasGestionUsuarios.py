@@ -94,7 +94,7 @@ def determinarCentro_AdministradorCentro(request):
             try:
                 models.CentroAdministradorCentro.objects.get(
                     id_centro=instancia_centro.id_centro,
-                    id_adm_centro=user)
+                    id_adm_centro=id_adm_centro)
             except:
                 return HttpResponseRedirect(
                     reverse('determinarCentro_AdministradorCentro'))
