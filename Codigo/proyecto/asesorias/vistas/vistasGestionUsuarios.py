@@ -152,8 +152,9 @@ def enviar_mail_creacion_usuario(request, correo_destino,
             'Tipo: Administrador de centro\n' +
             'Usuario: ' + str(username) + '\n' +
             'Contraseña: ' + str(password) + '\n')
+        correo_origen = 'uco.asesorias.academicas@gmail.com'
 
-        send_mail(tema, contenido, request.user.email, [correo_destino])
+        send_mail(tema, contenido, correo_origen, [correo_destino])
 
         enviado = True
     except:
@@ -182,9 +183,12 @@ def recordar_password(request):
                     nuevo_password = User.objects.make_random_password()
                     user.set_password(nuevo_password)
                     user.save()
-                    enviar_mail_creacion_usuario(request,
-                        correo_electronico, user.username,
-                        nuevo_password)
+
+                    email = unicode(user.email)
+                    username = unicode(user.username)
+
+                    print enviar_mail_creacion_usuario(request,
+                        email, username, nuevo_password)
 
                 enviado = True
             except:

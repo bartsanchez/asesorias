@@ -13,7 +13,7 @@ def checkCentro(funcion):
         instancia_centro = models.Centro.objects.get(
             nombre_centro=centro)
         instancia_adm_centro = models.AdministradorCentro.objects.get(
-            correo_electronico=request.user)
+            correo_electronico=unicode(request.user))
 
         try:
             models.CentroAdministradorCentro.objects.get(
