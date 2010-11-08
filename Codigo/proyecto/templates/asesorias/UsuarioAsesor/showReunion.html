@@ -44,6 +44,7 @@
         {% for pregunta in preguntas_oficiales %}
         <tr>
             <th scope="row">{{ pregunta.determinarEnunciado }}: {{ pregunta.respuesta }}</th>
+            <td><a href="{% url delPreguntaOficialAReunion curso_academico reunion.dni_pasaporte reunion.id_reunion pregunta.id_entrevista_oficial pregunta.id_pregunta_oficial %}" class="deletelink">Eliminar</a></td>
         </tr>
         {% endfor %}
 
