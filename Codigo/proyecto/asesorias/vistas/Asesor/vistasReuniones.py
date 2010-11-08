@@ -123,3 +123,35 @@ def showReunion(request, curso_academico, dni_pasaporte, id_reunion):
         'preguntas_reunion': preguntas_reunion,
         'preguntas_oficiales': preguntas_oficiales,
         'preguntas_asesor': preguntas_asesor})
+
+def addPreguntaAReunion(request, curso_academico, dni_pasaporte,
+    id_reunion):
+    preguntas_oficiales = False
+    preguntas_asesor = False
+
+    # Se obtiene la instancia del asesor curso academico.
+    instancia_asesorCA = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+        unicode(request.user), curso_academico)
+
+    # El asesor presta asesoria durante el curso academico.
+    if instancia_asesorCA:
+        # Se obtiene la instancia de la reunion.
+        instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
+            curso_academico, id_reunion)
+
+        # Si existe se buscan las preguntas.
+        if instancia_reunion:
+            preguntas_oficiales = models.PreguntaOficial.objects.order_by(
+                'enunciado')
+            preguntas_asesor = models.PreguntaAsesor.objects.filter(
+                dni_pasaporte=instancia_asesorCA.dni_pasaporte,
+                curso_academico=curso_academico).order_by('enunciado')
+
+    return render_to_response(PATH + 'addPreguntaAReunion.html',
+        {'user': request.user,
+        'dni_pasaporte': dni_pasaporte,
+        'curso_academico': curso_academico,
+        'reunion': instancia_reunion,
+        'preguntas_oficiales': preguntas_oficiales,
+        'preguntas_asesor': preguntas_asesor})

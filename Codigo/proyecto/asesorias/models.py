@@ -468,6 +468,9 @@ class PreguntaAsesor(models.Model):
         unique_together = ("dni_pasaporte", "curso_academico",
             "id_entrevista_asesor", "id_pregunta_asesor")
 
+    def determinarTipo(self):
+        return unicode('Asesor')
+
     def __unicode__(self):
         return unicode(self.enunciado)
 
@@ -690,6 +693,9 @@ class PreguntaOficial(models.Model):
         db_table = "PreguntasOficiales"
         unique_together = ("id_entrevista_oficial",
             "id_pregunta_oficial")
+
+    def determinarTipo(self):
+        return unicode('Oficial')
 
     def __unicode__(self):
         return unicode(self.enunciado)
