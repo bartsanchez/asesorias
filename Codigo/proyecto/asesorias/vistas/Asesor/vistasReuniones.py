@@ -4,6 +4,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias.vistas.AdministradorPrincipal import \
     vistasAsesorCursoAcademico
+from asesorias.vistas.AdministradorPrincipal import \
+    vistasPreguntaOficial
 from asesorias.vistas.AdministradorPrincipal import vistasReunion
 from asesorias import models, forms
 
@@ -142,8 +144,8 @@ def addPreguntaAReunion(request, curso_academico, dni_pasaporte,
 
         # Si existe se buscan las preguntas.
         if instancia_reunion:
-            preguntas_oficiales = models.PreguntaOficial.objects.order_by(
-                'enunciado')
+            preguntas_oficiales = \
+                models.PreguntaOficial.objects.order_by('enunciado')
             preguntas_asesor = models.PreguntaAsesor.objects.filter(
                 dni_pasaporte=instancia_asesorCA.dni_pasaporte,
                 curso_academico=curso_academico).order_by('enunciado')
@@ -155,3 +157,38 @@ def addPreguntaAReunion(request, curso_academico, dni_pasaporte,
         'reunion': instancia_reunion,
         'preguntas_oficiales': preguntas_oficiales,
         'preguntas_asesor': preguntas_asesor})
+
+def addPreguntaOficialAReunion(request, curso_academico, dni_pasaporte,
+    id_reunion, id_entrevista_oficial, id_pregunta_oficial):
+    # Se obtiene la instancia del asesor curso academico.
+    instancia_asesorCA = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+        unicode(request.user), curso_academico)
+
+    # El asesor presta asesoria durante el curso academico.
+    if instancia_asesorCA:
+        # Se obtiene la instancia de la reunion.
+        instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
+            curso_academico, id_reunion)
+
+        # Si existe se buscan las preguntas.
+        if instancia_reunion:
+            instancia_pregunta_oficial = \
+                vistasPreguntaOficial.obtenerPreguntaOficial(
+                id_entrevista_oficial, id_pregunta_oficial)
+
+            instancia_nueva_pregunta = \
+                models.ReunionPreguntaOficial.objects.create(
+                dni_pasaporte=dni_pasaporte,
+                curso_academico=curso_academico,
+                id_reunion=id_reunion,
+                id_entrevista_oficial=id_entrevista_oficial,
+                id_pregunta_oficial=id_pregunta_oficial,
+                respuesta='-')
+            instancia_nueva_pregunta.save()
+
+    return HttpResponseRedirect(
+            reverse('showReunion_Asesor',
+            kwargs={'curso_academico': curso_academico,
+            'dni_pasaporte': dni_pasaporte,
+            'id_reunion': id_reunion}))
