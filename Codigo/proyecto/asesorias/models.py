@@ -728,6 +728,14 @@ class Reunion(models.Model):
         self.delete()
         return
 
+    def determinarNombreAlumno(self):
+        alumno = Alumno.objects.get(dni_pasaporte=self.dni_pasaporte)
+        return (alumno.nombre)
+
+    def determinarApellidosAlumno(self):
+        alumno = Alumno.objects.get(dni_pasaporte=self.dni_pasaporte)
+        return (alumno.apellidos)
+
     def __unicode__(self):
         return unicode(self.fecha.strftime('%d/%m/%Y'))
 
