@@ -146,9 +146,6 @@ def addPreguntaAReunion(request, curso_academico, dni_pasaporte,
         if instancia_reunion:
             preguntas_oficiales = \
                 models.PreguntaOficial.objects.order_by('enunciado')
-            preguntas_asesor = models.PreguntaAsesor.objects.filter(
-                dni_pasaporte=instancia_asesorCA.dni_pasaporte,
-                curso_academico=curso_academico).order_by('enunciado')
 
     return render_to_response(PATH + 'addPreguntaAReunion.html',
         {'user': request.user,
