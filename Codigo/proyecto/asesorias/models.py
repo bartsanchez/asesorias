@@ -471,6 +471,13 @@ class PreguntaAsesor(models.Model):
     def determinarTipo(self):
         return unicode('Asesor')
 
+    def determinarPlantilla(self):
+        plantilla = PlantillaEntrevistaAsesor.objects.get(
+            dni_pasaporte=self.dni_pasaporte,
+            curso_academico=self.curso_academico,
+            id_entrevista_asesor=self.id_entrevista_asesor)
+        return unicode(plantilla.descripcion)
+
     def __unicode__(self):
         return unicode(self.enunciado)
 

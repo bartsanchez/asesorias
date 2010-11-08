@@ -35,7 +35,7 @@
                 {% for pregunta in preguntas_oficiales %}
 
                 <tr>
-                    <th scope="row">{{ pregunta.determinarTipo }} : {{ pregunta.enunciado }}</th>
+                    <th scope="row">{{ pregunta.determinarTipo }} : {{ pregunta.id_entrevista_oficial.descripcion }} : {{ pregunta.enunciado }}</th>
                     <td><a href="#" class=addlink></a></td>
                 </tr>
 
@@ -44,7 +44,7 @@
                 {% for pregunta in preguntas_asesor %}
 
                 <tr>
-                    <th scope="row">{{ pregunta.determinarTipo }} : {{ pregunta.enunciado }}</th>
+                    <th scope="row">{{ pregunta.determinarTipo }} : {{ pregunta.determinarPlantilla }} : {{ pregunta.enunciado }}</th>
                     <td><a href="#" class=addlink></a></td>
                 </tr>
 
