@@ -4,6 +4,8 @@
 
     <h1>Ver reunión.</h1>
 
+    {% if form %}
+
     <a href="{# url generarPDFListaAlumnos_Asesor curso_academico busqueda #}" class="pdflink">Generar PDF</a>
 
     <div class="module">
@@ -56,5 +58,12 @@
 
         </table>
     </div>
+
+    {% else %}
+
+        <p>No existe tal reunión</p>
+        <a href="{% url listReunion_Asesor curso_academico 'fecha' %}">Volver</a>
+
+    {% endif %}
 
 {% endblock %}

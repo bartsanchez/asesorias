@@ -81,6 +81,7 @@ def listReunion(request, curso_academico, orden):
 
 def showReunion(request, curso_academico, dni_pasaporte, id_reunion):
     dni_pasaporte_asesor = unicode(request.user)
+    form = False
     instancia_reunion = False
     preguntas_reunion = False
     preguntas_oficiales = False
@@ -96,6 +97,7 @@ def showReunion(request, curso_academico, dni_pasaporte, id_reunion):
         # Se obtiene la instancia de la reunion.
         instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
             curso_academico, id_reunion)
+
         # Si existe se buscan las preguntas.
         if instancia_reunion:
             form = forms.ReunionForm(instance=instancia_reunion)
@@ -111,12 +113,8 @@ def showReunion(request, curso_academico, dni_pasaporte, id_reunion):
                 curso_academico=curso_academico,
                 id_reunion=id_reunion)
 
-            print preguntas_asesor
-            preguntas_reunion = True
-
-    #########################################
-    ## MODIFICAR COMPLETAMENTE ESTA FUNCION #
-    #########################################
+            if (preguntas_oficiales) or (preguntas_asesor):
+                preguntas_reunion = True
 
     return render_to_response(PATH + 'showReunion.html',
         {'user': request.user, 'form': form,
