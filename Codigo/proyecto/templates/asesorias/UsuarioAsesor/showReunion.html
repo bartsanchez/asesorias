@@ -43,13 +43,13 @@
         <!-- Preguntas -->
         {% for pregunta in preguntas_oficiales %}
         <tr>
-            <th scope="row">{{ pregunta }}: {{ pregunta.respuesta }}</th>
+            <th scope="row">{{ pregunta.determinarEnunciado }}: {{ pregunta.respuesta }}</th>
         </tr>
         {% endfor %}
 
         {% for pregunta in preguntas_asesor %}
         <tr>
-            <th scope="row">{{ pregunta }}: {{ pregunta.respuesta }}</th>
+            <th scope="row">{{ pregunta.determinarEnunciado }}: {{ pregunta.respuesta }}</th>
         </tr>
         {% endfor %}
 

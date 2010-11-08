@@ -797,6 +797,14 @@ class ReunionPreguntaAsesor(models.Model):
             "id_reunion", "dni_pasaporte_asesor",
             "id_entrevista_asesor", "id_pregunta_asesor")
 
+    def determinarEnunciado(self):
+        pregunta = PreguntaAsesor.objects.get(
+            dni_pasaporte=self.dni_pasaporte_asesor,
+            curso_academico=self.curso_academico,
+            id_entrevista_asesor=self.id_entrevista_asesor,
+            id_pregunta_asesor=self.id_pregunta_asesor)
+        return unicode(pregunta.enunciado)
+
     def __unicode__(self):
         return unicode(self.id_pregunta_asesor)
 
@@ -815,6 +823,12 @@ class ReunionPreguntaOficial(models.Model):
         unique_together = ("dni_pasaporte", "curso_academico",
             "id_reunion", "id_entrevista_oficial",
             "id_pregunta_oficial")
+
+    def determinarEnunciado(self):
+        pregunta = PreguntaOficial.objects.get(
+            id_entrevista_oficial=self.id_entrevista_oficial,
+            id_pregunta_oficial=self.id_pregunta_oficial)
+        return unicode(pregunta.enunciado)
 
     def __unicode__(self):
         return unicode(self.id_pregunta_oficial)
