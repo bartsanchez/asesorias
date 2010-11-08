@@ -28,7 +28,7 @@ def listReunion(request, curso_academico, orden):
         # Se crea una lista con todas las reuniones del asesor.
         lista_reuniones = models.Reunion.objects.filter(
             dni_pasaporte__in=lista_alumnosCA,
-            curso_academico=curso_academico)
+            curso_academico=curso_academico).order_by('fecha')
 
     # El asesor aun no presta asesoria en este curso academico.
     else:

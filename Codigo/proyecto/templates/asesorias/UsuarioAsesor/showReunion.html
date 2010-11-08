@@ -17,10 +17,12 @@
         {% else %}
 
         {% for field in form %}
+        {% ifnotequal field.name 'id_reunion' %}
         <tr>
             <th scope="row">{{ field.label_tag }}</th>
             <td>{{ field }}</td>
         </tr>
+        {% endifnotequal %}
         {% endfor %}
 
         </table>
