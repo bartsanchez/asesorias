@@ -187,7 +187,7 @@ def recordar_password(request):
                     email = unicode(user.email)
                     username = unicode(user.username)
 
-                    print enviar_mail_creacion_usuario(request,
+                    enviar_mail_creacion_usuario(request,
                         email, username, nuevo_password)
 
                 enviado = True
