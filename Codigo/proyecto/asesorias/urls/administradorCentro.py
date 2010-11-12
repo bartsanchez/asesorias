@@ -28,6 +28,8 @@ urlpatterns = patterns(VISTAS + 'vistasAdministradorCentro',
         name='administradorCentro_org_docente'),
 
     ### Includes a cada entidad ###
+    (r'^info/',
+        include(URLS + 'informacionPersonal')),
 
     (r'^titulacion/',
         include(URLS + 'titulacion')),

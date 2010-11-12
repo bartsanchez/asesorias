@@ -5,7 +5,6 @@
 
     {% block informacion_personal %}
                                     <ul>
-                                        <li><a href="{# url showInfo_Alumno curso_academico #}">Ver información personal</a></li>
-                                        <li><a href="{# url modificarClave_Alumno curso_academico #}">Modificar contraseña</a></li>
+                                        <li><a href="{% url modificarClave_AdministradorCentro centro %}">Modificar contraseña</a></li>
                                     </ul>
     {% endblock %}
