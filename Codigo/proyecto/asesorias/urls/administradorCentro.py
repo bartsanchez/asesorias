@@ -14,6 +14,11 @@ urlpatterns = patterns(VISTAS + 'vistasAdministradorCentro',
     url(r'^$', 'administradorCentro_inicio',
         name='administradorCentro_inicio'),
 
+    url(r'^informacion_personal/$',
+
+        'administradorCentro_informacion_personal',
+        name='administradorCentro_informacion_personal'),
+
     url(r'^organizacion_institucional/$',
         'administradorCentro_org_institucional',
         name='administradorCentro_org_institucional'),

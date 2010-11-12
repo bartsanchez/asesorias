@@ -2,6 +2,7 @@
 
     {% block menu %}
                 <li><a href="{% url administradorCentro_inicio centro %}" {% block opcion_inicio %}{% endblock %}>Inicio</a></li>
+                <li><a href="{% url administradorCentro_informacion_personal centro %}" {% block opcion_informacion_personal %}{% endblock %}>Información personal</a></li>
                 <li><a href="{% url administradorCentro_org_institucional centro %}" {% block opcion_org_institucional %}{% endblock %}>Organización institucional</a></li>
                 <li><a href="{% url administradorCentro_org_docente centro %}" {% block opcion_org_docente %}{% endblock %}>Organización docente</a></li>
     {% endblock %}
@@ -10,6 +11,9 @@
 
     {% block elementos_sidebar %}
                             <ul>
+                                <li><h3><a href="{% url administradorCentro_informacion_personal centro %}">Información personal</a></h3>
+                                    {% block informacion_personal %}{% endblock %}
+                                </li>
                                 <li><h3><a href="{% url administradorCentro_org_institucional centro %}">Organización institucional</a></h3>
                                     {% block org_institucional %}{% endblock %}
                                 </li>
