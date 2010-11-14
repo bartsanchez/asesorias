@@ -1,8 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias.vistas.vistasAdministradorPrincipal import \
+    checkAdministradorPrincipal
 from asesorias.utils import vistasPDF
 
 # Comprueba si existe un asesor y, de ser asi, lo devuelve.
@@ -14,6 +17,8 @@ def obtenerAsesor(dni_pasaporte):
         resultado = False
     return resultado
 
+@checkAdministradorPrincipal
+@login_required
 def addAsesor(request):
     # Se ha rellenado el formulario.
     if request.method == 'POST':
@@ -40,6 +45,8 @@ def addAsesor(request):
     return render_to_response('asesorias/Asesor/addAsesor.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def editAsesor(request, dni_pasaporte):
     # Se obtiene la instancia del asesor.
     instancia_asesor = obtenerAsesor(dni_pasaporte)
@@ -78,6 +85,8 @@ def editAsesor(request, dni_pasaporte):
         {'user': request.user, 'form': form,
         'dni_pasaporte': dni_pasaporte})
 
+@checkAdministradorPrincipal
+@login_required
 def delAsesor(request, dni_pasaporte):
     # Se obtiene la instancia del asesor.
     instancia_asesor = obtenerAsesor(dni_pasaporte)
@@ -93,6 +102,8 @@ def delAsesor(request, dni_pasaporte):
     return render_to_response('asesorias/Asesor/delAsesor.html',
         {'user': request.user, 'error': error})
 
+@checkAdministradorPrincipal
+@login_required
 def listAsesor(request, orden):
     # Se obtiene una lista con todos los asesores.
     lista_asesores = models.Asesor.objects.order_by('dni_pasaporte')
@@ -122,6 +133,8 @@ def listAsesor(request, orden):
         'lista_asesores': lista_asesores, 'busqueda': busqueda,
         'orden': orden})
 
+@checkAdministradorPrincipal
+@login_required
 def generarPDFListaAsesores(request, busqueda):
     # Se obtiene una lista con todos los asesores.
     lista_asesores = models.Asesor.objects.order_by('dni_pasaporte')
