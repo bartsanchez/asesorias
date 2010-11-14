@@ -1,7 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias.vistas.vistasAdministradorPrincipal import \
+    checkAdministradorPrincipal
 from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/PlantillaEntrevistaOficial/'
@@ -16,6 +19,8 @@ def obtenerPlantillaEntrevistaOficial(id_entrevista_oficial):
         resultado = False
     return resultado
 
+@checkAdministradorPrincipal
+@login_required
 def addPlantillaEntrevistaOficial(request):
     # Se ha rellenado el formulario.
     if request.method == 'POST':
@@ -36,6 +41,8 @@ def addPlantillaEntrevistaOficial(request):
         'addPlantillaEntrevistaOficial.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def editPlantillaEntrevistaOficial(request, id_entrevista_oficial):
     # Se obtiene la instancia de la plantilla.
     instancia_plantilla_entrevista_oficial = \
@@ -66,6 +73,8 @@ def editPlantillaEntrevistaOficial(request, id_entrevista_oficial):
         'editPlantillaEntrevistaOficial.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def delPlantillaEntrevistaOficial(request, id_entrevista_oficial):
     # Se obtiene la instancia del asesor.
     instancia_plantilla_entrevista_oficial = \
@@ -96,6 +105,8 @@ def delPlantillaEntrevistaOficial(request, id_entrevista_oficial):
         'delPlantillaEntrevistaOficial.html',
         {'user': request.user, 'error': error})
 
+@checkAdministradorPrincipal
+@login_required
 def listPlantillaEntrevistaOficial(request, orden):
     # Se obtiene una lista con todos las plantillas de entrevista
     # oficiales.
@@ -132,6 +143,8 @@ def listPlantillaEntrevistaOficial(request, orden):
         lista_plantillas_entrevista_oficial,
         'busqueda': busqueda, 'orden': orden})
 
+@checkAdministradorPrincipal
+@login_required
 def generarPDFListaPlantillasEntrevistaOficial(request, busqueda):
     lista_plantillas_entrevista_oficial = \
         models.PlantillaEntrevistaOficial.objects.order_by(
