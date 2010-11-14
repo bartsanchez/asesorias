@@ -1,9 +1,12 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
 from asesorias.vistas.AdministradorPrincipal import \
     vistasPlantillaEntrevistaOficial as vistasPEO
+from asesorias.vistas.vistasAdministradorPrincipal import \
+    checkAdministradorPrincipal
 from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/PreguntaOficial/'
@@ -88,6 +91,8 @@ def determinarSiguienteIdPreguntaDePlantillaOficial(
             break
     return contador
 
+@checkAdministradorPrincipal
+@login_required
 def addPreguntaOficial(request, id_entrevista_oficial):
     # Se comprueba que exista la entrevista, en caso de introducir una.
     if id_entrevista_oficial != '':
@@ -141,6 +146,8 @@ def addPreguntaOficial(request, id_entrevista_oficial):
     return render_to_response(PATH + 'addPreguntaOficial.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def editPreguntaOficial(request, id_entrevista_oficial,
     id_pregunta_oficial):
     # Se obtiene la instancia de la pregunta oficial.
@@ -193,6 +200,8 @@ def editPreguntaOficial(request, id_entrevista_oficial,
     return render_to_response(PATH + 'editPreguntaOficial.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def delPreguntaOficial(request, id_entrevista_oficial,
     id_pregunta_oficial):
     # Se obtiene la instancia de la pregunta oficial.
@@ -211,6 +220,8 @@ def delPreguntaOficial(request, id_entrevista_oficial,
     return render_to_response(PATH + 'delPreguntaOficial.html',
         {'user': request.user, 'error': error})
 
+@checkAdministradorPrincipal
+@login_required
 def selectEntrevistaOficial(request):
     # Se ha introducido una plantilla oficial.
     if request.method == 'POST':
@@ -237,6 +248,8 @@ def selectEntrevistaOficial(request):
     return render_to_response(PATH + 'selectEntrevistaOficial.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def listPreguntaOficial(request, entrevista_oficial, orden):
     # Se comprueba que exista la entrevista pasada por argumento.
     instancia_entrevista_oficial = \
@@ -298,6 +311,8 @@ def listPreguntaOficial(request, entrevista_oficial, orden):
         'entrevista_oficial': entrevista_oficial,
         'orden': orden})
 
+@checkAdministradorPrincipal
+@login_required
 def generarPDFListaPreguntasOficiales(request, entrevista_oficial, busqueda):
     # Se comprueba que exista la entrevista pasada por argumento.
     instancia_entrevista_oficial = \
