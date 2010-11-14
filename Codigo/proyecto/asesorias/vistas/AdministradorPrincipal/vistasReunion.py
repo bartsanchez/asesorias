@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -6,6 +7,8 @@ from asesorias.vistas.AdministradorPrincipal import \
     vistasAlumno, vistasAlumnoCursoAcademico
 from asesorias.vistas.AdministradorPrincipal import \
     vistasAsesor, vistasAsesorCursoAcademico
+from asesorias.vistas.vistasAdministradorPrincipal import \
+    checkAdministradorPrincipal
 from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/Reunion/'
@@ -96,6 +99,8 @@ def determinarSiguienteIdReunionDeAlumnoCursoAcademico(
             break
     return contador
 
+@checkAdministradorPrincipal
+@login_required
 def addReunion(request, dni_pasaporte, curso_academico):
     # Se obtiene el posible alumno_curso_academico.
     instancia_alumno_curso_academico = \
@@ -156,6 +161,8 @@ def addReunion(request, dni_pasaporte, curso_academico):
         'curso_academico': curso_academico,
         'dni_pasaporte_alumno': dni_pasaporte})
 
+@checkAdministradorPrincipal
+@login_required
 def editReunion(request, dni_pasaporte, curso_academico, id_reunion):
     # Se obtiene la instancia de la reunion.
     instancia_reunion = obtenerReunion(dni_pasaporte, curso_academico,
@@ -223,6 +230,8 @@ def editReunion(request, dni_pasaporte, curso_academico, id_reunion):
         'dni_pasaporte_alumno': dni_pasaporte,
         'id_reunion': id_reunion})
 
+@checkAdministradorPrincipal
+@login_required
 def delReunion(request, dni_pasaporte, curso_academico, id_reunion):
     # Se obtiene la instancia de la reunion.
     instancia_reunion= obtenerReunion(dni_pasaporte, curso_academico,
@@ -241,6 +250,8 @@ def delReunion(request, dni_pasaporte, curso_academico, id_reunion):
     return render_to_response(PATH + 'delReunion.html',
         {'user': request.user, 'error': error})
 
+@checkAdministradorPrincipal
+@login_required
 def selectAsesor(request, tipo):
     # Se ha introducido un asesor.
     if request.method == 'POST':
@@ -267,6 +278,8 @@ def selectAsesor(request, tipo):
     return render_to_response(PATH + 'selectAsesor.html',
         {'user': request.user, 'form': form, 'tipo': tipo})
 
+@checkAdministradorPrincipal
+@login_required
 def selectAsesorCursoAcademico(request, dni_pasaporte, tipo):
     # Se obtiene el posible asesor.
     instancia_asesor = vistasAsesor.obtenerAsesor(dni_pasaporte)
@@ -311,6 +324,8 @@ def selectAsesorCursoAcademico(request, dni_pasaporte, tipo):
         {'user': request.user, 'form': form,
         'dni_pasaporte': dni_pasaporte, 'tipo': tipo})
 
+@checkAdministradorPrincipal
+@login_required
 def selectAlumno(request, dni_pasaporte, curso_academico, tipo):
     # Se obtiene el posible asesor curso academico.
     instancia_asesorCA = \
@@ -374,6 +389,8 @@ def selectAlumno(request, dni_pasaporte, curso_academico, tipo):
         'curso_academico': curso_academico,
         'tipo': tipo})
 
+@checkAdministradorPrincipal
+@login_required
 def listReunion(request, dni_pasaporte, curso_academico, orden):
     # Se obtiene el posible alumno_curso_academico.
     instancia_alumno_curso_academico = \
@@ -444,6 +461,8 @@ def listReunion(request, dni_pasaporte, curso_academico, orden):
         'dni_pasaporte_alumno': dni_pasaporte,
         'orden': orden})
 
+@checkAdministradorPrincipal
+@login_required
 def generarPDFListaReuniones(request, dni_pasaporte,
     curso_academico, busqueda):
     # Se obtiene el posible alumno_curso_academico.
