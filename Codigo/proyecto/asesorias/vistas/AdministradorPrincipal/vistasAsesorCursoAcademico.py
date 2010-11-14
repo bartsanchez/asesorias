@@ -1,9 +1,12 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
 from asesorias.vistas.AdministradorPrincipal import vistasAsesor
 from asesorias.vistas.AdministradorPrincipal import vistasDepartamento
+from asesorias.vistas.vistasAdministradorPrincipal import \
+    checkAdministradorPrincipal
 from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/AsesorCursoAcademico/'
@@ -20,6 +23,8 @@ def obtenerAsesorCursoAcademico(dni_pasaporte, curso_academico):
         resultado = False
     return resultado
 
+@checkAdministradorPrincipal
+@login_required
 def addAsesorCursoAcademico(request, dni_pasaporte):
     # Se comprueba que exista el asesor, en caso de introducirlo.
     if (dni_pasaporte != ''):
@@ -55,6 +60,8 @@ def addAsesorCursoAcademico(request, dni_pasaporte):
     return render_to_response(PATH + 'addAsesorCursoAcademico.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def editAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
     # Se obtiene la instancia del asesor curso academico.
     instancia_asesor_curso_academico= obtenerAsesorCursoAcademico(
@@ -97,6 +104,8 @@ def editAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
     return render_to_response(PATH + 'editAsesorCursoAcademico.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def delAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
     # Se obtiene la instancia del asesor curso academico.
     instancia_asesor_curso_academico= obtenerAsesorCursoAcademico(
@@ -118,6 +127,8 @@ def delAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
     return render_to_response(PATH + 'delAsesorCursoAcademico.html',
         {'user': request.user, 'error': error})
 
+@checkAdministradorPrincipal
+@login_required
 def selectAsesor(request):
     # Se ha introducido un asesor.
     if request.method == 'POST':
@@ -144,6 +155,8 @@ def selectAsesor(request):
     return render_to_response(PATH + 'selectAsesor.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def listAsesorCursoAcademico(request, dni_pasaporte, orden):
     # Se comprueba que exista el asesor pasado por argumento.
     existe_asesor = models.Asesor.objects.filter(
@@ -218,6 +231,8 @@ def listAsesorCursoAcademico(request, dni_pasaporte, orden):
         'busqueda': busqueda,
         'asesor': dni_pasaporte, 'orden': orden})
 
+@checkAdministradorPrincipal
+@login_required
 def generarPDFListaAsesoresCursoAcademico(request, dni_pasaporte,
     busqueda):
     # Se comprueba que exista el asesor pasado por argumento.
