@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -7,6 +8,8 @@ from asesorias.vistas.AdministradorPrincipal import \
     vistasAsesorCursoAcademico
 from asesorias.vistas.AdministradorPrincipal import \
     vistasPlantillaEntrevistaAsesor as vistasPEA
+from asesorias.vistas.vistasAdministradorPrincipal import \
+    checkAdministradorPrincipal
 from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/PreguntaAsesor/'
@@ -98,6 +101,8 @@ def determinarSiguienteIdPreguntaDePlantillaDeAsesor(
             break
     return contador
 
+@checkAdministradorPrincipal
+@login_required
 def addPreguntaAsesor(request, dni_pasaporte, curso_academico,
     entrevista_asesor):
     # Se comprueba que exista la plantilla de entrevista de asesor
@@ -152,6 +157,8 @@ def addPreguntaAsesor(request, dni_pasaporte, curso_academico,
         'curso_academico': curso_academico,
         'entrevista_asesor': entrevista_asesor})
 
+@checkAdministradorPrincipal
+@login_required
 def editPreguntaAsesor(request, dni_pasaporte, curso_academico,
     id_entrevista_asesor, id_pregunta_asesor):
     # Se obtiene la instancia de la pregunta de asesor.
@@ -211,6 +218,8 @@ def editPreguntaAsesor(request, dni_pasaporte, curso_academico,
         'curso_academico': curso_academico,
         'entrevista_asesor': id_entrevista_asesor})
 
+@checkAdministradorPrincipal
+@login_required
 def delPreguntaAsesor(request, dni_pasaporte, curso_academico,
     id_entrevista_asesor, id_pregunta_asesor):
     # Se obtiene la instancia de la pregunta de asesor.
@@ -232,6 +241,8 @@ def delPreguntaAsesor(request, dni_pasaporte, curso_academico,
     return render_to_response(PATH + 'delPreguntaAsesor.html',
         {'user': request.user, 'error': error})
 
+@checkAdministradorPrincipal
+@login_required
 def selectAsesor(request, tipo):
     # Se ha introducido un asesor.
     if request.method == 'POST':
@@ -258,6 +269,8 @@ def selectAsesor(request, tipo):
     return render_to_response(PATH + 'selectAsesor.html',
         {'user': request.user, 'form': form, 'tipo': tipo})
 
+@checkAdministradorPrincipal
+@login_required
 def selectAsesorCursoAcademico(request, dni_pasaporte, tipo):
     # Se obtiene el posible asesor.
     instancia_asesor = vistasAsesor.obtenerAsesor(dni_pasaporte)
@@ -302,6 +315,8 @@ def selectAsesorCursoAcademico(request, dni_pasaporte, tipo):
         {'user': request.user, 'form': form,
         'dni_pasaporte': dni_pasaporte, 'tipo': tipo})
 
+@checkAdministradorPrincipal
+@login_required
 def selectPlantillaEntrevistaAsesor(request, dni_pasaporte,
     curso_academico, tipo):
     # Se obtiene el posible asesor curso academico.
@@ -358,6 +373,8 @@ def selectPlantillaEntrevistaAsesor(request, dni_pasaporte,
         'curso_academico': curso_academico,
         'tipo': tipo})
 
+@checkAdministradorPrincipal
+@login_required
 def listPreguntaAsesor(request, dni_pasaporte, curso_academico,
     id_entrevista_asesor, orden):
     # Se comprueba que exista la plantilla de entrevista de asesor
@@ -424,6 +441,8 @@ def listPreguntaAsesor(request, dni_pasaporte, curso_academico,
         'entrevista_asesor': id_entrevista_asesor,
         'orden': orden})
 
+@checkAdministradorPrincipal
+@login_required
 def generarPDFListaPreguntasAsesor(request, dni_pasaporte,
     curso_academico, id_entrevista_asesor, busqueda):
     # Se comprueba que exista la plantilla de entrevista de asesor
