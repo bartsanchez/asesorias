@@ -31,7 +31,7 @@ def administradorCentro_inicio(request, centro):
         {'user': request.user, 'centro': centro})
 
 @checkCentro
-@login_required()
+@login_required
 def administradorCentro_informacion_personal(request, centro):
     return render_to_response(
         PATH + 'administradorCentro_informacion_personal.html',
