@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -5,6 +6,8 @@ from asesorias import models, forms
 from asesorias.vistas.AdministradorPrincipal import vistasAsignatura
 from asesorias.vistas.AdministradorPrincipal import vistasCentro
 from asesorias.vistas.AdministradorPrincipal import vistasTitulacion
+from asesorias.vistas.vistasAdministradorPrincipal import \
+    checkAdministradorPrincipal
 from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/AsignaturaCursoAcademico/'
@@ -30,6 +33,8 @@ def obtenerAsignaturaCursoAcademico(nombre_centro, nombre_titulacion,
         resultado = False
     return resultado
 
+@checkAdministradorPrincipal
+@login_required
 def addAsignaturaCursoAcademico(request, nombre_centro,
     nombre_titulacion, plan_estudios, nombre_asignatura):
     # Se obtiene la posible asignatura.
@@ -98,6 +103,8 @@ def addAsignaturaCursoAcademico(request, nombre_centro,
         'plan_estudios': plan_estudios,
         'nombre_asignatura': nombre_asignatura})
 
+@checkAdministradorPrincipal
+@login_required
 def editAsignaturaCursoAcademico(request, nombre_centro,
     nombre_titulacion, plan_estudios, nombre_asignatura,
     curso_academico):
@@ -180,6 +187,8 @@ def editAsignaturaCursoAcademico(request, nombre_centro,
         'plan_estudios': plan_estudios,
         'nombre_asignatura': nombre_asignatura})
 
+@checkAdministradorPrincipal
+@login_required
 def delAsignaturaCursoAcademico(request, nombre_centro,
     nombre_titulacion, plan_estudios, nombre_asignatura,
     curso_academico):
@@ -205,6 +214,8 @@ def delAsignaturaCursoAcademico(request, nombre_centro,
     return render_to_response(PATH + 'delAsignaturaCursoAcademico.html',
         {'user': request.user, 'error': error})
 
+@checkAdministradorPrincipal
+@login_required
 def selectCentro(request, tipo):
     # Se ha introducido un centro.
     if request.method == 'POST':
@@ -236,6 +247,8 @@ def selectCentro(request, tipo):
     return render_to_response(PATH + 'selectCentro.html',
         {'user': request.user, 'form': form, 'tipo': tipo})
 
+@checkAdministradorPrincipal
+@login_required
 def selectTitulacion(request, nombre_centro, tipo):
     # Se obtiene el posible centro.
     instancia_centro = vistasCentro.obtenerCentro(nombre_centro)
@@ -285,6 +298,8 @@ def selectTitulacion(request, nombre_centro, tipo):
         {'user': request.user, 'form': form,
         'nombre_centro': nombre_centro, 'tipo': tipo})
 
+@checkAdministradorPrincipal
+@login_required
 def selectAsignatura(request, nombre_centro, nombre_titulacion,
     plan_estudios, tipo):
     # Se obtiene la posible titulacion.
@@ -351,6 +366,8 @@ def selectAsignatura(request, nombre_centro, nombre_titulacion,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios, 'tipo': tipo})
 
+@checkAdministradorPrincipal
+@login_required
 def listAsignaturaCursoAcademico(request, nombre_centro,
     nombre_titulacion, plan_estudios, nombre_asignatura, orden):
     # Se obtiene la posible asignatura.
@@ -425,6 +442,8 @@ def listAsignaturaCursoAcademico(request, nombre_centro,
         'plan_estudios': plan_estudios,
         'nombre_asignatura': nombre_asignatura, 'orden': orden})
 
+@checkAdministradorPrincipal
+@login_required
 def generarPDFListaAsignaturasCursoAcademico(request, nombre_centro,
     nombre_titulacion, plan_estudios, nombre_asignatura, busqueda):
     # Se obtiene la posible asignatura.
