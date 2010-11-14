@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -5,6 +6,8 @@ from asesorias import models, forms
 from asesorias.vistas.AdministradorPrincipal import vistasAsesor
 from asesorias.vistas.AdministradorPrincipal import \
     vistasAsesorCursoAcademico
+from asesorias.vistas.vistasAdministradorPrincipal import \
+    checkAdministradorPrincipal
 from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/PlantillaEntrevistaAsesor/'
@@ -98,6 +101,8 @@ def determinarSiguienteIdPlantillaDeAsesorCursoAcademico(
             break
     return contador
 
+@checkAdministradorPrincipal
+@login_required
 def addPlantillaEntrevistaAsesor(request, dni_pasaporte,
     curso_academico):
     # Se comprueba que exista el asesor curso academico pasado por
@@ -152,6 +157,8 @@ def addPlantillaEntrevistaAsesor(request, dni_pasaporte,
         'dni_pasaporte': dni_pasaporte,
         'curso_academico': curso_academico})
 
+@checkAdministradorPrincipal
+@login_required
 def editPlantillaEntrevistaAsesor(request, dni_pasaporte,
     curso_academico, id_entrevista_asesor):
     # Se obtiene la instancia de la plantilla de entrevista de asesor.
@@ -224,6 +231,8 @@ def editPlantillaEntrevistaAsesor(request, dni_pasaporte,
         'dni_pasaporte': dni_pasaporte,
         'curso_academico': curso_academico})
 
+@checkAdministradorPrincipal
+@login_required
 def delPlantillaEntrevistaAsesor(request, dni_pasaporte,
     curso_academico, id_entrevista_asesor):
     # Se obtiene la instancia de la asignatura curso academico.
@@ -247,6 +256,8 @@ def delPlantillaEntrevistaAsesor(request, dni_pasaporte,
     return render_to_response(PATH +'delPlantillaEntrevistaAsesor.html',
         {'user': request.user, 'error': error})
 
+@checkAdministradorPrincipal
+@login_required
 def selectAsesor(request, tipo):
     # Se ha introducido un asesor.
     if request.method == 'POST':
@@ -273,6 +284,8 @@ def selectAsesor(request, tipo):
     return render_to_response(PATH + 'selectAsesor.html',
         {'user': request.user, 'form': form, 'tipo': tipo})
 
+@checkAdministradorPrincipal
+@login_required
 def selectAsesorCursoAcademico(request, dni_pasaporte, tipo):
     # Se obtiene el posible asesor.
     instancia_asesor = vistasAsesor.obtenerAsesor(dni_pasaporte)
@@ -324,6 +337,8 @@ def selectAsesorCursoAcademico(request, dni_pasaporte, tipo):
         {'user': request.user, 'form': form,
         'dni_pasaporte': dni_pasaporte, 'tipo': tipo})
 
+@checkAdministradorPrincipal
+@login_required
 def listPlantillaEntrevistaAsesor(request, dni_pasaporte,
     curso_academico, orden):
     # Se obtiene el posible asesor curso academico.
@@ -393,6 +408,8 @@ def listPlantillaEntrevistaAsesor(request, dni_pasaporte,
         'curso_academico': curso_academico,
         'orden': orden})
 
+@checkAdministradorPrincipal
+@login_required
 def generarPDFListaPlantillasEntrevistaAsesor(request, dni_pasaporte,
     curso_academico,busqueda):
     # Se obtiene el posible asesor curso academico.
