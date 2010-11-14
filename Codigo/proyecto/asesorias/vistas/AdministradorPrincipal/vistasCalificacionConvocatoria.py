@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -10,6 +11,8 @@ from asesorias.vistas.AdministradorPrincipal import \
     vistasMatricula, vistasTitulacion
 from asesorias.vistas.AdministradorPrincipal import \
     vistasAsignaturaCursoAcademico as vistasAsignaturaCA
+from asesorias.vistas.vistasAdministradorPrincipal import \
+    checkAdministradorPrincipal
 from asesorias.utils import vistasPDF
 
 
@@ -45,6 +48,8 @@ def obtenerCalificacionConvocatoria(nombre_centro, nombre_titulacion,
         resultado = False
     return resultado
 
+@checkAdministradorPrincipal
+@login_required
 def addCalificacionConvocatoria(request, nombre_centro,
     nombre_titulacion, plan_estudios, nombre_asignatura,
     curso_academico, dni_pasaporte):
@@ -111,6 +116,8 @@ def addCalificacionConvocatoria(request, nombre_centro,
         'curso_academico': curso_academico,
         'dni_pasaporte': dni_pasaporte})
 
+@checkAdministradorPrincipal
+@login_required
 def editCalificacionConvocatoria(request, nombre_centro,
     nombre_titulacion, plan_estudios, nombre_asignatura,
     curso_academico, dni_pasaporte, convocatoria):
@@ -173,6 +180,8 @@ def editCalificacionConvocatoria(request, nombre_centro,
         'curso_academico': curso_academico,
         'dni_pasaporte': dni_pasaporte})
 
+@checkAdministradorPrincipal
+@login_required
 def delCalificacionConvocatoria(request, nombre_centro,
     nombre_titulacion, plan_estudios, nombre_asignatura,
     curso_academico, dni_pasaporte, convocatoria):
@@ -200,6 +209,8 @@ def delCalificacionConvocatoria(request, nombre_centro,
     return render_to_response(PATH + 'delCalificacionConvocatoria.html',
        {'user': request.user, 'error': error})
 
+@checkAdministradorPrincipal
+@login_required
 def selectCentro(request, tipo):
     # Se ha introducido un centro.
     if request.method == 'POST':
@@ -231,6 +242,8 @@ def selectCentro(request, tipo):
     return render_to_response(PATH + 'selectCentro.html',
         {'user': request.user, 'form': form, 'tipo': tipo})
 
+@checkAdministradorPrincipal
+@login_required
 def selectTitulacion(request, nombre_centro, tipo):
     # Se obtiene el posible centro.
     instancia_centro = vistasCentro.obtenerCentro(nombre_centro)
@@ -279,6 +292,8 @@ def selectTitulacion(request, nombre_centro, tipo):
         {'user': request.user, 'form': form,
         'nombre_centro': nombre_centro, 'tipo': tipo})
 
+@checkAdministradorPrincipal
+@login_required
 def selectAsignatura(request, nombre_centro, nombre_titulacion,
     plan_estudios, tipo):
     # Se obtiene la posible titulacion.
@@ -336,6 +351,8 @@ def selectAsignatura(request, nombre_centro, nombre_titulacion,
         'nombre_titulacion': nombre_titulacion,
         'plan_estudios': plan_estudios, 'tipo': tipo})
 
+@checkAdministradorPrincipal
+@login_required
 def selectAsignaturaCursoAcademico(request, nombre_centro,
     nombre_titulacion, plan_estudios, nombre_asignatura, tipo):
     # Se obtiene la posible asignatura.
@@ -407,6 +424,8 @@ def selectAsignaturaCursoAcademico(request, nombre_centro,
         'nombre_asignatura': nombre_asignatura,
         'tipo': tipo})
 
+@checkAdministradorPrincipal
+@login_required
 def selectAlumno(request, nombre_centro, nombre_titulacion,
     plan_estudios, nombre_asignatura, curso_academico, tipo):
     # Se obtiene la posible asignatura curso academico.
@@ -494,6 +513,8 @@ def selectAlumno(request, nombre_centro, nombre_titulacion,
         'curso_academico': curso_academico,
         'tipo': tipo})
 
+@checkAdministradorPrincipal
+@login_required
 def listCalificacionConvocatoria(request, nombre_centro,
     nombre_titulacion, plan_estudios, nombre_asignatura,
     curso_academico, dni_pasaporte, orden):
@@ -580,6 +601,8 @@ def listCalificacionConvocatoria(request, nombre_centro,
         'dni_pasaporte': dni_pasaporte,
         'orden': orden})
 
+@checkAdministradorPrincipal
+@login_required
 def generarPDFListaCalificacionesConvocatoria(request, nombre_centro,
     nombre_titulacion, plan_estudios, nombre_asignatura,
     curso_academico, dni_pasaporte, busqueda):
