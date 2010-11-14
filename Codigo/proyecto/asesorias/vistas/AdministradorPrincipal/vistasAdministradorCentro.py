@@ -1,9 +1,12 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
 from asesorias import vistas
+from asesorias.vistas.vistasAdministradorPrincipal import \
+    checkAdministradorPrincipal
 from asesorias.utils import vistasPDF
 
 # Comprueba si existe un administrador de centro y, de ser asi,
@@ -18,6 +21,8 @@ def obtenerAdministradorCentro(administrador_centro):
         resultado = False
     return resultado
 
+@checkAdministradorPrincipal
+@login_required
 def addAdministradorCentro(request):
     # Se ha rellenado el formulario.
     if request.method == 'POST':
@@ -50,6 +55,8 @@ def addAdministradorCentro(request):
         'asesorias/AdministradorCentro/addAdministradorCentro.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def editAdministradorCentro(request, administrador_centro):
     # Se obtiene la instancia del administrador de centro.
     instancia_admin_centro = obtenerAdministradorCentro(
@@ -80,6 +87,8 @@ def editAdministradorCentro(request, administrador_centro):
         'asesorias/AdministradorCentro/editAdministradorCentro.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def delAdministradorCentro(request, administrador_centro):
     # Se obtiene la instancia del administrador de centro.
     instancia_admin_centro = obtenerAdministradorCentro(
@@ -104,6 +113,8 @@ def delAdministradorCentro(request, administrador_centro):
         'asesorias/AdministradorCentro/delAdministradorCentro.html',
         {'user': request.user, 'error': error})
 
+@checkAdministradorPrincipal
+@login_required
 def listAdministradorCentro(request, orden):
     # Se establece el ordenamiento inicial.
     if ((orden == 'nombre_adm_centro') or
@@ -148,6 +159,8 @@ def listAdministradorCentro(request, orden):
         'lista_administradores_centro': lista_administradores_centro,
         'busqueda': busqueda, 'orden': orden})
 
+@checkAdministradorPrincipal
+@login_required
 def generarPDFListaAdministradoresCentro(request, busqueda):
     # Se obtiene una lista con todos los administradores de centro.
     lista_administradores_centro = \
