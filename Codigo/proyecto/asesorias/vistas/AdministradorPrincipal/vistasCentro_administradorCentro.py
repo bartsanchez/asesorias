@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -5,6 +6,8 @@ from asesorias import models, forms
 from asesorias.vistas.AdministradorPrincipal import vistasCentro
 from asesorias.vistas.AdministradorPrincipal import \
     vistasAdministradorCentro
+from asesorias.vistas.vistasAdministradorPrincipal import \
+    checkAdministradorPrincipal
 from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/Centro_AdministradorCentro/'
@@ -29,6 +32,8 @@ def obtenerCentro_administradorCentro(centro, administrador_centro):
         resultado = False
     return resultado
 
+@checkAdministradorPrincipal
+@login_required
 def addCentro_administradorCentro(request, nombre_centro):
     # Se comprueba que exista el centro en caso de introducir uno.
     if nombre_centro != '':
@@ -71,6 +76,8 @@ def addCentro_administradorCentro(request, nombre_centro):
         PATH + 'addCentro_administradorCentro.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def editCentro_administradorCentro(request, centro,
     administrador_centro):
     # Se obtiene la instancia del centro_administradorCentro.
@@ -104,6 +111,8 @@ def editCentro_administradorCentro(request, centro,
         PATH + 'editCentro_administradorCentro.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def delCentro_administradorCentro(request,centro, administrador_centro):
     # Se obtiene la instancia del centro_administradorCentro.
     instancia_centro_administradorCentro = \
@@ -147,6 +156,8 @@ def ordenarPorAdministradorCentro(lista_centros_administradorCentro):
 
     return lista_aux
 
+@checkAdministradorPrincipal
+@login_required
 def selectCentro(request):
     # Se ha introducido un centro.
     if request.method == 'POST':
@@ -178,6 +189,8 @@ def selectCentro(request):
         PATH + 'selectCentro.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def listCentro_administradorCentro(request, centro, orden):
     # Se comprueba que exista el centro pasado por argumento.
     instancia_centro = vistasCentro.obtenerCentro(centro)
@@ -248,6 +261,8 @@ def listCentro_administradorCentro(request, centro, orden):
         lista_centros_administradorCentro, 'busqueda': busqueda,
         'centro': centro, 'orden': orden})
 
+@checkAdministradorPrincipal
+@login_required
 def generarPDFListaCentros_administradorCentro(request, centro,
     busqueda):
     # Se comprueba que exista el centro pasado por argumento.
