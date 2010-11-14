@@ -1,7 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias.vistas.vistasAdministradorPrincipal import \
+    checkAdministradorPrincipal
 from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/Departamento/'
@@ -16,6 +19,8 @@ def obtenerDepartamento(nombre_departamento):
         resultado = False
     return resultado
 
+@checkAdministradorPrincipal
+@login_required
 def addDepartamento(request):
     # Se ha rellenado el formulario.
     if request.method == 'POST':
@@ -34,6 +39,8 @@ def addDepartamento(request):
     return render_to_response(PATH + 'addDepartamento.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def editDepartamento(request, nombre_departamento):
     # Se obtiene la instancia del departamento.
     instancia_departamento= obtenerDepartamento(nombre_departamento)
@@ -58,6 +65,8 @@ def editDepartamento(request, nombre_departamento):
     return render_to_response(PATH + 'editDepartamento.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def delDepartamento(request, nombre_departamento):
     # Se obtiene la instancia del departamento.
     instancia_departamento = obtenerDepartamento(nombre_departamento)
@@ -73,6 +82,8 @@ def delDepartamento(request, nombre_departamento):
     return render_to_response(PATH + 'delDepartamento.html',
         {'user': request.user, 'error': error})
 
+@checkAdministradorPrincipal
+@login_required
 def listDepartamento(request, orden):
     # Se obtiene una lista con todos los departamentos.
     lista_departamentos = models.Departamento.objects.order_by(
@@ -103,6 +114,8 @@ def listDepartamento(request, orden):
         'lista_departamentos': lista_departamentos,
         'busqueda': busqueda, 'orden': orden})
 
+@checkAdministradorPrincipal
+@login_required
 def generarPDFListaDepartamentos(request, busqueda):
     # Se obtiene una lista con todos los departamentos.
     lista_departamentos = models.Departamento.objects.order_by(
