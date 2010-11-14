@@ -1,7 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias.vistas.vistasAdministradorPrincipal import \
+    checkAdministradorPrincipal
 from asesorias.utils import vistasPDF
 
 # Comprueba si existe un centro y, de ser asi, lo devuelve.
@@ -13,6 +16,8 @@ def obtenerCentro(centro):
         resultado = False
     return resultado
 
+@checkAdministradorPrincipal
+@login_required
 def addCentro(request):
     # Se ha rellenado el formulario.
     if request.method == 'POST':
@@ -31,6 +36,8 @@ def addCentro(request):
     return render_to_response('asesorias/Centro/addCentro.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def editCentro(request, centro):
     # Se obtiene la instancia del centro.
     instancia_centro = obtenerCentro(centro)
@@ -55,6 +62,8 @@ def editCentro(request, centro):
     return render_to_response('asesorias/Centro/editCentro.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def delCentro(request, centro):
     # Se obtiene la instancia del centro.
     instancia_centro = obtenerCentro(centro)
@@ -70,6 +79,8 @@ def delCentro(request, centro):
     return render_to_response('asesorias/Centro/delCentro.html',
         {'user': request.user, 'error': error})
 
+@checkAdministradorPrincipal
+@login_required
 def listCentro(request, orden):
     # Se obtiene una lista con todos los centros.
     lista_centros = models.Centro.objects.order_by('nombre_centro')
@@ -99,6 +110,8 @@ def listCentro(request, orden):
             'lista_centros': lista_centros, 'busqueda': busqueda,
             'orden': orden})
 
+@checkAdministradorPrincipal
+@login_required
 def generarPDFListaCentros(request, busqueda):
     lista_centros = models.Centro.objects.order_by('nombre_centro')
 
