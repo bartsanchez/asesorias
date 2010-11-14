@@ -1,8 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias.vistas.vistasAdministradorPrincipal import \
+    checkAdministradorPrincipal
 from asesorias.utils import vistasPDF
 
 # Comprueba si existe un alumno y, de ser asi, lo devuelve.
@@ -14,6 +17,8 @@ def obtenerAlumno(dni_pasaporte):
         resultado = False
     return resultado
 
+@checkAdministradorPrincipal
+@login_required
 def addAlumno(request):
     # Se ha rellenado el formulario.
     if request.method == 'POST':
@@ -40,6 +45,8 @@ def addAlumno(request):
     return render_to_response('asesorias/Alumno/addAlumno.html',
         {'user': request.user, 'form': form})
 
+@checkAdministradorPrincipal
+@login_required
 def editAlumno(request, dni_pasaporte):
     # Se obtiene la instancia del alumno.
     instancia_alumno = obtenerAlumno(dni_pasaporte)
@@ -100,6 +107,8 @@ def editAlumno(request, dni_pasaporte):
         {'user': request.user, 'form': form,
         'dni_pasaporte': dni_pasaporte})
 
+@checkAdministradorPrincipal
+@login_required
 def delAlumno(request, dni_pasaporte):
     # Se obtiene la instancia del alumno.
     instancia_alumno = obtenerAlumno(dni_pasaporte)
@@ -115,6 +124,8 @@ def delAlumno(request, dni_pasaporte):
     return render_to_response('asesorias/Alumno/delAlumno.html',
         {'user': request.user, 'error': error})
 
+@checkAdministradorPrincipal
+@login_required
 def listAlumno(request, orden):
     # Se obtiene una lista con todos los alumnos.
     lista_alumnos = models.Alumno.objects.order_by('dni_pasaporte')
@@ -145,6 +156,8 @@ def listAlumno(request, orden):
         'busqueda': busqueda,
         'orden': orden})
 
+@checkAdministradorPrincipal
+@login_required
 def generarPDFListaAlumnos(request, busqueda):
     # Se obtiene una lista con todos los alumnos.
     lista_alumnos = models.Alumno.objects.order_by('dni_pasaporte')
