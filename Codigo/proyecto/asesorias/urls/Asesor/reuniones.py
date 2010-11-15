@@ -7,6 +7,11 @@ VISTAS = 'asesorias.vistas.Asesor.'
 # ------------------------#
 
 urlpatterns = patterns(VISTAS + 'vistasReuniones',
+    url(r'^delReunion/(?P<dni_pasaporte>[\s\w]+)/' +
+        '(?P<id_reunion>\d+)/$',
+
+        'delReunion', name='delReunion_Asesor'),
+
     url(r'^listReunion/(?P<orden>[\s\w]*)/$',
         'listReunion', name='listReunion_Asesor'),
 

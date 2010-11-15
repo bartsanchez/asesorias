@@ -11,6 +11,23 @@ from asesorias import models, forms
 
 PATH = 'asesorias/UsuarioAsesor/'
 
+def delReunion(request, curso_academico, dni_pasaporte, id_reunion):
+    # Se obtiene la instancia de la reunion.
+    instancia_reunion= vistasReunion.obtenerReunion(
+        dni_pasaporte, curso_academico, id_reunion)
+    # Si existe se elimina.
+    if instancia_reunion:
+        instancia_reunion.borrar()
+        # Redirige a la pagina de listar reuniones.
+        return HttpResponseRedirect(reverse('listReunion_Asesor',
+                kwargs={'curso_academico': curso_academico,
+                'orden': 'fecha'}))
+    # La reunion no existe.
+    else:
+        error = True
+    return render_to_response(PATH + 'delReunion.html',
+        {'user': request.user, 'error': error})
+
 def listReunion(request, curso_academico, orden):
     dni_pasaporte = unicode(request.user)
 

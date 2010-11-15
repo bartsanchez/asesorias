@@ -1,0 +1,15 @@
+{% extends "asesorias/Base/Asesor/reuniones.html" %}
+
+{% block content %}
+
+    <h1>Eliminar reunión.</h1>
+
+    {% if error %}
+
+    <p>No existe tal reunión.</p>
+
+    <a href="{% url listReunion_Asesor 'fecha' %}">Lista de reuniones</a>
+
+    {% endif %}
+
+{% endblock %}

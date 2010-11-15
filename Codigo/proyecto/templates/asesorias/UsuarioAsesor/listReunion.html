@@ -52,7 +52,7 @@
         <tr>
             <th scope="row"><a href="{% url showReunion_Asesor curso_academico reunion.dni_pasaporte reunion.id_reunion %}">{{ reunion }} : {{ reunion.determinarNombreAlumno }} {{ reunion.determinarApellidosAlumno }}</th>
             <td><a href="{# url showAlumno_Asesor curso_academico alumno.dni_pasaporte_alumno #}" class="searchlink2">Ver</a></td>
-            <td><a href="#" class="deletelink">Eliminar</td>
+            <td><a href="{% url delReunion_Asesor curso_academico reunion.dni_pasaporte reunion.id_reunion %}" class="deletelink">Eliminar</td>
         </tr>
         {% endfor %}
 
