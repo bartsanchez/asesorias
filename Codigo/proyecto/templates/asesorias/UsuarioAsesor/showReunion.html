@@ -58,14 +58,16 @@
         {% endif %}
 
         </table>
-        <a href="{% url addPreguntaAReunion curso_academico reunion.dni_pasaporte reunion.id_reunion %}" class="addlink">Añadir</a>
+    </div>
+
+    <div>
+        <a href="{% url addPreguntaAReunion curso_academico reunion.dni_pasaporte reunion.id_reunion %}" class="addlink">Añadir pregunta</a>
     </div>
 
     {% else %}
-
-        <p>No existe tal reunión</p>
-        <a href="{% url listReunion_Asesor curso_academico 'fecha' %}">Volver</a>
-
+    <p>No existe tal reunión</p>
     {% endif %}
+
+    <div><a href="{% url listReunion_Asesor curso_academico 'fecha' %}">Volver</a></div>
 
 {% endblock %}
