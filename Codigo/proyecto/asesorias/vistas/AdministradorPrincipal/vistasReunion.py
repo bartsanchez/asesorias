@@ -34,7 +34,7 @@ def obtenerReunionesDeAlumnoCursoAcademico(
         # por argumento.
         resultado = models.Reunion.objects.filter(
             dni_pasaporte=
-            instancia_alumno_curso_academico.dni_pasaporte_id,
+            instancia_alumno_curso_academico.dni_pasaporte_alumno,
             curso_academico=
             instancia_alumno_curso_academico.curso_academico)
     except:
