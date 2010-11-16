@@ -1,0 +1,342 @@
+/** {
+  border: 1px solid blue;
+}*/
+
+/* 
+	ESTILO GENERAL
+*/
+
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+	font-family: "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+	color: #333;
+	background: #fff;
+}
+
+/*
+	ESTILO GLOBAL
+*/
+
+h1 {
+	font-size: 18px;
+	color: #666;
+	margin: 5px;
+}
+
+p {
+	color: #5b80b2;
+	text-decoration: none;
+}
+
+/* LINKS */
+
+a {
+	text-decoration: none;
+}
+
+a: link, a:visited {
+	color: #5b80b2;
+	text-decoration: none;
+}
+
+a: hover {
+	color: #036;
+}
+
+a.section:link, a.section:visited {
+	color: white;
+	text-decoration: none;
+}
+
+/* TABLAS */
+
+table {
+
+	border-collapse: collapse;
+}
+
+td, th {
+	font-size: 11px;
+	line-height: 13px;
+	border-bottom: 1px solid #eee;
+	vertical-align: center;
+	padding: 5px;
+	font-family: "Lucida Grande", Verdana, Arial, sans-serif;
+}
+
+th {
+	width: 100%;
+	text-align: left;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+td {
+	width: 100%;
+	text-align: right;
+}
+
+/* ACTION ICONS */
+
+.addlink {
+	padding-left: 12px;
+	background: url(http://localhost/media/img/icon_addlink.gif) 0 .2em no-repeat;
+}
+
+.editlink {
+	padding-left: 12px;
+	background: url(http://localhost/media/img/icon_changelink.gif) 0 .25em no-repeat;
+}
+
+.deletelink {
+	padding-left: 12px;
+	background: url(http://localhost/media/img/icon_deletelink.gif) 0 .25em no-repeat;
+}
+
+.searchlink {
+	padding-left: 20px;
+	background: #eee url(http://localhost/media/img/icon_searchlink.gif) 0 0 no-repeat;
+}
+
+.searchlink2 {
+	padding-left: 20px;
+	background: url(http://localhost/media/img/icon_searchlink.gif) 0 0 no-repeat;
+}
+
+.updatelink {
+	padding-left: 12px;
+	background: url(http://localhost/media/img/icon_updatelink.gif) 0 .25em no-repeat;
+}
+
+.pdflink {
+	margin-left: 35px;
+	padding: 2px 0 2px 20px;
+	background: url(http://localhost/media/img/icon_pdflink.gif) 0 .25em no-repeat;
+}
+
+/*
+	CABECERA
+*/
+
+#header {
+	height: 60px;
+	background: #417690;
+	color: #ffc;
+	overflow: hidden;
+	padding: 0.5em;
+}
+
+#header h1 {
+	float: left;
+	height: 30px;
+	padding: 0 10px;
+	font-size: 24px;
+	margin: 15px 0;
+	font-weight: normal;
+	color: #f4f379;
+}
+
+#logo {
+	float: left;
+}
+
+/*
+	MENU HORIZONTAL
+*/
+
+#hmenu {
+	margin: 0 auto;
+	width:780px;
+	overflow: hidden;
+	background: #417690;
+}
+
+#hmenu * {
+	margin: 0;
+	padding: 0;
+}
+
+ul#menu {
+	width: 776px;
+	margin: 0 auto;
+}
+
+#menu li{
+	float:left;
+	list-style:none;
+	margin:0 3px;
+	padding:0
+}
+
+#menu li a {
+	padding: 5px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#menu li a, #menu li a:link, #menu li a:visited {
+	background: #417690;
+	color: #ffc;
+	display: block;
+}
+
+#menu li a.active {
+	background: #417690;
+	color: #ffc;
+	display: block;
+	padding: 5px 5px 0 5px;
+	border-bottom: 5px solid #f96;
+}
+
+#menu li a:hover, #menu li a:active {
+	background: #ffc;
+	color: #417690;
+	padding: 5px 5px 0 5px;
+	border-bottom: 5px solid #f96;
+}
+
+/*
+	CONTENIDO
+*/
+
+#container {
+	position: relative;
+	width: 100%;
+	padding: 0;
+}
+
+#content {
+	overflow: auto;
+	margin: 0 auto;
+	padding: 25px 0;
+	width: 778px;
+	border-left: 1px solid #417690;
+	border-right: 1px solid #417690;
+}
+
+#content-main {
+	margin-left: 180px;
+	margin-right: 15px;
+	text-align: center;
+}
+
+#footer {
+	clear: both;
+	padding: 10px;
+	background: #417690;
+}
+
+/* 
+	SIDEBAR
+*/
+
+#sidebar {
+	float: left;
+	width: 160px;
+	margin-left: 15px;
+}
+
+#sidebar ul {
+	margin: 0;
+	padding: 0;
+}
+
+#sidebar li {
+	list-style-type: none;
+	margin-bottom: 10px;
+}
+
+#sidebar ul li ul li ul li {
+	list-style-type: disc;
+	margin-left: 25px;
+	margin-right: 15px;
+}
+
+#sidebar a {
+	color: #417690;
+	/*font-weight: bold;*/
+}
+
+#sidebar h3 {
+	font-size: 14px;
+	color: #417690;
+}
+
+#sidebar .module {
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+}
+
+#sidebar .module h2 {
+	background: #eee url(http://localhost/media/img/nav-bg.gif) bottom left repeat-x;
+	color: #666;
+	margin-bottom: 3px;
+}
+
+/* MODULOS */
+
+.module {
+	margin: 5px 0 10px 0;
+	background: white;
+}
+
+.module h2, .module caption {
+	margin: 0 0 0 -1px;
+	padding: 2px 5px 3px 5px;
+	font-size: 11px;
+	text-align: left;
+	font-weight: bold;
+	background: #7CA0C7 url(http://localhost/media/img/default-bg.gif) top left repeat-x;
+	color: white;
+}
+
+.module p, .module h3 {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.module table {
+	width: 500px;
+	margin: 0 auto;
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+}
+
+/* BUSQUEDAS */
+.search {
+	width: 500px;
+	margin: 5px auto;
+	background: white;
+}
+
+.search th {
+	float: left;
+	width: 100%;
+	border-bottom: none;
+}
+
+.search td {
+	border-bottom: none;
+}
+
+.search td input {
+	float: left;
+	width: 100%;
+}
+
+/* FORMULARIOS */
+.form {
+	width: 500px;
+	margin: 5px auto;
+	background: white;
+}
+
+.form input {
+	margin: 0 5px;
+}
+
+.form a {
+	margin-left: 5px;
+}

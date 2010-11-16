@@ -1,0 +1,57 @@
+/* LOGIN FORM */
+
+#header {
+	background: #417690;
+	color: #f4f379;
+	overflow: hidden;
+	padding: 1em 0.5em;
+	margin: 0 0 1em 0;
+}
+
+body h1 {
+	font-size: 18px;
+	border: 0;
+	margin: 0;
+}
+
+body.login {
+	font-family: "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+	background: #eee;
+}
+
+.login #container {
+	background: white;
+	border: 1px solid #ccc;
+	width: 400px;
+	margin: 100px auto 0 auto;
+}
+
+.login #content {
+	margin-bottom: 10px;
+}
+
+.login .form-row {
+    padding: 4px 0;
+    float: left;
+    width: 100%;
+}
+
+.login .form-row label {
+    float: left;
+    width: 9em;
+    padding-right: 0.5em;
+    line-height: 2em;
+    text-align: right;
+    font-size: 1em;
+    color: #333;
+}
+
+.login .form-row #id_username, .login .form-row #id_password {
+    width: 14em;
+}
+
+
+.login .submit-row {
+    clear: both;
+    padding: 0 0 0 9.4em;
+}
