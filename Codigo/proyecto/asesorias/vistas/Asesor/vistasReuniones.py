@@ -111,8 +111,6 @@ def addReunion(request, curso_academico, dni_pasaporte):
             'comentario_asesor': comentario_asesor,
             'comentario_alumno': comentario_alumno}
 
-        print datos_reunion
-
         # Se obtienen los valores y se valida.
         form = forms.ReunionForm(datos_reunion)
         if form.is_valid():
