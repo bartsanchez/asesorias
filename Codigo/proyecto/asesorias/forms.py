@@ -262,6 +262,21 @@ class PreguntaOficialFormSelect(forms.Form):
             'enunciado')
 
 class ReunionForm(forms.ModelForm):
+    # Se comprueba que el curso academico coincide con la fecha.
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        curso_academico = cleaned_data.get('curso_academico')
+        fecha = cleaned_data.get('fecha')
+        year = fecha.year
+
+        if not ((year == curso_academico) or
+            (year == (curso_academico+1))):
+
+            raise forms.ValidationError('La fecha introducida no ' +
+            'coincide con el curso académico actual.')
+
+        return cleaned_data
+
     class Meta:
         model = models.Reunion
 
