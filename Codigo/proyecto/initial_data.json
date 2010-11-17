@@ -379,56 +379,218 @@
     "pk": 1,
     "model": "asesorias.plantillaentrevistaoficial",
     "fields": {
-      "descripcion": "entrevista oficial 1",
-      "ultima_modificacion": "2010-08-26"
-    }
-  },
-  {
-    "pk": 2,
-    "model": "asesorias.plantillaentrevistaoficial",
-    "fields": {
-      "descripcion": "entrevista oficial 2",
-      "ultima_modificacion": "2010-08-26"
+      "descripcion": "Ficha personal",
+      "ultima_modificacion": "2010-11-17"
     }
   },
   {
     "pk": 1,
     "model": "asesorias.preguntaoficial",
     "fields": {
-      "ultima_modificacion": "2010-08-26",
+      "ultima_modificacion": "2010-11-17",
       "id_pregunta_oficial": 1,
       "id_entrevista_oficial": 1,
-      "enunciado": "esto es una pregunta"
+      "enunciado": "\u00bfQui\u00e9n le ha informado de esta carrera?"
     }
   },
   {
     "pk": 2,
     "model": "asesorias.preguntaoficial",
     "fields": {
-      "ultima_modificacion": "2010-08-26",
+      "ultima_modificacion": "2010-11-17",
       "id_pregunta_oficial": 2,
       "id_entrevista_oficial": 1,
-      "enunciado": "esto es otra pregunta?"
+      "enunciado": "\u00bfQu\u00e9 sabe de ella?"
     }
   },
   {
     "pk": 3,
     "model": "asesorias.preguntaoficial",
     "fields": {
-      "ultima_modificacion": "2010-08-26",
-      "id_pregunta_oficial": 1,
-      "id_entrevista_oficial": 2,
-      "enunciado": "esto es una pregunta2"
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 3,
+      "id_entrevista_oficial": 1,
+      "enunciado": "\u00bfPor qu\u00e9 se ha planteado hacerla?"
     }
   },
   {
     "pk": 4,
     "model": "asesorias.preguntaoficial",
     "fields": {
-      "ultima_modificacion": "2010-08-26",
-      "id_pregunta_oficial": 2,
-      "id_entrevista_oficial": 2,
-      "enunciado": "\u00bfesto es una pregunta2?"
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 4,
+      "id_entrevista_oficial": 1,
+      "enunciado": "\u00bfQu\u00e9 pretende conseguir, cu\u00e1les son sus aspiraciones?"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "asesorias.preguntaoficial",
+    "fields": {
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 5,
+      "id_entrevista_oficial": 1,
+      "enunciado": "\u00bfDe qu\u00e9 cree que depende, preferentemente, la consecuci\u00f3n de sus aspiraciones? (Se\u00f1ale la que le parezca m\u00e1s importante)"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "asesorias.preguntaoficial",
+    "fields": {
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 6,
+      "id_entrevista_oficial": 1,
+      "enunciado": "\u00bfCu\u00e1ntos a\u00f1os cree que son necesarios en la mayor\u00eda de los casos para realizar la carrera que est\u00e1 estudiando?"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "asesorias.preguntaoficial",
+    "fields": {
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 7,
+      "id_entrevista_oficial": 1,
+      "enunciado": "\u00bfQu\u00e9 carrera le hubiese gustado realizar?"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "asesorias.preguntaoficial",
+    "fields": {
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 8,
+      "id_entrevista_oficial": 1,
+      "enunciado": "\u00bfQu\u00e9 carrera solicit\u00f3 en la preinscripci\u00f3n en primer lugar?"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "asesorias.preguntaoficial",
+    "fields": {
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 9,
+      "id_entrevista_oficial": 1,
+      "enunciado": "\u00bfQu\u00e9 lugar ocupa la carrera que est\u00e1 haciendo en su preinscripci\u00f3n?"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "asesorias.preguntaoficial",
+    "fields": {
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 10,
+      "id_entrevista_oficial": 1,
+      "enunciado": "\u00bfQu\u00e9 dificultades cree que va a encontrar?"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "asesorias.preguntaoficial",
+    "fields": {
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 11,
+      "id_entrevista_oficial": 1,
+      "enunciado": "Adem\u00e1s de los estudios universitarios, \u00bfrealiza otras actividades laborales, culturales, deportivas, etc., de forma habitual?"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "asesorias.preguntaoficial",
+    "fields": {
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 12,
+      "id_entrevista_oficial": 1,
+      "enunciado": "\u00bfCu\u00e1les?"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "asesorias.preguntaoficial",
+    "fields": {
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 13,
+      "id_entrevista_oficial": 1,
+      "enunciado": "Aproximadamente, \u00bfcu\u00e1ntos alumnos van a las clases te\u00f3ricas?"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "asesorias.preguntaoficial",
+    "fields": {
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 14,
+      "id_entrevista_oficial": 1,
+      "enunciado": "Aproximadamente, \u00bfcu\u00e1ntos alumnos van a las clases pr\u00e1cticas?"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "asesorias.preguntaoficial",
+    "fields": {
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 15,
+      "id_entrevista_oficial": 1,
+      "enunciado": "El ambiente entre compa\u00f1eros de clase lo considera:"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "asesorias.preguntaoficial",
+    "fields": {
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 16,
+      "id_entrevista_oficial": 1,
+      "enunciado": "La colaboraci\u00f3n entre los compa\u00f1eros del curso es:"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "asesorias.preguntaoficial",
+    "fields": {
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 17,
+      "id_entrevista_oficial": 1,
+      "enunciado": "Considera que la comunicaci\u00f3n con los compa\u00f1eros del curso es:"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "asesorias.preguntaoficial",
+    "fields": {
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 18,
+      "id_entrevista_oficial": 1,
+      "enunciado": "\u00bfC\u00f3mo cree que es, en general, la relaci\u00f3n de los profesores con los alumnos?"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "asesorias.preguntaoficial",
+    "fields": {
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 19,
+      "id_entrevista_oficial": 1,
+      "enunciado": "Cree que el profesor en clase:"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "asesorias.preguntaoficial",
+    "fields": {
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 20,
+      "id_entrevista_oficial": 1,
+      "enunciado": "\u00bfA qu\u00e9 le gustar\u00eda dedicarse al acabar la carrera?"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "asesorias.preguntaoficial",
+    "fields": {
+      "ultima_modificacion": "2010-11-17",
+      "id_pregunta_oficial": 21,
+      "id_entrevista_oficial": 1,
+      "enunciado": "Observaciones"
     }
   },
   {
