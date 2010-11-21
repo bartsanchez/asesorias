@@ -280,7 +280,8 @@ def addPreguntaAReunion(request, curso_academico, dni_pasaporte,
         # Si existe se buscan las preguntas.
         if instancia_reunion:
             preguntas_oficiales = \
-                models.PreguntaOficial.objects.order_by('enunciado')
+                models.PreguntaOficial.objects.order_by(
+                'id_entrevista_oficial', 'id_pregunta_oficial')
 
     return render_to_response(PATH + 'addPreguntaAReunion.html',
         {'user': request.user,
