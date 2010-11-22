@@ -296,7 +296,7 @@ def addPlantillaAReunion(request, curso_academico, dni_pasaporte,
                         models.PreguntaAsesor.objects.filter(
                         curso_academico=curso_academico,
                         dni_pasaporte=request.user,
-                        id_entrevista_oficial=id_entrevista
+                        id_entrevista_asesor=id_entrevista
                         ).order_by('id_pregunta_asesor')
                 else:
                     lista_preguntas = False
@@ -351,6 +351,46 @@ def addPlantillaOficialAReunion(request, curso_academico, dni_pasaporte,
                     id_reunion=id_reunion,
                     id_entrevista_oficial=id_entrevista_oficial,
                     id_pregunta_oficial=pregunta.id_pregunta_oficial,
+                    respuesta='-')
+                instancia_nueva_pregunta.save()
+
+    return HttpResponseRedirect(
+            reverse('showReunion_Asesor',
+            kwargs={'curso_academico': curso_academico,
+            'dni_pasaporte': dni_pasaporte,
+            'id_reunion': id_reunion}))
+
+def addPlantillaAsesorAReunion(request, curso_academico, dni_pasaporte,
+    id_reunion, id_entrevista_asesor):
+    # Se obtiene la instancia del asesor curso academico.
+    instancia_asesorCA = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+        unicode(request.user), curso_academico)
+
+    # El asesor presta asesoria durante el curso academico.
+    if instancia_asesorCA:
+        # Se obtiene la instancia de la reunion.
+        instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
+            curso_academico, id_reunion)
+
+        # Si existe se buscan las preguntas.
+        if instancia_reunion:
+            lista_preguntas_asesor = \
+                models.PreguntaAsesor.objects.filter(
+                curso_academico=curso_academico,
+                dni_pasaporte=unicode(request.user),
+                id_entrevista_asesor=id_entrevista_asesor).order_by(
+                'id_pregunta_asesor')
+
+            for pregunta in lista_preguntas_asesor:
+                instancia_nueva_pregunta = \
+                    models.ReunionPreguntaAsesor.objects.create(
+                    dni_pasaporte_alumno=dni_pasaporte,
+                    dni_pasaporte_asesor=unicode(request.user),
+                    curso_academico=curso_academico,
+                    id_reunion=id_reunion,
+                    id_entrevista_asesor=id_entrevista_asesor,
+                    id_pregunta_asesor=pregunta.id_pregunta_asesor,
                     respuesta='-')
                 instancia_nueva_pregunta.save()
 
