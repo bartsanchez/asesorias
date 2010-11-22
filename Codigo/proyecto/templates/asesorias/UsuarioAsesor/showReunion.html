@@ -30,6 +30,14 @@
         </table>
     </div>
 
+    <div>
+        <a href="{% url addPlantillaAReunion curso_academico reunion.dni_pasaporte reunion.id_reunion '' '' %}" class="addlink">Añadir plantilla</a>
+    </div>
+
+    <div>
+        <a href="{% url addPreguntaAReunion curso_academico reunion.dni_pasaporte reunion.id_reunion %}" class="addlink">Añadir pregunta</a>
+    </div>
+
     <div class="module">
         <table summary="Preguntas.">
         <caption><h2>Preguntas</h2></caption>
@@ -61,14 +69,6 @@
         {% endif %}
 
         </table>
-    </div>
-
-    <div>
-        <a href="{% url addPlantillaAReunion curso_academico reunion.dni_pasaporte reunion.id_reunion %}" class="addlink">Añadir plantilla</a>
-    </div>
-
-    <div>
-        <a href="{% url addPreguntaAReunion curso_academico reunion.dni_pasaporte reunion.id_reunion %}" class="addlink">Añadir pregunta</a>
     </div>
 
     {% else %}

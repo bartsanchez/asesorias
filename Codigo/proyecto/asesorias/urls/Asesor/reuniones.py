@@ -27,7 +27,8 @@ urlpatterns = patterns(VISTAS + 'vistasReuniones',
         'showReunion', name='showReunion_Asesor'),
 
     url(r'^addPlantillaAReunion/(?P<dni_pasaporte>[\s\w]+)/' +
-        '(?P<id_reunion>\d+)/$',
+        '(?P<id_reunion>\d+)/(?P<id_entrevista>\d*)/' +
+        '(?P<tipo>[\s\w]*)/$',
 
         'addPlantillaAReunion', name='addPlantillaAReunion'),
 

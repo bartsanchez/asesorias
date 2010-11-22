@@ -36,8 +36,9 @@
                 {% for plantilla in plantillas_oficiales %}
 
                 <tr>
-                    <th scope="row">{{ plantilla.descripcion }}</th>
-                    <td><a href="{% url addPlantillaOficialAReunion curso_academico dni_pasaporte reunion.id_reunion plantilla.id_entrevista_oficial %}" class=addlink></a></td>
+                    <th scope="row"><a href="{% url addPlantillaAReunion curso_academico dni_pasaporte reunion.id_reunion plantilla.id_entrevista_oficial 'oficial' %}">{{ plantilla.descripcion }}</a></th>
+                    <td><a href="{% url addPlantillaAReunion curso_academico dni_pasaporte reunion.id_reunion plantilla.id_entrevista_oficial 'oficial' %}" class=searchlink2>Ver</a></td>
+                    <td><a href="{% url addPlantillaOficialAReunion curso_academico dni_pasaporte reunion.id_reunion plantilla.id_entrevista_oficial %}" class=addlink>Añadir</a></td>
                 </tr>
 
                 {% endfor %}
@@ -66,5 +67,41 @@
         </form>
 
     </div>
+
+    {% if lista_preguntas %}
+
+    <h1>Preguntas de la plantilla "{{ lista_preguntas.1.id_entrevista_oficial.descripcion }}".</h1>
+
+     <div class="module">
+        <table summary="Preguntas.">
+        <caption><h2>Preguntas</h2></caption>
+
+        {% ifequal tipo 'oficial' %}
+
+            {% for pregunta in lista_preguntas %}
+            <tr>
+                <th scope="row">{{ pregunta.enunciado }}</th>
+                <td><a href="{% url addPreguntaOficialAReunion curso_academico dni_pasaporte reunion.id_reunion pregunta.id_entrevista_oficial_id pregunta.id_pregunta_oficial %}" class=addlink></a></td>
+            </tr>
+            {% endfor %}
+
+        {% endifequal %}
+
+        {% ifequal tipo 'asesor' %}
+
+            {% for pregunta in preguntas_asesor %}
+            <tr>
+                <th scope="row">{{ pregunta.determinarEnunciado }}: {{ pregunta.respuesta }}</th>
+            </tr>
+            {% endfor %}
+
+        {% endifequal %}
+
+        </table>
+    </div>
+
+    {% endif %}
+
+    <div><a href="{% url listReunion_Asesor curso_academico 'fecha' %}">Volver</a></div>
 
 {% endblock %}

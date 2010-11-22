@@ -262,7 +262,7 @@ def showReunion(request, curso_academico, dni_pasaporte, id_reunion):
         'preguntas_asesor': preguntas_asesor})
 
 def addPlantillaAReunion(request, curso_academico, dni_pasaporte,
-    id_reunion):
+    id_reunion, id_entrevista, tipo):
     # Se obtiene la instancia del asesor curso academico.
     instancia_asesorCA = \
         vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
@@ -284,6 +284,26 @@ def addPlantillaAReunion(request, curso_academico, dni_pasaporte,
                 models.PlantillaEntrevistaAsesor.objects.filter(
                 curso_academico=curso_academico,
                 dni_pasaporte=request.user)
+
+            if (id_entrevista and tipo):
+                if tipo == 'oficial':
+                    lista_preguntas = \
+                        models.PreguntaOficial.objects.filter(
+                        id_entrevista_oficial=id_entrevista
+                        ).order_by('id_pregunta_oficial')
+                elif tipo == 'asesor':
+                    lista_preguntas = \
+                        models.PreguntaAsesor.objects.filter(
+                        curso_academico=curso_academico,
+                        dni_pasaporte=request.user,
+                        id_entrevista_oficial=id_entrevista
+                        ).order_by('id_pregunta_asesor')
+                else:
+                    lista_preguntas = False
+                    tipo = False
+            else:
+                lista_preguntas = False
+                tipo = False
         else:
             return HttpResponseRedirect(reverse('listReunion_Asesor',
                 kwargs={'curso_academico': curso_academico,
@@ -299,7 +319,9 @@ def addPlantillaAReunion(request, curso_academico, dni_pasaporte,
         'curso_academico': curso_academico,
         'reunion': instancia_reunion,
         'plantillas_oficiales': plantillas_oficiales,
-        'plantillas_asesor': plantillas_asesor})
+        'plantillas_asesor': plantillas_asesor,
+        'lista_preguntas': lista_preguntas,
+        'tipo': tipo})
 
 def addPlantillaOficialAReunion(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista_oficial):
