@@ -503,3 +503,34 @@ def delPreguntaOficialAReunion(request, curso_academico, dni_pasaporte,
             kwargs={'curso_academico': curso_academico,
             'dni_pasaporte': dni_pasaporte,
             'id_reunion': id_reunion}))
+
+def delPreguntaAsesorAReunion(request, curso_academico, dni_pasaporte,
+    id_reunion, id_entrevista_asesor, id_pregunta_asesor):
+    # Se obtiene la instancia del asesor curso academico.
+    instancia_asesorCA = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+        unicode(request.user), curso_academico)
+
+    # El asesor presta asesoria durante el curso academico.
+    if instancia_asesorCA:
+        # Se obtiene la instancia de la reunion.
+        instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
+            curso_academico, id_reunion)
+
+        # Si existe se buscan las preguntas.
+        if instancia_reunion:
+            instancia_reunion_pregunta_asesor = \
+                models.ReunionPreguntaAsesor.objects.get(
+                dni_pasaporte_alumno=dni_pasaporte,
+                dni_pasaporte_asesor=unicode(request.user),
+                curso_academico=curso_academico,
+                id_reunion=id_reunion,
+                id_entrevista_asesor=id_entrevista_asesor,
+                id_pregunta_asesor=id_pregunta_asesor)
+            instancia_reunion_pregunta_asesor.delete()
+
+    return HttpResponseRedirect(
+            reverse('showReunion_Asesor',
+            kwargs={'curso_academico': curso_academico,
+            'dni_pasaporte': dni_pasaporte,
+            'id_reunion': id_reunion}))
