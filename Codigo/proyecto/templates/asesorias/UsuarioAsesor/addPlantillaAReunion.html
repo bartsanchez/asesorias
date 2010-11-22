@@ -1,0 +1,70 @@
+{% extends "asesorias/Base/Asesor/reuniones.html" %}
+
+{% block content %}
+
+    <h1>Añadir plantilla a reunión.</h1>
+
+    <div class="form">
+        <div><p>Fecha: <b>{{ reunion.fecha }}</b></p></div>
+        <div><p>DNI/Pasaporte: <b>{{ reunion.dni_pasaporte }}</b></p></div>
+        <div><p>Nombre: <b>{{ reunion.determinarNombreAlumno }}</b></p></div>
+        <div><p>Apellidos: <b>{{ reunion.determinarApellidosAlumno }}</b></p></div>
+    </div>
+
+
+    {% if form.errors %}
+    <div id="form-error">
+        <p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}<li><em>{{ field.label_tag }}</em>: {{ field.errors|striptags }}</li>{% endif %}
+            {% endfor %}
+            {% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
+        </ul>
+    </div>
+    {% endif %}
+
+
+    <div class="module">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Lista de plantillas oficiales.">
+                <caption><h2>Lista de plantillas oficiales</h2></caption>
+
+                {% for plantilla in plantillas_oficiales %}
+
+                <tr>
+                    <th scope="row">{{ plantilla.descripcion }}</th>
+                    <td><a href="{# url addPreguntaOficialAReunion curso_academico dni_pasaporte reunion.id_reunion pregunta.id_entrevista_oficial_id pregunta.id_pregunta_oficial #}" class=addlink></a></td>
+                </tr>
+
+                {% endfor %}
+
+                </table>
+
+                {% if plantillas_asesor %}
+
+                <table summary="Lista de plantillas de asesor.">
+                <caption><h2>Lista de plantillas de asesor</h2></caption>
+
+                {% for plantilla in plantillas_asesor %}
+
+                <tr>
+                    <th scope="row">{{ plantilla.descripcion }}</th>
+                    <td><a href="{# url addPreguntaOficialAReunion curso_academico dni_pasaporte reunion.id_reunion pregunta.id_entrevista_oficial_id pregunta.id_pregunta_oficial #}" class=addlink></a></td>
+                </tr>
+
+                {% endfor %}
+
+                </table>
+
+                {% endif %}
+            </div>
+
+        </form>
+
+    </div>
+
+{% endblock %}
