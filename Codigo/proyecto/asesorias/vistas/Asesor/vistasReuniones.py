@@ -283,7 +283,7 @@ def addPlantillaAReunion(request, curso_academico, dni_pasaporte,
             plantillas_asesor = \
                 models.PlantillaEntrevistaAsesor.objects.filter(
                 curso_academico=curso_academico,
-                dni_pasaporte=request.user)
+                dni_pasaporte=unicode(request.user))
 
             if (id_entrevista and tipo):
                 if tipo == 'oficial':
