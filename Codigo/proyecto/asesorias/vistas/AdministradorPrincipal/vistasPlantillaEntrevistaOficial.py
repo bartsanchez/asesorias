@@ -87,12 +87,7 @@ def delPlantillaEntrevistaOficial(request, id_entrevista_oficial):
             models.PreguntaOficial.objects.filter(
             id_entrevista_oficial=id_entrevista_oficial)
 
-        # Si la entrevista tenia preguntas se modifica el id.
-        if (preguntas_de_plantilla):
-            for pregunta in preguntas_de_plantilla:
-                pregunta.delete()
-
-        instancia_plantilla_entrevista_oficial.delete()
+        instancia_plantilla_entrevista_oficial.borrar()
         # Redirige a la pagina de listar plantillas de entrevista
         # oficiales.
         return HttpResponseRedirect(

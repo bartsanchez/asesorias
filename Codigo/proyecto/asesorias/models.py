@@ -682,6 +682,15 @@ class PlantillaEntrevistaOficial(models.Model):
     class Meta:
         db_table = "PlantillasEntrevistaOficial"
 
+    def borrar(self):
+        # Se borran todas las preguntas de asesor de esta plantilla.
+        preguntas_de_plantilla = PreguntaOficial.objects.filter(
+            id_entrevista_oficial=self.id_entrevista_oficial).delete()
+
+        # Se borra la plantilla.
+        self.delete()
+        return
+
     def __unicode__(self):
         return unicode(self.descripcion)
 
