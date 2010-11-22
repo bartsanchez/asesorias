@@ -683,7 +683,7 @@ class PlantillaEntrevistaOficial(models.Model):
         db_table = "PlantillasEntrevistaOficial"
 
     def borrar(self):
-        # Se borran todas las preguntas de asesor de esta plantilla.
+        # Se borran todas las preguntas oficiales de esta plantilla.
         preguntas_de_plantilla = PreguntaOficial.objects.filter(
             id_entrevista_oficial=self.id_entrevista_oficial).delete()
 
