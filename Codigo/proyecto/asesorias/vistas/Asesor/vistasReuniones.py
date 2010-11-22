@@ -295,7 +295,7 @@ def addPlantillaAReunion(request, curso_academico, dni_pasaporte,
                     lista_preguntas = \
                         models.PreguntaAsesor.objects.filter(
                         curso_academico=curso_academico,
-                        dni_pasaporte=request.user,
+                        dni_pasaporte=unicode(request.user),
                         id_entrevista_asesor=id_entrevista
                         ).order_by('id_pregunta_asesor')
                 else:
