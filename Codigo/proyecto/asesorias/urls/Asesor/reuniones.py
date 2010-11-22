@@ -31,6 +31,12 @@ urlpatterns = patterns(VISTAS + 'vistasReuniones',
 
         'addPlantillaAReunion', name='addPlantillaAReunion'),
 
+    url(r'^addPlantillaOficialAReunion/(?P<dni_pasaporte>[\s\w]+)/' +
+        '(?P<id_reunion>\d+)/(?P<id_entrevista_oficial>[\s\w]+)/$',
+
+        'addPlantillaOficialAReunion',
+        name='addPlantillaOficialAReunion'),
+
     url(r'^addPreguntaAReunion/(?P<dni_pasaporte>[\s\w]+)/' +
         '(?P<id_reunion>\d+)/$',
 
@@ -38,14 +44,14 @@ urlpatterns = patterns(VISTAS + 'vistasReuniones',
 
     url(r'^addPreguntaOficialAReunion/(?P<dni_pasaporte>[\s\w]+)/' +
         '(?P<id_reunion>\d+)/(?P<id_entrevista_oficial>[\s\w]+)/' +
-        '(?P<id_pregunta_oficial>[\s\w]+)$',
+        '(?P<id_pregunta_oficial>[\s\w]+)/$',
 
         'addPreguntaOficialAReunion',
         name='addPreguntaOficialAReunion'),
 
     url(r'^delPreguntaOficialAReunion/(?P<dni_pasaporte>[\s\w]+)/' +
         '(?P<id_reunion>\d+)/(?P<id_entrevista_oficial>[\s\w]+)/' +
-        '(?P<id_pregunta_oficial>[\s\w]+)$',
+        '(?P<id_pregunta_oficial>[\s\w]+)/$',
 
         'delPreguntaOficialAReunion',
         name='delPreguntaOficialAReunion'),

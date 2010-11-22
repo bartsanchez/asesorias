@@ -37,7 +37,7 @@
 
                 <tr>
                     <th scope="row">{{ plantilla.descripcion }}</th>
-                    <td><a href="{# url addPreguntaOficialAReunion curso_academico dni_pasaporte reunion.id_reunion pregunta.id_entrevista_oficial_id pregunta.id_pregunta_oficial #}" class=addlink></a></td>
+                    <td><a href="{% url addPlantillaOficialAReunion curso_academico dni_pasaporte reunion.id_reunion plantilla.id_entrevista_oficial %}" class=addlink></a></td>
                 </tr>
 
                 {% endfor %}

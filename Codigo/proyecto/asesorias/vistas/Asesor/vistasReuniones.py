@@ -301,6 +301,43 @@ def addPlantillaAReunion(request, curso_academico, dni_pasaporte,
         'plantillas_oficiales': plantillas_oficiales,
         'plantillas_asesor': plantillas_asesor})
 
+def addPlantillaOficialAReunion(request, curso_academico, dni_pasaporte,
+    id_reunion, id_entrevista_oficial):
+    # Se obtiene la instancia del asesor curso academico.
+    instancia_asesorCA = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+        unicode(request.user), curso_academico)
+
+    # El asesor presta asesoria durante el curso academico.
+    if instancia_asesorCA:
+        # Se obtiene la instancia de la reunion.
+        instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
+            curso_academico, id_reunion)
+
+        # Si existe se buscan las preguntas.
+        if instancia_reunion:
+            lista_preguntas_oficiales = \
+                models.PreguntaOficial.objects.filter(
+                id_entrevista_oficial=id_entrevista_oficial).order_by(
+                'id_pregunta_oficial')
+
+            for pregunta in lista_preguntas_oficiales:
+                instancia_nueva_pregunta = \
+                    models.ReunionPreguntaOficial.objects.create(
+                    dni_pasaporte=dni_pasaporte,
+                    curso_academico=curso_academico,
+                    id_reunion=id_reunion,
+                    id_entrevista_oficial=id_entrevista_oficial,
+                    id_pregunta_oficial=pregunta.id_pregunta_oficial,
+                    respuesta='-')
+                instancia_nueva_pregunta.save()
+
+    return HttpResponseRedirect(
+            reverse('showReunion_Asesor',
+            kwargs={'curso_academico': curso_academico,
+            'dni_pasaporte': dni_pasaporte,
+            'id_reunion': id_reunion}))
+
 def addPreguntaAReunion(request, curso_academico, dni_pasaporte,
     id_reunion):
     preguntas_oficiales = False
