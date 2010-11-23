@@ -687,6 +687,9 @@ class PlantillaEntrevistaOficial(models.Model):
         preguntas_de_plantilla = PreguntaOficial.objects.filter(
             id_entrevista_oficial=self.id_entrevista_oficial).delete()
 
+        preguntas_de_reunion = ReunionPreguntaOficial.objects.filter(
+            id_entrevista_oficial=self.id_entrevista_oficial).delete()
+
         # Se borra la plantilla.
         self.delete()
         return
