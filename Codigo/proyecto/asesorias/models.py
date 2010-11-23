@@ -444,7 +444,12 @@ class PlantillaEntrevistaAsesor(models.Model):
         preguntas_de_plantilla = PreguntaAsesor.objects.filter(
             dni_pasaporte=self.dni_pasaporte,
             curso_academico=self.curso_academico,
-            id_entrevista_asesor=self.id_entrevista_asesor).delete()
+            id_entrevista_asesor=self.id_entrevista_asesor)
+
+        # Si la plantilla  tenia participaba en reuniones se borran.
+        if (preguntas_de_plantilla):
+            for pregunta in preguntas_de_plantilla:
+                pregunta.borrar()
 
         # Se borra la plantilla.
         self.delete()
