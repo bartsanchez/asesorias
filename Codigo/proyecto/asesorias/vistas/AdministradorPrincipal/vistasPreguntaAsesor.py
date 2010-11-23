@@ -228,7 +228,7 @@ def delPreguntaAsesor(request, dni_pasaporte, curso_academico,
         id_pregunta_asesor)
     # Si existe se elimina.
     if instancia_pregunta_asesor:
-        instancia_pregunta_asesor.delete()
+        instancia_pregunta_asesor.borrar()
         # Redirige a la pagina de listar preguntas de asesor.
         return HttpResponseRedirect(reverse('listPreguntaAsesor',
                 kwargs={'dni_pasaporte': dni_pasaporte,

@@ -527,7 +527,7 @@ def delPreguntaAsesor(request, curso_academico, id_entrevista_asesor,
         id_pregunta_asesor)
     # Si existe se elimina.
     if instancia_pregunta_asesor:
-        instancia_pregunta_asesor.delete()
+        instancia_pregunta_asesor.borrar()
         # Redirige a la pagina de listar preguntas de asesor.
         return HttpResponseRedirect(reverse('listPreguntaAsesor_Asesor',
                 kwargs={'curso_academico': curso_academico,

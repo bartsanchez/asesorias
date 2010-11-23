@@ -468,6 +468,18 @@ class PreguntaAsesor(models.Model):
         unique_together = ("dni_pasaporte", "curso_academico",
             "id_entrevista_asesor", "id_pregunta_asesor")
 
+    def borrar(self):
+        # Se obtienen todas las preguntas de asesor.
+        preguntas_de_reunion = ReunionPreguntaAsesor.objects.filter(
+            dni_pasaporte_asesor=self.dni_pasaporte,
+            curso_academico=self.curso_academico,
+            id_entrevista_asesor=self.id_entrevista_asesor,
+            id_pregunta_asesor=self.id_pregunta_asesor).delete()
+
+        # Se borra la plantilla.
+        self.delete()
+        return
+
     def determinarTipo(self):
         return unicode('Asesor')
 
