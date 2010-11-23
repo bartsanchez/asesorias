@@ -713,6 +713,16 @@ class PreguntaOficial(models.Model):
         unique_together = ("id_entrevista_oficial",
             "id_pregunta_oficial")
 
+    def borrar(self):
+        # Se borran todas las preguntas oficiales.
+        preguntas_de_reunion = ReunionPreguntaOficial.objects.filter(
+            id_entrevista_oficial=self.id_entrevista_oficial_id,
+            id_pregunta_oficial=self.id_pregunta_oficial).delete()
+
+        # Se borra la plantilla.
+        self.delete()
+        return
+
     def determinarTipo(self):
         return unicode('Oficial')
 

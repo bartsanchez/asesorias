@@ -209,7 +209,7 @@ def delPreguntaOficial(request, id_entrevista_oficial,
         id_entrevista_oficial, id_pregunta_oficial)
     # Si existe se elimina.
     if instancia_pregunta_oficial:
-        instancia_pregunta_oficial.delete()
+        instancia_pregunta_oficial.borrar()
         # Redirige a la pagina de listar preguntas oficiales.
         return HttpResponseRedirect(reverse('listPreguntaOficial',
             kwargs={'entrevista_oficial': id_entrevista_oficial,
