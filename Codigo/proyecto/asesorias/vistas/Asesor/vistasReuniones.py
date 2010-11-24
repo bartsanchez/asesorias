@@ -1,3 +1,4 @@
+from datetime import date
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -91,7 +92,12 @@ def addReunion(request, curso_academico, dni_pasaporte):
     # Se ha rellenado el formulario.
     if request.method == 'POST':
         # Se extraen los valores pasados por el metodo POST.
-        fecha = request.POST['fecha']
+        fecha_day = request.POST['fecha_day']
+        fecha_month = request.POST['fecha_month']
+        fecha_year = request.POST['fecha_year']
+        fecha = date(int(fecha_year), int(fecha_month),
+            int(fecha_day))
+
         tipo = request.POST['tipo']
         comentario_asesor = request.POST['comentario_asesor']
         comentario_alumno = request.POST['comentario_alumno']
