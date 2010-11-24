@@ -4,6 +4,7 @@
 from django import forms
 from asesorias import models
 from datetime import date
+from django.forms.extras.widgets import SelectDateWidget
 
 CHOICES = [('administradorPrincipal', 'Administrador principal'),
     ('administradorCentro','Administrador de centro'),
@@ -279,6 +280,10 @@ class ReunionForm(forms.ModelForm):
 
     class Meta:
         model = models.Reunion
+        widgets = {
+            'fecha' : SelectDateWidget(years=range(date.today().year,
+            (date.today().year + 2))),
+        }
 
 class ReunionFormSelect(forms.Form):
     reunion = forms.ModelChoiceField(
