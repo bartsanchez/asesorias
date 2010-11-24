@@ -406,45 +406,6 @@ def addPlantillaAsesorAReunion(request, curso_academico, dni_pasaporte,
             'dni_pasaporte': dni_pasaporte,
             'id_reunion': id_reunion}))
 
-def addPreguntaAReunion(request, curso_academico, dni_pasaporte,
-    id_reunion):
-    preguntas_oficiales = False
-    preguntas_asesor = False
-
-    # Se obtiene la instancia del asesor curso academico.
-    instancia_asesorCA = \
-        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
-        unicode(request.user), curso_academico)
-
-    # El asesor presta asesoria durante el curso academico.
-    if instancia_asesorCA:
-        # Se obtiene la instancia de la reunion.
-        instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
-            curso_academico, id_reunion)
-
-        # Si existe se buscan las preguntas.
-        if instancia_reunion:
-            preguntas_oficiales = \
-                models.PreguntaOficial.objects.order_by(
-                'id_entrevista_oficial', 'id_pregunta_oficial')
-
-        else:
-            return HttpResponseRedirect(reverse('listReunion_Asesor',
-                kwargs={'curso_academico': curso_academico,
-                'orden': 'fecha'}))
-    else:
-        return HttpResponseRedirect(reverse('listReunion_Asesor',
-                kwargs={'curso_academico': curso_academico,
-                'orden': 'fecha'}))
-
-    return render_to_response(PATH + 'addPreguntaAReunion.html',
-        {'user': request.user,
-        'dni_pasaporte': dni_pasaporte,
-        'curso_academico': curso_academico,
-        'reunion': instancia_reunion,
-        'preguntas_oficiales': preguntas_oficiales,
-        'preguntas_asesor': preguntas_asesor})
-
 def addPreguntaOficialAReunion(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista_oficial, id_pregunta_oficial):
     # Se obtiene la instancia del asesor curso academico.
