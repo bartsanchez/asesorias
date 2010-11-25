@@ -401,12 +401,9 @@ def addPlantillaAsesorAReunion(request, curso_academico, dni_pasaporte,
 
             for pregunta in lista_preguntas_asesor:
                 if not (vistasRPA.obtenerReunion_preguntaAsesor(
-                dni_pasaporte_alumno=dni_pasaporte,
-                curso_academico=curso_academico,
-                id_reunion=id_reunion,
-                dni_pasaporte_asesor=user,
-                id_entrevista_asesor=id_entrevista_asesor,
-                id_pregunta_asesor=pregunta.id_pregunta_asesor)):
+                dni_pasaporte, curso_academico, id_reunion, user,
+                id_entrevista_asesor, pregunta.id_pregunta_asesor)):
+
                     instancia_nueva_pregunta = \
                         models.ReunionPreguntaAsesor.objects.create(
                         dni_pasaporte_alumno=dni_pasaporte,
@@ -486,12 +483,8 @@ def addPreguntaAsesorAReunion(request, curso_academico, dni_pasaporte,
                 id_pregunta_asesor)
 
             if not (vistasRPA.obtenerReunion_preguntaAsesor(
-                dni_pasaporte_alumno=dni_pasaporte,
-                curso_academico=curso_academico,
-                id_reunion=id_reunion,
-                dni_pasaporte_asesor=user,
-                id_entrevista_asesor=id_entrevista_asesor,
-                id_pregunta_asesor=id_pregunta_asesor)):
+                dni_pasaporte, curso_academico, id_reunion, user,
+                id_entrevista_asesor, id_pregunta_asesor)):
 
                 instancia_nueva_pregunta = \
                     models.ReunionPreguntaAsesor.objects.create(
