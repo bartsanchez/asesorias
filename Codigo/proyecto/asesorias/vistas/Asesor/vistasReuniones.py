@@ -9,6 +9,8 @@ from asesorias.vistas.AdministradorPrincipal import \
     vistasAsesorCursoAcademico
 from asesorias.vistas.AdministradorPrincipal import \
     vistasPreguntaOficial
+from asesorias.vistas.AdministradorPrincipal import \
+    vistasPreguntaAsesor
 from asesorias.vistas.AdministradorPrincipal import vistasReunion
 from asesorias import models, forms
 
@@ -432,6 +434,38 @@ def addPreguntaOficialAReunion(request, curso_academico, dni_pasaporte,
                 id_entrevista_oficial=id_entrevista_oficial,
                 id_pregunta_oficial=id_pregunta_oficial,
                 respuesta='-')
+            instancia_nueva_pregunta.save()
+
+def addPreguntaAsesorAReunion(request, curso_academico, dni_pasaporte,
+    id_reunion, id_entrevista_asesor, id_pregunta_asesor):
+    user = unicode(request.user)
+    # Se obtiene la instancia del asesor curso academico.
+    instancia_asesorCA = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(user,
+        curso_academico)
+
+    # El asesor presta asesoria durante el curso academico.
+    if instancia_asesorCA:
+        # Se obtiene la instancia de la reunion.
+        instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
+            curso_academico, id_reunion)
+
+        # Si existe se buscan las preguntas.
+        if instancia_reunion:
+            instancia_pregunta_asesor = \
+                vistasPreguntaAsesor.obtenerPreguntaAsesor(user,
+                curso_academico, id_entrevista_asesor,
+                id_pregunta_asesor)
+
+            instancia_nueva_pregunta = \
+                models.ReunionPreguntaAsesor.objects.create(
+                    dni_pasaporte_alumno=dni_pasaporte,
+                    dni_pasaporte_asesor=unicode(request.user),
+                    curso_academico=curso_academico,
+                    id_reunion=id_reunion,
+                    id_entrevista_asesor=id_entrevista_asesor,
+                    id_pregunta_asesor=id_pregunta_asesor,
+                    respuesta='-')
             instancia_nueva_pregunta.save()
 
     return HttpResponseRedirect(

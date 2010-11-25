@@ -99,7 +99,7 @@
             {% for pregunta in lista_preguntas %}
             <tr>
                 <th scope="row">{{ pregunta.enunciado }}</th>
-                <td><a href="{# url addPreguntaAsesorAReunion curso_academico dni_pasaporte reunion.id_reunion pregunta.id_entrevista_asesor pregunta.id_pregunta_asesor #}" class=addlink></a></td>
+                <td><a href="{% url addPreguntaAsesorAReunion curso_academico dni_pasaporte reunion.id_reunion pregunta.id_entrevista_asesor pregunta.id_pregunta_asesor %}" class=addlink></a></td>
             </tr>
             {% endfor %}
 
