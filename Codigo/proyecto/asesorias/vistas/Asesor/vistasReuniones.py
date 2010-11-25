@@ -355,15 +355,20 @@ def addPlantillaOficialAReunion(request, curso_academico, dni_pasaporte,
                 'id_pregunta_oficial')
 
             for pregunta in lista_preguntas_oficiales:
-                instancia_nueva_pregunta = \
-                    models.ReunionPreguntaOficial.objects.create(
-                    dni_pasaporte=dni_pasaporte,
-                    curso_academico=curso_academico,
-                    id_reunion=id_reunion,
-                    id_entrevista_oficial=id_entrevista_oficial,
-                    id_pregunta_oficial=pregunta.id_pregunta_oficial,
-                    respuesta='-')
-                instancia_nueva_pregunta.save()
+                if not (vistasRPO.obtenerReunion_preguntaOficial(
+                    dni_pasaporte, curso_academico, id_reunion,
+                    id_entrevista_oficial,
+                    pregunta.id_pregunta_oficial)):
+
+                    instancia_nueva_pregunta = \
+                        models.ReunionPreguntaOficial.objects.create(
+                        dni_pasaporte=dni_pasaporte,
+                        curso_academico=curso_academico,
+                        id_reunion=id_reunion,
+                        id_entrevista_oficial=id_entrevista_oficial,
+                        id_pregunta_oficial=pregunta.id_pregunta_oficial,
+                        respuesta='-')
+                    instancia_nueva_pregunta.save()
 
     return HttpResponseRedirect(
             reverse('showReunion_Asesor',
@@ -439,13 +444,9 @@ def addPreguntaOficialAReunion(request, curso_academico, dni_pasaporte,
                 vistasPreguntaOficial.obtenerPreguntaOficial(
                 id_entrevista_oficial, id_pregunta_oficial)
 
-            toma = (vistasRPO.obtenerReunion_preguntaOficial(
+            if not (vistasRPO.obtenerReunion_preguntaOficial(
             dni_pasaporte, curso_academico, id_reunion,
-            id_entrevista_oficial, id_pregunta_oficial))
-
-            print toma
-
-            if not toma:
+            id_entrevista_oficial, id_pregunta_oficial)):
 
                 instancia_nueva_pregunta = \
                     models.ReunionPreguntaOficial.objects.create(
