@@ -4,8 +4,6 @@
 
     <h1>Ver reunión.</h1>
 
-    {% if form %}
-
     <a href="{# url generarPDFListaAlumnos_Asesor curso_academico busqueda #}" class="pdflink">Generar PDF</a>
 
     <div class="module">
@@ -18,16 +16,30 @@
 
         {% else %}
 
-        {% for field in form %}
-        {% ifnotequal field.name 'id_reunion' %}
-        {% ifnotequal field.name 'curso_academico' %}
         <tr>
-            <th scope="row">{{ field.label_tag }}</th>
-            <td>{{ field }}</td>
+            <th scope="row">DNI/Pasaporte</th>
+            <td>{{ reunion.dni_pasaporte }}</td>
         </tr>
-        {% endifnotequal %}
-        {% endifnotequal %}
-        {% endfor %}
+        <tr>
+            <th scope="row">Nombre</th>
+            <td>{{ reunion.determinarNombreAlumno }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Nombre</th>
+            <td>{{ reunion.determinarApellidosAlumno }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Tipo</th>
+            <td>{% ifequal reunion.tipo 'GRU' %}Grupal{% else %}Individual{% endifequal %}</td>
+        </tr>
+        <tr>
+            <th scope="row">Comentario del asesor</th>
+            <td>{{ reunion.comentario_asesor }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Comentario del alumno</th>
+            <td>{{ reunion.comentario_alumno }}</td>
+        </tr>
 
         </table>
     </div>
@@ -74,10 +86,6 @@
 
         </table>
     </div>
-
-    {% else %}
-    <p>No existe tal reunión</p>
-    {% endif %}
 
     <div><a href="{% url listReunion_Asesor curso_academico 'fecha' %}">Volver</a></div>
 

@@ -243,7 +243,6 @@ def showReunion(request, curso_academico, dni_pasaporte, id_reunion):
 
         # Si existe se buscan las preguntas.
         if instancia_reunion:
-            form = forms.ReunionForm(instance=instancia_reunion)
             preguntas_oficiales = \
                 models.ReunionPreguntaOficial.objects.filter(
                 dni_pasaporte=dni_pasaporte,
@@ -260,7 +259,7 @@ def showReunion(request, curso_academico, dni_pasaporte, id_reunion):
                 preguntas_reunion = True
 
     return render_to_response(PATH + 'showReunion.html',
-        {'user': request.user, 'form': form,
+        {'user': request.user,
         'curso_academico': curso_academico,
         'reunion': instancia_reunion,
         'preguntas_reunion': preguntas_reunion,
