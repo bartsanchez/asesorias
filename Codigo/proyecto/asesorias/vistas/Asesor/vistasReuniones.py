@@ -11,6 +11,8 @@ from asesorias.vistas.AdministradorPrincipal import \
     vistasPreguntaOficial
 from asesorias.vistas.AdministradorPrincipal import \
     vistasPreguntaAsesor
+from asesorias.vistas.AdministradorPrincipal import \
+    vistasReunion_preguntaAsesor as vistasRPA
 from asesorias.vistas.AdministradorPrincipal import vistasReunion
 from asesorias import models, forms
 
@@ -369,10 +371,11 @@ def addPlantillaOficialAReunion(request, curso_academico, dni_pasaporte,
 
 def addPlantillaAsesorAReunion(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista_asesor):
+    user = unicode(request.user)
     # Se obtiene la instancia del asesor curso academico.
     instancia_asesorCA = \
-        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
-        unicode(request.user), curso_academico)
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(user,
+        curso_academico)
 
     # El asesor presta asesoria durante el curso academico.
     if instancia_asesorCA:
@@ -385,21 +388,28 @@ def addPlantillaAsesorAReunion(request, curso_academico, dni_pasaporte,
             lista_preguntas_asesor = \
                 models.PreguntaAsesor.objects.filter(
                 curso_academico=curso_academico,
-                dni_pasaporte=unicode(request.user),
+                dni_pasaporte=user,
                 id_entrevista_asesor=id_entrevista_asesor).order_by(
                 'id_pregunta_asesor')
 
             for pregunta in lista_preguntas_asesor:
-                instancia_nueva_pregunta = \
-                    models.ReunionPreguntaAsesor.objects.create(
-                    dni_pasaporte_alumno=dni_pasaporte,
-                    dni_pasaporte_asesor=unicode(request.user),
-                    curso_academico=curso_academico,
-                    id_reunion=id_reunion,
-                    id_entrevista_asesor=id_entrevista_asesor,
-                    id_pregunta_asesor=pregunta.id_pregunta_asesor,
-                    respuesta='-')
-                instancia_nueva_pregunta.save()
+                if not (vistasRPA.obtenerReunion_preguntaAsesor(
+                dni_pasaporte_alumno=dni_pasaporte,
+                curso_academico=curso_academico,
+                id_reunion=id_reunion,
+                dni_pasaporte_asesor=user,
+                id_entrevista_asesor=id_entrevista_asesor,
+                id_pregunta_asesor=pregunta.id_pregunta_asesor)):
+                    instancia_nueva_pregunta = \
+                        models.ReunionPreguntaAsesor.objects.create(
+                        dni_pasaporte_alumno=dni_pasaporte,
+                        dni_pasaporte_asesor=user,
+                        curso_academico=curso_academico,
+                        id_reunion=id_reunion,
+                        id_entrevista_asesor=id_entrevista_asesor,
+                        id_pregunta_asesor=pregunta.id_pregunta_asesor,
+                        respuesta='-')
+                    instancia_nueva_pregunta.save()
 
     return HttpResponseRedirect(
             reverse('showReunion_Asesor',
@@ -457,16 +467,24 @@ def addPreguntaAsesorAReunion(request, curso_academico, dni_pasaporte,
                 curso_academico, id_entrevista_asesor,
                 id_pregunta_asesor)
 
-            instancia_nueva_pregunta = \
-                models.ReunionPreguntaAsesor.objects.create(
-                    dni_pasaporte_alumno=dni_pasaporte,
-                    dni_pasaporte_asesor=unicode(request.user),
-                    curso_academico=curso_academico,
-                    id_reunion=id_reunion,
-                    id_entrevista_asesor=id_entrevista_asesor,
-                    id_pregunta_asesor=id_pregunta_asesor,
-                    respuesta='-')
-            instancia_nueva_pregunta.save()
+            if not (vistasRPA.obtenerReunion_preguntaAsesor(
+                dni_pasaporte_alumno=dni_pasaporte,
+                curso_academico=curso_academico,
+                id_reunion=id_reunion,
+                dni_pasaporte_asesor=user,
+                id_entrevista_asesor=id_entrevista_asesor,
+                id_pregunta_asesor=id_pregunta_asesor)):
+
+                instancia_nueva_pregunta = \
+                    models.ReunionPreguntaAsesor.objects.create(
+                        dni_pasaporte_alumno=dni_pasaporte,
+                        dni_pasaporte_asesor=user,
+                        curso_academico=curso_academico,
+                        id_reunion=id_reunion,
+                        id_entrevista_asesor=id_entrevista_asesor,
+                        id_pregunta_asesor=id_pregunta_asesor,
+                        respuesta='-')
+                instancia_nueva_pregunta.save()
 
     return HttpResponseRedirect(
             reverse('showReunion_Asesor',
