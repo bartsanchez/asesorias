@@ -104,7 +104,7 @@ def addReunion(request, curso_academico, dni_pasaporte):
         fecha = date(int(fecha_year), int(fecha_month),
             int(fecha_day))
 
-        tipo = request.POST['tipo']
+        tipo = 'IND'
         comentario_asesor = request.POST['comentario_asesor']
         comentario_alumno = request.POST['comentario_alumno']
 

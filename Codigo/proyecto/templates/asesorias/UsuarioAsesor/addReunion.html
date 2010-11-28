@@ -36,7 +36,11 @@
                 {% ifnotequal field.name 'id_reunion' %}
                 <tr>
                     <th scope="row">{{ field.label_tag }}</th>
+                    {% ifnotequal field.name 'tipo' %}
                     <td>{{ field }}</td>
+                    {% else %}
+                    <td>Individual</td>
+                    {% endifnotequal %}
                 </tr>
                 {% endifnotequal %}
                 {% endifnotequal %}
