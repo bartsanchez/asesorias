@@ -76,6 +76,97 @@ def selectAlumno(request, curso_academico):
         'dni_pasaporte': dni_pasaporte,
         'curso_academico': curso_academico})
 
+def selectAlumnos(request, curso_academico, lista_alumnos):
+    dni_pasaporte = unicode(request.user)
+
+    # Se obtiene el posible asesor curso academico.
+    instancia_asesorCA = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+        dni_pasaporte, curso_academico)
+
+    # Se comprueba que exista el asesor curso academico.
+    if not instancia_asesorCA:
+        return HttpResponseRedirect(
+            reverse('listReunion_Asesor',
+                kwargs={'curso_academico': curso_academico,
+                'orden': 'fecha'}))
+
+    # La lista de alumnos no esta vacia.
+    if len(lista_alumnos)>0:
+
+        # Descompone los dnis de los alumnos que participan en la
+        # reunion.
+        lista_aux = lista_alumnos.rsplit('&')
+        lista_aux.pop()
+        lista_participantes = []
+
+        # Por cada argumento pasado se intenta crear una instancia
+        # del alumno.
+        for alumno in lista_aux:
+            instancia_alumno = \
+                vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(
+                alumno, curso_academico)
+            if instancia_alumno:
+                if (instancia_alumno.codigo_asesorCursoAcademico_id ==
+                    instancia_asesorCA.codigo_asesorCursoAcademico):
+                        lista_participantes.append(instancia_alumno)
+                else:
+                    return HttpResponseRedirect(
+                        reverse('selectAlumnos_Asesor',
+                            kwargs={'curso_academico': curso_academico,
+                            'lista_alumnos': ''}))
+            else:
+                return HttpResponseRedirect(
+                    reverse('selectAlumnos_Asesor',
+                        kwargs={'curso_academico': curso_academico,
+                        'lista_alumnos': ''}))
+    else:
+        lista_participantes = False
+
+    # Se obtiene la lista de alumnos disponible.
+    lista_disponibles = models.AlumnoCursoAcademico.objects.filter(
+        codigo_asesorCursoAcademico=
+        instancia_asesorCA.codigo_asesorCursoAcademico,
+        curso_academico=curso_academico)
+
+    # Se convierten en lista en vez de queryset
+    lista_aux = []
+    for disponible in lista_disponibles:
+        lista_aux.append(disponible)
+    lista_disponibles = lista_aux
+
+    # Se eliminan de los disponibles los ya participantes.
+    if lista_participantes:
+        for participante in lista_participantes:
+            for disponible in lista_disponibles:
+                if participante == disponible:
+                    lista_disponibles.remove(disponible)
+
+    return render_to_response(PATH + 'selectAlumnos.html',
+        {'user': request.user,
+        'dni_pasaporte': dni_pasaporte,
+        'curso_academico': curso_academico,
+        'lista_alumnos': lista_alumnos,
+        'lista_participantes': lista_participantes,
+        'lista_disponibles': lista_disponibles})
+
+def addAlumnoAReunionGrupal(request, curso_academico, lista_alumnos,
+    dni_pasaporte):
+    # Se inserta el alumno a la reunion.
+    lista_alumnos += dni_pasaporte + '&'
+    return HttpResponseRedirect(reverse('selectAlumnos_Asesor',
+        kwargs={'curso_academico': curso_academico,
+        'lista_alumnos': lista_alumnos}))
+
+def delAlumnoAReunionGrupal(request, curso_academico, lista_alumnos,
+    dni_pasaporte):
+    # Se busca el alumno para borrarlo de la reunion.
+    if not (lista_alumnos.find(dni_pasaporte)<0):
+        lista_alumnos = lista_alumnos.replace(dni_pasaporte + '&', '')
+    return HttpResponseRedirect(reverse('selectAlumnos_Asesor',
+        kwargs={'curso_academico': curso_academico,
+        'lista_alumnos': lista_alumnos}))
+
 def addReunion(request, curso_academico, dni_pasaporte):
     # Se obtiene el posible alumno_curso_academico.
     instancia_alumno_curso_academico = \

@@ -10,6 +10,19 @@ urlpatterns = patterns(VISTAS + 'vistasReuniones',
     url(r'^selectAlumno/$',
         'selectAlumno', name='selectAlumno_Asesor'),
 
+    url(r'^selectAlumnos/(?P<lista_alumnos>[\s\w\&]*)/$',
+        'selectAlumnos', name='selectAlumnos_Asesor'),
+
+    url(r'^addAlumnoAReunionGrupal/(?P<lista_alumnos>[\s\w\&]*)/' +
+        '(?P<dni_pasaporte>[\s\w]+)/$',
+
+        'addAlumnoAReunionGrupal', name='addAlumnoAReunionGrupal'),
+
+    url(r'^delAlumnoAReunionGrupal/(?P<lista_alumnos>[\s\w\&]*)/' +
+        '(?P<dni_pasaporte>[\s\w]+)/$',
+
+        'delAlumnoAReunionGrupal', name='delAlumnoAReunionGrupal'),
+
     url(r'^addReunion/(?P<dni_pasaporte>[\s\w]+)/$',
         'addReunion', name='addReunion_Asesor'),
 
