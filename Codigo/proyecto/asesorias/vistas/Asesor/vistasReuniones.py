@@ -142,8 +142,10 @@ def selectAlumnos(request, curso_academico, lista_alumnos):
                 if participante == disponible:
                     lista_disponibles.remove(disponible)
 
+    form = forms.ReunionForm()
+
     return render_to_response(PATH + 'selectAlumnos.html',
-        {'user': request.user,
+        {'user': request.user, 'form': form,
         'dni_pasaporte': dni_pasaporte,
         'curso_academico': curso_academico,
         'lista_alumnos': lista_alumnos,
