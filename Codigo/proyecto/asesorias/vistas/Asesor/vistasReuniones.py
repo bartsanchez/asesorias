@@ -142,7 +142,51 @@ def selectAlumnos(request, curso_academico, lista_alumnos):
                 if participante == disponible:
                     lista_disponibles.remove(disponible)
 
-    form = forms.ReunionForm()
+    # Se ha rellenado el formulario.
+    if request.method == 'POST':
+        # Se extraen los valores pasados por el metodo POST.
+        fecha_day = request.POST['fecha_day']
+        fecha_month = request.POST['fecha_month']
+        fecha_year = request.POST['fecha_year']
+        fecha = date(int(fecha_year), int(fecha_month),
+            int(fecha_day))
+
+        tipo = 'GRU'
+        comentario_asesor = request.POST['comentario_asesor']
+        comentario_alumno = request.POST['comentario_alumno']
+
+        for alumno in lista_participantes:
+            # Se determina el siguiente id_reunion para el alumno curso
+            # academico.
+            id_reunion = vistasReunion.\
+                determinarSiguienteIdReunionDeAlumnoCursoAcademico(
+                alumno)
+
+            # Datos necesarios para crear la nueva plantilla.
+            datos_reunion = {
+                'dni_pasaporte': alumno.dni_pasaporte_alumno,
+                'curso_academico': curso_academico,
+                'id_reunion': id_reunion,
+                'fecha': fecha,
+                'tipo': tipo,
+                'comentario_asesor': comentario_asesor,
+                'comentario_alumno': comentario_alumno}
+
+            # Se obtienen los valores y se valida.
+            form = forms.ReunionForm(datos_reunion)
+            if form.is_valid():
+                # Se guarda la informacion del formulario en el sistema.
+                form.save()
+                # Redirige a la pagina de listar reuniones.
+
+        return HttpResponseRedirect(
+                    reverse('listReunion_Asesor',kwargs={
+                    'curso_academico': curso_academico,
+                    'orden': 'fecha'}))
+
+    # Si aun no se ha rellenado el formulario, se genera uno en blanco.
+    else:
+        form = forms.ReunionForm()
 
     return render_to_response(PATH + 'selectAlumnos.html',
         {'user': request.user, 'form': form,
