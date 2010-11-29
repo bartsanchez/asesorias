@@ -155,6 +155,12 @@ def selectAlumnos(request, curso_academico, lista_alumnos):
         comentario_asesor = request.POST['comentario_asesor']
         comentario_alumno = request.POST['comentario_alumno']
 
+        if not lista_participantes:
+            return HttpResponseRedirect(
+                    reverse('selectAlumnos_Asesor',
+                        kwargs={'curso_academico': curso_academico,
+                        'lista_alumnos': ''}))
+
         for alumno in lista_participantes:
             # Se determina el siguiente id_reunion para el alumno curso
             # academico.
