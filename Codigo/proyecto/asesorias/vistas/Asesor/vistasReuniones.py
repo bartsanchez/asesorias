@@ -191,6 +191,11 @@ def selectAlumnos(request, curso_academico, lista_alumnos):
                 # Se guarda la informacion del formulario en el sistema.
                 form.save()
                 # Redirige a la pagina de listar reuniones.
+            else:
+                return HttpResponseRedirect(
+                    reverse('selectAlumnos_Asesor',
+                        kwargs={'curso_academico': curso_academico,
+                        'lista_alumnos': ''}))
 
         return HttpResponseRedirect(
                     reverse('listReunion_Asesor',kwargs={
