@@ -148,6 +148,13 @@ def selectAlumnos(request, curso_academico, lista_alumnos):
         fecha_day = request.POST['fecha_day']
         fecha_month = request.POST['fecha_month']
         fecha_year = request.POST['fecha_year']
+
+        if (fecha_day=='0' or fecha_month=='0' or fecha_year=='0'):
+            return HttpResponseRedirect(
+                reverse('selectAlumnos_Asesor',
+                    kwargs={'curso_academico': curso_academico,
+                    'lista_alumnos': ''}))
+
         fecha = date(int(fecha_year), int(fecha_month),
             int(fecha_day))
 
@@ -244,6 +251,13 @@ def addReunion(request, curso_academico, dni_pasaporte):
         fecha_day = request.POST['fecha_day']
         fecha_month = request.POST['fecha_month']
         fecha_year = request.POST['fecha_year']
+
+        if (fecha_day=='0' or fecha_month=='0' or fecha_year=='0'):
+            return HttpResponseRedirect(
+                reverse('addReunion_Asesor',
+                    kwargs={'curso_academico': curso_academico,
+                    'dni_pasaporte': dni_pasaporte}))
+
         fecha = date(int(fecha_year), int(fecha_month),
             int(fecha_day))
 
