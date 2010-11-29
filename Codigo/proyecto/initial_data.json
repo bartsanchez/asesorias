@@ -831,7 +831,7 @@
     "pk": 1,
     "model": "asesorias.reunion",
     "fields": {
-      "tipo": "GRU",
+      "tipo": "IND",
       "fecha": "2008-01-01",
       "comentario_asesor": "hola",
       "id_reunion": 1,
@@ -844,7 +844,7 @@
     "pk": 2,
     "model": "asesorias.reunion",
     "fields": {
-      "tipo": "GRU",
+      "tipo": "IND",
       "fecha": "2001-01-01",
       "comentario_asesor": "hola",
       "id_reunion": 1,
@@ -857,7 +857,7 @@
     "pk": 3,
     "model": "asesorias.reunion",
     "fields": {
-      "tipo": "GRU",
+      "tipo": "IND",
       "fecha": "2000-01-01",
       "comentario_asesor": "hola",
       "id_reunion": 1,
@@ -883,7 +883,7 @@
     "pk": 5,
     "model": "asesorias.reunion",
     "fields": {
-      "tipo": "GRU",
+      "tipo": "IND",
       "fecha": "2010-01-01",
       "comentario_asesor": "hola",
       "id_reunion": 1,
@@ -896,7 +896,7 @@
     "pk": 6,
     "model": "asesorias.reunion",
     "fields": {
-      "tipo": "GRU",
+      "tipo": "IND",
       "fecha": "2010-10-10",
       "comentario_asesor": "hola",
       "id_reunion": 2,
