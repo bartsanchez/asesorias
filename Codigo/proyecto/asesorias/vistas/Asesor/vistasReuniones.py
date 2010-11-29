@@ -155,8 +155,15 @@ def selectAlumnos(request, curso_academico, lista_alumnos):
                     kwargs={'curso_academico': curso_academico,
                     'lista_alumnos': ''}))
 
-        fecha = date(int(fecha_year), int(fecha_month),
-            int(fecha_day))
+        # Comprueba que la fecha sea correcta.
+        try:
+            fecha = date(int(fecha_year), int(fecha_month),
+                int(fecha_day))
+        except:
+           return HttpResponseRedirect(
+                reverse('selectAlumnos_Asesor',
+                    kwargs={'curso_academico': curso_academico,
+                    'lista_alumnos': lista_alumnos}))
 
         tipo = 'GRU'
         comentario_asesor = request.POST['comentario_asesor']
@@ -263,8 +270,15 @@ def addReunion(request, curso_academico, dni_pasaporte):
                     kwargs={'curso_academico': curso_academico,
                     'dni_pasaporte': dni_pasaporte}))
 
-        fecha = date(int(fecha_year), int(fecha_month),
-            int(fecha_day))
+        # Comprueba que la fecha sea correcta.
+        try:
+            fecha = date(int(fecha_year), int(fecha_month),
+                int(fecha_day))
+        except:
+           return HttpResponseRedirect(
+                reverse('addReunion_Asesor',
+                    kwargs={'curso_academico': curso_academico,
+                    'dni_pasaporte': dni_pasaporte}))
 
         tipo = 'IND'
         comentario_asesor = request.POST['comentario_asesor']

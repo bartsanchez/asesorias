@@ -126,7 +126,22 @@ def addReunion(request, dni_pasaporte, curso_academico):
         fecha_day = request.POST['fecha_day']
         fecha_month = request.POST['fecha_month']
         fecha_year = request.POST['fecha_year']
-        fecha = date(int(fecha_year), int(fecha_month), int(fecha_day))
+
+        if (fecha_day=='0' or fecha_month=='0' or fecha_year=='0'):
+            return HttpResponseRedirect(
+                reverse('addReunion',
+                    kwargs={'curso_academico': curso_academico,
+                    'dni_pasaporte': dni_pasaporte}))
+
+        # Comprueba que la fecha sea correcta.
+        try:
+            fecha = date(int(fecha_year), int(fecha_month),
+                int(fecha_day))
+        except:
+           return HttpResponseRedirect(
+                reverse('addReunion',
+                    kwargs={'curso_academico': curso_academico,
+                    'dni_pasaporte': dni_pasaporte}))
 
         tipo = request.POST['tipo']
         comentario_asesor = request.POST['comentario_asesor']
