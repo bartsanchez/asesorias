@@ -350,15 +350,24 @@ def listReunion(request, curso_academico, orden):
             instancia_asesorCA.codigo_asesorCursoAcademico).values_list(
             'dni_pasaporte_alumno', flat=True)
 
-        # Se crea una lista con todas las reuniones del asesor.
-        lista_reuniones = models.Reunion.objects.filter(
+        # Se crea una lista con todas las reuniones individuales del
+        # asesor.
+        lista_reuniones_individuales = models.Reunion.objects.filter(
             dni_pasaporte__in=lista_alumnosCA,
-            curso_academico=curso_academico).order_by('fecha')
+            curso_academico=curso_academico,
+            tipo='IND').order_by('fecha')
+
+        # Se crea una lista con todas las reuniones grupales del asesor.
+        lista_reuniones_grupales = models.Reunion.objects.filter(
+            dni_pasaporte__in=lista_alumnosCA,
+            curso_academico=curso_academico,
+            tipo='GRU').order_by('fecha')
 
     # El asesor aun no presta asesoria en este curso academico.
     else:
         lista_alumnosCA = ''
-        lista_reuniones = ''
+        lista_reuniones_individuales = ''
+        lista_reuniones_grupales = ''
 
     # Se ha realizado una busqueda.
     if request.method == 'POST':
@@ -396,11 +405,15 @@ def listReunion(request, curso_academico, orden):
         busqueda = False
 
         if (orden == '_fecha'):
-            lista_reuniones = reversed(lista_reuniones)
+            lista_reuniones_individuales = \
+                reversed(lista_reuniones_individuales)
+            lista_reuniones_grupales = \
+                reversed(lista_reuniones_grupales)
 
     return render_to_response(PATH + 'listReunion.html',
         {'user': request.user, 'form': form,
-        'lista_reuniones': lista_reuniones,
+        'lista_reuniones_individuales': lista_reuniones_individuales,
+        'lista_reuniones_grupales': lista_reuniones_grupales,
         'busqueda': busqueda,
         'orden': orden,
         'curso_academico': curso_academico})

@@ -30,7 +30,7 @@
         <table summary="Lista de reuniones.">
         <caption><h2>Lista de reuniones{% if busqueda %} (Filtro = {{ busqueda }}){% endif %}</h2></caption>
 
-        {% if not lista_reuniones %}
+        {% if not lista_reuniones_individuales and not lista_reuniones_grupales %}
 
         <tr><th scope="row"><p>No existen actualmente reuniones de este asesor para este curso académico.</p></th></tr>
 
@@ -48,8 +48,24 @@
         </tr>
         {% endif %}
 
+        <tr>
+            <th scope="row">Individuales</th>
+        </tr>
+
         <!-- Reuniones -->
-        {% for reunion in lista_reuniones %}
+        {% for reunion in lista_reuniones_individuales %}
+        <tr>
+            <th scope="row"><a href="{% url showReunion_Asesor curso_academico reunion.dni_pasaporte reunion.id_reunion %}">{{ reunion }} : {{ reunion.determinarNombreAlumno }} {{ reunion.determinarApellidosAlumno }}</th>
+            <td><a href="{% url showReunion_Asesor curso_academico reunion.dni_pasaporte reunion.id_reunion %}" class="searchlink2">Ver</a></td>
+            <td><a href="{% url delReunion_Asesor curso_academico reunion.dni_pasaporte reunion.id_reunion %}" class="deletelink">Eliminar</td>
+        </tr>
+        {% endfor %}
+
+        <tr>
+            <th scope="row">Grupales</th>
+        </tr>
+
+        {% for reunion in lista_reuniones_grupales %}
         <tr>
             <th scope="row"><a href="{% url showReunion_Asesor curso_academico reunion.dni_pasaporte reunion.id_reunion %}">{{ reunion }} : {{ reunion.determinarNombreAlumno }} {{ reunion.determinarApellidosAlumno }}</th>
             <td><a href="{% url showReunion_Asesor curso_academico reunion.dni_pasaporte reunion.id_reunion %}" class="searchlink2">Ver</a></td>
