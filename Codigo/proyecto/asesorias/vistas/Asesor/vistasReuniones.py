@@ -358,6 +358,7 @@ def listReunion(request, curso_academico, orden):
     # El asesor aun no presta asesoria en este curso academico.
     else:
         lista_alumnosCA = ''
+        lista_reuniones = ''
 
     # Se ha realizado una busqueda.
     if request.method == 'POST':
