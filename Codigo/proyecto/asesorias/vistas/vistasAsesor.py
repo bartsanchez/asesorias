@@ -2,6 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
+from asesorias.vistas.AdministradorPrincipal import \
+    vistasAsesorCursoAcademico
 from asesorias import forms
 
 PATH = 'asesorias/UsuarioAsesor/'
@@ -43,9 +45,18 @@ def setCursoAcademico(request, curso_academico):
         form = forms.CursoAcademicoFormSelect(request.POST)
         # Si es valido se redirige.
         if form.is_valid():
-            curso_academico = request.POST['curso_academico']
-            return HttpResponseRedirect(reverse('asesor_inicio',
-            kwargs={'curso_academico': curso_academico}))
+            curso_academico_nuevo = request.POST['curso_academico']
+
+            # Se comprueba que exista el asesor curso academico.
+            if vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+                unicode(request.user), curso_academico_nuevo):
+                return HttpResponseRedirect(reverse('asesor_inicio',
+                    kwargs={'curso_academico': curso_academico_nuevo}))
+            else:
+                return render_to_response(
+                    PATH + 'NoCursoAcademico.html',
+                    {'user': request.user,
+                    'curso_academico': curso_academico})
     else:
         form = forms.CursoAcademicoFormSelect()
     return render_to_response(
