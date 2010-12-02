@@ -76,7 +76,7 @@ def selectAlumno(request, curso_academico):
         'dni_pasaporte': dni_pasaporte,
         'curso_academico': curso_academico})
 
-def selectAlumnos(request, curso_academico, lista_alumnos):
+def addReunionGrupal(request, curso_academico, lista_alumnos):
     dni_pasaporte = unicode(request.user)
 
     # Se obtiene el posible asesor curso academico.
@@ -112,12 +112,12 @@ def selectAlumnos(request, curso_academico, lista_alumnos):
                         lista_participantes.append(instancia_alumno)
                 else:
                     return HttpResponseRedirect(
-                        reverse('selectAlumnos_Asesor',
+                        reverse('addReunionGrupal_Asesor',
                             kwargs={'curso_academico': curso_academico,
                             'lista_alumnos': ''}))
             else:
                 return HttpResponseRedirect(
-                    reverse('selectAlumnos_Asesor',
+                    reverse('addReunionGrupal_Asesor',
                         kwargs={'curso_academico': curso_academico,
                         'lista_alumnos': ''}))
     else:
@@ -151,7 +151,7 @@ def selectAlumnos(request, curso_academico, lista_alumnos):
 
         if (fecha_day=='0' or fecha_month=='0' or fecha_year=='0'):
             return HttpResponseRedirect(
-                reverse('selectAlumnos_Asesor',
+                reverse('addReunionGrupal_Asesor',
                     kwargs={'curso_academico': curso_academico,
                     'lista_alumnos': ''}))
 
@@ -161,7 +161,7 @@ def selectAlumnos(request, curso_academico, lista_alumnos):
                 int(fecha_day))
         except:
            return HttpResponseRedirect(
-                reverse('selectAlumnos_Asesor',
+                reverse('addReunionGrupal_Asesor',
                     kwargs={'curso_academico': curso_academico,
                     'lista_alumnos': lista_alumnos}))
 
@@ -171,7 +171,7 @@ def selectAlumnos(request, curso_academico, lista_alumnos):
 
         if not lista_participantes:
             return HttpResponseRedirect(
-                    reverse('selectAlumnos_Asesor',
+                    reverse('addReunionGrupal_Asesor',
                         kwargs={'curso_academico': curso_academico,
                         'lista_alumnos': ''}))
 
@@ -200,7 +200,7 @@ def selectAlumnos(request, curso_academico, lista_alumnos):
                 # Redirige a la pagina de listar reuniones.
             else:
                 return HttpResponseRedirect(
-                    reverse('selectAlumnos_Asesor',
+                    reverse('addReunionGrupal_Asesor',
                         kwargs={'curso_academico': curso_academico,
                         'lista_alumnos': ''}))
 
@@ -213,7 +213,7 @@ def selectAlumnos(request, curso_academico, lista_alumnos):
     else:
         form = forms.ReunionForm()
 
-    return render_to_response(PATH + 'selectAlumnos.html',
+    return render_to_response(PATH + 'addReunionGrupal.html',
         {'user': request.user, 'form': form,
         'dni_pasaporte': dni_pasaporte,
         'curso_academico': curso_academico,
@@ -259,7 +259,7 @@ def addAlumnoAReunionGrupal(request, curso_academico, lista_alumnos,
     dni_pasaporte):
     # Se inserta el alumno a la reunion.
     lista_alumnos += dni_pasaporte + '&'
-    return HttpResponseRedirect(reverse('selectAlumnos_Asesor',
+    return HttpResponseRedirect(reverse('addReunionGrupal_Asesor',
         kwargs={'curso_academico': curso_academico,
         'lista_alumnos': lista_alumnos}))
 
@@ -268,7 +268,7 @@ def delAlumnoAReunionGrupal(request, curso_academico, lista_alumnos,
     # Se busca el alumno para borrarlo de la reunion.
     if not (lista_alumnos.find(dni_pasaporte)<0):
         lista_alumnos = lista_alumnos.replace(dni_pasaporte + '&', '')
-    return HttpResponseRedirect(reverse('selectAlumnos_Asesor',
+    return HttpResponseRedirect(reverse('addReunionGrupal_Asesor',
         kwargs={'curso_academico': curso_academico,
         'lista_alumnos': lista_alumnos}))
 
