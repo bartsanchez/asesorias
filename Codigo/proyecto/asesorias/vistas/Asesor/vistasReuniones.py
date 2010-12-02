@@ -221,6 +221,40 @@ def selectAlumnos(request, curso_academico, lista_alumnos):
         'lista_participantes': lista_participantes,
         'lista_disponibles': lista_disponibles})
 
+def delReunionGrupal(request, curso_academico, fecha):
+    # Si existen, se eliminan todas las reuiones grupales del asesor
+    # para tal curso academico y fecha.
+    instancia_asesorCA = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+        unicode(request.user), curso_academico)
+
+    lista_alumnos = \
+        instancia_asesorCA.determinarAlumnos().values_list(
+        'dni_pasaporte_alumno', flat=True)
+
+    print fecha
+
+    if lista_alumnos:
+        error = False
+        for dni in lista_alumnos:
+            reuniones = models.Reunion.objects.filter(
+                dni_pasaporte= dni,
+                curso_academico= curso_academico,
+                fecha=fecha)
+            if reuniones:
+                for reunion in reuniones:
+                    reunion.borrar()
+        return HttpResponseRedirect(
+            reverse('listReunion_Asesor',kwargs={
+            'curso_academico': curso_academico,
+            'orden': 'fecha'}))
+    else:
+        error = True
+
+    return render_to_response(PATH + 'delReunion.html',
+        {'user': request.user, 'error': error,
+        'curso_academico': curso_academico, 'fecha': fecha})
+
 def addAlumnoAReunionGrupal(request, curso_academico, lista_alumnos,
     dni_pasaporte):
     # Se inserta el alumno a la reunion.
@@ -332,7 +366,8 @@ def delReunion(request, curso_academico, dni_pasaporte, id_reunion):
     else:
         error = True
     return render_to_response(PATH + 'delReunion.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'error': error,
+        'curso_academico': curso_academico})
 
 def listReunion(request, curso_academico, orden):
     dni_pasaporte = unicode(request.user)
@@ -361,7 +396,7 @@ def listReunion(request, curso_academico, orden):
         lista_reuniones_grupales = models.Reunion.objects.filter(
             dni_pasaporte__in=lista_alumnosCA,
             curso_academico=curso_academico,
-            tipo='GRU').order_by('fecha')
+            tipo='GRU').values_list('fecha', flat=True).distinct()
 
     # El asesor aun no presta asesoria en este curso academico.
     else:

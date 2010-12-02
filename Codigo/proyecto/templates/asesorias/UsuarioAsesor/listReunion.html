@@ -48,8 +48,12 @@
         </tr>
         {% endif %}
 
+        {% if lista_reuniones_individuales %}
+
         <tr>
             <th scope="row">Individuales</th>
+            <td></td>
+            <td></td>
         </tr>
 
         <!-- Reuniones -->
@@ -61,17 +65,25 @@
         </tr>
         {% endfor %}
 
+        {% endif %}
+
+        {% if lista_reuniones_grupales %}
+
         <tr>
             <th scope="row">Grupales</th>
+            <td></td>
+            <td></td>
         </tr>
 
         {% for reunion in lista_reuniones_grupales %}
         <tr>
-            <th scope="row"><a href="{% url showReunion_Asesor curso_academico reunion.dni_pasaporte reunion.id_reunion %}">{{ reunion }} : {{ reunion.determinarNombreAlumno }} {{ reunion.determinarApellidosAlumno }}</th>
-            <td><a href="{% url showReunion_Asesor curso_academico reunion.dni_pasaporte reunion.id_reunion %}" class="searchlink2">Ver</a></td>
-            <td><a href="{% url delReunion_Asesor curso_academico reunion.dni_pasaporte reunion.id_reunion %}" class="deletelink">Eliminar</td>
+            <th scope="row"><a href="{# url showReunion_Asesor curso_academico reunion.dni_pasaporte reunion.id_reunion #}">{{ reunion }}</th>
+            <td><a href="{# url showReunion_Asesor curso_academico reunion.dni_pasaporte reunion.id_reunion #}" class="searchlink2">Ver</a></td>
+            <td><a href="{% url delReunionGrupal_Asesor curso_academico reunion.isoformat %}" class="deletelink">Eliminar</td>
         </tr>
         {% endfor %}
+
+        {% endif %}
 
         {% endif %}
 
