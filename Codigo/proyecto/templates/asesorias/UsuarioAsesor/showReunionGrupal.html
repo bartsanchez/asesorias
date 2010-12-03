@@ -1,0 +1,25 @@
+{% extends "asesorias/Base/Asesor/reuniones.html" %}
+
+{% block content %}
+
+    <h1>Ver reunión grupal.</h1>
+
+    <a href="{# url generarPDFListaAlumnos_Asesor curso_academico busqueda #}" class="pdflink">Generar PDF</a>
+
+    <div class="module">
+        <table summary="Alumnos participantes.">
+        <caption><h2>Alumnos participantes</h2></caption>
+
+        {% for alumno in lista_participantes %}
+        <tr>
+            <th scope="row">{{ alumno.dni_pasaporte_alumno }} : {{ alumno.nombre }} {{ alumno.apellidos }}</th>
+            <td><a href="{# url delAlumnoAReunionGrupal curso_academico lista_alumnos alumno.dni_pasaporte_alumno_id #}" class="deletelink">Eliminar</a></td>
+        </tr>
+        {% endfor %}
+
+        </table>
+    </div>
+
+    <div><a href="{% url listReunion_Asesor curso_academico 'fecha' %}">Volver</a></div>
+
+{% endblock %}

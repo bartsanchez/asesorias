@@ -72,7 +72,7 @@ def selectAlumno(request, curso_academico):
             curso_academico=curso_academico)
 
     return render_to_response(PATH + 'selectAlumno.html',
-        {'user': request.user, 'form': form,
+        {'user': dni_pasaporte, 'form': form,
         'dni_pasaporte': dni_pasaporte,
         'curso_academico': curso_academico})
 
@@ -214,7 +214,7 @@ def addReunionGrupal(request, curso_academico, lista_alumnos):
         form = forms.ReunionForm()
 
     return render_to_response(PATH + 'addReunionGrupal.html',
-        {'user': request.user, 'form': form,
+        {'user': dni_pasaporte, 'form': form,
         'dni_pasaporte': dni_pasaporte,
         'curso_academico': curso_academico,
         'lista_alumnos': lista_alumnos,
@@ -232,13 +232,11 @@ def delReunionGrupal(request, curso_academico, fecha):
         instancia_asesorCA.determinarAlumnos().values_list(
         'dni_pasaporte_alumno', flat=True)
 
-    print fecha
-
     if lista_alumnos:
         error = False
         for dni in lista_alumnos:
             reuniones = models.Reunion.objects.filter(
-                dni_pasaporte= dni,
+                dni_pasaporte=dni,
                 curso_academico= curso_academico,
                 fecha=fecha)
             if reuniones:
@@ -517,6 +515,67 @@ def showReunion(request, curso_academico, dni_pasaporte, id_reunion):
         'preguntas_reunion': preguntas_reunion,
         'preguntas_oficiales': preguntas_oficiales,
         'preguntas_asesor': preguntas_asesor})
+
+def showReunionGrupal(request, curso_academico, fecha):
+    dni_pasaporte_asesor = unicode(request.user)
+
+    # Se obtiene la instancia del asesor curso academico.
+    instancia_asesorCA = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+        unicode(request.user), curso_academico)
+
+    if instancia_asesorCA:
+        lista_participantes = []
+        lista_alumnos = \
+        instancia_asesorCA.determinarAlumnos().values_list(
+        'dni_pasaporte_alumno', flat=True)
+
+        # Se obtienen todos los alumnos participantes de la reunion.
+        for alumno in lista_alumnos:
+            lista_reuniones = models.Reunion.objects.filter(
+                dni_pasaporte=alumno,
+                curso_academico=curso_academico,
+                fecha=fecha)
+            print lista_reuniones
+            if lista_reuniones:
+                for reunion in lista_reuniones:
+                    instancia_alumno = \
+                        vistasAlumnoCursoAcademico.\
+                        obtenerAlumnoCursoAcademico(alumno,
+                        curso_academico)
+                    lista_participantes.append(instancia_alumno)
+    else:
+        # Redirige a la pagina de listar reuniones.
+        return HttpResponseRedirect(reverse('listReunion_Asesor',
+                kwargs={'curso_academico': curso_academico,
+                'orden': 'fecha'}))
+
+        ## Se obtiene la instancia de la reunion.
+        #instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
+            #curso_academico, id_reunion)
+
+        ## Si existe se buscan las preguntas.
+        #if instancia_reunion:
+            #preguntas_oficiales = \
+                #models.ReunionPreguntaOficial.objects.filter(
+                #dni_pasaporte=dni_pasaporte,
+                #curso_academico=curso_academico,
+                #id_reunion=id_reunion)
+
+            #preguntas_asesor = \
+                #models.ReunionPreguntaAsesor.objects.filter(
+                #dni_pasaporte_alumno=dni_pasaporte,
+                #curso_academico=curso_academico,
+                #id_reunion=id_reunion)
+
+            #if (preguntas_oficiales) or (preguntas_asesor):
+                #preguntas_reunion = True
+
+    return render_to_response(PATH + 'showReunionGrupal.html',
+        {'user': dni_pasaporte_asesor,
+        'curso_academico': curso_academico,
+        'fecha': fecha,
+        'lista_participantes': lista_participantes})
 
 def addPlantillaAReunion(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista, tipo):
