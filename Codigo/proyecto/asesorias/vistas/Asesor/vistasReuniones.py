@@ -536,8 +536,9 @@ def showReunionGrupal(request, curso_academico, fecha):
             lista_reuniones = models.Reunion.objects.filter(
                 dni_pasaporte=alumno,
                 curso_academico=curso_academico,
-                fecha=fecha)
-            print lista_reuniones
+                fecha=fecha,
+                tipo='GRU')
+
             if lista_reuniones:
                 for reunion in lista_reuniones:
                     instancia_alumno = \
