@@ -519,6 +519,9 @@ def showReunion(request, curso_academico, dni_pasaporte, id_reunion):
 
 def showReunionGrupal(request, curso_academico, fecha):
     dni_pasaporte_asesor = unicode(request.user)
+    preguntas_reunion = False
+    preguntas_oficiales = False
+    preguntas_reunion = False
 
     # Se obtiene la instancia del asesor curso academico.
     instancia_asesorCA = \
@@ -546,6 +549,26 @@ def showReunionGrupal(request, curso_academico, fecha):
                         obtenerAlumnoCursoAcademico(alumno,
                         curso_academico)
                     lista_participantes.append(instancia_alumno)
+
+        if lista_alumnos:
+            instancia_primer_alumno = \
+                vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(
+                lista_alumnos[0], curso_academico)
+
+            # Obtiene las preguntas de la reunion grupal.
+            preguntas_oficiales = \
+                models.ReunionPreguntaOficial.objects.filter(
+                dni_pasaporte=instancia_primer_alumno.dni_pasaporte_alumno,
+                curso_academico=instancia_primer_alumno.curso_academico)
+
+            preguntas_asesor = \
+                models.ReunionPreguntaAsesor.objects.filter(
+                dni_pasaporte_alumno=
+                instancia_primer_alumno.dni_pasaporte_alumno,
+                curso_academico=instancia_primer_alumno.curso_academico)
+
+        if (preguntas_oficiales) or (preguntas_asesor):
+            preguntas_reunion = True
     else:
         # Redirige a la pagina de listar reuniones.
         return HttpResponseRedirect(reverse('listReunion_Asesor',
@@ -577,7 +600,10 @@ def showReunionGrupal(request, curso_academico, fecha):
         {'user': dni_pasaporte_asesor,
         'curso_academico': curso_academico,
         'fecha': fecha,
-        'lista_participantes': lista_participantes})
+        'lista_participantes': lista_participantes,
+        'preguntas_reunion': preguntas_reunion,
+        'preguntas_oficiales': preguntas_oficiales,
+        'preguntas_asesor': preguntas_asesor})
 
 def addPlantillaAReunion(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista, tipo):

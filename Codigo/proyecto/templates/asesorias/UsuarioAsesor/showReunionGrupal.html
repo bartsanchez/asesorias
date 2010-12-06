@@ -20,6 +20,43 @@
         </table>
     </div>
 
+    <div class="module">
+        <table summary="Preguntas.">
+        <caption><h2>Preguntas</h2></caption>
+
+        {% if not preguntas_reunion %}
+
+        <tr><th scope="row"><p>No existen preguntas para esta reunión de asesor.</p></th></tr>
+
+        {% else %}
+
+        <!-- Preguntas -->
+        {% for pregunta in preguntas_oficiales %}
+        <tr>
+            <th scope="row">P: {{ pregunta.determinarEnunciado }}</th>
+            <td><a href="{# url delPreguntaOficialAReunion curso_academico reunion.dni_pasaporte reunion.id_reunion pregunta.id_entrevista_oficial pregunta.id_pregunta_oficial #}" class="deletelink">Eliminar</a></td>
+        </tr>
+        <tr>
+            <th scope="row">R: {{ pregunta.respuesta }}</th>
+            <td></td>
+        </tr>
+        {% endfor %}
+
+        {% for pregunta in preguntas_asesor %}
+        <tr>
+            <th scope="row">P: {{ pregunta.determinarEnunciado }}</th>
+            <td><a href="{# url delPreguntaAsesorAReunion curso_academico reunion.dni_pasaporte reunion.id_reunion pregunta.id_entrevista_asesor pregunta.id_pregunta_asesor #}" class="deletelink">Eliminar</a></td>
+        </tr>
+        <tr>
+            <th scope="row">R: {{ pregunta.respuesta }}</th>
+            <td></td>
+        </tr>
+        {% endfor %}
+
+        {% endif %}
+        </table>
+    </div>
+
     <div><a href="{% url listReunion_Asesor curso_academico 'fecha' %}">Volver</a></div>
 
 {% endblock %}
