@@ -238,7 +238,8 @@ def delReunionGrupal(request, curso_academico, fecha):
             reuniones = models.Reunion.objects.filter(
                 dni_pasaporte=dni,
                 curso_academico= curso_academico,
-                fecha=fecha)
+                fecha=fecha,
+                tipo='GRU')
             if reuniones:
                 for reunion in reuniones:
                     reunion.borrar()
