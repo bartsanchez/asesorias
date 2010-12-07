@@ -649,48 +649,46 @@ def addPlantillaAReunion(request, curso_academico, dni_pasaporte,
 
 def addPlantillaAReunionGrupal(request, curso_academico, fecha,
     id_entrevista, tipo):
+    dni_pasaporte_asesor = unicode(request.user)
     # Se obtienen los participantes de la reunion grupal.
     lista_participantes = determinarAlumnosReunion(dni_pasaporte_asesor,
         curso_academico, fecha)
 
     if lista_participantes:
-        print 'HOLA'
+        instancia_reunion = models.Reunion.objects.filter(
+            dni_pasaporte=lista_participantes[0].dni_pasaporte_alumno,
+            curso_academico=curso_academico,
+            tipo='GRU',
+            fecha=fecha)
 
-        # Si existe se buscan las preguntas.
-        if lista_reuniones:
-            instancia_reunion = lista_reuniones[0]
-            plantillas_oficiales = \
-                models.PlantillaEntrevistaOficial.objects.order_by(
-                'id_entrevista_oficial')
+        plantillas_oficiales = \
+            models.PlantillaEntrevistaOficial.objects.order_by(
+            'id_entrevista_oficial')
 
-            plantillas_asesor = \
-                models.PlantillaEntrevistaAsesor.objects.filter(
-                curso_academico=curso_academico,
-                dni_pasaporte=unicode(request.user))
+        plantillas_asesor = \
+            models.PlantillaEntrevistaAsesor.objects.filter(
+            curso_academico=curso_academico,
+            dni_pasaporte=unicode(request.user))
 
-            if (id_entrevista and tipo):
-                if tipo == 'oficial':
-                    lista_preguntas = \
-                        models.PreguntaOficial.objects.filter(
-                        id_entrevista_oficial=id_entrevista
-                        ).order_by('id_pregunta_oficial')
-                elif tipo == 'asesor':
-                    lista_preguntas = \
-                        models.PreguntaAsesor.objects.filter(
-                        curso_academico=curso_academico,
-                        dni_pasaporte=unicode(request.user),
-                        id_entrevista_asesor=id_entrevista
-                        ).order_by('id_pregunta_asesor')
-                else:
-                    lista_preguntas = False
-                    tipo = False
+        if (id_entrevista and tipo):
+            if tipo == 'oficial':
+                lista_preguntas = \
+                    models.PreguntaOficial.objects.filter(
+                    id_entrevista_oficial=id_entrevista
+                    ).order_by('id_pregunta_oficial')
+            elif tipo == 'asesor':
+                lista_preguntas = \
+                    models.PreguntaAsesor.objects.filter(
+                    curso_academico=curso_academico,
+                    dni_pasaporte=unicode(request.user),
+                    id_entrevista_asesor=id_entrevista
+                    ).order_by('id_pregunta_asesor')
             else:
                 lista_preguntas = False
                 tipo = False
         else:
-            return HttpResponseRedirect(reverse('listReunion_Asesor',
-                kwargs={'curso_academico': curso_academico,
-                'orden': 'fecha'}))
+            lista_preguntas = False
+            tipo = False
     else:
         return HttpResponseRedirect(reverse('listReunion_Asesor',
                 kwargs={'curso_academico': curso_academico,
