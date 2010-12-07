@@ -35,7 +35,7 @@
                 <tr>
                     <th scope="row"><a href="{# url addPlantillaAReunion curso_academico dni_pasaporte reunion.id_reunion plantilla.id_entrevista_oficial 'oficial' #}">{{ plantilla.descripcion }}</a></th>
                     <td><a href="{# url addPlantillaAReunion curso_academico dni_pasaporte reunion.id_reunion plantilla.id_entrevista_oficial 'oficial' #}" class=searchlink2>Ver</a></td>
-                    <td><a href="{# url addPlantillaOficialAReunion curso_academico dni_pasaporte reunion.id_reunion plantilla.id_entrevista_oficial #}" class=addlink>Añadir</a></td>
+                    <td><a href="{% url addPlantillaOficialAReunionGrupal curso_academico fecha plantilla.id_entrevista_oficial %}" class=addlink>Añadir</a></td>
                 </tr>
 
                 {% endfor %}

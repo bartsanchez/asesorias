@@ -96,4 +96,10 @@ urlpatterns = patterns(VISTAS + 'vistasReuniones',
 
         'addPlantillaAReunionGrupal',
         name='addPlantillaAReunionGrupal'),
+
+    url(r'^addPlantillaOficialAReunionGrupal/(?P<fecha>[\s\w\-]+)/' +
+        '(?P<id_entrevista_oficial>[\s\w]+)/$',
+
+        'addPlantillaOficialAReunionGrupal',
+        name='addPlantillaOficialAReunionGrupal'),
 )
