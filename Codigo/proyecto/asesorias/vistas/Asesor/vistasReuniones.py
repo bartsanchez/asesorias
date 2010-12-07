@@ -41,15 +41,16 @@ def determinarAlumnosReunion(dni_pasaporte, curso_academico, fecha):
                 tipo='GRU')
 
             if lista_reuniones:
-                for reunion in lista_reuniones:
-                    instancia_alumno = \
-                        vistasAlumnoCursoAcademico.\
-                        obtenerAlumnoCursoAcademico(alumno,
-                        curso_academico)
-                    lista_participantes.append(instancia_alumno)
+                instancia_alumno = \
+                    vistasAlumnoCursoAcademico.\
+                    obtenerAlumnoCursoAcademico(alumno,
+                    curso_academico)
+                lista_participantes.append(instancia_alumno)
 
     return lista_participantes
 
+def determinarReunionesGrupales(dni_pasaporte, curso_academico, fecha):
+    return 0
 def selectAlumno(request, curso_academico):
     dni_pasaporte = unicode(request.user)
 
