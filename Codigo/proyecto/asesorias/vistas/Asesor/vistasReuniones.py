@@ -550,8 +550,6 @@ def showReunion(request, curso_academico, dni_pasaporte, id_reunion):
 def showReunionGrupal(request, curso_academico, fecha):
     dni_pasaporte_asesor = unicode(request.user)
     preguntas_reunion = False
-    preguntas_oficiales = False
-    preguntas_reunion = False
 
     lista_participantes = determinarAlumnosReunion(dni_pasaporte_asesor,
         curso_academico, fecha)
@@ -571,8 +569,12 @@ def showReunionGrupal(request, curso_academico, fecha):
             instancia_primer_alumno.dni_pasaporte_alumno,
             curso_academico=instancia_primer_alumno.curso_academico)
 
-    if (preguntas_oficiales) or (preguntas_asesor):
-        preguntas_reunion = True
+        if (preguntas_oficiales) or (preguntas_asesor):
+            preguntas_reunion = True
+    else:
+        return HttpResponseRedirect(reverse('listReunion_Asesor',
+                kwargs={'curso_academico': curso_academico,
+                'orden': 'fecha'}))
 
     return render_to_response(PATH + 'showReunionGrupal.html',
         {'user': dni_pasaporte_asesor,
@@ -647,26 +649,12 @@ def addPlantillaAReunion(request, curso_academico, dni_pasaporte,
 
 def addPlantillaAReunionGrupal(request, curso_academico, fecha,
     id_entrevista, tipo):
-    # Se obtiene la instancia del asesor curso academico.
-    instancia_asesorCA = \
-        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
-        unicode(request.user), curso_academico)
+    # Se obtienen los participantes de la reunion grupal.
+    lista_participantes = determinarAlumnosReunion(dni_pasaporte_asesor,
+        curso_academico, fecha)
 
-    # El asesor presta asesoria durante el curso academico.
-    if instancia_asesorCA:
-        lista_participantes = []
-        lista_reuniones = []
-        lista_alumnos = \
-            instancia_asesorCA.determinarAlumnos().values_list(
-            'dni_pasaporte_alumno', flat=True)
-
-        # Se obtienen todos los alumnos participantes de la reunion.
-        for alumno in lista_alumnos:
-            lista_reuniones.append(models.Reunion.objects.filter(
-                dni_pasaporte=alumno,
-                curso_academico=curso_academico,
-                fecha=fecha,
-                tipo='GRU'))
+    if lista_participantes:
+        print 'HOLA'
 
         # Si existe se buscan las preguntas.
         if lista_reuniones:
