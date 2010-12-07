@@ -909,30 +909,26 @@ def addPreguntaOficialAReunionGrupal(request, curso_academico, fecha,
         fecha)
 
     if lista_reuniones:
-        print lista_reuniones
-        ## Se obtiene la instancia de la reunion.
-        #instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
-            #curso_academico, id_reunion)
+        # Por cada reunion en la reunion grupal se incluyen las
+        # preguntas.
+        for reunion in lista_reuniones:
+            instancia_pregunta_oficial = \
+                vistasPreguntaOficial.obtenerPreguntaOficial(
+                id_entrevista_oficial, id_pregunta_oficial)
 
-        ## Si existe se buscan las preguntas.
-        #if instancia_reunion:
-            #instancia_pregunta_oficial = \
-                #vistasPreguntaOficial.obtenerPreguntaOficial(
-                #id_entrevista_oficial, id_pregunta_oficial)
+            if not (vistasRPO.obtenerReunion_preguntaOficial(
+            reunion.dni_pasaporte, curso_academico, reunion.id_reunion,
+            id_entrevista_oficial, id_pregunta_oficial)):
 
-            #if not (vistasRPO.obtenerReunion_preguntaOficial(
-            #dni_pasaporte, curso_academico, id_reunion,
-            #id_entrevista_oficial, id_pregunta_oficial)):
-
-                #instancia_nueva_pregunta = \
-                    #models.ReunionPreguntaOficial.objects.create(
-                    #dni_pasaporte=dni_pasaporte,
-                    #curso_academico=curso_academico,
-                    #id_reunion=id_reunion,
-                    #id_entrevista_oficial=id_entrevista_oficial,
-                    #id_pregunta_oficial=id_pregunta_oficial,
-                    #respuesta='-')
-                #instancia_nueva_pregunta.save()
+                instancia_nueva_pregunta = \
+                    models.ReunionPreguntaOficial.objects.create(
+                    dni_pasaporte=reunion.dni_pasaporte,
+                    curso_academico=curso_academico,
+                    id_reunion=reunion.id_reunion,
+                    id_entrevista_oficial=id_entrevista_oficial,
+                    id_pregunta_oficial=id_pregunta_oficial,
+                    respuesta='-')
+                instancia_nueva_pregunta.save()
 
     return HttpResponseRedirect(
             reverse('showReunionGrupal_Asesor',
