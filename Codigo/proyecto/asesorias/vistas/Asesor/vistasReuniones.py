@@ -901,6 +901,44 @@ def addPreguntaOficialAReunion(request, curso_academico, dni_pasaporte,
             'dni_pasaporte': dni_pasaporte,
             'id_reunion': id_reunion}))
 
+def addPreguntaOficialAReunionGrupal(request, curso_academico, fecha,
+    id_entrevista_oficial, id_pregunta_oficial):
+    user = unicode(request.user)
+
+    lista_reuniones = determinarReunionesGrupales(user, curso_academico,
+        fecha)
+
+    if lista_reuniones:
+        print lista_reuniones
+        ## Se obtiene la instancia de la reunion.
+        #instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
+            #curso_academico, id_reunion)
+
+        ## Si existe se buscan las preguntas.
+        #if instancia_reunion:
+            #instancia_pregunta_oficial = \
+                #vistasPreguntaOficial.obtenerPreguntaOficial(
+                #id_entrevista_oficial, id_pregunta_oficial)
+
+            #if not (vistasRPO.obtenerReunion_preguntaOficial(
+            #dni_pasaporte, curso_academico, id_reunion,
+            #id_entrevista_oficial, id_pregunta_oficial)):
+
+                #instancia_nueva_pregunta = \
+                    #models.ReunionPreguntaOficial.objects.create(
+                    #dni_pasaporte=dni_pasaporte,
+                    #curso_academico=curso_academico,
+                    #id_reunion=id_reunion,
+                    #id_entrevista_oficial=id_entrevista_oficial,
+                    #id_pregunta_oficial=id_pregunta_oficial,
+                    #respuesta='-')
+                #instancia_nueva_pregunta.save()
+
+    return HttpResponseRedirect(
+            reverse('showReunionGrupal_Asesor',
+            kwargs={'curso_academico': curso_academico,
+            'fecha': fecha}))
+
 def addPreguntaAsesorAReunion(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista_asesor, id_pregunta_asesor):
     user = unicode(request.user)
