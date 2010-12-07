@@ -574,27 +574,6 @@ def showReunionGrupal(request, curso_academico, fecha):
     if (preguntas_oficiales) or (preguntas_asesor):
         preguntas_reunion = True
 
-        ## Se obtiene la instancia de la reunion.
-        #instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
-            #curso_academico, id_reunion)
-
-        ## Si existe se buscan las preguntas.
-        #if instancia_reunion:
-            #preguntas_oficiales = \
-                #models.ReunionPreguntaOficial.objects.filter(
-                #dni_pasaporte=dni_pasaporte,
-                #curso_academico=curso_academico,
-                #id_reunion=id_reunion)
-
-            #preguntas_asesor = \
-                #models.ReunionPreguntaAsesor.objects.filter(
-                #dni_pasaporte_alumno=dni_pasaporte,
-                #curso_academico=curso_academico,
-                #id_reunion=id_reunion)
-
-            #if (preguntas_oficiales) or (preguntas_asesor):
-                #preguntas_reunion = True
-
     return render_to_response(PATH + 'showReunionGrupal.html',
         {'user': dni_pasaporte_asesor,
         'curso_academico': curso_academico,
