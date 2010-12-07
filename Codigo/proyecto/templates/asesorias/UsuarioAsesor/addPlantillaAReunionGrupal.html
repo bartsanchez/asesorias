@@ -33,8 +33,8 @@
                 {% for plantilla in plantillas_oficiales %}
 
                 <tr>
-                    <th scope="row"><a href="{# url addPlantillaAReunion curso_academico dni_pasaporte reunion.id_reunion plantilla.id_entrevista_oficial 'oficial' #}">{{ plantilla.descripcion }}</a></th>
-                    <td><a href="{# url addPlantillaAReunion curso_academico dni_pasaporte reunion.id_reunion plantilla.id_entrevista_oficial 'oficial' #}" class=searchlink2>Ver</a></td>
+                    <th scope="row"><a href="{% url addPlantillaAReunionGrupal curso_academico fecha plantilla.id_entrevista_oficial 'oficial' %}">{{ plantilla.descripcion }}</a></th>
+                    <td><a href="{% url addPlantillaAReunionGrupal curso_academico fecha plantilla.id_entrevista_oficial 'oficial' %}" class=searchlink2>Ver</a></td>
                     <td><a href="{% url addPlantillaOficialAReunionGrupal curso_academico fecha plantilla.id_entrevista_oficial %}" class=addlink>Añadir</a></td>
                 </tr>
 
@@ -85,7 +85,7 @@
             {% for pregunta in lista_preguntas %}
             <tr>
                 <th scope="row">{{ pregunta.enunciado }}</th>
-                <td><a href="{% url addPreguntaOficialAReunion curso_academico dni_pasaporte reunion.id_reunion pregunta.id_entrevista_oficial_id pregunta.id_pregunta_oficial %}" class=addlink></a></td>
+                <td><a href="{# url addPreguntaOficialAReunion curso_academico dni_pasaporte reunion.id_reunion pregunta.id_entrevista_oficial_id pregunta.id_pregunta_oficial #}" class=addlink></a></td>
             </tr>
             {% endfor %}
 
