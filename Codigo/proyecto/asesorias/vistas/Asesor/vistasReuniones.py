@@ -667,6 +667,81 @@ def addPlantillaAReunion(request, curso_academico, dni_pasaporte,
         'lista_preguntas': lista_preguntas,
         'tipo': tipo})
 
+def addPlantillaAReunionGrupal(request, curso_academico, fecha,
+    id_entrevista, tipo):
+    # Se obtiene la instancia del asesor curso academico.
+    instancia_asesorCA = \
+        vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
+        unicode(request.user), curso_academico)
+
+    # El asesor presta asesoria durante el curso academico.
+    if instancia_asesorCA:
+        lista_participantes = []
+        lista_reuniones = []
+        lista_alumnos = \
+            instancia_asesorCA.determinarAlumnos().values_list(
+            'dni_pasaporte_alumno', flat=True)
+
+        # Se obtienen todos los alumnos participantes de la reunion.
+        for alumno in lista_alumnos:
+            lista_reuniones.append(models.Reunion.objects.filter(
+                dni_pasaporte=alumno,
+                curso_academico=curso_academico,
+                fecha=fecha,
+                tipo='GRU'))
+
+        print 'hola'
+        # Si existe se buscan las preguntas.
+        if lista_reuniones:
+            instancia_reunion = lista_reuniones[0]
+            plantillas_oficiales = \
+                models.PlantillaEntrevistaOficial.objects.order_by(
+                'id_entrevista_oficial')
+
+            plantillas_asesor = \
+                models.PlantillaEntrevistaAsesor.objects.filter(
+                curso_academico=curso_academico,
+                dni_pasaporte=unicode(request.user))
+
+            if (id_entrevista and tipo):
+                if tipo == 'oficial':
+                    lista_preguntas = \
+                        models.PreguntaOficial.objects.filter(
+                        id_entrevista_oficial=id_entrevista
+                        ).order_by('id_pregunta_oficial')
+                elif tipo == 'asesor':
+                    lista_preguntas = \
+                        models.PreguntaAsesor.objects.filter(
+                        curso_academico=curso_academico,
+                        dni_pasaporte=unicode(request.user),
+                        id_entrevista_asesor=id_entrevista
+                        ).order_by('id_pregunta_asesor')
+                else:
+                    lista_preguntas = False
+                    tipo = False
+            else:
+                lista_preguntas = False
+                tipo = False
+        else:
+            return HttpResponseRedirect(reverse('listReunion_Asesor',
+                kwargs={'curso_academico': curso_academico,
+                'orden': 'fecha'}))
+    else:
+        return HttpResponseRedirect(reverse('listReunion_Asesor',
+                kwargs={'curso_academico': curso_academico,
+                'orden': 'fecha'}))
+
+    return render_to_response(PATH + 'addPlantillaAReunionGrupal.html',
+        {'user': request.user,
+        #'dni_pasaporte': dni_pasaporte,
+        'curso_academico': curso_academico,
+        'fecha': fecha,
+        'reunion': instancia_reunion,
+        'plantillas_oficiales': plantillas_oficiales,
+        'plantillas_asesor': plantillas_asesor,
+        'lista_preguntas': lista_preguntas,
+        'tipo': tipo})
+
 def addPlantillaOficialAReunion(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista_oficial):
     # Se obtiene la instancia del asesor curso academico.
