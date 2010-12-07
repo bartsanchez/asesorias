@@ -585,22 +585,29 @@ def showReunionGrupal(request, curso_academico, fecha):
         curso_academico, fecha)
 
     if lista_participantes:
-        instancia_primer_alumno = lista_participantes[0]
+        lista_reuniones = determinarReunionesGrupales(
+            dni_pasaporte_asesor, curso_academico, fecha)
 
-        # Obtiene las preguntas de la reunion grupal.
-        preguntas_oficiales = \
-            models.ReunionPreguntaOficial.objects.filter(
-            dni_pasaporte=instancia_primer_alumno.dni_pasaporte_alumno,
-            curso_academico=instancia_primer_alumno.curso_academico)
+        if lista_reuniones:
+            instancia_primera_reunion = lista_reuniones[0]
 
-        preguntas_asesor = \
-            models.ReunionPreguntaAsesor.objects.filter(
-            dni_pasaporte_alumno=
-            instancia_primer_alumno.dni_pasaporte_alumno,
-            curso_academico=instancia_primer_alumno.curso_academico)
+            # Obtiene las preguntas de la reunion grupal.
+            preguntas_oficiales = \
+                models.ReunionPreguntaOficial.objects.filter(
+                    dni_pasaporte=
+                    instancia_primera_reunion.dni_pasaporte,
+                    curso_academico=curso_academico,
+                    id_reunion=instancia_primera_reunion.id_reunion)
 
-        if (preguntas_oficiales) or (preguntas_asesor):
-            preguntas_reunion = True
+            preguntas_asesor = \
+                models.ReunionPreguntaAsesor.objects.filter(
+                    dni_pasaporte_alumno=
+                    instancia_primera_reunion.dni_pasaporte,
+                    curso_academico=curso_academico,
+                    id_reunion=instancia_primera_reunion.id_reunion)
+
+            if (preguntas_oficiales) or (preguntas_asesor):
+                preguntas_reunion = True
     else:
         return HttpResponseRedirect(reverse('listReunion_Asesor',
                 kwargs={'curso_academico': curso_academico,
