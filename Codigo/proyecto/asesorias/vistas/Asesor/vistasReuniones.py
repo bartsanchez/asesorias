@@ -1014,6 +1014,31 @@ def delPreguntaOficialAReunion(request, curso_academico, dni_pasaporte,
             'dni_pasaporte': dni_pasaporte,
             'id_reunion': id_reunion}))
 
+def delPreguntaOficialAReunionGrupal(request, curso_academico, fecha,
+    id_entrevista_oficial, id_pregunta_oficial):
+    user = unicode(request.user)
+
+    lista_reuniones = determinarReunionesGrupales(user, curso_academico,
+        fecha)
+
+    if lista_reuniones:
+        # Por cada reunion en la reunion grupal se incluyen las
+        # preguntas.
+        for reunion in lista_reuniones:
+            instancia_reunion_pregunta_oficial = \
+                models.ReunionPreguntaOficial.objects.get(
+                dni_pasaporte=reunion.dni_pasaporte,
+                curso_academico=curso_academico,
+                id_reunion=reunion.id_reunion,
+                id_entrevista_oficial=id_entrevista_oficial,
+                id_pregunta_oficial=id_pregunta_oficial)
+            instancia_reunion_pregunta_oficial.delete()
+
+    return HttpResponseRedirect(
+            reverse('showReunionGrupal_Asesor',
+            kwargs={'curso_academico': curso_academico,
+            'fecha': fecha}))
+
 def delPreguntaAsesorAReunion(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista_asesor, id_pregunta_asesor):
     # Se obtiene la instancia del asesor curso academico.
