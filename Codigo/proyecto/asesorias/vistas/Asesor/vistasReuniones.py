@@ -984,6 +984,44 @@ def addPreguntaAsesorAReunion(request, curso_academico, dni_pasaporte,
             'dni_pasaporte': dni_pasaporte,
             'id_reunion': id_reunion}))
 
+def addPreguntaAsesorAReunionGrupal(request, curso_academico, fecha,
+    id_entrevista_asesor, id_pregunta_asesor):
+    user = unicode(request.user)
+
+    lista_reuniones = determinarReunionesGrupales(user, curso_academico,
+        fecha)
+
+    if lista_reuniones:
+        # Por cada reunion en la reunion grupal se incluyen las
+        # preguntas.
+        for reunion in lista_reuniones:
+            instancia_pregunta_asesor = \
+                vistasPreguntaAsesor.obtenerPreguntaAsesor(
+                user, curso_academico, id_entrevista_asesor,
+                id_pregunta_asesor)
+
+            if instancia_pregunta_asesor:
+                if not (vistasRPA.obtenerReunion_preguntaAsesor(
+                    reunion.dni_pasaporte, curso_academico,
+                    reunion.id_reunion, user, id_entrevista_asesor,
+                    id_pregunta_asesor)):
+
+                    instancia_nueva_pregunta = \
+                        models.ReunionPreguntaAsesor.objects.create(
+                        dni_pasaporte_alumno=reunion.dni_pasaporte,
+                        curso_academico=curso_academico,
+                        dni_pasaporte_asesor=user,
+                        id_reunion=reunion.id_reunion,
+                        id_entrevista_asesor=id_entrevista_asesor,
+                        id_pregunta_asesor=id_pregunta_asesor,
+                        respuesta='-')
+                    instancia_nueva_pregunta.save()
+
+    return HttpResponseRedirect(
+            reverse('showReunionGrupal_Asesor',
+            kwargs={'curso_academico': curso_academico,
+            'fecha': fecha}))
+
 def delPreguntaOficialAReunion(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista_oficial, id_pregunta_oficial):
     # Se obtiene la instancia del asesor curso academico.
