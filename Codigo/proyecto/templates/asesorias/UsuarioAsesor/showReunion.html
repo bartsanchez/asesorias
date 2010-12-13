@@ -77,7 +77,7 @@
         </tr>
         <tr>
             <th scope="row">R: {{ pregunta.respuesta }}</th>
-            <td></td>
+            <td><a href="{% url editRespuestaAsesor curso_academico reunion.dni_pasaporte reunion.id_reunion pregunta.id_entrevista_asesor pregunta.id_pregunta_asesor %}" class="editlink">Editar</a></td>
         </tr>
         {% endfor %}
 
