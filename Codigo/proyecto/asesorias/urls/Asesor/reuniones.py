@@ -123,6 +123,12 @@ urlpatterns = patterns(VISTAS + 'vistasReuniones',
         'addPlantillaOficialAReunionGrupal',
         name='addPlantillaOficialAReunionGrupal'),
 
+    url(r'^addPlantillaAsesorAReunionGrupal/(?P<fecha>[\s\w\-]+)/' +
+        '(?P<id_entrevista_asesor>[\s\w]+)/$',
+
+        'addPlantillaAsesorAReunionGrupal',
+        name='addPlantillaAsesorAReunionGrupal'),
+
     # Preguntas grupales #
 
     url(r'^addPreguntaOficialAReunionGrupal/(?P<fecha>[\s\w\-]+)/' +

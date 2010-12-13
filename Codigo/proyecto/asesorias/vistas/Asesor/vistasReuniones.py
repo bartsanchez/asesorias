@@ -867,6 +867,46 @@ def addPlantillaAsesorAReunion(request, curso_academico, dni_pasaporte,
             'dni_pasaporte': dni_pasaporte,
             'id_reunion': id_reunion}))
 
+def addPlantillaAsesorAReunionGrupal(request, curso_academico, fecha,
+    id_entrevista_asesor):
+    user = unicode(request.user)
+
+    lista_reuniones = determinarReunionesGrupales(user, curso_academico,
+        fecha)
+
+    if lista_reuniones:
+        # Por cada reunion en la reunion grupal se incluyen las
+        # preguntas.
+        for reunion in lista_reuniones:
+            lista_preguntas_asesor = \
+                models.PreguntaAsesor.objects.filter(
+                curso_academico=curso_academico,
+                dni_pasaporte=user,
+                id_entrevista_asesor=id_entrevista_asesor).order_by(
+                'id_pregunta_asesor')
+
+            for pregunta in lista_preguntas_asesor:
+                if not (vistasRPA.obtenerReunion_preguntaAsesor(
+                reunion.dni_pasaporte, curso_academico,
+                reunion.id_reunion, user, id_entrevista_asesor,
+                pregunta.id_pregunta_asesor)):
+
+                    instancia_nueva_pregunta = \
+                        models.ReunionPreguntaAsesor.objects.create(
+                        dni_pasaporte_alumno=reunion.dni_pasaporte,
+                        dni_pasaporte_asesor=user,
+                        curso_academico=curso_academico,
+                        id_reunion=reunion.id_reunion,
+                        id_entrevista_asesor=id_entrevista_asesor,
+                        id_pregunta_asesor=pregunta.id_pregunta_asesor,
+                        respuesta='-')
+                    instancia_nueva_pregunta.save()
+
+    return HttpResponseRedirect(
+            reverse('showReunionGrupal_Asesor',
+            kwargs={'curso_academico': curso_academico,
+            'fecha': fecha}))
+
 def addPreguntaOficialAReunion(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista_oficial, id_pregunta_oficial):
     user = unicode(request.user)
