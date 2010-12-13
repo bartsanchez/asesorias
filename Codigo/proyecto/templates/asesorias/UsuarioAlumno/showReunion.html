@@ -50,7 +50,7 @@
         </tr>
         <tr>
             <th scope="row">R: {{ pregunta.respuesta }}</th>
-            <td><a href="{% url editRespuestaOficial curso_academico reunion.dni_pasaporte reunion.id_reunion pregunta.id_entrevista_oficial pregunta.id_pregunta_oficial %}" class="editlink">Editar</a></td>
+            <td><a href="{% url editRespuestaOficial_Alumno curso_academico reunion.id_reunion pregunta.id_entrevista_oficial pregunta.id_pregunta_oficial %}" class="editlink">Editar</a></td>
         </tr>
         {% endfor %}
 
@@ -61,7 +61,7 @@
         </tr>
         <tr>
             <th scope="row">R: {{ pregunta.respuesta }}</th>
-            <td><a href="{% url editRespuestaAsesor curso_academico reunion.dni_pasaporte reunion.id_reunion pregunta.id_entrevista_asesor pregunta.id_pregunta_asesor %}" class="editlink">Editar</a></td>
+            <td><a href="{% url editRespuestaAsesor_Alumno curso_academico reunion.id_reunion pregunta.id_entrevista_asesor pregunta.id_pregunta_asesor %}" class="editlink">Editar</a></td>
         </tr>
         {% endfor %}
 
