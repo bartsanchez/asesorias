@@ -52,8 +52,8 @@
           <!-- Reuniones -->
         {% for reunion in lista_reuniones %}
         <tr>
-            <th scope="row"><a href="{# url showReunion_Asesor curso_academico reunion.dni_pasaporte reunion.id_reunion #}">{{ reunion }}</th>
-            <td><a href="{# url showReunion_Asesor curso_academico reunion.dni_pasaporte reunion.id_reunion #}" class="searchlink2">Ver</a></td>
+            <th scope="row"><a href="{% url showReunion_Alumno curso_academico reunion.id_reunion %}">{{ reunion }}</th>
+            <td><a href="{% url showReunion_Alumno curso_academico reunion.id_reunion %}" class="searchlink2">Ver</a></td>
         </tr>
         {% endfor %}
 

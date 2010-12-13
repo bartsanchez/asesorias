@@ -1,0 +1,76 @@
+{% extends "asesorias/Base/Alumno/reuniones.html" %}
+
+{% block content %}
+
+    <h1>Ver reunión.</h1>
+
+    <a href="{# url generarPDFListaAlumnos_Asesor curso_academico busqueda #}" class="pdflink">Generar PDF</a>
+
+    <div class="module">
+        <table summary="Ver reunión.">
+        <caption><h2>Ver reunión{% if reunion %} ({{ reunion }}){% endif %}</h2></caption>
+
+        {% if not reunion %}
+
+        <tr><th scope="row"><p>No existen actualmente tal reunión de este asesor para este curso académico.</p></th></tr>
+
+        {% else %}
+
+        <tr>
+            <th scope="row">Tipo</th>
+            <td>{% ifequal reunion.tipo 'GRU' %}Grupal{% else %}Individual{% endifequal %}</td>
+        </tr>
+        <tr>
+            <th scope="row">Comentario del asesor</th>
+            <td>{{ reunion.comentario_asesor }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Comentario del alumno</th>
+            <td>{{ reunion.comentario_alumno }}</td>
+        </tr>
+
+        </table>
+    </div>
+
+    <div class="module">
+        <table summary="Preguntas.">
+        <caption><h2>Preguntas</h2></caption>
+
+        {% if not preguntas_reunion %}
+
+        <tr><th scope="row"><p>No existen preguntas para esta reunión de asesor.</p></th></tr>
+
+        {% else %}
+
+        <!-- Preguntas -->
+        {% for pregunta in preguntas_oficiales %}
+        <tr>
+            <th scope="row">P: {{ pregunta.determinarEnunciado }}</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">R: {{ pregunta.respuesta }}</th>
+            <td><a href="{% url editRespuestaOficial curso_academico reunion.dni_pasaporte reunion.id_reunion pregunta.id_entrevista_oficial pregunta.id_pregunta_oficial %}" class="editlink">Editar</a></td>
+        </tr>
+        {% endfor %}
+
+        {% for pregunta in preguntas_asesor %}
+        <tr>
+            <th scope="row">P: {{ pregunta.determinarEnunciado }}</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th scope="row">R: {{ pregunta.respuesta }}</th>
+            <td><a href="{% url editRespuestaAsesor curso_academico reunion.dni_pasaporte reunion.id_reunion pregunta.id_entrevista_asesor pregunta.id_pregunta_asesor %}" class="editlink">Editar</a></td>
+        </tr>
+        {% endfor %}
+
+        {% endif %}
+        {% endif %}
+
+        </table>
+    </div>
+
+    <div><a href="{% url listReunion_Asesor curso_academico 'fecha' %}">Volver</a></div>
+
+{% endblock %}

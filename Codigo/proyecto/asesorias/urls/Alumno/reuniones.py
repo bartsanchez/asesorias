@@ -9,4 +9,8 @@ VISTAS = 'asesorias.vistas.Alumno.'
 urlpatterns = patterns(VISTAS + 'vistasReuniones',
     url(r'^listReunion/(?P<orden>[\s\w]*)/$',
         'listReunion', name='listReunion_Alumno'),
+
+    url(r'^showReunion/(?P<id_reunion>\d+)/$',
+
+        'showReunion', name='showReunion_Alumno'),
 )

@@ -2,6 +2,9 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias.vistas.AdministradorPrincipal import vistasAlumno
+from asesorias.vistas.AdministradorPrincipal import \
+    vistasAlumnoCursoAcademico
+from asesorias.vistas.AdministradorPrincipal import vistasReunion
 from asesorias import models, forms
 
 PATH = 'asesorias/UsuarioAlumno/'
@@ -60,3 +63,49 @@ def listReunion(request, curso_academico, orden):
         'busqueda': busqueda,
         'orden': orden,
         'curso_academico': curso_academico})
+
+def showReunion(request, curso_academico, id_reunion):
+    user = unicode(request.user)
+
+    instancia_alumno = \
+        vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(user,
+        curso_academico)
+
+    if instancia_alumno:
+        # Se obtiene la instancia de la reunion.
+        instancia_reunion = vistasReunion.obtenerReunion(user,
+            curso_academico, id_reunion)
+
+        if instancia_reunion:
+            preguntas_oficiales = \
+                models.ReunionPreguntaOficial.objects.filter(
+                dni_pasaporte=user,
+                curso_academico=curso_academico,
+                id_reunion=id_reunion)
+
+            preguntas_asesor = \
+                models.ReunionPreguntaAsesor.objects.filter(
+                dni_pasaporte_alumno=user,
+                curso_academico=curso_academico,
+                id_reunion=id_reunion)
+
+            if (preguntas_oficiales) or (preguntas_asesor):
+                preguntas_reunion = True
+        else:
+            # Redirige a la pagina de listar reuniones.
+            return HttpResponseRedirect(reverse('listReunion_Alumno',
+                kwargs={'curso_academico': curso_academico,
+                'orden': 'fecha'}))
+    else:
+        # Redirige a la pagina de listar reuniones.
+        return HttpResponseRedirect(reverse('listReunion_Alumno',
+            kwargs={'curso_academico': curso_academico,
+            'orden': 'fecha'}))
+
+    return render_to_response(PATH + 'showReunion.html',
+        {'user': request.user,
+        'curso_academico': curso_academico,
+        'reunion': instancia_reunion,
+        'preguntas_reunion': preguntas_reunion,
+        'preguntas_oficiales': preguntas_oficiales,
+        'preguntas_asesor': preguntas_asesor})
