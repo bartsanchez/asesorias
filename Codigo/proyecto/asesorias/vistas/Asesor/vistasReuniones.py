@@ -786,37 +786,36 @@ def addPlantillaOficialAReunion(request, curso_academico, dni_pasaporte,
 
 def addPlantillaOficialAReunionGrupal(request, curso_academico, fecha,
     id_entrevista_oficial):
-    print determinarReunionesGrupales(unicode(request.user),
-        curso_academico, fecha)
+    user = unicode(request.user)
 
-    ## El asesor presta asesoria durante el curso academico.
-    #if instancia_asesorCA:
-        ## Se obtiene la instancia de la reunion.
-        #instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
-            #curso_academico, id_reunion)
+    lista_reuniones = determinarReunionesGrupales(user, curso_academico,
+        fecha)
 
-        ## Si existe se buscan las preguntas.
-        #if instancia_reunion:
-            #lista_preguntas_oficiales = \
-                #models.PreguntaOficial.objects.filter(
-                #id_entrevista_oficial=id_entrevista_oficial).order_by(
-                #'id_pregunta_oficial')
+    if lista_reuniones:
+        # Por cada reunion en la reunion grupal se incluyen las
+        # preguntas.
+        for reunion in lista_reuniones:
+            lista_preguntas_oficiales = \
+                models.PreguntaOficial.objects.filter(
+                id_entrevista_oficial=id_entrevista_oficial).order_by(
+                'id_pregunta_oficial')
 
-            #for pregunta in lista_preguntas_oficiales:
-                #if not (vistasRPO.obtenerReunion_preguntaOficial(
-                    #dni_pasaporte, curso_academico, id_reunion,
-                    #id_entrevista_oficial,
-                    #pregunta.id_pregunta_oficial)):
+            for pregunta in lista_preguntas_oficiales:
+                if not (vistasRPO.obtenerReunion_preguntaOficial(
+                    reunion.dni_pasaporte, curso_academico,
+                    reunion.id_reunion, id_entrevista_oficial,
+                    pregunta.id_pregunta_oficial)):
 
-                    #instancia_nueva_pregunta = \
-                        #models.ReunionPreguntaOficial.objects.create(
-                        #dni_pasaporte=dni_pasaporte,
-                        #curso_academico=curso_academico,
-                        #id_reunion=id_reunion,
-                        #id_entrevista_oficial=id_entrevista_oficial,
-                        #id_pregunta_oficial=pregunta.id_pregunta_oficial,
-                        #respuesta='-')
-                    #instancia_nueva_pregunta.save()
+                    instancia_nueva_pregunta = \
+                        models.ReunionPreguntaOficial.objects.create(
+                        dni_pasaporte=reunion.dni_pasaporte,
+                        curso_academico=curso_academico,
+                        id_reunion=reunion.id_reunion,
+                        id_entrevista_oficial=id_entrevista_oficial,
+                        id_pregunta_oficial=
+                        pregunta.id_pregunta_oficial,
+                        respuesta='-')
+                    instancia_nueva_pregunta.save()
 
     return HttpResponseRedirect(
             reverse('showReunionGrupal_Asesor',
