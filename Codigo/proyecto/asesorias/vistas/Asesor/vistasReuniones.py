@@ -1124,8 +1124,8 @@ def editRespuestaOficial(request, curso_academico, dni_pasaporte,
         'curso_academico': curso_academico,
         'dni_pasaporte': dni_pasaporte,
         'id_reunion': id_reunion,
-        'id_entrevista_oficial': id_entrevista_oficial,
-        'id_pregunta_oficial': id_pregunta_oficial,
+        'id_entrevista': id_entrevista_oficial,
+        'id_pregunta': id_pregunta_oficial,
         'fecha_reunion': fecha_reunion})
 
 def delPreguntaOficialAReunion(request, curso_academico, dni_pasaporte,
