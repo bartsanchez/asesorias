@@ -49,7 +49,7 @@
         {% for pregunta in preguntas_asesor %}
         <tr>
             <th scope="row">P: {{ pregunta.determinarEnunciado }}</th>
-            <td><a href="{# url delPreguntaAsesorAReunion curso_academico reunion.dni_pasaporte reunion.id_reunion pregunta.id_entrevista_asesor pregunta.id_pregunta_asesor #}" class="deletelink">Eliminar</a></td>
+            <td><a href="{% url delPreguntaAsesorAReunionGrupal curso_academico fecha pregunta.id_entrevista_asesor pregunta.id_pregunta_asesor %}" class="deletelink">Eliminar</a></td>
         </tr>
         <tr>
             <th scope="row">R: {{ pregunta.respuesta }}</th>

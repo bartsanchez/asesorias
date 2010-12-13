@@ -1107,3 +1107,29 @@ def delPreguntaAsesorAReunion(request, curso_academico, dni_pasaporte,
             kwargs={'curso_academico': curso_academico,
             'dni_pasaporte': dni_pasaporte,
             'id_reunion': id_reunion}))
+
+def delPreguntaAsesorAReunionGrupal(request, curso_academico, fecha,
+    id_entrevista_asesor, id_pregunta_asesor):
+    user = unicode(request.user)
+
+    lista_reuniones = determinarReunionesGrupales(user, curso_academico,
+        fecha)
+
+    if lista_reuniones:
+        # Por cada reunion en la reunion grupal se incluyen las
+        # preguntas.
+        for reunion in lista_reuniones:
+            instancia_reunion_pregunta_asesor = \
+                models.ReunionPreguntaAsesor.objects.get(
+                dni_pasaporte_alumno=reunion.dni_pasaporte,
+                curso_academico=curso_academico,
+                dni_pasaporte_asesor=user,
+                id_reunion=reunion.id_reunion,
+                id_entrevista_asesor=id_entrevista_asesor,
+                id_pregunta_asesor=id_pregunta_asesor)
+            instancia_reunion_pregunta_asesor.delete()
+
+    return HttpResponseRedirect(
+            reverse('showReunionGrupal_Asesor',
+            kwargs={'curso_academico': curso_academico,
+            'fecha': fecha}))
