@@ -21,6 +21,9 @@ urlpatterns = patterns(VISTAS + 'vistasAlumno',
     url(r'^matriculas/$', 'alumno_matriculas',
         name='alumno_matriculas'),
 
+    url(r'^reuniones/$', 'alumno_reuniones',
+        name='alumno_reuniones'),
+
     url(r'^establecerCursoAcademico/$', 'setCursoAcademico',
         name='setCursoAcademico_Alumno'),
 
@@ -31,4 +34,7 @@ urlpatterns = patterns(VISTAS + 'vistasAlumno',
 
     (r'^matriculas/',
         include(URLS + 'matriculas')),
+
+    (r'^reuniones/',
+        include(URLS + 'reuniones')),
 )

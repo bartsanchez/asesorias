@@ -1,0 +1,10 @@
+{% extends "asesorias/Base/Alumno/base_alumno.html" %}
+
+    <!-- Determina el elemento activo en el menú horizontal -->
+    {% block opcion_reuniones %}class="active"{% endblock %}
+
+    {% block reuniones %}
+                                    <ul>
+                                        <li><a href="{# url showMatriculacionActual_Alumno curso_academico #}">Ver reuniones</a></li>
+                                    </ul>
+    {% endblock %}
