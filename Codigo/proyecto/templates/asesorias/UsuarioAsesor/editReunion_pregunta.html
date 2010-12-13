@@ -1,0 +1,65 @@
+{% extends "asesorias/Base/Asesor/reuniones.html" %}
+
+{% block content %}
+
+    <h1>Editar respuesta.</h1>
+
+    <div class="form">
+         <div><p>Alumno: <b>{{ dni_pasaporte }}</b></p></div>
+        <div><p>Reunión: <b>{{ fecha_reunion }}</b></p></div>
+        <div><p>Plantilla de entrevista de asesor: <b>{{ id_entrevista_oficial }}</b></p></div>
+        <div><p>Pregunta de asesor: <b>{{ id_pregunta_oficial }}</b></p></div>
+    </div>
+
+    {% if not form %}
+
+    <p>No existe tal reunión - pregunta.</p>
+
+    <div><a href="{% url listReunion_Asesor curso_academico 'fecha' %}">Volver</a></div>
+
+    {% else %}
+
+    {% if form.errors %}
+    <div id="form-error">
+        <p>La operación no pudo llevarse a cabo porque ha habido uno o más errores.</p>
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}<li><em>{{ field.label_tag }}</em>: {{ field.errors|striptags }}</li>{% endif %}
+            {% endfor %}
+            {% if form.non_field_errors %}{{ form.non_field_errors}}{% endif %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <div class="module">
+
+        <form action="" method="post">
+
+            <div class="fieldWrapper">
+                <table summary="Editar reunión.">
+                <caption><h2>Editar reunión</h2></caption>
+
+                {% for field in form %}
+
+                <!-- Excluye los campos que forman parte de la clave que se controlarán por software. -->
+                {% ifequal field.name 'respuesta' %}
+                <tr>
+                    <th scope="row">{{ field.label_tag }}</th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endifequal %}
+
+                {% endfor %}
+                </table>
+            </div>
+
+            <p><input type="submit" value="Confirmar"/></p>
+        </form>
+
+    </div>
+
+    {% endif %}
+
+    <div><a href="{% url showReunion_Asesor curso_academico dni_pasaporte id_reunion %}">Volver</a></div>
+
+{% endblock %}

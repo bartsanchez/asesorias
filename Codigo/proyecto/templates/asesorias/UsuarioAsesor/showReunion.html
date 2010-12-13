@@ -66,7 +66,7 @@
         </tr>
         <tr>
             <th scope="row">R: {{ pregunta.respuesta }}</th>
-            <td></td>
+            <td><a href="{% url editRespuestaOficial curso_academico reunion.dni_pasaporte reunion.id_reunion pregunta.id_entrevista_oficial pregunta.id_pregunta_oficial %}" class="editlink">Editar</a></td>
         </tr>
         {% endfor %}
 
