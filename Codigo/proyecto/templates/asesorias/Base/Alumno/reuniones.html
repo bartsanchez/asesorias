@@ -5,6 +5,6 @@
 
     {% block reuniones %}
                                     <ul>
-                                        <li><a href="{# url showMatriculacionActual_Alumno curso_academico #}">Ver reuniones</a></li>
+                                        <li><a href="{% url listReunion_Alumno curso_academico 'fecha' %}">Ver reuniones</a></li>
                                     </ul>
     {% endblock %}
