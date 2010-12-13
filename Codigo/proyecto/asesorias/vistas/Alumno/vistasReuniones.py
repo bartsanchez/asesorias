@@ -7,6 +7,8 @@ from asesorias.vistas.AdministradorPrincipal import \
 from asesorias.vistas.AdministradorPrincipal import vistasReunion
 from asesorias.vistas.AdministradorPrincipal import \
     vistasReunion_preguntaAsesor as vistasRPA
+from asesorias.vistas.AdministradorPrincipal import \
+    vistasReunion_preguntaOficial as vistasRPO
 from asesorias import models, forms
 
 PATH = 'asesorias/UsuarioAlumno/'
@@ -181,66 +183,66 @@ def editRespuestaAsesor(request, curso_academico, id_reunion,
 
 def editRespuestaOficial(request, curso_academico, id_reunion,
     id_entrevista_oficial, id_pregunta_oficial):
-    ## Se obtiene la instancia del asesor curso academico.
-    #instancia_asesorCA = \
-        #vistasAsesorCursoAcademico.obtenerAsesorCursoAcademico(
-        #unicode(request.user), curso_academico)
+    user = unicode(request.user)
 
-    ## El asesor presta asesoria durante el curso academico.
-    #if instancia_asesorCA:
-        ## Se obtiene la instancia de la reunion - pregunta oficial.
-        #instancia_reunion_preguntaOficial = \
-            #vistasRPO.obtenerReunion_preguntaOficial(
-            #dni_pasaporte, curso_academico, id_reunion,
-            #id_entrevista_oficial, id_pregunta_oficial)
+    instancia_alumno = \
+        vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(user,
+        curso_academico)
 
-        ## Si existe se buscan las preguntas.
-        #if instancia_reunion_preguntaOficial:
-             ## Se obtiene la instancia de la reunion.
-            #fecha_reunion = vistasReunion.obtenerReunion(
-                #dni_pasaporte, curso_academico, id_reunion).fecha
+    if instancia_alumno:
+        # Se obtiene el dni del asesor.
+        dni_pasaporte_asesor = \
+            instancia_alumno.codigo_asesorCursoAcademico.dni_pasaporte
 
-            ## Se carga el formulario para la reunion - pregunta oficial
-            ## existente.
-            #form = forms.Reunion_PreguntaOficialForm(
-                #instance=instancia_reunion_preguntaOficial)
-            ## Se ha modificado el formulario original.
-            #if request.method == 'POST':
-                ##Se extraen los valores pasados por el metodo POST.
-                #respuesta = request.POST['respuesta']
+        # Se obtiene la instancia de la reunion - pregunta oficial.
+        instancia_reunion_preguntaOficial = \
+            vistasRPO.obtenerReunion_preguntaOficial(
+            user, curso_academico, id_reunion,
+            id_entrevista_oficial, id_pregunta_oficial)
 
-                ## Datos necesarios para crear la nueva reunion -
-                ##pregunta de asesor.
-                #datos_reunion_preguntaOficial = {
-                    #'dni_pasaporte': dni_pasaporte,
-                    #'curso_academico': curso_academico,
-                    #'id_reunion': id_reunion,
-                    #'id_entrevista_oficial': id_entrevista_oficial,
-                    #'id_pregunta_oficial': id_pregunta_oficial,
-                    #'respuesta': respuesta}
+        # Si existe se buscan las preguntas.
+        if instancia_reunion_preguntaOficial:
+            # Se obtiene la instancia de la reunion.
+            fecha_reunion = vistasReunion.obtenerReunion(
+                user, curso_academico, id_reunion).fecha
 
-                ## Se actualiza el formulario con la nueva informacion.
-                #form = forms.Reunion_PreguntaOficialForm(
-                    #datos_reunion_preguntaOficial,
-                    #instance=instancia_reunion_preguntaOficial)
+            # Se carga el formulario para la reunion - pregunta oficial
+            # existente.
+            form = forms.Reunion_PreguntaOficialForm(
+                instance=instancia_reunion_preguntaOficial)
+            # Se ha modificado el formulario original.
+            if request.method == 'POST':
+                #Se extraen los valores pasados por el metodo POST.
+                respuesta = request.POST['respuesta']
 
-                ## Si es valido se guarda.
-                #if form.is_valid():
-                    #form.save()
-                    #return HttpResponseRedirect(
-                        #reverse('showReunion_Asesor',
-                        #kwargs={'curso_academico': curso_academico,
-                        #'dni_pasaporte': dni_pasaporte,
-                        #'id_reunion': id_reunion}))
-        #else:
-            #form = False
-            #fecha_reunion = ''
+                # Datos necesarios para crear la nueva reunion -
+                #pregunta de asesor.
+                datos_reunion_preguntaOficial = {
+                    'dni_pasaporte': user,
+                    'curso_academico': curso_academico,
+                    'id_reunion': id_reunion,
+                    'id_entrevista_oficial': id_entrevista_oficial,
+                    'id_pregunta_oficial': id_pregunta_oficial,
+                    'respuesta': respuesta}
+
+                # Se actualiza el formulario con la nueva informacion.
+                form = forms.Reunion_PreguntaOficialForm(
+                    datos_reunion_preguntaOficial,
+                    instance=instancia_reunion_preguntaOficial)
+
+                # Si es valido se guarda.
+                if form.is_valid():
+                    form.save()
+                    return HttpResponseRedirect(
+                        reverse('showReunion_Alumno',
+                        kwargs={'curso_academico': curso_academico,
+                        'id_reunion': id_reunion}))
+        else:
+            form = False
+            fecha_reunion = ''
 
     return render_to_response(PATH + 'editReunion_pregunta.html',
         {'user': request.user, 'form': form,
         'curso_academico': curso_academico,
-        'dni_pasaporte': dni_pasaporte,
         'id_reunion': id_reunion,
-        'id_entrevista': id_entrevista_oficial,
-        'id_pregunta': id_pregunta_oficial,
         'fecha_reunion': fecha_reunion})
