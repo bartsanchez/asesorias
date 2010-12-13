@@ -29,12 +29,10 @@ def listReunion(request, curso_academico, orden):
 
             # Se recorren los elementos determinando si coinciden
             # con la busqueda.
-            for reunion in lista_reuniones_individuales:
+            for reunion in lista_reuniones:
                 # Se crea una cadena auxiliar para examinar si se
                 # encuentra el resultado de la busqueda.
-                cadena = (unicode(reunion.fecha)
-                    + unicode(reunion.determinarNombreAlumno())
-                    + unicode(reunion.determinarApellidosAlumno()))
+                cadena = unicode(reunion.fecha)
 
                 # Si se encuentra la busqueda el elemento se incluye
                 # en la lista auxiliar.
@@ -42,26 +40,7 @@ def listReunion(request, curso_academico, orden):
                     lista_aux.append(reunion)
 
             # La lista final a devolver sera la lista auxiliar.
-            lista_reuniones_individuales = lista_aux
-
-            # Se crea una lista auxiliar que albergara el resultado
-            # de la busqueda.
-            lista_aux = []
-
-            # Se recorren los elementos determinando si coinciden
-            # con la busqueda.
-            for reunion in lista_reuniones_grupales:
-                # Se crea una cadena auxiliar para examinar si se
-                # encuentra el resultado de la busqueda.
-                cadena = unicode(reunion)
-
-                # Si se encuentra la busqueda el elemento se incluye
-                # en la lista auxiliar.
-                if cadena.find(busqueda) >= 0:
-                    lista_aux.append(reunion)
-
-            # La lista final a devolver sera la lista auxiliar.
-            lista_reuniones_grupales = lista_aux
+            lista_reuniones = lista_aux
 
         else:
             busqueda = False
