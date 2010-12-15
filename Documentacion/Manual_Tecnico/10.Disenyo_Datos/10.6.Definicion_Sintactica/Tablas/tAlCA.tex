@@ -2,12 +2,16 @@
 
 \begin{verbatim}
   CREATE TABLE AlumnosCursoAcadémico(
-  dni_pasaporte   varchar(9)     NOT NULL,
-  curso_académico int(4)         NOT NULL,
-  observaciones   varchar(100),
+  dni_pasaporte               varchar(9)     NOT NULL,
+  curso_académico             int(4)         NOT NULL,
+  observaciones               varchar(100),
+  codigo_asesorCursoAcademico varchar(13)    NOT NULL,
   PRIMARY KEY pk_alumnosCA (dni_pasaporte, curso_académico),
   FOREIGN KEY alumnosCA_fk_alumnos (dni_pasaporte)
   REFERENCES Alumnos (dni_pasaporte)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY asesorCA_fk_alumnosCA (codigo_asesorCursoAcademico)
+  REFERENCES AsesoresCursoAcademico (codigo_asesorCursoAcademico)
   ON DELETE CASCADE ON UPDATE CASCADE
   );
 \end{verbatim}
