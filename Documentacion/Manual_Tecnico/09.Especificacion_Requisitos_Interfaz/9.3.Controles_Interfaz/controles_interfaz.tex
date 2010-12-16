@@ -1,0 +1,65 @@
+\section{Controles de la interfaz}
+
+  \subsection{Apariencia}
+
+  \paragraph{}La aplicación tendrá una interfaz de tipo web, con lo que se
+  aprovecharán las facilidades que, para estos cometidos, tienen los
+  navegadores.
+
+  \paragraph{}La aplicación se desarrollará en una resolución de pantalla de
+  800*600 píxeles, con el objetivo de estar accesible para la gran mayoría de
+  los monitores actuales.
+
+  \paragraph{}En la página principal, se encontrará el formulario con tres
+  campos: identificador de cada usuario, rol con el que desea acceder y
+  su contraseña, para que el usuario registrado entre al sistema.
+
+  \paragraph{}En las siguientes páginas, habrá una botonera situada en la parte
+  superior de la ventana, donde se dispondrán las acciones de mayor complejidad
+  (menú principal). A su vez, en la zona izquierda aparecerán las opciones
+  dependientes de la opción elegida en el menú principal. Estas opciones
+  cambiarán dependiendo del rol con el que se haya accedido al sistema, solo
+  permitiendo el acceso a las partes concernientes a dicho rol. Estos botones
+  estarán disponibles en todas las páginas del generador para facilitar el
+  desplazamiento desde cualquier punto de la página a otro.
+
+  \subsection{Usabilidad}
+
+  \paragraph{}La forma en que el usuario introduce datos en el sistema se
+  realiza mediante los elementos típicos de una página web, como por ejemplo
+  botones, enlaces, menús y formularios.
+
+  \paragraph{}En la zona de consultas aparecerá un formulario que permitirá la
+  realización de búsquedas tan complejas como se desee. Se permitirá la búsqueda
+  en función de múltiples campos de información. Además, en un mismo campo se
+  podrán introducir varios valores relacionados por un operador lógico. Los
+  resultados de las búsquedas se presentarán de forma que no haya una excesiva
+  acumulación de información mostrada en pantalla.
+
+  \subsection{Seguridad}
+
+  \paragraph{}Debido a los efectos indeseables que podría ocasionar el uso
+  fraudulento de los distintos tipos de usuario, se diseñará un sistema de
+  protección consistente en los siguientes puntos:
+
+  \begin{itemize}
+   \item Protección contra el acceso/creación/eliminación de información, por
+   un parte de un usuario, cuando dicha información no sea responsabilidad del
+   usuario. Ejemplo: un usuario administrador de centro que pretendiera borrar
+   una titulación de un centro que no le pertenece.
+   \item Disposición de un botón de cierre de sesión, lo que provoca que el
+   usuario deje de estar debidamente identificado en el sistema. De esta forma
+   ningún usuario sin privilegios podría entrar a las páginas de otros usuarios
+   cuando dicho usuario sale de la sesión.
+   \item \textit{Control de tiempo de inactividad de la aplicación. Si el
+   usuario está más de quince minutos sin realizar acción alguna, cuando intente
+   volver a la actividad será devuelto a la página principal de acceso al
+   sistema, tras su cierre de sesión.}
+   \item Cierre automático de sesión cuando el usuario cierra las ventanas
+   del navegador, pese a no haber cerrado sesión de forma explícita.
+  \end{itemize}
+
+  \paragraph{}Además, en el momento en el que el usuario solicite a la
+  aplicación que realice alguna opción destructiva de carácter importante, el
+  sistema pedirá verificación para la realización de dicha acción, como por
+  ejemplo la eliminación de un usuario por parte de algún usuario administrador.
