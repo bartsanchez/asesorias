@@ -1,8 +1,11 @@
 \subsection{Tabla AdministradoresCentro}
 
-  \paragraph{}Esta tabla se encuentra en FNBC puesto que el único determinante
-  funcional existente es el identificador principal y todas las dependencias
-  funcionales con el resto de atributos son completas.
+  \paragraph{}Esta tabla se encuentra en FNBC, ya que cada determinante
+  funcional es una clave candidata de la relación.
+
+  \paragraph{}Existen dos dependencias funcionales, la que forma la clave
+  primaria de la relación con el resto de atributos y, por otro lado, la que
+  forma la clave alterna con el resto de atributos de la relación.
 
   \begin{center}
     \begin{minipage}{3.7cm}{\begin{flushright}\begin{tabular}{ | c | }
@@ -15,6 +18,25 @@
     \end{minipage}
     \begin{minipage}{5.9cm}{\begin{tabular}{ | c | }
                   \hline
+                  correo\_electrónico \\
+                  nombre\_adm\_centro \\
+                  \hline
+                 \end{tabular} }
+    \end{minipage}
+  \end{center}
+
+  \begin{center}
+    \begin{minipage}{3.7cm}{\begin{flushright}\begin{tabular}{ | c | }
+                  \hline
+                  correo\_electrónico \\
+                  \hline
+                 \end{tabular}\end{flushright} }
+    \end{minipage}
+    \begin{minipage}{0.7cm}{$\longrightarrow$}
+    \end{minipage}
+    \begin{minipage}{5.9cm}{\begin{tabular}{ | c | }
+                  \hline
+                  id\_adm\_centro \\
                   nombre\_adm\_centro \\
                   \hline
                  \end{tabular} }
