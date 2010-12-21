@@ -39,7 +39,13 @@
                     <ul>
                         <li><h2>Sesión</h2>
                             <ul>
-                                <li><h3>{{ user }}</h3>
+                                <li>
+                                    {% block usuario %}
+                                    <div class="etiqueta">
+                                        <p>Usuario:</p>
+                                        <p><em>{{ user }}</em></p>
+                                    </div>
+                                    {% endblock %}
                                     {% block curso_academico %}{% endblock %}
                                     {% block centro %}{% endblock %}
                                     <ul>

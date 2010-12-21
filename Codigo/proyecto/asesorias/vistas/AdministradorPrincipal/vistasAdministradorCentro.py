@@ -37,8 +37,10 @@ def addAdministradorCentro(request):
                 unicode(instancia_admin_centro.correo_electronico)
             password = User.objects.make_random_password()
             email = unicode(instancia_admin_centro.correo_electronico)
+            name = unicode(instancia_admin_centro.nombre_adm_centro)
 
             user = User.objects.create_user(username, email, password)
+            user.first_name = name
             user.save()
 
             vistas.vistasGestionUsuarios.enviar_mail_creacion_usuario(

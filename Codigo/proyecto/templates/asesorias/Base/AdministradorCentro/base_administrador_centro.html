@@ -7,7 +7,19 @@
                 <li><a href="{% url administradorCentro_org_docente centro %}" {% block opcion_org_docente %}{% endblock %}>Organización docente</a></li>
     {% endblock %}
 
-    {% block centro %}<h3><a href="">{{ centro }}</a></h3>{% endblock %}
+                                {% block usuario %}
+                                    <div class="etiqueta">
+                                        <p>Usuario:</p>
+                                        <p><em>{{ user.first_name }}</em></p>
+                                    </div>
+                                {% endblock %}
+
+                                {% block centro %}
+                                    <div class="etiqueta">
+                                        <p>Centro:</p>
+                                        <p><em>{{ centro }}</em></p>
+                                    </div>
+                                {% endblock %}
 
     {% block elementos_sidebar %}
                             <ul>

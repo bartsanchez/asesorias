@@ -7,7 +7,12 @@
                 <li><a href="{% url alumno_reuniones curso_academico %}" {% block opcion_reuniones %}{% endblock %}>Reuniones</a></li>
     {% endblock %}
 
-    {% block curso_academico %}<h3><a href="{% url setCursoAcademico_Alumno curso_academico %}">{{ curso_academico }}/{{ curso_academico|add:'1' }}</a></h3>{% endblock %}
+                                {% block curso_academico %}
+                                    <div class="etiqueta">
+                                        <p>Curso académico:</p>
+                                        <p><em>{{ curso_academico }}/{{ curso_academico|add:'1' }}</em></p>
+                                    </div>
+                                {% endblock %}
 
     {% block elementos_sidebar %}
                             <ul>
