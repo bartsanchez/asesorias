@@ -1,0 +1,16 @@
+\item Prueba de creación de la base de datos.
+  \begin{itemize}
+    \item \textbf{Descripción:} Implementación de la base de datos diseñada
+    en el entorno de desarrollo.
+    \item \textbf{Problemas encontrados:} El software utilizado, Django, no
+    soporta la creación de claves primarias compuestas en la generación de su
+    modelo de datos.
+    \item \textbf{Soluciones adoptadas:} Se han creado claves primarias
+    artificiales, que son controladas por el programador en vez de ser
+    controladas directamente por el software Django. De hecho, para cada tabla
+    con clave primaria compuesta, en realidad sí que se utiliza una clave
+    primaria numérica que utiliza internamente Django para evitar duplicaciones
+    de elementos, pero ésta se obvia en la codificación de la aplicación, donde
+    los distintos elementos son accedidos a través de las claves primarias
+    artificiales.
+  \end{itemize}
