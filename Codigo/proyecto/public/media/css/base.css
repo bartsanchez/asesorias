@@ -226,6 +226,8 @@ ul#menu {
 	clear: both;
 	padding: 10px;
 	background: #417690;
+        text-align: center;
+        color: white;
 }
 
 /* 
@@ -273,6 +275,20 @@ ul#menu {
 	background: #eee url(http://localhost/media/img/nav-bg.gif) bottom left repeat-x;
 	color: #666;
 	margin-bottom: 3px;
+}
+
+#sidebar .etiqueta {
+        margin: 10px;
+}
+
+#sidebar .etiqueta p { 
+        margin: 0; 
+        padding: 0;
+}
+
+#sidebar .etiqueta p em {
+        font-weight: bold;
+        margin-left: 15px;
 }
 
 /* MODULOS */
