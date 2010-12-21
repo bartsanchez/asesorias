@@ -44,22 +44,22 @@
 
   \begin{itemize}
    \item Protección contra el acceso/creación/eliminación de información, por
-   un parte de un usuario, cuando dicha información no sea responsabilidad del
-   usuario. Ejemplo: un usuario administrador de centro que pretendiera borrar
-   una titulación de un centro que no le pertenece.
+   parte de un usuario no autorizado, cuando dicha información no sea
+   responsabilidad del usuario. Ejemplo: un usuario administrador de centro que
+   pretendiera borrar una titulación de un centro que no le pertenece.
    \item Disposición de un botón de cierre de sesión, lo que provoca que el
    usuario deje de estar debidamente identificado en el sistema. De esta forma
    ningún usuario sin privilegios podría entrar a las páginas de otros usuarios
    cuando dicho usuario sale de la sesión.
-   \item \textit{Control de tiempo de inactividad de la aplicación. Si el
+   \item Control de tiempo de inactividad de la aplicación. Si el
    usuario está más de quince minutos sin realizar acción alguna, cuando intente
    volver a la actividad será devuelto a la página principal de acceso al
-   sistema, tras su cierre de sesión.}
+   sistema, tras su cierre de sesión.
    \item Cierre automático de sesión cuando el usuario cierra las ventanas
    del navegador, pese a no haber cerrado sesión de forma explícita.
   \end{itemize}
 
   \paragraph{}Además, en el momento en el que el usuario solicite a la
   aplicación que realice alguna opción destructiva de carácter importante, el
-  sistema pedirá verificación para la realización de dicha acción, como por
+  sistema pedirá confirmación para la realización de dicha acción, como por
   ejemplo la eliminación de un usuario por parte de algún usuario administrador.
