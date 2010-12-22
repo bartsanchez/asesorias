@@ -388,8 +388,8 @@ def generarPDFListaAlumnosCursoAcademico(request, dni_pasaporte,
     # Se obtiene una lista con todos los alumnos curso academico.
     lista_alumnos_curso_academico = \
         models.AlumnoCursoAcademico.objects.filter(
-        codigo_asesorCursoAcademico=
-        instancia_asesorCA.codigo_asesorCursoAcademico).order_by(
+        dni_pasaporte_asesor=
+        instancia_asesorCA.dni_pasaporte).order_by(
         'dni_pasaporte_alumno')
 
     # Se ha realizado una busqueda.
