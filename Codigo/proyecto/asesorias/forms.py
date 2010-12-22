@@ -184,15 +184,14 @@ class AlumnosDeAsesorForm(forms.Form):
         models.AlumnoCursoAcademico.objects.all())
 
     # Necesario para actualizar el queryset en tiempo de ejecucion, a
-    # traves del argumento codigo_asesorCursoAcademico.
-    def __init__(self, codigo_asesorCursoAcademico, curso_academico,
+    # traves del argumento dni_pasaporte_asesor.
+    def __init__(self, dni_pasaporte_asesor, curso_academico,
         *args, **kwargs):
         super(AlumnosDeAsesorForm,
             self).__init__(*args, **kwargs)
         self.fields['alumno'].queryset = \
             models.AlumnoCursoAcademico.objects.filter(
-            codigo_asesorCursoAcademico=
-            codigo_asesorCursoAcademico,
+            dni_pasaporte_asesor=dni_pasaporte_asesor,
             curso_academico=curso_academico).order_by(
             'dni_pasaporte_alumno')
 
