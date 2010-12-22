@@ -254,7 +254,7 @@
     "model": "asesorias.alumnocursoacademico",
     "fields": {
       "observaciones": "uno",
-      "codigo_asesorCursoAcademico": 3,
+      "dni_pasaporte_asesor": "11111111A",
       "curso_academico": 2004,
       "dni_pasaporte_alumno": "12312312O"
     }
@@ -264,7 +264,7 @@
     "model": "asesorias.alumnocursoacademico",
     "fields": {
       "observaciones": "dos",
-      "codigo_asesorCursoAcademico": 3,
+      "dni_pasaporte_asesor": "11111111A",
       "curso_academico": 2004,
       "dni_pasaporte_alumno": "88888888Z"
     }
@@ -274,7 +274,7 @@
     "model": "asesorias.alumnocursoacademico",
     "fields": {
       "observaciones": "uno",
-      "codigo_asesorCursoAcademico": 2,
+      "dni_pasaporte_asesor": "12345678T",
       "curso_academico": 2008,
       "dni_pasaporte_alumno": "12312312O"
     }
@@ -284,7 +284,7 @@
     "model": "asesorias.alumnocursoacademico",
     "fields": {
       "observaciones": "dos",
-      "codigo_asesorCursoAcademico": 2,
+      "dni_pasaporte_asesor": "12345678T",
       "curso_academico": 2008,
       "dni_pasaporte_alumno": "88888888Z"
     }
@@ -294,7 +294,7 @@
     "model": "asesorias.alumnocursoacademico",
     "fields": {
       "observaciones": "uno",
-      "codigo_asesorCursoAcademico": 1,
+      "dni_pasaporte_asesor": "30303030L",
       "curso_academico": 2010,
       "dni_pasaporte_alumno": "12312312O"
     }
@@ -304,7 +304,7 @@
     "model": "asesorias.alumnocursoacademico",
     "fields": {
       "observaciones": "dos",
-      "codigo_asesorCursoAcademico": 1,
+      "dni_pasaporte_asesor": "30303030L",
       "curso_academico": 2010,
       "dni_pasaporte_alumno": "88888888Z"
     }

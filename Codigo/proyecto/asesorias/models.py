@@ -368,8 +368,8 @@ class AsesorCursoAcademico(models.Model):
 
     def determinarAlumnos(self):
         lista_alumnos = AlumnoCursoAcademico.objects.filter(
-            codigo_asesorCursoAcademico=
-            self.codigo_asesorCursoAcademico,
+            dni_pasaporte_asesor=
+            self.dni_pasaporte,
             curso_academico=self.curso_academico)
 
         return lista_alumnos
@@ -405,8 +405,8 @@ class AsesorCursoAcademico(models.Model):
         # Se obtienen todos los alumnos curso academico del asesor para
         # borrarlos.
         alumnos_curso_academico = AlumnoCursoAcademico.objects.filter(
-            codigo_asesorCursoAcademico=
-            self.codigo_asesorCursoAcademico,
+            dni_pasaporte_asesor=
+            self.dni_pasaporte,
             curso_academico=self.curso_academico)
 
         # Si el asesor tenia alumnos curso academico se borran.
@@ -552,8 +552,8 @@ class AlumnoCursoAcademico(models.Model):
         db_column='dni_pasaporte', verbose_name="DNI/Pasaporte")
     curso_academico = models.IntegerField("Curso académico")
     observaciones = models.CharField(max_length=100)
-    codigo_asesorCursoAcademico = models.ForeignKey(
-        'AsesorCursoAcademico', db_column='dni_pasaporte_asesor',
+    dni_pasaporte_asesor = models.ForeignKey(
+        'Asesor', db_column='dni_pasaporte_asesor',
         verbose_name="DNI/Pasaporte Asesor")
 
     class Meta:
