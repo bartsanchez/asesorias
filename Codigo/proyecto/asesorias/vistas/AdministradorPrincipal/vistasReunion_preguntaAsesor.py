@@ -68,8 +68,8 @@ def addReunion_preguntaAsesor(request, dni_pasaporte, curso_academico,
     # Se obtiene la instancia de la pregunta de asesor.
     instancia_pregunta_asesor = \
         vistasPreguntaAsesor.obtenerPreguntaAsesor(
-            instancia_alumnoCA.codigo_asesorCursoAcademico.dni_pasaporte
-            , curso_academico, id_entrevista_asesor, id_pregunta_asesor)
+            instancia_alumnoCA.dni_pasaporte_asesor, curso_academico,
+            id_entrevista_asesor, id_pregunta_asesor)
 
     if not instancia_pregunta_asesor:
         return HttpResponseRedirect(
@@ -79,11 +79,7 @@ def addReunion_preguntaAsesor(request, dni_pasaporte, curso_academico,
             'id_reunion': id_reunion,
             'id_entrevista_asesor': id_entrevista_asesor}))
 
-    # Se crea una instancia del asesor curso academico.
-    instancia_asesorCA = \
-        instancia_alumnoCA.codigo_asesorCursoAcademico
-
-    dni_pasaporte_asesor = instancia_asesorCA.dni_pasaporte
+    dni_pasaporte_asesor = instancia_alumnoCA.dni_pasaporte_asesor
 
     # Se ha rellenado el formulario.
     if request.method == 'POST':
@@ -315,7 +311,7 @@ def selectAlumno(request, dni_pasaporte, curso_academico, tipo):
 
         # Se obtiene el alumno y se valida.
         form = forms.AlumnosDeAsesorForm(
-            instancia_asesorCA.codigo_asesorCursoAcademico,
+            instancia_asesorCA.dni_pasaporte,
             curso_academico, request.POST)
 
         # Si es valido se redirige a listar alumnos curso academico.
@@ -343,8 +339,7 @@ def selectAlumno(request, dni_pasaporte, curso_academico, tipo):
 
     else:
         form = forms.AlumnosDeAsesorForm(
-            codigo_asesorCursoAcademico=
-            instancia_asesorCA.codigo_asesorCursoAcademico,
+            dni_pasaporte_asesor=instancia_asesorCA.dni_pasaporte,
             curso_academico=curso_academico)
 
     return render_to_response(PATH + 'selectAlumno.html',
@@ -368,10 +363,6 @@ def selectReunion(request, dni_pasaporte, curso_academico, tipo):
             kwargs={'dni_pasaporte': dni_pasaporte,
             'curso_academico': curso_academico,
             'tipo': 'list'}))
-
-    # Se crea una instancia del asesor curso academico.
-    instancia_asesorCA = \
-        instancia_alumno_curso_academico.codigo_asesorCursoAcademico
 
     # Se ha introducido un alumno.
     if request.method == 'POST':
@@ -408,7 +399,8 @@ def selectReunion(request, dni_pasaporte, curso_academico, tipo):
 
     return render_to_response(PATH + 'selectReunion.html',
         {'user': request.user, 'form': form,
-        'dni_pasaporte_asesor': instancia_asesorCA.dni_pasaporte,
+        'dni_pasaporte_asesor':
+        instancia_alumno_curso_academico.dni_pasaporte_asesor,
         'curso_academico': curso_academico,
         'dni_pasaporte_alumno': dni_pasaporte,
         'tipo': tipo})
@@ -442,11 +434,8 @@ def selectEntrevistaAsesor(request, dni_pasaporte, curso_academico,
             'curso_academico': curso_academico,
             'tipo': 'list'}))
 
-    # Se crea una instancia del asesor curso academico.
-    instancia_asesorCA = \
-        instancia_alumno_curso_academico.codigo_asesorCursoAcademico
-
-    dni_pasaporte_asesor = instancia_asesorCA.dni_pasaporte
+    dni_pasaporte_asesor = \
+        instancia_alumno_curso_academico.dni_pasaporte_asesor
 
     # Se ha introducido un alumno.
     if request.method == 'POST':
@@ -478,7 +467,8 @@ def selectEntrevistaAsesor(request, dni_pasaporte, curso_academico,
 
     return render_to_response(PATH + 'selectEntrevistaAsesor.html',
         {'user': request.user, 'form': form,
-        'dni_pasaporte_asesor': instancia_asesorCA.dni_pasaporte,
+        'dni_pasaporte_asesor':
+        instancia_alumno_curso_academico.dni_pasaporte_asesor,
         'curso_academico': curso_academico,
         'dni_pasaporte_alumno': dni_pasaporte,
         'id_reunion': id_reunion,
@@ -515,8 +505,8 @@ def selectPreguntaAsesor(request, dni_pasaporte, curso_academico,
     # Se obtiene la instancia de la entrevista de asesor.
     instancia_entrevista_asesor = \
         vistasPEA.obtenerPlantillaEntrevistaAsesor(
-            instancia_alumnoCA.codigo_asesorCursoAcademico.dni_pasaporte
-            , curso_academico, id_entrevista_asesor)
+            instancia_alumnoCA.dni_pasaporte_asesor, curso_academico,
+            id_entrevista_asesor)
 
     if not instancia_entrevista_asesor:
         return HttpResponseRedirect(
@@ -525,11 +515,7 @@ def selectPreguntaAsesor(request, dni_pasaporte, curso_academico,
             'curso_academico': curso_academico,
             'id_reunion': id_reunion}))
 
-    # Se crea una instancia del asesor curso academico.
-    instancia_asesorCA = \
-        instancia_alumnoCA.codigo_asesorCursoAcademico
-
-    dni_pasaporte_asesor = instancia_asesorCA.dni_pasaporte
+    dni_pasaporte_asesor = instancia_alumnoCA.dni_pasaporte_asesor
 
     # Se ha introducido un alumno.
     if request.method == 'POST':
@@ -564,7 +550,7 @@ def selectPreguntaAsesor(request, dni_pasaporte, curso_academico,
 
     return render_to_response(PATH + 'selectPreguntaAsesor.html',
         {'user': request.user, 'form': form,
-        'dni_pasaporte_asesor': instancia_asesorCA.dni_pasaporte,
+        'dni_pasaporte_asesor': instancia_alumnoCA.dni_pasaporte_asesor,
         'curso_academico': curso_academico,
         'dni_pasaporte_alumno': dni_pasaporte,
         'id_reunion': id_reunion,
@@ -592,9 +578,6 @@ def listReunion_preguntaAsesor(request, dni_pasaporte, curso_academico,
     instancia_alumnoCA = \
         vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(
         dni_pasaporte, curso_academico)
-
-    # Se crea una instancia del asesor curso academico.
-    instancia_asesorCA = instancia_alumnoCA.codigo_asesorCursoAcademico
 
     # Se obtiene una lista con todas las reuniones - pregunta de asesor.
     lista_reuniones_pregunta_de_asesor = \
@@ -649,7 +632,7 @@ def listReunion_preguntaAsesor(request, dni_pasaporte, curso_academico,
         'lista_reuniones_pregunta_de_asesor':
         lista_reuniones_pregunta_de_asesor,
         'busqueda': busqueda,
-        'dni_pasaporte_asesor': instancia_asesorCA.dni_pasaporte,
+        'dni_pasaporte_asesor': instancia_alumnoCA.dni_pasaporte_asesor,
         'curso_academico': curso_academico,
         'dni_pasaporte_alumno': dni_pasaporte,
         'id_reunion': id_reunion,
@@ -677,9 +660,6 @@ def generarPDFListaReuniones_preguntaAsesor(request, dni_pasaporte,
     instancia_alumnoCA = \
         vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(
         dni_pasaporte, curso_academico)
-
-    # Se crea una instancia del asesor curso academico.
-    instancia_asesorCA = instancia_alumnoCA.codigo_asesorCursoAcademico
 
     # Se obtiene una lista con todas las reuniones - pregunta de asesor.
     lista_reuniones_pregunta_de_asesor = \
