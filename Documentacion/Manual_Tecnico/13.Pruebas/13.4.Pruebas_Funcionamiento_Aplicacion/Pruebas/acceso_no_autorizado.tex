@@ -1,0 +1,23 @@
+\item Prueba de acceso a zonas del sistema para las cuales el usuario no tiene
+permiso.
+  \begin{itemize}
+    \item \textbf{Descripción:} Se intenta acceder a zonas del sistema donde el
+    usuario identificado no tiene permiso de acceso.
+    \item \textbf{Problemas encontrados:} Modificando manualmente la url del
+    navegador es posible acceder a zonas del sistema no autorizadas para el
+    usuario identificado. Ejemplo: un usuario Alumno que conozca la url a través
+    de la cual un usuario Administrador principal accede a su zona de la
+    aplicación puede ver su contenido.
+    \item \textbf{Soluciones adoptadas:} Se han creado funciones
+    decoradoras\footnote{Según la Wikipedia \cite{wikipedia} : \textit{A
+    decorator is a Python object that can be called with a single argument, and
+    that modifies functions or methods. Decorators are a form of
+    metaprogramming; they enhance the action of the function or method they
+    decorate. Canonical uses of function decorators are for creating class
+    methods or static methods, adding function attributes, tracing, setting pre-
+    and postconditions, and synchronisation, but can be used for far more
+    besides, including tail recursion elimination, memoization and even
+    improving the writing of decorators.}}
+    para cada tipo de rol que comprueban que se realice un acceso autorizado
+    para cada unas de las funciones de la aplicación.
+  \end{itemize}
