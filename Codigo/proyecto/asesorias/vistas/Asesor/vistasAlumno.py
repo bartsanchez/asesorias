@@ -29,8 +29,8 @@ def showAlumnos(request, curso_academico, orden):
 
         # Se obtiene una lista con todos los alumnos.
         lista_alumnosCA = models.AlumnoCursoAcademico.objects.filter(
-            codigo_asesorCursoAcademico =
-            instancia_asesorCA.codigo_asesorCursoAcademico).order_by(
+            dni_pasaporte_asesor=
+            instancia_asesorCA.dni_pasaporte).order_by(
             orden_inicial, orden_secundario)
 
     # El asesor aun no presta asesoria en este curso academico.
@@ -95,8 +95,8 @@ def generarPDFListaAlumnos(request, curso_academico, busqueda):
         # Se obtiene una lista con todos los alumnos curso academico
         # para ese asesor.
         lista_aux = models.AlumnoCursoAcademico.objects.filter(
-            codigo_asesorCursoAcademico =
-            instancia_asesorCA.codigo_asesorCursoAcademico).order_by(
+            dni_pasaporte_asesor=
+            instancia_asesorCA.dni_pasaporte).order_by(
             'dni_pasaporte_alumno__nombre',
             'dni_pasaporte_alumno__apellidos')
 
