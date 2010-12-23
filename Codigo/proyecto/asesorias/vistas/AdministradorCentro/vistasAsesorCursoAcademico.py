@@ -91,7 +91,7 @@ def listAsesorCursoAcademico(request, centro, curso_academico, orden):
     lista_asesores_aux = []
     for alumno in lista_alumnos_curso_academico:
         lista_asesores_aux.append(
-            alumno.codigo_asesorCursoAcademico.dni_pasaporte)
+            alumno.dni_pasaporte_asesor)
 
     # Se obtiene una lista con todos los asesores curso academico.
     lista_asesores_curso_academico = \
@@ -180,7 +180,7 @@ def generarPDFListaAsesoresCursoAcademico(request, centro,
     lista_asesores_aux = []
     for alumno in lista_alumnos_curso_academico:
         lista_asesores_aux.append(
-            alumno.codigo_asesorCursoAcademico.dni_pasaporte)
+            alumno.dni_pasaporte_asesor)
 
     # Se obtiene una lista con todos los asesores curso academico.
     lista_asesores_curso_academico = \
