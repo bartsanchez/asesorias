@@ -327,3 +327,7 @@ class ModificarClaveForm(forms.Form):
         widget=forms.PasswordInput)
     new_password2 = forms.CharField(label="Repetir nueva contraseña",
         widget=forms.PasswordInput)
+
+class RealizarConfirmacion(forms.Form):
+    confirmacion = forms.ChoiceField(choices=[(False, 'No'),
+        (True, 'Sí')], label="¿De verdad quieres eliminar el elemento?")

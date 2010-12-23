@@ -69,15 +69,24 @@ def delCentro(request, centro):
     instancia_centro = obtenerCentro(centro)
     # Si existe se elimina.
     if instancia_centro:
-        instancia_centro.borrar()
-        # Redirige a la pagina de listar centros.
-        return HttpResponseRedirect(reverse('listCentro',
-            kwargs={'orden': 'nombre_centro'}))
+        # Se carga el formulario para el centro existente.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
+
+            if confirmacion == 'True':
+                instancia_centro.borrar()
+
+            # Redirige a la pagina de listar centros.
+            return HttpResponseRedirect(reverse('listCentro',
+                kwargs={'orden': 'nombre_centro'}))
     # El centro no existe.
     else:
-        error = True
+        form = True
     return render_to_response('asesorias/Centro/delCentro.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'form': form})
 
 @checkAdministradorPrincipal
 @login_required
