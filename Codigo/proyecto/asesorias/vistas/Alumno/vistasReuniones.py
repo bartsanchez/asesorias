@@ -95,6 +95,8 @@ def showReunion(request, curso_academico, id_reunion):
 
             if (preguntas_oficiales) or (preguntas_asesor):
                 preguntas_reunion = True
+            else:
+                preguntas_reunion = False
         else:
             # Redirige a la pagina de listar reuniones.
             return HttpResponseRedirect(reverse('listReunion_Alumno',
@@ -125,7 +127,7 @@ def editRespuestaAsesor(request, curso_academico, id_reunion,
     if instancia_alumno:
         # Se obtiene el dni del asesor.
         dni_pasaporte_asesor = \
-            instancia_alumno.codigo_asesorCursoAcademico.dni_pasaporte
+            instancia_alumno.dni_pasaporte_asesor
 
         # Se obtiene una instancia de la reunion.
         instancia_reunion_preguntaAsesor = \
@@ -192,7 +194,7 @@ def editRespuestaOficial(request, curso_academico, id_reunion,
     if instancia_alumno:
         # Se obtiene el dni del asesor.
         dni_pasaporte_asesor = \
-            instancia_alumno.codigo_asesorCursoAcademico.dni_pasaporte
+            instancia_alumno.dni_pasaporte_asesor
 
         # Se obtiene la instancia de la reunion - pregunta oficial.
         instancia_reunion_preguntaOficial = \
