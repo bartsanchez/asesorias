@@ -166,8 +166,8 @@ def addReunionGrupal(request, curso_academico, lista_alumnos):
                 vistasAlumnoCursoAcademico.obtenerAlumnoCursoAcademico(
                 alumno, curso_academico)
             if instancia_alumno:
-                if (instancia_alumno.codigo_asesorCursoAcademico_id ==
-                    instancia_asesorCA.codigo_asesorCursoAcademico):
+                if (instancia_alumno.dni_pasaporte_asesor ==
+                    instancia_asesorCA.dni_pasaporte):
                         lista_participantes.append(instancia_alumno)
                 else:
                     return HttpResponseRedirect(
@@ -184,8 +184,7 @@ def addReunionGrupal(request, curso_academico, lista_alumnos):
 
     # Se obtiene la lista de alumnos disponible.
     lista_disponibles = models.AlumnoCursoAcademico.objects.filter(
-        codigo_asesorCursoAcademico=
-        instancia_asesorCA.codigo_asesorCursoAcademico,
+        dni_pasaporte_asesor=instancia_asesorCA.dni_pasaporte,
         curso_academico=curso_academico)
 
     # Se convierten en lista en vez de queryset
