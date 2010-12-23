@@ -100,8 +100,8 @@ def selectAlumno(request, curso_academico):
 
         # Se obtiene el alumno y se valida.
         form = forms.AlumnosDeAsesorForm(
-            instancia_asesorCA.codigo_asesorCursoAcademico,
-            curso_academico, request.POST)
+            instancia_asesorCA.dni_pasaporte, curso_academico,
+            request.POST)
 
         # Si es valido se redirige a listar alumnos curso academico.
         if form.is_valid():
@@ -127,8 +127,7 @@ def selectAlumno(request, curso_academico):
 
     else:
         form = forms.AlumnosDeAsesorForm(
-            codigo_asesorCursoAcademico=
-            instancia_asesorCA.codigo_asesorCursoAcademico,
+            dni_pasaporte_asesor=instancia_asesorCA.dni_pasaporte,
             curso_academico=curso_academico)
 
     return render_to_response(PATH + 'selectAlumno.html',
@@ -344,11 +343,8 @@ def addReunion(request, curso_academico, dni_pasaporte):
             kwargs={'curso_academico': curso_academico,
                 'orden': 'fecha'}))
 
-    # Se crea una instancia del asesor curso academico.
-    instancia_asesorCA = \
-        instancia_alumno_curso_academico.codigo_asesorCursoAcademico
-
-    dni_pasaporte_asesor = instancia_asesorCA.dni_pasaporte
+    dni_pasaporte_asesor = \
+        instancia_alumno_curso_academico.dni_pasaporte_asesor
 
     # Se ha rellenado el formulario.
     if request.method == 'POST':
@@ -440,8 +436,8 @@ def listReunion(request, curso_academico, orden):
     if instancia_asesorCA:
          # Se obtiene una lista con todos los alumnos.
         lista_alumnosCA = models.AlumnoCursoAcademico.objects.filter(
-            codigo_asesorCursoAcademico =
-            instancia_asesorCA.codigo_asesorCursoAcademico).values_list(
+            dni_pasaporte_asesor=
+            instancia_asesorCA.dni_pasaporte).values_list(
             'dni_pasaporte_alumno', flat=True)
 
         # Se crea una lista con todas las reuniones individuales del
