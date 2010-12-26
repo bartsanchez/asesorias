@@ -13,8 +13,6 @@ URLS = 'asesorias.urls.'
 # ----------------- #
 
 urlpatterns = patterns('',
-    (r'^admin/', include(admin.site.urls)),
-
     (r'^asesorias/administradorPrincipal/',
         include(URLS + 'administradorPrincipal')),
 
