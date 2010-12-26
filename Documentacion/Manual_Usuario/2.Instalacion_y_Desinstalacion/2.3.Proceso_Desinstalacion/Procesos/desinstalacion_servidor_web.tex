@@ -1,0 +1,47 @@
+\item \textbf{Desinstalación del servidor web Apache}.
+   Se procede a desinstalar el servidor web junto con su módulo
+   \textit{mod\_wsgi}. Para ello, escribiremos el siguiente comando:
+
+   \begin{verbatim}
+   # aptitude purge apache2 libapache2-mod-wsgi
+   \end{verbatim}
+
+   Seguidamente aparecerá el siguiente mensaje:
+
+   \begin{verbatim}
+   Se ELIMINARÁN los siguientes paquetes:
+   apache2{p} apache2-mpm-worker{u} apache2-utils{u}
+   apache2.2-bin{u} apache2.2-common{u}
+   libapache2-mod-wsgi{p} libaprutil1-dbd-sqlite3{u}
+   libaprutil1-ldap{u}
+   0 paquetes actualizados, 0 nuevos instalados, 8 para eliminar
+   y 0 sin actualizar.
+   Necesito descargar 0 B de ficheros. Después de desempaquetar se
+   liberarán 6693 kB.
+   ¿Quiere continuar? [Y/n/?]
+   \end{verbatim}
+
+   Introduciendo el carácter \textit{Y}, o pulsando \textit{Intro}, se procederá
+   a la desinstalación completa. El sistema devuelve la siguiente información,
+   devolviendo el \textit{prompt} a su estado inicial:
+
+   \begin{verbatim}
+   (Leyendo la base de datos ... 201320 files and directories
+   currently installed.)
+   Desinstalando apache2 ...
+   Desinstalando libapache2-mod-wsgi ...
+   Module wsgi disabled.
+   Run '/etc/init.d/apache2 restart' to activate new
+   configuration!
+   Purgando ficheros de configuración de libapache2-mod-wsgi ...
+   (Leyendo la base de datos ... 201306 files and directories
+   currently installed.)
+   Desinstalando apache2-mpm-worker ...
+   Stopping web server: apache2.
+   Desinstalando apache2.2-common ...
+   Desinstalando apache2-utils ...
+   Desinstalando apache2.2-bin ...
+   Desinstalando libaprutil1-dbd-sqlite3 ...
+   Desinstalando libaprutil1-ldap ...
+   Procesando disparadores para man-db ...
+   \end{verbatim}
