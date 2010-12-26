@@ -1,0 +1,37 @@
+\item \textbf{Desinstalación del sistema gestor de bases de datos}
+   Para proceder a la desinstalación del sistema gestor de bases de datos
+   utilizado, \textit{PostgreSQL}, deberá introducirse en la línea de comandos:
+
+   \begin{verbatim}
+   # aptitude purge postgresql
+   \end{verbatim}
+
+   Aparecerá la siguiente información:
+
+   \begin{verbatim}
+   Se ELIMINARÁN los siguientes paquetes:
+   postgresql{p} postgresql-8.4{u} postgresql-common{u}
+   ssl-cert{u}
+   0 paquetes actualizados, 0 nuevos instalados, 4 para eliminar
+   y 0 sin actualizar.
+   Necesito descargar 0 B de ficheros. Después de desempaquetar
+   se liberarán 15,8 MB.
+   ¿Quiere continuar? [Y/n/?]
+   \end{verbatim}
+
+   Introduciendo el carácter \textit{Y}, o pulsando \textit{Intro}, se procederá
+   a la desinstalación completa. El sistema devuelve la siguiente información,
+   devolviendo el \textit{prompt} a su estado inicial:
+
+   \begin{verbatim}
+   (Leyendo la base de datos ... 200858 files and directories
+   currently installed.)
+   Desinstalando postgresql ...
+   (Leyendo la base de datos ... 200854 files and directories
+   currently installed.)
+   Desinstalando postgresql-8.4 ...
+   Stopping PostgreSQL 8.4 database server: main.
+   Desinstalando postgresql-common ...
+   Desinstalando ssl-cert ...
+   Procesando disparadores para man-db ...
+   \end{verbatim}
