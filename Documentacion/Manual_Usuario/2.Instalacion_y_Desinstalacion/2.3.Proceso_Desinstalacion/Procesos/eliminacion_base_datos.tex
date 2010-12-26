@@ -1,0 +1,19 @@
+\item \textbf{Eliminación de la base de datos del sistema}
+  Para eliminar la base de datos utilizada del sistema, debemos asegurarnos que
+  lo hacemos con un usuario del sistema operativo que tenga los permisos
+  necesarios en el sistema gestor de bases de datos \textit{PostgreSQL}. Si
+  usted realizó la instalación de esta aplicación siguiendo el capítulo
+  \ref{instalacion}, \textit{Proceso de instalación}, de este manual, entonces
+  no tendrá ningún problema si utiliza el mismo usuario utilizado para la
+  creación de la base de datos, siempre y cuando no haya modificado las opciones
+  de configuración de PostgreSQL.
+
+  Para eliminar la base de datos del sistema será necesario introducir el
+  siguiente comando:
+
+  \begin{verbatim}
+  $ dropdb asesorias
+  \end{verbatim}
+
+  Si no existieron errores, entonces el \textit{prompt} debería volver a su
+  estado inicial, sin mensajes.
