@@ -1,0 +1,28 @@
+\item Prueba de configuración del servidor web.
+  \begin{itemize}
+    \item \textbf{Descripción:} Configuración del servidor web Apache en el
+    sistema operativo.
+    \item \textbf{Problemas encontrados:} Django no realiza el servicio de
+    ficheros estáticos multimedia, como imágenes, vídeo u hojas de estilo.
+    Según su propia documentación, esto es debido a que cualquier servidor web
+    de aplicaciones realiza esta tarea de una forma mucho más eficiente que
+    cualquier framework.
+    \item \textbf{Soluciones adoptadas:} Se han separado los archivos multimedia
+    utilizados del directorio original, de manera que ha habido que configurar
+    Apache para servir estos archivos de forma separada a la del
+    \textit{framework} Django. Estos archivos han sido situados en
+    \textit{/var/www/media/} y las opciones de configuración que ha habido que
+    realizar a Apache han sido sobre el fichero
+    \textit{/etc/apache2/httpd.conf}, y han sido:
+
+    \begin{verbatim}
+      Alias /media/ /var/www/media/
+
+      <Directory /var/www>
+      Order deny,allow
+      Allow from all
+      </Directory>
+    \end{verbatim}
+
+  \end{itemize}
+
