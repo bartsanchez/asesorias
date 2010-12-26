@@ -46,3 +46,14 @@
    Desinstalando libaprutil1-ldap ...
    Procesando disparadores para man-db ...
    \end{verbatim}
+
+   Nótese que la desinstalación del servidor web no provoca la eliminación de
+   los archivos multimedia que situamos en \textit{/var/www/media/}, por lo que
+   pasamos a su eliminación manual:
+
+   \begin{verbatim}
+   # rm -Rf /var/www/media/
+   \end{verbatim}
+
+   Si no ha habido ningún error, el \textit{prompt} volverá a su situación
+   inicial.
