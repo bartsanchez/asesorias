@@ -2,3 +2,82 @@
    Para llevar a cabo la configuración del servidor web, debemos hacer uso del
    contenido de la carpeta \textit{/public/} que acompaña al código fuente de
    esta aplicación.
+
+   En primer lugar, para realizar la configuración del servidor \textit{Apache}
+   con su módulo \textit{mod\_wsgi} se proporciona al usuario el archivo
+   \textit{httpd.conf} situado en \textit{/public/wsgi-script/}. Este archivo
+   es necesario sustituirlo por el archivo de configuración de \textit{Apache}
+   del mismo nombre, situado en la ruta del sistema \textit{/etc/apache2/}. Para
+   realizar dicha sustitución, introducimos el siguiente comando:
+
+   \begin{verbatim}
+   # cp /ruta-proyecto/public/wsgi-scripts/httpd.conf /etc/apache2/
+   \end{verbatim}
+
+   Nótese que \textit{ruta-proyecto} debe ser la ruta absoluta al directorio
+   \textit{/proyecto/} que contiene el código fuente proporcionado por esta
+   aplicación.
+
+   Este archivo hay que modificarlo para configurar correctamente el servidor
+   web, ya que hay que tener en cuenta la ruta absoluta del código fuente de
+   la aplicación. Para ello, editamos el fichero con nuestro editor favorito
+   (en este caso Nano \cite{nano}), teniendo en cuenta de que necesitamos
+   permisos de administrador del sistema:
+
+   \begin{verbatim}
+   # nano /etc/apache2/httpd.conf
+   \end{verbatim}
+
+   Una vez dentro, debemos sustituir la cadena \textit{/ruta-proyecto/} por
+   la ruta absoluta donde tengamos almacenado nuestro código fuente. Es decir,
+   un nivel superior de donde se encuentra el directorio \textit{/proyecto/}
+   proporcionado por el código fuente de esta aplicación.
+
+   Además, es necesario establecer el archivo de configuración para el módulo
+   \textit{mod\_wsgi} accesible para \textit{Apache}. Por lo que realizaremos
+   una copia al directorio empleado para tal fin:
+
+   \begin{verbatim}
+   # cp -R /ruta-proyecto/public/wsgi-script/ /var/www/
+   \end{verbatim}
+
+   El archivo que contiene esta carpeta también es necesario modificarlo, por
+   lo que escribimos:
+
+   \begin{verbatim}
+   # nano /var/www/wsgi-scripts/django.wsgi
+   \end{verbatim}
+
+   Y una vez dentro del editor sustituimos \textit{/ruta-proyecto/} (nótese que
+   aparece dos veces en el fichero) por la ruta absoluta donde tengamos
+   almacenado nuestro código fuente. Es decir, un nivel superior de donde se
+   encuentra el directorio \textit{/proyecto/} proporcionado por el código
+   fuente de esta aplicación.
+
+   Llegados a este punto es necesario proporcionar a \textit{Apache} los
+   archivos multimedia (imágenes y hojas de estilo) necesarias para la ejecución
+   de la aplicación. Para realizar dicha acción, introduciremos por línea de
+   comandos:
+
+   \begin{verbatim}
+   # cp -R /ruta-proyecto/public/media /var/www/
+   \end{verbatim}
+
+   Reiniciaremos \textit{Apache} para comprobar que los cambios han tenido
+   efecto:
+
+   \begin{verbatim}
+   # /etc/init.d/apache2 restart
+   \end{verbatim}
+
+   Lo que provocará el siguiente mensaje, si no hay errores:
+
+   \begin{verbatim}
+   Restarting web server: apache2 ... waiting .
+   \end{verbatim}
+
+   Para comprobar que todo ha ido bien, abriremos un navegador e introduciremos
+   la URL \textit{http://localhost/asesorias/}. Si se ha realizado la
+   instalación satisfactoriamente, debería aparecer la pantalla principal
+   de la aplicación vista en el capítulo \ref{pantallaPrincipal},
+   \textit{Página principal}.
