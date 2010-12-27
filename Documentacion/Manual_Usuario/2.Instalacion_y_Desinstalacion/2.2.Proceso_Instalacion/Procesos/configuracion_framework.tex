@@ -1,0 +1,22 @@
+\item \textbf{Configuración del \textit{framework}}.
+   Llegados a este punto es necesario configurar el \textit{framework}
+   utilizado, \textit{Django}, para que le sea posible conectarse a la base de
+   datos que acabamos de configurar. Para ello, debemos editar el archivo
+   \textit{settings.py} que se encuentra en la carpeta \textit{/proyecto/} del
+   código fuente que proporciona esta aplicación. Para ello:
+
+   \begin{verbatim}
+   $ nano /ruta-proyecto/proyecto/settings.py
+   \end{verbatim}
+
+   Una vez dentro, debemos localizar las líneas:
+
+   \begin{verbatim}
+   DATABASE_USER = ''
+   DATABASE_PASSWORD = ''
+   \end{verbatim}
+
+   Se debe introducir el nombre de usuario PostgreSQL válido y la contraseña
+   que utilizamos para tener acceso de lectura y escritura para nuestra base
+   de datos \textit{asesorías}. Con esto estaría completa la configuración
+   del \textit{framework Django}.
