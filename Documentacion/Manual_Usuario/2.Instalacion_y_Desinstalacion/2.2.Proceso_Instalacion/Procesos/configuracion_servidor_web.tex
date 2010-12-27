@@ -11,7 +11,8 @@
    realizar dicha sustitución, introducimos el siguiente comando:
 
    \begin{verbatim}
-   # cp /ruta-proyecto/public/wsgi-scripts/httpd.conf /etc/apache2/
+   # cp /ruta-proyecto/public/wsgi-scripts/httpd.conf
+   /etc/apache2/
    \end{verbatim}
 
    Nótese que \textit{ruta-proyecto} debe ser la ruta absoluta al directorio
@@ -33,9 +34,9 @@
    un nivel superior de donde se encuentra el directorio \textit{/proyecto/}
    proporcionado por el código fuente de esta aplicación.
 
-   Además, es necesario establecer el archivo de configuración para el módulo
-   \textit{mod\_wsgi} accesible para \textit{Apache}. Por lo que realizaremos
-   una copia al directorio empleado para tal fin:
+   Además, es necesario establecer que el archivo de configuración para el
+   módulo \textit{mod\_wsgi} sea accesible para \textit{Apache}, por lo que
+   realizaremos una copia al directorio empleado para tal fin:
 
    \begin{verbatim}
    # cp -R /ruta-proyecto/public/wsgi-script/ /var/www/
@@ -79,5 +80,5 @@
    Para comprobar que todo ha ido bien, abriremos un navegador e introduciremos
    la URL \textit{http://localhost/asesorias/}. Si se ha realizado la
    instalación satisfactoriamente, debería aparecer la pantalla principal
-   de la aplicación vista en el capítulo \ref{pantallaPrincipal},
+   de la aplicación vista en el capítulo \ref{paginaPrincipal},
    \textit{Página principal}.
