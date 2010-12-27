@@ -1,0 +1,61 @@
+\item \textbf{Instalación del sistema gestor de bases de datos}.
+   Se procede a instalar el sistema gestor de bases de datos utilizado,
+   \textit{PostgreSQL}.Para llevar a cabo la instalación, escribiremos el
+   siguiente comando:
+
+   \begin{verbatim}
+   # aptitude install postgresql
+   \end{verbatim}
+
+   Seguidamente aparecerá el siguiente mensaje:
+
+   \begin{verbatim}
+   Se instalarán los siguiente paquetes NUEVOS:
+   postgresql postgresql-8.4{a} postgresql-common{a}
+   0 paquetes actualizados, 3 nuevos instalados, 0 para eliminar
+   y 0 sin actualizar.
+   Necesito descargar 5344 kB de ficheros. Después de
+   desempaquetar se usarán 15,7 MB.
+   ¿Quiere continuar? [Y/n/?]
+   \end{verbatim}
+
+   Introduciendo el carácter \textit{Y}, o pulsando \textit{Intro}, se procederá
+   con la instalación completa. El sistema devuelve la siguiente información,
+   devolviendo el \textit{prompt} a su estado inicial:
+
+   \begin{verbatim}
+   Des:1 http://ftp.fr.debian.org/debian/ testing/main
+   postgresql-common all 113 [127 kB]
+   Des:2 http://ftp.fr.debian.org/debian/ testing/main
+   postgresql-8.4 i386 8.4.5-0squeeze2 [5198 kB]
+   Des:3 http://ftp.fr.debian.org/debian/ testing/main
+   postgresql all 8.4.5-0squeeze2 [18,2 kB]
+   Descargados 5344 kB en 10s (526 kB/s).
+   Preconfigurando paquetes ...
+   Seleccionando el paquete postgresql-common previamente
+   no seleccionado.
+   (Leyendo la base de datos ... 201096 files and directories
+   currently installed.)
+   Desempaquetando postgresql-common
+   (de .../postgresql-common_113_all.deb) ...
+   Seleccionando el paquete postgresql-8.4 previamente
+   no seleccionado.
+   Desempaquetando postgresql-8.4
+   (de .../postgresql-8.4_8.4.5-0squeeze2_i386.deb) ...
+   Seleccionando el paquete postgresql previamente
+   no seleccionado.
+   Desempaquetando postgresql
+   (de .../postgresql_8.4.5-0squeeze2_all.deb) ...
+   Procesando disparadores para man-db ...
+   Configurando postgresql-common (113) ...
+   Starting PostgreSQL 8.4 database server: main.
+   Configurando postgresql-8.4 (8.4.5-0squeeze2) ...
+   update-alternatives: using
+   /usr/share/postgresql/8.4/man/man1/postmaster.1.gz to
+   provide /usr/share/man/man1/postmaster.1.gz
+   (postmaster.1.gz) in auto mode.
+   Starting PostgreSQL 8.4 database server: main.
+   Configurando postgresql (8.4.5-0squeeze2) ...
+   \end{verbatim}
+
+   De esta forma, la aplicación queda correctamente instalada.
