@@ -1,0 +1,23 @@
+\item \textbf{Configuración del sistema gestor de bases de datos}.
+   Se procede a configurar el sistema gestor de bases de datos utilizado,
+   \textit{PostgreSQL}.Para llevar a cabo la configuración, debemos editar
+   el archivo \textit{pg\_hba.conf} situado en
+   \textit{/etc/postgresql/8.4/main/}. Por lo tanto:
+
+   \begin{verbatim}
+   # nano /etc/postgresql/8.4/main/pg_hba.conf
+   \end{verbatim}
+
+   Una vez dentro, debemos añadir al final del fichero la siguiente línea:
+
+   \begin{verbatim}
+   host  asesorias   [usuario]   127.0.0.1/32   [método]
+   \end{verbatim}
+
+   Nótese que hay que sustituir \textit{[usuario]} por el nombre de usuario del
+   sistema que queremos que administre nuestra aplicación. También será
+   necesario sustituir \textit{[método]} por el tipo de método de cifrado de la
+   contraseña del usuario de PostgreSQL (normalmente md5). Si tiene problemas
+   creando usuarios en PostgreSQL con permisos para leer y escribir bases de
+   datos, por favor, diríjase a la documentación oficial de PostgreSQL
+   \cite{postgresql}.
