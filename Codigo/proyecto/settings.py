@@ -1,6 +1,7 @@
 # Django settings for proyecto project.
+import os
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -28,6 +29,7 @@ TIME_ZONE = 'Europe/Madrid'
 LANGUAGE_CODE = 'es-es'
 
 SITE_ID = 1
+SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -69,7 +71,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    '/home/elbarto/pfc/Codigo/proyecto/templates/'
+    ( os.path.join(SITE_ROOT, 'templates'),)
 )
 
 INSTALLED_APPS = (

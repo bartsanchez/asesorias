@@ -1,10 +1,6 @@
 from django.conf.urls.defaults import *
 from proyecto import asesorias
 
-# Uncomment the next two lines to enable the admin:
-from django.contrib import admin
-admin.autodiscover()
-
 VISTAS = 'asesorias.vistas.'
 URLS = 'asesorias.urls.'
 
