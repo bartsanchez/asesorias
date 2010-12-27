@@ -99,4 +99,20 @@
    Configurando ssl-cert (1.0.28) ...
    \end{verbatim}
 
-   De esta forma, la aplicación queda correctamente instalada.
+   De esta forma, la aplicación queda correctamente instalada. Además, el
+   servidor web se ha iniciado automáticamente. En caso de tener algún problema
+   con el inicio del servidor web, se ha de indicar que el comando para
+   iniciarlo es:
+
+   \begin{verbatim}
+   # /etc/init.d/apache2 start
+   \end{verbatim}
+
+   En nuestro caso, como se había iniciado con normalidad, el comando devuelve
+   el mensaje:
+
+   \begin{verbatim}
+   Starting web server: apache2httpd (pid 13782) already running.
+   \end{verbatim}
+
+
