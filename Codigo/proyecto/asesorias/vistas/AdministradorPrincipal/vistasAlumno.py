@@ -114,15 +114,23 @@ def delAlumno(request, dni_pasaporte):
     instancia_alumno = obtenerAlumno(dni_pasaporte)
     # Si existe se elimina.
     if instancia_alumno:
-        instancia_alumno.borrar()
-        # Redirige a la pagina de listar alumnos.
-        return HttpResponseRedirect(reverse('listAlumno',
-            kwargs={'orden': 'nombre_asesor'}))
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
+
+            if confirmacion == 'True':
+                instancia_alumno.borrar()
+            # Redirige a la pagina de listar alumnos.
+            return HttpResponseRedirect(reverse('listAlumno',
+                kwargs={'orden': 'nombre_asesor'}))
     # El alumno no existe.
     else:
-        error = True
+        form = True
     return render_to_response('asesorias/Alumno/delAlumno.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'form': form})
 
 @checkAdministradorPrincipal
 @login_required
