@@ -72,15 +72,23 @@ def delDepartamento(request, nombre_departamento):
     instancia_departamento = obtenerDepartamento(nombre_departamento)
     # Si existe se elimina.
     if instancia_departamento:
-        instancia_departamento.delete()
-        # Redirige a la pagina de listar departamentos.
-        return HttpResponseRedirect(reverse('listDepartamento',
-            kwargs={'orden': 'nombre_departamento'}))
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
+
+            if confirmacion == 'True':
+                instancia_departamento.delete()
+            # Redirige a la pagina de listar departamentos.
+            return HttpResponseRedirect(reverse('listDepartamento',
+                kwargs={'orden': 'nombre_departamento'}))
     # El departamento no existe.
     else:
-        error = True
+        form = True
     return render_to_response(PATH + 'delDepartamento.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'form': form})
 
 @checkAdministradorPrincipal
 @login_required
