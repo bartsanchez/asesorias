@@ -97,23 +97,31 @@ def delAdministradorCentro(request, administrador_centro):
         administrador_centro)
     # Si existe se elimina.
     if instancia_admin_centro:
-        username = unicode(instancia_admin_centro.correo_electronico)
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
 
-        instancia_admin_centro.borrar()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
 
-        user = User.objects.get(username__exact=username)
-        user.delete()
+            if confirmacion == 'True':
+                username = \
+                    unicode(instancia_admin_centro.correo_electronico)
+                instancia_admin_centro.borrar()
+                user = User.objects.get(username__exact=username)
+                user.delete()
 
-        # Redirige a la pagina de listar administradores de centro.
-        return HttpResponseRedirect(
-            reverse('listAdministradorCentro',
-            kwargs={'orden': 'nombre_adm_centro'}) )
+            # Redirige a la pagina de listar administradores de centro.
+            return HttpResponseRedirect(
+                reverse('listAdministradorCentro',
+                kwargs={'orden': 'nombre_adm_centro'}) )
     # El administrador de centro no existe.
     else:
-        error = True
+        form = True
     return render_to_response(
         'asesorias/AdministradorCentro/delAdministradorCentro.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'form': form})
 
 @checkAdministradorPrincipal
 @login_required
