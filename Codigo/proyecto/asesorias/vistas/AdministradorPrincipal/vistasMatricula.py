@@ -241,24 +241,32 @@ def delMatricula(request, nombre_centro, nombre_titulacion,
 
     # Si existe se elimina.
     if instancia_matricula:
-        instancia_matricula.borrar()
-        # Redirige a la pagina de listar matriculas.
-        return HttpResponseRedirect(reverse('listMatricula',
-                kwargs={'nombre_centro':
-                instancia_matricula.determinarNombreCentro(),
-                'nombre_titulacion':
-                instancia_matricula.determinarNombreTitulacion(),
-                'plan_estudios':
-                instancia_matricula.determinarPlanEstudios(),
-                'nombre_asignatura':
-                instancia_matricula.determinarNombreAsignatura(),
-                'curso_academico': curso_academico,
-                'orden': 'curso_academico'}))
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
+
+            if confirmacion == 'True':
+                instancia_matricula.borrar()
+            # Redirige a la pagina de listar matriculas.
+            return HttpResponseRedirect(reverse('listMatricula',
+                    kwargs={'nombre_centro':
+                    instancia_matricula.determinarNombreCentro(),
+                    'nombre_titulacion':
+                    instancia_matricula.determinarNombreTitulacion(),
+                    'plan_estudios':
+                    instancia_matricula.determinarPlanEstudios(),
+                    'nombre_asignatura':
+                    instancia_matricula.determinarNombreAsignatura(),
+                    'curso_academico': curso_academico,
+                    'orden': 'curso_academico'}))
     # La matricula no existe.
     else:
-        error = True
+        form = True
     return render_to_response(PATH + 'delMatricula.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'form': form})
 
 @checkAdministradorPrincipal
 @login_required
@@ -271,16 +279,24 @@ def delMatricula2(request, nombre_centro, nombre_titulacion,
 
     # Si existe se elimina.
     if instancia_matricula:
-        instancia_matricula.borrar()
-        # Redirige a la pagina de listar matriculas.
-        return HttpResponseRedirect(reverse('listMatricula2',
-                kwargs={'dni_pasaporte': dni_pasaporte,
-                'curso_academico': curso_academico}))
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
+
+            if confirmacion == 'True':
+                instancia_matricula.borrar()
+            # Redirige a la pagina de listar matriculas.
+            return HttpResponseRedirect(reverse('listMatricula2',
+                    kwargs={'dni_pasaporte': dni_pasaporte,
+                    'curso_academico': curso_academico}))
     # La matricula no existe.
     else:
-        error = True
+        form = True
     return render_to_response(PATH + 'delMatricula.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'form': form})
 
 @checkAdministradorPrincipal
 @login_required
