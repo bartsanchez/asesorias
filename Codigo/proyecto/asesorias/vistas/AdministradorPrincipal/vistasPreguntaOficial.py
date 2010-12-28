@@ -209,16 +209,24 @@ def delPreguntaOficial(request, id_entrevista_oficial,
         id_entrevista_oficial, id_pregunta_oficial)
     # Si existe se elimina.
     if instancia_pregunta_oficial:
-        instancia_pregunta_oficial.borrar()
-        # Redirige a la pagina de listar preguntas oficiales.
-        return HttpResponseRedirect(reverse('listPreguntaOficial',
-            kwargs={'entrevista_oficial': id_entrevista_oficial,
-            'orden': 'enunciado'}))
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
+
+            if confirmacion == 'True':
+                instancia_pregunta_oficial.borrar()
+            # Redirige a la pagina de listar preguntas oficiales.
+            return HttpResponseRedirect(reverse('listPreguntaOficial',
+                kwargs={'entrevista_oficial': id_entrevista_oficial,
+                'orden': 'enunciado'}))
     # La pregunta no existe.
     else:
-        error = True
+        form = True
     return render_to_response(PATH + 'delPreguntaOficial.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'form': form})
 
 @checkAdministradorPrincipal
 @login_required
