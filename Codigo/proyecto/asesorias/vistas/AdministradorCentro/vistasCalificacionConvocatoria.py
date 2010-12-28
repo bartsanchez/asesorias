@@ -193,22 +193,30 @@ def delCalificacionConvocatoria(request, centro,
 
     # Si existe se elimina.
     if instancia_calificacion:
-        instancia_calificacion.delete()
-        # Redirige a la pagina de listar calificaciones.
-        return HttpResponseRedirect(
-            reverse('listCalificacionConvocatoria_administradorCentro',
-                    kwargs={'centro': centro,
-                    'nombre_titulacion': nombre_titulacion,
-                    'plan_estudios': plan_estudios,
-                    'nombre_asignatura': nombre_asignatura,
-                    'curso_academico': curso_academico,
-                    'dni_pasaporte': dni_pasaporte,
-                    'orden': 'convocatoria'}))
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
+
+            if confirmacion == 'True':
+                instancia_calificacion.delete()
+            # Redirige a la pagina de listar calificaciones.
+            return HttpResponseRedirect(reverse(
+                'listCalificacionConvocatoria_administradorCentro',
+                kwargs={'centro': centro,
+                'nombre_titulacion': nombre_titulacion,
+                'plan_estudios': plan_estudios,
+                'nombre_asignatura': nombre_asignatura,
+                'curso_academico': curso_academico,
+                'dni_pasaporte': dni_pasaporte,
+                'orden': 'convocatoria'}))
     # La calificacion no existe.
     else:
-        error = True
+        form = True
     return render_to_response(PATH + 'delCalificacionConvocatoria.html',
-       {'user': request.user, 'error': error, 'centro': centro})
+       {'user': request.user, 'form': form, 'centro': centro})
 
 @checkCentro
 @login_required
