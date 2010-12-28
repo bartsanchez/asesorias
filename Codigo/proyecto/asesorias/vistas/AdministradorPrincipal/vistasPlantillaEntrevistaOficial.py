@@ -81,24 +81,26 @@ def delPlantillaEntrevistaOficial(request, id_entrevista_oficial):
         obtenerPlantillaEntrevistaOficial(id_entrevista_oficial)
     # Si existe se elimina.
     if instancia_plantilla_entrevista_oficial:
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
 
-        # Se obtienen todas las preguntas oficiales de esta plantilla.
-        preguntas_de_plantilla = \
-            models.PreguntaOficial.objects.filter(
-            id_entrevista_oficial=id_entrevista_oficial)
-
-        instancia_plantilla_entrevista_oficial.borrar()
-        # Redirige a la pagina de listar plantillas de entrevista
-        # oficiales.
-        return HttpResponseRedirect(
-            reverse('listPlantillaEntrevistaOficial',
-            kwargs={'orden': 'descripcion'}))
+            if confirmacion == 'True':
+                instancia_plantilla_entrevista_oficial.borrar()
+            # Redirige a la pagina de listar plantillas de entrevista
+            # oficiales.
+            return HttpResponseRedirect(
+                reverse('listPlantillaEntrevistaOficial',
+                kwargs={'orden': 'descripcion'}))
     # La plantilla no existe.
     else:
-        error = True
+        form = True
     return render_to_response(PATH +
         'delPlantillaEntrevistaOficial.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'form': form})
 
 @checkAdministradorPrincipal
 @login_required
