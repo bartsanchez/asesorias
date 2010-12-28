@@ -119,17 +119,25 @@ def delCentro_administradorCentro(request,centro, administrador_centro):
         obtenerCentro_administradorCentro(centro, administrador_centro)
     # Si existe se elimina.
     if instancia_centro_administradorCentro:
-        instancia_centro_administradorCentro.delete()
-        # Redirige a la pagina de listar centro - administradorCentro.
-        return HttpResponseRedirect(
-            reverse('listCentro_administradorCentro',
-            kwargs={'centro': centro, 'orden': 'nombre_adm_centro'}))
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
+
+            if confirmacion == 'True':
+                instancia_centro_administradorCentro.delete()
+            # Redirige a la pagina de listar centro - administradorCentro.
+            return HttpResponseRedirect(
+                reverse('listCentro_administradorCentro',
+                kwargs={'centro': centro, 'orden': 'nombre_adm_centro'}))
     # El centro_administradorCentro no existe.
     else:
-        error = True
+        form = True
     return render_to_response(
         PATH + 'delCentro_administradorCentro.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'form': form, 'centro': centro})
 
 def ordenarPorAdministradorCentro(lista_centros_administradorCentro):
     # Lista auxiliar que albergara la nueva lista.
