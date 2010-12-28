@@ -342,7 +342,8 @@ def selectTitulacion(request, nombre_centro, tipo):
         else:
             return HttpResponseRedirect(
                 reverse('selectTitulacion_Asignatura',
-                kwargs={'nombre_centro': nombre_centro}))
+                kwargs={'nombre_centro': nombre_centro,
+                'tipo': tipo}))
 
     else:
         form = forms.TitulacionFormSelect(id_centro=id_centro)
