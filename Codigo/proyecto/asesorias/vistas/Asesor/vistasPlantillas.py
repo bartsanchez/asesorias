@@ -535,17 +535,26 @@ def delPreguntaAsesor(request, curso_academico, id_entrevista_asesor,
         id_pregunta_asesor)
     # Si existe se elimina.
     if instancia_pregunta_asesor:
-        instancia_pregunta_asesor.borrar()
-        # Redirige a la pagina de listar preguntas de asesor.
-        return HttpResponseRedirect(reverse('listPreguntaAsesor_Asesor',
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
+
+            if confirmacion == 'True':
+                instancia_pregunta_asesor.borrar()
+            # Redirige a la pagina de listar preguntas de asesor.
+            return HttpResponseRedirect(reverse(
+                'listPreguntaAsesor_Asesor',
                 kwargs={'curso_academico': curso_academico,
                 'id_entrevista_asesor': id_entrevista_asesor,
                 'orden': 'enunciado'}))
     # La pregunta no existe.
     else:
-        error = True
+        form = True
     return render_to_response(PATH + 'delPreguntaAsesor.html',
-        {'user': request.user, 'error': error,
+        {'user': request.user, 'form': form,
         'entrevista_asesor': id_entrevista_asesor,
         'curso_academico': curso_academico})
 
