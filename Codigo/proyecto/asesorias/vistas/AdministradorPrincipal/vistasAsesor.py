@@ -92,15 +92,23 @@ def delAsesor(request, dni_pasaporte):
     instancia_asesor = obtenerAsesor(dni_pasaporte)
     # Si existe se elimina.
     if instancia_asesor:
-        instancia_asesor.borrar()
-        # Redirige a la pagina de listar asesores.
-        return HttpResponseRedirect(reverse('listAsesor',
-            kwargs={'orden': 'nombre_asesor'}))
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
+
+            if confirmacion == 'True':
+                instancia_asesor.borrar()
+            # Redirige a la pagina de listar asesores.
+            return HttpResponseRedirect(reverse('listAsesor',
+                kwargs={'orden': 'nombre_asesor'}))
     # El asesor no existe.
     else:
-        error = True
+        form = True
     return render_to_response('asesorias/Asesor/delAsesor.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'form': form})
 
 @checkAdministradorPrincipal
 @login_required
