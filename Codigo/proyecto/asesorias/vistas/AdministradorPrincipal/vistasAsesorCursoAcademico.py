@@ -112,20 +112,25 @@ def delAsesorCursoAcademico(request, dni_pasaporte, curso_academico):
         dni_pasaporte, curso_academico)
     # Si existe se elimina.
     if instancia_asesor_curso_academico:
-        nombre_departamento = \
-            instancia_asesor_curso_academico.id_departamento
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
 
-        instancia_asesor_curso_academico.borrar()
-        # Redirige a la pagina de listar asesores curso academico.
-        return HttpResponseRedirect(
-            reverse('listAsesorCursoAcademico',
-            kwargs={'dni_pasaporte': dni_pasaporte,
-            'orden': 'curso_academico'}))
+            if confirmacion == 'True':
+                instancia_asesor_curso_academico.borrar()
+            # Redirige a la pagina de listar asesores curso academico.
+            return HttpResponseRedirect(
+                reverse('listAsesorCursoAcademico',
+                kwargs={'dni_pasaporte': dni_pasaporte,
+                'orden': 'curso_academico'}))
     # El asesor curso academico no existe.
     else:
-        error = True
+        form = True
     return render_to_response(PATH + 'delAsesorCursoAcademico.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'form': form})
 
 @checkAdministradorPrincipal
 @login_required
