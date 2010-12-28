@@ -201,16 +201,16 @@ def delCalificacionConvocatoria(request, nombre_centro,
 
             if confirmacion == 'True':
                 instancia_calificacion.delete()
-                # Redirige a la pagina de listar calificaciones.
-                return HttpResponseRedirect(
-                    reverse('listCalificacionConvocatoria',
-                            kwargs={'nombre_centro': nombre_centro,
-                            'nombre_titulacion': nombre_titulacion,
-                            'plan_estudios': plan_estudios,
-                            'nombre_asignatura': nombre_asignatura,
-                            'curso_academico': curso_academico,
-                            'dni_pasaporte': dni_pasaporte,
-                            'orden': 'convocatoria'}))
+            # Redirige a la pagina de listar calificaciones.
+            return HttpResponseRedirect(
+                reverse('listCalificacionConvocatoria',
+                        kwargs={'nombre_centro': nombre_centro,
+                        'nombre_titulacion': nombre_titulacion,
+                        'plan_estudios': plan_estudios,
+                        'nombre_asignatura': nombre_asignatura,
+                        'curso_academico': curso_academico,
+                        'dni_pasaporte': dni_pasaporte,
+                        'orden': 'convocatoria'}))
     # La calificacion no existe.
     else:
         form = True
