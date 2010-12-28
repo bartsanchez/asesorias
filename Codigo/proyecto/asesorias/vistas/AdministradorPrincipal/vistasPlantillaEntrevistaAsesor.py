@@ -241,20 +241,28 @@ def delPlantillaEntrevistaAsesor(request, dni_pasaporte,
         id_entrevista_asesor)
     # Si existe se elimina.
     if instancia_plantilla_entrevista_asesor:
-        instancia_plantilla_entrevista_asesor.borrar()
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
 
-        # Redirige a la pagina de listar plantillas de entrevista de
-        # asesor.
-        return HttpResponseRedirect(
-            reverse('listPlantillaEntrevistaAsesor',
-                kwargs={'dni_pasaporte': dni_pasaporte,
-                'curso_academico': curso_academico,
-                'orden': 'descripcion'}))
+            if confirmacion == 'True':
+                instancia_plantilla_entrevista_asesor.borrar()
+
+            # Redirige a la pagina de listar plantillas de entrevista de
+            # asesor.
+            return HttpResponseRedirect(
+                reverse('listPlantillaEntrevistaAsesor',
+                    kwargs={'dni_pasaporte': dni_pasaporte,
+                    'curso_academico': curso_academico,
+                    'orden': 'descripcion'}))
     # La plantilla no existe.
     else:
-        error = True
+        form = True
     return render_to_response(PATH +'delPlantillaEntrevistaAsesor.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'form': form})
 
 @checkAdministradorPrincipal
 @login_required
