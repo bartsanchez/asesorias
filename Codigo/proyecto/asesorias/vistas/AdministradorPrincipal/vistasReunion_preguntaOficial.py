@@ -197,19 +197,28 @@ def delReunion_preguntaOficial(request, dni_pasaporte_alumno,
 
     # Si existe se elimina.
     if instancia_reunion_preguntaOficial:
-        instancia_reunion_preguntaOficial.delete()
-        # Redirige a la pagina de listar reuniones-preguntas oficiales.
-        return HttpResponseRedirect(
-            reverse('listReunion_preguntaOficial',
-                    kwargs={'dni_pasaporte': dni_pasaporte_alumno,
-                    'curso_academico': curso_academico,
-                    'id_reunion': id_reunion,
-                    'orden': 'pregunta_oficial'}))
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
+
+            if confirmacion == 'True':
+                instancia_reunion_preguntaOficial.delete()
+            # Redirige a la pagina de listar reuniones-preguntas
+            # oficiales.
+            return HttpResponseRedirect(
+                reverse('listReunion_preguntaOficial',
+                        kwargs={'dni_pasaporte': dni_pasaporte_alumno,
+                        'curso_academico': curso_academico,
+                        'id_reunion': id_reunion,
+                        'orden': 'pregunta_oficial'}))
     # La reunion - pregunta oficial no existe.
     else:
-        error = True
+        form = True
     return render_to_response(PATH + 'delReunion_preguntaOficial.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'form': form})
 
 @checkAdministradorPrincipal
 @login_required
