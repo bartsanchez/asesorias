@@ -411,16 +411,24 @@ def delReunion(request, curso_academico, dni_pasaporte, id_reunion):
         dni_pasaporte, curso_academico, id_reunion)
     # Si existe se elimina.
     if instancia_reunion:
-        instancia_reunion.borrar()
-        # Redirige a la pagina de listar reuniones.
-        return HttpResponseRedirect(reverse('listReunion_Asesor',
-                kwargs={'curso_academico': curso_academico,
-                'orden': 'fecha'}))
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
+
+            if confirmacion == 'True':
+                instancia_reunion.borrar()
+            # Redirige a la pagina de listar reuniones.
+            return HttpResponseRedirect(reverse('listReunion_Asesor',
+                    kwargs={'curso_academico': curso_academico,
+                    'orden': 'fecha'}))
     # La reunion no existe.
     else:
-        error = True
+        form = True
     return render_to_response(PATH + 'delReunion.html',
-        {'user': request.user, 'error': error,
+        {'user': request.user, 'form': form,
         'curso_academico': curso_academico})
 
 def listReunion(request, curso_academico, orden):
