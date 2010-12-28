@@ -69,7 +69,7 @@ def delCentro(request, centro):
     instancia_centro = obtenerCentro(centro)
     # Si existe se elimina.
     if instancia_centro:
-        # Se carga el formulario para el centro existente.
+        # Se carga el formulario de confirmacion.
         form = forms.RealizarConfirmacion()
         # Se ha modificado el formulario original.
         if request.method == 'POST':
