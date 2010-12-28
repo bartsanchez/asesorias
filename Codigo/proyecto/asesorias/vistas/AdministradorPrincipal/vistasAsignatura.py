@@ -249,17 +249,26 @@ def delAsignatura(request, nombre_centro, nombre_titulacion,
         nombre_titulacion, plan_estudios, nombre_asignatura)
     # Si existe se elimina.
     if instancia_asignatura:
-        instancia_asignatura.borrar()
-        # Redirige a la pagina de listar asignaturas.
-        return HttpResponseRedirect(reverse('listAsignatura',
-            kwargs={'nombre_centro': nombre_centro,
-            'nombre_titulacion': nombre_titulacion,
-            'plan_estudios': plan_estudios, 'orden': 'nombre_centro'}))
+        # Se carga el formulacion de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
+
+            if confirmacion == 'True':
+                instancia_asignatura.borrar()
+            # Redirige a la pagina de listar asignaturas.
+            return HttpResponseRedirect(reverse('listAsignatura',
+                kwargs={'nombre_centro': nombre_centro,
+                'nombre_titulacion': nombre_titulacion,
+                'plan_estudios': plan_estudios,
+                'orden': 'nombre_centro'}))
     # La asignatura no existe.
     else:
-        error = True
+        form = True
     return render_to_response(PATH + 'delAsignatura.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'form': form})
 
 @checkAdministradorPrincipal
 @login_required
