@@ -149,19 +149,27 @@ def delAlumnoCursoAcademico(request, dni_pasaporte, curso_academico):
         dni_pasaporte, curso_academico)
     # Si existe se elimina.
     if instancia_alumno_curso_academico:
-        instancia_alumno_curso_academico.borrar()
-        # Redirige a la pagina de listar alumnos curso academico.
-        return HttpResponseRedirect(reverse('listAlumnoCursoAcademico',
-            kwargs={
-            'dni_pasaporte_asesor':
-            instancia_alumno_curso_academico.dni_pasaporte_asesor,
-            'curso_academico': curso_academico,
-            'orden': 'dni_pasaporte'}))
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
+
+            if confirmacion == 'True':
+                instancia_alumno_curso_academico.borrar()
+            # Redirige a la pagina de listar alumnos curso academico.
+            return HttpResponseRedirect(reverse('listAlumnoCursoAcademico',
+                kwargs={
+                'dni_pasaporte_asesor':
+                instancia_alumno_curso_academico.dni_pasaporte_asesor,
+                'curso_academico': curso_academico,
+                'orden': 'dni_pasaporte'}))
     # El alumno curso academico no existe.
     else:
-        error = True
+        form = True
     return render_to_response(PATH + 'delAlumnoCursoAcademico.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'form': form})
 
 @checkAdministradorPrincipal
 @login_required
