@@ -203,19 +203,28 @@ def delReunion_preguntaAsesor(request, dni_pasaporte_alumno,
 
     # Si existe se elimina.
     if instancia_reunion_preguntaAsesor:
-        instancia_reunion_preguntaAsesor.delete()
-        # Redirige a la pagina de listar reuniones - preguntas de asesor.
-        return HttpResponseRedirect(
-            reverse('listReunion_preguntaAsesor',
-                    kwargs={'dni_pasaporte': dni_pasaporte_alumno,
-                    'curso_academico': curso_academico,
-                    'id_reunion': id_reunion,
-                    'orden': 'pregunta_asesor'}))
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
+
+            if confirmacion == 'True':
+                instancia_reunion_preguntaAsesor.delete()
+            # Redirige a la pagina de listar reuniones - preguntas de
+            # asesor.
+            return HttpResponseRedirect(
+                reverse('listReunion_preguntaAsesor',
+                        kwargs={'dni_pasaporte': dni_pasaporte_alumno,
+                        'curso_academico': curso_academico,
+                        'id_reunion': id_reunion,
+                        'orden': 'pregunta_asesor'}))
     # La reunion - pregunta de asesor no existe.
     else:
-        error = True
+        form = True
     return render_to_response(PATH + 'delReunion_preguntaAsesor.html',
-        {'user': request.user, 'error': error})
+        {'user': request.user, 'form': form})
 
 @checkAdministradorPrincipal
 @login_required
