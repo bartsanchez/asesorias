@@ -6,7 +6,7 @@ from django.db import models
 # Create your models here.
 class Centro(models.Model):
     id_centro = models.AutoField(primary_key=True)
-    nombre_centro = models.CharField("Centro", max_length=25,
+    nombre_centro = models.CharField("*Centro", max_length=25,
         unique=True)
 
     class Meta:
