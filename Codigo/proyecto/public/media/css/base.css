@@ -142,6 +142,10 @@ td {
 	float: left;
 }
 
+#logo img {
+        border-style: none;
+}
+
 /*
 	MENU HORIZONTAL
 */
