@@ -211,17 +211,25 @@ def delTitulacion(request, centro, nombre_titulacion,
         nombre_titulacion, plan_estudios)
     # Si existe se elimina.
     if instancia_titulacion:
-        instancia_titulacion.borrar()
-        # Redirige a la pagina de listar titulaciones.
-        return HttpResponseRedirect(reverse(
-            'listTitulacion_administradorCentro',
-            kwargs={'centro': centro,
-            'orden': 'nombre_centro'}))
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
+
+            if confirmacion == 'True':
+                instancia_titulacion.borrar()
+            # Redirige a la pagina de listar titulaciones.
+            return HttpResponseRedirect(reverse(
+                'listTitulacion_administradorCentro',
+                kwargs={'centro': centro,
+                'orden': 'nombre_centro'}))
     # La titulacion no existe.
     else:
-        error = True
+        form = True
     return render_to_response(PATH + 'delTitulacion.html',
-        {'user': request.user, 'error': error, 'centro': centro})
+        {'user': request.user, 'form': form, 'centro': centro})
 
 @checkCentro
 @login_required
