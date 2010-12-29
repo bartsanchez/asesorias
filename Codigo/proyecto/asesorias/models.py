@@ -718,7 +718,8 @@ class CalificacionConvocatoria(models.Model):
 
 class PlantillaEntrevistaOficial(models.Model):
     id_entrevista_oficial = models.AutoField(primary_key=True)
-    descripcion = models.CharField("Descripción", max_length=100)
+    descripcion = models.CharField("Descripción", max_length=100,
+        blank=True, null=True)
     ultima_modificacion = models.DateField("Última modificación",
         auto_now=True)
 
