@@ -329,13 +329,13 @@ class Departamento(models.Model):
         return self.nombre_departamento
 
 class Asesor(models.Model):
-    dni_pasaporte = models.CharField("DNI/Pasaporte", primary_key=True,
+    dni_pasaporte = models.CharField("*DNI/Pasaporte", primary_key=True,
         max_length=9)
-    correo_electronico = models.EmailField("Correo electrónico",
+    correo_electronico = models.EmailField("*Correo electrónico",
         unique=True)
-    nombre = models.CharField(max_length=50)
-    apellidos = models.CharField(max_length=100)
-    telefono = models.IntegerField("Teléfono")
+    nombre = models.CharField("*Nombre", max_length=50)
+    apellidos = models.CharField(max_length=100, blank=True, null=True)
+    telefono = models.IntegerField("Teléfono", blank=True, null=True)
 
     class Meta:
         db_table = "Asesores"
