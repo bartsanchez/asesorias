@@ -746,9 +746,9 @@ class PreguntaOficial(models.Model):
     id_entrevista_oficial = \
         models.ForeignKey('PlantillaEntrevistaOficial',
         db_column='id_entrevista_oficial',
-        verbose_name="Entrevista oficial")
-    id_pregunta_oficial = models.IntegerField("Pregunta oficial")
-    enunciado = models.CharField(max_length=150)
+        verbose_name="*Entrevista oficial")
+    id_pregunta_oficial = models.IntegerField("*Pregunta oficial")
+    enunciado = models.CharField("*Enunciado", max_length=150)
     ultima_modificacion = models.DateField("Última modificación",
         auto_now=True)
 
