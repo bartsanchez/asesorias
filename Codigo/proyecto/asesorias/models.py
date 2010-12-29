@@ -618,9 +618,9 @@ class Matricula(models.Model):
     id_centro = models.IntegerField()
     id_titulacion = models.IntegerField()
     id_asignatura = models.IntegerField()
-    curso_academico = models.IntegerField("Curso académico")
-    dni_pasaporte = models.CharField("DNI/Pasaporte", max_length=9)
-    comentario = models.CharField(max_length=100)
+    curso_academico = models.IntegerField("*Curso académico")
+    dni_pasaporte = models.CharField("*DNI/Pasaporte", max_length=9)
+    comentario = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         db_table = "Matriculas"
