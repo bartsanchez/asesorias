@@ -360,11 +360,12 @@ class Asesor(models.Model):
 class AsesorCursoAcademico(models.Model):
     codigo_asesorCursoAcademico = models.AutoField(primary_key=True)
     dni_pasaporte = models.ForeignKey('Asesor',
-        db_column='dni_pasaporte', verbose_name="DNI/Pasaporte")
-    curso_academico = models.IntegerField("Curso académico")
-    observaciones = models.CharField(max_length=100)
+        db_column='dni_pasaporte', verbose_name="*DNI/Pasaporte")
+    curso_academico = models.IntegerField("*Curso académico")
+    observaciones = models.CharField(max_length=100, blank=True,
+        null=True)
     id_departamento = models.ForeignKey('Departamento',
-        db_column='id_departamento', verbose_name="Departamento")
+        db_column='id_departamento', verbose_name="*Departamento")
 
     class Meta:
         db_table = "AsesoresCursoAcademico"
