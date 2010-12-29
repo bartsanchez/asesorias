@@ -566,12 +566,13 @@ class Alumno(models.Model):
 class AlumnoCursoAcademico(models.Model):
     codigo_alumnoCursoAcademico = models.AutoField(primary_key=True)
     dni_pasaporte_alumno = models.ForeignKey('Alumno',
-        db_column='dni_pasaporte', verbose_name="DNI/Pasaporte")
-    curso_academico = models.IntegerField("Curso académico")
-    observaciones = models.CharField(max_length=100)
+        db_column='dni_pasaporte', verbose_name="*DNI/Pasaporte")
+    curso_academico = models.IntegerField("*Curso académico")
+    observaciones = models.CharField(max_length=100,
+        blank=True, null=True)
     dni_pasaporte_asesor = models.ForeignKey(
         'Asesor', db_column='dni_pasaporte_asesor',
-        verbose_name="DNI/Pasaporte Asesor")
+        verbose_name="*DNI/Pasaporte Asesor")
 
     class Meta:
         db_table = "AlumnosCursoAcademico"
