@@ -291,25 +291,32 @@ def delReunionGrupal(request, curso_academico, fecha):
         'dni_pasaporte_alumno', flat=True)
 
     if lista_alumnos:
-        error = False
-        for dni in lista_alumnos:
-            reuniones = models.Reunion.objects.filter(
-                dni_pasaporte=dni,
-                curso_academico= curso_academico,
-                fecha=fecha,
-                tipo='GRU')
-            if reuniones:
-                for reunion in reuniones:
-                    reunion.borrar()
-        return HttpResponseRedirect(
-            reverse('listReunion_Asesor',kwargs={
-            'curso_academico': curso_academico,
-            'orden': 'fecha'}))
+        # Se carga el formulario de confirmacion.
+        form = forms.RealizarConfirmacion()
+        # Se ha modificado el formulario original.
+        if request.method == 'POST':
+            form = forms.RealizarConfirmacion(request.POST)
+            confirmacion = request.POST['confirmacion']
+
+            if confirmacion == 'True':
+                for dni in lista_alumnos:
+                    reuniones = models.Reunion.objects.filter(
+                        dni_pasaporte=dni,
+                        curso_academico= curso_academico,
+                        fecha=fecha,
+                        tipo='GRU')
+                    if reuniones:
+                        for reunion in reuniones:
+                            reunion.borrar()
+            return HttpResponseRedirect(
+                reverse('listReunion_Asesor',kwargs={
+                'curso_academico': curso_academico,
+                'orden': 'fecha'}))
     else:
-        error = True
+        form = True
 
     return render_to_response(PATH + 'delReunion.html',
-        {'user': request.user, 'error': error,
+        {'user': request.user, 'form': form,
         'curso_academico': curso_academico, 'fecha': fecha})
 
 def addAlumnoAReunionGrupal(request, curso_academico, lista_alumnos,
