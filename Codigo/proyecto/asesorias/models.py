@@ -780,13 +780,16 @@ class Reunion(models.Model):
     )
 
     codigo_reunion = models.AutoField(primary_key=True)
-    dni_pasaporte = models.CharField("DNI/Pasaporte", max_length=9)
-    curso_academico = models.IntegerField("Curso académico")
+    dni_pasaporte = models.CharField("*DNI/Pasaporte", max_length=9)
+    curso_academico = models.IntegerField("*Curso académico")
     id_reunion = models.IntegerField()
-    fecha = models.DateField()
-    tipo = models.CharField(max_length=3, choices=TIPOS_REUNION)
-    comentario_asesor = models.CharField(max_length=100)
-    comentario_alumno = models.CharField(max_length=100)
+    fecha = models.DateField("*Fecha", blank=True, null=True)
+    tipo = models.CharField("*Tipo", max_length=3,
+        choices=TIPOS_REUNION)
+    comentario_asesor = models.CharField(max_length=100,
+        blank=True, null=True)
+    comentario_alumno = models.CharField(max_length=100,
+        blank=True, null=True)
 
     class Meta:
         db_table = "Reuniones"
