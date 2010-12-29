@@ -154,16 +154,20 @@ class Asignatura(models.Model):
     id_centro = models.IntegerField()
     id_titulacion = models.IntegerField()
     id_asignatura = models.IntegerField()
-    nombre_asignatura = models.CharField("Asignatura", max_length=50)
-    curso = models.IntegerField()
-    tipo = models.CharField(max_length=3, choices=TIPOS_ASIGNATURAS)
-    nCreditosTeoricos = models.FloatField("Nº de créditos teóricos")
-    nCreditosPracticos = models.FloatField("Nº de créditos prácticos")
+    nombre_asignatura = models.CharField("*Asignatura", max_length=50)
+    curso = models.IntegerField(blank=True, null=True)
+    tipo = models.CharField(max_length=3, choices=TIPOS_ASIGNATURAS,
+        blank=True, null=True)
+    nCreditosTeoricos = models.FloatField("Nº de créditos teóricos",
+        blank=True, null=True)
+    nCreditosPracticos = models.FloatField("Nº de créditos prácticos",
+        blank=True, null=True)
 
     class Meta:
         db_table = "Asignaturas"
-        unique_together = ("id_centro", "id_titulacion",
-            "id_asignatura")
+        unique_together = (("id_centro", "id_titulacion",
+            "id_asignatura"), ("id_centro", "id_titulacion",
+            "nombre_asignatura"))
 
     def editar(self, id_asignatura_antiguo):
         # Se obtienen todas las asignaturas curso academico de la
