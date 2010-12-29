@@ -232,6 +232,31 @@ class MatriculaForm(forms.ModelForm):
         model = models.Matricula
 
 class CalificacionConvocatoriaForm(forms.ModelForm):
+    # Se comprueba que solo existen dos matriculas por curso academico.
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        id_centro = cleaned_data.get('id_centro')
+        id_titulacion = cleaned_data.get('id_titulacion')
+        id_asignatura = cleaned_data.get('id_asignatura')
+        curso_academico = cleaned_data.get('curso_academico')
+        dni_pasaporte = cleaned_data.get('dni_pasaporte')
+
+        numero_convocatorias = \
+            models.CalificacionConvocatoria.objects.filter(
+            id_centro=id_centro,
+            id_titulacion=id_titulacion,
+            id_asignatura=id_asignatura,
+            curso_academico=curso_academico,
+            dni_pasaporte=dni_pasaporte).count()
+
+        if numero_convocatorias >= 2:
+
+            raise forms.ValidationError('No pueden existir más de dos' +
+            ' calificaciones por curso académico para una asignatura.')
+
+        else:
+            return cleaned_data
+
     class Meta:
         model = models.CalificacionConvocatoria
 
