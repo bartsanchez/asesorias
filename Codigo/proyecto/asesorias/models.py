@@ -825,10 +825,10 @@ class CentroAdministradorCentro(models.Model):
     codigo_centro_administradorCentro = \
         models.AutoField(primary_key=True)
     id_centro = models.ForeignKey('Centro', db_column='id_centro',
-        verbose_name="Centro")
+        verbose_name="*Centro")
     id_adm_centro = models.ForeignKey('AdministradorCentro',
         db_column='id_adm_centro',
-        verbose_name="Administrador de centro")
+        verbose_name="*Administrador de centro")
 
     class Meta:
         db_table = "CentroAdministradorCentro"
@@ -850,15 +850,15 @@ class CentroAdministradorCentro(models.Model):
 class ReunionPreguntaAsesor(models.Model):
     codigo_reunion_preguntasAsesores = \
         models.AutoField(primary_key=True)
-    dni_pasaporte_alumno = models.CharField("DNI/Pasaporte Alumno",
+    dni_pasaporte_alumno = models.CharField("*DNI/Pasaporte Alumno",
         max_length=9)
-    curso_academico = models.IntegerField("Curso académico")
+    curso_academico = models.IntegerField("*Curso académico")
     id_reunion = models.IntegerField()
-    dni_pasaporte_asesor = models.CharField("DNI/Pasaporte Asesor",
+    dni_pasaporte_asesor = models.CharField("*DNI/Pasaporte Asesor",
         max_length=9)
-    id_entrevista_asesor = models.IntegerField("Entrevista asesor")
-    id_pregunta_asesor = models.IntegerField("Pregunta asesor")
-    respuesta = models.CharField(max_length=150)
+    id_entrevista_asesor = models.IntegerField("*Entrevista asesor")
+    id_pregunta_asesor = models.IntegerField("*Pregunta asesor")
+    respuesta = models.CharField("*Respuesta", max_length=150)
 
     class Meta:
         db_table = "ReunionPreguntaAsesor"
