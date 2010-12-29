@@ -430,10 +430,11 @@ class AsesorCursoAcademico(models.Model):
 class PlantillaEntrevistaAsesor(models.Model):
     codigo_plantillaEntrevistaAsesor = \
         models.AutoField(primary_key=True)
-    dni_pasaporte = models.CharField("DNI/Pasaporte", max_length=9)
-    curso_academico = models.IntegerField("Curso académico")
-    id_entrevista_asesor = models.IntegerField("Entrevista asesor")
-    descripcion = models.CharField("Descripción", max_length=100)
+    dni_pasaporte = models.CharField("*DNI/Pasaporte", max_length=9)
+    curso_academico = models.IntegerField("*Curso académico")
+    id_entrevista_asesor = models.IntegerField("*Entrevista asesor")
+    descripcion = models.CharField("Descripción", max_length=100,
+        blank=True, null=True)
     ultima_modificacion = models.DateField("Última modificación",
         auto_now=True)
 
