@@ -880,12 +880,12 @@ class ReunionPreguntaAsesor(models.Model):
 class ReunionPreguntaOficial(models.Model):
     codigo_reunion_preguntasOficiales = \
         models.AutoField(primary_key=True)
-    dni_pasaporte = models.CharField("DNI/Pasaporte", max_length=9)
-    curso_academico = models.IntegerField("Curso académico")
+    dni_pasaporte = models.CharField("*DNI/Pasaporte", max_length=9)
+    curso_academico = models.IntegerField("*Curso académico")
     id_reunion = models.IntegerField()
-    id_entrevista_oficial = models.IntegerField("Entrevista oficial")
-    id_pregunta_oficial = models.IntegerField("Pregunta oficial")
-    respuesta = models.CharField(max_length=150)
+    id_entrevista_oficial = models.IntegerField("*Entrevista oficial")
+    id_pregunta_oficial = models.IntegerField("*Pregunta oficial")
+    respuesta = models.CharField("*Respuesta", max_length=150)
 
     class Meta:
         db_table = "ReunionPreguntaOficial"
