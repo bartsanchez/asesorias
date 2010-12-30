@@ -1,11 +1,11 @@
 \item \textbf{Configuración del servidor web}.
    Para llevar a cabo la configuración del servidor web, debemos hacer uso del
-   contenido de la carpeta \textit{/public/} que acompaña al código fuente de
+   contenido de la carpeta \textit{public} que acompaña al código fuente de
    esta aplicación.
 
    En primer lugar, para realizar la configuración del servidor \textit{Apache}
    con su módulo \textit{mod\_wsgi}, se proporciona al usuario el archivo
-   \textit{httpd.conf} situado en \textit{/public/wsgi-script/}. Este archivo
+   \textit{httpd.conf} situado en \textit{public/wsgi-script/}. Este archivo
    es necesario sustituirlo por el archivo de configuración de \textit{Apache}
    del mismo nombre, situado en la ruta del sistema \textit{/etc/apache2/}. Para
    realizar dicha sustitución, introducimos el siguiente comando:
@@ -16,8 +16,10 @@
    \end{verbatim}
 
    Nótese que \textit{ruta-proyecto} debe ser la ruta absoluta al directorio
-   \textit{/proyecto/} que contiene el código fuente proporcionado por esta
-   aplicación.
+   \textit{proyecto} que contiene el código fuente proporcionado por esta
+   aplicación. Por ejemplo, si el código fuente de la aplicación ha sido
+   descargado al directorio \textit{home} del usuario \textit{usuario},
+   la ruta debería ser: \textit{/home/usuario/}
 
    Este archivo hay que modificarlo para configurar correctamente el servidor
    web, ya que hay que tener en cuenta la ruta absoluta del código fuente de
@@ -29,10 +31,8 @@
    # nano /etc/apache2/httpd.conf
    \end{verbatim}
 
-   Una vez dentro, debemos sustituir la cadena \textit{/ruta-proyecto/} por
-   la ruta absoluta donde tengamos almacenado nuestro código fuente. Es decir,
-   un nivel superior de donde se encuentra el directorio \textit{/proyecto/}
-   proporcionado por el código fuente de esta aplicación.
+   Una vez dentro, debemos sustituir nuevamente la cadena
+   \textit{/ruta-proyecto/} tal y como hicimos en el paso anterior.
 
    Además, es necesario establecer que el archivo de configuración para el
    módulo \textit{mod\_wsgi} sea accesible para \textit{Apache}, por lo que
@@ -49,11 +49,9 @@
    # nano /var/www/wsgi-scripts/django.wsgi
    \end{verbatim}
 
-   Y una vez dentro del editor sustituimos \textit{/ruta-proyecto/} (nótese que
-   aparece dos veces en el fichero) por la ruta absoluta donde tengamos
-   almacenado nuestro código fuente. Es decir, un nivel superior de donde se
-   encuentra el directorio \textit{/proyecto/} proporcionado por el código
-   fuente de esta aplicación.
+   Y una vez dentro del editor sustituimos de nuevo \textit{/ruta-proyecto/}
+   (nótese que aparece dos veces en el fichero) tal y como lo hicimos en los
+   pasos anteriores.
 
    Llegados a este punto es necesario proporcionar a \textit{Apache} los
    archivos multimedia (imágenes y hojas de estilo) necesarias para la ejecución
