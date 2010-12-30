@@ -10,7 +10,7 @@
 \usepackage[bookmarksnumbered=true,pdfborder={0 0 0},colorlinks=true,
             linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
 \usepackage[final]{pdfpages}
-\usepackage[nottoc]{tocbibind}
+\usepackage[nottoc,notlof]{tocbibind}
 \usepackage{multirow}
 \usepackage{longtable}
 %
@@ -50,6 +50,8 @@
    \pagenumbering{roman}
    \tableofcontents
 
+   \listoffigures
+
    \chapter{Introducción}
    \pagenumbering{arabic}
       \input{1.Introduccion/introduccion}
@@ -67,8 +69,6 @@
    \chapter{Funcionamiento de la aplicación}
 
    \chapter{Ejemplos prácticos}
-
-   \listoffigures
 
    \input{Bibliografia/bibliografia}
 
