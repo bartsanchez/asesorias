@@ -29,6 +29,8 @@ urlpatterns = patterns(VISTAS + 'vistasAdministradorPrincipal',
     url(r'^plantillas/$',
         'administrador_plantillas', name='administrador_plantillas'),
 
+    url(r'^ayuda/$', 'ayuda', name='ayuda_administradorPrincipal'),
+
     ### Includes a cada entidad ###
 
     (r'^centro/',

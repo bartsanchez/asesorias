@@ -51,3 +51,9 @@ def administrador_reuniones(request):
 def administrador_plantillas(request):
     return render_to_response(PATH + 'administrador_plantillas.html',
         {'user': request.user})
+
+@checkAdministradorPrincipal
+@login_required
+def ayuda(request):
+    return render_to_response(PATH + 'ayuda.html',
+        {'user': request.user})
