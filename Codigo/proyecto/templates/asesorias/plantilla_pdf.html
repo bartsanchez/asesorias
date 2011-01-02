@@ -1,46 +1,48 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-	<head>
-		<title>Lista de {{ name }}</title>
-		<style type="text/css">
-			@import url(http://localhost/media/css/pdf.css);
+    <head>
+        <title>Lista de {{ name }}</title>
+        <style type="text/css">
+            @import url(http://localhost/media/css/pdf.css);
 
-			@font-face {
-				font-family: "Lucida Grande", Verdana, Arial, sans-serif;
-				}
+            @font-face {
+                font-family: "Lucida Grande", Verdana, Arial, sans-serif;
+                }
 
-			@page {
-				size: A4;
-				margin: 1cm;
-				@frame footer {
-					-pdf-frame-content: footerContent;
-					bottom: 0cm;
-					margin-left: 9.5cm;
-					margin-right: 9.5cm;
-					height: 1cm;
-				}
-			}
-		</style>
-	</head>
+            @page {
+                size: A4;
+                margin: 1cm;
+                @frame footer {
+                    -pdf-frame-content: footerContent;
+                    bottom: 0cm;
+                    margin-left: 9.5cm;
+                    margin-right: 9.5cm;
+                    height: 1cm;
+                }
+            }
+        </style>
+    </head>
 
-	<body>
-		<div>
-			<table>
-			<caption><h2>Lista de {{ name }}</h2></caption>
+    <body>
+        <h1>Asesorías Académicas</h1>
 
-				{% for item in mylist %}
-				<tr>
-					<th scope="row"><p>{{ item }}</p></th>
-				</tr>
-				{% endfor %}
+        <div>
+            <table>
+            <caption><h2>Lista de {{ name }}</h2></caption>
 
-			</table>
-		</div>
-		<div id="footerContent">
-			{%block page_foot%}
-				Página <pdf:pagenumber>
-			{%endblock%}
-		</div>
-	</body>
+                {% for item in mylist %}
+                <tr>
+                    <th scope="row"><p>{{ item }}</p></th>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+        <div id="footerContent">
+            {%block page_foot%}
+                Página <pdf:pagenumber>
+            {%endblock%}
+        </div>
+    </body>
 </html>
 
