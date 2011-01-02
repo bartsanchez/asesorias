@@ -305,8 +305,8 @@ class ReunionForm(forms.ModelForm):
     class Meta:
         model = models.Reunion
         widgets = {
-            'fecha' : SelectDateWidget(years=range(date.today().year,
-            (date.today().year + 2))),
+            'fecha' : SelectDateWidget(years=range(date.today().year +1,
+            1899, -1)),
         }
 
 class ReunionFormSelect(forms.Form):
