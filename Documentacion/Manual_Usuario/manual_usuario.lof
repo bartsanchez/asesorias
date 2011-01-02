@@ -6,12 +6,13 @@
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Captura de pantalla de la gesti\IeC {\'o}n de la informaci\IeC {\'o}n.}}{18}{figure.3.2}
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Captura de pantalla de una b\IeC {\'u}squeda de elementos.}}{20}{figure.3.3}
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Captura de pantalla de un listado de elementos.}}{20}{figure.3.4}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Captura de pantalla de la creaci\IeC {\'o}n de un nuevo elemento.}}{21}{figure.3.5}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Captura de pantalla del icono \textit {Editar}.}}{21}{figure.3.6}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Captura de pantalla de actualizaci\IeC {\'o}n de un elemento.}}{21}{figure.3.7}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Captura de pantalla del icono \textit {Eliminar}.}}{22}{figure.3.8}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Captura de pantalla de la ventana de confirmaci\IeC {\'o}n para \textit {Eliminar} un elemento.}}{22}{figure.3.9}
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Captura de pantalla del bot\IeC {\'o}n \textit {Confirmar}.}}{22}{figure.3.10}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Captura de pantalla del icono \textit {A\IeC {\~n}adir nuevo}.}}{21}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Captura de pantalla de la creaci\IeC {\'o}n de un nuevo elemento.}}{21}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Captura de pantalla del icono \textit {Editar}.}}{21}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Captura de pantalla de actualizaci\IeC {\'o}n de un elemento.}}{22}{figure.3.8}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Captura de pantalla del icono \textit {Eliminar}.}}{22}{figure.3.9}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Captura de pantalla de la ventana de confirmaci\IeC {\'o}n para \textit {Eliminar} un elemento.}}{22}{figure.3.10}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Captura de pantalla del bot\IeC {\'o}n \textit {Confirmar}.}}{22}{figure.3.11}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Captura de pantalla de la caja de texto para introducir el nombre.}}{23}{figure.4.1}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Captura de pantalla de la caja de texto para introducir la contrase\IeC {\~n}a.}}{24}{figure.4.2}
@@ -26,33 +27,32 @@
 \contentsline {figure}{\numberline {4.11}{\ignorespaces Captura del men\IeC {\'u} principal del usuario \textit {Administrador principal}.}}{28}{figure.4.11}
 \contentsline {figure}{\numberline {4.12}{\ignorespaces Captura del men\IeC {\'u} lateral del usuario \textit {Administrador principal}.}}{28}{figure.4.12}
 \contentsline {figure}{\numberline {4.13}{\ignorespaces Captura de pantalla de la lista de centros para el usuario \textit {Administrador principal}.}}{28}{figure.4.13}
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Captura de pantalla del icono \textit {A\IeC {\~n}adir nuevo}.}}{29}{figure.4.14}
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Captura de pantalla del formulario de creaci\IeC {\'o}n de \textit {Centro}.}}{29}{figure.4.15}
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Captura de pantalla del formulario de edici\IeC {\'o}n de \textit {Centro}.}}{29}{figure.4.16}
-\contentsline {figure}{\numberline {4.17}{\ignorespaces Captura de pantalla de la lista de administradores de centro para el usuario \textit {Administrador principal}.}}{30}{figure.4.17}
-\contentsline {figure}{\numberline {4.18}{\ignorespaces Captura de pantalla del formulario de creaci\IeC {\'o}n de \textit {Administrador de centro}.}}{30}{figure.4.18}
-\contentsline {figure}{\numberline {4.19}{\ignorespaces Captura de pantalla del formulario de edici\IeC {\'o}n de \textit {Administrador de centro}.}}{31}{figure.4.19}
-\contentsline {figure}{\numberline {4.20}{\ignorespaces Captura de pantalla de la lista desplegable para seleccionar centro para el usuario \textit {Administrador principal}.}}{32}{figure.4.20}
-\contentsline {figure}{\numberline {4.21}{\ignorespaces Captura de pantalla del bot\IeC {\'o}n \textit {A\IeC {\~n}adir}.}}{32}{figure.4.21}
-\contentsline {figure}{\numberline {4.22}{\ignorespaces Captura de pantalla de la lista de centro - administradores de centro para el usuario \textit {Administrador principal}.}}{32}{figure.4.22}
-\contentsline {figure}{\numberline {4.23}{\ignorespaces Captura de pantalla del bot\IeC {\'o}n \textit {Seleccionar}.}}{33}{figure.4.23}
-\contentsline {figure}{\numberline {4.24}{\ignorespaces Captura de pantalla del formulario de creaci\IeC {\'o}n de \textit {Centro - Administrador de centro}.}}{33}{figure.4.24}
-\contentsline {figure}{\numberline {4.25}{\ignorespaces Captura de pantalla del formulario de edici\IeC {\'o}n de \textit {Centro - Administrador de centro}.}}{34}{figure.4.25}
-\contentsline {figure}{\numberline {4.26}{\ignorespaces Captura de pantalla de la lista de titulaciones para el usuario \textit {Administrador principal}.}}{34}{figure.4.26}
-\contentsline {figure}{\numberline {4.27}{\ignorespaces Captura de pantalla del formulario de creaci\IeC {\'o}n de \textit {Titulaci\IeC {\'o}n}.}}{35}{figure.4.27}
-\contentsline {figure}{\numberline {4.28}{\ignorespaces Captura de pantalla del formulario de edici\IeC {\'o}n de \textit {Titulaci\IeC {\'o}n}.}}{36}{figure.4.28}
-\contentsline {figure}{\numberline {4.29}{\ignorespaces Captura de pantalla de la lista desplegable para seleccionar titulaci\IeC {\'o}n para el usuario \textit {Administrador principal}.}}{36}{figure.4.29}
-\contentsline {figure}{\numberline {4.30}{\ignorespaces Captura de pantalla de la lista de asignaturas para el usuario \textit {Administrador principal}.}}{37}{figure.4.30}
-\contentsline {figure}{\numberline {4.31}{\ignorespaces Captura de pantalla del formulario de creaci\IeC {\'o}n de \textit {Asignatura}.}}{37}{figure.4.31}
-\contentsline {figure}{\numberline {4.32}{\ignorespaces Captura de pantalla del formulario de edici\IeC {\'o}n de \textit {Asignatura}.}}{38}{figure.4.32}
-\contentsline {figure}{\numberline {4.33}{\ignorespaces Captura de pantalla de la lista desplegable para seleccionar asignatura para el usuario \textit {Administrador principal}.}}{39}{figure.4.33}
-\contentsline {figure}{\numberline {4.34}{\ignorespaces Captura de pantalla de la lista de asignaturas curso acad\IeC {\'e}mico para el usuario \textit {Administrador principal}.}}{40}{figure.4.34}
-\contentsline {figure}{\numberline {4.35}{\ignorespaces Captura de pantalla del formulario de creaci\IeC {\'o}n de \textit {Asignatura curso acad\IeC {\'e}mico}.}}{40}{figure.4.35}
-\contentsline {figure}{\numberline {4.36}{\ignorespaces Captura de pantalla del formulario de edici\IeC {\'o}n de \textit {Asignatura curso acad\IeC {\'e}mico}.}}{41}{figure.4.36}
-\contentsline {figure}{\numberline {4.37}{\ignorespaces Captura de pantalla de la lista de departamentos para el usuario \textit {Administrador principal}.}}{41}{figure.4.37}
-\contentsline {figure}{\numberline {4.38}{\ignorespaces Captura de pantalla del formulario de creaci\IeC {\'o}n de \textit {Departamento}.}}{42}{figure.4.38}
-\contentsline {figure}{\numberline {4.39}{\ignorespaces Captura de pantalla del formulario de edici\IeC {\'o}n de \textit {Departamento}.}}{42}{figure.4.39}
-\contentsline {figure}{\numberline {4.40}{\ignorespaces Captura de pantalla de la lista de asesores para el usuario \textit {Administrador principal}.}}{43}{figure.4.40}
-\contentsline {figure}{\numberline {4.41}{\ignorespaces Captura de pantalla del formulario de creaci\IeC {\'o}n de \textit {Asesor}.}}{43}{figure.4.41}
-\contentsline {figure}{\numberline {4.42}{\ignorespaces Captura de pantalla del formulario de edici\IeC {\'o}n de \textit {Asesor}.}}{44}{figure.4.42}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Captura de pantalla del formulario de creaci\IeC {\'o}n de \textit {Centro}.}}{29}{figure.4.14}
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Captura de pantalla del formulario de edici\IeC {\'o}n de \textit {Centro}.}}{29}{figure.4.15}
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Captura de pantalla de la lista de administradores de centro para el usuario \textit {Administrador principal}.}}{30}{figure.4.16}
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Captura de pantalla del formulario de creaci\IeC {\'o}n de \textit {Administrador de centro}.}}{30}{figure.4.17}
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Captura de pantalla del formulario de edici\IeC {\'o}n de \textit {Administrador de centro}.}}{31}{figure.4.18}
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Captura de pantalla de la lista desplegable para seleccionar centro para el usuario \textit {Administrador principal}.}}{32}{figure.4.19}
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Captura de pantalla del bot\IeC {\'o}n \textit {A\IeC {\~n}adir}.}}{32}{figure.4.20}
+\contentsline {figure}{\numberline {4.21}{\ignorespaces Captura de pantalla de la lista de centro - administradores de centro para el usuario \textit {Administrador principal}.}}{32}{figure.4.21}
+\contentsline {figure}{\numberline {4.22}{\ignorespaces Captura de pantalla del bot\IeC {\'o}n \textit {Seleccionar}.}}{32}{figure.4.22}
+\contentsline {figure}{\numberline {4.23}{\ignorespaces Captura de pantalla del formulario de creaci\IeC {\'o}n de \textit {Centro - Administrador de centro}.}}{33}{figure.4.23}
+\contentsline {figure}{\numberline {4.24}{\ignorespaces Captura de pantalla del formulario de edici\IeC {\'o}n de \textit {Centro - Administrador de centro}.}}{33}{figure.4.24}
+\contentsline {figure}{\numberline {4.25}{\ignorespaces Captura de pantalla de la lista de titulaciones para el usuario \textit {Administrador principal}.}}{34}{figure.4.25}
+\contentsline {figure}{\numberline {4.26}{\ignorespaces Captura de pantalla del formulario de creaci\IeC {\'o}n de \textit {Titulaci\IeC {\'o}n}.}}{35}{figure.4.26}
+\contentsline {figure}{\numberline {4.27}{\ignorespaces Captura de pantalla del formulario de edici\IeC {\'o}n de \textit {Titulaci\IeC {\'o}n}.}}{35}{figure.4.27}
+\contentsline {figure}{\numberline {4.28}{\ignorespaces Captura de pantalla de la lista desplegable para seleccionar titulaci\IeC {\'o}n para el usuario \textit {Administrador principal}.}}{36}{figure.4.28}
+\contentsline {figure}{\numberline {4.29}{\ignorespaces Captura de pantalla de la lista de asignaturas para el usuario \textit {Administrador principal}.}}{37}{figure.4.29}
+\contentsline {figure}{\numberline {4.30}{\ignorespaces Captura de pantalla del formulario de creaci\IeC {\'o}n de \textit {Asignatura}.}}{37}{figure.4.30}
+\contentsline {figure}{\numberline {4.31}{\ignorespaces Captura de pantalla del formulario de edici\IeC {\'o}n de \textit {Asignatura}.}}{38}{figure.4.31}
+\contentsline {figure}{\numberline {4.32}{\ignorespaces Captura de pantalla de la lista desplegable para seleccionar asignatura para el usuario \textit {Administrador principal}.}}{39}{figure.4.32}
+\contentsline {figure}{\numberline {4.33}{\ignorespaces Captura de pantalla de la lista de asignaturas curso acad\IeC {\'e}mico para el usuario \textit {Administrador principal}.}}{39}{figure.4.33}
+\contentsline {figure}{\numberline {4.34}{\ignorespaces Captura de pantalla del formulario de creaci\IeC {\'o}n de \textit {Asignatura curso acad\IeC {\'e}mico}.}}{40}{figure.4.34}
+\contentsline {figure}{\numberline {4.35}{\ignorespaces Captura de pantalla del formulario de edici\IeC {\'o}n de \textit {Asignatura curso acad\IeC {\'e}mico}.}}{40}{figure.4.35}
+\contentsline {figure}{\numberline {4.36}{\ignorespaces Captura de pantalla de la lista de departamentos para el usuario \textit {Administrador principal}.}}{41}{figure.4.36}
+\contentsline {figure}{\numberline {4.37}{\ignorespaces Captura de pantalla del formulario de creaci\IeC {\'o}n de \textit {Departamento}.}}{42}{figure.4.37}
+\contentsline {figure}{\numberline {4.38}{\ignorespaces Captura de pantalla del formulario de edici\IeC {\'o}n de \textit {Departamento}.}}{42}{figure.4.38}
+\contentsline {figure}{\numberline {4.39}{\ignorespaces Captura de pantalla de la lista de asesores para el usuario \textit {Administrador principal}.}}{43}{figure.4.39}
+\contentsline {figure}{\numberline {4.40}{\ignorespaces Captura de pantalla del formulario de creaci\IeC {\'o}n de \textit {Asesor}.}}{43}{figure.4.40}
+\contentsline {figure}{\numberline {4.41}{\ignorespaces Captura de pantalla del formulario de edici\IeC {\'o}n de \textit {Asesor}.}}{44}{figure.4.41}
 \addvspace {10\p@ }
