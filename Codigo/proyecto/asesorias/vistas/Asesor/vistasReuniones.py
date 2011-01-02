@@ -173,12 +173,12 @@ def addReunionGrupal(request, curso_academico, lista_alumnos):
                     return HttpResponseRedirect(
                         reverse('addReunionGrupal_Asesor',
                             kwargs={'curso_academico': curso_academico,
-                            'lista_alumnos': ''}))
+                            'lista_alumnos': 'null'}))
             else:
                 return HttpResponseRedirect(
                     reverse('addReunionGrupal_Asesor',
                         kwargs={'curso_academico': curso_academico,
-                        'lista_alumnos': ''}))
+                        'lista_alumnos': 'null'}))
     else:
         lista_participantes = False
 
@@ -211,7 +211,7 @@ def addReunionGrupal(request, curso_academico, lista_alumnos):
             return HttpResponseRedirect(
                 reverse('addReunionGrupal_Asesor',
                     kwargs={'curso_academico': curso_academico,
-                    'lista_alumnos': ''}))
+                    'lista_alumnos': 'null'}))
 
         # Comprueba que la fecha sea correcta.
         try:
@@ -231,7 +231,7 @@ def addReunionGrupal(request, curso_academico, lista_alumnos):
             return HttpResponseRedirect(
                     reverse('addReunionGrupal_Asesor',
                         kwargs={'curso_academico': curso_academico,
-                        'lista_alumnos': ''}))
+                        'lista_alumnos': 'null'}))
 
         for alumno in lista_participantes:
             # Se determina el siguiente id_reunion para el alumno curso
@@ -260,7 +260,7 @@ def addReunionGrupal(request, curso_academico, lista_alumnos):
                 return HttpResponseRedirect(
                     reverse('addReunionGrupal_Asesor',
                         kwargs={'curso_academico': curso_academico,
-                        'lista_alumnos': ''}))
+                        'lista_alumnos': 'null'}))
 
         return HttpResponseRedirect(
                     reverse('listReunion_Asesor',kwargs={
@@ -321,6 +321,8 @@ def delReunionGrupal(request, curso_academico, fecha):
 
 def addAlumnoAReunionGrupal(request, curso_academico, lista_alumnos,
     dni_pasaporte):
+    if lista_alumnos == 'null':
+        lista_alumnos = ''
     # Se inserta el alumno a la reunion.
     lista_alumnos += dni_pasaporte + '&'
     return HttpResponseRedirect(reverse('addReunionGrupal_Asesor',
@@ -332,6 +334,8 @@ def delAlumnoAReunionGrupal(request, curso_academico, lista_alumnos,
     # Se busca el alumno para borrarlo de la reunion.
     if not (lista_alumnos.find(dni_pasaporte)<0):
         lista_alumnos = lista_alumnos.replace(dni_pasaporte + '&', '')
+    if lista_alumnos == '':
+        lista_alumnos = 'null'
     return HttpResponseRedirect(reverse('addReunionGrupal_Asesor',
         kwargs={'curso_academico': curso_academico,
         'lista_alumnos': lista_alumnos}))
