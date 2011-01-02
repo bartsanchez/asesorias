@@ -10,7 +10,7 @@
                                 {% block curso_academico %}
                                     <div class="etiqueta">
                                         <p>Curso académico:</p>
-                                        <p><em>{{ curso_academico }}/{{ curso_academico|add:'1' }}</em></p>
+                                        <p><em><a href="{% url setCursoAcademico_Alumno curso_academico %}">{{ curso_academico }}/{{ curso_academico|add:'1' }}</a></em></p>
                                     </div>
                                 {% endblock %}
 
