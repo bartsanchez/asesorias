@@ -24,13 +24,13 @@
                 <!-- Centros - Administradores de centro. -->
                 <tr>
                     <th scope="row"><a href="{% url selectCentro_CentroAdministradorCentro %}">Centros - Administradores de centro</a></th>
-                    <td><a href="{% url addCentro_administradorCentro '' %}" class="addlink">Añadir</a></td>
+                    <td><a href="{% url addCentro_administradorCentro 'null' %}" class="addlink">Añadir</a></td>
                 </tr>
 
                 <!-- Titulaciones. -->
                 <tr>
                     <th scope="row"><a href="{% url selectCentro_Titulacion %}">Titulaciones</a></th>
-                    <td><a href="{% url addTitulacion '' %}" class="addlink">Añadir</a></td>
+                    <td><a href="{% url addTitulacion 'null' %}" class="addlink">Añadir</a></td>
                 </tr>
 
                 <!-- Asignaturas. -->
@@ -67,7 +67,7 @@
                 <!-- Asesores Curso Académico. -->
                 <tr>
                     <th scope="row"><a href="{% url selectAsesor_AsesorCursoAcademico %}">Asesores Curso Académico</a></th>
-                    <td><a href="{% url addAsesorCursoAcademico '' %}" class="addlink">Añadir</a></td>
+                    <td><a href="{% url addAsesorCursoAcademico 'null' %}" class="addlink">Añadir</a></td>
                 </tr>
 
                 </table>
@@ -142,7 +142,7 @@
                 <!-- Preguntas oficiales. -->
                 <tr>
                     <th scope="row"><a href="{% url selectEntrevistaOficial_PreguntaOficial %}">Preguntas oficiales</a></th>
-                    <td><a href="{% url addPreguntaOficial '' %}" class="addlink">Añadir</a></td>
+                    <td><a href="{% url addPreguntaOficial 'null' %}" class="addlink">Añadir</a></td>
                 </tr>
 
                 <!-- Plantillas de entrevista de asesor. -->
