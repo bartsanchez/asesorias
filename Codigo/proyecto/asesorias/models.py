@@ -900,6 +900,11 @@ class ReunionPreguntaOficial(models.Model):
             "id_reunion", "id_entrevista_oficial",
             "id_pregunta_oficial")
 
+    def determinarPlantilla(self):
+        plantilla = PlantillaEntrevistaOficial.objects.get(
+            id_entrevista_oficial=self.id_entrevista_oficial)
+        return unicode(plantilla.descripcion)
+
     def determinarEnunciado(self):
         pregunta = PreguntaOficial.objects.get(
             id_entrevista_oficial=self.id_entrevista_oficial,
