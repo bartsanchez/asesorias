@@ -1,0 +1,66 @@
+\section{Copia de seguridad}
+
+  \paragraph{}La aplicación permite la realización de copias de seguridad con
+  el objeto de evitar pérdidas de información existente en el sistema, y
+  mantener una apropiada integridad de la misma.
+
+  \paragraph{}Dado que el manejo de copias de seguridad no es una opción muy
+  corriente para la mayoría de los usuarios que utilizarán la aplicación, esta
+  opción queda restringida al usuario \textit{Administrador principal}. Además,
+  es indispensable que dicho administrador tenga acceso al sistema operativo
+  del servidor donde está funcionando la aplicación.
+
+  \paragraph{}Aprovechando que el software utilizado,
+  \textit{Django}\cite{django} en concreto, permite la creación y restauración
+  de copias de seguridad, estas operaciones se realizarán a través del mismo.
+
+\subsection{Creación de una copia de seguridad}
+
+  \paragraph{}Para la creación de una copia de seguridad de la información
+  existente en el sistema, deberá situar el \textit{prompt} en la ruta absoluta
+  al directorio \textit{proyecto} que contiene el código fuente proporcionado
+  por esta aplicación. Por ejemplo, si el código fuente de la aplicación ha sido
+  descargado al directorio \textit{home} del usuario \textit{usuario}, la ruta
+  debería ser: \textit{/home/usuario/}. Una vez situado en dicha ruta, se debe
+  introducir en la línea de comandos la siguiente orden:
+
+   \begin{verbatim}
+   $ python manage.py dumpdata > copia_seguridad.json
+   \end{verbatim}
+
+  \paragraph{}Nótese que \textit{copia\_seguridad} es el nombre que hemos puesto
+  a nuestro archivo que contiene la información del sistema, una vez guardada,
+  y \textit{json} es el formato con el que se guarda dicho archivo. No obstante,
+  en realidad no es obligatorio establecer una extensión a nuestro archivo de
+  copia de seguridad, pero es altamente recomendable ya que sugiere con mayor
+  precisión qué tipo de información contiene el archivo.
+
+  \paragraph{}Una vez introducida la orden, se habrá generado un archivo, en el
+  directorio donde ejecutamos el comando, con toda la información existente
+  en la base de datos de la aplicación.
+
+\subsection{Restauración de una copia de seguridad}
+
+  \paragraph{}Para la restauración de una copia de seguridad evidentemente
+  necesitamos haber realizado con anterioridad la creación de una copia de
+  seguridad.
+
+  \paragraph{}El archivo que se generó al realizar la copia de seguridad es
+  necesario copiarlo al directorio \textit{proyecto} que contiene el código
+  fuente proporcionado por esta aplicación. Por ejemplo, si el código fuente de
+  la aplicación ha sido descargado al directorio \textit{home} del usuario
+  \textit{usuario}, la ruta debería ser: \textit{/home/usuario/}. Seguidamente
+  nos situaremos en dicho directorio y ejecutaremos la orden:
+
+   \begin{verbatim}
+   $ python manage.py loaddata copia_seguridad.json
+   \end{verbatim}
+
+  \paragraph{}Nótese que \textit{copia\_seguridad} es el nombre del archivo que
+  contiene la información del sistema, una vez guardada, y \textit{json} es la
+  extensión que indica el formato con el que se había guarda dicho archivo, si
+  lo tuviera.
+
+  \paragraph{}Una vez introducida la orden, se habrá cargado en el sistema toda
+  la información que existía en la base de datos de la aplicación en el momento
+  en que se realizó la copia de seguridad.
