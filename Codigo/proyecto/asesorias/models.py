@@ -866,6 +866,13 @@ class ReunionPreguntaAsesor(models.Model):
             "id_reunion", "dni_pasaporte_asesor",
             "id_entrevista_asesor", "id_pregunta_asesor")
 
+    def determinarPlantilla(self):
+        plantilla = PlantillaEntrevistaAsesor.objects.get(
+            dni_pasaporte=self.dni_pasaporte_asesor,
+            curso_academico=self.curso_academico,
+            id_entrevista_asesor=self.id_entrevista_asesor)
+        return unicode(plantilla.descripcion)
+
     def determinarEnunciado(self):
         pregunta = PreguntaAsesor.objects.get(
             dni_pasaporte=self.dni_pasaporte_asesor,
