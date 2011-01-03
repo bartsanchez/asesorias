@@ -81,8 +81,7 @@ def addAlumnoCursoAcademico(request, dni_pasaporte_asesor,
     # Si aun no se ha rellenado el formulario, se genera uno en blanco.
     else:
         form = forms.AlumnoCursoAcademicoForm(
-            initial={'dni_pasaporte_asesor':
-            instancia_asesorCA.dni_pasaporte,
+            initial={'dni_pasaporte_asesor': dni_pasaporte_asesor,
             'curso_academico': curso_academico,
             'dni_pasaporte_alumno': dni_pasaporte_alumno})
     return render_to_response(PATH + 'addAlumnoCursoAcademico.html',
