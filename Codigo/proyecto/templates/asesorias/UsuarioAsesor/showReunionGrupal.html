@@ -8,7 +8,7 @@
 
     <div class="module">
         <table summary="Alumnos participantes.">
-        <caption><h2>Alumnos participantes</h2></caption>
+        <caption><h2>Alumnos participantes{% if fecha %} ({{ fecha }}){% endif %}</h2></caption>
 
         {% for alumno in lista_participantes %}
         <tr>
