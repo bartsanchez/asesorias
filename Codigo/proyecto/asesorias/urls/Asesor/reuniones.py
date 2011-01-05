@@ -153,7 +153,7 @@ urlpatterns = patterns(VISTAS + 'vistasReuniones',
         name='addPreguntaOficialAReunionGrupal'),
 
     url(r'^delPreguntaOficialAReunionGrupal/(?P<fecha>[\s\w\-]+)/' +
-        '/(?P<id_entrevista_oficial>[\s\w]+)/' +
+        '(?P<id_entrevista_oficial>[\s\w]+)/' +
         '(?P<id_pregunta_oficial>[\s\w]+)/$',
 
         'delPreguntaOficialAReunionGrupal',
@@ -167,7 +167,7 @@ urlpatterns = patterns(VISTAS + 'vistasReuniones',
         name='addPreguntaAsesorAReunionGrupal'),
 
     url(r'^delPreguntaAsesorAReunionGrupal/(?P<fecha>[\s\w\-]+)/' +
-        '/(?P<id_entrevista_asesor>[\s\w]+)/' +
+        '(?P<id_entrevista_asesor>[\s\w]+)/' +
         '(?P<id_pregunta_asesor>[\s\w]+)/$',
 
         'delPreguntaAsesorAReunionGrupal',
