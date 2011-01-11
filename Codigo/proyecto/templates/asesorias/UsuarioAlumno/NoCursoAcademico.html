@@ -1,0 +1,12 @@
+{% extends "asesorias/Base/Alumno/inicio.html" %}
+
+    {% block content %}
+
+    <h1>Seleccionar curso académico.</h1>
+
+    <p>No se ha podido cambiar el curso académico.</p>
+    <p>No se presta asesoría en el curso académico seleccionado.</p>
+
+    <a href="{% url setCursoAcademico_Alumno curso_academico %}">Volver</a>
+
+    {% endblock %}
