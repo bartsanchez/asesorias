@@ -858,7 +858,8 @@ class ReunionPreguntaAsesor(models.Model):
         max_length=9)
     id_entrevista_asesor = models.IntegerField("*Entrevista asesor")
     id_pregunta_asesor = models.IntegerField("*Pregunta asesor")
-    respuesta = models.CharField("*Respuesta", max_length=150)
+    respuesta = models.CharField("Respuesta", max_length=150,
+        blank=True, null=True)
 
     class Meta:
         db_table = "ReunionPreguntaAsesor"
@@ -892,7 +893,8 @@ class ReunionPreguntaOficial(models.Model):
     id_reunion = models.IntegerField()
     id_entrevista_oficial = models.IntegerField("*Entrevista oficial")
     id_pregunta_oficial = models.IntegerField("*Pregunta oficial")
-    respuesta = models.CharField("*Respuesta", max_length=150)
+    respuesta = models.CharField("Respuesta", max_length=150,
+        blank=True, null=True)
 
     class Meta:
         db_table = "ReunionPreguntaOficial"

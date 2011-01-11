@@ -789,7 +789,7 @@ def addPlantillaOficialAReunion(request, curso_academico, dni_pasaporte,
                         id_reunion=id_reunion,
                         id_entrevista_oficial=id_entrevista_oficial,
                         id_pregunta_oficial=pregunta.id_pregunta_oficial,
-                        respuesta='-')
+                        respuesta='')
                     instancia_nueva_pregunta.save()
 
     return HttpResponseRedirect(
@@ -828,7 +828,7 @@ def addPlantillaOficialAReunionGrupal(request, curso_academico, fecha,
                         id_entrevista_oficial=id_entrevista_oficial,
                         id_pregunta_oficial=
                         pregunta.id_pregunta_oficial,
-                        respuesta='-')
+                        respuesta='')
                     instancia_nueva_pregunta.save()
 
     return HttpResponseRedirect(
@@ -872,7 +872,7 @@ def addPlantillaAsesorAReunion(request, curso_academico, dni_pasaporte,
                         id_reunion=id_reunion,
                         id_entrevista_asesor=id_entrevista_asesor,
                         id_pregunta_asesor=pregunta.id_pregunta_asesor,
-                        respuesta='-')
+                        respuesta='')
                     instancia_nueva_pregunta.save()
 
     return HttpResponseRedirect(
@@ -913,7 +913,7 @@ def addPlantillaAsesorAReunionGrupal(request, curso_academico, fecha,
                         id_reunion=reunion.id_reunion,
                         id_entrevista_asesor=id_entrevista_asesor,
                         id_pregunta_asesor=pregunta.id_pregunta_asesor,
-                        respuesta='-')
+                        respuesta='')
                     instancia_nueva_pregunta.save()
 
     return HttpResponseRedirect(
@@ -952,7 +952,7 @@ def addPreguntaOficialAReunion(request, curso_academico, dni_pasaporte,
                     id_reunion=id_reunion,
                     id_entrevista_oficial=id_entrevista_oficial,
                     id_pregunta_oficial=id_pregunta_oficial,
-                    respuesta='-')
+                    respuesta='')
                 instancia_nueva_pregunta.save()
 
     return HttpResponseRedirect(
@@ -988,7 +988,7 @@ def addPreguntaOficialAReunionGrupal(request, curso_academico, fecha,
                         id_reunion=reunion.id_reunion,
                         id_entrevista_oficial=id_entrevista_oficial,
                         id_pregunta_oficial=id_pregunta_oficial,
-                        respuesta='-')
+                        respuesta='')
                     instancia_nueva_pregunta.save()
 
     return HttpResponseRedirect(
@@ -1029,7 +1029,7 @@ def addPreguntaAsesorAReunion(request, curso_academico, dni_pasaporte,
                         id_reunion=id_reunion,
                         id_entrevista_asesor=id_entrevista_asesor,
                         id_pregunta_asesor=id_pregunta_asesor,
-                        respuesta='-')
+                        respuesta='')
                 instancia_nueva_pregunta.save()
 
     return HttpResponseRedirect(
@@ -1068,7 +1068,7 @@ def addPreguntaAsesorAReunionGrupal(request, curso_academico, fecha,
                         id_reunion=reunion.id_reunion,
                         id_entrevista_asesor=id_entrevista_asesor,
                         id_pregunta_asesor=id_pregunta_asesor,
-                        respuesta='-')
+                        respuesta='')
                     instancia_nueva_pregunta.save()
 
     return HttpResponseRedirect(
