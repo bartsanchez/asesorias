@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage{lmodern} % Arregla un warning
+\usepackage{multicol}
 
 % Tema beamer
 \usetheme{Warsaw}
@@ -12,17 +13,52 @@
 \title[Asesorías Académicas]{Aplicación web para la gestión de la Asesoría
                              Académica en la Universidad de Córdoba}
 \author{Bartolomé Sánchez Salado}
+\institute{
+    \begin{tabular}{lp{3cm}r}
+      \textbf{Director} && \\
+      Nicolás Luis Fernández García && \scriptsize{Córdoba, enero 2011} \\
+    \end{tabular}}
+\date{}
 
 \begin{document}
 
-  \begin{frame}
+  %--- PORTADA ---%
+  \begin{frame}[plain]
+    \begin{tabular}{ccc}
+      \\
+      \includegraphics[height=0.18\textheight]{uco} &
+      \begin{tabular}{c}
+        {\bf UNIVERSIDAD DE CÓRDOBA} \\
+        {\bf Escuela Politécnica Superior} \\\\
+        Ingeniería Técnica en Informática de Gestión \\
+        Proyecto de fin de carrera \\\\
+        \end{tabular} &
+      \includegraphics[height=0.18\textheight]{eps} \\
+    \end{tabular}
     \titlepage
   \end{frame}
 
-  \begin{frame}
-    \tableofcontents[hideallsubsections]
-  \end{frame}
+  \AtBeginSection[]
+  {
+    \begin{frame}<beamer>
+      \frametitle{Sumario}
+      \tableofcontents[currentsection,hideallsubsections]
+    \end{frame}
+  }
 
+  \AtBeginSubsection[]
+  {
+    \begin{frame}<beamer>
+      \frametitle{Contenido de la sección}
+      \begin{multicols}{2}
+        \tableofcontents[currentsubsection,subsectionstyle=show/shaded/hide]
+      \end{multicols}
+    \end{frame}
+   }
+
+   \begin{frame}{Contenido}
+    \tableofcontents[hideallsubsections]
+   \end{frame}
 
   \section{Presentación}
     \subsection{Introducción}
