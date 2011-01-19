@@ -78,7 +78,7 @@
         \end{block}
       \end{frame}
 
-      \begin{frame}
+      \begin{frame}{Introducción}
         \begin{block}{Asesor Académico}
           \begin{itemize}
            \item Orienta al estudiante durante su estancia en la Universidad.
@@ -92,7 +92,7 @@
         \end{block}
       \end{frame}
 
-      \begin{frame}
+      \begin{frame}{Introducción}
         \begin{block}{Asesoría Académica en la UCO}
           \begin{itemize}
            \item En marzo de 2007, a través del Plan Propio de Calidad de la
@@ -136,7 +136,7 @@
         \end{block}
       \end{frame}
 
-      \begin{frame}
+      \begin{frame}{Definición del problema}
         \begin{block}{Necesidad de un sistema de gestión}
           \begin{itemize}
            \item Fácil acceso a la información.
@@ -326,12 +326,98 @@
   \section{Análisis}
     \subsection{Especificación de requisitos}
       \begin{frame}{Especificación de requisitos}
-
+        \begin{block}{Gestión de la Asesoría Académica.}
+          \begin{itemize}
+           \item Módulo de administrador principal.
+           \item Módulo de administrador de centro.
+           \item Módulo de asesores.
+           \item Módulo de alumnos.
+          \end{itemize}
+        \end{block}
       \end{frame}
 
-    \subsection{Modelización de la información}
-      \begin{frame}{Modelización de la información}
+      \begin{frame}{Especificación de requisitos}
+        \begin{block}{Módulo de administrador principal.}
+          \begin{itemize}
+           \item Gestión del sistema.
+           \item Gestión de plantillas de entrevista institucionales.
+           \item Gestión de copias de seguridad.
+           \item Explotación del sistema.
+           \item Ayuda.
+          \end{itemize}
+        \end{block}
+      \end{frame}
 
+      \begin{frame}{Especificación de requisitos}
+        \begin{block}{Módulo de administrador de centro.}
+          \begin{itemize}
+           \item Gestión de centro.
+           \item Explotación del sistema.
+           \item Ayuda.
+          \end{itemize}
+        \end{block}
+      \end{frame}
+
+      \begin{frame}{Especificación de requisitos}
+        \begin{block}{Módulo de asesores.}
+          \begin{itemize}
+           \item Gestión de alumnos.
+           \item Gestión de plantillas de entrevista de asesor.
+           \item Gestión de entrevistas.
+           \item Explotación del sistema.
+           \item Ayuda.
+          \end{itemize}
+        \end{block}
+      \end{frame}
+
+      \begin{frame}{Especificación de requisitos}
+        \begin{block}{Módulo de alumnos.}
+          \begin{itemize}
+           \item Explotación del sistema.
+           \item Ayuda.
+          \end{itemize}
+        \end{block}
+      \end{frame}
+
+      \begin{frame}{Especificación de requisitos}
+        \begin{block}{Supuestos semánticos.}
+          \begin{multicols}{2}
+          \begin{itemize}
+           \item Centro.
+           \item Titulación.
+           \item Asignatura.
+           \item Alumno.
+           \item Asesor.
+           \item Administrador de centro.
+           \item Departamento.
+           \item Reunión.
+           \item Plantilla Entrevista Oficial.
+           \item Plantilla Entrevista Asesor.
+           \item Pregunta Oficial.
+           \item Pregunta Asesor.
+          \end{itemize}
+          \end{multicols}
+        \end{block}
+      \end{frame}
+
+      \begin{frame}{Especificación de requisitos}
+        \begin{block}{Ejemplos de supuestos semánticos}
+          \begin{itemize}
+            \item \textit{Una asignatura tiene asignada una carga docente
+                  traducida en un número de créditos, teóricos y prácticos.}
+            \item \textit{Una reunión puede ser individual, donde solo
+                  participará un usuario alumno, o grupal, donde pueden
+                  participar varios.}
+          \end{itemize}
+        \end{block}
+      \end{frame}
+
+
+    \subsection{Modelización de la información}
+      \begin{frame}{Modelo Entidad-Relación}
+        \begin{center}
+          \includegraphics[height=6.5cm]{Diagramas/diagramaER}
+        \end{center}
       \end{frame}
 
     \subsection{Descripción funcional}
