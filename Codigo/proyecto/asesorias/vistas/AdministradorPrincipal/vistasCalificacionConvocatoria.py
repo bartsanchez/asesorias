@@ -154,6 +154,8 @@ def editCalificacionConvocatoria(request, nombre_centro,
             form = forms.CalificacionConvocatoriaForm(
                 datos_calificacion, instance=instancia_calificacion)
 
+            instancia_calificacion.delete()
+
             # Si es valido se guarda.
             if form.is_valid():
                 form.save()
