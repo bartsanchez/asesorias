@@ -63,7 +63,7 @@ def addCalificacionConvocatoria(request, centro, nombre_titulacion,
         return HttpResponseRedirect(
             reverse('selectTitulacion_CalificacionConvocatoria' +
             '_administradorCentro',
-            kwargs={'centro': centro, 'tipo': tipo}))
+            kwargs={'centro': centro, 'tipo': 'list'}))
 
     # Se ha rellenado el formulario.
     if request.method == 'POST':
@@ -153,6 +153,8 @@ def editCalificacionConvocatoria(request, centro,
             # Se actualiza el formulario con la nueva informacion.
             form = forms.CalificacionConvocatoriaForm(
                 datos_calificacion, instance=instancia_calificacion)
+
+            instancia_calificacion.delete()
 
             # Si es valido se guarda.
             if form.is_valid():
