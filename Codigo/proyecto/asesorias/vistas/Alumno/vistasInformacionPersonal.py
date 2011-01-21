@@ -27,6 +27,8 @@ def showInfo(request, curso_academico):
             apellidos = request.POST['apellidos']
             fecha_nacimiento = request.POST['fecha_nacimiento']
             direccion_cordoba = request.POST['direccion_cordoba']
+            telefono = request.POST['telefono']
+            direccion_familiar = request.POST['direccion_familiar']
             localidad_familiar = request.POST['localidad_familiar']
             provincia_familiar = request.POST['provincia_familiar']
             codigo_postal = request.POST['codigo_postal']
@@ -45,6 +47,8 @@ def showInfo(request, curso_academico):
                 'apellidos': apellidos,
                 'fecha_nacimiento': fecha_nacimiento,
                 'direccion_cordoba': direccion_cordoba,
+                'telefono': telefono,
+                'direccion_familiar': direccion_familiar,
                 'localidad_familiar': localidad_familiar,
                 'provincia_familiar': provincia_familiar,
                 'codigo_postal': codigo_postal,
