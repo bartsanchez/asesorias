@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -11,6 +12,7 @@ from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/UsuarioAsesor/'
 
+@login_required
 def showAlumnos(request, curso_academico, orden):
     # Se obtiene la instancia del asesor curso academico.
     instancia_asesorCA = \
@@ -84,6 +86,7 @@ def showAlumnos(request, curso_academico, orden):
         'orden': orden,
         'curso_academico': curso_academico})
 
+@login_required
 def generarPDFListaAlumnos(request, curso_academico, busqueda):
     # Se obtiene la instancia del asesor curso academico.
     instancia_asesorCA = \
@@ -135,6 +138,7 @@ def generarPDFListaAlumnos(request, curso_academico, busqueda):
         {'mylist': lista_alumnosCA,
         'name': 'alumnos asesorados',})
 
+@login_required
 def showAlumno(request, curso_academico, dni_pasaporte):
     # Se obtiene la instancia del alumno.
     instancia_alumno = vistasAlumno.obtenerAlumno(dni_pasaporte)
