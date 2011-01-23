@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -13,6 +14,7 @@ from asesorias import models, forms
 
 PATH = 'asesorias/UsuarioAlumno/'
 
+@login_required
 def listReunion(request, curso_academico, orden):
     user = unicode(request.user)
 
@@ -68,6 +70,7 @@ def listReunion(request, curso_academico, orden):
         'orden': orden,
         'curso_academico': curso_academico})
 
+@login_required
 def showReunion(request, curso_academico, id_reunion):
     user = unicode(request.user)
 
@@ -116,6 +119,7 @@ def showReunion(request, curso_academico, id_reunion):
         'preguntas_oficiales': preguntas_oficiales,
         'preguntas_asesor': preguntas_asesor})
 
+@login_required
 def editRespuestaAsesor(request, curso_academico, id_reunion,
     id_entrevista_asesor, id_pregunta_asesor):
     user = unicode(request.user)
@@ -183,6 +187,7 @@ def editRespuestaAsesor(request, curso_academico, id_reunion,
         'id_reunion': id_reunion,
         'fecha_reunion': fecha_reunion})
 
+@login_required
 def editRespuestaOficial(request, curso_academico, id_reunion,
     id_entrevista_oficial, id_pregunta_oficial):
     user = unicode(request.user)
