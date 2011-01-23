@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -6,6 +7,7 @@ from asesorias import models, forms
 
 PATH = 'asesorias/UsuarioAlumno/'
 
+@login_required
 def showMatriculacionActual(request, curso_academico):
     dni_pasaporte = unicode(request.user)
 
@@ -27,6 +29,7 @@ def showMatriculacionActual(request, curso_academico):
         'curso_academico': curso_academico,
         'lista_matriculas': lista_matriculas})
 
+@login_required
 def showMatriculacionHistorica(request, curso_academico):
     dni_pasaporte = unicode(request.user)
 
