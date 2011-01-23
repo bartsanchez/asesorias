@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -14,6 +15,7 @@ from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/UsuarioAsesor/'
 
+@login_required
 def listPlantillasOficiales(request, curso_academico, orden):
      # Se obtiene una lista con todos las plantillas de entrevista
     # oficiales.
@@ -51,6 +53,7 @@ def listPlantillasOficiales(request, curso_academico, orden):
         lista_plantillas_entrevista_oficial,
         'busqueda': busqueda, 'orden': orden})
 
+@login_required
 def generarPDFListaPlantillasEntrevistaOficial(request, curso_academico,
     busqueda):
     lista_plantillas_entrevista_oficial = \
@@ -67,6 +70,7 @@ def generarPDFListaPlantillasEntrevistaOficial(request, curso_academico,
         {'mylist': lista_plantillas_entrevista_oficial,
         'name': 'plantillas de entrevista oficial',})
 
+@login_required
 def listPreguntaOficial(request, curso_academico, entrevista_oficial,
     orden):
     # Se comprueba que exista la entrevista pasada por argumento.
@@ -132,6 +136,7 @@ def listPreguntaOficial(request, curso_academico, entrevista_oficial,
         'entrevista_oficial': entrevista_oficial,
         'orden': orden})
 
+@login_required
 def generarPDFListaPreguntasOficiales(request, curso_academico,
     entrevista_oficial, busqueda):
     # Se comprueba que exista la entrevista pasada por argumento.
@@ -177,6 +182,7 @@ def generarPDFListaPreguntasOficiales(request, curso_academico,
         {'mylist': lista_preguntas_oficiales,
         'name': 'preguntas oficiales',})
 
+@login_required
 def addPlantillaEntrevistaAsesor(request, curso_academico):
     dni_pasaporte = unicode(request.user)
 
@@ -231,6 +237,7 @@ def addPlantillaEntrevistaAsesor(request, curso_academico):
         'dni_pasaporte': dni_pasaporte,
         'curso_academico': curso_academico})
 
+@login_required
 def editPlantillaEntrevistaAsesor(request, curso_academico,
     id_entrevista_asesor):
     dni_pasaporte = unicode(request.user)
@@ -298,6 +305,7 @@ def editPlantillaEntrevistaAsesor(request, curso_academico,
         'dni_pasaporte': dni_pasaporte,
         'curso_academico': curso_academico})
 
+@login_required
 def delPlantillaEntrevistaAsesor(request, curso_academico,
     id_entrevista_asesor):
     dni_pasaporte = unicode(request.user)
@@ -330,6 +338,7 @@ def delPlantillaEntrevistaAsesor(request, curso_academico,
         {'user': request.user, 'form': form,
         'curso_academico': curso_academico})
 
+@login_required
 def listPlantillasAsesor(request, curso_academico, orden):
     dni_pasaporte = unicode(request.user)
 
@@ -387,6 +396,7 @@ def listPlantillasAsesor(request, curso_academico, orden):
         'busqueda': busqueda,
         'orden': orden})
 
+@login_required
 def generarPDFListaPlantillasEntrevistaAsesor(request,
     curso_academico,busqueda):
     dni_pasaporte = unicode(request.user)
@@ -408,6 +418,7 @@ def generarPDFListaPlantillasEntrevistaAsesor(request,
         {'mylist': lista_plantillas_entrevista_asesor,
         'name': 'plantillas de entrevista de asesor',})
 
+@login_required
 def addPreguntaAsesor(request, curso_academico, entrevista_asesor):
     dni_pasaporte = unicode(request.user)
 
@@ -463,6 +474,7 @@ def addPreguntaAsesor(request, curso_academico, entrevista_asesor):
         'curso_academico': curso_academico,
         'entrevista_asesor': entrevista_asesor})
 
+@login_required
 def editPreguntaAsesor(request, curso_academico, id_entrevista_asesor,
     id_pregunta_asesor):
     dni_pasaporte = unicode(request.user)
@@ -524,6 +536,7 @@ def editPreguntaAsesor(request, curso_academico, id_entrevista_asesor,
         'curso_academico': curso_academico,
         'entrevista_asesor': id_entrevista_asesor})
 
+@login_required
 def delPreguntaAsesor(request, curso_academico, id_entrevista_asesor,
     id_pregunta_asesor):
     dni_pasaporte = unicode(request.user)
@@ -558,6 +571,7 @@ def delPreguntaAsesor(request, curso_academico, id_entrevista_asesor,
         'entrevista_asesor': id_entrevista_asesor,
         'curso_academico': curso_academico})
 
+@login_required
 def listPreguntaAsesor(request, curso_academico, id_entrevista_asesor,
     orden):
     dni_pasaporte = unicode(request.user)
@@ -625,6 +639,7 @@ def listPreguntaAsesor(request, curso_academico, id_entrevista_asesor,
         'entrevista_asesor': id_entrevista_asesor,
         'orden': orden})
 
+@login_required
 def generarPDFListaPreguntasAsesor(request, curso_academico,
     id_entrevista_asesor, busqueda):
     dni_pasaporte = unicode(request.user)
