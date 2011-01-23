@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
@@ -7,6 +8,7 @@ from asesorias import models, forms
 
 PATH = 'asesorias/UsuarioAlumno/'
 
+@login_required
 def showInfo(request, curso_academico):
     user = unicode(request.user)
 
@@ -77,6 +79,7 @@ def showInfo(request, curso_academico):
         {'user': request.user, 'form': form,
         'curso_academico': curso_academico})
 
+@login_required
 def modificarClave(request, curso_academico):
     error = False
     user = request.user
