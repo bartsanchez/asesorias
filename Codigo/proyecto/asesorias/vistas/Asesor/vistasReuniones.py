@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from datetime import date
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -80,6 +81,7 @@ def determinarReunionesGrupales(dni_pasaporte, curso_academico, fecha):
 
     return lista_reunion_grupal
 
+@login_required
 def selectAlumno(request, curso_academico):
     dni_pasaporte = unicode(request.user)
 
@@ -135,6 +137,7 @@ def selectAlumno(request, curso_academico):
         'dni_pasaporte': dni_pasaporte,
         'curso_academico': curso_academico})
 
+@login_required
 def addReunionGrupal(request, curso_academico, lista_alumnos):
     dni_pasaporte = unicode(request.user)
 
@@ -279,6 +282,7 @@ def addReunionGrupal(request, curso_academico, lista_alumnos):
         'lista_participantes': lista_participantes,
         'lista_disponibles': lista_disponibles})
 
+@login_required
 def delReunionGrupal(request, curso_academico, fecha):
     # Si existen, se eliminan todas las reuiones grupales del asesor
     # para tal curso academico y fecha.
@@ -319,6 +323,7 @@ def delReunionGrupal(request, curso_academico, fecha):
         {'user': request.user, 'form': form,
         'curso_academico': curso_academico, 'fecha': fecha})
 
+@login_required
 def addAlumnoAReunionGrupal(request, curso_academico, lista_alumnos,
     dni_pasaporte):
     if lista_alumnos == 'null':
@@ -329,6 +334,7 @@ def addAlumnoAReunionGrupal(request, curso_academico, lista_alumnos,
         kwargs={'curso_academico': curso_academico,
         'lista_alumnos': lista_alumnos}))
 
+@login_required
 def delAlumnoAReunionGrupal(request, curso_academico, lista_alumnos,
     dni_pasaporte):
     # Se busca el alumno para borrarlo de la reunion.
@@ -340,6 +346,7 @@ def delAlumnoAReunionGrupal(request, curso_academico, lista_alumnos,
         kwargs={'curso_academico': curso_academico,
         'lista_alumnos': lista_alumnos}))
 
+@login_required
 def addReunion(request, curso_academico, dni_pasaporte):
     # Se obtiene el posible alumno_curso_academico.
     instancia_alumno_curso_academico = \
@@ -416,6 +423,7 @@ def addReunion(request, curso_academico, dni_pasaporte):
         'curso_academico': curso_academico,
         'dni_pasaporte_alumno': dni_pasaporte})
 
+@login_required
 def delReunion(request, curso_academico, dni_pasaporte, id_reunion):
     # Se obtiene la instancia de la reunion.
     instancia_reunion= vistasReunion.obtenerReunion(
@@ -442,6 +450,7 @@ def delReunion(request, curso_academico, dni_pasaporte, id_reunion):
         {'user': request.user, 'form': form,
         'curso_academico': curso_academico})
 
+@login_required
 def listReunion(request, curso_academico, orden):
     dni_pasaporte = unicode(request.user)
 
@@ -547,6 +556,7 @@ def listReunion(request, curso_academico, orden):
         'orden': orden,
         'curso_academico': curso_academico})
 
+@login_required
 def showReunion(request, curso_academico, dni_pasaporte, id_reunion):
     dni_pasaporte_asesor = unicode(request.user)
     form = False
@@ -591,6 +601,7 @@ def showReunion(request, curso_academico, dni_pasaporte, id_reunion):
         'preguntas_oficiales': preguntas_oficiales,
         'preguntas_asesor': preguntas_asesor})
 
+@login_required
 def showReunionGrupal(request, curso_academico, fecha):
     dni_pasaporte_asesor = unicode(request.user)
     preguntas_reunion = False
@@ -636,6 +647,7 @@ def showReunionGrupal(request, curso_academico, fecha):
         'preguntas_oficiales': preguntas_oficiales,
         'preguntas_asesor': preguntas_asesor})
 
+@login_required
 def addPlantillaAReunion(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista, tipo):
     # Se obtiene la instancia del asesor curso academico.
@@ -698,6 +710,7 @@ def addPlantillaAReunion(request, curso_academico, dni_pasaporte,
         'lista_preguntas': lista_preguntas,
         'tipo': tipo})
 
+@login_required
 def addPlantillaAReunionGrupal(request, curso_academico, fecha,
     id_entrevista, tipo):
     dni_pasaporte_asesor = unicode(request.user)
@@ -756,6 +769,7 @@ def addPlantillaAReunionGrupal(request, curso_academico, fecha,
         'lista_preguntas': lista_preguntas,
         'tipo': tipo})
 
+@login_required
 def addPlantillaOficialAReunion(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista_oficial):
     # Se obtiene la instancia del asesor curso academico.
@@ -798,6 +812,7 @@ def addPlantillaOficialAReunion(request, curso_academico, dni_pasaporte,
             'dni_pasaporte': dni_pasaporte,
             'id_reunion': id_reunion}))
 
+@login_required
 def addPlantillaOficialAReunionGrupal(request, curso_academico, fecha,
     id_entrevista_oficial):
     user = unicode(request.user)
@@ -836,6 +851,7 @@ def addPlantillaOficialAReunionGrupal(request, curso_academico, fecha,
             kwargs={'curso_academico': curso_academico,
             'fecha': fecha}))
 
+@login_required
 def addPlantillaAsesorAReunion(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista_asesor):
     user = unicode(request.user)
@@ -881,6 +897,7 @@ def addPlantillaAsesorAReunion(request, curso_academico, dni_pasaporte,
             'dni_pasaporte': dni_pasaporte,
             'id_reunion': id_reunion}))
 
+@login_required
 def addPlantillaAsesorAReunionGrupal(request, curso_academico, fecha,
     id_entrevista_asesor):
     user = unicode(request.user)
@@ -921,6 +938,7 @@ def addPlantillaAsesorAReunionGrupal(request, curso_academico, fecha,
             kwargs={'curso_academico': curso_academico,
             'fecha': fecha}))
 
+@login_required
 def addPreguntaOficialAReunion(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista_oficial, id_pregunta_oficial):
     user = unicode(request.user)
@@ -961,6 +979,7 @@ def addPreguntaOficialAReunion(request, curso_academico, dni_pasaporte,
             'dni_pasaporte': dni_pasaporte,
             'id_reunion': id_reunion}))
 
+@login_required
 def addPreguntaOficialAReunionGrupal(request, curso_academico, fecha,
     id_entrevista_oficial, id_pregunta_oficial):
     user = unicode(request.user)
@@ -996,6 +1015,7 @@ def addPreguntaOficialAReunionGrupal(request, curso_academico, fecha,
             kwargs={'curso_academico': curso_academico,
             'fecha': fecha}))
 
+@login_required
 def addPreguntaAsesorAReunion(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista_asesor, id_pregunta_asesor):
     user = unicode(request.user)
@@ -1038,6 +1058,7 @@ def addPreguntaAsesorAReunion(request, curso_academico, dni_pasaporte,
             'dni_pasaporte': dni_pasaporte,
             'id_reunion': id_reunion}))
 
+@login_required
 def addPreguntaAsesorAReunionGrupal(request, curso_academico, fecha,
     id_entrevista_asesor, id_pregunta_asesor):
     user = unicode(request.user)
@@ -1076,6 +1097,7 @@ def addPreguntaAsesorAReunionGrupal(request, curso_academico, fecha,
             kwargs={'curso_academico': curso_academico,
             'fecha': fecha}))
 
+@login_required
 def editRespuestaOficial(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista_oficial, id_pregunta_oficial):
     # Se obtiene la instancia del asesor curso academico.
@@ -1142,6 +1164,7 @@ def editRespuestaOficial(request, curso_academico, dni_pasaporte,
         'id_pregunta': id_pregunta_oficial,
         'fecha_reunion': fecha_reunion})
 
+@login_required
 def editRespuestaAsesor(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista_asesor, id_pregunta_asesor):
     user = unicode(request.user)
@@ -1210,6 +1233,7 @@ def editRespuestaAsesor(request, curso_academico, dni_pasaporte,
         'id_pregunta': id_pregunta_asesor,
         'fecha_reunion': fecha_reunion})
 
+@login_required
 def delPreguntaOficialAReunion(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista_oficial, id_pregunta_oficial):
     # Se obtiene la instancia del asesor curso academico.
@@ -1240,6 +1264,7 @@ def delPreguntaOficialAReunion(request, curso_academico, dni_pasaporte,
             'dni_pasaporte': dni_pasaporte,
             'id_reunion': id_reunion}))
 
+@login_required
 def delPreguntaOficialAReunionGrupal(request, curso_academico, fecha,
     id_entrevista_oficial, id_pregunta_oficial):
     user = unicode(request.user)
@@ -1265,6 +1290,7 @@ def delPreguntaOficialAReunionGrupal(request, curso_academico, fecha,
             kwargs={'curso_academico': curso_academico,
             'fecha': fecha}))
 
+@login_required
 def delPreguntaAsesorAReunion(request, curso_academico, dni_pasaporte,
     id_reunion, id_entrevista_asesor, id_pregunta_asesor):
     # Se obtiene la instancia del asesor curso academico.
@@ -1296,6 +1322,7 @@ def delPreguntaAsesorAReunion(request, curso_academico, dni_pasaporte,
             'dni_pasaporte': dni_pasaporte,
             'id_reunion': id_reunion}))
 
+@login_required
 def delPreguntaAsesorAReunionGrupal(request, curso_academico, fecha,
     id_entrevista_asesor, id_pregunta_asesor):
     user = unicode(request.user)
