@@ -149,7 +149,6 @@ def enviar_mail_creacion_usuario(request, correo_destino,
         tema = 'Asesorías académicas: Registro de usuario'
         contenido = ('Un usuario ha sido creado para este correo ' +
             'electrónico con los siguientes datos:\n\n' +
-            'Tipo: Administrador de centro\n' +
             'Usuario: ' + str(username) + '\n' +
             'Contraseña: ' + str(password) + '\n')
         correo_origen = 'uco.asesorias.academicas@gmail.com'

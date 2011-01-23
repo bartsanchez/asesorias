@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from asesorias import models, forms
+from asesorias import vistas
 from asesorias.vistas.vistasAdministradorPrincipal import \
     checkAdministradorPrincipal
 from asesorias.utils import vistasPDF
@@ -31,10 +32,13 @@ def addAsesor(request):
             # Se crea un usuario django.
             username = request.POST['dni_pasaporte']
             email = request.POST['correo_electronico']
-            password = username
+            password = User.objects.make_random_password()
 
             user = User.objects.create_user(username, email, password)
             user.save()
+
+            vistas.vistasGestionUsuarios.enviar_mail_creacion_usuario(
+                request, email, username, password)
 
             # Redirige a la pagina de listar asesores.
             return HttpResponseRedirect(reverse('listAsesor',
