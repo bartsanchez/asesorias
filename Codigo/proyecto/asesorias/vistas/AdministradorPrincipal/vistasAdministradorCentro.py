@@ -65,6 +65,8 @@ def editAdministradorCentro(request, administrador_centro):
         administrador_centro)
     # Si existe se edita.
     if instancia_admin_centro:
+        correo_electronico_antiguo = \
+            unicode(instancia_admin_centro.correo_electronico)        
         # Se carga el formulario para el administrador de centro centro
         # existente.
         form = forms.AdministradorCentroForm(
@@ -76,7 +78,17 @@ def editAdministradorCentro(request, administrador_centro):
                 instance=instancia_admin_centro)
             # Si es valido se guarda.
             if form.is_valid():
+                correo_electronico_nuevo = \
+                        request.POST['correo_electronico']
+
+                user = User.objects.get(
+                    username=correo_electronico_antiguo)
+                user.username = correo_electronico_nuevo
+                user.email = correo_electronico_nuevo
+                user.save()
+
                 form.save()
+
                 # Redirige a la pagina de listar administradores de
                 # centro.
                 return HttpResponseRedirect(reverse(
