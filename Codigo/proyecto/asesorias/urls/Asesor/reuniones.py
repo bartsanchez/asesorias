@@ -30,6 +30,12 @@ urlpatterns = patterns(VISTAS + 'vistasReuniones',
 
         'delReunion', name='delReunion_Asesor'),
 
+    url(r'^determinarReunion/(?P<dni_pasaporte>[\s\w]+)/' +
+        '(?P<fecha>[\s\w\-]+)/$',
+
+        'determinarReunion', 
+        name='determinarReunion_Asesor'),
+
     url(r'^showReunion/(?P<dni_pasaporte>[\s\w]+)/' +
         '(?P<id_reunion>\d+)/$',
 

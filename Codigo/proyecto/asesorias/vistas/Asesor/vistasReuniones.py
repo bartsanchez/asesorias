@@ -557,6 +557,28 @@ def listReunion(request, curso_academico, orden):
         'curso_academico': curso_academico})
 
 @login_required
+def determinarReunion(request, curso_academico, dni_pasaporte, fecha):
+    try:
+        reunion = models.Reunion.objects.get(
+            dni_pasaporte=dni_pasaporte,
+            curso_academico=curso_academico,
+            fecha=fecha)
+        exist = True
+    except:
+        exist = False
+        
+    if exist:
+        return HttpResponseRedirect(reverse('showReunion_Asesor',
+            kwargs={'curso_academico': curso_academico,
+                'dni_pasaporte': dni_pasaporte,
+                'id_reunion': reunion.id_reunion}))
+    else:
+        return HttpResponseRedirect(
+            reverse('showReunionGrupal_Asesor',
+            kwargs={'curso_academico': curso_academico,
+            'fecha': fecha}))
+
+@login_required
 def showReunion(request, curso_academico, dni_pasaporte, id_reunion):
     dni_pasaporte_asesor = unicode(request.user)
     form = False
