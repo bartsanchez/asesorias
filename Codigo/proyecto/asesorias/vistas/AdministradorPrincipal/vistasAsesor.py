@@ -78,6 +78,11 @@ def editAsesor(request, dni_pasaporte):
                 instance=instancia_asesor)
             # Si es valido se guarda.
             if form.is_valid():
+                user = User.objects.get(
+                    username=dni_pasaporte)
+                user.email=unicode(correo_electronico)
+                user.save()
+                
                 form.save()
                 # Redirige a la pagina de listar asesores.
                 return HttpResponseRedirect(reverse('listAsesor',
