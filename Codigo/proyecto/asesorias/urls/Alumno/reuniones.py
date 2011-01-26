@@ -28,6 +28,11 @@ urlpatterns = patterns(VISTAS + 'vistasReuniones',
         'editRespuestaAsesor',
         name='editRespuestaAsesor_Alumno'),
 
+    url(r'^generarPDF/reuniones/(?P<busqueda>[\s\w]+)/$',
+
+        'generarPDFListaReuniones',
+        name='generarPDFListaReuniones_Alumno'),
+
     url(r'^generarPDF/reunion/(?P<id_reunion>\d+)/$',
 
         'generarPDFReunion',

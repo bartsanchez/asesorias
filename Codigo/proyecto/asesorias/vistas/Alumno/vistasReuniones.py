@@ -260,6 +260,26 @@ def editRespuestaOficial(request, curso_academico, id_reunion,
         'fecha_reunion': fecha_reunion})
 
 @login_required
+def generarPDFListaReuniones(request, curso_academico, busqueda):
+    dni_pasaporte = unicode(request.user)
+
+    # Se obtiene una lista con todos las reuniones de asesor.
+    lista_reuniones = \
+        models.Reunion.objects.filter(
+        dni_pasaporte=dni_pasaporte,
+        curso_academico=curso_academico).order_by('fecha')
+
+    # Se ha realizado una busqueda.
+    if busqueda != 'False':
+        lista_reuniones = \
+            lista_reuniones.filter(
+            fecha__contains=busqueda)
+
+    return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
+        {'mylist': lista_reuniones,
+        'name': 'reuniones',})
+
+@login_required
 def generarPDFReunion(request, curso_academico, id_reunion):
     dni_pasaporte = unicode(request.user)
 
