@@ -1373,8 +1373,7 @@ def delPreguntaAsesorAReunionGrupal(request, curso_academico, fecha,
             'fecha': fecha}))
 
 @login_required
-def generarPDFListaReuniones(request, curso_academico, dni_pasaporte,
-    id_reunion):
+def generarPDFListaReuniones(request, curso_academico, busqueda):
     dni_pasaporte = unicode(request.user)
 
     # Se obtiene una lista con todos los alumnos.
