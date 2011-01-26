@@ -18,6 +18,7 @@ from asesorias.vistas.AdministradorPrincipal import \
     vistasReunion_preguntaOficial as vistasRPO
 from asesorias.vistas.AdministradorPrincipal import vistasReunion
 from asesorias import models, forms
+from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/UsuarioAsesor/'
 
@@ -566,7 +567,7 @@ def determinarReunion(request, curso_academico, dni_pasaporte, fecha):
         exist = True
     except:
         exist = False
-        
+
     if exist:
         return HttpResponseRedirect(reverse('showReunion_Asesor',
             kwargs={'curso_academico': curso_academico,
@@ -1370,3 +1371,28 @@ def delPreguntaAsesorAReunionGrupal(request, curso_academico, fecha,
             reverse('showReunionGrupal_Asesor',
             kwargs={'curso_academico': curso_academico,
             'fecha': fecha}))
+
+@login_required
+def generarPDFListaReuniones(request, curso_academico, busqueda):
+    dni_pasaporte = unicode(request.user)
+
+    # Se obtiene una lista con todos los alumnos.
+    lista_alumnosCA = models.AlumnoCursoAcademico.objects.filter(
+        dni_pasaporte_asesor=dni_pasaporte).values_list(
+        'dni_pasaporte_alumno', flat=True)
+
+    # Se obtiene una lista con todos las reuniones de asesor.
+    lista_reuniones = \
+        models.Reunion.objects.filter(
+        dni_pasaporte__in=lista_alumnosCA,
+        curso_academico=curso_academico).order_by('fecha')
+
+    # Se ha realizado una busqueda.
+    if busqueda != 'False':
+        lista_reuniones = \
+            lista_reuniones.filter(
+            fecha__contains=busqueda)
+
+    return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
+        {'mylist': lista_reuniones,
+        'name': 'reuniones',})

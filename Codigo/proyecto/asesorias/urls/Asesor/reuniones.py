@@ -33,7 +33,7 @@ urlpatterns = patterns(VISTAS + 'vistasReuniones',
     url(r'^determinarReunion/(?P<dni_pasaporte>[\s\w]+)/' +
         '(?P<fecha>[\s\w\-]+)/$',
 
-        'determinarReunion', 
+        'determinarReunion',
         name='determinarReunion_Asesor'),
 
     url(r'^showReunion/(?P<dni_pasaporte>[\s\w]+)/' +
@@ -178,4 +178,10 @@ urlpatterns = patterns(VISTAS + 'vistasReuniones',
 
         'delPreguntaAsesorAReunionGrupal',
         name='delPreguntaAsesorAReunionGrupal'),
+
+    # Exportar a PDF #
+    url(r'^generarPDF/reuniones/(?P<busqueda>[\s\w]+)/$',
+
+        'generarPDFListaReuniones',
+        name='generarPDFListaReuniones'),
 )
