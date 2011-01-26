@@ -27,4 +27,9 @@ urlpatterns = patterns(VISTAS + 'vistasReuniones',
 
         'editRespuestaAsesor',
         name='editRespuestaAsesor_Alumno'),
+
+    url(r'^generarPDF/reunion/(?P<id_reunion>\d+)/$',
+
+        'generarPDFReunion',
+        name='generarPDFReunion_Alumno'),
 )

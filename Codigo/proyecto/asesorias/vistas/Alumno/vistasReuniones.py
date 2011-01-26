@@ -5,12 +5,17 @@ from django.shortcuts import render_to_response
 from asesorias.vistas.AdministradorPrincipal import vistasAlumno
 from asesorias.vistas.AdministradorPrincipal import \
     vistasAlumnoCursoAcademico
+from asesorias.vistas.AdministradorPrincipal import \
+    vistasPreguntaOficial
+from asesorias.vistas.AdministradorPrincipal import \
+    vistasPreguntaAsesor
 from asesorias.vistas.AdministradorPrincipal import vistasReunion
 from asesorias.vistas.AdministradorPrincipal import \
     vistasReunion_preguntaAsesor as vistasRPA
 from asesorias.vistas.AdministradorPrincipal import \
     vistasReunion_preguntaOficial as vistasRPO
 from asesorias import models, forms
+from asesorias.utils import vistasPDF
 
 PATH = 'asesorias/UsuarioAlumno/'
 
@@ -253,3 +258,45 @@ def editRespuestaOficial(request, curso_academico, id_reunion,
         'curso_academico': curso_academico,
         'id_reunion': id_reunion,
         'fecha_reunion': fecha_reunion})
+
+@login_required
+def generarPDFReunion(request, curso_academico, id_reunion):
+    dni_pasaporte = unicode(request.user)
+
+    lista_preguntas = []
+
+    # Se obtiene la instancia de la reunion.
+    instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
+        curso_academico, id_reunion)
+
+    # Si existe se buscan las preguntas.
+    if instancia_reunion:
+        preguntas_oficiales = \
+            models.ReunionPreguntaOficial.objects.filter(
+            dni_pasaporte=dni_pasaporte,
+            curso_academico=curso_academico,
+            id_reunion=id_reunion)
+
+        for pregunta in preguntas_oficiales:
+            lista_preguntas.append(
+                vistasPreguntaOficial.obtenerPreguntaOficial(
+                pregunta.id_entrevista_oficial,
+                pregunta.id_pregunta_oficial))
+
+        preguntas_asesor = \
+            models.ReunionPreguntaAsesor.objects.filter(
+            dni_pasaporte_alumno=dni_pasaporte,
+            curso_academico=curso_academico,
+            id_reunion=id_reunion)
+
+        for pregunta in preguntas_asesor:
+            lista_preguntas.append(
+                models.PreguntaAsesor.objects.get(
+                dni_pasaporte=pregunta.dni_pasaporte_asesor,
+                curso_academico=curso_academico,
+                id_entrevista_asesor=pregunta.id_entrevista_asesor,
+                id_pregunta_asesor=pregunta.id_pregunta_asesor))
+
+    return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
+        {'mylist': lista_preguntas,
+        'name': 'preguntas de reuniones',})

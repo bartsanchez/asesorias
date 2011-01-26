@@ -4,7 +4,7 @@
 
     <h1>Ver reunión.</h1>
 
-    <a href="{# url generarPDFListaAlumnos_Asesor curso_academico busqueda #}" class="pdflink">Generar PDF</a>
+    <a href="{% url generarPDFReunion_Alumno curso_academico reunion.id_reunion %}" class="pdflink">Generar PDF</a>
 
     <div class="module">
         <table summary="Ver reunión.">
