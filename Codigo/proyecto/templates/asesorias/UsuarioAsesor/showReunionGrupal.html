@@ -4,8 +4,6 @@
 
     <h1>Ver reunión grupal.</h1>
 
-    <a href="{# url generarPDFListaAlumnos_Asesor curso_academico busqueda #}" class="pdflink">Generar PDF</a>
-
     <div class="module">
         <table summary="Alumnos participantes.">
         <caption><h2>Alumnos participantes{% if fecha %} ({{ fecha }}){% endif %}</h2></caption>
@@ -13,7 +11,7 @@
         {% for alumno in lista_participantes %}
         <tr>
             <th scope="row">{{ alumno.dni_pasaporte_alumno }} : {{ alumno.nombre }} {{ alumno.apellidos }}</th>
-	    <td><a href="{% url determinarReunion_Asesor curso_academico alumno.dni_pasaporte_alumno fecha %}" class="searchlink2">Ver</a></td>
+        <td><a href="{% url determinarReunion_Asesor curso_academico alumno.dni_pasaporte_alumno fecha %}" class="searchlink2">Ver</a></td>
         </tr>
         {% endfor %}
 

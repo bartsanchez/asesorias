@@ -1373,7 +1373,8 @@ def delPreguntaAsesorAReunionGrupal(request, curso_academico, fecha,
             'fecha': fecha}))
 
 @login_required
-def generarPDFListaReuniones(request, curso_academico, busqueda):
+def generarPDFListaReuniones(request, curso_academico, dni_pasaporte,
+    id_reunion):
     dni_pasaporte = unicode(request.user)
 
     # Se obtiene una lista con todos los alumnos.
@@ -1396,3 +1397,44 @@ def generarPDFListaReuniones(request, curso_academico, busqueda):
     return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
         {'mylist': lista_reuniones,
         'name': 'reuniones',})
+
+@login_required
+def generarPDFReunion(request, curso_academico, dni_pasaporte,
+    id_reunion):
+    lista_preguntas = []
+
+    # Se obtiene la instancia de la reunion.
+    instancia_reunion = vistasReunion.obtenerReunion(dni_pasaporte,
+        curso_academico, id_reunion)
+
+    # Si existe se buscan las preguntas.
+    if instancia_reunion:
+        preguntas_oficiales = \
+            models.ReunionPreguntaOficial.objects.filter(
+            dni_pasaporte=dni_pasaporte,
+            curso_academico=curso_academico,
+            id_reunion=id_reunion)
+
+        for pregunta in preguntas_oficiales:
+            lista_preguntas.append(
+                vistasPreguntaOficial.obtenerPreguntaOficial(
+                pregunta.id_entrevista_oficial,
+                pregunta.id_pregunta_oficial))
+
+        preguntas_asesor = \
+            models.ReunionPreguntaAsesor.objects.filter(
+            dni_pasaporte_alumno=dni_pasaporte,
+            curso_academico=curso_academico,
+            id_reunion=id_reunion)
+
+        for pregunta in preguntas_asesor:
+            lista_preguntas.append(
+                vistasPreguntaAsesor.obtenerPreguntaAsesor(
+                request.user,
+                curso_academico,
+                pregunta.id_entrevista_asesor,
+                pregunta.id_pregunta_asesor))
+
+    return vistasPDF.render_to_pdf('asesorias/plantilla_pdf.html',
+        {'mylist': lista_preguntas,
+        'name': 'preguntas de reuniones',})

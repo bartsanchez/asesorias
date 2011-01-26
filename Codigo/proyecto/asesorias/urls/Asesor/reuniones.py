@@ -184,4 +184,10 @@ urlpatterns = patterns(VISTAS + 'vistasReuniones',
 
         'generarPDFListaReuniones',
         name='generarPDFListaReuniones'),
+
+    url(r'^generarPDF/reunion/(?P<dni_pasaporte>[\s\w]+)/' +
+        '(?P<id_reunion>\d+)/$',
+
+        'generarPDFReunion',
+        name='generarPDFReunion'),
 )
